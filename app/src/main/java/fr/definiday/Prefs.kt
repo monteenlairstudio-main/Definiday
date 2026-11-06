@@ -66,7 +66,7 @@ class Prefs(ctx: Context) {
     var quizMinute: Int
         get() = sp.getInt("quizMinute", 0)
         set(v) = sp.edit().putInt("quizMinute", v).apply()
-    // Quiz counters (read by future mascot unlocks)
+    // Quiz counters (read by Unlocks)
     var lastQuizDay: Long
         get() = sp.getLong("lastQuizDay", Long.MIN_VALUE)
         set(v) = sp.edit().putLong("lastQuizDay", v).apply()
@@ -79,6 +79,10 @@ class Prefs(ctx: Context) {
     var perfectQuizzes: Int
         get() = sp.getInt("perfectQuizzes", 0)
         set(v) = sp.edit().putInt("perfectQuizzes", v).apply()
+    /** Quizzes with at least 2/3 right; users from before this counter start with their perfect quizzes. */
+    var passedQuizzes: Int
+        get() = sp.getInt("passedQuizzes", perfectQuizzes)
+        set(v) = sp.edit().putInt("passedQuizzes", v).apply()
     var correctAnswers: Int
         get() = sp.getInt("correctAnswers", 0)
         set(v) = sp.edit().putInt("correctAnswers", v).apply()

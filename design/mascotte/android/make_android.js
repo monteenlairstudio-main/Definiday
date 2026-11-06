@@ -24,6 +24,7 @@ const STYLES = {
   'Pelote.Rose': { gloseBall: '#E7A3A0', gloseBallD: '#9C5050' },
   'Acc.Noeud': { gates: ['Noeud'] }, 'Acc.Echarpe': { gates: ['Echarpe'] }, 'Acc.Bonnet': { gates: ['Bonnet'] },
   'Acc.Plume': { gates: ['Plume'] }, 'Acc.Marque': { gates: ['Marque'], off: ['Ruban'] },
+  Eclats: { gates: ['Glint'] }, // quiz sans faute : éclats autour de « bravo »
 };
 const jobs = [['assis', 'glose_assis'], ['livres', 'glose_livres'], ['soir', 'glose_soir'], ...WORDS.map(w => ['ecrit', `glose_ecrit_${w}`, { word: w }]),
   ['icone', 'glose_icone'], ['icone', 'glose_icone_dort', { sleep: true }]];

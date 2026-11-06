@@ -41,7 +41,8 @@ class GloseTest {
     @Test fun overlaysChangeThePicture() {
         val base = render(R.drawable.glose_assis_vd)
         assertTrue(diff(base, render(R.drawable.glose_assis_vd)) == 0)
-        overlays.forEach { (name, style) -> assertTrue(name, diff(base, render(R.drawable.glose_assis_vd, listOf(style))) > 50) }
+        // éclats are scaled to 0 in the still frame
+        overlays.filterKeys { it != "Glose_Eclats" }.forEach { (name, style) -> assertTrue(name, diff(base, render(R.drawable.glose_assis_vd, listOf(style))) > 50) }
     }
 
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {

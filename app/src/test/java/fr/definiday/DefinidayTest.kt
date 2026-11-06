@@ -175,9 +175,20 @@ class DefinidayTest {
         Quiz.record(p, 3, 3, day = 100)
         Quiz.record(p, 3, 3, day = 100) // same day counts once
         Quiz.record(p, 1, 3, day = 101)
-        assertEquals(2, p.quizzes); assertEquals(1, p.perfectQuizzes); assertEquals(4, p.correctAnswers); assertEquals(2, p.streak)
+        assertEquals(2, p.quizzes); assertEquals(1, p.perfectQuizzes); assertEquals(1, p.passedQuizzes); assertEquals(4, p.correctAnswers); assertEquals(2, p.streak)
         Quiz.record(p, 2, 3, day = 105)
         assertEquals(1, p.streak) // broken streak restarts
+    }
+
+    @Test fun quizPassesAtTwoThirds() {
+        listOf(1 to 1, 2 to 2, 2 to 3, 3 to 3).forEach { (s, t) -> assertTrue("$s/$t", Quiz.passed(s, t)) }
+        listOf(0 to 1, 1 to 2, 1 to 3, 0 to 3).forEach { (s, t) -> assertTrue("$s/$t", !Quiz.passed(s, t)) }
+        val p = Prefs(ctx).apply { perfectQuizzes = 4 } // user from before passedQuizzes
+        assertEquals(4, p.passedQuizzes)
+        Quiz.record(p, 2, 3, day = 200)
+        assertEquals(5, p.passedQuizzes); assertEquals(4, p.perfectQuizzes)
+        Quiz.record(p, 3, 3, day = 201)
+        assertEquals(6, p.passedQuizzes); assertEquals(5, p.perfectQuizzes)
     }
 
     @Test fun randomPickReplacesTheLockScreenWord() {
@@ -202,13 +213,37 @@ class DefinidayTest {
         Quotes.load(ctx).filter { it.auteur.contains("Joubert") || it.auteur.contains("Monselet") }.take(2).forEachIndexed { i, q ->
             save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
-        val activity = Robolectric.buildActivity(MainActivity::class.java).setup().get()
-        val root = activity.window.decorView
-        root.measure(View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(4000, View.MeasureSpec.AT_MOST))
-        root.layout(0, 0, 1080, root.measuredHeight)
-        val bmp = Bitmap.createBitmap(1080, root.measuredHeight, Bitmap.Config.ARGB_8888)
-        root.draw(Canvas(bmp))
-        save(bmp, File(out, "app.png"))
+        capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app.png"))
+        while (Words.seenToday(ctx).size < 3) Words.random(ctx) // daily slots may hold quotes, which are not quiz material
+        capture(quizEnd(right = 3), File(out, "quiz_bravo.png"))
+        Prefs(ctx).lastQuizDay = Long.MIN_VALUE
+        capture(quizEnd(right = 1), File(out, "quiz_encore.png"))
+    }
+
+    /** Plays the evening quiz with [right] good answers and returns the activity on its score screen. */
+    private fun quizEnd(right: Int): android.app.Activity {
+        val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
+        val defs = Words.load(ctx).associateBy { it.definition }
+        fun views() = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
+        for (i in Words.seenToday(ctx).indices) {
+            val answer = views().filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
+            views().filterIsInstance<android.widget.Button>().first { (it.text == answer.mot) == (i < right) }.performClick()
+            views().filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+        }
+        return a
+    }
+
+    /** Draws the activity at phone width; animations are started then run for 4 s so the word is written. */
+    private fun capture(a: android.app.Activity, f: File) {
+        val root = a.window.decorView
+        fun draw(): Bitmap {
+            root.measure(View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(4000, View.MeasureSpec.AT_MOST))
+            root.layout(0, 0, 1080, root.measuredHeight)
+            return Bitmap.createBitmap(1080, root.measuredHeight, Bitmap.Config.ARGB_8888).also { root.draw(Canvas(it)) }
+        }
+        draw()
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofSeconds(4))
+        save(draw(), f)
     }
 
     private fun save(b: Bitmap, f: File) = f.outputStream().use { b.compress(Bitmap.CompressFormat.PNG, 100, it) }

@@ -13,4 +13,5 @@
     <style name="Glose.Acc.Bonnet" parent=""><item name="gloseBonnet_3b2a20">#3b2a20</item><item name="gloseBonnet_a4acbc">?attr/gloseFur</item><item name="gloseBonnet_c75b54">#c75b54</item><item name="gloseBonnet_f0a6a2">?attr/gloseRose</item><item name="gloseBonnet_f8eedd">?attr/gloseCream</item><item name="gloseBonnet_fff6e6">#fff6e6</item></style>
     <style name="Glose.Acc.Plume" parent=""><item name="glosePlume_3b2a20">#3b2a20</item><item name="glosePlume_8c93a6">#8c93a6</item><item name="glosePlume_a87a26">#a87a26</item><item name="glosePlume_fbf6ec">#fbf6ec</item></style>
     <style name="Glose.Acc.Marque" parent=""><item name="gloseMarque_3b2a20">#3b2a20</item><item name="gloseMarque_8e3a44">#8e3a44</item><item name="gloseMarque_a87a26">#a87a26</item><item name="gloseMarque_d9a441">#d9a441</item><item name="gloseRuban_3b2a20">#00000000</item><item name="gloseRuban_f0a6a2">#00000000</item></style>
+    <style name="Glose.Eclats" parent=""><item name="gloseGlint_3b2a20">#3b2a20</item><item name="gloseGlint_ffe9a8">#ffe9a8</item></style>
 </resources>

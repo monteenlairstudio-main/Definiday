@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -33,8 +34,9 @@ class QuizActivity : Activity() {
 
     private fun next() {
         box.removeAllViews()
-        box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
         if (index == questions.size) return finishQuiz()
+        box.addView(glose(R.drawable.glose_icone_vd, 56))
+        box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
         val q = questions[index]
         box.addView(text("${index + 1} / ${questions.size}", 13f))
         box.addView(text(q.answer.definition, 20f))
@@ -57,13 +59,29 @@ class QuizActivity : Activity() {
     }
 
     private fun finishQuiz() {
+        box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
         if (questions.isEmpty()) {
             box.addView(text(getString(R.string.quiz_empty), 18f))
         } else {
             Quiz.record(Prefs(this), score, questions.size, LocalDate.now().toEpochDay())
+            val passed = Quiz.passed(score, questions.size)
+            // the thread writes the word once and holds it; never mocking when failed
+            box.addView(glose(if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin, 200,
+                if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()).apply {
+                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
+                Glose.play(this)
+            })
             box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply { gravity = Gravity.CENTER })
+            if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
         }
         box.addView(Button(this).apply { text = getString(R.string.quiz_close); setOnClickListener { finish() } })
+    }
+
+    private fun glose(res: Int, dp: Int, styles: List<Int> = emptyList()) = ImageView(this).apply {
+        setImageDrawable(Glose.drawable(context, res, styles))
+        contentDescription = getString(R.string.glose)
+        val px = (dp * resources.displayMetrics.density).toInt()
+        layoutParams = LinearLayout.LayoutParams(px, px).apply { gravity = Gravity.CENTER_HORIZONTAL }
     }
 
     companion object {
@@ -83,9 +101,13 @@ object Quiz {
         Question(w, (distractors + w).shuffled(rnd))
     }
 
-    /** Counters the mascot unlocks will read. A quiz counts once per day. */
+    /** Passed = at most one mistake per 3 questions (1/1, 2/2, 2/3). */
+    fun passed(score: Int, total: Int) = score * 3 >= total * 2
+
+    /** Counters the mascot unlocks read. A quiz counts once per day. */
     fun record(p: Prefs, score: Int, total: Int, day: Long) {
         if (p.lastQuizDay == day) return
+        p.passedQuizzes += if (passed(score, total)) 1 else 0 // read before perfectQuizzes moves: its default is perfectQuizzes
         p.streak = if (p.lastQuizDay == day - 1) p.streak + 1 else 1
         p.lastQuizDay = day
         p.quizzes += 1
