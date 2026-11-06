@@ -29,6 +29,8 @@ class BugHuntTest {
         l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null }
     }.flatten()
     private fun texts(a: android.app.Activity) = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()
+    /** The quiz progress is drawn (yarn balls): its TalkBack text is read instead. */
+    private fun progress(a: android.app.Activity) = views(a).mapNotNull { it.contentDescription?.toString() }.toList()
     /** Answers the current question (first option) and goes to the next one. */
     private fun answerOne(a: android.app.Activity) {
         val defs = Words.load(ctx).map { it.definition }.toSet()
@@ -103,9 +105,9 @@ class BugHuntTest {
         val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
         answerOne(c.get())
         val total = Words.seenToday(ctx).size
-        assertTrue("2 / $total" in texts(c.get()))
+        assertTrue(ctx.getString(R.string.quiz_progress, 2, total) in progress(c.get()))
         c.recreate()
-        assertTrue("after rotation: ${texts(c.get()).filter { "/" in it }}", "2 / $total" in texts(c.get()))
+        assertTrue("after rotation: ${progress(c.get())}", ctx.getString(R.string.quiz_progress, 2, total) in progress(c.get()))
     }
 
     /** BUG 7: two words share a definition (aruspice/haruspice, mercuriale/semonce): the quiz can show both, one is marked wrong. */
@@ -162,7 +164,7 @@ class BugHuntTest {
             val tap = shadowOf(ctx.getSystemService(NotificationManager::class.java).activeNotifications.single { it.id == 50 }.notification.contentIntent).savedIntent
             TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT-12")) // past midnight
             val a = Robolectric.buildActivity(QuizActivity::class.java, tap).setup().get()
-            assertTrue(texts(a).toString(), "1 / $n" in texts(a) && ctx.getString(R.string.quiz_eve) in texts(a))
+            assertTrue(texts(a).toString(), ctx.getString(R.string.quiz_progress, 1, n) in progress(a) && ctx.getString(R.string.quiz_eve) in texts(a))
             repeat(n) { answerOne(a) }
             assertEquals(d, Prefs(ctx).lastQuizDay)
         } finally { TimeZone.setDefault(tz) }

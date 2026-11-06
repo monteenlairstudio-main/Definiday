@@ -50,7 +50,9 @@
     <string name="glose_bravo">Monsieur Glose écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
     <string name="glose_encore">Monsieur Glose écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u00A0?</string>
+    <string name="quiz_passed">Joli travail\u202F: ces mots sont un peu plus à vous ce soir.</string>
     <string name="unlock_new">Monsieur Glose a gagné\u202F:</string>
+    <string name="unlock_more">+\u00A0%1$d dans la collection</string>
     <string name="collection_open">Collection de Monsieur Glose</string>
     <string name="collection_see">Voir la collection</string>
     <string name="collection_title">Collection de Monsieur Glose</string>
