@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.drawable.Animatable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
@@ -47,6 +46,7 @@ class MainActivity : Activity() {
             warnIfHurried()
         }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
+        findViewById<Button>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
 
         findViewById<Switch>(R.id.enabled).apply {
             isChecked = p.enabled
@@ -112,7 +112,7 @@ class MainActivity : Activity() {
 
     override fun onPause() {
         super.onPause()
-        (findViewById<ImageView>(R.id.glose).drawable as? Animatable)?.stop()
+        Glose.stop(findViewById(R.id.glose))
     }
 
     /** Past 3 random picks in a day, once: invite to slow down. */

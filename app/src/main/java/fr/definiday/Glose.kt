@@ -18,6 +18,24 @@ object Glose {
         return t.getDrawable(res)!!
     }
 
+    /** The user's choice (pose, pelage, pelote, accessory or ""), each falling back to the default unless unlocked. */
+    fun choice(p: Prefs): Map<Unlocks.Kind, String> {
+        val ok = p.unlocked + Unlocks.of(0, 0, 0, 0)
+        fun pick(id: String, default: String) = if (id in ok) id else default
+        return mapOf(Unlocks.Kind.POSE to pick(p.glosePose, "assis"), Unlocks.Kind.PELAGE to pick(p.glosePelage, "tigre"),
+            Unlocks.Kind.PELOTE to pick(p.glosePelote, "bordeaux"), Unlocks.Kind.ACC to pick(p.gloseAcc, ""))
+    }
+
+    fun save(p: Prefs, c: Map<Unlocks.Kind, String>) {
+        p.glosePose = c.getValue(Unlocks.Kind.POSE); p.glosePelage = c.getValue(Unlocks.Kind.PELAGE)
+        p.glosePelote = c.getValue(Unlocks.Kind.PELOTE); p.gloseAcc = c.getValue(Unlocks.Kind.ACC)
+    }
+
+    fun pose(c: Map<Unlocks.Kind, String>) = Unlocks.byId[c[Unlocks.Kind.POSE]]?.res ?: R.drawable.glose_assis
+
+    /** Theme overlays of a choice: pelage, pelote, accessory. */
+    fun styles(c: Map<Unlocks.Kind, String>) = c.values.mapNotNull { Unlocks.byId[it]?.style }.filter { it != 0 }
+
     /** Glose showing one collection item: its pose, or the seated pose wearing it. */
     fun preview(ctx: Context, item: Unlocks.Item): Drawable =
         drawable(ctx, if (item.res != 0) item.res else R.drawable.glose_assis, listOf(item.style).filter { it != 0 })
@@ -28,6 +46,8 @@ object Glose {
         d.reset()
         if (ValueAnimator.areAnimatorsEnabled()) d.start()
     }
+
+    fun stop(v: ImageView) = (v.drawable as? AnimatedVectorDrawable)?.stop()
 
     /** Still image (notifications, tests): the drawable fitted and centred in a w x h bitmap. */
     fun bitmap(ctx: Context, res: Int, w: Int, h: Int, styles: List<Int> = emptyList()): Bitmap {

@@ -6,11 +6,13 @@ entry_points:
   - design/mascotte/android/svg2avd.js
   - app/src/main/java/fr/definiday/Glose.kt
   - app/src/main/java/fr/definiday/Unlocks.kt
+  - app/src/main/java/fr/definiday/CollectionActivity.kt
   - app/src/main/res/values/glose_styles.xml
 covers:
   - design/mascotte/
   - app/src/main/java/fr/definiday/Glose.kt
   - app/src/main/java/fr/definiday/Unlocks.kt
+  - app/src/main/java/fr/definiday/CollectionActivity.kt
   - app/src/test/java/fr/definiday/GloseTest.kt
   - app/src/main/res/drawable/glose_*
   - app/src/main/res/values/glose_attrs.xml
@@ -25,3 +27,4 @@ edges:
 - Step 1 verification without emulator: GloseTest (Robolectric GraphicsMode NATIVE, real framework VectorDrawable inflation) inflates every glose_* VD/AVD with and without all overlays, asserts each Glose.* overlay changes pixels, and writes app/build/demo/glose/{poses,overlays_assis,combos}.png. Attr-to-attr gate values (bonnet ear tips = ?attr/gloseFur) resolve correctly. Icons (glose_icone*) crop the bonnet and quill: apply only pelage/pelote overlays to icons. Glose.drawable(ctx, res, styles) = ContextThemeWrapper(ctx, R.style.Glose) + theme.applyStyle(each, true). <!-- id:2b0e -->
 - AVD gotcha: framework AVD uses the RenderThread animator, which only really starts at the first draw; isRunning() stays false until then (in Robolectric, draw the view on a software canvas first, which falls back to the UI-thread animator). <!-- id:b91f -->
 - Unlocks.items is the owner's table (thresholds on quizzes/perfect/passed/streak, never correctAnswers): written words are pose items (ecrit_mot, ecrit_encore, ecrit_bravo, ecrit_dodo, ecrit_rare). Unlocks.of() is pure; Unlocks.update(p) unions into Prefs.unlocked (never shrinks, broken streak loses nothing) and returns items not in Prefs.announced; QuizActivity announces them once ('Nouveau : ...', Glose previewing the last/rarest). Test unlockTable holds the table as data + boundary checks. <!-- id:add7 -->
+- CollectionActivity (programmatic layout, no AndroidX): 200 dp animated preview of the trial choice, 'Choisir' saves via Glose.save into Prefs.glosePose/glosePelage/glosePelote/gloseAcc (one accessory or none; second tap on the worn accessory removes it). Grid of 96 dp still thumbnails (AVD never started); locked = ColorFilter SRC_IN #B8AFA0 silhouette + Unlocks.hint. Glose.choice(p) falls back to defaults for ids not in Prefs.unlocked. Entry: main-screen button and 'Voir la collection' after an announcement. Demo capture app/build/demo/collection.png. Opening it inflates ~21 VDs (each theme is a separate drawable cache entry): watch first-open time on low-end phones. <!-- id:c303 -->

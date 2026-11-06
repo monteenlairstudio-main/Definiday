@@ -130,6 +130,11 @@
             style="@style/Row"
             android:text="@string/quiz_open" />
 
+        <Button
+            android:id="@+id/collection_open"
+            style="@style/Row"
+            android:text="@string/collection_open" />
+
         <TextView
             style="@style/Label"
             android:layout_marginTop="16dp"

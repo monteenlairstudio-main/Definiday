@@ -85,6 +85,10 @@ class QuizActivity : Activity() {
         p.announced = p.announced + fresh.map { it.id }
         box.addView(text(getString(R.string.unlock_new, fresh.joinToString(", ") { it.nom }), 18f, bold = true).apply { gravity = Gravity.CENTER })
         box.addView(glose(Glose.preview(this, fresh.last()), 160).apply { Glose.play(this) })
+        box.addView(Button(this).apply {
+            text = getString(R.string.collection_see)
+            setOnClickListener { startActivity(android.content.Intent(context, CollectionActivity::class.java)) }
+        })
     }
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {

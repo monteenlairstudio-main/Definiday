@@ -72,6 +72,19 @@ class GloseTest {
         assertEquals("Encore 2 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("soir"), p))
     }
 
+    @Test fun collectionTriesThenKeepsAChoice() {
+        val p = Prefs(ctx).apply { quizzes = 5 }
+        val a = Robolectric.buildActivity(CollectionActivity::class.java).setup().get()
+        fun find(desc: String): android.view.View { val l = ArrayList<android.view.View>(); a.window.decorView.findViewsWithText(l, desc, android.view.View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION); return l.first() }
+        assertFalse(find("Pelote sauge, à débloquer, Encore 15 quiz").isClickable)
+        find("Pelote moutarde").performClick()
+        assertEquals("bordeaux", p.glosePelote) // only tried
+        val choose = a.window.decorView.let { val l = ArrayList<android.view.View>(); it.findViewsWithText(l, ctx.getString(R.string.collection_choose), android.view.View.FIND_VIEWS_WITH_TEXT); l.first() }
+        choose.performClick()
+        assertEquals("moutarde", p.glosePelote)
+        assertEquals(listOf(R.style.Glose_Pelote_Moutarde), Glose.styles(Glose.choice(p)))
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)

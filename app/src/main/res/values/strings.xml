@@ -46,4 +46,9 @@
     <string name="glose_encore">Monsieur Glose écrit « encore » avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u00A0?</string>
     <string name="unlock_new">Nouveau\u00A0: %1$s</string>
+    <string name="collection_open">Collection de Monsieur Glose</string>
+    <string name="collection_see">Voir la collection</string>
+    <string name="collection_title">COLLECTION DE MONSIEUR GLOSE</string>
+    <string name="collection_choose">Choisir</string>
+    <string name="collection_locked">à débloquer</string>
 </resources>

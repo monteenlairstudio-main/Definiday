@@ -93,6 +93,19 @@ class Prefs(ctx: Context) {
     var announced: Set<String>
         get() = sp.getStringSet("announced", null).orEmpty().toSet()
         set(v) = sp.edit().putStringSet("announced", v).apply()
+    /** Glose as chosen in the collection (Unlocks ids; "" = no accessory). */
+    var glosePose: String
+        get() = sp.getString("glosePose", "assis")!!
+        set(v) = sp.edit().putString("glosePose", v).apply()
+    var glosePelage: String
+        get() = sp.getString("glosePelage", "tigre")!!
+        set(v) = sp.edit().putString("glosePelage", v).apply()
+    var glosePelote: String
+        get() = sp.getString("glosePelote", "bordeaux")!!
+        set(v) = sp.edit().putString("glosePelote", v).apply()
+    var gloseAcc: String
+        get() = sp.getString("gloseAcc", "")!!
+        set(v) = sp.edit().putString("gloseAcc", v).apply()
     /** Random picks warned about today (warning shown once a day, past 3 picks). */
     var warnedDay: Long
         get() = sp.getLong("warnedDay", Long.MIN_VALUE)
