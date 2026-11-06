@@ -1,0 +1,1080 @@
+[
+  {
+    "mot": "abâtardir",
+    "nature": "v. tr.",
+    "definition": "Faire perdre à un être ou à une chose les qualités de sa race, de son origine ; avilir, dégrader.",
+    "exemple": "Des siècles de servitude avaient fini par abâtardir ce peuple autrefois fier.",
+    "academie": true
+  },
+  {
+    "mot": "abjurer",
+    "nature": "v. tr.",
+    "definition": "Renoncer solennellement à une religion, à une doctrine ou à une opinion.",
+    "exemple": "Sous la menace du bûcher, il dut abjurer sa foi en public.",
+    "academie": true
+  },
+  {
+    "mot": "abois",
+    "nature": "n. m. pl.",
+    "definition": "Aboiements de la meute autour de la bête traquée ; « aux abois » : acculé, dans une situation désespérée.",
+    "exemple": "Criblé de dettes, l'imprimeur était aux abois.",
+    "academie": false
+  },
+  {
+    "mot": "aboucher",
+    "nature": "v. tr.",
+    "definition": "Mettre deux personnes en rapport pour qu'elles s'entendent ; raccorder deux tuyaux bout à bout.",
+    "exemple": "Un intermédiaire discret se chargea d'aboucher l'acheteur et le vendeur.",
+    "academie": false
+  },
+  {
+    "mot": "aboulie",
+    "nature": "n. f.",
+    "definition": "Absence ou affaiblissement pathologique de la volonté, rendant incapable d'agir ou de décider.",
+    "exemple": "Une sorte d'aboulie le clouait des journées entières dans son fauteuil.",
+    "academie": true
+  },
+  {
+    "mot": "absoute",
+    "nature": "n. f.",
+    "definition": "Prières dites autour du cercueil après la messe des funérailles.",
+    "exemple": "La famille se recueillit pendant l'absoute avant la levée du corps.",
+    "academie": true
+  },
+  {
+    "mot": "abstème",
+    "nature": "adj. et n.",
+    "definition": "Qui ne boit pas de vin, à l'origine au point de ne pouvoir communier sous cette espèce ; par extension, qui ne boit pas d'alcool.",
+    "exemple": "Abstème depuis sa jeunesse, il trinquait à l'eau claire.",
+    "academie": false
+  },
+  {
+    "mot": "ab irato",
+    "nature": "loc. adv.",
+    "definition": "Sous l'effet de la colère, sans réflexion.",
+    "exemple": "Cette lettre de démission, écrite ab irato, il la regretta dès le lendemain.",
+    "academie": true
+  },
+  {
+    "mot": "acabit",
+    "nature": "n. m.",
+    "definition": "Nature, qualité d'une personne ou d'une chose ; souvent péjoratif, dans « du même acabit ».",
+    "exemple": "Lui et ses complices sont tous du même acabit.",
+    "academie": false
+  },
+  {
+    "mot": "acagnarder",
+    "nature": "v. pron.",
+    "definition": "S'abandonner à une vie oisive et paresseuse, prendre ses aises dans l'inaction.",
+    "exemple": "L'hiver venu, il s'acagnardait au coin du feu jusqu'à midi.",
+    "academie": true
+  },
+  {
+    "mot": "acanthe",
+    "nature": "n. f.",
+    "definition": "Plante aux grandes feuilles découpées dont la forme orne le chapiteau corinthien.",
+    "exemple": "Le sculpteur cisela des feuilles d'acanthe au sommet de chaque colonne.",
+    "academie": true
+  },
+  {
+    "mot": "accessit",
+    "nature": "n. m.",
+    "definition": "Distinction accordée aux élèves qui, sans obtenir de prix, s'en sont approchés.",
+    "exemple": "Il revint de la distribution des prix avec un modeste accessit de latin.",
+    "academie": true
+  },
+  {
+    "mot": "accointance",
+    "nature": "n. f.",
+    "definition": "Relation familière, fréquentation ; surtout au pluriel, souvent avec une nuance péjorative.",
+    "exemple": "On lui prêtait des accointances douteuses dans le milieu.",
+    "academie": false
+  },
+  {
+    "mot": "accort",
+    "nature": "adj.",
+    "definition": "Gracieux, aimable et avenant ; s'emploie surtout au féminin.",
+    "exemple": "Une servante accorte nous apporta le cidre et les crêpes.",
+    "academie": true
+  },
+  {
+    "mot": "accroire",
+    "nature": "v. tr.",
+    "definition": "Ne s'emploie qu'avec « faire » ou « laisser » : faire croire une chose fausse.",
+    "exemple": "Il voulait nous faire accroire qu'il avait dîné avec le ministre.",
+    "academie": true
+  },
+  {
+    "mot": "acédie",
+    "nature": "n. f.",
+    "definition": "Dégoût spirituel, torpeur de l'âme qui détourne de la prière et de l'effort.",
+    "exemple": "Le moine, en proie à l'acédie, ne trouvait plus de goût à l'office.",
+    "academie": false
+  },
+  {
+    "mot": "acerbe",
+    "nature": "adj.",
+    "definition": "Qui blesse par sa dureté et sa méchanceté, en parlant de propos.",
+    "exemple": "Le critique publia un compte rendu acerbe de la pièce.",
+    "academie": true
+  },
+  {
+    "mot": "achalandé",
+    "nature": "adj.",
+    "definition": "Qui a de nombreux clients ; par extension, abusive selon les puristes, bien approvisionné.",
+    "exemple": "Cette boutique bien achalandée ne désemplit pas de la journée.",
+    "academie": true
+  },
+  {
+    "mot": "achopper",
+    "nature": "v. intr.",
+    "definition": "Se heurter à une difficulté qui arrête ; buter contre un obstacle.",
+    "exemple": "Les négociations ont achoppé sur la question des salaires.",
+    "academie": true
+  },
+  {
+    "mot": "acmé",
+    "nature": "n. f.",
+    "definition": "Point culminant, plus haut degré d'intensité d'un phénomène.",
+    "exemple": "À l'acmé de sa gloire, le chanteur remplissait les plus grandes salles.",
+    "academie": false
+  },
+  {
+    "mot": "acquit",
+    "nature": "n. m.",
+    "definition": "Reconnaissance écrite d'un paiement ; « par acquit de conscience » : pour n'avoir rien à se reprocher.",
+    "exemple": "Par acquit de conscience, elle vérifia une dernière fois que la porte était fermée.",
+    "academie": true
+  },
+  {
+    "mot": "acrostiche",
+    "nature": "n. m.",
+    "definition": "Poème dont les initiales des vers, lues de haut en bas, forment un mot ou un nom.",
+    "exemple": "Il offrit à sa fiancée un acrostiche formant son prénom.",
+    "academie": true
+  },
+  {
+    "mot": "adamantin",
+    "nature": "adj.",
+    "definition": "Qui a la dureté ou l'éclat du diamant.",
+    "exemple": "Ses yeux avaient un éclat adamantin sous la lumière des lustres.",
+    "academie": false
+  },
+  {
+    "mot": "adipeux",
+    "nature": "adj.",
+    "definition": "Qui contient de la graisse ; gras, bouffi de graisse.",
+    "exemple": "Un bourgeois adipeux somnolait sur la banquette du train.",
+    "academie": true
+  },
+  {
+    "mot": "adjurer",
+    "nature": "v. tr.",
+    "definition": "Supplier quelqu'un avec insistance, prier instamment.",
+    "exemple": "Sa mère l'adjura de renoncer à ce voyage périlleux.",
+    "academie": true
+  },
+  {
+    "mot": "admonester",
+    "nature": "v. tr.",
+    "definition": "Réprimander sévèrement, faire une remontrance solennelle.",
+    "exemple": "Le juge admonesta le jeune prévenu avant de le relâcher.",
+    "academie": true
+  },
+  {
+    "mot": "adouber",
+    "nature": "v. tr.",
+    "definition": "Armer chevalier en remettant les armes ; au figuré, reconnaître officiellement quelqu'un.",
+    "exemple": "Le roi adouba le jeune écuyer au lendemain de la bataille.",
+    "academie": true
+  },
+  {
+    "mot": "ad patres",
+    "nature": "loc. adv.",
+    "definition": "Dans la mort ; surtout dans « envoyer ad patres » : tuer, faire mourir.",
+    "exemple": "D'un coup d'épée, le mousquetaire envoya son rival ad patres.",
+    "academie": true
+  },
+  {
+    "mot": "adret",
+    "nature": "n. m.",
+    "definition": "Versant d'une vallée de montagne exposé au soleil.",
+    "exemple": "Les villages se sont bâtis sur l'adret, laissant l'ubac aux forêts.",
+    "academie": false
+  },
+  {
+    "mot": "adultérer",
+    "nature": "v. tr.",
+    "definition": "Altérer la pureté d'une substance en y mêlant d'autres éléments ; falsifier.",
+    "exemple": "Le marchand fut condamné pour avoir adultéré son vin avec de l'eau.",
+    "academie": true
+  },
+  {
+    "mot": "adventice",
+    "nature": "adj.",
+    "definition": "Qui survient de l'extérieur, de façon accessoire ; se dit d'une plante qui pousse sans avoir été semée.",
+    "exemple": "Le jardinier arrachait les herbes adventices entre les rangs de salades.",
+    "academie": true
+  },
+  {
+    "mot": "aède",
+    "nature": "n. m.",
+    "definition": "Poète de la Grèce antique qui chantait ses œuvres en s'accompagnant de la lyre.",
+    "exemple": "Homère est le plus illustre des aèdes.",
+    "academie": false
+  },
+  {
+    "mot": "aérolithe",
+    "nature": "n. m.",
+    "definition": "Pierre tombée du ciel, météorite.",
+    "exemple": "Les paysans virent un aérolithe embraser le ciel avant de s'écraser dans le champ.",
+    "academie": true
+  },
+  {
+    "mot": "affabulation",
+    "nature": "n. f.",
+    "definition": "Récit inventé de toutes pièces et présenté comme vrai.",
+    "exemple": "Son prétendu passé d'aventurier n'était qu'une affabulation.",
+    "academie": true
+  },
+  {
+    "mot": "afféterie",
+    "nature": "n. f.",
+    "definition": "Recherche maniérée et prétentieuse dans les manières ou le style.",
+    "exemple": "Son écriture, pleine d'afféterie, lassait vite le lecteur.",
+    "academie": true
+  },
+  {
+    "mot": "affidé",
+    "nature": "adj. et n.",
+    "definition": "À qui l'on se fie ; personne de confiance, complice dévoué.",
+    "exemple": "Le comploteur envoya l'un de ses affidés surveiller le palais.",
+    "academie": true
+  },
+  {
+    "mot": "affiquet",
+    "nature": "n. m.",
+    "definition": "Petit ornement de toilette, colifichet ; surtout au pluriel.",
+    "exemple": "Elle avait couvert sa robe de rubans et d'affiquets.",
+    "academie": true
+  },
+  {
+    "mot": "affres",
+    "nature": "n. f. pl.",
+    "definition": "Angoisses, tourments extrêmes.",
+    "exemple": "L'écrivain connut les affres de la page blanche pendant des mois.",
+    "academie": true
+  },
+  {
+    "mot": "affriander",
+    "nature": "v. tr.",
+    "definition": "Attirer par l'appât d'une friandise ; allécher par quelque chose d'agréable.",
+    "exemple": "L'odeur des brioches affriandait les passants.",
+    "academie": true
+  },
+  {
+    "mot": "affrioler",
+    "nature": "v. tr.",
+    "definition": "Attirer, séduire par l'appât d'un plaisir.",
+    "exemple": "Les promesses de gains rapides affriolèrent bien des naïfs.",
+    "academie": true
+  },
+  {
+    "mot": "affubler",
+    "nature": "v. tr.",
+    "definition": "Habiller de façon bizarre ou ridicule ; au figuré, attribuer quelque chose de ridicule.",
+    "exemple": "On l'avait affublé d'un chapeau à plumes et d'un surnom grotesque.",
+    "academie": true
+  },
+  {
+    "mot": "affût",
+    "nature": "n. m.",
+    "definition": "Endroit où l'on se poste pour guetter le gibier ; « être à l'affût » : guetter une occasion.",
+    "exemple": "Le journaliste était toujours à l'affût du moindre scandale.",
+    "academie": false
+  },
+  {
+    "mot": "agacerie",
+    "nature": "n. f.",
+    "definition": "Mine ou parole provocante destinée à aguicher ou à taquiner.",
+    "exemple": "Ses agaceries finirent par attirer l'attention du jeune homme.",
+    "academie": true
+  },
+  {
+    "mot": "agape",
+    "nature": "n. f.",
+    "definition": "Repas fraternel des premiers chrétiens ; au pluriel, festin joyeux entre amis.",
+    "exemple": "Après la vendange, les agapes se prolongèrent jusqu'à l'aube.",
+    "academie": false
+  },
+  {
+    "mot": "agélaste",
+    "nature": "n. m. et f.",
+    "definition": "Personne qui ne rit jamais, qui ne sait pas rire.",
+    "exemple": "Même le meilleur bouffon n'aurait pu dérider cet agélaste.",
+    "academie": false
+  },
+  {
+    "mot": "aggiornamento",
+    "nature": "n. m.",
+    "definition": "Adaptation d'une institution ou d'une doctrine à l'évolution du monde moderne.",
+    "exemple": "Le parti entreprit un aggiornamento de son programme après la défaite.",
+    "academie": false
+  },
+  {
+    "mot": "agiotage",
+    "nature": "n. m.",
+    "definition": "Spéculation sur les fonds publics, les changes ou les valeurs.",
+    "exemple": "La fièvre de l'agiotage ruina bien des familles sous la Régence.",
+    "academie": true
+  },
+  {
+    "mot": "agonir",
+    "nature": "v. tr.",
+    "definition": "Accabler quelqu'un d'injures, de reproches.",
+    "exemple": "Le cocher, furieux, agonit d'injures le piéton distrait.",
+    "academie": true
+  },
+  {
+    "mot": "agreste",
+    "nature": "adj.",
+    "definition": "Champêtre, rustique ; qui a le caractère de la campagne.",
+    "exemple": "Le peintre aimait ces paysages agrestes faits de haies et de vergers.",
+    "academie": true
+  },
+  {
+    "mot": "aguets",
+    "nature": "n. m. pl.",
+    "definition": "Ne s'emploie que dans « aux aguets » : en position de guetter, d'épier, sur ses gardes.",
+    "exemple": "Le chat restait aux aguets devant le trou de la souris.",
+    "academie": false
+  },
+  {
+    "mot": "ahaner",
+    "nature": "v. intr.",
+    "definition": "Respirer bruyamment sous l'effort, peiner.",
+    "exemple": "Le bûcheron ahanait à chaque coup de cognée.",
+    "academie": true
+  },
+  {
+    "mot": "aiguail",
+    "nature": "n. m.",
+    "definition": "Rosée qui perle sur les feuilles, les herbes et les arbres.",
+    "exemple": "À l'aube, l'aiguail perlait sur les fougères.",
+    "academie": true
+  },
+  {
+    "mot": "aiguière",
+    "nature": "n. f.",
+    "definition": "Vase à anse et à bec destiné à contenir de l'eau.",
+    "exemple": "Le valet versa l'eau de l'aiguière sur les mains des convives.",
+    "academie": true
+  },
+  {
+    "mot": "airain",
+    "nature": "n. m.",
+    "definition": "Ancien nom du bronze ; symbole de dureté.",
+    "exemple": "Il avait, disait-on, un cœur d'airain.",
+    "academie": true
+  },
+  {
+    "mot": "aîtres",
+    "nature": "n. m. pl.",
+    "definition": "Disposition des lieux, des pièces d'une maison.",
+    "exemple": "Elle connaissait les aîtres de la vieille demeure mieux que personne.",
+    "academie": false
+  },
+  {
+    "mot": "alambiqué",
+    "nature": "adj.",
+    "definition": "Exagérément compliqué et raffiné, au point d'en être obscur.",
+    "exemple": "Il se perdit dans une explication alambiquée que nul ne comprit.",
+    "academie": false
+  },
+  {
+    "mot": "alanguir",
+    "nature": "v. tr.",
+    "definition": "Rendre languissant, affaiblir l'énergie.",
+    "exemple": "La chaleur de l'été alanguissait les promeneurs.",
+    "academie": true
+  },
+  {
+    "mot": "alcarazas",
+    "nature": "n. m.",
+    "definition": "Vase de terre poreuse dans lequel l'eau se rafraîchit par évaporation.",
+    "exemple": "Sur la terrasse, l'alcarazas gardait l'eau fraîche malgré la canicule.",
+    "academie": true
+  },
+  {
+    "mot": "alcôve",
+    "nature": "n. f.",
+    "definition": "Renfoncement d'une chambre où l'on place un lit ; symbole de la vie amoureuse intime.",
+    "exemple": "Les secrets d'alcôve de la favorite alimentaient les ragots de la cour.",
+    "academie": true
+  },
+  {
+    "mot": "alcyon",
+    "nature": "n. m.",
+    "definition": "Oiseau marin fabuleux dont la présence annonçait le calme de la mer.",
+    "exemple": "Les poètes saluaient l'alcyon, messager des jours paisibles.",
+    "academie": true
+  },
+  {
+    "mot": "algarade",
+    "nature": "n. f.",
+    "definition": "Vive querelle, sortie brusque et injurieuse contre quelqu'un.",
+    "exemple": "Une algarade éclata entre les deux voisins à propos de la haie.",
+    "academie": true
+  },
+  {
+    "mot": "algide",
+    "nature": "adj.",
+    "definition": "Qui s'accompagne d'une sensation de froid intense.",
+    "exemple": "Le malade, pris d'une fièvre algide, grelottait sous ses couvertures.",
+    "academie": true
+  },
+  {
+    "mot": "aliboron",
+    "nature": "n. m.",
+    "definition": "Homme ignorant et sot ; nom plaisant donné à l'âne.",
+    "exemple": "Ce maître aliboron prétendait tout savoir et ne savait rien.",
+    "academie": true
+  },
+  {
+    "mot": "allitération",
+    "nature": "n. f.",
+    "definition": "Répétition de mêmes consonnes dans une suite de mots rapprochés, pour un effet sonore.",
+    "exemple": "« Pour qui sont ces serpents qui sifflent sur vos têtes ? » est une allitération célèbre.",
+    "academie": true
+  },
+  {
+    "mot": "aloi",
+    "nature": "n. m.",
+    "definition": "Titre légal d'une monnaie ; « de bon aloi » : de bonne qualité, qui mérite l'estime.",
+    "exemple": "Il régnait dans la salle une gaieté de bon aloi.",
+    "academie": true
+  },
+  {
+    "mot": "alpestre",
+    "nature": "adj.",
+    "definition": "Propre aux Alpes ou aux paysages de montagne qui leur ressemblent.",
+    "exemple": "Le sentier serpentait parmi les prairies alpestres.",
+    "academie": true
+  },
+  {
+    "mot": "altier",
+    "nature": "adj.",
+    "definition": "Qui a de la hauteur, de la fierté, voire de l'orgueil.",
+    "exemple": "Elle passa devant eux d'un pas altier, sans un regard.",
+    "academie": true
+  },
+  {
+    "mot": "amarante",
+    "nature": "n. f.",
+    "definition": "Plante ornementale aux fleurs rouge pourpre ; adjectivement, de cette couleur.",
+    "exemple": "Le salon était tendu de velours amarante.",
+    "academie": true
+  },
+  {
+    "mot": "ambages",
+    "nature": "n. f. pl.",
+    "definition": "Détours de langage ; surtout dans « sans ambages » : sans détour, franchement.",
+    "exemple": "Elle lui annonça sans ambages qu'elle le quittait.",
+    "academie": false
+  },
+  {
+    "mot": "amble",
+    "nature": "n. m.",
+    "definition": "Allure d'un quadrupède qui lève en même temps les deux jambes du même côté.",
+    "exemple": "La mule avançait à l'amble sur le chemin pierreux.",
+    "academie": true
+  },
+  {
+    "mot": "ambroisie",
+    "nature": "n. f.",
+    "definition": "Nourriture des dieux de l'Olympe, qui donnait l'immortalité ; mets exquis.",
+    "exemple": "Ce gâteau de grand-mère était pour nous une véritable ambroisie.",
+    "academie": true
+  },
+  {
+    "mot": "amouracher",
+    "nature": "v. pron.",
+    "definition": "Se prendre d'un amour soudain et passager, souvent jugé peu raisonnable.",
+    "exemple": "À soixante ans, il s'amouracha d'une chanteuse de cabaret.",
+    "academie": true
+  },
+  {
+    "mot": "amphibologie",
+    "nature": "n. f.",
+    "definition": "Ambiguïté d'une phrase qui peut s'interpréter de plusieurs façons.",
+    "exemple": "Cette clause du contrat, par son amphibologie, prêtait à contestation.",
+    "academie": true
+  },
+  {
+    "mot": "ampoulé",
+    "nature": "adj.",
+    "definition": "Emphatique et boursouflé, en parlant d'un style.",
+    "exemple": "Le maire prononça un discours ampoulé qui endormit l'auditoire.",
+    "academie": true
+  },
+  {
+    "mot": "amusette",
+    "nature": "n. f.",
+    "definition": "Petit amusement, occupation sans importance.",
+    "exemple": "Pour lui, la politique n'était qu'une amusette de salon.",
+    "academie": true
+  },
+  {
+    "mot": "anachorète",
+    "nature": "n. m.",
+    "definition": "Religieux qui vit retiré dans la solitude ; par extension, personne vivant à l'écart du monde.",
+    "exemple": "Retiré dans sa cabane, il menait une vie d'anachorète.",
+    "academie": true
+  },
+  {
+    "mot": "anacoluthe",
+    "nature": "n. f.",
+    "definition": "Rupture de construction dans une phrase, qui laisse un élément sans suite logique.",
+    "exemple": "« Le nez de Cléopâtre, s'il eût été plus court... » est une anacoluthe célèbre.",
+    "academie": false
+  },
+  {
+    "mot": "anadyomène",
+    "nature": "adj.",
+    "definition": "Qui sort de l'eau, en parlant de Vénus naissant de la mer.",
+    "exemple": "Le tableau représentait une Vénus anadyomène tordant sa chevelure.",
+    "academie": false
+  },
+  {
+    "mot": "anathème",
+    "nature": "n. m.",
+    "definition": "Excommunication solennelle ; condamnation, réprobation publique.",
+    "exemple": "Le philosophe fut frappé d'anathème par les autorités religieuses.",
+    "academie": true
+  },
+  {
+    "mot": "ancillaire",
+    "nature": "adj.",
+    "definition": "Relatif aux servantes ; « amours ancillaires » : liaisons avec des servantes.",
+    "exemple": "Le roman évoque les amours ancillaires d'un notable de province.",
+    "academie": true
+  },
+  {
+    "mot": "anhéler",
+    "nature": "v. intr.",
+    "definition": "Respirer avec peine, être essoufflé.",
+    "exemple": "Le vieux cheval anhélait en gravissant la côte.",
+    "academie": false
+  },
+  {
+    "mot": "anicroche",
+    "nature": "n. f.",
+    "definition": "Petit obstacle, difficulté imprévue qui retarde.",
+    "exemple": "Le voyage se déroula sans la moindre anicroche.",
+    "academie": true
+  },
+  {
+    "mot": "animadversion",
+    "nature": "n. f.",
+    "definition": "Blâme, réprobation ; hostilité marquée envers quelqu'un.",
+    "exemple": "Ses frasques lui valurent l'animadversion de tout le village.",
+    "academie": true
+  },
+  {
+    "mot": "ânonner",
+    "nature": "v. tr. et intr.",
+    "definition": "Lire ou réciter avec peine, en hésitant.",
+    "exemple": "L'élève ânonnait sa leçon devant le tableau noir.",
+    "academie": true
+  },
+  {
+    "mot": "antan",
+    "nature": "adv.",
+    "definition": "Autrefois ; à l'origine, l'année précédente. S'emploie surtout dans « d'antan ».",
+    "exemple": "Elle regrettait les bals d'antan.",
+    "academie": true
+  },
+  {
+    "mot": "antédiluvien",
+    "nature": "adj.",
+    "definition": "Antérieur au Déluge ; par plaisanterie, très ancien, démodé.",
+    "exemple": "Il conduisait une automobile antédiluvienne qui pétaradait.",
+    "academie": true
+  },
+  {
+    "mot": "antépénultième",
+    "nature": "adj.",
+    "definition": "Qui vient juste avant l'avant-dernier ; troisième en partant de la fin.",
+    "exemple": "Dans « tabouret », « ta » est la syllabe antépénultième.",
+    "academie": true
+  },
+  {
+    "mot": "antienne",
+    "nature": "n. f.",
+    "definition": "Verset chanté avant et après un psaume ; au figuré, propos répété sans cesse.",
+    "exemple": "Il reprit son antienne habituelle sur la jeunesse qui ne travaille plus.",
+    "academie": true
+  },
+  {
+    "mot": "antinomie",
+    "nature": "n. f.",
+    "definition": "Contradiction entre deux idées, deux lois ou deux principes.",
+    "exemple": "Il voyait une antinomie entre la liberté absolue et l'ordre social.",
+    "academie": true
+  },
+  {
+    "mot": "antiphrase",
+    "nature": "n. f.",
+    "definition": "Emploi d'un mot ou d'une phrase dans un sens contraire à son sens véritable, par ironie.",
+    "exemple": "« Quel beau temps ! » sous une averse est une antiphrase.",
+    "academie": false
+  },
+  {
+    "mot": "antiquaille",
+    "nature": "n. f.",
+    "definition": "Objet ancien de peu de valeur, vieillerie.",
+    "exemple": "Le grenier était encombré d'antiquailles poussiéreuses.",
+    "academie": true
+  },
+  {
+    "mot": "antre",
+    "nature": "n. m.",
+    "definition": "Caverne, grotte profonde et obscure ; lieu inquiétant ou retiré.",
+    "exemple": "Le savant passait ses nuits dans l'antre encombré de son laboratoire.",
+    "academie": true
+  },
+  {
+    "mot": "anuiter",
+    "nature": "v. pron.",
+    "definition": "Se laisser surprendre par la nuit en chemin.",
+    "exemple": "Ne nous anuitons pas dans cette forêt mal famée.",
+    "academie": true
+  },
+  {
+    "mot": "apanage",
+    "nature": "n. m.",
+    "definition": "Ce qui est le propre de quelqu'un ou de quelque chose ; à l'origine, terres données aux cadets des rois.",
+    "exemple": "La patience n'est pas l'apanage de la vieillesse.",
+    "academie": true
+  },
+  {
+    "mot": "aparté",
+    "nature": "n. m.",
+    "definition": "Paroles qu'un personnage dit à part soi ; entretien particulier au sein d'une réunion.",
+    "exemple": "Les deux ministres eurent un bref aparté dans le couloir.",
+    "academie": false
+  },
+  {
+    "mot": "apocryphe",
+    "nature": "adj.",
+    "definition": "Dont l'authenticité est douteuse ou non reconnue.",
+    "exemple": "Cette lettre attribuée à Voltaire est sans doute apocryphe.",
+    "academie": true
+  },
+  {
+    "mot": "apodictique",
+    "nature": "adj.",
+    "definition": "Dont la vérité est nécessaire et démontrée, qui s'impose sans contestation.",
+    "exemple": "Il présentait ses opinions avec une assurance apodictique.",
+    "academie": true
+  },
+  {
+    "mot": "apologie",
+    "nature": "n. f.",
+    "definition": "Discours ou écrit qui défend, justifie ou fait l'éloge de quelqu'un ou de quelque chose.",
+    "exemple": "Le livre est une apologie passionnée de la lenteur.",
+    "academie": false
+  },
+  {
+    "mot": "apologue",
+    "nature": "n. m.",
+    "definition": "Petit récit allégorique dont on tire une leçon morale.",
+    "exemple": "La fable du chêne et du roseau est un apologue sur l'humilité.",
+    "academie": true
+  },
+  {
+    "mot": "apostasie",
+    "nature": "n. f.",
+    "definition": "Abandon public d'une religion, et par extension d'une doctrine ou d'un parti.",
+    "exemple": "Son ralliement au camp adverse fut vécu comme une apostasie.",
+    "academie": true
+  },
+  {
+    "mot": "apostille",
+    "nature": "n. f.",
+    "definition": "Note ou recommandation ajoutée en marge ou au bas d'un écrit.",
+    "exemple": "Le préfet ajouta une apostille favorable à la requête.",
+    "academie": true
+  },
+  {
+    "mot": "apostropher",
+    "nature": "v. tr.",
+    "definition": "Adresser brusquement la parole à quelqu'un, souvent avec rudesse.",
+    "exemple": "Un passant apostropha le conducteur qui avait grillé le feu.",
+    "academie": true
+  },
+  {
+    "mot": "apothicaire",
+    "nature": "n. m.",
+    "definition": "Ancien nom du pharmacien ; « compte d'apothicaire » : compte long et minutieux.",
+    "exemple": "Le partage de l'héritage tourna au compte d'apothicaire.",
+    "academie": true
+  },
+  {
+    "mot": "appariteur",
+    "nature": "n. m.",
+    "definition": "Huissier d'une faculté ou d'une administration, chargé du service et de l'ordre.",
+    "exemple": "L'appariteur ouvrit les portes de l'amphithéâtre.",
+    "academie": true
+  },
+  {
+    "mot": "appas",
+    "nature": "n. m. pl.",
+    "definition": "Charmes, attraits physiques d'une femme ; ce qui attire, séduit.",
+    "exemple": "Le poète célébrait les appas de sa belle.",
+    "academie": true
+  },
+  {
+    "mot": "appeau",
+    "nature": "n. m.",
+    "definition": "Petit instrument imitant le cri des oiseaux pour les attirer.",
+    "exemple": "Le chasseur souffla dans son appeau pour attirer les cailles.",
+    "academie": true
+  },
+  {
+    "mot": "appétence",
+    "nature": "n. f.",
+    "definition": "Désir, inclination qui porte vers un objet propre à satisfaire un besoin.",
+    "exemple": "Il montrait une appétence certaine pour les honneurs.",
+    "academie": true
+  },
+  {
+    "mot": "appointements",
+    "nature": "n. m. pl.",
+    "definition": "Rémunération fixe attachée à un emploi.",
+    "exemple": "Ses appointements de commis suffisaient à peine à le nourrir.",
+    "academie": false
+  },
+  {
+    "mot": "aquilin",
+    "nature": "adj.",
+    "definition": "Recourbé en bec d'aigle, en parlant du nez.",
+    "exemple": "Son nez aquilin lui donnait un profil d'empereur romain.",
+    "academie": true
+  },
+  {
+    "mot": "aquilon",
+    "nature": "n. m.",
+    "definition": "Vent du nord, froid et violent ; poétique.",
+    "exemple": "L'aquilon faisait ployer les cimes des pins.",
+    "academie": false
+  },
+  {
+    "mot": "araser",
+    "nature": "v. tr.",
+    "definition": "Mettre de niveau un mur ou une surface ; user un relief jusqu'à le niveler.",
+    "exemple": "L'érosion a arasé ces montagnes au fil des millénaires.",
+    "academie": true
+  },
+  {
+    "mot": "arcane",
+    "nature": "n. m.",
+    "definition": "Secret, mystère réservé aux initiés ; surtout au pluriel.",
+    "exemple": "Elle connaissait tous les arcanes de la procédure administrative.",
+    "academie": true
+  },
+  {
+    "mot": "archal",
+    "nature": "n. m.",
+    "definition": "Laiton ; « fil d'archal » : fil de laiton.",
+    "exemple": "Les bouquets de fleurs séchées tenaient par un fil d'archal.",
+    "academie": true
+  },
+  {
+    "mot": "ardélion",
+    "nature": "n. m.",
+    "definition": "Personne qui fait l'empressée, se mêle de tout et ne sert à rien.",
+    "exemple": "Cet ardélion se rendait partout et n'y faisait rien d'utile.",
+    "academie": true
+  },
+  {
+    "mot": "aréopage",
+    "nature": "n. m.",
+    "definition": "Assemblée de personnes compétentes ou savantes ; à l'origine, tribunal d'Athènes.",
+    "exemple": "Il dut défendre sa thèse devant un aréopage de professeurs.",
+    "academie": true
+  },
+  {
+    "mot": "argousin",
+    "nature": "n. m.",
+    "definition": "Vieilli et péjoratif : agent de police ; autrefois, surveillant des forçats.",
+    "exemple": "Deux argousins le cueillirent à la sortie du tripot.",
+    "academie": true
+  },
+  {
+    "mot": "arguer",
+    "nature": "v. tr. et intr.",
+    "definition": "Tirer une conséquence, déduire ; prétexter, invoquer comme argument.",
+    "exemple": "Il arguait de son grand âge pour refuser la corvée.",
+    "academie": true
+  },
+  {
+    "mot": "argutie",
+    "nature": "n. f.",
+    "definition": "Raisonnement d'une subtilité excessive et vaine ; chicane.",
+    "exemple": "L'avocat se perdait en arguties pour gagner du temps.",
+    "academie": true
+  },
+  {
+    "mot": "aria",
+    "nature": "n. m.",
+    "definition": "Vieilli : souci, tracas, embarras.",
+    "exemple": "Quel aria pour obtenir ce simple papier !",
+    "academie": false
+  },
+  {
+    "mot": "aristarque",
+    "nature": "n. m.",
+    "definition": "Critique éclairé mais sévère.",
+    "exemple": "Les aristarques de la presse ont éreinté son premier roman.",
+    "academie": false
+  },
+  {
+    "mot": "arroger",
+    "nature": "v. pron.",
+    "definition": "S'attribuer indûment un droit, un pouvoir ou une qualité.",
+    "exemple": "Il s'est arrogé le droit de décider pour tout le monde.",
+    "academie": true
+  },
+  {
+    "mot": "articulet",
+    "nature": "n. m.",
+    "definition": "Petit article de journal sans importance.",
+    "exemple": "Son exploit ne lui valut qu'un articulet en page six.",
+    "academie": false
+  },
+  {
+    "mot": "aruspice",
+    "nature": "n. m.",
+    "definition": "Devin de l'Antiquité qui lisait l'avenir dans les entrailles des victimes.",
+    "exemple": "L'aruspice examina le foie du bélier et prédit la victoire.",
+    "academie": true
+  },
+  {
+    "mot": "ascèse",
+    "nature": "n. f.",
+    "definition": "Discipline de vie faite de privations, en vue d'un perfectionnement moral ou spirituel.",
+    "exemple": "Il s'imposait une ascèse rigoureuse pour préparer la course.",
+    "academie": true
+  },
+  {
+    "mot": "aspérité",
+    "nature": "n. f.",
+    "definition": "Saillie, inégalité d'une surface ; au figuré, rudesse du caractère.",
+    "exemple": "Le grimpeur s'agrippait aux moindres aspérités de la paroi.",
+    "academie": true
+  },
+  {
+    "mot": "asphodèle",
+    "nature": "n. m.",
+    "definition": "Plante à fleurs blanches ou jaunes, associée dans la mythologie grecque au séjour des morts.",
+    "exemple": "Les ombres erraient dans la prairie d'asphodèles.",
+    "academie": true
+  },
+  {
+    "mot": "asséner",
+    "nature": "v. tr.",
+    "definition": "Porter un coup avec force ; au figuré, énoncer avec brutalité.",
+    "exemple": "Il lui asséna un coup de poing, puis quelques vérités bien senties.",
+    "academie": true
+  },
+  {
+    "mot": "assonance",
+    "nature": "n. f.",
+    "definition": "Répétition d'une même voyelle accentuée, notamment à la fin des vers.",
+    "exemple": "Les chansons de geste reposent sur l'assonance plutôt que sur la rime.",
+    "academie": true
+  },
+  {
+    "mot": "assuétude",
+    "nature": "n. f.",
+    "definition": "Accoutumance de l'organisme à une substance ; dépendance.",
+    "exemple": "L'assuétude au tabac rendait chaque tentative de sevrage douloureuse.",
+    "academie": false
+  },
+  {
+    "mot": "ataraxie",
+    "nature": "n. f.",
+    "definition": "Tranquillité de l'âme, absence de trouble, idéal des philosophes antiques.",
+    "exemple": "Le sage stoïcien recherchait l'ataraxie face aux coups du sort.",
+    "academie": true
+  },
+  {
+    "mot": "atavisme",
+    "nature": "n. m.",
+    "definition": "Réapparition de caractères d'un ancêtre ; par extension, hérédité des tendances.",
+    "exemple": "Par atavisme, il avait le goût de la mer comme ses aïeux marins.",
+    "academie": true
+  },
+  {
+    "mot": "atone",
+    "nature": "adj.",
+    "definition": "Qui manque de vigueur, d'expression ; en phonétique, non accentué.",
+    "exemple": "Il fixait la fenêtre d'un regard atone.",
+    "academie": true
+  },
+  {
+    "mot": "atour",
+    "nature": "n. m.",
+    "definition": "Parure, ornement de toilette ; surtout au pluriel, dans « dans ses plus beaux atours ».",
+    "exemple": "Elle était parée de ses plus beaux atours pour le bal.",
+    "academie": true
+  },
+  {
+    "mot": "atticisme",
+    "nature": "n. m.",
+    "definition": "Délicatesse et pureté du goût et du style, à la manière des Athéniens.",
+    "exemple": "Sa conversation avait un atticisme qui charmait les salons.",
+    "academie": true
+  },
+  {
+    "mot": "attiédir",
+    "nature": "v. tr.",
+    "definition": "Rendre tiède ; au figuré, diminuer l'ardeur d'un sentiment.",
+    "exemple": "Les années avaient attiédi leur passion.",
+    "academie": true
+  },
+  {
+    "mot": "attifer",
+    "nature": "v. tr.",
+    "definition": "Familier : habiller, parer avec mauvais goût ou de façon ridicule.",
+    "exemple": "Sa tante l'avait attifé d'un costume trop grand.",
+    "academie": false
+  },
+  {
+    "mot": "attrition",
+    "nature": "n. f.",
+    "definition": "Regret d'avoir offensé Dieu, inspiré par la crainte du châtiment plutôt que par l'amour ; usure de corps durs par frottement.",
+    "exemple": "Le théologien distinguait l'attrition de la contrition parfaite.",
+    "academie": true
+  },
+  {
+    "mot": "aubade",
+    "nature": "n. f.",
+    "definition": "Concert donné à l'aube sous les fenêtres de quelqu'un.",
+    "exemple": "Les musiciens donnèrent une aubade à la jeune mariée.",
+    "academie": true
+  },
+  {
+    "mot": "augure",
+    "nature": "n. m.",
+    "definition": "Présage, signe de ce qui doit arriver ; dans l'Antiquité, prêtre chargé d'interpréter les présages.",
+    "exemple": "Cette première neige était de bon augure pour la saison.",
+    "academie": true
+  },
+  {
+    "mot": "auguste",
+    "nature": "adj.",
+    "definition": "Qui inspire le respect et la vénération par sa grandeur.",
+    "exemple": "L'auguste assemblée se leva à l'entrée du souverain.",
+    "academie": true
+  },
+  {
+    "mot": "aulique",
+    "nature": "adj.",
+    "definition": "Qui se rapporte à la cour d'un souverain.",
+    "exemple": "Le peintre avait adopté le style aulique en vogue à Versailles.",
+    "academie": true
+  },
+  {
+    "mot": "aumônière",
+    "nature": "n. f.",
+    "definition": "Bourse que l'on portait à la ceinture ; en cuisine, crêpe garnie et fermée en forme de bourse.",
+    "exemple": "Le chef servit des aumônières aux pommes caramélisées.",
+    "academie": true
+  },
+  {
+    "mot": "aune",
+    "nature": "n. f.",
+    "definition": "Ancienne mesure de longueur ; « à l'aune de » : en prenant pour critère.",
+    "exemple": "Il jugeait chaque projet à l'aune de sa rentabilité.",
+    "academie": true
+  },
+  {
+    "mot": "auspice",
+    "nature": "n. m.",
+    "definition": "Présage tiré du vol des oiseaux ; au pluriel, « sous les auspices de » : sous la protection de.",
+    "exemple": "Le festival s'est ouvert sous les meilleurs auspices.",
+    "academie": true
+  },
+  {
+    "mot": "autan",
+    "nature": "n. m.",
+    "definition": "Vent violent venu du sud-est, qui souffle sur le Languedoc et la région toulousaine.",
+    "exemple": "Quand souffle l'autan, les Toulousains deviennent nerveux.",
+    "academie": true
+  },
+  {
+    "mot": "autodafé",
+    "nature": "n. m.",
+    "definition": "Supplice du feu infligé par l'Inquisition ; destruction par le feu, notamment de livres.",
+    "exemple": "Les régimes totalitaires ont organisé des autodafés de livres jugés subversifs.",
+    "academie": true
+  },
+  {
+    "mot": "avachir",
+    "nature": "v. tr.",
+    "definition": "Rendre mou, déformé ; au figuré, priver d'énergie, de vigueur.",
+    "exemple": "L'oisiveté avait fini par l'avachir.",
+    "academie": true
+  },
+  {
+    "mot": "avenant",
+    "nature": "adj.",
+    "definition": "Qui plaît par sa bonne grâce, son amabilité ; « à l'avenant » : en accord, pareillement.",
+    "exemple": "L'hôtesse était avenante, et le repas à l'avenant.",
+    "academie": true
+  },
+  {
+    "mot": "avers",
+    "nature": "n. m.",
+    "definition": "Face d'une monnaie ou d'une médaille qui porte l'effigie principale.",
+    "exemple": "L'avers de la pièce montre le profil de l'empereur.",
+    "academie": true
+  },
+  {
+    "mot": "avertin",
+    "nature": "n. m.",
+    "definition": "Vieilli : maladie de l'esprit, accès de folie ou de colère.",
+    "exemple": "Quel avertin l'a donc pris de tout casser ainsi ?",
+    "academie": true
+  },
+  {
+    "mot": "aveulir",
+    "nature": "v. tr.",
+    "definition": "Rendre veule, sans volonté ni énergie.",
+    "exemple": "Le confort et la facilité avaient aveuli la jeune génération, selon lui.",
+    "academie": false
+  },
+  {
+    "mot": "avocasserie",
+    "nature": "n. f.",
+    "definition": "Péjoratif : chicane d'avocat, argumentation tortueuse.",
+    "exemple": "Il se lassait de ces avocasseries qui retardaient le procès.",
+    "academie": true
+  },
+  {
+    "mot": "avunculaire",
+    "nature": "adj.",
+    "definition": "Qui se rapporte à un oncle ou à une tante.",
+    "exemple": "Orphelin, il grandit sous l'autorité avunculaire de son oncle maternel.",
+    "academie": true
+  },
+  {
+    "mot": "azyme",
+    "nature": "adj.",
+    "definition": "Se dit du pain sans levain.",
+    "exemple": "Pour la Pâque juive, on mange du pain azyme.",
+    "academie": true
+  }
+]

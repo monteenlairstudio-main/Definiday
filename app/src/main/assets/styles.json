@@ -1,0 +1,320 @@
+{
+ "polices": [
+  {
+   "id": "playfair_display",
+   "nom": "Playfair Display",
+   "fichier": "playfair_display",
+   "genre": "didone",
+   "evoque": "élégance classique, XVIIIe–XIXe siècle, raffinement, salon"
+  },
+  {
+   "id": "abril_fatface",
+   "nom": "Abril Fatface",
+   "fichier": "abril_fatface",
+   "genre": "didone grasse",
+   "evoque": "affiche, presse, emphase, Belle Époque, théâtre"
+  },
+  {
+   "id": "libre_baskerville",
+   "nom": "Libre Baskerville",
+   "fichier": "libre_baskerville",
+   "genre": "réale",
+   "evoque": "Lumières, savoir, imprimerie, raison, encyclopédie"
+  },
+  {
+   "id": "eb_garamond",
+   "nom": "EB Garamond",
+   "fichier": "eb_garamond",
+   "genre": "garalde",
+   "evoque": "Renaissance, humanisme, littérature, livre ancien"
+  },
+  {
+   "id": "cormorant_garamond",
+   "nom": "Cormorant Garamond",
+   "fichier": "cormorant_garamond",
+   "genre": "garalde fine",
+   "evoque": "poésie, délicatesse, luxe, finesse, lyrisme"
+  },
+  {
+   "id": "im_fell_english",
+   "nom": "IM Fell English",
+   "fichier": "im_fell_english",
+   "genre": "ancienne",
+   "evoque": "XVIIe siècle, grimoire, archives, patine, mystère"
+  },
+  {
+   "id": "uncial_antiqua",
+   "nom": "Uncial Antiqua",
+   "fichier": "uncial_antiqua",
+   "genre": "onciale",
+   "evoque": "Moyen Âge, monastère, celtique, légende, manuscrit"
+  },
+  {
+   "id": "unifraktur_maguntia",
+   "nom": "UnifrakturMaguntia",
+   "fichier": "unifraktur_maguntia",
+   "genre": "gothique (fraktur)",
+   "evoque": "gothique, féodal, sombre, héraldique, Gutenberg"
+  },
+  {
+   "id": "cinzel",
+   "nom": "Cinzel",
+   "fichier": "cinzel",
+   "genre": "capitales romaines",
+   "evoque": "Antiquité, Rome, monument, solennité, droit"
+  },
+  {
+   "id": "dancing_script",
+   "nom": "Dancing Script",
+   "fichier": "dancing_script",
+   "genre": "manuscrite",
+   "evoque": "gaieté, spontanéité, correspondance, tendresse, fête"
+  },
+  {
+   "id": "parisienne",
+   "nom": "Parisienne",
+   "fichier": "parisienne",
+   "genre": "calligraphique",
+   "evoque": "romance, Paris, galanterie, mondanité, rêverie"
+  },
+  {
+   "id": "tenor_sans",
+   "nom": "Tenor Sans",
+   "fichier": "tenor_sans",
+   "genre": "sans-serif humaniste",
+   "evoque": "modernité, sobriété, clarté, design, science"
+  },
+  {
+   "id": "zilla_slab",
+   "nom": "Zilla Slab",
+   "fichier": "zilla_slab",
+   "genre": "mécane",
+   "evoque": "industrie, technique, robustesse, XIXe siècle, artisanat"
+  },
+  {
+   "id": "courier_prime",
+   "nom": "Courier Prime",
+   "fichier": "courier_prime",
+   "genre": "machine à écrire",
+   "evoque": "administration, journalisme, enquête, rapport, XXe siècle"
+  }
+ ],
+ "palettes": [
+  {
+   "id": "encre_de_chine",
+   "nom": "Encre de Chine",
+   "sombre": true,
+   "fond_haut": "#16181D",
+   "fond_bas": "#0B0C0F",
+   "mot": "#F2EEE6",
+   "nature": "#A9A49A",
+   "texte": "#DCD8D0",
+   "exemple": "#A9A49A",
+   "evoque": "écriture, nuit, gravité, calligraphie"
+  },
+  {
+   "id": "bleu_nuit",
+   "nom": "Bleu nuit",
+   "sombre": true,
+   "fond_haut": "#1B2A4A",
+   "fond_bas": "#0D1526",
+   "mot": "#F3E9C8",
+   "nature": "#9FB3D9",
+   "texte": "#D9E2F2",
+   "exemple": "#A8B8D8",
+   "evoque": "nuit, rêve, étoiles, mélancolie, sommeil"
+  },
+  {
+   "id": "ardoise",
+   "nom": "Ardoise",
+   "sombre": true,
+   "fond_haut": "#3A434D",
+   "fond_bas": "#252B32",
+   "mot": "#EEF1F4",
+   "nature": "#B8C2CC",
+   "texte": "#E1E6EB",
+   "exemple": "#C0C8D0",
+   "evoque": "école, pluie, pierre, sobriété, ville"
+  },
+  {
+   "id": "vert_de_gris",
+   "nom": "Vert-de-gris",
+   "sombre": true,
+   "fond_haut": "#2E4A45",
+   "fond_bas": "#1B2E2B",
+   "mot": "#E4F0E9",
+   "nature": "#9CC7B8",
+   "texte": "#D6E6DF",
+   "exemple": "#A9CBBF",
+   "evoque": "cuivre, temps, oxydation, mer, antiquité"
+  },
+  {
+   "id": "lie_de_vin",
+   "nom": "Lie-de-vin",
+   "sombre": true,
+   "fond_haut": "#4A1E2C",
+   "fond_bas": "#2A0F18",
+   "mot": "#F5DCC8",
+   "nature": "#D79AA8",
+   "texte": "#EED9DE",
+   "exemple": "#D3A9B4",
+   "evoque": "vin, banquet, passion, velours, ivresse"
+  },
+  {
+   "id": "braise",
+   "nom": "Braise",
+   "sombre": true,
+   "fond_haut": "#3A1A10",
+   "fond_bas": "#1A0A06",
+   "mot": "#FFB36B",
+   "nature": "#E08A5E",
+   "texte": "#F2DACB",
+   "exemple": "#D9A88F",
+   "evoque": "feu, colère, forge, ardeur, guerre"
+  },
+  {
+   "id": "sous_bois",
+   "nom": "Sous-bois",
+   "sombre": true,
+   "fond_haut": "#24331F",
+   "fond_bas": "#121A10",
+   "mot": "#E2D7A8",
+   "nature": "#A9BF8C",
+   "texte": "#DCE3CF",
+   "exemple": "#B2C2A0",
+   "evoque": "forêt, mousse, champignon, nature, secret"
+  },
+  {
+   "id": "violine",
+   "nom": "Violine",
+   "sombre": true,
+   "fond_haut": "#33203F",
+   "fond_bas": "#1A0F22",
+   "mot": "#E9D2F2",
+   "nature": "#BFA1D1",
+   "texte": "#E3D6EA",
+   "exemple": "#BBA7C9",
+   "evoque": "mystère, magie, crépuscule, liturgie, occulte"
+  },
+  {
+   "id": "abysses",
+   "nom": "Abysses",
+   "sombre": true,
+   "fond_haut": "#0E2E3A",
+   "fond_bas": "#05141A",
+   "mot": "#8FE3E0",
+   "nature": "#6FB7C2",
+   "texte": "#D3ECEF",
+   "exemple": "#9CC6CC",
+   "evoque": "océan, profondeur, marin, froid, inconnu"
+  },
+  {
+   "id": "parchemin",
+   "nom": "Parchemin",
+   "sombre": false,
+   "fond_haut": "#F4E9D0",
+   "fond_bas": "#E6D3AC",
+   "mot": "#3B2412",
+   "nature": "#7A4E2A",
+   "texte": "#3E2F22",
+   "exemple": "#5E4A36",
+   "evoque": "manuscrit, histoire, archives, Moyen Âge, savoir"
+  },
+  {
+   "id": "sepia",
+   "nom": "Sépia",
+   "sombre": false,
+   "fond_haut": "#EADBC4",
+   "fond_bas": "#D6BF9D",
+   "mot": "#3A2717",
+   "nature": "#6E4A2F",
+   "texte": "#3B2C1F",
+   "exemple": "#57422F",
+   "evoque": "photographie, nostalgie, passé, famille, souvenir"
+  },
+  {
+   "id": "sanguine",
+   "nom": "Sanguine",
+   "sombre": false,
+   "fond_haut": "#F3E2D3",
+   "fond_bas": "#E7C9B2",
+   "mot": "#7A2614",
+   "nature": "#9A3B22",
+   "texte": "#3F231A",
+   "exemple": "#62392B",
+   "evoque": "dessin, chair, Renaissance, atelier, corps"
+  },
+  {
+   "id": "safran",
+   "nom": "Safran",
+   "sombre": false,
+   "fond_haut": "#FBEBC4",
+   "fond_bas": "#F3D38A",
+   "mot": "#6B2E05",
+   "nature": "#8A4A12",
+   "texte": "#3D2A10",
+   "exemple": "#5C4319",
+   "evoque": "épice, Orient, soleil, chaleur, marché"
+  },
+  {
+   "id": "lavande",
+   "nom": "Lavande",
+   "sombre": false,
+   "fond_haut": "#EEE8F6",
+   "fond_bas": "#D9CDEB",
+   "mot": "#3F2A63",
+   "nature": "#6A548F",
+   "texte": "#2F2640",
+   "exemple": "#4E4363",
+   "evoque": "Provence, douceur, parfum, calme, linge"
+  },
+  {
+   "id": "givre",
+   "nom": "Givre",
+   "sombre": false,
+   "fond_haut": "#F2F7FA",
+   "fond_bas": "#D9E7EF",
+   "mot": "#1E3D59",
+   "nature": "#4A6F8C",
+   "texte": "#22313D",
+   "exemple": "#3F5566",
+   "evoque": "hiver, froid, pureté, silence, glace"
+  },
+  {
+   "id": "aube",
+   "nom": "Aube",
+   "sombre": false,
+   "fond_haut": "#FCE9DC",
+   "fond_bas": "#F3CFC4",
+   "mot": "#7D2E4A",
+   "nature": "#A04A5B",
+   "texte": "#3A2730",
+   "exemple": "#5A3E48",
+   "evoque": "matin, naissance, espoir, douceur, éveil"
+  },
+  {
+   "id": "pistache",
+   "nom": "Pistache",
+   "sombre": false,
+   "fond_haut": "#EEF3DC",
+   "fond_bas": "#D7E3B5",
+   "mot": "#2F4A12",
+   "nature": "#55702D",
+   "texte": "#2A3320",
+   "exemple": "#46522F",
+   "evoque": "printemps, jardin, fraîcheur, botanique, enfance"
+  },
+  {
+   "id": "craie",
+   "nom": "Craie",
+   "sombre": false,
+   "fond_haut": "#F7F5F0",
+   "fond_bas": "#E8E4DA",
+   "mot": "#1C1C1C",
+   "nature": "#6B6458",
+   "texte": "#2B2925",
+   "exemple": "#4F4A42",
+   "evoque": "neutre, géométrie, logique, clarté, abstraction"
+  }
+ ]
+}

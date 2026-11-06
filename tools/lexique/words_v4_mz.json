@@ -1,0 +1,508 @@
+[
+  {
+    "mot": "maritorne",
+    "nature": "n. f.",
+    "definition": "Soutenu. Femme d'allure grossière et masculine, laide et peu soignée de sa personne.",
+    "exemple": "À l'auberge, une maritorne aux mains rouges nous jeta deux écuelles sur la table.",
+    "academie": true,
+    "anecdote": "Le mot vient de Maritorne, servante d'auberge du Don Quichotte de Cervantès, devenue par antonomase un nom commun.",
+    "source": "https://fr.wiktionary.org/wiki/maritorne"
+  },
+  {
+    "mot": "matagraboliser",
+    "nature": "v. tr.",
+    "definition": "Échafauder une chose avec un soin excessif ; par extension, l'embrouiller à force de propos creux et compliqués.",
+    "exemple": "Il a matagrabolisé son discours pendant trois nuits, et personne n'y a rien compris.",
+    "academie": false,
+    "anecdote": "Mot forgé par Rabelais, qui l'emploie dans Gargantua, sur le grec mataios (« vain ») et le moyen français grabeler (« passer au crible »).",
+    "source": "https://fr.wiktionary.org/wiki/matagraboliser"
+  },
+  {
+    "mot": "onirocritie",
+    "nature": "n. f.",
+    "definition": "Art de déchiffrer les songes et d'en tirer une signification.",
+    "exemple": "Ce vieux traité d'onirocritie prétend lire l'avenir dans le moindre rêve.",
+    "academie": true
+  },
+  {
+    "mot": "palotin",
+    "nature": "n. m.",
+    "definition": "Personnage subalterne et effacé, voué aux seconds rôles.",
+    "exemple": "Le ministre s'entourait de palotins dociles qui n'osaient jamais le contredire.",
+    "academie": false,
+    "anecdote": "Le mot naît en 1895 dans Ubu roi ; les pataphysiciens en ont fait aussi le nom d'un de leurs mois, qui court de mi-avril à mi-mai.",
+    "source": "https://fr.wiktionary.org/wiki/palotin"
+  },
+  {
+    "mot": "passe-volant",
+    "nature": "n. m.",
+    "definition": "Autrefois, homme non enrôlé qu'on faisait figurer à une revue pour grossir une compagnie, le capitaine empochant sa solde.",
+    "exemple": "Le capitaine fit défiler trois passe-volants pour tromper le commissaire aux revues.",
+    "academie": true
+  },
+  {
+    "mot": "patrociner",
+    "nature": "v. intr.",
+    "definition": "Vieilli. Discourir sans fin, au point d'en devenir importun, pour convaincre ou défendre une cause.",
+    "exemple": "Il patrocina une heure durant sans que le juge daignât lever les yeux.",
+    "academie": true
+  },
+  {
+    "mot": "quérimonie",
+    "nature": "n. f.",
+    "definition": "Plainte, lamentation. En droit ancien, requête adressée au juge d'Église pour être autorisé à publier un monitoire.",
+    "exemple": "Ses lettres n'étaient qu'une longue quérimonie sur l'ingratitude de ses enfants.",
+    "academie": false,
+    "anecdote": "Du latin querimonia, « plainte » : le mot est apparenté à querelle.",
+    "source": "https://fr.wiktionary.org/wiki/quérimonie"
+  },
+  {
+    "mot": "riotte",
+    "nature": "n. f.",
+    "definition": "Vieilli. Petite dispute, chamaillerie sans gravité.",
+    "exemple": "Leurs riottes de voisinage amusaient tout le village.",
+    "academie": true,
+    "anecdote": "C'est le déverbal de l'ancien français rioter, verbe qui a aussi donné l'anglais riot.",
+    "source": "https://fr.wiktionary.org/wiki/riotte"
+  },
+  {
+    "mot": "rogaton",
+    "nature": "n. m.",
+    "definition": "Reste de nourriture, menu débris d'un repas ; par extension, petit écrit sans valeur. S'emploie surtout au pluriel.",
+    "exemple": "Le soir, on dînait des rogatons de la veille réchauffés au coin du feu.",
+    "academie": true
+  },
+  {
+    "mot": "simarre",
+    "nature": "n. f.",
+    "definition": "Longue robe d'apparat jadis portée par les magistrats, les dignitaires ou les dames ; sorte de soutane mise sous la robe.",
+    "exemple": "Le chancelier parut en simarre de soie noire.",
+    "academie": true
+  },
+  {
+    "mot": "soulas",
+    "nature": "n. m.",
+    "definition": "Vieilli. Réconfort apporté à une peine. Ne s'emploie plus guère que pour imiter l'ancienne langue.",
+    "exemple": "Ces quelques vers furent pour le prisonnier un doux soulas.",
+    "academie": true
+  },
+  {
+    "mot": "syndérèse",
+    "nature": "n. f.",
+    "definition": "En théologie, faculté de l'âme qui discerne infailliblement le bien ; par extension, remords de conscience.",
+    "exemple": "Malgré tous ses sophismes, la syndérèse le tourmentait chaque nuit.",
+    "academie": false,
+    "anecdote": "Le mot remonte, par le latin, au grec syntêrêsis, qui signifie « conservation ».",
+    "source": "https://fr.wiktionary.org/wiki/syndérèse"
+  },
+  {
+    "mot": "trigaud",
+    "nature": "n. m.",
+    "definition": "Personne fourbe, qui use de détours au lieu d'agir franchement.",
+    "exemple": "Méfie-toi de ce trigaud : il te sourit et négocie dans ton dos.",
+    "academie": false
+  },
+  {
+    "mot": "trivelin",
+    "nature": "n. m.",
+    "definition": "Bouffon de la comédie italienne ; l'acteur qui tenait sur scène cet emploi de farceur.",
+    "exemple": "Le trivelin fit rire la salle par ses grimaces et ses culbutes.",
+    "academie": false,
+    "anecdote": "Il est tiré de Trivellino, nom d'un des types comiques du théâtre italien.",
+    "source": "https://fr.wiktionary.org/wiki/trivelin"
+  },
+  {
+    "mot": "malencontre",
+    "nature": "n. f.",
+    "definition": "Vieilli. Fâcheuse rencontre ; malheur qui survient par hasard.",
+    "exemple": "Par malencontre, la diligence versa à deux lieues du relais.",
+    "academie": true
+  },
+  {
+    "mot": "malévole",
+    "nature": "adj.",
+    "definition": "Littéraire. Qui veut du mal à autrui, animé de mauvaises intentions.",
+    "exemple": "Elle ignora les commérages des langues malévoles.",
+    "academie": true
+  },
+  {
+    "mot": "malefaim",
+    "nature": "n. f.",
+    "definition": "Désuet. Faim atroce, de celles qui rongent et torturent le corps.",
+    "exemple": "Après trois jours de marche, la malefaim tenaillait les fuyards.",
+    "academie": true
+  },
+  {
+    "mot": "messeoir",
+    "nature": "v. intr.",
+    "definition": "Littéraire. Être déplacé, ne pas convenir ; s'emploie surtout dans une tournure négative.",
+    "exemple": "Il ne vous messied pas de montrer un peu d'humilité.",
+    "academie": true
+  },
+  {
+    "mot": "mohatra",
+    "nature": "adj.",
+    "definition": "Vieilli. Se dit d'un contrat usuraire : le marchand cède cher et à crédit un bien qu'il reprend aussitôt, comptant et à bas prix.",
+    "exemple": "Ce prêteur déguisait ses usures sous des contrats mohatra.",
+    "academie": true,
+    "anecdote": "On le fait remonter à l'arabe mokhatara : une vente risquée, où chacun s'expose au hasard.",
+    "source": "https://fr.wiktionary.org/wiki/mohatra"
+  },
+  {
+    "mot": "mont-pagnote",
+    "nature": "n. m.",
+    "definition": "Vieilli. Hauteur d'où l'on observe une bataille sans courir le moindre danger.",
+    "exemple": "Du haut de son mont-pagnote, le marquis commentait la mêlée.",
+    "academie": true,
+    "anecdote": "Il vient de l'italien pagnotta, une sorte de pain ; au XVIIIe siècle, on appelait ainsi le soldat poltron qui fuyait le danger.",
+    "source": "https://fr.wiktionary.org/wiki/mont-pagnote"
+  },
+  {
+    "mot": "musser",
+    "nature": "v. pron.",
+    "definition": "Vieilli. Se cacher, se dérober aux regards.",
+    "exemple": "Le renard alla se musser dans un buisson de ronces.",
+    "academie": true
+  },
+  {
+    "mot": "mésoffrir",
+    "nature": "v. intr.",
+    "definition": "Vieilli. Proposer d'une marchandise un prix inférieur à ce qu'elle vaut.",
+    "exemple": "L'acheteur mésoffrit si grossièrement que le paysan tourna les talons.",
+    "academie": true
+  },
+  {
+    "mot": "nice",
+    "nature": "adj.",
+    "definition": "Vieilli. D'une simplicité candide, sans aucune malice.",
+    "exemple": "La jeune bergère, toute nice, crut aux promesses du galant.",
+    "academie": true,
+    "anecdote": "Il est issu, par l'ancien français, du latin nescius, « ignorant ».",
+    "source": "https://fr.wiktionary.org/wiki/nice"
+  },
+  {
+    "mot": "oubliance",
+    "nature": "n. f.",
+    "definition": "Vieilli. Fait d'oublier ; défaillance de la mémoire.",
+    "exemple": "Pardonnez mon oubliance : j'avais promis de vous écrire.",
+    "academie": true
+  },
+  {
+    "mot": "ouiche",
+    "nature": "interj.",
+    "definition": "Familier et vieilli. Exclamation ironique qui marque le doute ou l'incrédulité.",
+    "exemple": "Lui, payer ses dettes ? Ouiche ! On l'attend encore.",
+    "academie": true,
+    "anecdote": "Attesté dès 1696, c'est une altération amusante de oui.",
+    "source": "https://fr.wiktionary.org/wiki/ouiche"
+  },
+  {
+    "mot": "panader",
+    "nature": "v. pron.",
+    "definition": "Vieilli. Marcher d'un air vaniteux et satisfait, en faisant étalage de sa personne.",
+    "exemple": "Le nouveau bailli se panadait sur la place, la canne à la main.",
+    "academie": true,
+    "anecdote": "De l'ancien français penader, « sauter, ruer », dit du cheval qui parade, avant de prendre le sens de « se pavaner ».",
+    "source": "https://fr.wiktionary.org/wiki/panader"
+  },
+  {
+    "mot": "patard",
+    "nature": "n. m.",
+    "definition": "Menue pièce de monnaie frappée au XVe siècle dans les États bourguignons des Pays-Bas ; plus largement, sou sans valeur.",
+    "exemple": "Il n'aurait pas donné un patard pour tirer son cousin d'affaire.",
+    "academie": true
+  },
+  {
+    "mot": "pince-maille",
+    "nature": "n. m. et f.",
+    "definition": "Familier et vieilli. Avare qui laisse voir sa ladrerie jusque dans les moindres détails.",
+    "exemple": "Ce pince-maille compte les morceaux de sucre de ses invités.",
+    "academie": true,
+    "anecdote": "Il est composé de pincer et de maille, nom d'une ancienne petite monnaie.",
+    "source": "https://fr.wiktionary.org/wiki/pince-maille"
+  },
+  {
+    "mot": "pitrepite",
+    "nature": "n. m.",
+    "definition": "Désuet. Alcool d'une grande violence, préparé à base d'esprit-de-vin.",
+    "exemple": "Le colporteur offrit à la ronde un gobelet de pitrepite.",
+    "academie": true
+  },
+  {
+    "mot": "piperie",
+    "nature": "n. f.",
+    "definition": "Vieilli. Tricherie au jeu ; par extension, toute espèce de fourberie.",
+    "exemple": "Les dés étaient truqués, et la piperie fut découverte au troisième coup.",
+    "academie": true
+  },
+  {
+    "mot": "pourpris",
+    "nature": "n. m.",
+    "definition": "Vieilli. Enclos, espace fermé qui entoure un lieu.",
+    "exemple": "Les moines cultivaient leurs simples dans le pourpris de l'abbaye.",
+    "academie": true
+  },
+  {
+    "mot": "pretintaille",
+    "nature": "n. f.",
+    "definition": "Garniture en découpures dont on ornait autrefois les robes de femme ; au pluriel, détails accessoires qui gravitent autour d'une chose.",
+    "exemple": "Sa robe à pretintailles fit sensation au bal du gouverneur.",
+    "academie": true
+  },
+  {
+    "mot": "prud’homie",
+    "nature": "n. f.",
+    "definition": "Vieilli. Honnêteté scrupuleuse jointe à une conduite sage et avisée.",
+    "exemple": "Sa prud’homie était connue de tout le bailliage.",
+    "academie": true
+  },
+  {
+    "mot": "rédarguer",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Reprendre quelqu'un, le blâmer pour une faute.",
+    "exemple": "Le précepteur rédarguait son élève à chaque barbarisme.",
+    "academie": true
+  },
+  {
+    "mot": "roger-bontemps",
+    "nature": "n. m.",
+    "definition": "Familier et vieilli. Personne joviale qui vit sans se soucier de rien.",
+    "exemple": "Ce roger-bontemps dépensait son héritage en chansons et en banquets.",
+    "academie": true,
+    "anecdote": "On l'attribue souvent à Roger de Collerye (1468-1536), joyeux secrétaire d'un évêque d'Auxerre ; pourtant, un « Rogier bontemps » figure déjà dans le Livre du Cœur d'amour épris de René d'Anjou.",
+    "source": "https://fr.wiktionary.org/wiki/roger-bontemps"
+  },
+  {
+    "mot": "simplesse",
+    "nature": "n. f.",
+    "definition": "Vieilli. Candeur douce et naturelle, ingénuité sans apprêt.",
+    "exemple": "Elle répondit avec une simplesse qui désarma les plus moqueurs.",
+    "academie": true
+  },
+  {
+    "mot": "souleur",
+    "nature": "n. f.",
+    "definition": "Désuet et familier. Frayeur soudaine qui saisit et serre le cœur.",
+    "exemple": "En entendant craquer l'escalier, il eut une souleur.",
+    "academie": true
+  },
+  {
+    "mot": "souventefois",
+    "nature": "adv.",
+    "definition": "Archaïsme. Souvent, à maintes reprises.",
+    "exemple": "Souventefois, le soir venu, il relisait les lettres de sa mère.",
+    "academie": true
+  },
+  {
+    "mot": "trantran",
+    "nature": "n. m.",
+    "definition": "Familier et vieilli. Marche lente et routinière des affaires ou de la vie de tous les jours.",
+    "exemple": "La boutique reprit son trantran après le départ des inspecteurs.",
+    "academie": true,
+    "anecdote": "Littré le tire d'un ancien verbe trantraner, venu du néerlandais tranten, « se promener çà et là ».",
+    "source": "https://fr.wiktionary.org/wiki/trantran"
+  },
+  {
+    "mot": "tumultuaire",
+    "nature": "adj.",
+    "definition": "Vieilli. Qui se fait dans le tumulte et la hâte, au mépris des formes et des lois.",
+    "exemple": "Une assemblée tumultuaire proclama la déchéance du conseil.",
+    "academie": true
+  },
+  {
+    "mot": "vaillantise",
+    "nature": "n. f.",
+    "definition": "Vieilli. Acte de bravoure ; par ironie, fanfaronnade.",
+    "exemple": "Il racontait ses vaillantises à qui voulait l'entendre.",
+    "academie": true
+  },
+  {
+    "mot": "vanterie",
+    "nature": "n. f.",
+    "definition": "Vieilli. Éloge présomptueux que l'on fait de soi-même.",
+    "exemple": "Ses vanteries de chasseur lassaient tous les convives.",
+    "academie": true
+  },
+  {
+    "mot": "vervelle",
+    "nature": "n. f.",
+    "definition": "Anneau passé à la patte d'un oiseau de fauconnerie, gravé au nom ou aux armes de son maître.",
+    "exemple": "Le faucon égaré portait une vervelle aux armes du comte.",
+    "academie": true
+  },
+  {
+    "mot": "vive-la-joie",
+    "nature": "n. m.",
+    "definition": "Familier et vieilli. Homme gai et insouciant.",
+    "exemple": "Ce gros vive-la-joie animait toutes les noces du canton.",
+    "academie": true
+  },
+  {
+    "mot": "pourchas",
+    "nature": "n. m.",
+    "definition": "Désuet. Fait de rechercher ou de poursuivre quelqu'un, en particulier pour le courtiser.",
+    "exemple": "Il consacra tout un printemps au pourchas de la belle meunière.",
+    "academie": true
+  },
+  {
+    "mot": "papegai",
+    "nature": "n. m.",
+    "definition": "Ancien nom du perroquet ; oiseau de bois peint juché sur une perche, que visent les tireurs à l'arc ou à l'arbalète.",
+    "exemple": "Le meilleur archer abattit le papegai et fut proclamé roi de la confrérie.",
+    "academie": true
+  },
+  {
+    "mot": "paterne",
+    "nature": "adj.",
+    "definition": "Dont la bonhomie protectrice imite, souvent avec affectation, celle d'un père.",
+    "exemple": "Le directeur lui tapota l'épaule d'un geste paterne.",
+    "academie": true
+  },
+  {
+    "mot": "protervité",
+    "nature": "n. f.",
+    "definition": "Rare. Audace effrontée, insolence.",
+    "exemple": "La protervité de ce jeune clerc scandalisait le chapitre.",
+    "academie": false,
+    "anecdote": "Il est emprunté au latin protervitas, « impudence, effronterie », attesté en français dès 1308.",
+    "source": "https://fr.wiktionary.org/wiki/protervité"
+  },
+  {
+    "mot": "philodoxe",
+    "nature": "n. m.",
+    "definition": "Personne qui s'attache aux opinions et aux apparences ; penseur qui avance des idées sans les fonder en raison.",
+    "exemple": "Ce philodoxe change de doctrine au gré des salons.",
+    "academie": false
+  },
+  {
+    "mot": "tabarinade",
+    "nature": "n. f.",
+    "definition": "Farce bouffonne et grossière, à la manière des parades de Tabarin.",
+    "exemple": "Ses discours électoraux tournaient à la tabarinade.",
+    "academie": false,
+    "anecdote": "Tabarin était le nom de scène de Jean Salomon (vers 1584-1633), charlatan dont les farces de tréteaux firent la renommée.",
+    "source": "https://fr.wiktionary.org/wiki/tabarinade"
+  },
+  {
+    "mot": "zanni",
+    "nature": "n. m.",
+    "definition": "Dans la comédie vénitienne, rôle de bouffon ; le personnage comique qui l'incarne.",
+    "exemple": "Le zanni enchaînait les pitreries devant le public de la foire.",
+    "academie": true,
+    "anecdote": "C'est une déformation dialectale de l'italien Giovanni.",
+    "source": "https://fr.wiktionary.org/wiki/zanni"
+  },
+  {
+    "mot": "talmouse",
+    "nature": "n. f.",
+    "definition": "Pâtisserie au fromage, mêlant crème, farine, œufs, sucre et beurre.",
+    "exemple": "On servit des talmouses tièdes avec le vin blanc.",
+    "academie": true
+  },
+  {
+    "mot": "noctiluque",
+    "nature": "adj.",
+    "definition": "Qui émet de la lumière dans l'obscurité nocturne.",
+    "exemple": "La mer, noctiluque, s'illuminait sous chaque coup de rame.",
+    "academie": false
+  },
+  {
+    "mot": "quinola",
+    "nature": "n. m.",
+    "definition": "Au reversi, valet de cœur, carte maîtresse du jeu ; au figuré, valet ou homme à gages qui escortait une dame.",
+    "exemple": "Il abattit le quinola avec un sourire triomphant.",
+    "academie": false
+  },
+  {
+    "mot": "nonnain",
+    "nature": "n. f.",
+    "definition": "Vieilli ou littéraire. Religieuse, nonne.",
+    "exemple": "Les nonnains chantaient matines derrière la grille.",
+    "academie": false,
+    "anecdote": "C'est l'ancien cas régime de nonne en ancien français.",
+    "source": "https://fr.wiktionary.org/wiki/nonnain"
+  },
+  {
+    "mot": "mauvaiseté",
+    "nature": "n. f.",
+    "definition": "Vieilli. Caractère mauvais d'une personne ou d'une chose ; parole ou acte destiné à nuire.",
+    "exemple": "Il répandait ses mauvaisetés avec un sourire angélique.",
+    "academie": false
+  },
+  {
+    "mot": "ventre-saint-gris",
+    "nature": "interj.",
+    "definition": "Vieilli. Juron familier prêté à Henri IV.",
+    "exemple": "Ventre-saint-gris ! Qui a laissé filer mon cheval ?",
+    "academie": false,
+    "anecdote": "Son origine reste discutée : peut-être un Vendredi-Saint ou un « ventre du Saint-Esprit » volontairement déformés, pour ne pas blasphémer.",
+    "source": "https://fr.wiktionary.org/wiki/ventre-saint-gris"
+  },
+  {
+    "mot": "sébile",
+    "nature": "n. f.",
+    "definition": "Petite coupe ronde et creuse, en bois ou en métal ; en particulier, celle où les mendiants recueillent les aumônes.",
+    "exemple": "L'aveugle tendait sa sébile aux passants du pont.",
+    "academie": true
+  },
+  {
+    "mot": "mangerie",
+    "nature": "n. f.",
+    "definition": "Désuet. Action de manger. Aussi, repas copieux et festif ; rarement, exactions qui ruinent les pauvres gens.",
+    "exemple": "La noce tourna en une mangerie de trois jours.",
+    "academie": true
+  },
+  {
+    "mot": "sagette",
+    "nature": "n. f.",
+    "definition": "Vieilli, poétique ou plaisant. Flèche.",
+    "exemple": "Cupidon décocha sa sagette au cœur du jeune page.",
+    "academie": true
+  },
+  {
+    "mot": "mévendre",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Se défaire d'un bien en le cédant au-dessous de ce qu'il a coûté.",
+    "exemple": "Pressé par ses créanciers, il dut mévendre sa récolte.",
+    "academie": true
+  },
+  {
+    "mot": "menuaille",
+    "nature": "n. f.",
+    "definition": "Familier et vieilli. Petite monnaie en quantité ; menu fretin ; petits objets bons pour le rebut.",
+    "exemple": "Il vida sur le comptoir une poignée de menuaille.",
+    "academie": true
+  },
+  {
+    "mot": "olinde",
+    "nature": "n. f.",
+    "definition": "Vieilli. Lame d'épée de grande qualité.",
+    "exemple": "Le mousquetaire ne se séparait jamais de son olinde.",
+    "academie": true,
+    "anecdote": "Elle doit son nom à la ville brésilienne d'Olinda, où l'on fabriquait ces lames.",
+    "source": "https://fr.wiktionary.org/wiki/olinde"
+  },
+  {
+    "mot": "patte-pelu",
+    "nature": "n. m.",
+    "definition": "Vieilli. Homme sournois qui arrive à ses fins sous des dehors doux et honnêtes.",
+    "exemple": "Ce patte-pelu avait capté l'héritage à force de prévenances.",
+    "academie": true
+  },
+  {
+    "mot": "torquet",
+    "nature": "n. m.",
+    "definition": "Désuet. Ruse tortueuse, mauvais tour destiné à duper.",
+    "exemple": "On lui avait joué un torquet, et il paya deux fois la même vache.",
+    "academie": true
+  },
+  {
+    "mot": "taisson",
+    "nature": "n. m.",
+    "definition": "Vieilli. Ancien nom du blaireau.",
+    "exemple": "Le taisson sortit de son terrier à la tombée du jour.",
+    "academie": true,
+    "anecdote": "Attesté dès 1180 chez Marie de France, il vient du bas latin taxo, « blaireau ».",
+    "source": "https://fr.wiktionary.org/wiki/taisson"
+  }
+]

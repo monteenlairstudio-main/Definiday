@@ -1,0 +1,352 @@
+[
+  {
+    "mot": "quadrivium",
+    "nature": "n. m.",
+    "definition": "Au Moyen Âge, cycle supérieur des arts libéraux réunissant arithmétique, géométrie, musique et astronomie.",
+    "exemple": "Après le trivium, l'écolier abordait le quadrivium et ses nombres.",
+    "academie": true
+  },
+  {
+    "mot": "quintaine",
+    "nature": "n. f.",
+    "definition": "Poteau ou mannequin pivotant contre lequel les cavaliers s'exerçaient à frapper de la lance.",
+    "exemple": "Le jeune écuyer manqua la quintaine et reçut le bâton dans le dos.",
+    "academie": true
+  },
+  {
+    "mot": "raccroc",
+    "nature": "n. m.",
+    "definition": "Coup heureux qui doit plus au hasard qu'à l'habileté.",
+    "exemple": "Il n'a gagné cette partie que par raccroc, et il le sait.",
+    "academie": true
+  },
+  {
+    "mot": "rassoter",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Entêter quelqu'un d'une passion au point de le rendre sot.",
+    "exemple": "Cette chanteuse l'a rassoté : il dépense tout son bien en bouquets.",
+    "academie": false
+  },
+  {
+    "mot": "regrattier",
+    "nature": "n. m.",
+    "definition": "Vieilli. Revendeur au détail de menues denrées ; au figuré, celui qui chicane sur les plus petites dépenses.",
+    "exemple": "Le regrattier du coin vendait le sel à la pincée.",
+    "academie": true
+  },
+  {
+    "mot": "remembrance",
+    "nature": "n. f.",
+    "definition": "Poétique. Souvenir, mémoire que l'on garde d'une chose passée.",
+    "exemple": "La remembrance de ses étés d'enfance lui revenait avec l'odeur des tilleuls.",
+    "academie": true
+  },
+  {
+    "mot": "rencogner",
+    "nature": "v. pron.",
+    "definition": "Se retirer dans un coin pour s'y blottir ; s'enfermer chez soi.",
+    "exemple": "Timide, il se rencognait près du poêle dès que les invités arrivaient.",
+    "academie": true
+  },
+  {
+    "mot": "rossinante",
+    "nature": "n. f.",
+    "definition": "Cheval maigre et piteux, par allusion à la monture de don Quichotte.",
+    "exemple": "Le colporteur arriva au village sur une rossinante qui boitait.",
+    "academie": true
+  },
+  {
+    "mot": "rossolis",
+    "nature": "n. m.",
+    "definition": "Ancienne liqueur faite d'eau-de-vie sucrée et parfumée.",
+    "exemple": "Grand-mère offrait un doigt de rossolis aux visiteurs de marque.",
+    "academie": true
+  },
+  {
+    "mot": "rotrouenge",
+    "nature": "n. f.",
+    "definition": "Chanson lyrique du Moyen Âge, parente des chansons de toile.",
+    "exemple": "Le jongleur entonna une rotrouenge sur un amant parti en croisade.",
+    "academie": false
+  },
+  {
+    "mot": "rebéquer",
+    "nature": "v. pron.",
+    "definition": "Familier et vieilli. Répliquer avec insolence à un supérieur, lui tenir tête.",
+    "exemple": "Le petit commis osa se rebéquer contre son patron.",
+    "academie": false
+  },
+  {
+    "mot": "rengréger",
+    "nature": "v. pron.",
+    "definition": "Désuet. S'aggraver, empirer, en parlant d'un mal ou d'une douleur.",
+    "exemple": "Loin d'elle, son chagrin ne faisait que se rengréger.",
+    "academie": false
+  },
+  {
+    "mot": "rubigineux",
+    "nature": "adj.",
+    "definition": "Couvert de rouille, ou qui en a la couleur.",
+    "exemple": "Une grille rubigineuse fermait le parc abandonné.",
+    "academie": false
+  },
+  {
+    "mot": "ribleur",
+    "nature": "n. m.",
+    "definition": "Vieilli. Filou qui court les rues la nuit.",
+    "exemple": "Les ribleurs guettaient les bourgeois attardés au sortir des tavernes.",
+    "academie": false
+  },
+  {
+    "mot": "rhyparographe",
+    "nature": "n. m.",
+    "definition": "Dans l'Antiquité, peintre qui représentait des sujets vulgaires ou triviaux.",
+    "exemple": "Ce rhyparographe peignait des cuisines sales plutôt que des dieux.",
+    "academie": false
+  },
+  {
+    "mot": "ripopée",
+    "nature": "n. f.",
+    "definition": "Vieilli. Mélange de fonds de vins divers ; par extension, mixture faite de restes disparates.",
+    "exemple": "Le cabaretier servait aux clients ivres une ripopée de fonds de bouteilles.",
+    "academie": true
+  },
+  {
+    "mot": "soliveau",
+    "nature": "n. m.",
+    "definition": "Au figuré, personne sans énergie ni autorité, par allusion à une fable de La Fontaine.",
+    "exemple": "Le conseil voulait un soliveau à sa tête, pour gouverner à sa place.",
+    "academie": true
+  },
+  {
+    "mot": "spicilège",
+    "nature": "n. m.",
+    "definition": "Recueil de textes, de pièces ou de pensées choisis.",
+    "exemple": "Il tenait un spicilège de maximes glanées au fil de ses lectures.",
+    "academie": false
+  },
+  {
+    "mot": "sternutatoire",
+    "nature": "adj.",
+    "definition": "Qui provoque l'éternuement.",
+    "exemple": "La poudre sternutatoire du farceur mit toute la salle en émoi.",
+    "academie": true
+  },
+  {
+    "mot": "souloir",
+    "nature": "v. intr.",
+    "definition": "Archaïque. Avoir coutume de faire quelque chose, s'employant suivi d'un infinitif.",
+    "exemple": "Il venait, comme il soulait faire, s'asseoir sous le vieux chêne.",
+    "academie": false
+  },
+  {
+    "mot": "suivez-moi-jeune-homme",
+    "nature": "n. m.",
+    "definition": "Désuet. Ruban qui pendait à l'arrière d'un chapeau ou d'une robe de femme.",
+    "exemple": "Les suivez-moi-jeune-homme de son chapeau flottaient au vent.",
+    "academie": false
+  },
+  {
+    "mot": "scurrile",
+    "nature": "adj.",
+    "definition": "Vieilli. Digne d'un bouffon, d'une plaisanterie basse.",
+    "exemple": "Ses saillies scurriles faisaient rire l'antichambre et rougir le salon.",
+    "academie": false
+  },
+  {
+    "mot": "stillicide",
+    "nature": "n. m.",
+    "definition": "Eau qui tombe goutte à goutte.",
+    "exemple": "Dans la grotte, seul le stillicide troublait le silence.",
+    "academie": false
+  },
+  {
+    "mot": "sirventès",
+    "nature": "n. m.",
+    "definition": "Poème des troubadours, le plus souvent satirique.",
+    "exemple": "Le troubadour composa un sirventès mordant contre le comte avare.",
+    "academie": false
+  },
+  {
+    "mot": "tire-laine",
+    "nature": "n. m.",
+    "definition": "Désuet. Voleur qui détroussait les passants.",
+    "exemple": "Au Pont-Neuf, les tire-laine dépouillaient les badauds de leur manteau.",
+    "academie": true
+  },
+  {
+    "mot": "tartarinade",
+    "nature": "n. f.",
+    "definition": "Fanfaronnade ridicule, vantardise dans le goût du Tartarin de Daudet.",
+    "exemple": "Son récit de chasse au lion n'était qu'une tartarinade de plus.",
+    "academie": false
+  },
+  {
+    "mot": "trissotin",
+    "nature": "n. m.",
+    "definition": "Pédant ridicule et prétentieux, d'après un personnage de Molière.",
+    "exemple": "Ce trissotin récitait ses sonnets à qui ne voulait pas les entendre.",
+    "academie": false
+  },
+  {
+    "mot": "tenson",
+    "nature": "n. f.",
+    "definition": "Poème médiéval en forme de débat dialogué entre deux poètes sur un sujet donné.",
+    "exemple": "Les deux troubadours s'affrontèrent dans une tenson sur la fidélité.",
+    "academie": true
+  },
+  {
+    "mot": "toton",
+    "nature": "n. m.",
+    "definition": "Petite toupie aux faces marquées de lettres ou de chiffres, servant à des jeux de hasard.",
+    "exemple": "Les enfants misaient des noisettes sur le toton qui tournoyait.",
+    "academie": true
+  },
+  {
+    "mot": "turlutaine",
+    "nature": "n. f.",
+    "definition": "Propos frivole ressassé ; par extension, marotte.",
+    "exemple": "Avec sa turlutaine sur les complots, il lassait tous ses voisins.",
+    "academie": true
+  },
+  {
+    "mot": "tracassin",
+    "nature": "n. m.",
+    "definition": "Humeur inquiète et chagrine.",
+    "exemple": "Un tracassin sourd l'empêchait de trouver le sommeil.",
+    "academie": false
+  },
+  {
+    "mot": "tapabor",
+    "nature": "n. m.",
+    "definition": "Désuet. Bonnet aux bords rabattables pour se protéger de la pluie et du vent.",
+    "exemple": "Le vieux marin enfonça son tapabor jusqu'aux oreilles.",
+    "academie": false
+  },
+  {
+    "mot": "triacleur",
+    "nature": "n. m.",
+    "definition": "Désuet. Vendeur de thériaque, remède ancien ; au figuré, charlatan beau parleur.",
+    "exemple": "Le triacleur vantait sur la place un élixir qui guérissait tout.",
+    "academie": false
+  },
+  {
+    "mot": "trousse-galant",
+    "nature": "n. m.",
+    "definition": "Vieilli. Maladie foudroyante qui emporte en peu de temps, nom parfois donné au choléra.",
+    "exemple": "En une nuit, le trousse-galant avait emporté le meunier.",
+    "academie": false
+  },
+  {
+    "mot": "ure",
+    "nature": "n. m.",
+    "definition": "Aurochs, bœuf sauvage aujourd'hui disparu.",
+    "exemple": "Les chasseurs francs traquaient l'ure dans les grandes forêts.",
+    "academie": false
+  },
+  {
+    "mot": "viduité",
+    "nature": "n. f.",
+    "definition": "État d'une personne veuve qui ne s'est pas remariée.",
+    "exemple": "Elle porta le noir durant toute sa longue viduité.",
+    "academie": true
+  },
+  {
+    "mot": "venette",
+    "nature": "n. f.",
+    "definition": "Populaire et vieilli. Peur, frayeur.",
+    "exemple": "En entendant craquer le grenier, il eut une belle venette.",
+    "academie": true
+  },
+  {
+    "mot": "vertugadin",
+    "nature": "n. m.",
+    "definition": "Bourrelet ou armature que les femmes portaient autrefois sous la jupe pour la faire bouffer.",
+    "exemple": "Avec son vertugadin, la marquise ne passait plus les portes.",
+    "academie": true
+  },
+  {
+    "mot": "virelai",
+    "nature": "n. m.",
+    "definition": "Ancien petit poème français à refrain, bâti sur deux rimes et en vers courts.",
+    "exemple": "Le ménestrel improvisa un virelai pour la fille du seigneur.",
+    "academie": true
+  },
+  {
+    "mot": "vitchoura",
+    "nature": "n. m.",
+    "definition": "Pardessus garni de fourrure qu'on mettait pour sortir par grand froid.",
+    "exemple": "Il ôta son vitchoura couvert de neige dans le vestibule.",
+    "academie": true
+  },
+  {
+    "mot": "vulnéraire",
+    "nature": "adj. et n. m.",
+    "definition": "Qui guérit les plaies ; remède propre à les cicatriser.",
+    "exemple": "On appliqua sur la blessure un vulnéraire à base de plantes.",
+    "academie": true
+  },
+  {
+    "mot": "vide-gousset",
+    "nature": "n. m.",
+    "definition": "Vieilli. Voleur, coupeur de bourses.",
+    "exemple": "Méfiez-vous des vide-goussets qui rôdent autour de la foire.",
+    "academie": false
+  },
+  {
+    "mot": "vêprée",
+    "nature": "n. f.",
+    "definition": "Désuet. Fin de l'après-midi, approche du soir.",
+    "exemple": "À la vêprée, les faneurs rentraient en chantant.",
+    "academie": false
+  },
+  {
+    "mot": "vertubleu",
+    "nature": "interj.",
+    "definition": "Vieilli. Juron exprimant la surprise ou la colère.",
+    "exemple": "Vertubleu ! qui a osé toucher à mon vin ?",
+    "academie": false
+  },
+  {
+    "mot": "vérécondie",
+    "nature": "n. f.",
+    "definition": "Littéraire et vieilli. Pudeur, retenue, réserve.",
+    "exemple": "Elle baissa les yeux avec une vérécondie de jeune fille.",
+    "academie": false
+  },
+  {
+    "mot": "vespétro",
+    "nature": "n. m.",
+    "definition": "Ancienne liqueur stomachique à base d'eau-de-vie, de sucre, d'angélique et de coriandre.",
+    "exemple": "Après le repas, l'oncle servit un petit verre de vespétro.",
+    "academie": false
+  },
+  {
+    "mot": "wergeld",
+    "nature": "n. m.",
+    "definition": "Chez les Francs, somme versée par un coupable à la victime ou à sa famille pour échapper à la vengeance.",
+    "exemple": "Le meurtrier dut payer un lourd wergeld aux parents du défunt.",
+    "academie": false
+  },
+  {
+    "mot": "xérophagie",
+    "nature": "n. f.",
+    "definition": "Jeûne des premiers chrétiens qui, en carême, ne mangeaient que du pain et des fruits secs.",
+    "exemple": "Les ermites pratiquaient une stricte xérophagie jusqu'à Pâques.",
+    "academie": false
+  },
+  {
+    "mot": "zythum",
+    "nature": "n. m.",
+    "definition": "Boisson d'orge fermentée, proche de la bière, de l'Égypte antique.",
+    "exemple": "Les bâtisseurs des pyramides recevaient leur ration de zythum.",
+    "academie": false
+  },
+  {
+    "mot": "zinzinuler",
+    "nature": "v. intr.",
+    "definition": "Chanter, en parlant de la mésange, de la fauvette et de certains autres oiseaux.",
+    "exemple": "Dès l'aube, les mésanges zinzinulaient dans la haie.",
+    "academie": false
+  }
+]

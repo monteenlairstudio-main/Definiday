@@ -1,0 +1,982 @@
+[
+  {
+    "mot": "damasquiner",
+    "nature": "v. tr.",
+    "definition": "Orner un objet de fer ou d'acier en y incrustant de fins filets d'or ou d'argent.",
+    "exemple": "L'artisan de Tolède damasquinait la garde du poignard avec une patience d'orfèvre.",
+    "academie": true
+  },
+  {
+    "mot": "damoiseau",
+    "nature": "n. m.",
+    "definition": "Au Moyen Âge, jeune gentilhomme qui n'était pas encore chevalier. Par ironie, jeune homme qui joue les galants.",
+    "exemple": "Le damoiseau rêvait du jour où il serait enfin adoubé.",
+    "academie": true
+  },
+  {
+    "mot": "dantesque",
+    "nature": "adj.",
+    "definition": "Qui évoque l'enfer décrit par Dante ; d'une grandeur effrayante, terrifiante.",
+    "exemple": "Les pompiers ont décrit un incendie dantesque, aux flammes hautes de trente mètres.",
+    "academie": false
+  },
+  {
+    "mot": "darder",
+    "nature": "v. tr.",
+    "definition": "Lancer comme un dard ; se dit surtout du soleil qui envoie ses rayons, ou d'un regard vif.",
+    "exemple": "En plein midi, le soleil dardait ses rayons sur la place déserte.",
+    "academie": true
+  },
+  {
+    "mot": "dauber",
+    "nature": "v. tr. et intr.",
+    "definition": "Dénigrer, railler quelqu'un ou quelque chose ; en dire du mal (dauber sur quelqu'un).",
+    "exemple": "Dès qu'il avait le dos tourné, ses collègues daubaient sur ses manies.",
+    "academie": false
+  },
+  {
+    "mot": "débonnaire",
+    "nature": "adj.",
+    "definition": "D'une bonté indulgente et paisible, parfois jusqu'à la faiblesse.",
+    "exemple": "Le vieux professeur, débonnaire, laissait passer les retards sans un mot.",
+    "academie": true
+  },
+  {
+    "mot": "débotté",
+    "nature": "n. m.",
+    "definition": "Moment de l'arrivée, où l'on ôte ses bottes. « Au débotté » : dès l'arrivée, à l'improviste.",
+    "exemple": "Le ministre a dû répondre aux journalistes au débotté, à peine descendu du train.",
+    "academie": true
+  },
+  {
+    "mot": "décati",
+    "nature": "adj.",
+    "definition": "Qui a perdu sa fraîcheur, sa jeunesse ; marqué par l'âge.",
+    "exemple": "Le jeune premier d'autrefois n'était plus qu'un acteur décati.",
+    "academie": false
+  },
+  {
+    "mot": "décavé",
+    "nature": "adj. et n.",
+    "definition": "Qui a perdu tout son argent, en particulier au jeu ; ruiné.",
+    "exemple": "Il sortit du casino décavé, sans même de quoi payer son taxi.",
+    "academie": false
+  },
+  {
+    "mot": "dessiller",
+    "nature": "v. tr.",
+    "definition": "Ouvrir les yeux de quelqu'un sur ce qu'il ignorait ou refusait de voir. « Dessiller les yeux » : détromper.",
+    "exemple": "Ce procès lui a dessillé les yeux sur la vraie nature de son associé.",
+    "academie": true
+  },
+  {
+    "mot": "déconfiture",
+    "nature": "n. f.",
+    "definition": "Défaite complète, échec cuisant ; par extension, ruine financière.",
+    "exemple": "La déconfiture de l'équipe favorite a stupéfié tout le stade.",
+    "academie": true
+  },
+  {
+    "mot": "décrépitude",
+    "nature": "n. f.",
+    "definition": "Affaiblissement extrême dû au grand âge ; par extension, déchéance avancée d'une chose ou d'une institution.",
+    "exemple": "Laissé à l'abandon, le manoir sombrait lentement dans la décrépitude.",
+    "academie": true
+  },
+  {
+    "mot": "dédale",
+    "nature": "n. m.",
+    "definition": "Réseau de chemins si embrouillé qu'on s'y perd ; au figuré, enchevêtrement de choses compliquées.",
+    "exemple": "Il s'est perdu dans le dédale des formulaires administratifs.",
+    "academie": true
+  },
+  {
+    "mot": "déduit",
+    "nature": "n. m.",
+    "definition": "Vieilli : divertissement, passe-temps agréable ; spécialement, plaisir amoureux.",
+    "exemple": "La chasse au faucon était le déduit favori des seigneurs du lieu.",
+    "academie": true
+  },
+  {
+    "mot": "défenestrer",
+    "nature": "v. tr.",
+    "definition": "Jeter quelqu'un ou quelque chose par la fenêtre.",
+    "exemple": "En 1618, deux représentants de l'empereur furent défenestrés au château de Prague.",
+    "academie": false
+  },
+  {
+    "mot": "déférence",
+    "nature": "n. f.",
+    "definition": "Considération respectueuse qui porte à s'incliner devant l'avis ou la volonté de quelqu'un.",
+    "exemple": "Il écoutait son aîné avec une déférence presque excessive.",
+    "academie": true
+  },
+  {
+    "mot": "dégingandé",
+    "nature": "adj.",
+    "definition": "Se dit d'une personne grande dont l'allure et les gestes semblent mal coordonnés, comme désarticulés.",
+    "exemple": "Un adolescent dégingandé traversa la cour en balançant ses longs bras.",
+    "academie": true
+  },
+  {
+    "mot": "déguerpir",
+    "nature": "v. intr.",
+    "definition": "Quitter un lieu en hâte, souvent contraint ; s'enfuir.",
+    "exemple": "Au premier aboiement, les maraudeurs ont déguerpi du verger.",
+    "academie": true
+  },
+  {
+    "mot": "délectation",
+    "nature": "n. f.",
+    "definition": "Plaisir vif que l'on savoure pleinement et consciemment.",
+    "exemple": "Elle dégustait chaque bouchée de la tarte avec une évidente délectation.",
+    "academie": true
+  },
+  {
+    "mot": "démantibuler",
+    "nature": "v. tr.",
+    "definition": "Familier : mettre en pièces, disloquer, démolir.",
+    "exemple": "Les déménageurs ont démantibulé la vieille armoire en voulant la descendre.",
+    "academie": true
+  },
+  {
+    "mot": "démiurge",
+    "nature": "n. m.",
+    "definition": "Chez Platon, divinité qui façonne l'univers ; au figuré, créateur d'une œuvre de vaste ampleur.",
+    "exemple": "Balzac fut le démiurge d'un monde peuplé de milliers de personnages.",
+    "academie": false
+  },
+  {
+    "mot": "déparer",
+    "nature": "v. tr.",
+    "definition": "Nuire à la beauté ou à l'harmonie d'un ensemble ; enlaidir.",
+    "exemple": "Ce pylône dépare un paysage par ailleurs magnifique.",
+    "academie": true
+  },
+  {
+    "mot": "dépenaillé",
+    "nature": "adj.",
+    "definition": "Vêtu de haillons ou très négligemment ; se dit aussi d'un vêtement en lambeaux.",
+    "exemple": "Un épouvantail dépenaillé veillait sur le champ de blé.",
+    "academie": true
+  },
+  {
+    "mot": "déprédation",
+    "nature": "n. f.",
+    "definition": "Pillage accompagné de dégâts ; par extension, malversation dans la gestion de biens confiés.",
+    "exemple": "Les déprédations des vandales ont laissé la chapelle sans vitraux.",
+    "academie": true
+  },
+  {
+    "mot": "déréliction",
+    "nature": "n. f.",
+    "definition": "Sentiment d'abandon et de profonde solitude ; en théologie, sentiment d'être délaissé par Dieu.",
+    "exemple": "Dans sa cellule, le prisonnier éprouvait une déréliction absolue.",
+    "academie": false
+  },
+  {
+    "mot": "désuétude",
+    "nature": "n. f.",
+    "definition": "État de ce qui n'est plus en usage. « Tomber en désuétude » : cesser d'être pratiqué.",
+    "exemple": "Cette loi, jamais abrogée, est tombée en désuétude depuis longtemps.",
+    "academie": false
+  },
+  {
+    "mot": "déshérence",
+    "nature": "n. f.",
+    "definition": "En droit, absence d'héritier qui fait revenir une succession à l'État. Au figuré, « en déshérence » : à l'abandon.",
+    "exemple": "Faute d'héritier, le domaine tomba en déshérence et revint à l'État.",
+    "academie": true
+  },
+  {
+    "mot": "désœuvrement",
+    "nature": "n. m.",
+    "definition": "État de quelqu'un qui n'a rien à faire, qui reste sans occupation.",
+    "exemple": "Par pur désœuvrement, il se mit à compter les tuiles du toit voisin.",
+    "academie": true
+  },
+  {
+    "mot": "détaler",
+    "nature": "v. intr.",
+    "definition": "Familier : s'enfuir au plus vite.",
+    "exemple": "Le lapin détala dès qu'il entendit craquer une branche.",
+    "academie": true
+  },
+  {
+    "mot": "déveine",
+    "nature": "n. f.",
+    "definition": "Familier : malchance persistante, en particulier au jeu.",
+    "exemple": "Quelle déveine : trois crevaisons dans la même semaine !",
+    "academie": true
+  },
+  {
+    "mot": "diaphane",
+    "nature": "adj.",
+    "definition": "Qui laisse passer la lumière sans être transparent ; se dit aussi d'un teint très pâle, comme translucide.",
+    "exemple": "Les rideaux diaphanes tamisaient la lumière du matin.",
+    "academie": true
+  },
+  {
+    "mot": "diatribe",
+    "nature": "n. f.",
+    "definition": "Critique virulente, souvent injurieuse, orale ou écrite.",
+    "exemple": "Le député s'est lancé dans une longue diatribe contre le gouvernement.",
+    "academie": true
+  },
+  {
+    "mot": "dilettante",
+    "nature": "n. m. et f.",
+    "definition": "Personne qui s'adonne à une activité pour son seul plaisir, sans s'y engager pleinement.",
+    "exemple": "Ce dilettante touche à la peinture, au violon et à la poésie sans rien approfondir.",
+    "academie": false
+  },
+  {
+    "mot": "dilection",
+    "nature": "n. f.",
+    "definition": "Amour pur et spirituel, d'abord au sens religieux ; littéraire : vive affection, préférence marquée.",
+    "exemple": "Elle gardait pour ses vieux livres une dilection touchante.",
+    "academie": true
+  },
+  {
+    "mot": "dionysiaque",
+    "nature": "adj.",
+    "definition": "Qui se rapporte à Dionysos ; par extension, marqué par l'ivresse, l'exaltation et l'élan des sens.",
+    "exemple": "La fête des vendanges tourna en une nuit dionysiaque de danses et de chants.",
+    "academie": true
+  },
+  {
+    "mot": "dirimant",
+    "nature": "adj.",
+    "definition": "En droit, qui annule un acte, notamment un mariage ; par extension, qui forme un obstacle absolu.",
+    "exemple": "La parenté proche constitue un empêchement dirimant au mariage.",
+    "academie": true
+  },
+  {
+    "mot": "disert",
+    "nature": "adj.",
+    "definition": "Qui parle avec aisance et facilité, avec une élégance naturelle.",
+    "exemple": "Peu disert sur sa vie privée, il devenait intarissable sur la botanique.",
+    "academie": false
+  },
+  {
+    "mot": "dispendieux",
+    "nature": "adj.",
+    "definition": "Qui entraîne de grosses dépenses ; coûteux.",
+    "exemple": "Ce voyage, trop dispendieux, a finalement été annulé.",
+    "academie": true
+  },
+  {
+    "mot": "divaguer",
+    "nature": "v. intr.",
+    "definition": "Tenir des propos incohérents, déraisonner ; au sens propre, errer çà et là.",
+    "exemple": "La fièvre le faisait divaguer toute la nuit.",
+    "academie": true
+  },
+  {
+    "mot": "docte",
+    "nature": "adj.",
+    "definition": "Qui possède un grand savoir, une vaste érudition ; se dit aussi, souvent avec ironie, d'un ton savant et pédant.",
+    "exemple": "Il nous expliqua d'un ton docte l'histoire de la fourchette.",
+    "academie": true
+  },
+  {
+    "mot": "doléance",
+    "nature": "n. f.",
+    "definition": "Plainte par laquelle on expose un grief ou une réclamation (surtout au pluriel).",
+    "exemple": "Le maire a reçu les doléances des riverains excédés par le bruit.",
+    "academie": true
+  },
+  {
+    "mot": "dolent",
+    "nature": "adj.",
+    "definition": "Qui souffre et se plaint ; qui prend un air ou un ton plaintif.",
+    "exemple": "D'une voix dolente, il réclama encore une tisane.",
+    "academie": true
+  },
+  {
+    "mot": "donquichottisme",
+    "nature": "n. m.",
+    "definition": "Attitude généreuse mais chimérique de celui qui se pose en redresseur de torts.",
+    "exemple": "Partir seul en guerre contre la multinationale relevait du pur donquichottisme.",
+    "academie": true
+  },
+  {
+    "mot": "dorloter",
+    "nature": "v. tr.",
+    "definition": "Entourer quelqu'un de soins tendres et attentifs ; choyer.",
+    "exemple": "Sa grand-mère le dorlotait comme un prince à chaque visite.",
+    "academie": true
+  },
+  {
+    "mot": "douairière",
+    "nature": "n. f.",
+    "definition": "Autrefois, veuve jouissant d'un douaire ; familièrement, dame âgée de la haute société.",
+    "exemple": "La vieille douairière recevait chaque jeudi dans son salon Empire.",
+    "academie": true
+  },
+  {
+    "mot": "doucereux",
+    "nature": "adj.",
+    "definition": "D'une douceur fade ou affectée, qui sonne faux.",
+    "exemple": "Il nous accueillit avec un sourire doucereux qui ne m'inspira aucune confiance.",
+    "academie": true
+  },
+  {
+    "mot": "draconien",
+    "nature": "adj.",
+    "definition": "D'une sévérité extrême, en parlant de lois, de règles ou de mesures.",
+    "exemple": "Pour redresser les comptes, la direction a imposé des économies draconiennes.",
+    "academie": false
+  },
+  {
+    "mot": "drille",
+    "nature": "n. m.",
+    "definition": "Vieilli : compagnon. Ne s'emploie plus guère que dans « joyeux drille » : homme jovial, bon vivant.",
+    "exemple": "Son oncle, un joyeux drille, animait tous les banquets de famille.",
+    "academie": true
+  },
+  {
+    "mot": "dru",
+    "nature": "adj.",
+    "definition": "Épais et serré, en parlant notamment de l'herbe, des cheveux ou de la pluie ; aussi, vigoureux.",
+    "exemple": "Une herbe drue recouvrait les talus du chemin.",
+    "academie": true
+  },
+  {
+    "mot": "dulcifier",
+    "nature": "v. tr.",
+    "definition": "Adoucir, rendre plus doux.",
+    "exemple": "Un filet de miel dulcifiait l'amertume de la tisane.",
+    "academie": true
+  },
+  {
+    "mot": "duplicité",
+    "nature": "n. f.",
+    "definition": "Caractère de qui affiche des sentiments ou des intentions autres que les siens pour tromper ; fausseté.",
+    "exemple": "Sa duplicité éclata au grand jour lorsqu'on découvrit ses lettres.",
+    "academie": true
+  },
+  {
+    "mot": "dyscole",
+    "nature": "adj.",
+    "definition": "Rare : d'humeur difficile, peu accommodant.",
+    "exemple": "Le voisin, dyscole et grognon, refusait toutes nos invitations.",
+    "academie": false
+  },
+  {
+    "mot": "décorum",
+    "nature": "n. m.",
+    "definition": "Ensemble des bienséances et du cérémonial à observer en certaines circonstances.",
+    "exemple": "La réception à l'ambassade se déroula dans le plus strict décorum.",
+    "academie": true
+  },
+  {
+    "mot": "démêlé",
+    "nature": "n. m.",
+    "definition": "Différend, querelle ; surtout au pluriel, dans « avoir des démêlés avec quelqu'un ».",
+    "exemple": "L'ancien maire a eu de nombreux démêlés avec la justice.",
+    "academie": true
+  },
+  {
+    "mot": "désopilant",
+    "nature": "adj.",
+    "definition": "Qui fait rire de bon cœur ; très drôle.",
+    "exemple": "Son imitation du directeur était proprement désopilante.",
+    "academie": true
+  },
+  {
+    "mot": "diablerie",
+    "nature": "n. f.",
+    "definition": "Sortilège attribué au diable ; par extension, espièglerie, tour malicieux.",
+    "exemple": "Les enfants préparaient encore quelque diablerie dans le grenier.",
+    "academie": true
+  },
+  {
+    "mot": "diantre",
+    "nature": "interj.",
+    "definition": "Vieilli : juron atténué qui marque l'étonnement, l'admiration ou l'agacement.",
+    "exemple": "Diantre ! Vous avez fait toute la route à pied ?",
+    "academie": true
+  },
+  {
+    "mot": "dictame",
+    "nature": "n. m.",
+    "definition": "Plante aromatique réputée guérir les plaies ; au figuré et littéraire, baume, adoucissement d'une peine.",
+    "exemple": "Ses lettres furent un dictame pour mon cœur meurtri.",
+    "academie": true
+  },
+  {
+    "mot": "dégoter",
+    "nature": "v. tr.",
+    "definition": "Familier : dénicher, trouver ce qu'on cherchait, souvent à grand-peine.",
+    "exemple": "J'ai dégoté une édition originale chez un bouquiniste des quais.",
+    "academie": true
+  },
+  {
+    "mot": "débours",
+    "nature": "n. m.",
+    "definition": "Somme avancée pour le compte d'autrui et qui doit être remboursée.",
+    "exemple": "Le notaire a ajouté ses débours au montant de ses honoraires.",
+    "academie": true
+  },
+  {
+    "mot": "défroque",
+    "nature": "n. f.",
+    "definition": "Vieux vêtements qu'on ne porte plus ; tenue usée, de piètre allure.",
+    "exemple": "Il avait enfilé une défroque trouvée au grenier pour jouer l'épouvantail.",
+    "academie": true
+  },
+  {
+    "mot": "déluré",
+    "nature": "adj.",
+    "definition": "Vif et dégourdi ; parfois, d'une liberté d'allure jugée effrontée.",
+    "exemple": "La gamine délurée avait déjà négocié trois bonbons avec le marchand.",
+    "academie": true
+  },
+  {
+    "mot": "diaprer",
+    "nature": "v. tr.",
+    "definition": "Littéraire : parer de couleurs variées et chatoyantes.",
+    "exemple": "L'automne diaprait la forêt de roux, d'ocre et de pourpre.",
+    "academie": true
+  },
+  {
+    "mot": "didascalie",
+    "nature": "n. f.",
+    "definition": "Au théâtre, indication de l'auteur sur le jeu des acteurs ou la mise en scène.",
+    "exemple": "La didascalie précise que le personnage entre en titubant.",
+    "academie": true
+  },
+  {
+    "mot": "dispos",
+    "nature": "adj.",
+    "definition": "En bonne forme physique et morale, prêt à agir.",
+    "exemple": "Après une bonne nuit, il se leva frais et dispos.",
+    "academie": true
+  },
+  {
+    "mot": "éborgner",
+    "nature": "v. tr.",
+    "definition": "Rendre quelqu'un borgne en lui crevant ou blessant un œil.",
+    "exemple": "Une branche basse a failli l'éborgner pendant sa course en forêt.",
+    "academie": true
+  },
+  {
+    "mot": "ébrouer",
+    "nature": "v. pron.",
+    "definition": "En parlant d'un cheval, souffler bruyamment des naseaux ; par extension, s'agiter, se secouer vivement.",
+    "exemple": "Sorti de la rivière, le chien s'ébroua en arrosant tout le monde.",
+    "academie": true
+  },
+  {
+    "mot": "échalas",
+    "nature": "n. m.",
+    "definition": "Pieu qui soutient un cep de vigne ; familièrement, personne grande et maigre.",
+    "exemple": "Ce grand échalas devait se baisser pour passer sous la porte.",
+    "academie": true
+  },
+  {
+    "mot": "échauffourée",
+    "nature": "n. f.",
+    "definition": "Bagarre confuse et brève ; accrochage de faible ampleur.",
+    "exemple": "Une échauffourée a éclaté entre supporters à la sortie du stade.",
+    "academie": true
+  },
+  {
+    "mot": "échevelé",
+    "nature": "adj.",
+    "definition": "Dont les cheveux sont en désordre ; au figuré, désordonné, effréné.",
+    "exemple": "Ils se lancèrent dans une danse échevelée jusqu'à l'aube.",
+    "academie": true
+  },
+  {
+    "mot": "écornifleur",
+    "nature": "n. m.",
+    "definition": "Familier et vieilli : parasite qui vit aux dépens d'autrui, pique-assiette.",
+    "exemple": "Cet écornifleur s'invitait à tous les dîners du quartier.",
+    "academie": true
+  },
+  {
+    "mot": "écot",
+    "nature": "n. m.",
+    "definition": "Quote-part de chacun dans une dépense commune. « Payer son écot » : contribuer.",
+    "exemple": "Chaque convive a payé son écot à la fin du repas.",
+    "academie": true
+  },
+  {
+    "mot": "édénique",
+    "nature": "adj.",
+    "definition": "Qui évoque l'Éden, le paradis terrestre.",
+    "exemple": "Le voilier mouilla dans une crique édénique aux eaux turquoise.",
+    "academie": false
+  },
+  {
+    "mot": "efflanqué",
+    "nature": "adj.",
+    "definition": "Très maigre, aux flancs creusés.",
+    "exemple": "Un chat efflanqué rôdait autour des poubelles.",
+    "academie": false
+  },
+  {
+    "mot": "égotisme",
+    "nature": "n. m.",
+    "definition": "Disposition à parler de soi, à s'analyser et à se placer au centre de tout.",
+    "exemple": "L'égotisme du narrateur finit par lasser le lecteur.",
+    "academie": true
+  },
+  {
+    "mot": "égrillard",
+    "nature": "adj.",
+    "definition": "Qui aime les plaisanteries un peu lestes ; grivois.",
+    "exemple": "L'oncle racontait des histoires égrillardes au dessert.",
+    "academie": true
+  },
+  {
+    "mot": "élégiaque",
+    "nature": "adj.",
+    "definition": "Propre à l'élégie ; d'une mélancolie tendre et plaintive.",
+    "exemple": "Le poème prend un ton élégiaque en évoquant l'enfance perdue.",
+    "academie": true
+  },
+  {
+    "mot": "élimé",
+    "nature": "adj.",
+    "definition": "Usé et aminci par le frottement, en parlant d'un tissu.",
+    "exemple": "Il portait une veste élimée aux coudes.",
+    "academie": false
+  },
+  {
+    "mot": "émacié",
+    "nature": "adj.",
+    "definition": "Très amaigri, en particulier au visage.",
+    "exemple": "Après sa longue maladie, son visage émacié faisait peine à voir.",
+    "academie": true
+  },
+  {
+    "mot": "embrouillamini",
+    "nature": "n. m.",
+    "definition": "Familier : grande confusion, situation inextricable.",
+    "exemple": "Personne ne comprenait plus rien à cet embrouillamini de contrats.",
+    "academie": true
+  },
+  {
+    "mot": "éméché",
+    "nature": "adj.",
+    "definition": "Familier : légèrement ivre.",
+    "exemple": "Un peu éméché, il entonna une chanson de marin.",
+    "academie": false
+  },
+  {
+    "mot": "émérite",
+    "nature": "adj.",
+    "definition": "Qui a acquis une grande compétence par une longue pratique ; se dit aussi d'un professeur honoraire.",
+    "exemple": "C'est une alpiniste émérite qui a gravi les plus hauts sommets.",
+    "academie": true
+  },
+  {
+    "mot": "émonder",
+    "nature": "v. tr.",
+    "definition": "Débarrasser un arbre de ses branches inutiles ; au figuré, épurer.",
+    "exemple": "Le jardinier émonde les tilleuls de l'allée chaque hiver.",
+    "academie": true
+  },
+  {
+    "mot": "empesé",
+    "nature": "adj.",
+    "definition": "Raidi à l'empois ; au figuré, guindé, dépourvu de naturel.",
+    "exemple": "Son discours empesé endormit l'assemblée.",
+    "academie": false
+  },
+  {
+    "mot": "empourprer",
+    "nature": "v. tr.",
+    "definition": "Colorer de pourpre, de rouge.",
+    "exemple": "Le soleil couchant empourprait les falaises.",
+    "academie": true
+  },
+  {
+    "mot": "encalminé",
+    "nature": "adj.",
+    "definition": "En parlant d'un voilier, immobilisé faute de vent.",
+    "exemple": "Encalminé au large, le navire attendit la brise trois jours durant.",
+    "academie": false
+  },
+  {
+    "mot": "encanailler",
+    "nature": "v. pron.",
+    "definition": "Fréquenter des gens peu recommandables ou prendre leurs manières, souvent par jeu.",
+    "exemple": "Le soir, ces bourgeois aimaient s'encanailler dans les guinguettes.",
+    "academie": true
+  },
+  {
+    "mot": "encorbellement",
+    "nature": "n. m.",
+    "definition": "Construction en saillie sur le nu d'un mur, soutenue par des consoles.",
+    "exemple": "Les maisons à encorbellement se rejoignent presque au-dessus de la ruelle.",
+    "academie": true
+  },
+  {
+    "mot": "endimanché",
+    "nature": "adj.",
+    "definition": "Vêtu de ses habits du dimanche, souvent avec une certaine gaucherie.",
+    "exemple": "Toute la famille, endimanchée, posait devant l'église.",
+    "academie": false
+  },
+  {
+    "mot": "engeance",
+    "nature": "n. f.",
+    "definition": "Péjoratif : catégorie de personnes jugées méprisables.",
+    "exemple": "Il pestait contre cette engeance de spéculateurs.",
+    "academie": true
+  },
+  {
+    "mot": "enguirlander",
+    "nature": "v. tr.",
+    "definition": "Orner de guirlandes ; familièrement, réprimander vertement.",
+    "exemple": "Il s'est fait enguirlander par sa mère pour son retard.",
+    "academie": true
+  },
+  {
+    "mot": "enorgueillir",
+    "nature": "v. pron.",
+    "definition": "Tirer orgueil de quelque chose.",
+    "exemple": "Le village s'enorgueillit de son église romane.",
+    "academie": true
+  },
+  {
+    "mot": "entéléchie",
+    "nature": "n. f.",
+    "definition": "Chez Aristote, état d'un être parvenu à sa pleine réalisation, ce qui n'était en lui que possible étant devenu acte.",
+    "exemple": "Pour Aristote, l'âme est l'entéléchie du corps.",
+    "academie": true
+  },
+  {
+    "mot": "entrelacs",
+    "nature": "n. m.",
+    "definition": "Ornement fait de lignes ou de motifs entrecroisés.",
+    "exemple": "La grille du parc dessinait un entrelacs de feuillages en fer forgé.",
+    "academie": false
+  },
+  {
+    "mot": "épicurien",
+    "nature": "adj. et n.",
+    "definition": "Disciple d'Épicure ; par extension, qui recherche avant tout les plaisirs de la vie.",
+    "exemple": "En bon épicurien, il ne manquait jamais une fête des vendanges.",
+    "academie": true
+  },
+  {
+    "mot": "épigramme",
+    "nature": "n. f.",
+    "definition": "Petit poème satirique se terminant par un trait piquant ; mot mordant.",
+    "exemple": "Voltaire décochait ses épigrammes contre ses rivaux.",
+    "academie": true
+  },
+  {
+    "mot": "épithalame",
+    "nature": "n. m.",
+    "definition": "Poème composé pour célébrer un mariage.",
+    "exemple": "Le poète offrit aux jeunes mariés un épithalame de sa composition.",
+    "academie": false
+  },
+  {
+    "mot": "éploré",
+    "nature": "adj.",
+    "definition": "Qui est en pleurs, plongé dans le chagrin.",
+    "exemple": "La veuve éplorée se tenait près du cercueil.",
+    "academie": true
+  },
+  {
+    "mot": "époustouflant",
+    "nature": "adj.",
+    "definition": "Familier : étonnant au point de couper le souffle.",
+    "exemple": "Le funambule a réalisé une traversée époustouflante.",
+    "academie": false
+  },
+  {
+    "mot": "équanimité",
+    "nature": "n. f.",
+    "definition": "Égalité d'humeur, sérénité qui ne se laisse pas troubler.",
+    "exemple": "Il accueillit la mauvaise nouvelle avec une parfaite équanimité.",
+    "academie": false
+  },
+  {
+    "mot": "équipée",
+    "nature": "n. f.",
+    "definition": "Sortie, escapade ou aventure, souvent un peu folle.",
+    "exemple": "Notre équipée en solex jusqu'à la mer reste un souvenir mémorable.",
+    "academie": true
+  },
+  {
+    "mot": "érémitique",
+    "nature": "adj.",
+    "definition": "Propre aux ermites, à leur vie solitaire.",
+    "exemple": "Il mène depuis dix ans une existence érémitique dans les Cévennes.",
+    "academie": true
+  },
+  {
+    "mot": "ergastule",
+    "nature": "n. m.",
+    "definition": "Dans l'Antiquité romaine, prison souterraine où l'on enfermait les esclaves.",
+    "exemple": "Les esclaves rebelles étaient jetés dans l'ergastule du domaine.",
+    "academie": true
+  },
+  {
+    "mot": "escarbille",
+    "nature": "n. f.",
+    "definition": "Fragment de charbon incomplètement brûlé qui s'échappe d'un foyer ou d'une cheminée.",
+    "exemple": "Une escarbille de la locomotive lui brûla le col.",
+    "academie": true
+  },
+  {
+    "mot": "escient",
+    "nature": "n. m.",
+    "definition": "Vieilli : connaissance qu'on a d'une chose. Surtout dans « à bon escient » : avec discernement, à propos.",
+    "exemple": "Il faut employer ce mot à bon escient.",
+    "academie": true
+  },
+  {
+    "mot": "escobarderie",
+    "nature": "n. f.",
+    "definition": "Vieilli : réponse ou conduite hypocrite et fuyante.",
+    "exemple": "Ses escobarderies ne trompaient plus personne au conseil.",
+    "academie": true
+  },
+  {
+    "mot": "estafette",
+    "nature": "n. f.",
+    "definition": "Militaire chargé de porter les dépêches.",
+    "exemple": "L'estafette arriva au galop, porteuse d'un ordre du général.",
+    "academie": true
+  },
+  {
+    "mot": "estaminet",
+    "nature": "n. m.",
+    "definition": "Petit café populaire, en particulier dans le nord de la France et en Belgique.",
+    "exemple": "Les mineurs se retrouvaient à l'estaminet après leur poste.",
+    "academie": true
+  },
+  {
+    "mot": "estoc",
+    "nature": "n. m.",
+    "definition": "Ancienne épée longue et étroite, faite pour frapper de la pointe. « D'estoc et de taille » : avec la pointe et le tranchant.",
+    "exemple": "Les chevaliers frappaient d'estoc et de taille.",
+    "academie": false
+  },
+  {
+    "mot": "estomaquer",
+    "nature": "v. tr.",
+    "definition": "Familier : surprendre vivement, stupéfier.",
+    "exemple": "Son aplomb a estomaqué toute l'assemblée.",
+    "academie": true
+  },
+  {
+    "mot": "étiage",
+    "nature": "n. m.",
+    "definition": "Niveau le plus bas d'un cours d'eau.",
+    "exemple": "En août, la rivière atteint son étiage et l'on voit les galets.",
+    "academie": true
+  },
+  {
+    "mot": "étioler",
+    "nature": "v. pron.",
+    "definition": "S'affaiblir, perdre sa vigueur et son éclat.",
+    "exemple": "Privée de lumière, la plante s'étiole.",
+    "academie": true
+  },
+  {
+    "mot": "étique",
+    "nature": "adj.",
+    "definition": "D'une maigreur extrême.",
+    "exemple": "Un cheval étique tirait la charrette.",
+    "academie": true
+  },
+  {
+    "mot": "étriller",
+    "nature": "v. tr.",
+    "definition": "Frotter un cheval avec l'étrille ; au figuré, malmener, battre, ou faire payer trop cher.",
+    "exemple": "L'équipe locale s'est fait étriller cinq buts à zéro.",
+    "academie": true
+  },
+  {
+    "mot": "euphonie",
+    "nature": "n. f.",
+    "definition": "Succession harmonieuse de sons agréables à l'oreille.",
+    "exemple": "Par euphonie, on ajoute un « t » dans « a-t-il ».",
+    "academie": true
+  },
+  {
+    "mot": "évanescent",
+    "nature": "adj.",
+    "definition": "Qui s'efface peu à peu, fugace et insaisissable.",
+    "exemple": "Un parfum évanescent flottait encore dans le couloir.",
+    "academie": true
+  },
+  {
+    "mot": "éventaire",
+    "nature": "n. m.",
+    "definition": "Étalage de marchandises, souvent à l'extérieur d'une boutique.",
+    "exemple": "Le primeur disposait ses fruits sur l'éventaire.",
+    "academie": true
+  },
+  {
+    "mot": "exciper",
+    "nature": "v. tr. ind.",
+    "definition": "En droit ou littéraire : se prévaloir d'un fait, d'une pièce (exciper de quelque chose).",
+    "exemple": "L'avocat excipa de la bonne foi de son client.",
+    "academie": true
+  },
+  {
+    "mot": "exorde",
+    "nature": "n. m.",
+    "definition": "Première partie d'un discours, destinée à capter l'attention.",
+    "exemple": "Dès l'exorde, l'orateur conquit son auditoire.",
+    "academie": true
+  },
+  {
+    "mot": "expectative",
+    "nature": "n. f.",
+    "definition": "Attente fondée sur une promesse ou une probabilité. « Rester dans l'expectative » : attendre la suite sans se décider.",
+    "exemple": "Faute d'informations, il préféra rester dans l'expectative.",
+    "academie": true
+  },
+  {
+    "mot": "expédient",
+    "nature": "n. m.",
+    "definition": "Moyen de fortune pour se tirer d'embarras. « Vivre d'expédients » : de moyens douteux.",
+    "exemple": "Ruiné, il vivait d'expédients.",
+    "academie": true
+  },
+  {
+    "mot": "ébaudir",
+    "nature": "v. pron.",
+    "definition": "Vieilli : se réjouir bruyamment, s'amuser.",
+    "exemple": "Les villageois s'ébaudissaient autour du feu de la Saint-Jean.",
+    "academie": true
+  },
+  {
+    "mot": "écheveau",
+    "nature": "n. m.",
+    "definition": "Fil replié en longueur ; au figuré, ensemble embrouillé.",
+    "exemple": "L'enquêteur tentait de démêler l'écheveau de l'affaire.",
+    "academie": true
+  },
+  {
+    "mot": "édile",
+    "nature": "n. m.",
+    "definition": "Dans la Rome antique, magistrat chargé des édifices et des jeux ; aujourd'hui, élu municipal.",
+    "exemple": "Les édiles ont inauguré la nouvelle fontaine.",
+    "academie": true
+  },
+  {
+    "mot": "égrotant",
+    "nature": "adj.",
+    "definition": "Littéraire : souvent malade, de santé fragile.",
+    "exemple": "Ce vieillard égrotant ne quittait plus son fauteuil.",
+    "academie": false
+  },
+  {
+    "mot": "encan",
+    "nature": "n. m.",
+    "definition": "« À l'encan » : aux enchères publiques ; au figuré, offert au plus offrant.",
+    "exemple": "Les meubles du château furent vendus à l'encan.",
+    "academie": true
+  },
+  {
+    "mot": "encablure",
+    "nature": "n. f.",
+    "definition": "Ancienne mesure de longueur marine, environ 200 mètres.",
+    "exemple": "Le canot s'approcha à quelques encablures de la côte.",
+    "academie": true
+  },
+  {
+    "mot": "encoignure",
+    "nature": "n. f.",
+    "definition": "Angle intérieur formé par deux murs ; meuble placé dans cet angle.",
+    "exemple": "Une vieille horloge se dressait dans l'encoignure du salon.",
+    "academie": true
+  },
+  {
+    "mot": "épiloguer",
+    "nature": "v. intr.",
+    "definition": "Faire des commentaires interminables sur quelque chose (épiloguer sur).",
+    "exemple": "Inutile d'épiloguer sur cet échec : passons à autre chose.",
+    "academie": true
+  },
+  {
+    "mot": "épousailles",
+    "nature": "n. f. pl.",
+    "definition": "Vieilli ou plaisant : célébration du mariage.",
+    "exemple": "Tout le canton fut convié aux épousailles.",
+    "academie": true
+  },
+  {
+    "mot": "érubescent",
+    "nature": "adj.",
+    "definition": "Didactique : qui rougit, qui devient légèrement rouge.",
+    "exemple": "Érubescente, la jeune fille baissa les yeux.",
+    "academie": true
+  },
+  {
+    "mot": "esbroufe",
+    "nature": "n. f.",
+    "definition": "Familier : étalage de manières prétentieuses pour impressionner.",
+    "exemple": "Il fait beaucoup d'esbroufe, mais il n'y a rien derrière.",
+    "academie": true
+  },
+  {
+    "mot": "escarpolette",
+    "nature": "n. f.",
+    "definition": "Siège suspendu par des cordes, sur lequel on se balance.",
+    "exemple": "La fillette se balançait sur l'escarpolette du jardin.",
+    "academie": true
+  },
+  {
+    "mot": "esseulé",
+    "nature": "adj.",
+    "definition": "Laissé seul, délaissé.",
+    "exemple": "Un chien esseulé attendait sur le quai.",
+    "academie": false
+  },
+  {
+    "mot": "estocade",
+    "nature": "n. f.",
+    "definition": "Grand coup porté de la pointe de l'épée, notamment par le matador pour achever le taureau ; au figuré, coup décisif.",
+    "exemple": "Le dernier argument de l'avocat porta l'estocade.",
+    "academie": true
+  },
+  {
+    "mot": "évertuer",
+    "nature": "v. pron.",
+    "definition": "Faire tous ses efforts pour parvenir à quelque chose.",
+    "exemple": "Il s'évertuait à réparer la vieille horloge.",
+    "academie": true
+  },
+  {
+    "mot": "écritoire",
+    "nature": "n. f.",
+    "definition": "Petit nécessaire ou meuble contenant ce qu'il faut pour écrire.",
+    "exemple": "Elle rangeait ses lettres dans une écritoire en acajou.",
+    "academie": true
+  },
+  {
+    "mot": "endêver",
+    "nature": "v. intr.",
+    "definition": "Vieilli : éprouver une vive contrariété, enrager. « Faire endêver » : faire enrager.",
+    "exemple": "Ce garnement s'amuse à faire endêver sa sœur.",
+    "academie": true
+  },
+  {
+    "mot": "équarrir",
+    "nature": "v. tr.",
+    "definition": "Tailler à angles droits ; dépecer un animal mort.",
+    "exemple": "Le charpentier équarrissait une poutre de chêne.",
+    "academie": true
+  },
+  {
+    "mot": "extravaguer",
+    "nature": "v. intr.",
+    "definition": "Penser ou dire des choses dénuées de sens ; déraisonner.",
+    "exemple": "La fièvre le faisait extravaguer.",
+    "academie": true
+  }
+]

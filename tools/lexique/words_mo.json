@@ -1,0 +1,842 @@
+[
+  {
+    "mot": "madré",
+    "nature": "adj. et n.",
+    "definition": "Rusé sous des dehors simples, habile à tromper sans en avoir l'air.",
+    "exemple": "Ce paysan madré savait toujours obtenir le meilleur prix au marché.",
+    "academie": true
+  },
+  {
+    "mot": "maestria",
+    "nature": "n. f.",
+    "definition": "Aisance et brio remarquables dans l'exécution d'une œuvre ou d'une tâche.",
+    "exemple": "Elle a dirigé l'orchestre avec une maestria qui a soulevé la salle.",
+    "academie": true
+  },
+  {
+    "mot": "mafflu",
+    "nature": "adj.",
+    "definition": "Qui a de grosses joues, un visage plein et rebondi.",
+    "exemple": "Un angelot mafflu souriait au-dessus de l'autel.",
+    "academie": true
+  },
+  {
+    "mot": "maïeutique",
+    "nature": "n. f.",
+    "definition": "Méthode socratique qui consiste à amener quelqu'un, par des questions, à découvrir lui-même ce qu'il sait.",
+    "exemple": "Par une patiente maïeutique, le professeur conduisit l'élève à la solution.",
+    "academie": true
+  },
+  {
+    "mot": "malappris",
+    "nature": "adj. et n.",
+    "definition": "Qui manque d'éducation, de politesse.",
+    "exemple": "Ce malappris n'a même pas daigné dire bonjour.",
+    "academie": true
+  },
+  {
+    "mot": "malemort",
+    "nature": "n. f.",
+    "definition": "Mort funeste, violente ou cruelle.",
+    "exemple": "Le conte promettait la malemort à quiconque franchirait le seuil maudit.",
+    "academie": true
+  },
+  {
+    "mot": "malgracieux",
+    "nature": "adj.",
+    "definition": "Qui manque d'amabilité, de grâce dans ses manières ; peu aimable.",
+    "exemple": "Le portier nous a accueillis d'un ton malgracieux.",
+    "academie": true
+  },
+  {
+    "mot": "malitorne",
+    "nature": "adj. et n.",
+    "definition": "Grossier, maladroit et gauche dans ses manières.",
+    "exemple": "Ce garçon malitorne renversait tout ce qu'il touchait.",
+    "academie": true
+  },
+  {
+    "mot": "maltôte",
+    "nature": "n. f.",
+    "definition": "Impôt extraordinaire levé autrefois en France ; par extension, perception abusive d'un droit.",
+    "exemple": "Les villageois se révoltèrent contre une nouvelle maltôte sur le sel.",
+    "academie": true
+  },
+  {
+    "mot": "manant",
+    "nature": "n. m.",
+    "definition": "Autrefois, habitant d'un village, paysan ; par extension, homme grossier et sans éducation.",
+    "exemple": "Le seigneur traitait ses manants avec un profond mépris.",
+    "academie": true
+  },
+  {
+    "mot": "mânes",
+    "nature": "n. m. pl.",
+    "definition": "Âmes des morts, dans l'Antiquité romaine ; par extension, mémoire vénérée des ancêtres.",
+    "exemple": "Il invoqua les mânes de ses aïeux avant la bataille.",
+    "academie": true
+  },
+  {
+    "mot": "maquignon",
+    "nature": "n. m.",
+    "definition": "Marchand de chevaux ; par extension, intermédiaire peu scrupuleux en affaires.",
+    "exemple": "Ce maquignon nous a vendu un cheval qui boitait dès la sortie de l'écurie.",
+    "academie": true
+  },
+  {
+    "mot": "marauder",
+    "nature": "v. intr.",
+    "definition": "Commettre de petits larcins, notamment voler des fruits ou des légumes dans les champs.",
+    "exemple": "Les gamins allaient marauder dans les vergers du voisin.",
+    "academie": true
+  },
+  {
+    "mot": "marotte",
+    "nature": "n. f.",
+    "definition": "Idée fixe, manie à laquelle on s'adonne avec passion.",
+    "exemple": "Collectionner les vieilles cartes postales est devenu sa marotte.",
+    "academie": false
+  },
+  {
+    "mot": "marmiteux",
+    "nature": "adj. et n.",
+    "definition": "Qui a un air piteux, misérable ou mal en point.",
+    "exemple": "Il revint de la pêche bredouille et tout marmiteux.",
+    "academie": true
+  },
+  {
+    "mot": "matois",
+    "nature": "adj. et n.",
+    "definition": "Rusé, qui sait habilement tirer son épingle du jeu.",
+    "exemple": "Le vieux notaire, matois, ne dévoilait jamais ses intentions.",
+    "academie": true
+  },
+  {
+    "mot": "méphistophélique",
+    "nature": "adj.",
+    "definition": "Qui évoque Méphistophélès, par sa malice diabolique ou son ironie inquiétante.",
+    "exemple": "Il esquissa un sourire méphistophélique avant d'abattre ses cartes.",
+    "academie": false
+  },
+  {
+    "mot": "mercuriale",
+    "nature": "n. f.",
+    "definition": "Réprimande sévère adressée à quelqu'un.",
+    "exemple": "Le directeur infligea une mercuriale aux retardataires.",
+    "academie": true
+  },
+  {
+    "mot": "mésallier",
+    "nature": "v. pron.",
+    "definition": "Se marier avec une personne jugée de condition inférieure.",
+    "exemple": "Sa famille l'accusait de s'être mésalliée en épousant un saltimbanque.",
+    "academie": true
+  },
+  {
+    "mot": "mignardise",
+    "nature": "n. f.",
+    "definition": "Grâce affectée, délicatesse excessive dans les manières.",
+    "exemple": "Ses mignardises finissaient par agacer tout le monde.",
+    "academie": true
+  },
+  {
+    "mot": "minauder",
+    "nature": "v. intr.",
+    "definition": "Prendre des airs affectés pour plaire ou séduire.",
+    "exemple": "Elle minaudait devant le miroir en essayant son chapeau.",
+    "academie": true
+  },
+  {
+    "mot": "mirliton",
+    "nature": "n. m.",
+    "definition": "Petit instrument formé d'un tube garni d'une membrane qui vibre quand on chante dedans ; « vers de mirliton » : vers médiocres.",
+    "exemple": "Il nous a récité des vers de mirliton pour son anniversaire.",
+    "academie": true
+  },
+  {
+    "mot": "momerie",
+    "nature": "n. f.",
+    "definition": "Affectation ridicule d'un sentiment que l'on n'éprouve pas ; cérémonie bizarre ou ridicule.",
+    "exemple": "Assez de ces momeries, dis-nous franchement ce que tu penses.",
+    "academie": true
+  },
+  {
+    "mot": "morbleu",
+    "nature": "interj.",
+    "definition": "Juron ancien marquant la colère ou la surprise.",
+    "exemple": "Morbleu ! Qui a osé toucher à mon épée ?",
+    "academie": true
+  },
+  {
+    "mot": "mordicus",
+    "nature": "adv.",
+    "definition": "Avec obstination, sans démordre.",
+    "exemple": "Il soutient mordicus qu'il a vu un loup dans le jardin.",
+    "academie": true
+  },
+  {
+    "mot": "morgue",
+    "nature": "n. f.",
+    "definition": "Attitude hautaine et méprisante, arrogance.",
+    "exemple": "Il toisa les nouveaux venus avec une morgue insupportable.",
+    "academie": true
+  },
+  {
+    "mot": "moult",
+    "nature": "adv.",
+    "definition": "Beaucoup, en grand nombre (souvent employé par plaisanterie).",
+    "exemple": "Après moult hésitations, elle accepta l'invitation.",
+    "academie": true
+  },
+  {
+    "mot": "mutin",
+    "nature": "adj.",
+    "definition": "Malicieux et espiègle, d'une vivacité taquine.",
+    "exemple": "Elle lui lança un regard mutin par-dessus son livre.",
+    "academie": true
+  },
+  {
+    "mot": "myrmidon",
+    "nature": "n. m.",
+    "definition": "Homme de petite taille et sans valeur, qui se donne des airs importants.",
+    "exemple": "Ce myrmidon prétendait nous donner des ordres.",
+    "academie": true
+  },
+  {
+    "mot": "mystagogue",
+    "nature": "n. m. et f.",
+    "definition": "Dans l'Antiquité grecque, prêtre ou prêtresse chargé d'initier aux mystères religieux.",
+    "exemple": "Le mystagogue conduisait les initiés vers le sanctuaire d'Éleusis.",
+    "academie": true
+  },
+  {
+    "mot": "macaronique",
+    "nature": "adj.",
+    "definition": "Se dit d'une poésie burlesque mêlant des mots d'une langue vulgaire à des terminaisons latines.",
+    "exemple": "Les étudiants s'amusaient à composer des vers macaroniques.",
+    "academie": true
+  },
+  {
+    "mot": "magister",
+    "nature": "n. m.",
+    "definition": "Maître d'école de village ; par moquerie, pédant.",
+    "exemple": "Le magister corrigeait les dictées à la lueur d'une chandelle.",
+    "academie": true
+  },
+  {
+    "mot": "mâchicoulis",
+    "nature": "n. m.",
+    "definition": "Galerie en saillie au sommet d'une muraille, percée d'ouvertures pour jeter des projectiles sur les assaillants.",
+    "exemple": "Du haut des mâchicoulis, les défenseurs versaient de la poix brûlante.",
+    "academie": true
+  },
+  {
+    "mot": "marivaudage",
+    "nature": "n. m.",
+    "definition": "Badinage galant et raffiné, à la manière des personnages de Marivaux.",
+    "exemple": "Leur marivaudage amusait toute la tablée.",
+    "academie": true
+  },
+  {
+    "mot": "mazette",
+    "nature": "interj.",
+    "definition": "Exclamation familière marquant l'étonnement ou l'admiration.",
+    "exemple": "Mazette ! Quelle belle voiture tu t'es offerte !",
+    "academie": true
+  },
+  {
+    "mot": "ménechme",
+    "nature": "n. m.",
+    "definition": "Personne qui ressemble parfaitement à une autre ; sosie.",
+    "exemple": "Son ménechme a été arrêté à sa place par erreur.",
+    "academie": false
+  },
+  {
+    "mot": "mésaise",
+    "nature": "n. m.",
+    "definition": "Gêne, sentiment de déplaisir ou d'insatisfaction ; autrefois aussi, manque de ressources (vieilli).",
+    "exemple": "Un mésaise le gagnait chaque fois qu'il entrait dans cette maison.",
+    "academie": false
+  },
+  {
+    "mot": "métempsycose",
+    "nature": "n. f.",
+    "definition": "Doctrine selon laquelle une même âme anime successivement plusieurs corps.",
+    "exemple": "Il croyait à la métempsycose et se voyait renaître en chat.",
+    "academie": false
+  },
+  {
+    "mot": "minois",
+    "nature": "n. m.",
+    "definition": "Visage jeune, délicat et gracieux.",
+    "exemple": "Son joli minois apparut à la fenêtre.",
+    "academie": true
+  },
+  {
+    "mot": "mitan",
+    "nature": "n. m.",
+    "definition": "Milieu, centre (vieilli ou régional).",
+    "exemple": "Ils plantèrent un tilleul au mitan de la cour.",
+    "academie": true
+  },
+  {
+    "mot": "muscadin",
+    "nature": "n. m.",
+    "definition": "Sous la Révolution, jeune contre-révolutionnaire à l'élégance recherchée ; par extension, homme d'une élégance affectée.",
+    "exemple": "Le muscadin paradait, la cravate haute et la canne à la main.",
+    "academie": false
+  },
+  {
+    "mot": "mâtiné",
+    "nature": "adj.",
+    "definition": "Se dit d'un animal, notamment d'un chien, qui n'est pas de race pure ; au figuré, mêlé de quelque chose d'autre.",
+    "exemple": "Il parle un français mâtiné d'accent italien.",
+    "academie": true
+  },
+  {
+    "mot": "médianoche",
+    "nature": "n. m.",
+    "definition": "Repas pris au milieu de la nuit, notamment après une veillée.",
+    "exemple": "Après la messe de minuit, toute la famille se retrouva pour le médianoche.",
+    "academie": true
+  },
+  {
+    "mot": "mésintelligence",
+    "nature": "n. f.",
+    "definition": "Défaut d'entente, désaccord entre des personnes.",
+    "exemple": "Une mésintelligence durable s'était installée entre les deux frères.",
+    "academie": true
+  },
+  {
+    "mot": "mordoré",
+    "nature": "adj.",
+    "definition": "D'un brun chaud aux reflets dorés.",
+    "exemple": "Les feuilles mordorées de l'automne tapissaient l'allée.",
+    "academie": true
+  },
+  {
+    "mot": "morfondre",
+    "nature": "v. pron.",
+    "definition": "S'ennuyer à attendre, languir dans l'inaction.",
+    "exemple": "Il se morfondait sur le quai en attendant le dernier train.",
+    "academie": true
+  },
+  {
+    "mot": "mortifier",
+    "nature": "v. tr.",
+    "definition": "Humilier profondément, blesser dans son amour-propre.",
+    "exemple": "Cette remarque publique l'a mortifié.",
+    "academie": true
+  },
+  {
+    "mot": "moutonner",
+    "nature": "v. intr.",
+    "definition": "Se couvrir de petites vagues blanches d'écume, en parlant de la mer ou d'un lac.",
+    "exemple": "Sous le vent, la mer commençait à moutonner.",
+    "academie": true
+  },
+  {
+    "mot": "muser",
+    "nature": "v. intr.",
+    "definition": "Flâner, perdre son temps à des riens.",
+    "exemple": "Il aimait muser le long des quais, sans but précis.",
+    "academie": true
+  },
+  {
+    "mot": "margoulin",
+    "nature": "n. m.",
+    "definition": "Commerçant ou homme d'affaires peu scrupuleux.",
+    "exemple": "Ce margoulin revendait des montres contrefaites.",
+    "academie": false
+  },
+  {
+    "mot": "mascaret",
+    "nature": "n. m.",
+    "definition": "Longue vague déferlante qui remonte un fleuve à son embouchure lors des grandes marées.",
+    "exemple": "Les curieux se pressaient sur la rive pour voir passer le mascaret.",
+    "academie": true
+  },
+  {
+    "mot": "mélopée",
+    "nature": "n. f.",
+    "definition": "Chant monotone et mélancolique.",
+    "exemple": "Une mélopée s'élevait du campement des bergers.",
+    "academie": true
+  },
+  {
+    "mot": "motus",
+    "nature": "interj.",
+    "definition": "S'emploie pour inviter à garder un secret.",
+    "exemple": "Motus et bouche cousue sur la fête surprise !",
+    "academie": true
+  },
+  {
+    "mot": "marri",
+    "nature": "adj.",
+    "definition": "Fâché, contrarié ou attristé (vieilli).",
+    "exemple": "Il se montra fort marri de n'avoir pas été invité.",
+    "academie": true
+  },
+  {
+    "mot": "maugréer",
+    "nature": "v. intr.",
+    "definition": "Manifester sa mauvaise humeur en grommelant.",
+    "exemple": "Il partit sous la pluie en maugréant contre le mauvais temps.",
+    "academie": true
+  },
+  {
+    "mot": "malepeste",
+    "nature": "interj.",
+    "definition": "Ancien juron marquant l'étonnement ou le dépit.",
+    "exemple": "Malepeste ! La porte est encore fermée.",
+    "academie": true
+  },
+  {
+    "mot": "mamours",
+    "nature": "n. m. pl.",
+    "definition": "Démonstrations de tendresse, caresses câlines (familier).",
+    "exemple": "Le chat venait faire des mamours à sa maîtresse.",
+    "academie": true
+  },
+  {
+    "mot": "mutatis mutandis",
+    "nature": "loc. adv.",
+    "definition": "En faisant les changements nécessaires pour adapter le propos à un autre cas.",
+    "exemple": "Cette règle s'applique, mutatis mutandis, aux associations.",
+    "academie": false
+  },
+  {
+    "mot": "melliflue",
+    "nature": "adj.",
+    "definition": "Qui a la douceur du miel ; au figuré, d'une douceur fade et affectée, doucereux.",
+    "exemple": "Il nous servit un discours melliflue pour faire passer la hausse.",
+    "academie": true
+  },
+  {
+    "mot": "méchef",
+    "nature": "n. m.",
+    "definition": "Accident fâcheux, malheur (vieilli).",
+    "exemple": "Un méchef l'empêcha de se rendre au rendez-vous.",
+    "academie": false
+  },
+  {
+    "mot": "nabab",
+    "nature": "n. m.",
+    "definition": "Homme extrêmement riche qui étale son luxe.",
+    "exemple": "Il menait un train de vie de nabab sur la Côte d'Azur.",
+    "academie": true
+  },
+  {
+    "mot": "naïade",
+    "nature": "n. f.",
+    "definition": "Nymphe des rivières et des fontaines, dans la mythologie grecque.",
+    "exemple": "La fontaine du parc est ornée d'une naïade de marbre.",
+    "academie": true
+  },
+  {
+    "mot": "nantir",
+    "nature": "v. tr.",
+    "definition": "Pourvoir, munir quelqu'un de quelque chose.",
+    "exemple": "Ses parents l'avaient nanti d'une solide éducation.",
+    "academie": true
+  },
+  {
+    "mot": "narquois",
+    "nature": "adj.",
+    "definition": "Moqueur et malicieux.",
+    "exemple": "Il me regardait avec un sourire narquois.",
+    "academie": true
+  },
+  {
+    "mot": "nasiller",
+    "nature": "v. intr.",
+    "definition": "Parler ou chanter du nez.",
+    "exemple": "La vieille radio nasillait une chanson d'avant-guerre.",
+    "academie": true
+  },
+  {
+    "mot": "naufrageur",
+    "nature": "n. m.",
+    "definition": "Personne qui provoquait des naufrages, au moyen de faux signaux, pour piller les épaves.",
+    "exemple": "La légende des naufrageurs hante encore cette côte bretonne.",
+    "academie": true
+  },
+  {
+    "mot": "navrance",
+    "nature": "n. f.",
+    "definition": "Profonde affliction, tristesse accablante.",
+    "exemple": "Une navrance silencieuse se lisait sur son visage.",
+    "academie": false
+  },
+  {
+    "mot": "nécromancie",
+    "nature": "n. f.",
+    "definition": "Art prétendu d'évoquer les morts pour connaître l'avenir.",
+    "exemple": "Le sorcier pratiquait la nécromancie dans les catacombes.",
+    "academie": true
+  },
+  {
+    "mot": "népenthès",
+    "nature": "n. m.",
+    "definition": "Breuvage que les Anciens croyaient capable de dissiper le chagrin ; par extension, remède à la douleur.",
+    "exemple": "La musique était son népenthès après les jours sombres.",
+    "academie": true
+  },
+  {
+    "mot": "nervi",
+    "nature": "n. m.",
+    "definition": "Homme de main chargé des violences et des basses besognes pour le compte d'autrui.",
+    "exemple": "Le caïd envoya ses nervis intimider le témoin.",
+    "academie": false
+  },
+  {
+    "mot": "nescience",
+    "nature": "n. f.",
+    "definition": "Ignorance, absence de savoir.",
+    "exemple": "Il avouait sa nescience en matière de botanique.",
+    "academie": false
+  },
+  {
+    "mot": "nenni",
+    "nature": "interj.",
+    "definition": "Non (vieilli ou plaisant).",
+    "exemple": "Tu crois que j'ai cédé ? Nenni !",
+    "academie": true
+  },
+  {
+    "mot": "nicodème",
+    "nature": "n. m.",
+    "definition": "Homme niais, simple d'esprit.",
+    "exemple": "Ce nicodème a cru toutes les fables qu'on lui contait.",
+    "academie": false
+  },
+  {
+    "mot": "nimber",
+    "nature": "v. tr.",
+    "definition": "Entourer d'un nimbe, d'un halo lumineux.",
+    "exemple": "Le soleil couchant nimbait la colline d'une lumière rose.",
+    "academie": true
+  },
+  {
+    "mot": "nippe",
+    "nature": "n. f.",
+    "definition": "Vêtement usé ou de peu de valeur (surtout au pluriel, familier).",
+    "exemple": "Il rassembla ses nippes dans un baluchon et partit.",
+    "academie": false
+  },
+  {
+    "mot": "noise",
+    "nature": "n. f.",
+    "definition": "Querelle (surtout dans « chercher noise à quelqu'un »).",
+    "exemple": "Il cherche noise à tout le monde depuis ce matin.",
+    "academie": true
+  },
+  {
+    "mot": "nonchaloir",
+    "nature": "n. m.",
+    "definition": "Nonchalance, indolence (littéraire).",
+    "exemple": "Elle s'abandonnait à un doux nonchaloir sur la terrasse.",
+    "academie": true
+  },
+  {
+    "mot": "nasarde",
+    "nature": "n. f.",
+    "definition": "Chiquenaude donnée sur le nez ; au figuré, affront moqueur.",
+    "exemple": "Le clown reçut une nasarde qui fit rire les enfants.",
+    "academie": true
+  },
+  {
+    "mot": "nobliau",
+    "nature": "n. m.",
+    "definition": "Noble de petite noblesse, qui n'a guère que son titre (péjoratif).",
+    "exemple": "Ce nobliau de province se donnait des airs de prince.",
+    "academie": false
+  },
+  {
+    "mot": "nocher",
+    "nature": "n. m.",
+    "definition": "Celui qui conduit une barque, batelier (littéraire).",
+    "exemple": "Charon, le nocher des Enfers, réclamait son obole.",
+    "academie": true
+  },
+  {
+    "mot": "noliser",
+    "nature": "v. tr.",
+    "definition": "Louer un navire ou un avion pour un transport ; affréter.",
+    "exemple": "L'agence avait nolisé un avion pour les supporters.",
+    "academie": true
+  },
+  {
+    "mot": "nonpareil",
+    "nature": "adj.",
+    "definition": "Qui n'a pas son pareil, sans égal (vieilli).",
+    "exemple": "Elle était d'une beauté nonpareille.",
+    "academie": true
+  },
+  {
+    "mot": "nemrod",
+    "nature": "n. m.",
+    "definition": "Grand chasseur, passionné de chasse.",
+    "exemple": "Ce nemrod ne revenait jamais du bois sans un lièvre.",
+    "academie": false
+  },
+  {
+    "mot": "notule",
+    "nature": "n. f.",
+    "definition": "Courte note ou annotation.",
+    "exemple": "Il griffonnait des notules dans la marge de ses livres.",
+    "academie": true
+  },
+  {
+    "mot": "nautonier",
+    "nature": "n. m.",
+    "definition": "Celui qui conduit un navire ou une barque (littéraire).",
+    "exemple": "Le nautonier guidait la barque entre les écueils.",
+    "academie": true
+  },
+  {
+    "mot": "obérer",
+    "nature": "v. tr.",
+    "definition": "Charger de dettes ; compromettre gravement par des charges financières.",
+    "exemple": "Ces dépenses inconsidérées ont obéré le budget de la commune.",
+    "academie": true
+  },
+  {
+    "mot": "obséquieux",
+    "nature": "adj.",
+    "definition": "Qui pousse la politesse et les égards jusqu'à la servilité.",
+    "exemple": "Le serveur obséquieux s'inclinait à chaque phrase.",
+    "academie": true
+  },
+  {
+    "mot": "obtempérer",
+    "nature": "v. tr. ind.",
+    "definition": "Obéir, se soumettre à un ordre (« obtempérer à »).",
+    "exemple": "Le conducteur a refusé d'obtempérer aux injonctions des gendarmes.",
+    "academie": true
+  },
+  {
+    "mot": "obvier",
+    "nature": "v. tr. ind.",
+    "definition": "Prendre des mesures pour prévenir un mal, un inconvénient (« obvier à »).",
+    "exemple": "On construisit une digue pour obvier aux inondations.",
+    "academie": true
+  },
+  {
+    "mot": "occire",
+    "nature": "v. tr.",
+    "definition": "Tuer (vieilli ou plaisant).",
+    "exemple": "Le chevalier jura d'occire le dragon.",
+    "academie": true
+  },
+  {
+    "mot": "ochlocratie",
+    "nature": "n. f.",
+    "definition": "Gouvernement exercé par la foule, la populace.",
+    "exemple": "Le philosophe craignait que la démocratie ne dégénère en ochlocratie.",
+    "academie": false
+  },
+  {
+    "mot": "odalisque",
+    "nature": "n. f.",
+    "definition": "Autrefois, esclave ou servante au service des femmes d'un harem ; en peinture, femme de harem.",
+    "exemple": "Ingres a peint une célèbre odalisque allongée.",
+    "academie": true
+  },
+  {
+    "mot": "onction",
+    "nature": "n. f.",
+    "definition": "Action d'oindre lors d'un rite ; au figuré, douceur pénétrante dans les paroles ou les manières.",
+    "exemple": "Le prélat parlait avec une onction qui apaisait les fidèles.",
+    "academie": true
+  },
+  {
+    "mot": "onques",
+    "nature": "adv.",
+    "definition": "Jamais (vieilli).",
+    "exemple": "On ne vit onques chevalier plus vaillant.",
+    "academie": true
+  },
+  {
+    "mot": "opiniâtre",
+    "nature": "adj.",
+    "definition": "Tenace et obstiné dans ses idées ou ses efforts.",
+    "exemple": "Un travail opiniâtre lui a permis de réussir le concours.",
+    "academie": true
+  },
+  {
+    "mot": "opuscule",
+    "nature": "n. m.",
+    "definition": "Petit ouvrage, court écrit.",
+    "exemple": "Il publia un opuscule sur l'art de la pêche à la mouche.",
+    "academie": true
+  },
+  {
+    "mot": "orbe",
+    "nature": "n. m.",
+    "definition": "Surface ou espace circulaire ; globe, sphère (littéraire).",
+    "exemple": "L'orbe de la lune émergeait des nuages.",
+    "academie": true
+  },
+  {
+    "mot": "ordalie",
+    "nature": "n. f.",
+    "definition": "Au Moyen Âge, épreuve physique imposée à un accusé pour établir, par jugement de Dieu, son innocence ou sa culpabilité.",
+    "exemple": "L'accusé dut subir l'ordalie du fer rouge.",
+    "academie": true
+  },
+  {
+    "mot": "orée",
+    "nature": "n. f.",
+    "definition": "Bordure, lisière d'un bois.",
+    "exemple": "Une biche apparut à l'orée de la forêt.",
+    "academie": true
+  },
+  {
+    "mot": "orfraie",
+    "nature": "n. f.",
+    "definition": "Grand rapace ; « pousser des cris d'orfraie » : pousser des cris perçants.",
+    "exemple": "Elle poussa des cris d'orfraie en voyant la souris.",
+    "academie": true
+  },
+  {
+    "mot": "oriflamme",
+    "nature": "n. f.",
+    "definition": "Bannière d'apparat, longue et effilée ; autrefois, étendard des rois de France.",
+    "exemple": "Des oriflammes flottaient au-dessus des tribunes.",
+    "academie": true
+  },
+  {
+    "mot": "orphéon",
+    "nature": "n. m.",
+    "definition": "Fanfare ou chorale populaire.",
+    "exemple": "L'orphéon municipal ouvrait le défilé du 14 Juillet.",
+    "academie": true
+  },
+  {
+    "mot": "ost",
+    "nature": "n. m.",
+    "definition": "Armée, au Moyen Âge ; service militaire dû au seigneur.",
+    "exemple": "Le roi convoqua l'ost pour la campagne d'été.",
+    "academie": false
+  },
+  {
+    "mot": "outrance",
+    "nature": "n. f.",
+    "definition": "Excès, exagération ; « à outrance » : à l'excès.",
+    "exemple": "Ce roman pèche par l'outrance de ses descriptions.",
+    "academie": true
+  },
+  {
+    "mot": "ouvrer",
+    "nature": "v. tr. et intr.",
+    "definition": "Travailler, façonner une matière (vieilli).",
+    "exemple": "Ces artisans savent ouvrer le cuivre comme personne.",
+    "academie": true
+  },
+  {
+    "mot": "ouailles",
+    "nature": "n. f. pl.",
+    "definition": "Fidèles d'une paroisse par rapport à leur curé (souvent plaisant).",
+    "exemple": "Le curé connaissait chacune de ses ouailles.",
+    "academie": false
+  },
+  {
+    "mot": "oukase",
+    "nature": "n. m.",
+    "definition": "Édit du tsar ; par extension, ordre impératif et arbitraire.",
+    "exemple": "La direction a lancé un oukase interdisant le télétravail.",
+    "academie": false
+  },
+  {
+    "mot": "oindre",
+    "nature": "v. tr.",
+    "definition": "Frotter d'huile ou d'une substance grasse ; consacrer par une onction.",
+    "exemple": "Le prêtre oignit le front du nouveau roi.",
+    "academie": false
+  },
+  {
+    "mot": "oison",
+    "nature": "n. m.",
+    "definition": "Petit de l'oie ; au figuré, personne naïve et sotte.",
+    "exemple": "Une file d'oisons suivait la mère oie jusqu'à la mare.",
+    "academie": true
+  },
+  {
+    "mot": "oliphant",
+    "nature": "n. m.",
+    "definition": "Cor d'ivoire des chevaliers du Moyen Âge.",
+    "exemple": "Roland sonna de l'oliphant à Roncevaux.",
+    "academie": false
+  },
+  {
+    "mot": "orichalque",
+    "nature": "n. m.",
+    "definition": "Dans l'Antiquité, métal ou alliage mystérieux et précieux, dont la nature exacte reste discutée.",
+    "exemple": "Platon décrit des remparts de l'Atlantide recouverts d'orichalque.",
+    "academie": false
+  },
+  {
+    "mot": "orviétan",
+    "nature": "n. m.",
+    "definition": "Drogue prétendue miraculeuse vendue par les charlatans ; « marchand d'orviétan » : charlatan.",
+    "exemple": "Ce politicien n'est qu'un marchand d'orviétan.",
+    "academie": true
+  },
+  {
+    "mot": "ourdir",
+    "nature": "v. tr.",
+    "definition": "Préparer en secret une machination ; au sens propre, disposer les fils d'une chaîne de tissage.",
+    "exemple": "Les conjurés ourdissaient un complot contre le roi.",
+    "academie": true
+  },
+  {
+    "mot": "ouvroir",
+    "nature": "n. m.",
+    "definition": "Lieu où des femmes se réunissaient pour des travaux d'aiguille, notamment au profit des pauvres.",
+    "exemple": "Les dames de la paroisse tricotaient des écharpes à l'ouvroir.",
+    "academie": true
+  },
+  {
+    "mot": "obsidional",
+    "nature": "adj.",
+    "definition": "Relatif au siège d'une ville.",
+    "exemple": "Pendant le siège, on frappa une monnaie obsidionale.",
+    "academie": true
+  },
+  {
+    "mot": "officine",
+    "nature": "n. f.",
+    "definition": "Pharmacie, lieu où l'on prépare les médicaments ; péjorativement, lieu où se trame quelque chose de louche.",
+    "exemple": "Ces rumeurs sortaient d'une officine de propagande.",
+    "academie": true
+  },
+  {
+    "mot": "obédience",
+    "nature": "n. f.",
+    "definition": "Obéissance à une autorité spirituelle ; appartenance à une doctrine ou à un groupe.",
+    "exemple": "Ce journal est d'obédience libérale.",
+    "academie": true
+  },
+  {
+    "mot": "orémus",
+    "nature": "n. m.",
+    "definition": "Prière (familier, souvent au pluriel).",
+    "exemple": "La vieille dame marmonnait ses orémus au coin du feu.",
+    "academie": true
+  },
+  {
+    "mot": "ouïr",
+    "nature": "v. tr.",
+    "definition": "Entendre (vieilli ; surtout à l'infinitif et au participe « ouï »).",
+    "exemple": "J'ai ouï dire que vous partiez pour l'Italie.",
+    "academie": true
+  },
+  {
+    "mot": "obsécration",
+    "nature": "n. f.",
+    "definition": "Figure de rhétorique par laquelle l'orateur implore l'assistance de Dieu, ou celle de quelqu'un au nom de Dieu.",
+    "exemple": "Son discours s'acheva par une vibrante obsécration.",
+    "academie": true
+  }
+]
