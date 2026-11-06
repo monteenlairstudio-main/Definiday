@@ -1,6 +1,6 @@
 """Merge lexicon batches into app/src/main/assets/words.json.
 
-Usage: python3 tools/merge_words.py tools/lexique/words_*.json tools/lexique/qa_*.json tools/lexique/enrich_*.json
+Usage: python3 tools/merge_words.py tools/lexique/words_*.json tools/lexique/qa_*.json tools/lexique/enrich_*.json tools/lexique/style_*.json
 Later files patch earlier ones field by field for the same lemma (e.g. enrich_* only adds "anecdote"/"source");
 {"mot": ..., "_supprimer": true} removes it. Partial patches (no "nature") for a missing lemma are ignored.
 """

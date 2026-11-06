@@ -19,7 +19,7 @@ Chaque mot propose deux liens :
 - **Académie française** : au moment du clic, une recherche sur dictionnaire-academie.fr ouvre l’article (avec repli sur le CNRTL).
 - **TLFi (CNRTL)** : `cnrtl.fr/definition/<mot>`.
 
-Les données (≈1 340 mots, dont ≈800 avec une anecdote sourcée) sont dans `app/src/main/assets/words.json`, générées par `python3 tools/merge_words.py tools/lexique/words_*.json tools/lexique/qa_*.json tools/lexique/enrich_*.json` à partir des lots et des correctifs de relecture (`qa_*`, dont le tri qui a retiré les mots courants). Le test unitaire exige au moins 3 × 365 mots.
+Les données (≈1 340 mots, dont ≈800 avec une anecdote sourcée) sont dans `app/src/main/assets/words.json`, générées par `python3 tools/merge_words.py tools/lexique/words_*.json tools/lexique/qa_*.json tools/lexique/enrich_*.json tools/lexique/style_*.json` à partir des lots et des correctifs de relecture (`qa_*`, dont le tri qui a retiré les mots courants). Le test unitaire exige au moins 3 × 365 mots.
 `tools/check_copies.py` compare chaque définition à celles du Wiktionnaire (index local du dump `frwiktionary-…-pages-articles.xml.bz2`) et signale les formulations trop proches : la dernière passe n’en signale aucune.
 
 ## Build

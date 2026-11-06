@@ -1,0 +1,2242 @@
+[
+ {
+  "mot": "eulogie",
+  "palette": "parchemin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "euphonie",
+  "palette": "lavande",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "euphuisme",
+  "palette": "sanguine",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "eutrapélie",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "exciper",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "exorde",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "extravaguer",
+  "palette": "violine",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "ébaubi",
+  "palette": "aube",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "ébaudir",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "ébouffer",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "éburnéen",
+  "palette": "givre",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "écaché",
+  "palette": "sanguine",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "écarbouiller",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "échalas",
+  "palette": "pistache",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "écheveau",
+  "palette": "lavande",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "échevelé",
+  "palette": "braise",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "écornifleur",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "écot",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "écritoire",
+  "palette": "encre_de_chine",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "édénique",
+  "palette": "pistache",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "édile",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "égotisme",
+  "palette": "sepia",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "égrillard",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "égrotant",
+  "palette": "givre",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "éjouir",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "élégiaque",
+  "palette": "bleu_nuit",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "élimé",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "émerillonné",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "émonder",
+  "palette": "pistache",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "épanorthose",
+  "palette": "craie",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "épigone",
+  "palette": "ardoise",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "épigramme",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "épiloguer",
+  "palette": "parchemin",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "épiphonème",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "épistolier",
+  "palette": "parchemin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "épithalame",
+  "palette": "aube",
+  "police": "parisienne"
+ },
+ {
+  "mot": "éploré",
+  "palette": "bleu_nuit",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "épousailles",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "équanimité",
+  "palette": "lavande",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "équarrir",
+  "palette": "sanguine",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "équipollent",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "érémitique",
+  "palette": "sous_bois",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "éristique",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "érubescent",
+  "palette": "sanguine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "érugineux",
+  "palette": "vert_de_gris",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "étésien",
+  "palette": "safran",
+  "police": "cinzel"
+ },
+ {
+  "mot": "étiage",
+  "palette": "ardoise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "étioler",
+  "palette": "lavande",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "étique",
+  "palette": "givre",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "étriller",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "évagation",
+  "palette": "bleu_nuit",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "évanescent",
+  "palette": "givre",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "éventaire",
+  "palette": "safran",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "faciende",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "faconde",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "factieux",
+  "palette": "braise",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "factotum",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "fadaise",
+  "palette": "lavande",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "fafelu",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "fagoter",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "faguenas",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "faisandé",
+  "palette": "sous_bois",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "faitardise",
+  "palette": "lavande",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "falbala",
+  "palette": "lavande",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "fallace",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "falot",
+  "palette": "ardoise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "falourde",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "fanfreluche",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "faquin",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "faraud",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "farfadet",
+  "palette": "sous_bois",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "faribole",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "fatras",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "fatuité",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "fauteur",
+  "palette": "braise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "fenaison",
+  "palette": "safran",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "fescennin",
+  "palette": "lie_de_vin",
+  "police": "cinzel"
+ },
+ {
+  "mot": "fesse-mathieu",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "félon",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "férule",
+  "palette": "ardoise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "fétu",
+  "palette": "safran",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "fieffé",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "fifrelin",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "filandreux",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "flagorneur",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "flamberge",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "flandrin",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "flavescent",
+  "palette": "safran",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "flexueux",
+  "palette": "lavande",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "flibustier",
+  "palette": "abysses",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "flonflon",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "flouer",
+  "palette": "violine",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "folâtrer",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "folliculaire",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "fondrière",
+  "palette": "sous_bois",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "forban",
+  "palette": "abysses",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "forfanterie",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "forligner",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "fortrait",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "fouailler",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "foucade",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "frairie",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "fredaine",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "frelaté",
+  "palette": "vert_de_gris",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "freluquet",
+  "palette": "lavande",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "frimas",
+  "palette": "givre",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "friselis",
+  "palette": "pistache",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "fruition",
+  "palette": "lie_de_vin",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "fuligineux",
+  "palette": "encre_de_chine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "futaie",
+  "palette": "sous_bois",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "gabegie",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "gabelou",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "gaber",
+  "palette": "safran",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "galantin",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "galetas",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "galéjade",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "galimafrée",
+  "palette": "sanguine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "galimatias",
+  "palette": "violine",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "gambiller",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "gandin",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "gasconnade",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "gaudriole",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "gausser",
+  "palette": "safran",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "gâte-sauce",
+  "palette": "sanguine",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "gent",
+  "palette": "parchemin",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "gerfaut",
+  "palette": "givre",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "géhenne",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "gélasin",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "gémonies",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "géronte",
+  "palette": "sepia",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "gésir",
+  "palette": "encre_de_chine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "gibbeux",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "gibus",
+  "palette": "encre_de_chine",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "gimblette",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "ginguet",
+  "palette": "pistache",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "girandole",
+  "palette": "bleu_nuit",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "girie",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "giron",
+  "palette": "aube",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "glèbe",
+  "palette": "sous_bois",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "gloriole",
+  "palette": "safran",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "gloser",
+  "palette": "parchemin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "gnognote",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "gnomique",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "gobelotter",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "gobichonner",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "godailler",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "godelureau",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "godiche",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "goffe",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "goguenard",
+  "palette": "safran",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "goguette",
+  "palette": "lie_de_vin",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "gonfalon",
+  "palette": "sanguine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "gongorisme",
+  "palette": "safran",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "gonin",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "gouailleur",
+  "palette": "ardoise",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "gourd",
+  "palette": "givre",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "gourgandine",
+  "palette": "lie_de_vin",
+  "police": "parisienne"
+ },
+ {
+  "mot": "gourmander",
+  "palette": "braise",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "gourme",
+  "palette": "sanguine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "gourmé",
+  "palette": "ardoise",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "gousset",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "gracile",
+  "palette": "lavande",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "gravelure",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "gredin",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "grègues",
+  "palette": "sepia",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "gribouille",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "grigou",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "grimaud",
+  "palette": "parchemin",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "grimelin",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "grisette",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "grivèlerie",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "guerdon",
+  "palette": "safran",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "guerroyer",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "gueux",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "guigne",
+  "palette": "sanguine",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "guilledou",
+  "palette": "bleu_nuit",
+  "police": "parisienne"
+ },
+ {
+  "mot": "guingois",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "gyrovague",
+  "palette": "parchemin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "haguignète",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "halenée",
+  "palette": "lie_de_vin",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "hallali",
+  "palette": "sous_bois",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "hallier",
+  "palette": "sous_bois",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "hamadryade",
+  "palette": "sous_bois",
+  "police": "cinzel"
+ },
+ {
+  "mot": "hanap",
+  "palette": "lie_de_vin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "hapax",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "hapelopin",
+  "palette": "sanguine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "happelourde",
+  "palette": "violine",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "haquenée",
+  "palette": "lavande",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "haridelle",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "haro",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "harpailler",
+  "palette": "braise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "haruspice",
+  "palette": "violine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "hâbleur",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "hâve",
+  "palette": "givre",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "herboriser",
+  "palette": "pistache",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "heur",
+  "palette": "aube",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "hère",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "héraut",
+  "palette": "safran",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "hérésiarque",
+  "palette": "violine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "hiémal",
+  "palette": "givre",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "hiératique",
+  "palette": "violine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "hiérophante",
+  "palette": "violine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "hippiatre",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "hippogriffe",
+  "palette": "bleu_nuit",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "hircin",
+  "palette": "sous_bois",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "hispide",
+  "palette": "sous_bois",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "histrion",
+  "palette": "lie_de_vin",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "hobereau",
+  "palette": "sous_bois",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "hoirie",
+  "palette": "parchemin",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "homélie",
+  "palette": "parchemin",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "homoncule",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "hongreline",
+  "palette": "sanguine",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "honnir",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "hoqueton",
+  "palette": "sanguine",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "horion",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "houlette",
+  "palette": "pistache",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "houppelande",
+  "palette": "lie_de_vin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "hourvari",
+  "palette": "braise",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "huchet",
+  "palette": "sous_bois",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "hutin",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "hybris",
+  "palette": "braise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "hyménée",
+  "palette": "aube",
+  "police": "parisienne"
+ },
+ {
+  "mot": "hypallage",
+  "palette": "craie",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "hypocoristique",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "hypocras",
+  "palette": "lie_de_vin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "icelui",
+  "palette": "parchemin",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "idiosyncrasie",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "idoine",
+  "palette": "craie",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "ignivome",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "ilote",
+  "palette": "ardoise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "imbriaque",
+  "palette": "lie_de_vin",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "immarcescible",
+  "palette": "pistache",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "impavide",
+  "palette": "ardoise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "impécunieux",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "impéritie",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "impétrant",
+  "palette": "parchemin",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "impollu",
+  "palette": "givre",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "imprécation",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "improbe",
+  "palette": "encre_de_chine",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "in petto",
+  "palette": "violine",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "inanité",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "incarnadin",
+  "palette": "sanguine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "incoercible",
+  "palette": "braise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "incontinent",
+  "palette": "aube",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "incunable",
+  "palette": "parchemin",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "incurie",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "ineffable",
+  "palette": "aube",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "inexpiable",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "inexpugnable",
+  "palette": "ardoise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "inextinguible",
+  "palette": "braise",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "inénarrable",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "infatuation",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "inféoder",
+  "palette": "parchemin",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "infrangible",
+  "palette": "ardoise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "infus",
+  "palette": "aube",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "ingambe",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "inique",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "insipience",
+  "palette": "craie",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "intempérance",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "intercesseur",
+  "palette": "violine",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "interlope",
+  "palette": "bleu_nuit",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "ire",
+  "palette": "braise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "irénique",
+  "palette": "lavande",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "irréfragable",
+  "palette": "craie",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "irréméable",
+  "palette": "abysses",
+  "police": "cinzel"
+ },
+ {
+  "mot": "irrémissible",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "irrépréhensible",
+  "palette": "givre",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "isabelle",
+  "palette": "sepia",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "issir",
+  "palette": "parchemin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "itou",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "ivraie",
+  "palette": "sous_bois",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "jaboter",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "jacquerie",
+  "palette": "braise",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "jactance",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "jaculatoire",
+  "palette": "aube",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "janotisme",
+  "palette": "craie",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "jaquemart",
+  "palette": "vert_de_gris",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "jarnicoton",
+  "palette": "safran",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "jaseran",
+  "palette": "safran",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "jobard",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "jocrisse",
+  "palette": "pistache",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "jointée",
+  "palette": "aube",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "joliesse",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "jonchée",
+  "palette": "pistache",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "jouailler",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "jouvenceau",
+  "palette": "pistache",
+  "police": "parisienne"
+ },
+ {
+  "mot": "jubé",
+  "palette": "parchemin",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "jusant",
+  "palette": "abysses",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "jusquiame",
+  "palette": "sous_bois",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "kakemono",
+  "palette": "encre_de_chine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "keepsake",
+  "palette": "sepia",
+  "police": "parisienne"
+ },
+ {
+  "mot": "knout",
+  "palette": "encre_de_chine",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "labile",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "lacis",
+  "palette": "vert_de_gris",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "lacrymatoire",
+  "palette": "bleu_nuit",
+  "police": "cinzel"
+ },
+ {
+  "mot": "ladre",
+  "palette": "sepia",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "lambrequin",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "lampon",
+  "palette": "safran",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "landier",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "languide",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "lanterner",
+  "palette": "bleu_nuit",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "lantiponner",
+  "palette": "lavande",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "lanturlu",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "lapalissade",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "latitudinaire",
+  "palette": "lavande",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "latrie",
+  "palette": "violine",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "lavis",
+  "palette": "encre_de_chine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "lazaret",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "lazzi",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "lendit",
+  "palette": "safran",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "lendore",
+  "palette": "bleu_nuit",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "leste",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "lémure",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "lénifiant",
+  "palette": "lavande",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "léonin",
+  "palette": "safran",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "léthifère",
+  "palette": "encre_de_chine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "liard",
+  "palette": "vert_de_gris",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "libation",
+  "palette": "lie_de_vin",
+  "police": "cinzel"
+ },
+ {
+  "mot": "libelle",
+  "palette": "parchemin",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "lice",
+  "palette": "sanguine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "lige",
+  "palette": "parchemin",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "limbes",
+  "palette": "bleu_nuit",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "liminaire",
+  "palette": "aube",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "linéament",
+  "palette": "craie",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "linostole",
+  "palette": "parchemin",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "lippe",
+  "palette": "sanguine",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "locatis",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "logorrhée",
+  "palette": "safran",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "longanimité",
+  "palette": "lavande",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "loqueteux",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "loquèle",
+  "palette": "craie",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "lorette",
+  "palette": "lie_de_vin",
+  "police": "parisienne"
+ },
+ {
+  "mot": "lovelace",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "lucifuge",
+  "palette": "bleu_nuit",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "lucre",
+  "palette": "safran",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "ludion",
+  "palette": "givre",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "lumignon",
+  "palette": "bleu_nuit",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "lustral",
+  "palette": "givre",
+  "police": "cinzel"
+ },
+ {
+  "mot": "lycanthrope",
+  "palette": "bleu_nuit",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "macaronique",
+  "palette": "safran",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "madré",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mafflu",
+  "palette": "sanguine",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "magister",
+  "palette": "ardoise",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "maïeutique",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "malandrin",
+  "palette": "sous_bois",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "malefaim",
+  "palette": "ardoise",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "malemort",
+  "palette": "encre_de_chine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "malencontre",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "malepeste",
+  "palette": "braise",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "malévole",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "malgracieux",
+  "palette": "ardoise",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "malitorne",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "maltalent",
+  "palette": "braise",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "maltôte",
+  "palette": "parchemin",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "mamamouchi",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "manant",
+  "palette": "sous_bois",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "mangerie",
+  "palette": "lie_de_vin",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mansuétude",
+  "palette": "lavande",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "maquignon",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "marauder",
+  "palette": "pistache",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "margouillis",
+  "palette": "sous_bois",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "margoulin",
+  "palette": "ardoise",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "maritorne",
+  "palette": "sanguine",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "marivaudage",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "marjolet",
+  "palette": "aube",
+  "police": "parisienne"
+ },
+ {
+  "mot": "marmiteux",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "marmoréen",
+  "palette": "givre",
+  "police": "cinzel"
+ },
+ {
+  "mot": "marmouset",
+  "palette": "sepia",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "maroufle",
+  "palette": "braise",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "marri",
+  "palette": "ardoise",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "mascaret",
+  "palette": "abysses",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "matagraboliser",
+  "palette": "safran",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "matamore",
+  "palette": "braise",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "matassin",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "matois",
+  "palette": "violine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "matutinal",
+  "palette": "aube",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "maupiteux",
+  "palette": "ardoise",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "mauvaiseté",
+  "palette": "encre_de_chine",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mazarinade",
+  "palette": "parchemin",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mazette",
+  "palette": "aube",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "mâchicoulis",
+  "palette": "ardoise",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "mânes",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "mâtiné",
+  "palette": "sepia",
+  "police": "zilla_slab"
+ },
+ {
+  "mot": "melliflue",
+  "palette": "safran",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "menuaille",
+  "palette": "vert_de_gris",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "mercuriale",
+  "palette": "braise",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "messeoir",
+  "palette": "lavande",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "méchef",
+  "palette": "ardoise",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "médianoche",
+  "palette": "bleu_nuit",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "mélopée",
+  "palette": "bleu_nuit",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "ménechme",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "méphistophélique",
+  "palette": "violine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "méphitique",
+  "palette": "vert_de_gris",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mésaise",
+  "palette": "ardoise",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "mésallier",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "mésintelligence",
+  "palette": "ardoise",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "mésoffrir",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "métempsycose",
+  "palette": "violine",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "mévendre",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "mignardise",
+  "palette": "lavande",
+  "police": "parisienne"
+ },
+ {
+  "mot": "mirifique",
+  "palette": "safran",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "mirliflore",
+  "palette": "lavande",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "mirliton",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "misonéisme",
+  "palette": "ardoise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "mitan",
+  "palette": "sous_bois",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "mithridatiser",
+  "palette": "vert_de_gris",
+  "police": "cinzel"
+ },
+ {
+  "mot": "mohatra",
+  "palette": "sepia",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "momerie",
+  "palette": "violine",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "monomachie",
+  "palette": "braise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "mont-pagnote",
+  "palette": "ardoise",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "morbidesse",
+  "palette": "sanguine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "morbleu",
+  "palette": "braise",
+  "police": "abril_fatface"
+ },
+ {
+  "mot": "mordoré",
+  "palette": "sepia",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "morgue",
+  "palette": "encre_de_chine",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "morigéner",
+  "palette": "ardoise",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "moult",
+  "palette": "parchemin",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "moutonner",
+  "palette": "abysses",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "mugueter",
+  "palette": "pistache",
+  "police": "parisienne"
+ },
+ {
+  "mot": "munificence",
+  "palette": "safran",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "muscadin",
+  "palette": "lie_de_vin",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "muser",
+  "palette": "lavande",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "musser",
+  "palette": "sous_bois",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "mutatis mutandis",
+  "palette": "craie",
+  "police": "cinzel"
+ },
+ {
+  "mot": "myrmidon",
+  "palette": "ardoise",
+  "police": "cinzel"
+ },
+ {
+  "mot": "mystagogue",
+  "palette": "violine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "nacarat",
+  "palette": "sanguine",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "naguère",
+  "palette": "sepia",
+  "police": "libre_baskerville"
+ },
+ {
+  "mot": "naïade",
+  "palette": "givre",
+  "police": "cinzel"
+ },
+ {
+  "mot": "nantir",
+  "palette": "safran",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "nasarde",
+  "palette": "sanguine",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "naufrageur",
+  "palette": "abysses",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "naumachie",
+  "palette": "abysses",
+  "police": "cinzel"
+ },
+ {
+  "mot": "nautonier",
+  "palette": "abysses",
+  "police": "eb_garamond"
+ },
+ {
+  "mot": "navrance",
+  "palette": "bleu_nuit",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "nemrod",
+  "palette": "sous_bois",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "nenni",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "nervi",
+  "palette": "encre_de_chine",
+  "police": "courier_prime"
+ },
+ {
+  "mot": "nescience",
+  "palette": "ardoise",
+  "police": "tenor_sans"
+ },
+ {
+  "mot": "nécromancie",
+  "palette": "violine",
+  "police": "unifraktur_maguntia"
+ },
+ {
+  "mot": "nénie",
+  "palette": "encre_de_chine",
+  "police": "cinzel"
+ },
+ {
+  "mot": "népenthès",
+  "palette": "bleu_nuit",
+  "police": "cinzel"
+ },
+ {
+  "mot": "nice",
+  "palette": "aube",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "nicodème",
+  "palette": "pistache",
+  "police": "dancing_script"
+ },
+ {
+  "mot": "nidoreux",
+  "palette": "vert_de_gris",
+  "police": "im_fell_english"
+ },
+ {
+  "mot": "nimber",
+  "palette": "aube",
+  "police": "uncial_antiqua"
+ },
+ {
+  "mot": "nitescence",
+  "palette": "aube",
+  "police": "cormorant_garamond"
+ },
+ {
+  "mot": "nobliau",
+  "palette": "sepia",
+  "police": "playfair_display"
+ },
+ {
+  "mot": "nocher",
+  "palette": "abysses",
+  "police": "cinzel"
+ }
+]
