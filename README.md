@@ -12,6 +12,13 @@ Appli Android : chaque jour, à l’heure choisie, un mot français rare ou savo
 - Historique local : un mot déjà montré (du jour ou au hasard) ne redevient mot du jour qu’après 270 jours (~9 mois), et ne ressort au hasard qu’après 120 jours (~4 mois) ; les mots jamais vus passent en premier. Les prochains mots du jour (mots par jour × 270) sont exclus du hasard, ce qui garantit les 9 mois quel que soit l’usage du bouton. Les 4 mois du hasard sont garantis avec 1 mot par jour ; avec 3 mots par jour la réserve hors mots du jour est trop petite, le hasard reprend alors le mot vu le plus anciennement.
 - Styles : 18 palettes et 14 polices libres (SIL OFL, licences dans `assets/licences/`) au catalogue `assets/styles.json` ; chaque mot a sa palette et sa police assorties, utilisées si elles font partie de la sélection de l’utilisateur (boutons « Palettes » et « Polices »), sinon un choix stable dans la sélection.
 - Anecdote (« Le saviez-vous ? ») avec lien vers sa source Wiktionnaire/Wikipédia quand elle existe.
+- Quiz du soir sur les mots vus dans la journée (4 propositions par mot), rappel par notification à l’heure choisie.
+- **Monsieur Glose**, chat bibliothécaire à lunettes dorées (dessins et outils dans `design/mascotte/`) :
+  - animé en tête de l’écran principal (arrêté hors de l’écran, image fixe si les animations sont désactivées) ; après 21 h, endormi dans sa tasse une fois cette pose débloquée ;
+  - en fin de quiz, le fil de sa pelote écrit « bravo » (quiz réussi : au moins 2/3 de bonnes réponses, avec éclats si sans faute) ou « encore » et « Demain, on retente ? » ;
+  - dans la notification du quiz : endormi dans sa tasse (image fixe) et sa tête endormie en grande icône ;
+  - pas sur l’écran de verrouillage (l’espace reste au mot) ;
+  - **Collection** : 21 éléments (poses, mots du fil, pelages, pelotes, accessoires) débloqués par les quiz faits, réussis, sans faute et les soirs d’affilée (seuils dans `Unlocks.kt`, les mêmes avec 1 ou 3 mots par jour) ; rien ne se perd quand une série se casse ; chaque nouveauté est annoncée une fois ; éléments verrouillés en silhouette avec ce qui manque ; le choix (pose, pelage, pelote, accessoire) s’applique partout.
 
 ## Sources
 Les définitions et exemples sont **rédigés pour Definiday** et vérifiés avec le [Wiktionnaire](https://fr.wiktionary.org) (CC BY-SA). Ils ne sont pas copiés depuis le Dictionnaire de l’Académie française ni depuis le TLFi : les CGU de dictionnaire-academie.fr interdisent la reproduction et l’extraction automatisée.
@@ -27,7 +34,8 @@ Les données (≈1 340 mots, dont ≈800 avec une anecdote sourcée) sont dans `
 ./gradlew :app:testDebugUnitTest :app:assembleRelease
 ```
 - APK : `app/build/outputs/apk/release/app-release.apk`, signé avec la clé release si elle est configurée (voir ci-dessous), sinon avec la clé debug.
-- Captures de démo générées par les tests (Robolectric) : `app/build/demo/`.
+- Captures de démo générées par les tests (Robolectric) : `app/build/demo/` (écran principal, fin de quiz, collection, notification du quiz ; `glose/` : contrôle de tous les dessins de Monsieur Glose).
+- Dessins de Monsieur Glose : XML générés par `node design/mascotte/android/make_android.js` et versionnés (voir `design/mascotte/README.md`).
 - Le CI GitHub Actions publie l’APK et les captures en artefact.
 
 ## Signature release

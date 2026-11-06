@@ -107,7 +107,7 @@ class MainActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
-        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.pose(Glose.choice(Prefs(context))))); Glose.play(this) }
+        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(Prefs(context)))); Glose.play(this) }
     }
 
     override fun onPause() {

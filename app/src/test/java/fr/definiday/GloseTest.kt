@@ -85,6 +85,14 @@ class GloseTest {
         assertEquals(listOf(R.style.Glose_Pelote_Moutarde), Glose.styles(Glose.choice(p)))
     }
 
+    @Test fun eveningPoseAfterNinePmOnceUnlocked() {
+        val p = Prefs(ctx).apply { glosePose = "assis" }
+        assertEquals(R.drawable.glose_assis, Glose.mainPose(p, hour = 22)) // not unlocked yet
+        p.unlocked = setOf("soir")
+        assertEquals(R.drawable.glose_assis, Glose.mainPose(p, hour = 20))
+        assertEquals(R.drawable.glose_soir, Glose.mainPose(p, hour = 21))
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)

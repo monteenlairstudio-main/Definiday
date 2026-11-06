@@ -1,13 +1,14 @@
 ---
 type: subsystem
-summary: Evening quiz on the words seen today (4 options, same part of speech), daily reminder alarm, counters for future mascot unlocks
+summary: Evening quiz on the words seen today (4 options, same part of speech), reminder notification with Glose, counters (incl. passedQuizzes >= 2/3) feeding Unlocks, bravo/encore reaction and unlock announcements
 entry_points:
   - app/src/main/java/fr/definiday/QuizActivity.kt
 covers:
   - app/src/main/java/fr/definiday/QuizActivity.kt
-last_commit: 1a7535d
+last_commit: 0ce50ba
 edges:
   - to: word-selection type: depends_on reason: questions = Words.seenToday()
+  - to: mascot type: depends_on reason: score reaction, Unlocks.update/announce
 ---
 
 - Quiz.record counts a quiz once per day; streak = consecutive quiz days; counters quizzes/perfectQuizzes/correctAnswers/streak live in Prefs. ACTION_QUIZ alarm at quizHour:quizMinute (default 21:00), rescheduled with the daily alarm on boot/time changes. <!-- id:96de -->

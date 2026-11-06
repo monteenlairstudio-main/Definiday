@@ -18,6 +18,7 @@ covers:
   - app/src/main/res/values/glose_attrs.xml
   - app/src/main/res/values/glose_styles.xml
   - app/src/main/res/interpolator/
+last_commit: 0ce50ba
 edges:
   - to: build-ci type: related_to reason: generated XML is versioned because CI does not run Node
 ---

@@ -33,6 +33,10 @@ object Glose {
 
     fun pose(c: Map<Unlocks.Kind, String>) = Unlocks.byId[c[Unlocks.Kind.POSE]]?.res ?: R.drawable.glose_assis
 
+    /** Main-screen pose: asleep in his cup from 21:00 (local time) once unlocked, else the chosen pose. */
+    fun mainPose(p: Prefs, hour: Int = java.time.LocalTime.now().hour) =
+        if (hour >= 21 && "soir" in p.unlocked) R.drawable.glose_soir else pose(choice(p))
+
     /** Theme overlays of a choice: pelage, pelote, accessory. */
     fun styles(c: Map<Unlocks.Kind, String>) = c.values.mapNotNull { Unlocks.byId[it]?.style }.filter { it != 0 }
 
