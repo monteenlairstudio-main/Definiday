@@ -53,6 +53,10 @@ class Prefs(ctx: Context) {
     var textBottom: Boolean
         get() = sp.getBoolean("textBottom", true)
         set(v) = sp.edit().putBoolean("textBottom", v).apply()
+    /** "Plus de citations": 2 slots in 5 hold a quote instead of 1. */
+    var moreQuotes: Boolean
+        get() = sp.getBoolean("moreQuotes", false)
+        set(v) = sp.edit().putBoolean("moreQuotes", v).apply()
     var quizEnabled: Boolean
         get() = sp.getBoolean("quizEnabled", true)
         set(v) = sp.edit().putBoolean("quizEnabled", v).apply()

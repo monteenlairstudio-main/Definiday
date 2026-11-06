@@ -38,4 +38,7 @@
     <string name="text_pos">Position du texte sur l’écran de verrouillage</string>
     <string name="slow_title">Prenez le temps</string>
     <string name="slow_default">Un mot savouré vaut mieux que dix effleurés : relisez sa définition, essayez-le dans une phrase.</string>
+    <string name="quote_label">CITATION DU JOUR</string>
+    <string name="wikiquote">Source (Wikiquote)</string>
+    <string name="more_quotes">Plus de citations (2 sur 5 au lieu de 1 sur 5)</string>
 </resources>

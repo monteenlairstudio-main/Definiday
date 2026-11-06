@@ -90,7 +90,7 @@ class DailyReceiver : BroadcastReceiver() {
         )
 
         /** Puts words on the lock screen (today's by default, or a random pick that replaces them). */
-        fun show(ctx: Context, words: List<Word> = Words.today(ctx)) {
+        fun show(ctx: Context, words: List<Item> = Words.today(ctx)) {
             val p = Prefs(ctx)
             val nm = ctx.getSystemService(NotificationManager::class.java)
             (1..3).forEach { nm.cancel(it) }
@@ -129,19 +129,26 @@ class DailyReceiver : BroadcastReceiver() {
                 .apply { lockscreenVisibility = Notification.VISIBILITY_PUBLIC; setShowBadge(false) },
         )
 
-        private fun notify(ctx: Context, w: Word, durationMs: Long, id: Int) {
+        /** Notification title and text of an item. */
+        fun texts(item: Item): Pair<String, String> = when (item) {
+            is Word -> item.mot to "${item.nature} · ${item.definition}" +
+                (if (item.exemple.isNotEmpty()) "\n«\u00a0${item.exemple}\u00a0»" else "") +
+                (if (item.anecdote.isNotEmpty()) "\n\n${item.anecdote}" else "")
+            is Quote -> item.signature to "«\u00a0${item.texte}\u00a0»"
+        }
+
+        private fun notify(ctx: Context, w: Item, durationMs: Long, id: Int) {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             channel(nm, ctx)
             val open = PendingIntent.getActivity(
-                ctx, id, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot),
+                ctx, id, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
             )
-            val body = "${w.nature} · ${w.definition}" + (if (w.exemple.isNotEmpty()) "\n«\u00a0${w.exemple}\u00a0»" else "") +
-                (if (w.anecdote.isNotEmpty()) "\n\n${w.anecdote}" else "")
+            val (title, body) = texts(w)
             val n = Notification.Builder(ctx, CHANNEL)
                 .setSmallIcon(R.drawable.ic_stat)
-                .setContentTitle(w.mot)
-                .setContentText("${w.nature} · ${w.definition}")
+                .setContentTitle(title)
+                .setContentText(body.substringBefore('\n'))
                 .setStyle(Notification.BigTextStyle().bigText(body))
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .setContentIntent(open)

@@ -16,6 +16,8 @@ data class Style(val palette: Palette, val typeface: Typeface)
 
 /** Catalog in assets/styles.json; each word suggests a palette and a font, used only if the user kept them in the pool. */
 object Styles {
+    private val DISPLAY_ONLY = setOf("unifraktur_maguntia", "uncial_antiqua", "dancing_script", "parisienne", "cinzel", "abril_fatface")
+
     class Catalog(val palettes: List<Palette>, val polices: List<Police>)
 
     fun parse(json: String): Catalog {
@@ -35,13 +37,17 @@ object Styles {
     fun <T> pick(suggested: String, pool: List<T>, id: (T) -> String, mot: String): T =
         pool.firstOrNull { id(it) == suggested } ?: pool[Math.floorMod(mot.hashCode(), pool.size)]
 
-    fun of(ctx: Context, w: Word): Style {
+    /** A word uses its own palette/font when kept; a quote gets a stable pick from the pools. */
+    fun of(ctx: Context, item: Item): Style {
+        val (pal, pol) = if (item is Word) item.palette to item.police else "" to ""
         val cat = load(ctx)
         val p = Prefs(ctx)
         val palettes = cat.palettes.filter { p.palettes?.contains(it.id) ?: true }.ifEmpty { cat.palettes }
         val polices = cat.polices.filter { p.polices?.contains(it.id) ?: true }.ifEmpty { cat.polices }
-        val police = pick(w.police, polices, Police::id, w.mot)
-        val font = ctx.resources.getIdentifier(police.fichier, "font", ctx.packageName)
-        return Style(pick(w.palette, palettes, Palette::id, w.mot), if (font == 0) Typeface.SERIF else ctx.resources.getFont(font))
+            // a whole sentence in fraktur or script is unreadable: quotes only take text faces
+            .let { if (item is Quote) it.filter { f -> f.id !in DISPLAY_ONLY } else it }
+        val font = polices.takeIf { it.isNotEmpty() }?.let { pick(pol, it, Police::id, item.key) }
+            ?.let { ctx.resources.getIdentifier(it.fichier, "font", ctx.packageName) } ?: 0
+        return Style(pick(pal, palettes, Palette::id, item.key), if (font == 0) Typeface.SERIF else ctx.resources.getFont(font))
     }
 }

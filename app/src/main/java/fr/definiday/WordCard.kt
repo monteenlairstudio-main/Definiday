@@ -15,9 +15,14 @@ object WordCard {
     /** One paragraph of the card: text, size as a fraction of the screen width, face, color. */
     class Line(val text: String, val size: Float, val face: Typeface, val color: Int)
 
-    fun lines(w: Word, style: Style): List<Line> {
+    fun lines(item: Item, style: Style): List<Line> {
         val pal = style.palette
         val serif = { s: Int -> Typeface.create(Typeface.SERIF, s) }
+        if (item is Quote) return listOf(
+            Line("«\u00a0${item.texte}\u00a0»", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
+            Line(item.signature, 0.042f, serif(Typeface.ITALIC), pal.nature),
+        )
+        val w = item as Word
         return listOf(
             Line(w.mot, if (w.mot.length > 12) 0.09f else 0.12f, style.typeface, pal.mot),
             Line(w.nature, 0.042f, serif(Typeface.ITALIC), pal.nature),
@@ -26,8 +31,8 @@ object WordCard {
         ).filter { it.text.isNotEmpty() }
     }
 
-    fun render(w: Word, width: Int, height: Int, style: Style, bottom: Boolean = true) =
-        render(lines(w, style), style.palette, width, height, bottom)
+    fun render(item: Item, width: Int, height: Int, style: Style, bottom: Boolean = true) =
+        render(lines(item, style), style.palette, width, height, bottom)
 
     /**
      * Full-screen lock wallpaper. bottom = text block ends above the shortcut row, because the system clock

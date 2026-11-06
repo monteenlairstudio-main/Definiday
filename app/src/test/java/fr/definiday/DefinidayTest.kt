@@ -57,6 +57,22 @@ class DefinidayTest {
     /** With 1 daily word, random picks also keep their 4 months (with 3 daily words that is best effort only). */
     @Test fun randomWordsStayAwayFourMonths() = simulate(perDay = 1, randomPerDay = 2, checkRandom = true)
 
+    @Test fun quoteSlotsFollowTheRatio() {
+        fun quotes(perDay: Int, more: Boolean) = (0L until 365).sumOf { d -> (0 until perDay).count { Words.isQuoteSlot(d, it, more) } }
+        assertEquals(73, quotes(1, false)) // 1 in 5
+        assertEquals(146, quotes(1, true)) // 2 in 5
+        assertEquals(219, quotes(3, false))
+        val q = Quotes.load(ctx)
+        assertTrue(q.size >= 300)
+        q.forEach { assertTrue(it.texte, it.texte.length <= 260 && it.source.startsWith("https://fr.wikiquote.org/wiki/")) }
+        assertTrue(q.count { it.theme == "lenteur" } >= 10)
+        Prefs(ctx).polices = setOf("unifraktur_maguntia") // only a display face kept -> quote falls back to serif
+        assertEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, q.first()).typeface)
+        Prefs(ctx).polices = null
+        DailyReceiver.show(ctx, listOf(q.first())) // a quote renders as notification + lock-screen card
+        assertEquals(q.first().signature, ctx.getSystemService(NotificationManager::class.java).activeNotifications.single().notification.extras.getString(Notification.EXTRA_TITLE))
+    }
+
     @Test fun dailyWordsAreStableAndMarkedSeen() {
         val p = Prefs(ctx).apply { wordsPerDay = 2 }
         val first = Words.today(ctx)
@@ -64,7 +80,7 @@ class DefinidayTest {
         assertEquals(first, Words.today(ctx)) // same words all day
         val r = Words.random(ctx)
         assertTrue(r !in first)
-        assertEquals(first + r, Words.seenToday(ctx))
+        assertEquals(first.filterIsInstance<Word>() + r, Words.seenToday(ctx)) // quotes are not quiz material
         p.wordsPerDay = 3
         assertEquals(first, Words.today(ctx).take(2)) // raising the count keeps the earlier picks
     }
@@ -82,7 +98,7 @@ class DefinidayTest {
         val n = ctx.getSystemService(NotificationManager::class.java).activeNotifications.single().notification
         assertEquals(Notification.VISIBILITY_PUBLIC, n.visibility)
         assertEquals(30 * 60_000L, n.timeoutAfter)
-        assertEquals(Words.today(ctx).single().mot, n.extras.getString(Notification.EXTRA_TITLE))
+        assertEquals(DailyReceiver.texts(Words.today(ctx).single()).first, n.extras.getString(Notification.EXTRA_TITLE))
         Prefs(ctx).wordsPerDay = 3
         DailyReceiver.show(ctx)
         assertEquals(3, ctx.getSystemService(NotificationManager::class.java).activeNotifications.size)
@@ -182,6 +198,9 @@ class DefinidayTest {
         }
         words.filter { it.mot in setOf("zinzolin", "patibulaire", "bergamasque", "potron-minet", "incunable", "marivaudage") }.forEach { w ->
             save(WordCard.render(w, 540, 1170, Styles.of(ctx, w)), File(out, "style_${w.mot}.png"))
+        }
+        Quotes.load(ctx).filter { it.auteur.contains("Joubert") || it.auteur.contains("Monselet") }.take(2).forEachIndexed { i, q ->
+            save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
         val activity = Robolectric.buildActivity(MainActivity::class.java).setup().get()
         val root = activity.window.decorView

@@ -205,6 +205,11 @@
             android:layout_height="48dp" />
 
         <Switch
+            android:id="@+id/more_quotes"
+            style="@style/Row"
+            android:text="@string/more_quotes" />
+
+        <Switch
             android:id="@+id/quiz_enabled"
             style="@style/Row"
             android:text="@string/quiz_enabled" />

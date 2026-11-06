@@ -7,7 +7,7 @@ entry_points:
 covers:
   - app/src/main/java/fr/definiday/Words.kt
   - app/src/main/java/fr/definiday/Prefs.kt
-last_commit: 0f2f727
+last_commit: a2935fa
 edges:
   - to: lexicon-data type: depends_on reason: reads assets/words.json
 ---

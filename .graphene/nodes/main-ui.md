@@ -9,7 +9,7 @@ covers:
   - app/src/main/res/layout/
   - app/src/main/res/values/
   - app/src/main/res/values-night/
-last_commit: 0f2f727
+last_commit: a2935fa
 edges:
   - to: word-selection type: depends_on reason: today/random/seenToday
   - to: styles type: depends_on reason: card colors, pool settings

@@ -9,7 +9,7 @@ covers:
   - app/src/main/assets/styles.json
   - app/src/main/res/font/
   - app/src/main/assets/licences/
-last_commit: 6e93968
+last_commit: a2935fa
 edges:
   - to: lexicon-data type: related_to reason: each word carries palette/police ids
 ---

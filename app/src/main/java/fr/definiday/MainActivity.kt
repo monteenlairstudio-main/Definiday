@@ -37,7 +37,7 @@ class MainActivity : Activity() {
 
         val p = Prefs(this)
         val daily = Words.today(this)
-        show(daily.firstOrNull { it.mot == intent.getStringExtra(EXTRA_MOT) } ?: daily.first())
+        show(daily.firstOrNull { it.key == intent.getStringExtra(EXTRA_MOT) } ?: daily.first())
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             show(w)
@@ -75,6 +75,10 @@ class MainActivity : Activity() {
         spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) {
             p.textBottom = it == 0
         }
+        findViewById<Switch>(R.id.more_quotes).apply {
+            isChecked = p.moreQuotes
+            setOnCheckedChangeListener { _, on -> p.moreQuotes = on } // applies to the next days' picks
+        }
         findViewById<Switch>(R.id.quiz_enabled).apply {
             isChecked = p.quizEnabled
             setOnCheckedChangeListener { _, on -> p.quizEnabled = on; DailyReceiver.scheduleQuiz(context) }
@@ -102,7 +106,7 @@ class MainActivity : Activity() {
     private fun warnIfHurried() {
         val p = Prefs(this)
         val day = java.time.LocalDate.now().toEpochDay()
-        if (p.warnedDay == day || Words.seenToday(this).size - p.dailyMots.size <= 3) return
+        if (p.warnedDay == day || Words.seenToday(this).count { it.mot !in p.dailyMots } <= 3) return
         p.warnedDay = day
         AlertDialog.Builder(this)
             .setTitle(R.string.slow_title)
@@ -111,28 +115,48 @@ class MainActivity : Activity() {
             .show()
     }
 
-    private var current: Word? = null
+    private var current: Item? = null
 
-    /** Displays one word in the card, in its palette and font; links follow it. */
-    private fun show(w: Word) {
-        current = w
-        val st = Styles.of(this, w)
+    /** Displays one word or quote in the card, in its palette and font; links follow it. */
+    private fun show(item: Item) {
+        current = item
+        val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
         ).apply { cornerRadius = 16 * resources.displayMetrics.density }
-        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
+        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot); textSize = if (item is Quote) 24f else 40f }
         listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
-        text(R.id.label, getString(if (w.mot in Prefs(this).dailyMots) R.string.today else R.string.random))
-        text(R.id.mot, w.mot)
-        text(R.id.nature, w.nature)
-        text(R.id.definition, w.definition)
-        text(R.id.exemple, if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»")
-        text(R.id.anecdote, w.anecdote)
-        findViewById<View>(R.id.anecdote_box).visibility = if (w.anecdote.isEmpty()) View.GONE else View.VISIBLE
-        findViewById<Button>(R.id.source).setOnClickListener { open(w.source) }
-        findViewById<Button>(R.id.academie).setOnClickListener { openAcademie(w.mot) }
-        findViewById<Button>(R.id.cnrtl).setOnClickListener { open(cnrtl(w.mot)) }
+        val daily = item.key in Prefs(this).dailyMots
+        val academie = findViewById<Button>(R.id.academie)
+        val cnrtl = findViewById<Button>(R.id.cnrtl)
+        when (item) {
+            is Quote -> {
+                text(R.id.label, getString(R.string.quote_label))
+                text(R.id.mot, "«\u00a0${item.texte}\u00a0»")
+                text(R.id.nature, item.signature)
+                text(R.id.definition, "")
+                text(R.id.exemple, "")
+                findViewById<View>(R.id.anecdote_box).visibility = View.GONE
+                academie.visibility = View.GONE
+                cnrtl.text = getString(R.string.wikiquote)
+                cnrtl.setOnClickListener { open(item.source) }
+            }
+            is Word -> {
+                text(R.id.label, getString(if (daily) R.string.today else R.string.random))
+                text(R.id.mot, item.mot)
+                text(R.id.nature, item.nature)
+                text(R.id.definition, item.definition)
+                text(R.id.exemple, if (item.exemple.isEmpty()) "" else "«\u00a0${item.exemple}\u00a0»")
+                text(R.id.anecdote, item.anecdote)
+                findViewById<View>(R.id.anecdote_box).visibility = if (item.anecdote.isEmpty()) View.GONE else View.VISIBLE
+                findViewById<Button>(R.id.source).setOnClickListener { open(item.source) }
+                academie.visibility = View.VISIBLE
+                academie.setOnClickListener { openAcademie(item.mot) }
+                cnrtl.text = getString(R.string.cnrtl)
+                cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
+            }
+        }
         showSeen()
         findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
     }

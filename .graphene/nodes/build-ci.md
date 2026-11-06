@@ -14,7 +14,7 @@ covers:
   - gradle/
   - .github/
   - app/src/test/
-last_commit: 0f2f727
+last_commit: a2935fa
 ---
 
 - Robolectric 4.17 on JDK 21 needs jvmArgs --add-opens=java.base/java.io=ALL-UNNAMED and --add-exports=java.base/jdk.internal.access=ALL-UNNAMED. Maven Central returned 429 in the cloud container: settings.gradle.kts lists the Google mirror maven-central.storage-download.googleapis.com first; android-all-instrumented jar was fetched from that mirror into ~/.m2 (sha1 checked). <!-- id:258f -->
