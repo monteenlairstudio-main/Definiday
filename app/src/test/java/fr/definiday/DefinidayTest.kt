@@ -265,6 +265,10 @@ class DefinidayTest {
         }
         val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key
         capture(main(), File(ui, "home_light.png"))
+        p.palettes = setOf("craie") // palest card on cream: 1 dp edge (Styles.needsEdge)
+        capture(main(), File(ui, "home_pale.png"))
+        p.palettes = null
+        listOf(R.drawable.saison_flocon, R.drawable.saison_feuille, R.drawable.saison_fleur).forEachIndexed { i, r -> save(Glose.bitmap(ctx.getDrawable(r)!!, 144, 144), File(ui, "season_$i.png")) }
         capture(main(Quotes.load(ctx).first { it.texte.length > 120 }.key), File(ui, "home_quote.png"))
         RuntimeEnvironment.setFontScale(1.3f)
         capture(main(), File(ui, "home_font130.png"))
