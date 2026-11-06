@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- First launch (OnboardingActivity): 4 steps swapped in place in one scroll, actions pinned below -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/progress"
+                style="@style/Label"
+                android:accessibilityHeading="false" />
+
+            <!-- 1. Bienvenue -->
+            <LinearLayout
+                android:id="@+id/step_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/glose"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/glose" />
+
+                <TextView
+                    android:id="@+id/title_welcome"
+                    style="@style/Title"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_welcome_title" />
+
+                <TextView
+                    style="@style/Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/onb_welcome" />
+            </LinearLayout>
+
+            <!-- 2. Où: mode, live lock-screen preview, wallpaper warning, removal at the 1st unlock -->
+            <LinearLayout
+                android:id="@+id/step_where"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_where"
+                    style="@style/Title"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_where_title" />
+
+                <!-- order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK -->
+                <RadioGroup
+                    android:id="@+id/mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <RadioButton
+                        android:id="@+id/mode_both"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="@string/mode_both"
+                        android:textColor="@color/ink"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/mode_notif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="@string/mode_notif"
+                        android:textColor="@color/ink"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/mode_lock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="@string/mode_lock"
+                        android:textColor="@color/ink"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/lock_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- WordCard.render of the first daily word, with the chosen time as a clock: a fake lock screen -->
+                    <ImageView
+                        android:id="@+id/preview"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/warn"
+                        android:padding="12dp"
+                        android:text="@string/wallpaper_hint"
+                        android:textColor="@color/ink"
+                        android:textSize="15sp" />
+
+                    <Switch
+                        android:id="@+id/unlock_once"
+                        style="@style/Toggle"
+                        android:text="@string/onb_unlock_once" />
+
+                    <TextView
+                        style="@style/Help"
+                        android:text="@string/unlocks_hint" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 3. Quand: time, words a day, evening quiz -->
+            <LinearLayout
+                android:id="@+id/step_when"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_when"
+                    style="@style/Title"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_when_title" />
+
+                <Button
+                    android:id="@+id/time"
+                    style="@style/Setting" />
+
+                <TextView
+                    style="@style/Field"
+                    android:labelFor="@+id/per_day"
+                    android:text="@string/per_day" />
+
+                <Spinner
+                    android:id="@+id/per_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp" />
+
+                <Switch
+                    android:id="@+id/quiz_enabled"
+                    style="@style/Toggle"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/quiz_enabled" />
+
+                <TextView
+                    style="@style/Help"
+                    android:text="@string/onb_quiz_hint" />
+
+                <Button
+                    android:id="@+id/quiz_time"
+                    style="@style/Setting" />
+            </LinearLayout>
+
+            <!-- 4. Permissions in context, each block only when needed -->
+            <LinearLayout
+                android:id="@+id/step_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_ask"
+                    style="@style/Title"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_ask_title" />
+
+                <TextView
+                    android:id="@+id/notif_why"
+                    style="@style/Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/onb_notif_why" />
+
+                <LinearLayout
+                    android:id="@+id/exact_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/warn"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/exact_no"
+                        android:textColor="@color/ink"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/exact_ask"
+                        style="@style/Row"
+                        android:text="@string/exact_ask" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/next"
+            style="@style/Primary" />
+
+        <Button
+            android:id="@+id/skip"
+            style="@style/Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>

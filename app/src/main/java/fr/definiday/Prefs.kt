@@ -17,6 +17,10 @@ class Prefs(val ctx: Context) {
     private fun str(k: String, d: String) = runCatching { sp.getString(k, d) }.getOrNull() ?: d
     private fun strings(k: String) = runCatching { sp.getStringSet(k, null)?.toSet() }.getOrNull()
 
+    /** First-launch onboarding done (or skipped). Users from before it count as done: they already had a day picked. */
+    var onboarded: Boolean
+        get() = bool("onboarded", sp.contains("dailyDay"))
+        set(v) = sp.edit().putBoolean("onboarded", v).apply()
     var enabled: Boolean
         get() = bool("enabled", true)
         set(v) = sp.edit().putBoolean("enabled", v).apply()

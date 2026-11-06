@@ -251,7 +251,7 @@ class DefinidayTest {
         renderInterface(File(out, "ui").apply { mkdirs() })
     }
 
-    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, Couleurs et polices, quiz steps, Collection. */
+    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, onboarding steps, Couleurs et polices, quiz steps, Collection. */
     private fun renderInterface(ui: File) {
         val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
         fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
@@ -269,6 +269,13 @@ class DefinidayTest {
             val w = views(a).filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
             views(a).filterIsInstance<android.widget.Button>().first { (it.text == w.mot) == right }.performClick()
         }
+        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 shows both requests
+        fun onboarding(suffix: String) {
+            p.unlocks = 1; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(false)
+            (0..3).forEach { n -> capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
+                .also { a -> repeat(n) { a.findViewById<View>(R.id.next).performClick() } }, File(ui, "onboarding_${n + 1}$suffix.png")) }
+            p.unlocks = 0; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(true)
+        }
         val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key
         capture(main(), File(ui, "home_light.png"))
         p.palettes = setOf("craie") // palest card on cream: 1 dp edge (Styles.needsEdge)
@@ -283,6 +290,7 @@ class DefinidayTest {
         RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
         capture(main(long), File(ui, "home_w360_font200_long.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_w360_font200.png"))
+        onboarding("_w360_font200")
         capture(styles(), File(ui, "styles_w360_font200.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
         RuntimeEnvironment.setFontScale(1.3f)
@@ -294,6 +302,7 @@ class DefinidayTest {
         capture(main(), File(ui, "home_notifications_off.png"))
         org.robolectric.Shadows.shadowOf(ctx.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(true)
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_light.png"))
+        onboarding("_light")
         capture(styles(), File(ui, "styles_light.png"))
         capture(quiz(), File(ui, "quiz_question.png"))
         capture(quiz().also { answer(it, right = true) }, File(ui, "quiz_juste.png"))
@@ -303,6 +312,7 @@ class DefinidayTest {
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_dark.png"))
+        onboarding("_dark")
         capture(styles(), File(ui, "styles_dark.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_dark_faux.png"))
         p.lastQuizDay = Long.MIN_VALUE

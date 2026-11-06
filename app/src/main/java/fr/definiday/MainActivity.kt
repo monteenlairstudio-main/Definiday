@@ -1,14 +1,11 @@
 package fr.definiday
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Layout
@@ -40,9 +37,8 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // asked once (not at each rotation); refused: banner, see onResume
-        if (Build.VERSION.SDK_INT >= 33 && savedInstanceState == null && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
-            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        // first launch: the onboarding asks for notifications in context (refused: banner, see onResume), then comes back here
+        if (!Prefs(this).onboarded) { startActivity(Intent(this, OnboardingActivity::class.java)); finish(); return }
         // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's). Shown in onResume.
         current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
         findViewById<Button>(R.id.new_word).setOnClickListener {
