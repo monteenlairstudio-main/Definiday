@@ -51,18 +51,22 @@ object Words {
         return pool.filter { w -> history[w.mot]?.let { today - it >= RANDOM_COOLDOWN_DAYS } ?: true }.randomOrNull(rnd) ?: pool.first()
     }
 
-    /** Today's 1–3 items (words and quotes), picked once per day and remembered (stable across app, notifications and wallpaper). */
+    /**
+     * Today's 1–3 items (words and quotes), picked once per day and remembered (stable across app, notifications and wallpaper).
+     * Picking does not mark them seen: [shown] does, once a notification, the wallpaper or the app card really shows one.
+     */
     fun today(ctx: Context): List<Item> {
         val p = Prefs(ctx)
-        val h = History(ctx)
         val day = LocalDate.now().toEpochDay()
         val all = load(ctx)
         val quotes = Quotes.load(ctx)
         val byKey = (all + quotes).associateBy { it.key }
         val picked = (if (p.dailyDay == day) p.dailyMots.mapNotNull(byKey::get) else emptyList()).toMutableList()
+        val h = History(ctx).all().toMutableMap()
+        picked.forEach { h[it.key] = day } // reserved: not picked twice
         while (picked.size < p.wordsPerDay) {
             val quote = quotes.isNotEmpty() && isQuoteSlot(day, picked.size, p.moreQuotes)
-            picked += (if (quote) nextDaily(quotes, h.all()) else nextDaily(all, h.all())).also { h.mark(it.key, day) }
+            picked += (if (quote) nextDaily(quotes, h) else nextDaily(all, h)).also { h[it.key] = day }
         }
         p.dailyDay = day
         p.dailyMots = picked.map { it.key }
@@ -75,12 +79,18 @@ object Words {
         return nextRandom(load(ctx), h.all(), day, Prefs(ctx).wordsPerDay).also { h.mark(it.mot, day) }
     }
 
+    /** Marks items as seen today (history, quiz): called only where they were really shown. */
+    fun shown(ctx: Context, items: List<Item>) {
+        val day = LocalDate.now().toEpochDay()
+        History(ctx).run { items.forEach { mark(it.key, day) } }
+    }
+
     /** Every word (not quote) shown on [day] (today by default), daily ones first, then random picks: the quiz material. */
     fun seenToday(ctx: Context, day: Long = LocalDate.now().toEpochDay()): List<Word> {
         val byMot = load(ctx).associateBy { it.mot }
-        val daily = Prefs(ctx).run { if (dailyDay == day) dailyMots else emptyList() }
-        val random = History(ctx).all().filterValues { it == day }.keys.filter { it !in daily }.sorted()
-        return (daily + random).mapNotNull(byMot::get)
+        val shown = History(ctx).all().filterValues { it == day }.keys
+        val daily = Prefs(ctx).run { if (dailyDay == day) dailyMots else emptyList() }.filter { it in shown }
+        return (daily + (shown - daily.toSet()).sorted()).mapNotNull(byMot::get)
     }
 
     // ponytail: re-parses the asset on each call (~1 ms for 1 200 words); cache it if it ever shows in a profile

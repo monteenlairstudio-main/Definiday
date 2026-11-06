@@ -104,7 +104,8 @@ class DailyReceiver : BroadcastReceiver() {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             (1..3).forEach { nm.cancel(it) }
             val durationMs = p.durationMinutes * 60_000L
-            if (p.mode != Prefs.MODE_LOCK) words.forEachIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }
+            // only what is really shown counts as seen (history, quiz): lock-only mode with 2-3 words shows the first one
+            val shown = if (p.mode == Prefs.MODE_LOCK) mutableListOf() else words.filterIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }.toMutableList()
             val w = words.first() // ponytail: wallpaper shows only the first daily word; stack them if 2-3 words should fit
             if (p.mode != Prefs.MODE_NOTIF) {
                 val m = ctx.resources.displayMetrics // portrait size whatever the current orientation
@@ -117,8 +118,10 @@ class DailyReceiver : BroadcastReceiver() {
                     p.unlocksSeen = 0
                     scheduleEnd(ctx, p.wallpaperEndAt)
                     if (p.unlocks > 0) UnlockService.start(ctx)
+                    if (w !in shown) shown += w
                 }
             }
+            Words.shown(ctx, shown)
         }
 
         /** force = Nth unlock reached (before the duration ran out). */
@@ -146,7 +149,8 @@ class DailyReceiver : BroadcastReceiver() {
             is Quote -> item.signature to "«\u00a0${item.texte}\u00a0»"
         }
 
-        private fun notify(ctx: Context, w: Item, durationMs: Long, id: Int) {
+        /** True when posted (and notifications are on). */
+        private fun notify(ctx: Context, w: Item, durationMs: Long, id: Int): Boolean {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             channel(nm, ctx)
             val open = PendingIntent.getActivity(
@@ -164,7 +168,8 @@ class DailyReceiver : BroadcastReceiver() {
                 .setAutoCancel(true)
                 .setTimeoutAfter(durationMs)
                 .build()
-            runCatching { nm.notify(id, n) } // SecurityException if POST_NOTIFICATIONS denied: wallpaper mode still works
+            // SecurityException if POST_NOTIFICATIONS denied: wallpaper mode still works
+            return runCatching { nm.notify(id, n) }.isSuccess && nm.areNotificationsEnabled()
         }
     }
 }

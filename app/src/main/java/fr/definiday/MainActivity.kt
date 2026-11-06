@@ -133,6 +133,7 @@ class MainActivity : Activity() {
     /** Displays one word or quote in the card, in its palette and font; links follow it. */
     private fun show(item: Item) {
         current = item
+        Words.shown(this, listOf(item)) // the card shows it: seen today (history, quiz)
         val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
@@ -174,11 +175,11 @@ class MainActivity : Activity() {
         findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
     }
 
-    /** One tappable chip per word already shown today. */
+    /** One tappable chip per word of the day (shown or not yet, e.g. 2nd-3rd words in lock-only mode) and per random pick seen today. */
     private fun showSeen() {
         val row = findViewById<LinearLayout>(R.id.seen)
         row.removeAllViews()
-        Words.seenToday(this).forEach { w ->
+        (Words.today(this).filterIsInstance<Word>() + Words.seenToday(this)).distinct().forEach { w ->
             row.addView(Button(this, null, android.R.attr.borderlessButtonStyle).apply {
                 text = w.mot
                 isAllCaps = false

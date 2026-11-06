@@ -78,6 +78,8 @@ class DefinidayTest {
         val first = Words.today(ctx)
         assertEquals(2, first.size)
         assertEquals(first, Words.today(ctx)) // same words all day
+        assertTrue(Words.seenToday(ctx).isEmpty()) // picked, not shown yet
+        DailyReceiver.show(ctx) // notifications: shown
         val r = Words.random(ctx)
         assertTrue(r !in first)
         assertEquals(first.filterIsInstance<Word>() + r, Words.seenToday(ctx)) // quotes are not quiz material

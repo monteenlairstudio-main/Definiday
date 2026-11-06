@@ -180,4 +180,19 @@ class BugHuntTest {
         assertTrue(views(c.get()).filterIsInstance<Button>().filter { it.text != ctx.getString(R.string.quiz_next) }.none { it.isEnabled })
         assertTrue(views(c.get()).filterIsInstance<Button>().any { it.text == ctx.getString(R.string.quiz_next) })
     }
+
+    /** Lock-only mode with 3 words: only the wallpaper's word is seen; raising the count mid-day burns nothing until shown. */
+    @Test fun onlyReallyShownItemsAreSeen() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_LOCK; wordsPerDay = 3 }
+        val today = Words.today(ctx)
+        DailyReceiver.show(ctx)
+        val day = LocalDate.now().toEpochDay()
+        assertEquals(listOf(today.first().key), History(ctx).all().filterValues { it == day }.keys.toList())
+        p.mode = Prefs.MODE_NOTIF; p.wordsPerDay = 1
+        DailyReceiver.show(ctx)
+        p.wordsPerDay = 3; Words.today(ctx) // two more picked mid-day, not shown
+        assertEquals(1, History(ctx).all().count { it.value == day })
+        Robolectric.buildActivity(MainActivity::class.java).setup() // the card shows the first
+        assertEquals(1, History(ctx).all().count { it.value == day })
+    }
 }
