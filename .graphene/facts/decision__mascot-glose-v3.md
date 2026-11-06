@@ -1,0 +1,6 @@
+---
+category: decision
+subject: mascot-glose-v3
+---
+
+Monsieur Glose v3 delivered (scratchpad glose/, not yet in the repo): poses assis (default), livres, ecrit_<mot> (mot, bravo, encore, rare, dodo; single-stroke cursive, 'lire'/'rêve' rejected because dot/accent need a pen lift), soir (asleep in the teacup), icone (head only, strokes x1.7). 22 variants (fur creme/enluminure/nuit, yarn moutarde/rose/sauge, accessories bonnet/echarpe/marque/noeud/plume). One shared gloseHead() + palette. Proposed integration (mise_en_place.md): main screen 160 dp animated, head during quiz, bravo/encore at quiz end, static evening pose in the quiz notification, NOT on the lock screen, new Collection screen; 21 unlocks tied to quiz counters (+ new passedQuizzes counter; with 70 % a 1-3 question quiz needs a perfect score, so 2/3 suggested); custom svg2avd.js converter (Svg2Vector from the Gradle cache flattens groups and drops animations) -> VectorDrawable/AVD, word = trimPathEnd, validated by aapt2; fur/yarn via Theme.applyStyle attrs, accessories via scaleX=?attr (accepted by aapt2, runtime behaviour unverified, test first); ~160 KB; 9 steps ~6.5-7 days. Owner decisions pending: threshold, words, unlock thresholds (count quizzes not answers?), lock screen, auto evening pose after 21:00, text under 'encore', bonnet/Nuit d'encre colors.
