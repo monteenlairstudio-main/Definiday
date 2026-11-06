@@ -10,6 +10,7 @@ Appli Android : chaque jour, à l’heure choisie, un mot français rare ou savo
 - Fin sur l’écran de verrouillage : après la durée, ou au 1er/2e/3e déverrouillage (service de premier plan discret, car Android ne signale plus les déverrouillages aux applis en arrière-plan ; la durée reste un maximum).
 - Bouton « Nouveau mot au hasard » et liste des mots déjà vus aujourd’hui.
 - Historique local : un mot déjà montré (du jour ou au hasard) ne redevient mot du jour qu’après 270 jours (~9 mois), et ne ressort au hasard qu’après 120 jours (~4 mois) ; les mots jamais vus passent en premier. Les prochains mots du jour (mots par jour × 270) sont exclus du hasard, ce qui garantit les 9 mois quel que soit l’usage du bouton. Les 4 mois du hasard sont garantis avec 1 mot par jour ; avec 3 mots par jour la réserve hors mots du jour est trop petite, le hasard reprend alors le mot vu le plus anciennement.
+- Styles : 18 palettes et 14 polices libres (SIL OFL, licences dans `assets/licences/`) au catalogue `assets/styles.json` ; chaque mot a sa palette et sa police assorties, utilisées si elles font partie de la sélection de l’utilisateur (boutons « Palettes » et « Polices »), sinon un choix stable dans la sélection.
 - Anecdote (« Le saviez-vous ? ») avec lien vers sa source Wiktionnaire/Wikipédia quand elle existe.
 
 ## Sources

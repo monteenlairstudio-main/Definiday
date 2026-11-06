@@ -11,49 +11,57 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
-            android:id="@+id/label"
-            style="@style/Label"
-            android:text="@string/today" />
-
-        <TextView
-            android:id="@+id/mot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="serif"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/nature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:textColor="@color/accent"
-            android:textSize="16sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/definition"
+        <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="serif"
-            android:lineSpacingMultiplier="1.2"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="19sp" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/exemple"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="serif"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+            <TextView
+                android:id="@+id/label"
+                style="@style/Label"
+                android:text="@string/today" />
+
+            <TextView
+                android:id="@+id/mot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="serif"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:textColor="@color/accent"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/definition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="serif"
+                android:lineSpacingMultiplier="1.2"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/exemple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="serif"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/anecdote_box"
@@ -186,6 +194,14 @@
             android:text="@string/wallpaper_hint"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/palettes"
+            style="@style/Row" />
+
+        <Button
+            android:id="@+id/polices"
+            style="@style/Row" />
 
         <Button
             android:id="@+id/test"

@@ -73,7 +73,7 @@ class DailyReceiver : BroadcastReceiver() {
                 val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
                 runCatching {
                     p.wallpaperId = WallpaperManager.getInstance(ctx).setBitmap(
-                        WordCard.render(w, width, height), null, true, WallpaperManager.FLAG_LOCK,
+                        WordCard.render(w, width, height, Styles.of(ctx, w)), null, true, WallpaperManager.FLAG_LOCK,
                     )
                     p.wallpaperEndAt = System.currentTimeMillis() + durationMs // duration stays the upper bound
                     p.unlocksSeen = 0

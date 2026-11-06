@@ -2,9 +2,11 @@ package fr.definiday
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -64,6 +66,9 @@ class MainActivity : Activity() {
         spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
             p.unlocks = it
         }
+        val cat = Styles.load(this)
+        pool(R.id.palettes, R.string.palettes, cat.palettes.map { it.id to it.nom }, { p.palettes }) { p.palettes = it }
+        pool(R.id.polices, R.string.polices, cat.polices.map { it.id to it.nom }, { p.polices }) { p.polices = it }
         findViewById<Button>(R.id.test).setOnClickListener {
             DailyReceiver.show(this)
             Toast.makeText(this, R.string.test_done, Toast.LENGTH_LONG).show()
@@ -71,8 +76,18 @@ class MainActivity : Activity() {
         DailyReceiver.scheduleNext(this)
     }
 
-    /** Displays one word in the card; links follow it. */
+    private var current: Word? = null
+
+    /** Displays one word in the card, in its palette and font; links follow it. */
     private fun show(w: Word) {
+        current = w
+        val st = Styles.of(this, w)
+        findViewById<View>(R.id.card).background = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
+        ).apply { cornerRadius = 16 * resources.displayMetrics.density }
+        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
+        listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
+            .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
         text(R.id.label, getString(if (w.mot in Prefs(this).dailyMots) R.string.today else R.string.random))
         text(R.id.mot, w.mot)
         text(R.id.nature, w.nature)
@@ -97,6 +112,26 @@ class MainActivity : Activity() {
                 isAllCaps = false
                 setOnClickListener { show(w) }
             })
+        }
+    }
+
+    /** Button opening a multi-choice list of the catalog; an empty choice means "all". */
+    private fun pool(id: Int, label: Int, items: List<Pair<String, String>>, get: () -> Set<String>?, set: (Set<String>?) -> Unit) {
+        val b = findViewById<Button>(id)
+        fun refresh() { b.text = getString(label, get()?.size ?: items.size, items.size) }
+        refresh()
+        b.setOnClickListener {
+            val checked = BooleanArray(items.size) { get()?.contains(items[it].first) ?: true }
+            AlertDialog.Builder(this)
+                .setMultiChoiceItems(items.map { it.second }.toTypedArray(), checked) { _, i, on -> checked[i] = on }
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    val kept = items.filterIndexed { i, _ -> checked[i] }.map { it.first }.toSet()
+                    set(if (kept.isEmpty() || kept.size == items.size) null else kept)
+                    refresh()
+                    current?.let(::show)
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
     }
 

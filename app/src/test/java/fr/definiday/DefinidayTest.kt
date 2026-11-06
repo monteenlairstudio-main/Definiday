@@ -118,12 +118,23 @@ class DefinidayTest {
         assertEquals(1, ctx.getSystemService(NotificationManager::class.java).activeNotifications.size)
     }
 
+    @Test fun everyWordStyleExistsAndPoolIsHonoured() {
+        val cat = Styles.load(ctx)
+        cat.polices.forEach { assertTrue(it.id, ctx.resources.getIdentifier(it.fichier, "font", ctx.packageName) != 0) }
+        val ids = cat.palettes.map { it.id }.toSet() to cat.polices.map { it.id }.toSet()
+        Words.load(ctx).filter { it.palette.isNotEmpty() }.forEach { assertTrue(it.mot, it.palette in ids.first && it.police in ids.second) }
+        val w = Words.load(ctx).first()
+        val p = Prefs(ctx).apply { palettes = setOf("craie") }
+        assertEquals("craie", Styles.of(ctx, w).palette.id) // word's own palette left out -> pool wins
+        p.palettes = null
+    }
+
     /** Not a check: writes the demo PNGs (lock-screen card + main screen) to app/build/demo. */
     @Test fun renderDemoImages() {
         val out = File("build/demo").apply { mkdirs() }
         val words = Words.load(ctx)
         listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }).forEachIndexed { i, w ->
-            save(WordCard.render(w, 1080, 2340), File(out, "lockscreen_$i.png"))
+            save(WordCard.render(w, 1080, 2340, Styles.of(ctx, w)), File(out, "lockscreen_$i.png"))
         }
         val activity = Robolectric.buildActivity(MainActivity::class.java).setup().get()
         val root = activity.window.decorView

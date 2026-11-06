@@ -8,6 +8,7 @@ import kotlin.random.Random
 data class Word(
     val mot: String, val nature: String, val definition: String, val exemple: String,
     val anecdote: String = "", val source: String = "",
+    val palette: String = "", val police: String = "",
 )
 
 object Words {
@@ -20,7 +21,8 @@ object Words {
         val a = JSONArray(json)
         return List(a.length()) {
             val o = a.getJSONObject(it)
-            Word(o.getString("mot"), o.getString("nature"), o.getString("definition"), o.optString("exemple"), o.optString("anecdote"), o.optString("source"))
+            Word(o.getString("mot"), o.getString("nature"), o.getString("definition"), o.optString("exemple"), o.optString("anecdote"), o.optString("source"),
+                o.optString("palette"), o.optString("police"))
         }
     }
 

@@ -24,4 +24,6 @@
     <string name="new_word">Nouveau mot au hasard</string>
     <string name="seen_today">DÉJÀ VUS AUJOURD’HUI</string>
     <string name="per_day">Nombre de mots par jour</string>
+    <string name="palettes">Palettes : %1$d / %2$d</string>
+    <string name="polices">Polices : %1$d / %2$d</string>
 </resources>

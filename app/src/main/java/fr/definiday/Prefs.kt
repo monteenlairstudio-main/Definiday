@@ -47,6 +47,13 @@ class Prefs(ctx: Context) {
     var dailyMots: List<String>
         get() = sp.getString("dailyMots", "")!!.split('|').filter { it.isNotEmpty() }
         set(v) = sp.edit().putString("dailyMots", v.joinToString("|")).apply()
+    /** Palettes/fonts the user kept in the pool; null = all. */
+    var palettes: Set<String>?
+        get() = sp.getStringSet("palettes", null)
+        set(v) = sp.edit().putStringSet("palettes", v).apply()
+    var polices: Set<String>?
+        get() = sp.getStringSet("polices", null)
+        set(v) = sp.edit().putStringSet("polices", v).apply()
 }
 
 /** mot -> epoch day it was last shown (daily or random). */
