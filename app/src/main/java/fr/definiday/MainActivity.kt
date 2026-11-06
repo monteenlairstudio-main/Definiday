@@ -241,7 +241,8 @@ class MainActivity : Activity() {
             c.setRequestProperty("X-Requested-With", "XMLHttpRequest")
             c.setRequestProperty("Accept", "application/json") // without it the server answers with a redirect
             c.outputStream.use { it.write("term=${URLEncoder.encode(mot, "UTF-8")}&options=1".toByteArray()) }
-            JSONObject(c.inputStream.bufferedReader().use { it.readText() }).getJSONArray("result").getJSONObject(0).getString("url")
+            JSONObject(c.inputStream.bufferedReader().use { r -> // at most 64 KiB: a truncated answer fails to parse and falls back to the CNRTL
+                buildString { generateSequence { r.read().takeIf { it >= 0 } }.take(64 * 1024).forEach { append(it.toChar()) } } }).getJSONArray("result").getJSONObject(0).getString("url")
                 .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
         }.getOrDefault(cnrtl(mot))
         // DNS isn't bounded by the socket timeouts: give up if the lookup took too long or the screen is gone

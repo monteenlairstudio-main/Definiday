@@ -70,12 +70,24 @@ Vérifier : `apksigner verify --print-certs app/build/outputs/apk/release/app-re
 Changement de clé : l’APK actuel, signé debug, ne se met pas à jour vers l’APK signé release. Désinstaller une fois (l’historique des mots vus est perdu), puis installer le nouvel APK.
 
 ### CI GitHub Actions
-Dans *Settings → Secrets and variables → Actions* du dépôt :
-- `DEFINIDAY_KEYSTORE_BASE64` : le `.jks` en base64, sur une ligne. Linux : `base64 -w0 definiday.jks` ; macOS : `base64 -i definiday.jks` ; PowerShell : `[Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path definiday.jks).Path)) | Set-Clipboard` (chemin résolu : .NET ne suit pas le dossier courant de PowerShell).
-- `DEFINIDAY_KEYSTORE_PASSWORD`.
-- Optionnels : `DEFINIDAY_KEY_ALIAS`, `DEFINIDAY_KEY_PASSWORD`.
+Le workflow `.github/workflows/build.yml` a deux jobs :
+- `test`, sur toutes les branches et les PR, **sans aucun secret** : validation du wrapper Gradle, tests unitaires, APK release **signé debug** (artefact `definiday-debug-signed`, avec les captures de démo).
+- `release`, seulement sur `main` et les tags, après `test` : décode le keystore dans `$RUNNER_TEMP` sans rien afficher, `assembleRelease` seul, supprime le `.jks` même en cas d’échec, artefact `definiday-release`. Il échoue si le secret du keystore manque (pas d’APK signé debug publié par erreur depuis `main`).
 
-Le workflow décode le keystore dans `$RUNNER_TEMP` sans rien afficher (GitHub masque aussi les secrets dans les logs). Sans secret (forks, PR externes), l’APK reste signé debug. Pour d’autres noms de secrets, ne modifier que les `secrets.*` de `.github/workflows/build.yml`.
+Les actions sont épinglées par SHA de commit, Dependabot (`.github/dependabot.yml`) propose chaque semaine les mises à jour des actions et des dépendances Gradle.
+
+**À faire une fois par le propriétaire** (admin du dépôt), dans *Settings → Environments* :
+1. *New environment* → nom `release` → *Configure environment*.
+2. *Deployment branches and tags* → *Selected branches and tags* → *Add deployment branch or tag rule* : type *Branch*, motif `main` ; puis une seconde règle de type *Tag*, motif `*` (ou `v*` si les tags sont toujours de la forme `v1.2.3`).
+3. Facultatif : *Required reviewers* (soi-même) pour valider chaque signature à la main.
+4. *Environment secrets* → *Add secret* pour chacun :
+   - `DEFINIDAY_KEYSTORE_BASE64` : le `.jks` en base64, sur une ligne. Linux : `base64 -w0 definiday.jks` ; macOS : `base64 -i definiday.jks` ; PowerShell : `[Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path definiday.jks).Path)) | Set-Clipboard` (chemin résolu : .NET ne suit pas le dossier courant de PowerShell).
+   - `DEFINIDAY_KEYSTORE_PASSWORD`.
+   - Optionnels : `DEFINIDAY_KEY_ALIAS`, `DEFINIDAY_KEY_PASSWORD`.
+5. **Supprimer** ces mêmes secrets de *Settings → Secrets and variables → Actions → Repository secrets* : tant qu’ils y restent, n’importe quelle branche peut les lire en modifiant le workflow.
+6. Vérifier : un push sur `main` (ou un tag) produit l’artefact `definiday-release`, dont `apksigner verify --print-certs` n’affiche pas `CN=Android Debug`.
+
+Un secret ne se relit pas : il faut le recoller depuis la sauvegarde du `.jks` et le gestionnaire de mots de passe. Pour d’autres noms de secrets, ne modifier que les `secrets.*` du job `release`.
 
 ### Play Console, piste de test interne (optionnel)
 Voie la plus fiable contre les avertissements de Play Protect : l’appli est installée par le Play Store.
