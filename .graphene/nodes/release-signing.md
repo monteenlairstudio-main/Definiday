@@ -12,3 +12,4 @@ last_commit: 1973c647fc673c6b0d35418ec31cba8e3dbadff8
 - No keystore -> debug key + logger.warn. Keystore set but password missing or file absent -> build fails on purpose (no silent debug signing). Wrong password fails at :app:packageRelease. <!-- id:65d8 -->
 - Verified 2026-11-06: assembleRelease OK with and without keystore; apksigner verify --print-certs shows the keystore CN, not CN=Android Debug, when configured. <!-- id:4990 -->
 - Switching from debug-signed to release-signed APK requires an uninstall (signature mismatch) which wipes local word history. Same between sideloaded APK and Play (Play App Signing). <!-- id:4dc4 -->
+- .gitignore excludes *.jks and *.keystore so a keystore dropped in the clone cannot be committed by accident. <!-- id:da60 -->
