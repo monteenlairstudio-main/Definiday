@@ -12,3 +12,4 @@ edges:
 
 - Secrets: DEFINIDAY_KEYSTORE_BASE64, DEFINIDAY_KEYSTORE_PASSWORD, optional DEFINIDAY_KEY_ALIAS / DEFINIDAY_KEY_PASSWORD. Passed only to the decode and Gradle steps (not to third-party actions). No secret (forks) -> debug signing. Not yet run with real secrets. <!-- id:8f4a -->
 - secrets.* cannot be used in step if: conditions, hence the [ -n ] guard inside the decode script. <!-- id:8f78 -->
+- Windows owner encodes the keystore in PowerShell: [IO.File]::ReadAllBytes("rel.jks") resolves against .NET's cwd (often C:\WINDOWS\system32), not PowerShell's location -> FileNotFoundException. Use (Resolve-Path definiday.jks).Path. README documents the fixed command. <!-- id:a77b src:user error report 2026-11-06 -->

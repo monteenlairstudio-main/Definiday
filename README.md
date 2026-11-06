@@ -62,7 +62,7 @@ Changement de clé : l’APK actuel, signé debug, ne se met pas à jour vers l�
 
 ### CI GitHub Actions
 Dans *Settings → Secrets and variables → Actions* du dépôt :
-- `DEFINIDAY_KEYSTORE_BASE64` : le `.jks` en base64, sur une ligne. Linux : `base64 -w0 definiday.jks` ; macOS : `base64 -i definiday.jks` ; PowerShell : `[Convert]::ToBase64String([IO.File]::ReadAllBytes("definiday.jks"))`.
+- `DEFINIDAY_KEYSTORE_BASE64` : le `.jks` en base64, sur une ligne. Linux : `base64 -w0 definiday.jks` ; macOS : `base64 -i definiday.jks` ; PowerShell : `[Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path definiday.jks).Path)) | Set-Clipboard` (chemin résolu : .NET ne suit pas le dossier courant de PowerShell).
 - `DEFINIDAY_KEYSTORE_PASSWORD`.
 - Optionnels : `DEFINIDAY_KEY_ALIAS`, `DEFINIDAY_KEY_PASSWORD`.
 
