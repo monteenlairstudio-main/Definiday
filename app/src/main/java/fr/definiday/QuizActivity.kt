@@ -27,6 +27,7 @@ class QuizActivity : Activity() {
     private var index = 0
     private var score = 0
     private var picked = -1 // option chosen for the current question, -1 = not answered yet
+    private var icon: ImageView? = null // small Glose at the top of each question: nods or tilts its head on answers
     private var done = false // that day's quiz was already counted when this one opened: its score won't count
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +48,11 @@ class QuizActivity : Activity() {
         box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
         next()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        icon?.let(Glose::stop) // a pending reaction never returns to idle on a hidden screen
     }
 
     override fun onSaveInstanceState(out: Bundle) {
@@ -75,7 +81,7 @@ class QuizActivity : Activity() {
     private fun next() {
         box.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
+        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO; icon = this })
         box.addView(title())
         if (day < LocalDate.now().toEpochDay()) box.addView(text(getString(R.string.quiz_eve), 13f))
         val q = questions[index]
@@ -133,7 +139,7 @@ class QuizActivity : Activity() {
     private fun react(b: View, right: Boolean) {
         if (Build.VERSION.SDK_INT >= 30) b.performHapticFeedback(if (right) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.REJECT)
         else if (right) b.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        // TODO(glose-reaction): Glose.once(...) nod when right, curious tilt when wrong
+        icon?.let { Glose.once(it, if (right) R.drawable.glose_icone_hoche else R.drawable.glose_icone_penche, R.drawable.glose_icone_vd, accessory = false) }
         if (!ValueAnimator.areAnimatorsEnabled()) return
         b.stateListAnimator = null // its release (to scale 1) would fight the pop; the button stays disabled until next()
         if (right) b.animate().scaleX(1.04f).scaleY(1.04f).setDuration(90).withEndAction {
