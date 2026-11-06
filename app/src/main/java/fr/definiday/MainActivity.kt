@@ -184,14 +184,20 @@ class MainActivity : Activity() {
 
     private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
 
-    private fun open(url: String) = try {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    } catch (e: ActivityNotFoundException) {
-        Toast.makeText(this, R.string.no_browser, Toast.LENGTH_LONG).show()
+    /** Opens https links only (data-provided URLs), in a browser. */
+    private fun open(url: String) {
+        val uri = Uri.parse(url)
+        if (uri.scheme != "https") return
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE))
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, R.string.no_browser, Toast.LENGTH_LONG).show()
+        }
     }
 
     /** One lookup on the Académie's own search, triggered by the user's tap, to reach the article page. Falls back to CNRTL. */
     private fun openAcademie(mot: String) = Thread {
+        val started = System.currentTimeMillis()
         val url = runCatching {
             val c = URL("https://www.dictionnaire-academie.fr/search").openConnection() as HttpURLConnection
             c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 5000; c.readTimeout = 5000
@@ -201,7 +207,8 @@ class MainActivity : Activity() {
             JSONObject(c.inputStream.bufferedReader().use { it.readText() }).getJSONArray("result").getJSONObject(0).getString("url")
                 .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
         }.getOrDefault(cnrtl(mot))
-        runOnUiThread { open(url) }
+        // DNS isn't bounded by the socket timeouts: give up if the lookup took too long or the screen is gone
+        runOnUiThread { if (!isDestroyed && System.currentTimeMillis() - started < 12_000) open(url) }
     }.start()
 
     private fun cnrtl(mot: String) = "https://www.cnrtl.fr/definition/" + Uri.encode(mot)

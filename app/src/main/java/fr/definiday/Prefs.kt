@@ -6,6 +6,8 @@ class Prefs(ctx: Context) {
     companion object { const val MODE_BOTH = 0; const val MODE_NOTIF = 1; const val MODE_LOCK = 2 }
 
     private val sp = ctx.getSharedPreferences("definiday", Context.MODE_PRIVATE)
+    /** Device-local state, excluded from backup/transfer (res/xml backup and data-extraction rules): a restored wallpaper id could match someone else's wallpaper. */
+    private val local = ctx.getSharedPreferences("wallpaper_state", Context.MODE_PRIVATE)
 
     var enabled: Boolean
         get() = sp.getBoolean("enabled", true)
@@ -28,15 +30,15 @@ class Prefs(ctx: Context) {
         get() = sp.getInt("unlocks", 0)
         set(v) = sp.edit().putInt("unlocks", v).apply()
     var unlocksSeen: Int
-        get() = sp.getInt("unlocksSeen", 0)
-        set(v) = sp.edit().putInt("unlocksSeen", v).apply()
+        get() = local.getInt("unlocksSeen", 0)
+        set(v) = local.edit().putInt("unlocksSeen", v).apply()
     /** When our lock-screen wallpaper must be removed; 0 = none of ours is set. */
     var wallpaperEndAt: Long
-        get() = sp.getLong("wallpaperEndAt", 0)
-        set(v) = sp.edit().putLong("wallpaperEndAt", v).apply()
+        get() = local.getLong("wallpaperEndAt", 0)
+        set(v) = local.edit().putLong("wallpaperEndAt", v).apply()
     var wallpaperId: Int
-        get() = sp.getInt("wallpaperId", -1)
-        set(v) = sp.edit().putInt("wallpaperId", v).apply()
+        get() = local.getInt("wallpaperId", -1)
+        set(v) = local.edit().putInt("wallpaperId", v).apply()
     var wordsPerDay: Int
         get() = sp.getInt("wordsPerDay", 1)
         set(v) = sp.edit().putInt("wordsPerDay", v).apply()
