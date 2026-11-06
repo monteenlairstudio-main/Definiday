@@ -8,4 +8,10 @@
     <color name="ink">#EDE6D6</color>
     <color name="ink2">#B5AC9A</color>
     <color name="warn">#3D3014</color>
+    <!-- Switch off: thumb ink2 8.14:1 on bg; track 3.40:1 on bg, thumb on it 2.39:1. On: thumb accent 8.19:1; track = accent 40 % over bg (2.31:1). -->
+    <color name="switch_track_off">#6E6A62</color>
+    <color name="switch_track_on">#595042</color>
+    <color name="ripple">#40C9A96E</color>
+    <!-- 1.83:1 on bg (was #B8AFA0, 8.45:1: brighter than the unlocked items) -->
+    <color name="silhouette">#3A4256</color>
 </resources>

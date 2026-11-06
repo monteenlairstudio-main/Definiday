@@ -28,16 +28,30 @@
 
         <Button
             android:id="@+id/time"
-            style="@style/Row" />
+            style="@style/Setting" />
 
-        <TextView
-            android:id="@+id/exact_state"
-            style="@style/Help" />
+        <!-- exact alarms refused (default on Android 14+): banner as on the home screen -->
+        <LinearLayout
+            android:id="@+id/exact_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/warn"
+            android:orientation="vertical"
+            android:padding="12dp">
 
-        <Button
-            android:id="@+id/exact_ask"
-            style="@style/Row"
-            android:text="@string/exact_ask" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exact_no"
+                android:textColor="@color/ink"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/exact_ask"
+                style="@style/Row"
+                android:text="@string/exact_ask" />
+        </LinearLayout>
 
         <TextView
             style="@style/Field"
@@ -54,6 +68,10 @@
             android:id="@+id/more_quotes"
             style="@style/Toggle"
             android:text="@string/more_quotes" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/more_quotes_hint" />
 
         <Button
             android:id="@+id/test"
@@ -139,7 +157,7 @@
 
         <Button
             android:id="@+id/quiz_time"
-            style="@style/Row" />
+            style="@style/Setting" />
 
         <!-- Apparence -->
         <TextView
@@ -149,11 +167,11 @@
 
         <Button
             android:id="@+id/palettes"
-            style="@style/Row" />
+            style="@style/Setting" />
 
         <Button
             android:id="@+id/polices"
-            style="@style/Row" />
+            style="@style/Setting" />
 
         <TextView
             style="@style/Label"
