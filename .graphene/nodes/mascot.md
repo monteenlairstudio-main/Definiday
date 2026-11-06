@@ -18,7 +18,7 @@ covers:
   - app/src/main/res/values/glose_attrs.xml
   - app/src/main/res/values/glose_styles.xml
   - app/src/main/res/interpolator/
-last_commit: 6fc6deb
+last_commit: 7408a8f
 edges:
   - to: build-ci type: related_to reason: generated XML is versioned because CI does not run Node
 ---
@@ -33,3 +33,4 @@ edges:
 - Step 7: quiz notification pictures (see lockscreen-display). Test quizNotificationShowsSleepingGlose writes app/build/demo/notif_quiz.png. <!-- id:430a -->
 - Glose.play with animators disabled (developer option or battery saver) now returns WITHOUT reset(): AVD.reset() applies the animators' start values (trimPathEnd 0), which erased the word of the 'le fil écrit…' poses; the untouched AVD draws its VD still with the word fully written. Test GloseTest.writtenPoseKeepsItsWordWithoutAnimations (duration scale 0 via reflective ValueAnimator.setDurationScale; fails with reset: 2245 px differ). Also Glose.choice/pose ignore ids of the wrong Kind (tampered prefs). <!-- id:cebe -->
 - P8 fixed (6fc6deb): Unlocks.hint(item, p, today) uses p.streak only if Quiz.unbroken(p, today) (last quiz today, the eve, or before quote-only days within 7), else 0; p.streak itself still restarts only at the next quiz. Collection: labels via style Label (no .uppercase()), hint text 12 sp ink2 without alpha (was 2.6:1), worn cells isSelected for TalkBack. GloseTest.unlocksAreKeptAndAnnouncedOnce now sets lastQuizDay = today for its restarted streak and checks the broken-streak hint. <!-- id:4008 -->
+- Collection 0.8.0 (7408a8f): title + Glose preview (160dp) + « Choisir » are a fixed header, only the grids scroll. Item names in ink; locked silhouettes @color/silhouette (#B8AFA0 light, #3A4256 night 1.83:1). Gotcha: fitsSystemWindows replaces the view's padding with insets: put it on a padding-less wrapper. <!-- id:dbbf -->

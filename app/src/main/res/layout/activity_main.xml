@@ -33,12 +33,14 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/glose" />
 
+        <!-- one TalkBack stop reading label, word, nature, definition and example (API 28+) -->
         <LinearLayout
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:screenReaderFocusable="true">
 
             <TextView
                 android:id="@+id/label"
@@ -148,7 +150,7 @@
 
         <Button
             android:id="@+id/quiz_open"
-            style="@style/Row"
+            style="@style/Primary"
             android:layout_marginTop="12dp"
             android:text="@string/quiz_open" />
 
@@ -171,8 +173,10 @@
 
         <Button
             android:id="@+id/settings_open"
-            style="@style/Row"
-            android:layout_marginTop="24dp"
-            android:text="@string/settings" />
+            style="@style/Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_link" />
     </LinearLayout>
 </ScrollView>

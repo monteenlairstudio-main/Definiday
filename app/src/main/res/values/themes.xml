@@ -87,5 +87,28 @@
         <item name="android:minHeight">48dp</item>
         <item name="android:textColor">@color/ink</item>
         <item name="android:textSize">16sp</item>
+        <!-- 3:1 states (colors.xml); src_over: the platform track is a 30 % alpha shape, SRC_IN would keep it pale -->
+        <item name="android:thumbTint">@color/switch_thumb</item>
+        <item name="android:trackTint">@color/switch_track</item>
+        <item name="android:trackTintMode">src_over</item>
+    </style>
+    <!-- the one main action of a screen: accent fill, text bg (4.72:1 light, 8.19:1 dark) -->
+    <style name="Primary" parent="Row">
+        <item name="android:background">@drawable/btn_primary</item>
+        <item name="android:textColor">@color/bg</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- a setting's value (time, palettes): drawn like the menus (arrow, no outline, sans-serif), not like an action -->
+    <style name="Setting" parent="android:Widget.Material.Spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">48dp</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

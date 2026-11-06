@@ -1,7 +1,6 @@
 package fr.definiday
 
 import android.app.Activity
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -29,20 +28,24 @@ class CollectionActivity : Activity() {
         Unlocks.update(p)
         trial = Glose.choice(p).toMutableMap()
         val pad = (24 * dp).toInt()
-        val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
-        setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
-        box.addView(label(getString(R.string.collection_title)))
+        // fixed header (title, preview, "Choisir") above the scrolling grids: what is tried stays in sight
+        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true } // the insets replace its padding
+        val head = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, 0) }.also(root::addView)
+        val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, 0, pad, pad) }
+        head.addView(label(getString(R.string.collection_title)))
         preview = ImageView(this).apply {
             contentDescription = getString(R.string.glose)
-            layoutParams = LinearLayout.LayoutParams((200 * dp).toInt(), (200 * dp).toInt()).apply { gravity = Gravity.CENTER_HORIZONTAL }
+            layoutParams = LinearLayout.LayoutParams((160 * dp).toInt(), (160 * dp).toInt()).apply { gravity = Gravity.CENTER_HORIZONTAL }
             setOnClickListener { Glose.play(this) }
         }
-        box.addView(preview)
+        head.addView(preview)
         choose = Button(this).apply {
             text = getString(R.string.collection_choose)
             setOnClickListener { Glose.save(p, trial); refresh() }
         }
-        box.addView(choose)
+        head.addView(choose)
+        root.addView(ScrollView(this).apply { addView(box) }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f))
+        setContentView(root)
         Unlocks.Kind.values().forEach { kind ->
             box.addView(label(kind.titre).apply { setPadding(0, (20 * dp).toInt(), 0, (8 * dp).toInt()) })
             box.addView(GridLayout(this).apply {
@@ -69,10 +72,10 @@ class CollectionActivity : Activity() {
             layoutParams = GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED), GridLayout.spec(GridLayout.UNDEFINED, 1f)).apply { width = 0 }
             addView(ImageView(context).apply {
                 setImageDrawable(Glose.preview(context, item)) // still: the AVD is never started here
-                if (!open) setColorFilter(SILHOUETTE, PorterDuff.Mode.SRC_IN)
+                if (!open) setColorFilter(getColor(R.color.silhouette), PorterDuff.Mode.SRC_IN)
                 layoutParams = LinearLayout.LayoutParams((96 * dp).toInt(), (96 * dp).toInt())
             })
-            addView(TextView(context).apply { text = item.nom; textSize = 13f; gravity = Gravity.CENTER })
+            addView(TextView(context).apply { text = item.nom; textSize = 13f; gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink)) })
             if (!open) addView(TextView(context).apply { text = Unlocks.hint(item, p); textSize = 12f; gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink2)) })
             contentDescription = item.nom + if (open) "" else ", " + getString(R.string.collection_locked) + ", " + Unlocks.hint(item, p)
             if (open) setOnClickListener {
@@ -95,6 +98,4 @@ class CollectionActivity : Activity() {
             } else null
         }
     }
-
-    companion object { private val SILHOUETTE = Color.parseColor("#B8AFA0") }
 }

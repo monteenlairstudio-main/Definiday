@@ -91,9 +91,7 @@ class SettingsActivity : Activity() {
     override fun onResume() {
         super.onResume()
         // back from the system "Alarms & reminders" page
-        val ask = Alarms.requestIntent(this)
-        findViewById<TextView>(R.id.exact_state).setText(if (ask == null) R.string.exact_ok else R.string.exact_no)
-        findViewById<View>(R.id.exact_ask).visibility = if (ask == null) View.GONE else View.VISIBLE
+        findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
     }
 
     /** Button opening a multi-choice list of the catalog; an empty choice means "all". */
