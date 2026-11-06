@@ -171,3 +171,18 @@ des neiges (`swap` de couleurs d'une porte) ; mots « coucou », « ronron », �
 Restants : sapin encore petit dans la pose « pile » et sous l'anse ; grelot en partie caché par le menton dans la tasse ;
 la monture écaille est un aplat (pas de marbrure) ; poids : +272 Ko sur l'APK release (les accessoires sont dessinés dans
 chaque pose : passer aux calques par emplacement avant le 20e).
+
+## Réactions au toucher (`android/reactions.js`, `Glose.tap`)
+AVD à animateurs seuls sur les VD existants (aucun nouveau dessin), cibles relues dans le VD (groupe animé sous `paupiere_d`, pivot de
+la pelote, traits `fil_a/b/c`) ; chaque valeur finit où elle commence (vérifié par le générateur). Un toucher (600 ms) : clin d'œil et
+tête penchée ; endormi : il se blottit, les « z » sautillent. 4 touchers d'affilée (1,8 s) : assis, la pelote lui échappe, roule au bord
+du livre et rebondit dans ses pattes ; pile, sa patte tape la pelote qui rebondit deux fois, tête relevée, queue qui frétille ; soir, il
+s'étire hors de la tasse et se rendort, un gros « z » s'envole ; réveil, museau dans le thé (yeux clos), « ah », bouffée de vapeur ;
+« le fil écrit » (tous les mots), le fil rembobine le mot et le réécrit d'un trait, la pelote tourne avec. Contrôle : `node android/apercu_reactions.js <poses>`.
+### Itération 1 (rendus/react_*.png)
+1. Assis : pelote lancée vers le haut, cachée derrière le menton et les pattes → elle roule vers la droite, devant le livre.
+2. Pile : pelote qui roule à gauche, hors du cadre → rebonds sur place ; rotation finale 200° (saut au retour) → 360°.
+3. Réveil : la bouffée de vapeur rétrécissait d'un coup à la fin → elle s'efface en montant (fillAlpha) puis revient ;
+   « le fil écrit » : bras levé qui sautillait et décollait la patte du fil → retiré.
+Restants : pas de cœur ni de fioriture (il faudrait un nouveau tracé) ; la pelote assise se décolle du brin qui pend pendant qu'elle roule ;
+Robolectric ne dessine pas les valeurs animées d'une AVD (aperçu Chromium à la place).

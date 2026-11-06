@@ -60,7 +60,8 @@ class MainActivity : Activity() {
         }
         DailyReceiver.scheduleNext(this)
         DailyReceiver.scheduleQuiz(this)
-        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.play(it as ImageView) } // a tap replays it
+        val taps = Glose.Taps()
+        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.tap(it as ImageView, taps, Glose.mainPose(Prefs(this))) } // reacts, then its idle life
     }
 
     /** singleTop: a notification tapped while the app is open shows its item here instead of stacking a new screen. */

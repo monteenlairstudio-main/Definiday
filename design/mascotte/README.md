@@ -9,6 +9,7 @@ npm install paper@0.12.18            # dans ce dossier (node_modules/ non versio
 export PLAYWRIGHT=/opt/node-tools/node_modules/playwright   # si Playwright n'est pas installé ici
 node make_all.js                     # SVG animés, variantes et rendus PNG (rendus/ et iter/ non versionnés)
 node android/make_android.js         # dessins Android -> app/src/main/res (XML versionnés : la CI ne lance pas Node)
+node android/apercu_reactions.js assis   # images des réactions au toucher (android/reactions.js) -> rendus/react_assis.png
 ```
 `make_android.js` exporte chaque pose en variante `{all:true}` (tous les accessoires et détails des pelages rares
 dessinés à leur place), puis `android/svg2avd.js` remplace leurs couleurs par des attributs de thème : transparents dans
