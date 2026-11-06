@@ -130,6 +130,7 @@ object Glose {
     fun tap(v: ImageView, taps: Taps, pose: Int, dress: (Int) -> Drawable = { mine(v.context, it) }) {
         val suffix = taps.next() ?: return
         v.performHapticFeedback(android.view.HapticFeedbackConstants.CONTEXT_CLICK)
+        Sounds.play(v.context, if (suffix == "_special") Sounds.PURR else Sounds.MRR) // silent unless « Sons » is on
         val r = v.resources // by name: needs the resources kept (no shrinkResources); GloseTest checks that every pose has both
         val res = r.getIdentifier(r.getResourceEntryName(pose) + suffix, "drawable", v.context.packageName)
         if (res != 0) once(v, res, pose, dress = dress) else play(v)
