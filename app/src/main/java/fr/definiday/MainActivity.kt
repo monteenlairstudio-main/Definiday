@@ -72,7 +72,7 @@ class MainActivity : Activity() {
         }
         showUnlocks()
         spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
-            p.unlocks = it
+            p.unlocks = it; UnlockService.sync(this) // applies to the word already on the lock screen
         }
         spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) {
             p.textBottom = it == 0

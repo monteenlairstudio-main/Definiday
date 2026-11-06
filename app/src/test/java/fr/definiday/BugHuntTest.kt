@@ -72,7 +72,7 @@ class BugHuntTest {
     }
 
     /** BUG 3: switching "Fin sur l'écran de verrouillage" to "Après la durée choisie" while the watch runs removes the word at the next unlock. */
-    @Ignore("fixed in a later commit") @Test fun unlocksSetToZeroKeepsTheWallpaperForTheDuration() {
+    @Test fun unlocksSetToZeroKeepsTheWallpaperForTheDuration() {
         val p = Prefs(ctx).apply { mode = Prefs.MODE_LOCK; unlocks = 2; durationMinutes = 60 }
         DailyReceiver.show(ctx) // UnlockService started
         p.unlocks = 0 // MainActivity spinner: only the pref changes, the service keeps counting
@@ -209,5 +209,30 @@ class BugHuntTest {
         DailyReceiver().onReceive(ctx, Intent(android.app.AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED))
         val show = shadowOf(am).scheduledAlarms.first { shadowOf(it.operation).savedIntent.action == DailyReceiver.ACTION_SHOW }
         assertEquals(0L, show.windowLengthMs) // exact
+    }
+
+    /** UnlockService itself: counts USER_PRESENT, removes the word at the Nth unlock and stops; its notification shows N. */
+    @Test fun unlockServiceCountsUnlocks() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_LOCK; unlocks = 2; durationMinutes = 60 }
+        DailyReceiver.show(ctx)
+        val c = Robolectric.buildService(UnlockService::class.java).create().startCommand(0, 1)
+        assertTrue(shadowOf(c.get()).lastForegroundNotification.extras.getString(android.app.Notification.EXTRA_TEXT)!!.contains("2"))
+        fun unlock() { ctx.sendBroadcast(Intent(Intent.ACTION_USER_PRESENT)); shadowOf(android.os.Looper.getMainLooper()).idle() }
+        unlock()
+        assertEquals(1, p.unlocksSeen); assertTrue(p.wallpaperEndAt != 0L); assertTrue(!shadowOf(c.get()).isStoppedBySelf)
+        unlock()
+        assertEquals(0L, p.wallpaperEndAt); assertTrue(shadowOf(c.get()).isStoppedBySelf)
+        c.destroy()
+    }
+
+    /** Switching from "Après la durée" to 1-3 unlocks while the word is shown starts the watch; back to 0 stops it. */
+    @Test fun unlockSettingChangeSyncsTheWatch() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_LOCK; unlocks = 0; durationMinutes = 60 }
+        DailyReceiver.show(ctx)
+        assertEquals(null, shadowOf(ctx).nextStartedService)
+        p.unlocks = 1; UnlockService.sync(ctx)
+        assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStartedService.component!!.className)
+        p.unlocks = 0; UnlockService.sync(ctx)
+        assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStoppedService.component!!.className)
     }
 }

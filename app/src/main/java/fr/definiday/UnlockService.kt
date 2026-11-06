@@ -22,18 +22,21 @@ class UnlockService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        val nm = getSystemService(NotificationManager::class.java)
-        nm.createNotificationChannel(NotificationChannel(CHANNEL, getString(R.string.watch_channel), NotificationManager.IMPORTANCE_MIN))
+        getSystemService(NotificationManager::class.java)
+            .createNotificationChannel(NotificationChannel(CHANNEL, getString(R.string.watch_channel), NotificationManager.IMPORTANCE_MIN))
+        registerReceiver(receiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+    }
+
+    // Count lives in prefs, so a restarted service keeps it; the duration END alarm is the fallback if we're killed for good.
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // posted at each start: sync() restarts it when the setting changes, so the text shows the current count
         val n = Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_stat)
             .setContentText(getString(R.string.watch_text, Prefs(this).unlocks))
             .build()
         if (Build.VERSION.SDK_INT >= 34) startForeground(ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE) else startForeground(ID, n)
-        registerReceiver(receiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+        return START_STICKY
     }
-
-    // Count lives in prefs, so a restarted service keeps it; the duration END alarm is the fallback if we're killed for good.
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int) = START_STICKY
 
     override fun onDestroy() {
         unregisterReceiver(receiver)
@@ -51,10 +54,16 @@ class UnlockService : Service() {
             runCatching { ctx.startForegroundService(Intent(ctx, UnlockService::class.java)) }
         }
 
-        /** One unlock; true when the wallpaper was removed. */
+        /** After "Fin sur l'écran de verrouillage" changed: watch while our word is shown and 1-3 unlocks are chosen, else stop. */
+        fun sync(ctx: Context) {
+            val p = Prefs(ctx)
+            if (p.wallpaperEndAt != 0L && p.unlocks > 0) start(ctx) else ctx.stopService(Intent(ctx, UnlockService::class.java))
+        }
+
+        /** One unlock; true when the watch is over (wallpaper removed, or gone, or the setting is back to the duration alone). */
         fun countUnlock(ctx: Context): Boolean {
             val p = Prefs(ctx)
-            if (p.wallpaperEndAt == 0L) return true
+            if (p.wallpaperEndAt == 0L || p.unlocks == 0) return true
             p.unlocksSeen += 1
             if (p.unlocksSeen < p.unlocks) return false
             DailyReceiver.clearWallpaper(ctx, force = true)
