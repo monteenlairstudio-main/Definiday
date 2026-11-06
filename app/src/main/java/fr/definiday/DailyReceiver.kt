@@ -10,8 +10,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.ZonedDateTime
 
 /** Daily alarm -> show the word; END alarm -> remove our lock wallpaper; boot/update -> reschedule. */
@@ -21,7 +24,8 @@ class DailyReceiver : BroadcastReceiver() {
             ACTION_SHOW -> { show(ctx); scheduleNext(ctx) }
             ACTION_QUIZ -> { quizReminder(ctx); scheduleQuiz(ctx) }
             ACTION_END -> clearWallpaper(ctx)
-            else -> { // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED: re-anchor alarms
+            // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED, exact-alarm access granted: re-anchor alarms
+            else -> {
                 scheduleNext(ctx)
                 scheduleQuiz(ctx)
                 val end = Prefs(ctx).wallpaperEndAt
@@ -40,8 +44,10 @@ class DailyReceiver : BroadcastReceiver() {
         private const val QUIZ_ID = 50
         private const val CHANNEL = "daily_word"
 
+        /** Anchored on today's date (not on now's offset): on the fall-back night an ambiguous time resolves to its earlier
+         *  instant, so a late delivery in the repeated hour schedules tomorrow, not the same time again 1 h later. */
         fun nextTrigger(now: ZonedDateTime, hour: Int, minute: Int): ZonedDateTime {
-            val t = now.withHour(hour).withMinute(minute).withSecond(0).withNano(0)
+            val t = ZonedDateTime.of(now.toLocalDate(), LocalTime.of(hour, minute), now.zone)
             return if (t.isAfter(now)) t else t.plusDays(1)
         }
 
@@ -87,8 +93,8 @@ class DailyReceiver : BroadcastReceiver() {
         private fun scheduleEnd(ctx: Context, at: Long) =
             set(ctx.getSystemService(AlarmManager::class.java), at, pending(ctx, ACTION_END))
 
-        // Exact when allowed (always before API 31). Otherwise inexact: Android only promises delivery within the hour.
-        // ponytail: no SCHEDULE_EXACT_ALARM prompt; add one if users on 13+ complain about late words
+        // Exact when allowed (see Alarms). Otherwise inexact: Android only promises delivery within the hour, and the
+        // background start of UnlockService is then refused on 12+ (exact alarms are exempt from that restriction).
         private fun set(am: AlarmManager, at: Long, pi: PendingIntent) =
             if (Build.VERSION.SDK_INT < 31 || am.canScheduleExactAlarms()) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
             else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
@@ -172,4 +178,17 @@ class DailyReceiver : BroadcastReceiver() {
             return runCatching { nm.notify(id, n) }.isSuccess && nm.areNotificationsEnabled()
         }
     }
+}
+
+/**
+ * "Alarms & reminders" access (SCHEDULE_EXACT_ALARM): granted at install on Android 12-13, denied by default on 14+ for new
+ * installs (and after a restore). Granting it sends ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED, which DailyReceiver
+ * handles like a boot; revoking it stops the app and cancels exact alarms, so inexact ones are set at the next scheduling.
+ */
+object Alarms {
+    fun canExact(ctx: Context) = Build.VERSION.SDK_INT < 31 || ctx.getSystemService(AlarmManager::class.java).canScheduleExactAlarms()
+
+    /** Opens this app's "Alarms & reminders" page; null when there is nothing to ask (before Android 12, or already granted). */
+    fun requestIntent(ctx: Context): Intent? =
+        if (canExact(ctx)) null else Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:" + ctx.packageName))
 }

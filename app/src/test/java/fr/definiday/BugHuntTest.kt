@@ -81,7 +81,7 @@ class BugHuntTest {
     }
 
     /** BUG 4: without an exact-alarm permission the daily SHOW alarm is inexact on Android 12+, so the background start of UnlockService is refused. */
-    @Ignore("fixed in a later commit") @Test fun dailyAlarmMayStartTheUnlockWatch() {
+    @Test fun dailyAlarmMayStartTheUnlockWatch() {
         val perms = ctx.packageManager.getPackageInfo(ctx.packageName, PackageManager.GET_PERMISSIONS).requestedPermissions.orEmpty()
         assertTrue("canScheduleExactAlarms() is always false: ${perms.toList()}",
             perms.any { it == android.Manifest.permission.SCHEDULE_EXACT_ALARM || it == android.Manifest.permission.USE_EXACT_ALARM })
@@ -126,7 +126,7 @@ class BugHuntTest {
     }
 
     /** BUG 9 (edge): fall-back night, daily time 02:30, inexact alarm delivered 40 min late (02:10 second pass) -> rescheduled 20 min later the same night. */
-    @Ignore("fixed in a later commit") @Test fun fallBackLateDeliveryDoesNotFireTwice() {
+    @Test fun fallBackLateDeliveryDoesNotFireTwice() {
         val late = ZonedDateTime.parse("2026-10-25T02:10:00+01:00[Europe/Paris]") // the 02:30+02:00 alarm, 40 min late
         val next = DailyReceiver.nextTrigger(late, 2, 30)
         assertEquals("next show", LocalDate.of(2026, 10, 26), next.toLocalDate())
@@ -194,5 +194,20 @@ class BugHuntTest {
         assertEquals(1, History(ctx).all().count { it.value == day })
         Robolectric.buildActivity(MainActivity::class.java).setup() // the card shows the first
         assertEquals(1, History(ctx).all().count { it.value == day })
+    }
+
+    /** Granting "Alarms & reminders" reschedules the daily alarm as exact; the settings intent is offered only while denied. */
+    @Test fun exactAlarmAccessIsRequestedThenUsed() {
+        val am = ctx.getSystemService(android.app.AlarmManager::class.java)
+        org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(false)
+        assertEquals(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Alarms.requestIntent(ctx)!!.action)
+        assertEquals("package:${ctx.packageName}", Alarms.requestIntent(ctx)!!.dataString)
+        DailyReceiver.scheduleNext(ctx)
+        assertTrue(shadowOf(am).scheduledAlarms.single().windowLengthMs != 0L) // inexact
+        org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(true)
+        assertEquals(null, Alarms.requestIntent(ctx))
+        DailyReceiver().onReceive(ctx, Intent(android.app.AlarmManager.ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED))
+        val show = shadowOf(am).scheduledAlarms.first { shadowOf(it.operation).savedIntent.action == DailyReceiver.ACTION_SHOW }
+        assertEquals(0L, show.windowLengthMs) // exact
     }
 }
