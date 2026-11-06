@@ -1,0 +1,6 @@
+---
+category: research
+subject: fun-cute-roadmap-2026-11-06
+---
+
+Report reports/Definiday plus fun et mignonne.md (notes research_notes/Definiday plus fun et mignonne/). Principles: surprise gifts not paid rewards (Deci 1999), never guilt, WCAG 2.2.2 (home Glose loop is infinite: stop after ~5 s), platform Views only (no Lottie/DynamicAnimation). Catalogue: deterministic unlocks, rarity Poche/Broché/Relié/Édition originale, 21 existing + 14 base + 170 future in 18 themed collections (annex A-S), no item name contains 'Glose' (renamable), item names without gender agreement. Prereqs: color tokens gloseSpecs (glasses share gold with bow tie/scarf) and gloseStripe (plain furs), per-slot overlay layers before ~20 accessories, split Kind.ACC into TETE/COU/YEUX/OBJET/LIVRE/MOT/DECOR/CADRE, new counters (l links opened, h active weeks, v/V/g recalled at J+7/30/90 need spaced review). Name customization: 7 string resources to rewrite (glose, glose_bravo, glose_encore, unlock_new, collection_open, collection_title, quiz_empty). Calendar deadlines: winter before 1 Dec, Nuits de la lecture 20-24 Jan 2027 (ship by 15 Jan), Printemps des poètes 8-31 Mar / Semaine langue française 13-21 Mar (ship by 1 Mar). 15 owner decisions listed in the report.
