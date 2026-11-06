@@ -3,6 +3,7 @@ package fr.definiday
 import android.Manifest
 import android.app.Activity
 import android.app.TimePickerDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -72,7 +73,11 @@ class MainActivity : Activity() {
 
     private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
 
-    private fun open(url: String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    private fun open(url: String) = try {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(this, R.string.no_browser, Toast.LENGTH_LONG).show()
+    }
 
     /** One lookup on the Académie's own search, triggered by the user's tap, to reach the article page. Falls back to CNRTL. */
     private fun openAcademie(mot: String) = Thread {
@@ -80,8 +85,10 @@ class MainActivity : Activity() {
             val c = URL("https://www.dictionnaire-academie.fr/search").openConnection() as HttpURLConnection
             c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 5000; c.readTimeout = 5000
             c.setRequestProperty("X-Requested-With", "XMLHttpRequest")
+            c.setRequestProperty("Accept", "application/json") // without it the server answers with a redirect
             c.outputStream.use { it.write("term=${URLEncoder.encode(mot, "UTF-8")}&options=1".toByteArray()) }
             JSONObject(c.inputStream.bufferedReader().use { it.readText() }).getJSONArray("result").getJSONObject(0).getString("url")
+                .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
         }.getOrDefault(cnrtl(mot))
         runOnUiThread { open(url) }
     }.start()

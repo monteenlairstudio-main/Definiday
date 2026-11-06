@@ -14,4 +14,5 @@
     <string name="test">Afficher maintenant</string>
     <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
     <string name="credits">Définitions rédigées pour Definiday et vérifiées avec le Wiktionnaire. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
+    <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
 </resources>

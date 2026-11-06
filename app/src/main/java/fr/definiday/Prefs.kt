@@ -24,4 +24,7 @@ class Prefs(ctx: Context) {
     var wallpaperEndAt: Long
         get() = sp.getLong("wallpaperEndAt", 0)
         set(v) = sp.edit().putLong("wallpaperEndAt", v).apply()
+    var wallpaperId: Int
+        get() = sp.getInt("wallpaperId", -1)
+        set(v) = sp.edit().putInt("wallpaperId", v).apply()
 }

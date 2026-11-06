@@ -47,6 +47,18 @@ class DefinidayTest {
         assertEquals(Words.today(ctx).mot, n.extras.getString(Notification.EXTRA_TITLE))
     }
 
+    @Test fun wallpaperIsRemovedOnlyWhenDueAndStillOurs() {
+        val p = Prefs(ctx).apply { wallpaper = true; durationMinutes = 15 }
+        DailyReceiver.show(ctx)
+        assertTrue(p.wallpaperEndAt > System.currentTimeMillis())
+        val end = android.content.Intent(ctx, DailyReceiver::class.java).setAction(DailyReceiver.ACTION_END)
+        DailyReceiver().onReceive(ctx, end) // early/stale END: keep it
+        assertTrue(p.wallpaperEndAt != 0L)
+        p.wallpaperEndAt = 1 // now due
+        DailyReceiver().onReceive(ctx, end)
+        assertEquals(0L, p.wallpaperEndAt)
+    }
+
     /** Not a check: writes the demo PNGs (lock-screen card + main screen) to app/build/demo. */
     @Test fun renderDemoImages() {
         val out = File("build/demo").apply { mkdirs() }

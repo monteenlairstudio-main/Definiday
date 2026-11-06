@@ -9,6 +9,7 @@ import android.app.WallpaperManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import java.time.ZonedDateTime
 
 /** Daily alarm -> show the word; END alarm -> remove our lock wallpaper; boot/update -> reschedule. */
@@ -17,7 +18,7 @@ class DailyReceiver : BroadcastReceiver() {
         when (intent.action) {
             ACTION_SHOW -> { show(ctx); scheduleNext(ctx) }
             ACTION_END -> clearWallpaper(ctx)
-            else -> { // BOOT_COMPLETED, MY_PACKAGE_REPLACED: alarms don't survive either
+            else -> { // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED: re-anchor alarms
                 scheduleNext(ctx)
                 val end = Prefs(ctx).wallpaperEndAt
                 if (end != 0L) { if (end <= System.currentTimeMillis()) clearWallpaper(ctx) else scheduleEnd(ctx, end) }
@@ -41,13 +42,17 @@ class DailyReceiver : BroadcastReceiver() {
             val pi = pending(ctx, ACTION_SHOW)
             if (!p.enabled) { am.cancel(pi); return }
             val at = nextTrigger(ZonedDateTime.now(), p.hour, p.minute).toInstant().toEpochMilli()
-            // ponytail: inexact alarm (no SCHEDULE_EXACT_ALARM permission), Doze can delay it a few minutes; switch to setExactAndAllowWhileIdle if users want to-the-minute
-            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+            set(am, at, pi)
         }
 
         private fun scheduleEnd(ctx: Context, at: Long) =
-            ctx.getSystemService(AlarmManager::class.java)
-                .setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pending(ctx, ACTION_END))
+            set(ctx.getSystemService(AlarmManager::class.java), at, pending(ctx, ACTION_END))
+
+        // Exact when allowed (always before API 31). Otherwise inexact: Android only promises delivery within the hour.
+        // ponytail: no SCHEDULE_EXACT_ALARM prompt; add one if users on 13+ complain about late words
+        private fun set(am: AlarmManager, at: Long, pi: PendingIntent) =
+            if (Build.VERSION.SDK_INT < 31 || am.canScheduleExactAlarms()) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+            else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
 
         private fun pending(ctx: Context, action: String) = PendingIntent.getBroadcast(
             ctx, action.hashCode(), Intent(ctx, DailyReceiver::class.java).setAction(action),
@@ -60,10 +65,11 @@ class DailyReceiver : BroadcastReceiver() {
             val durationMs = p.durationMinutes * 60_000L
             notify(ctx, w, durationMs)
             if (p.wallpaper) {
-                val m = ctx.resources.displayMetrics
+                val m = ctx.resources.displayMetrics // portrait size whatever the current orientation
+                val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
                 runCatching {
-                    WallpaperManager.getInstance(ctx).setBitmap(
-                        WordCard.render(w, m.widthPixels, m.heightPixels), null, true, WallpaperManager.FLAG_LOCK,
+                    p.wallpaperId = WallpaperManager.getInstance(ctx).setBitmap(
+                        WordCard.render(w, width, height), null, true, WallpaperManager.FLAG_LOCK,
                     )
                     p.wallpaperEndAt = System.currentTimeMillis() + durationMs
                     scheduleEnd(ctx, p.wallpaperEndAt)
@@ -73,9 +79,11 @@ class DailyReceiver : BroadcastReceiver() {
 
         private fun clearWallpaper(ctx: Context) {
             val p = Prefs(ctx)
-            if (p.wallpaperEndAt == 0L) return
-            // Lock screen falls back to the home wallpaper (Android can't hand us the previous lock image without storage permission).
-            runCatching { WallpaperManager.getInstance(ctx).clear(WallpaperManager.FLAG_LOCK) }
+            if (p.wallpaperEndAt == 0L || p.wallpaperEndAt > System.currentTimeMillis()) return // stale END after a newer SHOW
+            val wm = WallpaperManager.getInstance(ctx)
+            // Only remove it if it is still ours (user may have picked a new one, or prefs were restored on another phone).
+            // Lock screen then falls back to the home wallpaper (the previous lock image can't be read without storage permission).
+            if (wm.getWallpaperId(WallpaperManager.FLAG_LOCK) == p.wallpaperId) runCatching { wm.clear(WallpaperManager.FLAG_LOCK) }
             p.wallpaperEndAt = 0
         }
 
