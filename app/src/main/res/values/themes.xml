@@ -1,24 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Base" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- every Button (layouts and code) takes Btn: rounded, accent outline, normal case -->
+    <style name="AppTheme" parent="Base">
         <item name="android:colorAccent">@color/accent</item>
         <item name="android:colorPrimary">#1B2440</item>
         <item name="android:windowBackground">@color/bg</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/ink2</item>
+        <item name="android:buttonStyle">@style/Btn</item>
     </style>
     <style name="Label">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:letterSpacing">0.15</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:accessibilityHeading">true</item>
         <item name="android:textColor">@color/accent</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="Row">
+    <style name="Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:accessibilityHeading">true</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- serif body text, as on the card -->
+    <style name="Body">
+        <!-- a long word in running text breaks between syllables (with a hyphen), never anywhere -->
+        <item name="android:hyphenationFrequency">normal</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="Help">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/ink2</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Btn" parent="android:Widget.Material.Button">
+        <item name="android:background">@drawable/btn</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+    <!-- full-width row of the home actions and settings -->
+    <style name="Row" parent="Btn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+    <!-- external links: accent, underlined text (strings with <u>), 48 dp target -->
+    <style name="Link" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+    <style name="Field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textColor">@color/ink</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="Toggle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@color/ink</item>
         <item name="android:textSize">16sp</item>
     </style>
 </resources>

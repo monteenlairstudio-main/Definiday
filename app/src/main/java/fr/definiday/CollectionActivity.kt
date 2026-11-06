@@ -44,7 +44,7 @@ class CollectionActivity : Activity() {
         }
         box.addView(choose)
         Unlocks.Kind.values().forEach { kind ->
-            box.addView(label(kind.titre.uppercase()).apply { setPadding(0, (20 * dp).toInt(), 0, (8 * dp).toInt()) })
+            box.addView(label(kind.titre).apply { setPadding(0, (20 * dp).toInt(), 0, (8 * dp).toInt()) })
             box.addView(GridLayout(this).apply {
                 columnCount = 3
                 Unlocks.items.filter { it.kind == kind }.forEach { addView(cell(it)) }
@@ -58,9 +58,7 @@ class CollectionActivity : Activity() {
         Glose.stop(preview)
     }
 
-    private fun label(s: String) = TextView(this).apply {
-        text = s; textSize = 12f; letterSpacing = 0.15f; setTextColor(getColor(R.color.accent)); setTypeface(typeface, android.graphics.Typeface.BOLD)
-    }
+    private fun label(s: String) = TextView(this, null, 0, R.style.Label).apply { text = s }
 
     private fun cell(item: Unlocks.Item): View {
         val open = item.id in p.unlocked
@@ -75,7 +73,7 @@ class CollectionActivity : Activity() {
                 layoutParams = LinearLayout.LayoutParams((96 * dp).toInt(), (96 * dp).toInt())
             })
             addView(TextView(context).apply { text = item.nom; textSize = 13f; gravity = Gravity.CENTER })
-            if (!open) addView(TextView(context).apply { text = Unlocks.hint(item, p); textSize = 11f; gravity = Gravity.CENTER; alpha = 0.7f })
+            if (!open) addView(TextView(context).apply { text = Unlocks.hint(item, p); textSize = 12f; gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink2)) })
             contentDescription = item.nom + if (open) "" else ", " + getString(R.string.collection_locked) + ", " + Unlocks.hint(item, p)
             if (open) setOnClickListener {
                 // a second tap on the worn accessory takes it off
@@ -91,6 +89,7 @@ class CollectionActivity : Activity() {
         Glose.play(preview)
         choose.isEnabled = trial != Glose.choice(p)
         cells.forEach { (id, v) ->
+            v.isSelected = id in trial.values // worn: said to TalkBack, not only drawn
             v.background = if (id in trial.values) GradientDrawable().apply {
                 cornerRadius = 12 * dp; setStroke((2 * dp).toInt(), getColor(R.color.accent))
             } else null

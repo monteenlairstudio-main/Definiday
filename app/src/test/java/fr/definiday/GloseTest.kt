@@ -66,10 +66,13 @@ class GloseTest {
         val p = Prefs(ctx).apply { quizzes = 1; streak = 3 }
         assertEquals(setOf("ecrit_mot", "ecrit_encore", "soir", "ecrit_dodo"), Unlocks.update(p).map { it.id }.toSet())
         p.announced = p.announced + Unlocks.update(p).map { it.id }
-        p.streak = 1 // broken streak: nothing is lost, nothing new
+        p.streak = 1; p.lastQuizDay = java.time.LocalDate.now().toEpochDay() // broken streak restarted today: nothing is lost, nothing new
         assertTrue(Unlocks.update(p).isEmpty())
         assertTrue("soir" in p.unlocked)
         assertEquals("Encore 2 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("soir"), p))
+        // P8: broken since the last quiz (10 days ago), the hint counts from 0, not from the stale streak
+        p.streak = 2; p.lastQuizDay -= 10
+        assertEquals("Encore 7 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("echarpe"), p))
     }
 
     @Test fun collectionTriesThenKeepsAChoice() {

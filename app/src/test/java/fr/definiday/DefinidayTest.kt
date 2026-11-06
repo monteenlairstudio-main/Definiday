@@ -241,6 +241,56 @@ class DefinidayTest {
         capture(quizEnd(right = 3), File(out, "quiz_bravo.png"))
         Prefs(ctx).lastQuizDay = Long.MIN_VALUE
         capture(quizEnd(right = 1), File(out, "quiz_encore.png"))
+        renderInterface(File(out, "ui").apply { mkdirs() })
+    }
+
+    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, quiz steps, Collection. */
+    private fun renderInterface(ui: File) {
+        val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
+        fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
+            android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
+        fun quiz() = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
+        fun views(a: android.app.Activity) = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
+        fun answer(a: android.app.Activity, right: Boolean) {
+            val defs = Words.load(ctx).associateBy { it.definition }
+            val w = views(a).filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
+            views(a).filterIsInstance<android.widget.Button>().first { (it.text == w.mot) == right }.performClick()
+        }
+        val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key
+        capture(main(), File(ui, "home_light.png"))
+        capture(main(Quotes.load(ctx).first { it.texte.length > 120 }.key), File(ui, "home_quote.png"))
+        RuntimeEnvironment.setFontScale(1.3f)
+        capture(main(), File(ui, "home_font130.png"))
+        RuntimeEnvironment.setFontScale(2f)
+        capture(main(), File(ui, "home_font200.png"))
+        RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
+        capture(main(long), File(ui, "home_w360_font200_long.png"))
+        capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_w360_font200.png"))
+        capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
+        RuntimeEnvironment.setFontScale(1.3f)
+        capture(main(long), File(ui, "home_w360_font130_long.png"))
+        RuntimeEnvironment.setFontScale(1f)
+        capture(main(long), File(ui, "home_w360.png"))
+        RuntimeEnvironment.setQualifiers("+w411dp-h891dp")
+        org.robolectric.Shadows.shadowOf(ctx.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(false)
+        capture(main(), File(ui, "home_notifications_off.png"))
+        org.robolectric.Shadows.shadowOf(ctx.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(true)
+        capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_light.png"))
+        capture(quiz(), File(ui, "quiz_question.png"))
+        capture(quiz().also { answer(it, right = true) }, File(ui, "quiz_juste.png"))
+        capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_faux.png"))
+        capture(quizEnd(right = 2), File(ui, "quiz_fin.png"))
+        capture(quizEnd(right = 3), File(ui, "quiz_fin_refait.png")) // same day: score not counted
+        RuntimeEnvironment.setQualifiers("+night")
+        capture(main(), File(ui, "home_dark.png"))
+        capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_dark.png"))
+        capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_dark_faux.png"))
+        p.lastQuizDay = Long.MIN_VALUE
+        capture(quizEnd(right = 3), File(ui, "quiz_dark_fin.png"))
+        p.apply { quizzes = 12; perfectQuizzes = 6; passedQuizzes = 9; streak = 8; lastQuizDay -= 5 }
+        capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_dark.png"))
+        RuntimeEnvironment.setQualifiers("+notnight")
+        capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_light.png"))
     }
 
     /** Plays the evening quiz with [right] good answers and returns the activity on its score screen. */
@@ -256,13 +306,14 @@ class DefinidayTest {
         return a
     }
 
-    /** Draws the activity at phone width; animations are started then run for 4 s so the word is written. */
+    /** Draws the activity at its configured width; animations are started then run for 4 s so the word is written. */
     private fun capture(a: android.app.Activity, f: File) {
         val root = a.window.decorView
+        val w = (a.resources.configuration.screenWidthDp * a.resources.displayMetrics.density).toInt()
         fun draw(): Bitmap {
-            root.measure(View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(8000, View.MeasureSpec.AT_MOST))
-            root.layout(0, 0, 1080, root.measuredHeight)
-            return Bitmap.createBitmap(1080, root.measuredHeight, Bitmap.Config.ARGB_8888).also { root.draw(Canvas(it)) }
+            root.measure(View.MeasureSpec.makeMeasureSpec(w, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(16000, View.MeasureSpec.AT_MOST))
+            root.layout(0, 0, w, root.measuredHeight)
+            return Bitmap.createBitmap(w, root.measuredHeight, Bitmap.Config.ARGB_8888).also { root.draw(Canvas(it)) }
         }
         draw()
         org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofSeconds(4))

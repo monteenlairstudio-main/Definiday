@@ -42,7 +42,7 @@ class DailyReceiver : BroadcastReceiver() {
         const val ACTION_END = "fr.definiday.END"
         const val ACTION_QUIZ = "fr.definiday.QUIZ"
         private const val QUIZ_ID = 50
-        private const val CHANNEL = "daily_word"
+        const val CHANNEL = "daily_word"
 
         /** Anchored on today's date (not on now's offset): on the fall-back night an ambiguous time resolves to its earlier
          *  instant, so a late delivery in the repeated hour schedules tomorrow, not the same time again 1 h later. */

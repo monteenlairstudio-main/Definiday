@@ -30,6 +30,7 @@
 
         <activity android:name=".QuizActivity" android:exported="false" />
         <activity android:name=".CollectionActivity" android:exported="false" />
+        <activity android:name=".SettingsActivity" android:exported="false" />
 
         <receiver
             android:name=".DailyReceiver"

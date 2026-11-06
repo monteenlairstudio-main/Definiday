@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp">
+
+        <TextView
+            style="@style/Title"
+            android:text="@string/settings" />
+
+        <!-- Mot du jour -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="24dp"
+            android:text="@string/group_word" />
+
+        <Switch
+            android:id="@+id/enabled"
+            style="@style/Toggle"
+            android:text="@string/enabled" />
+
+        <Button
+            android:id="@+id/time"
+            style="@style/Row" />
+
+        <TextView
+            android:id="@+id/exact_state"
+            style="@style/Help" />
+
+        <Button
+            android:id="@+id/exact_ask"
+            style="@style/Row"
+            android:text="@string/exact_ask" />
+
+        <TextView
+            style="@style/Field"
+            android:labelFor="@+id/per_day"
+            android:text="@string/per_day" />
+
+        <Spinner
+            android:id="@+id/per_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <Switch
+            android:id="@+id/more_quotes"
+            style="@style/Toggle"
+            android:text="@string/more_quotes" />
+
+        <Button
+            android:id="@+id/test"
+            style="@style/Row"
+            android:text="@string/test" />
+
+        <!-- Écran de verrouillage -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/group_lock" />
+
+        <TextView
+            style="@style/Field"
+            android:labelFor="@+id/mode"
+            android:text="@string/mode" />
+
+        <Spinner
+            android:id="@+id/mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/wallpaper_hint"
+            style="@style/Help"
+            android:text="@string/wallpaper_hint" />
+
+        <TextView
+            style="@style/Field"
+            android:labelFor="@+id/duration"
+            android:text="@string/duration" />
+
+        <Spinner
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/duration_hint"
+            style="@style/Help" />
+
+        <TextView
+            android:id="@+id/unlocks_label"
+            style="@style/Field"
+            android:labelFor="@+id/unlocks"
+            android:text="@string/unlocks" />
+
+        <Spinner
+            android:id="@+id/unlocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/unlocks_hint"
+            style="@style/Help"
+            android:text="@string/unlocks_hint" />
+
+        <TextView
+            android:id="@+id/text_pos_label"
+            style="@style/Field"
+            android:labelFor="@+id/text_pos"
+            android:text="@string/text_pos" />
+
+        <Spinner
+            android:id="@+id/text_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <!-- Quiz du soir -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/group_quiz" />
+
+        <Switch
+            android:id="@+id/quiz_enabled"
+            style="@style/Toggle"
+            android:text="@string/quiz_enabled" />
+
+        <Button
+            android:id="@+id/quiz_time"
+            style="@style/Row" />
+
+        <!-- Apparence -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/group_look" />
+
+        <Button
+            android:id="@+id/palettes"
+            style="@style/Row" />
+
+        <Button
+            android:id="@+id/polices"
+            style="@style/Row" />
+
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/credits_title" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/credits" />
+    </LinearLayout>
+</ScrollView>

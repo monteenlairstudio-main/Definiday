@@ -9,7 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp">
+
+        <!-- shown when the chosen mode needs notifications and they are off -->
+        <TextView
+            android:id="@+id/notif_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/warn"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:text="@string/notif_off"
+            android:textColor="@color/ink"
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/glose"
@@ -30,13 +45,15 @@
                 style="@style/Label"
                 android:text="@string/today" />
 
+            <!-- size fitted in code so the longest piece of the word holds on one line -->
             <TextView
                 android:id="@+id/mot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:breakStrategy="simple"
                 android:fontFamily="serif"
-                android:textColor="?android:attr/textColorPrimary"
+                android:hyphenationFrequency="none"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -44,37 +61,59 @@
                 android:id="@+id/nature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:fontFamily="serif"
-                android:textColor="@color/accent"
                 android:textSize="16sp"
                 android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/definition"
+                android:hyphenationFrequency="normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="serif"
                 android:lineSpacingMultiplier="1.2"
-                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/exemple"
+                android:hyphenationFrequency="normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="serif"
-                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="16sp"
                 android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <Button
+                android:id="@+id/academie"
+                style="@style/Link"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/academie" />
+
+            <Button
+                android:id="@+id/cnrtl"
+                style="@style/Link"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cnrtl" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/anecdote_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -84,50 +123,33 @@
 
             <TextView
                 android:id="@+id/anecdote"
+                style="@style/Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="serif"
-                android:lineSpacingMultiplier="1.2"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp" />
+                android:layout_marginTop="8dp" />
 
             <Button
                 android:id="@+id/source"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/source" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-
-            <Button
-                android:id="@+id/academie"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/academie" />
-
-            <Button
-                android:id="@+id/cnrtl"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cnrtl" />
-        </LinearLayout>
-
         <Button
             android:id="@+id/new_word"
             style="@style/Row"
+            android:layout_marginTop="24dp"
             android:text="@string/new_word" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/new_word_hint" />
 
         <Button
             android:id="@+id/quiz_open"
             style="@style/Row"
+            android:layout_marginTop="12dp"
             android:text="@string/quiz_open" />
 
         <Button
@@ -137,126 +159,20 @@
 
         <TextView
             style="@style/Label"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/seen_today" />
 
-        <HorizontalScrollView
+        <!-- rows of chips, filled in code (wraps at large font sizes instead of scrolling sideways) -->
+        <LinearLayout
+            android:id="@+id/seen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
-            <LinearLayout
-                android:id="@+id/seen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </HorizontalScrollView>
-
-        <TextView
-            style="@style/Label"
-            android:layout_marginTop="32dp"
+        <Button
+            android:id="@+id/settings_open"
+            style="@style/Row"
+            android:layout_marginTop="24dp"
             android:text="@string/settings" />
-
-        <Switch
-            android:id="@+id/enabled"
-            style="@style/Row"
-            android:text="@string/enabled" />
-
-        <Button
-            android:id="@+id/time"
-            style="@style/Row" />
-
-        <TextView
-            style="@style/Row"
-            android:layout_marginBottom="0dp"
-            android:text="@string/per_day" />
-
-        <Spinner
-            android:id="@+id/per_day"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <TextView
-            style="@style/Row"
-            android:layout_marginBottom="0dp"
-            android:text="@string/duration" />
-
-        <Spinner
-            android:id="@+id/duration"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <TextView
-            style="@style/Row"
-            android:layout_marginBottom="0dp"
-            android:text="@string/mode" />
-
-        <Spinner
-            android:id="@+id/mode"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <TextView
-            android:id="@+id/unlocks_label"
-            style="@style/Row"
-            android:layout_marginBottom="0dp"
-            android:text="@string/unlocks" />
-
-        <Spinner
-            android:id="@+id/unlocks"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <TextView
-            android:id="@+id/text_pos_label"
-            style="@style/Row"
-            android:layout_marginBottom="0dp"
-            android:text="@string/text_pos" />
-
-        <Spinner
-            android:id="@+id/text_pos"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <Switch
-            android:id="@+id/more_quotes"
-            style="@style/Row"
-            android:text="@string/more_quotes" />
-
-        <Switch
-            android:id="@+id/quiz_enabled"
-            style="@style/Row"
-            android:text="@string/quiz_enabled" />
-
-        <Button
-            android:id="@+id/quiz_time"
-            style="@style/Row" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wallpaper_hint"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="13sp" />
-
-        <Button
-            android:id="@+id/palettes"
-            style="@style/Row" />
-
-        <Button
-            android:id="@+id/polices"
-            style="@style/Row" />
-
-        <Button
-            android:id="@+id/test"
-            style="@style/Row"
-            android:layout_marginTop="24dp"
-            android:text="@string/test" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/credits"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp" />
     </LinearLayout>
 </ScrollView>
