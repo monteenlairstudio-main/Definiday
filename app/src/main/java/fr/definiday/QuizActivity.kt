@@ -1,7 +1,6 @@
 package fr.definiday
 
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -75,62 +74,71 @@ class QuizActivity : Activity() {
         box.addView(title())
         if (day < LocalDate.now().toEpochDay()) box.addView(text(getString(R.string.quiz_eve), 13f))
         val q = questions[index]
-        box.addView(text("${index + 1} / ${questions.size}", 13f))
+        val counter = text("${index + 1} / ${questions.size}", 13f).apply { contentDescription = getString(R.string.quiz_progress, index + 1, questions.size) }
+        box.addView(counter)
+        box.addView(text(getString(R.string.quiz_prompt), 15f))
         box.addView(text(q.answer.definition, 20f))
         val buttons = q.options.map { button(it.mot) }
+        // said on screen and read by TalkBack when it appears (announceForAccessibility is deprecated)
+        val result = text("", 16f).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE; visibility = View.GONE; setPadding(0, paddingBottom, 0, paddingBottom) }
+        box.addView(result)
         fun reveal() {
             buttons.forEachIndexed { j, o ->
                 o.isEnabled = false
                 val good = q.options[j] == q.answer
                 if (good || j == picked) { // said in the text, not by the color alone; tint keeps the button's shape
                     o.text = (if (good) "✓ " else "✗ ") + q.options[j].mot
-                    o.background.mutate().setTint(if (good) GOOD else BAD)
-                    o.setTextColor(ON_COLOR)
+                    o.background.mutate().setTint(getColor(if (good) R.color.quiz_good else R.color.quiz_bad))
+                    o.setTextColor(getColor(R.color.quiz_on))
                 }
             }
+            result.text = if (q.options[picked] == q.answer) getString(R.string.quiz_right) else getString(R.string.quiz_wrong, q.answer.mot)
+            result.visibility = View.VISIBLE
             button(getString(R.string.quiz_next)).setOnClickListener { index++; picked = -1; next() }
         }
         buttons.forEachIndexed { i, b ->
             b.setOnClickListener {
                 picked = i
-                val right = q.options[i] == q.answer
-                if (right) score++
+                if (q.options[i] == q.answer) score++
                 reveal()
-                box.announceForAccessibility(if (right) getString(R.string.quiz_right) else getString(R.string.quiz_wrong, q.answer.mot))
             }
         }
         if (picked >= 0) reveal() // answered before a rotation: not twice
+        focus(counter)
     }
+
+    /** removeAllViews() drops TalkBack's focus: put it back on the new screen's first useful line. */
+    private fun focus(v: View) = v.post { v.performAccessibilityAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) }
 
     private fun finishQuiz() {
         box.addView(title())
         if (questions.isEmpty()) {
-            box.addView(text(getString(R.string.quiz_empty), 18f))
+            box.addView(text(getString(R.string.quiz_empty), 18f).also(::focus))
         } else {
-            Quiz.record(Prefs(this), score, questions.size, day)
+            val p = Prefs(this)
+            Quiz.record(p, score, questions.size, day)
             val passed = Quiz.passed(score, questions.size)
-            // the thread writes the word once and holds it; never mocking when failed
-            box.addView(glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
+            val fresh = Unlocks.update(p) // announced once each
+            p.announced = p.announced + fresh.map { it.id }
+            // something unlocked: one Glose, wearing the last (rarest) one; else the thread writes the word once and holds it, never mocking when failed
+            box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
+            else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
                 extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
                 contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
                 Glose.play(this)
             })
-            box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply { gravity = Gravity.CENTER })
+            box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply {
+                gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
+            })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
-            announce()
+            if (fresh.isNotEmpty()) {
+                box.addView(text(getString(R.string.unlock_new), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
+                box.addView(text(fresh.joinToString("\n") { it.nom }, 16f).apply { gravity = Gravity.CENTER })
+                button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
+            }
         }
         button(getString(R.string.quiz_close)).setOnClickListener { finish() }
-    }
-
-    /** "Nouveau : …" once per unlocked item, with Glose showing the last (rarest) one. */
-    private fun announce() {
-        val p = Prefs(this)
-        val fresh = Unlocks.update(p).ifEmpty { return }
-        p.announced = p.announced + fresh.map { it.id }
-        box.addView(text(getString(R.string.unlock_new, fresh.joinToString(", ") { it.nom }), 18f, bold = true).apply { gravity = Gravity.CENTER })
-        box.addView(glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 160).apply { Glose.play(this) })
-        button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
     }
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
@@ -143,10 +151,6 @@ class QuizActivity : Activity() {
     companion object {
         /** Epoch day of the quiz (the reminder's day); only that day or the eve is accepted. */
         const val EXTRA_DAY = "day"
-        // dark text on both, light or dark theme: 7.4:1 on GOOD, 6.7:1 on BAD
-        private val GOOD = Color.parseColor("#7FB77E")
-        private val BAD = Color.parseColor("#E08A7E")
-        private val ON_COLOR = Color.parseColor("#1F1A14")
     }
 }
 

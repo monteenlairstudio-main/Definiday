@@ -9,4 +9,16 @@
     <color name="ink">#1F1A14</color>
     <color name="ink2">#5C5446</color>
     <color name="warn">#F6E3B4</color>
+    <!-- quiz answers, sage / terracotta: quiz_on 10.3:1 on good, 9.8:1 on bad -->
+    <color name="quiz_good">#B5CFA9</color>
+    <color name="quiz_bad">#E8B9A8</color>
+    <color name="quiz_on">#1F1A14</color>
+    <!-- Switch (Toggle, trackTintMode src_over = opaque track). Off: thumb ink2 6.98:1 on bg; track 3.36:1 on bg, thumb on it 2.08:1.
+         On: thumb accent 4.72:1 on bg; track = accent 40 % over bg (1.70:1), the state is carried by the accent thumb. -->
+    <color name="switch_track_off">#8F8676</color>
+    <color name="switch_track_on">#CCBFA5</color>
+    <!-- pressed veil of Btn; focus is the 3 dp outline (btn.xml) -->
+    <color name="ripple">#33886A34</color>
+    <!-- locked Collection items, 2.03:1 on bg: dimmer than the unlocked ones (the state is also written) -->
+    <color name="silhouette">#B8AFA0</color>
 </resources>

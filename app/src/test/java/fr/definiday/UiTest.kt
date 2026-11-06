@@ -4,7 +4,9 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.provider.Settings
+import android.text.Layout
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
@@ -66,6 +68,8 @@ class UiTest {
         wrong.performClick()
         assertEquals("✗ $wrongMot", wrong.text.toString())
         assertTrue(buttons(a).any { it.text == "✓ ${answer.mot}" })
+        assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
+            it.text == ctx.getString(R.string.quiz_wrong, answer.mot) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
     }
 
@@ -122,13 +126,28 @@ class UiTest {
         assertEquals(View.VISIBLE, a.findViewById<View>(R.id.unlocks).visibility)
     }
 
-    /** I8: the longest word, small screen, font x2: the headword shrinks so no piece is cut. */
+    /** I8 / A14: the longest word, small screen, font x2: the headword shrinks down to 1.3 x the definition at most;
+     *  if it still does not hold on one line, it breaks between syllables (never anywhere). */
     @Test @Config(qualifiers = "fr-w360dp-h740dp-xxhdpi") fun longWordFitsAtLargeFont() {
         RuntimeEnvironment.setFontScale(2f)
         val w = Words.load(ctx).maxBy { it.mot.length * (if (' ' in it.mot || '-' in it.mot) 0 else 1) }
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
         val mot = a.findViewById<TextView>(R.id.mot)
         assertEquals(w.mot, mot.text.toString())
-        assertTrue(mot.paint.measureText(w.mot) <= (360 - 72) * ctx.resources.displayMetrics.density)
+        assertTrue(mot.paint.measureText(w.mot) <= (360 - 72) * ctx.resources.displayMetrics.density || mot.hyphenationFrequency == Layout.HYPHENATION_FREQUENCY_FULL)
+        assertTrue(mot.textSize >= a.findViewById<TextView>(R.id.definition).textSize)
+    }
+
+    /** A5: a random pick moves TalkBack to the card, a single stop; opening the screen does not. */
+    @Test fun randomPickMovesTalkBackToTheCard() {
+        shadowOf(ctx.getSystemService(AccessibilityManager::class.java)).apply { setEnabled(true); setTouchExplorationEnabled(true) }
+        val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
+        val card = a.findViewById<View>(R.id.card)
+        assertTrue(card.isScreenReaderFocusable)
+        shadowOf(android.os.Looper.getMainLooper()).idle()
+        assertTrue(!card.isAccessibilityFocused)
+        a.findViewById<Button>(R.id.new_word).performClick()
+        shadowOf(android.os.Looper.getMainLooper()).idle()
+        assertTrue(card.isAccessibilityFocused)
     }
 }

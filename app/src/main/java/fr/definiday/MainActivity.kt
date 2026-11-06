@@ -12,7 +12,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Layout
+import android.util.TypedValue
 import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -23,6 +26,7 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.util.Locale
 
 class MainActivity : Activity() {
     companion object { const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item" }
@@ -39,7 +43,7 @@ class MainActivity : Activity() {
         current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
-            show(w)
+            pick(w)
             DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen (said under the button)
             warnIfHurried()
         }
@@ -150,14 +154,24 @@ class MainActivity : Activity() {
         if (top) findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
     }
 
-    /** Largest size up to [max] sp at which each piece (between spaces, or after a hyphen) holds on one line:
-     *  a long word at a large font size or on a small screen is never cut in the middle. */
+    /** Chosen by the user (random pick, chip): shown, and TalkBack moves to the card, which reads the new item. */
+    private fun pick(item: Item) {
+        show(item)
+        findViewById<View>(R.id.card).run { post { performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) } }
+    }
+
+    /** Largest size up to [max] sp at which each piece (between spaces, or after a hyphen) holds on one line,
+     *  but never below 1.3 x the definition: there the word breaks between syllables instead (never anywhere). */
     private fun fit(v: TextView, max: Float) {
         val width = (resources.configuration.screenWidthDp - 2 * 16 - 2 * 20) * resources.displayMetrics.density // page and card padding (activity_main.xml)
         val pieces = v.text.split(Regex("[ \u00a0]|(?<=-)"))
         var sp = max
         v.textSize = sp
-        while (sp > 12 && pieces.any { v.paint.measureText(it) > width }) { sp -= 2; v.textSize = sp }
+        val floor = minOf(v.textSize, 1.3f * findViewById<TextView>(R.id.definition).textSize) // px: both follow the font scale
+        while (v.textSize > floor && pieces.any { v.paint.measureText(it) > width }) { sp -= 2; v.textSize = sp }
+        if (v.textSize < floor) v.setTextSize(TypedValue.COMPLEX_UNIT_PX, floor)
+        v.textLocale = Locale.FRENCH // French syllables
+        v.hyphenationFrequency = if (pieces.any { v.paint.measureText(it) > width }) Layout.HYPHENATION_FREQUENCY_FULL else Layout.HYPHENATION_FREQUENCY_NONE
     }
 
     /** One chip per item of the day (word or quote, shown or not yet, e.g. 2nd-3rd in lock-only mode) and per random pick seen today. */
@@ -171,7 +185,7 @@ class MainActivity : Activity() {
         (Words.today(this) + Words.seenToday(this)).distinctBy { it.key }.forEach { w ->
             val chip = Button(this).apply {
                 text = if (w is Word) w.mot else getString(R.string.quote_chip)
-                setOnClickListener { show(w) }
+                setOnClickListener { pick(w) }
                 measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             }
             if (row == null || used + chip.measuredWidth > width) { row = LinearLayout(this).also(box::addView); used = 0 }

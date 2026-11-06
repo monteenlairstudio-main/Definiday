@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.View
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -65,6 +66,7 @@ class DefinidayTest {
         val q = Quotes.load(ctx)
         assertTrue(q.size >= 300)
         q.forEach { assertTrue(it.texte, it.texte.length <= 260 && it.source.startsWith("https://fr.wikiquote.org/wiki/")) }
+        q.forEach { assertTrue(it.texte, '\'' !in it.texte && !Regex(" [;:!?]").containsMatchIn(it.texte)) } // ’ and U+202F, as words.json
         assertTrue(q.count { it.theme == "lenteur" } >= 10)
         Prefs(ctx).polices = setOf("unifraktur_maguntia") // only a display face kept -> quote falls back to serif
         assertEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, q.first()).typeface)
@@ -145,6 +147,11 @@ class DefinidayTest {
         val p = Prefs(ctx).apply { palettes = setOf("craie") }
         assertEquals("craie", Styles.of(ctx, w).palette.id) // word's own palette left out -> pool wins
         p.palettes = null
+        p.polices = setOf("unifraktur_maguntia") // only a display face kept: words of 8 letters or less keep it, longer ones fall back to serif
+        val (short, long) = Words.load(ctx).partition { it.mot.length <= 8 }
+        assertNotEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, short.first()).typeface)
+        assertEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, long.first()).typeface)
+        p.polices = null
     }
 
     @Test fun rebootPurgesExpiredWallpaper() {
