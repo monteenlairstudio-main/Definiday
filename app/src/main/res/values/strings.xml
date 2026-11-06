@@ -30,6 +30,7 @@
     <string name="quiz_notif">%1$d mot(s) vu(s) aujourd’hui : les reconnaîtrez-vous ?</string>
     <string name="quiz_next">Suivant</string>
     <string name="quiz_close">Fermer</string>
+    <string name="quiz_eve">Les mots d’hier</string>
     <string name="quiz_empty">Aucun mot vu aujourd’hui pour l’instant.</string>
     <string name="quiz_score">%1$d / %2$d</string>
     <string name="quiz_open">Quiz du jour</string>

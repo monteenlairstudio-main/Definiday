@@ -42,6 +42,9 @@ object Words {
     /** Slot `slot` of day `day` holds a quote for 1 slot in 5 (2 in 5 with "more quotes"), evenly over days and slots. */
     fun isQuoteSlot(day: Long, slot: Int, moreQuotes: Boolean) = Math.floorMod(day * 3 + slot, 5L) < if (moreQuotes) 2 else 1
 
+    /** Every daily slot of [day] is a quote: no quiz material that day (unless random picks). */
+    fun quotesOnly(day: Long, wordsPerDay: Int, moreQuotes: Boolean) = (0 until wordsPerDay).all { isQuoteSlot(day, it, moreQuotes) }
+
     /** Random word outside the daily reserve, unseen for 4 months; else the oldest-shown outside the reserve. */
     fun nextRandom(words: List<Word>, history: Map<String, Long>, today: Long, wordsPerDay: Int, rnd: Random = Random.Default): Word {
         val pool = queue(words, history).drop((wordsPerDay * DAILY_COOLDOWN_DAYS).toInt()).ifEmpty { words }
@@ -72,9 +75,8 @@ object Words {
         return nextRandom(load(ctx), h.all(), day, Prefs(ctx).wordsPerDay).also { h.mark(it.mot, day) }
     }
 
-    /** Every word (not quote) shown today, daily ones first, then random picks: the quiz material. */
-    fun seenToday(ctx: Context): List<Word> {
-        val day = LocalDate.now().toEpochDay()
+    /** Every word (not quote) shown on [day] (today by default), daily ones first, then random picks: the quiz material. */
+    fun seenToday(ctx: Context, day: Long = LocalDate.now().toEpochDay()): List<Word> {
         val byMot = load(ctx).associateBy { it.mot }
         val daily = Prefs(ctx).run { if (dailyDay == day) dailyMots else emptyList() }
         val random = History(ctx).all().filterValues { it == day }.keys.filter { it !in daily }.sorted()

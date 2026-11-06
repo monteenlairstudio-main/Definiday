@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Build
+import java.time.LocalDate
 import java.time.ZonedDateTime
 
 /** Daily alarm -> show the word; END alarm -> remove our lock wallpaper; boot/update -> reschedule. */
@@ -62,10 +63,13 @@ class DailyReceiver : BroadcastReceiver() {
         }
 
         private fun quizReminder(ctx: Context) {
-            if (Words.seenToday(ctx).isEmpty()) return
+            val today = LocalDate.now().toEpochDay()
+            if (Words.seenToday(ctx).isEmpty() || Prefs(ctx).lastQuizDay == today) return
             val nm = ctx.getSystemService(NotificationManager::class.java)
             channel(nm, ctx)
-            val open = PendingIntent.getActivity(ctx, QUIZ_ID, Intent(ctx, QuizActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+            // carries its day: tapped after midnight it opens the eve's quiz, not an empty one (UPDATE_CURRENT: the extra changes daily)
+            val open = PendingIntent.getActivity(ctx, QUIZ_ID, Intent(ctx, QuizActivity::class.java).putExtra(QuizActivity.EXTRA_DAY, today),
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             // a notification cannot play an AVD: still images of the user's Glose, asleep in his cup once that pose is unlocked
             val pose = if ("soir" in Prefs(ctx).unlocked) R.drawable.glose_soir_vd else R.drawable.glose_assis_vd
             val n = Notification.Builder(ctx, CHANNEL)
