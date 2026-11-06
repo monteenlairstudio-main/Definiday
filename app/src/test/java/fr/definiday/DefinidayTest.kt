@@ -25,9 +25,9 @@ class DefinidayTest {
 
     @Test fun datasetIsCleanAndCyclesWithoutRepeat() {
         val words = Words.load(ctx)
-        assertTrue(words.size >= 100)
+        assertTrue("need 3 years without repeat, got ${words.size}", words.size >= 3 * 365)
         assertEquals(words.size, words.map { it.mot.lowercase() }.toSet().size)
-        words.forEach { assertTrue(it.mot, it.nature.isNotBlank() && it.definition.isNotBlank()) }
+        words.forEach { assertTrue(it.mot, it.nature.isNotBlank() && it.nature != "n." && it.definition.length in 1..200 && it.exemple.length <= 120) }
         assertEquals(words.toSet(), (0L until words.size).map { Words.forDay(words, 20_000 + it) }.toSet())
     }
 
