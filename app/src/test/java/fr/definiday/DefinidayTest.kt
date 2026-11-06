@@ -129,6 +129,50 @@ class DefinidayTest {
         p.palettes = null
     }
 
+    @Test fun rebootPurgesExpiredWallpaper() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_BOTH }
+        DailyReceiver.show(ctx)
+        p.wallpaperEndAt = 1 // expired while the phone was off
+        DailyReceiver().onReceive(ctx, android.content.Intent(android.content.Intent.ACTION_BOOT_COMPLETED))
+        assertEquals(0L, p.wallpaperEndAt)
+    }
+
+    @Test fun rebootReschedulesPendingWallpaperEndAndUnlockWatch() {
+        Prefs(ctx).apply { mode = Prefs.MODE_BOTH; unlocks = 2 }
+        DailyReceiver.show(ctx)
+        val app = org.robolectric.Shadows.shadowOf(ctx)
+        while (app.nextStartedService != null) Unit // drop the start done by show()
+        DailyReceiver().onReceive(ctx, android.content.Intent(android.content.Intent.ACTION_BOOT_COMPLETED))
+        assertEquals(UnlockService::class.java.name, app.nextStartedService?.component?.className)
+        val am = org.robolectric.Shadows.shadowOf(ctx.getSystemService(android.app.AlarmManager::class.java))
+        assertTrue(am.scheduledAlarms.size >= 2) // daily SHOW + wallpaper END (+ quiz)
+    }
+
+    @Test fun quizOffersFourDistinctOptionsAndCountsStreaks() {
+        val all = Words.load(ctx)
+        val seen = all.take(3)
+        Quiz.build(seen, all, kotlin.random.Random(3)).forEach { q ->
+            assertEquals(4, q.options.toSet().size)
+            assertTrue(q.answer in q.options)
+        }
+        val p = Prefs(ctx)
+        Quiz.record(p, 3, 3, day = 100)
+        Quiz.record(p, 3, 3, day = 100) // same day counts once
+        Quiz.record(p, 1, 3, day = 101)
+        assertEquals(2, p.quizzes); assertEquals(1, p.perfectQuizzes); assertEquals(4, p.correctAnswers); assertEquals(2, p.streak)
+        Quiz.record(p, 2, 3, day = 105)
+        assertEquals(1, p.streak) // broken streak restarts
+    }
+
+    @Test fun randomPickReplacesTheLockScreenWord() {
+        Prefs(ctx).apply { mode = Prefs.MODE_BOTH; wordsPerDay = 3 }
+        DailyReceiver.show(ctx)
+        val r = Words.random(ctx)
+        DailyReceiver.show(ctx, listOf(r))
+        val n = ctx.getSystemService(NotificationManager::class.java).activeNotifications.single().notification
+        assertEquals(r.mot, n.extras.getString(Notification.EXTRA_TITLE))
+    }
+
     /** Not a check: writes the demo PNGs (lock-screen card + main screen) to app/build/demo. */
     @Test fun renderDemoImages() {
         val out = File("build/demo").apply { mkdirs() }

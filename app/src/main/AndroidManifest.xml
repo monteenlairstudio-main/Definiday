@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".QuizActivity" android:exported="false" />
+
         <receiver
             android:name=".DailyReceiver"
             android:exported="false">

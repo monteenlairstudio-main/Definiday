@@ -118,6 +118,11 @@
             style="@style/Row"
             android:text="@string/new_word" />
 
+        <Button
+            android:id="@+id/quiz_open"
+            style="@style/Row"
+            android:text="@string/quiz_open" />
+
         <TextView
             style="@style/Label"
             android:layout_marginTop="16dp"
@@ -187,6 +192,26 @@
             android:id="@+id/unlocks"
             android:layout_width="match_parent"
             android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/text_pos_label"
+            style="@style/Row"
+            android:layout_marginBottom="0dp"
+            android:text="@string/text_pos" />
+
+        <Spinner
+            android:id="@+id/text_pos"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <Switch
+            android:id="@+id/quiz_enabled"
+            style="@style/Row"
+            android:text="@string/quiz_enabled" />
+
+        <Button
+            android:id="@+id/quiz_time"
+            style="@style/Row" />
 
         <TextView
             android:layout_width="match_parent"

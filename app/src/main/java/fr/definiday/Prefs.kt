@@ -47,6 +47,40 @@ class Prefs(ctx: Context) {
     var dailyMots: List<String>
         get() = sp.getString("dailyMots", "")!!.split('|').filter { it.isNotEmpty() }
         set(v) = sp.edit().putString("dailyMots", v.joinToString("|")).apply()
+    /** Lock-screen text anchored at the bottom (clear of the big clock) or starting mid-screen. */
+    var textBottom: Boolean
+        get() = sp.getBoolean("textBottom", true)
+        set(v) = sp.edit().putBoolean("textBottom", v).apply()
+    var quizEnabled: Boolean
+        get() = sp.getBoolean("quizEnabled", true)
+        set(v) = sp.edit().putBoolean("quizEnabled", v).apply()
+    var quizHour: Int
+        get() = sp.getInt("quizHour", 21)
+        set(v) = sp.edit().putInt("quizHour", v).apply()
+    var quizMinute: Int
+        get() = sp.getInt("quizMinute", 0)
+        set(v) = sp.edit().putInt("quizMinute", v).apply()
+    // Quiz counters (read by future mascot unlocks)
+    var lastQuizDay: Long
+        get() = sp.getLong("lastQuizDay", Long.MIN_VALUE)
+        set(v) = sp.edit().putLong("lastQuizDay", v).apply()
+    var streak: Int
+        get() = sp.getInt("streak", 0)
+        set(v) = sp.edit().putInt("streak", v).apply()
+    var quizzes: Int
+        get() = sp.getInt("quizzes", 0)
+        set(v) = sp.edit().putInt("quizzes", v).apply()
+    var perfectQuizzes: Int
+        get() = sp.getInt("perfectQuizzes", 0)
+        set(v) = sp.edit().putInt("perfectQuizzes", v).apply()
+    var correctAnswers: Int
+        get() = sp.getInt("correctAnswers", 0)
+        set(v) = sp.edit().putInt("correctAnswers", v).apply()
+    /** Random picks warned about today (warning shown once a day, past 3 picks). */
+    var warnedDay: Long
+        get() = sp.getLong("warnedDay", Long.MIN_VALUE)
+        set(v) = sp.edit().putLong("warnedDay", v).apply()
+
     /** Palettes/fonts the user kept in the pool; null = all. */
     var palettes: Set<String>?
         get() = sp.getStringSet("palettes", null)

@@ -38,7 +38,13 @@ class MainActivity : Activity() {
         val p = Prefs(this)
         val daily = Words.today(this)
         show(daily.firstOrNull { it.mot == intent.getStringExtra(EXTRA_MOT) } ?: daily.first())
-        findViewById<Button>(R.id.new_word).setOnClickListener { show(Words.random(this)) }
+        findViewById<Button>(R.id.new_word).setOnClickListener {
+            val w = Words.random(this)
+            show(w)
+            DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen
+            warnIfHurried()
+        }
+        findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
 
         findViewById<Switch>(R.id.enabled).apply {
             isChecked = p.enabled
@@ -56,7 +62,7 @@ class MainActivity : Activity() {
         spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
             if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this); showSeen() }
         }
-        val unlocks = listOf(R.id.unlocks_label, R.id.unlocks).map { findViewById<View>(it) }
+        val unlocks = listOf(R.id.unlocks_label, R.id.unlocks, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
         fun showUnlocks() = unlocks.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
         // order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK
         spinner(R.id.mode, listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), p.mode) {
@@ -66,6 +72,21 @@ class MainActivity : Activity() {
         spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
             p.unlocks = it
         }
+        spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) {
+            p.textBottom = it == 0
+        }
+        findViewById<Switch>(R.id.quiz_enabled).apply {
+            isChecked = p.quizEnabled
+            setOnCheckedChangeListener { _, on -> p.quizEnabled = on; DailyReceiver.scheduleQuiz(context) }
+        }
+        val quizTime = findViewById<Button>(R.id.quiz_time)
+        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute) }
+        showQuizTime()
+        quizTime.setOnClickListener {
+            TimePickerDialog(this, { _, h, m ->
+                p.quizHour = h; p.quizMinute = m; showQuizTime(); DailyReceiver.scheduleQuiz(this)
+            }, p.quizHour, p.quizMinute, true).show()
+        }
         val cat = Styles.load(this)
         pool(R.id.palettes, R.string.palettes, cat.palettes.map { it.id to it.nom }, { p.palettes }) { p.palettes = it }
         pool(R.id.polices, R.string.polices, cat.polices.map { it.id to it.nom }, { p.polices }) { p.polices = it }
@@ -74,6 +95,20 @@ class MainActivity : Activity() {
             Toast.makeText(this, R.string.test_done, Toast.LENGTH_LONG).show()
         }
         DailyReceiver.scheduleNext(this)
+        DailyReceiver.scheduleQuiz(this)
+    }
+
+    /** Past 3 random picks in a day, once: invite to slow down. */
+    private fun warnIfHurried() {
+        val p = Prefs(this)
+        val day = java.time.LocalDate.now().toEpochDay()
+        if (p.warnedDay == day || Words.seenToday(this).size - p.dailyMots.size <= 3) return
+        p.warnedDay = day
+        AlertDialog.Builder(this)
+            .setTitle(R.string.slow_title)
+            .setMessage(Quotes.slow(this) ?: getString(R.string.slow_default))
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     private var current: Word? = null

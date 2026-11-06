@@ -17,9 +17,11 @@ class DailyReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         when (intent.action) {
             ACTION_SHOW -> { show(ctx); scheduleNext(ctx) }
+            ACTION_QUIZ -> { quizReminder(ctx); scheduleQuiz(ctx) }
             ACTION_END -> clearWallpaper(ctx)
             else -> { // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED: re-anchor alarms
                 scheduleNext(ctx)
+                scheduleQuiz(ctx)
                 val end = Prefs(ctx).wallpaperEndAt
                 if (end != 0L) {
                     if (end <= System.currentTimeMillis()) clearWallpaper(ctx)
@@ -32,6 +34,8 @@ class DailyReceiver : BroadcastReceiver() {
     companion object {
         const val ACTION_SHOW = "fr.definiday.SHOW"
         const val ACTION_END = "fr.definiday.END"
+        const val ACTION_QUIZ = "fr.definiday.QUIZ"
+        private const val QUIZ_ID = 50
         private const val CHANNEL = "daily_word"
 
         fun nextTrigger(now: ZonedDateTime, hour: Int, minute: Int): ZonedDateTime {
@@ -48,6 +52,29 @@ class DailyReceiver : BroadcastReceiver() {
             set(am, at, pi)
         }
 
+        fun scheduleQuiz(ctx: Context) {
+            val p = Prefs(ctx)
+            val am = ctx.getSystemService(AlarmManager::class.java)
+            val pi = pending(ctx, ACTION_QUIZ)
+            if (!p.quizEnabled) { am.cancel(pi); return }
+            set(am, nextTrigger(ZonedDateTime.now(), p.quizHour, p.quizMinute).toInstant().toEpochMilli(), pi)
+        }
+
+        private fun quizReminder(ctx: Context) {
+            if (Words.seenToday(ctx).isEmpty()) return
+            val nm = ctx.getSystemService(NotificationManager::class.java)
+            channel(nm, ctx)
+            val open = PendingIntent.getActivity(ctx, QUIZ_ID, Intent(ctx, QuizActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+            val n = Notification.Builder(ctx, CHANNEL)
+                .setSmallIcon(R.drawable.ic_stat)
+                .setContentTitle(ctx.getString(R.string.quiz_title))
+                .setContentText(ctx.getString(R.string.quiz_notif, Words.seenToday(ctx).size))
+                .setContentIntent(open)
+                .setAutoCancel(true)
+                .build()
+            runCatching { nm.notify(QUIZ_ID, n) }
+        }
+
         private fun scheduleEnd(ctx: Context, at: Long) =
             set(ctx.getSystemService(AlarmManager::class.java), at, pending(ctx, ACTION_END))
 
@@ -62,9 +89,11 @@ class DailyReceiver : BroadcastReceiver() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
 
-        fun show(ctx: Context) {
+        /** Puts words on the lock screen (today's by default, or a random pick that replaces them). */
+        fun show(ctx: Context, words: List<Word> = Words.today(ctx)) {
             val p = Prefs(ctx)
-            val words = Words.today(ctx)
+            val nm = ctx.getSystemService(NotificationManager::class.java)
+            (1..3).forEach { nm.cancel(it) }
             val durationMs = p.durationMinutes * 60_000L
             if (p.mode != Prefs.MODE_LOCK) words.forEachIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }
             val w = words.first() // ponytail: wallpaper shows only the first daily word; stack them if 2-3 words should fit
@@ -73,7 +102,7 @@ class DailyReceiver : BroadcastReceiver() {
                 val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
                 runCatching {
                     p.wallpaperId = WallpaperManager.getInstance(ctx).setBitmap(
-                        WordCard.render(w, width, height, Styles.of(ctx, w)), null, true, WallpaperManager.FLAG_LOCK,
+                        WordCard.render(w, width, height, Styles.of(ctx, w), p.textBottom), null, true, WallpaperManager.FLAG_LOCK,
                     )
                     p.wallpaperEndAt = System.currentTimeMillis() + durationMs // duration stays the upper bound
                     p.unlocksSeen = 0
@@ -95,12 +124,14 @@ class DailyReceiver : BroadcastReceiver() {
             ctx.stopService(Intent(ctx, UnlockService::class.java))
         }
 
+        private fun channel(nm: NotificationManager, ctx: Context) = nm.createNotificationChannel(
+            NotificationChannel(CHANNEL, ctx.getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT)
+                .apply { lockscreenVisibility = Notification.VISIBILITY_PUBLIC; setShowBadge(false) },
+        )
+
         private fun notify(ctx: Context, w: Word, durationMs: Long, id: Int) {
             val nm = ctx.getSystemService(NotificationManager::class.java)
-            nm.createNotificationChannel(
-                NotificationChannel(CHANNEL, ctx.getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT)
-                    .apply { lockscreenVisibility = Notification.VISIBILITY_PUBLIC; setShowBadge(false) },
-            )
+            channel(nm, ctx)
             val open = PendingIntent.getActivity(
                 ctx, id, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,

@@ -10,7 +10,7 @@ covers:
   - app/src/main/java/fr/definiday/UnlockService.kt
   - app/src/main/java/fr/definiday/WordCard.kt
   - app/src/main/AndroidManifest.xml
-last_commit: 6e93968
+last_commit: 457e808
 edges:
   - to: word-selection type: depends_on reason: shows Words.today()
   - to: styles type: depends_on reason: WordCard renders with Styles.of()
@@ -20,3 +20,5 @@ edges:
 - Wallpaper removal only if WallpaperManager.getWallpaperId(FLAG_LOCK) still equals the id returned by setBitmap (user may have changed it, or prefs restored on another phone). Stale END after a newer SHOW is ignored unless force=true (Nth unlock). clear(FLAG_LOCK) makes the lock screen fall back to the home wallpaper; the original lock image cannot be restored without storage permission. <!-- id:3e7d -->
 - Alarms: setExactAndAllowWhileIdle when SDK<31 or canScheduleExactAlarms(), else setAndAllowWhileIdle (Android only promises delivery within the hour). Rescheduled on BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED (all exempt from implicit-broadcast limits). <!-- id:e5de -->
 - Known UX issue reported by the owner: with no notification on the lock screen, the system's big clock covers the text that starts at 42% of the height. Fix in progress: bottom-anchored text block. <!-- id:d268 -->
+- Lock-screen text is now bottom-anchored (ends at 84 % of the height, shrinks down to 60 % size to fit in 40 % of the screen) so the big system clock shown when there is no notification no longer covers it. Setting 'Position du texte' keeps the old mid-screen layout as an option (OEM clocks differ). <!-- id:f30e -->
+- DailyReceiver.show(ctx, words) cancels notifications 1..3 then posts/renders the given words: the random button calls it with the random pick, so it replaces the lock-screen word. <!-- id:58c1 -->
