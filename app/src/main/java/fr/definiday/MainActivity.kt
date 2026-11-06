@@ -29,7 +29,12 @@ import java.net.URLEncoder
 import java.util.Locale
 
 class MainActivity : Activity() {
-    companion object { const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item" }
+    companion object {
+        const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item"
+
+        /** Small still prop beside Glose by month: snowflake in winter, leaf in autumn, flower in spring, none in summer. */
+        fun season(month: Int) = when (month) { 12, 1, 2 -> R.drawable.saison_flocon; in 9..11 -> R.drawable.saison_feuille; in 3..5 -> R.drawable.saison_fleur; else -> 0 }
+    }
 
     private var current: Item? = null
 
@@ -79,6 +84,7 @@ class MainActivity : Activity() {
         val p = Prefs(this)
         current?.let { show(it, top = false) }
         findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); Glose.play(this) }
+        findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
         val done = p.lastQuizDay == java.time.LocalDate.now().toEpochDay()
         findViewById<Button>(R.id.quiz_open).setText(if (done) R.string.quiz_done else R.string.quiz_open)
         findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
@@ -115,7 +121,10 @@ class MainActivity : Activity() {
         val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
-        ).apply { cornerRadius = 16 * resources.displayMetrics.density }
+        ).apply {
+            cornerRadius = 20 * resources.displayMetrics.density
+            if (Styles.needsEdge(st.palette, getColor(R.color.bg))) setStroke(resources.displayMetrics.density.toInt().coerceAtLeast(1), getColor(R.color.card_edge))
+        }
         findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
         listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
@@ -183,7 +192,7 @@ class MainActivity : Activity() {
         var row: LinearLayout? = null
         var used = 0
         (Words.today(this) + Words.seenToday(this)).distinctBy { it.key }.forEach { w ->
-            val chip = Button(this).apply {
+            val chip = Button(this, null, 0, R.style.Chip).apply {
                 text = if (w is Word) w.mot else getString(R.string.quote_chip)
                 setOnClickListener { pick(w) }
                 measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)

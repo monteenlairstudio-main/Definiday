@@ -19,6 +19,8 @@
     <color name="switch_track_on">#CCBFA5</color>
     <!-- pressed veil of Btn; focus is the 3 dp outline (btn.xml) -->
     <color name="ripple">#33886A34</color>
+    <!-- 1 dp edge of a word card that melts into bg (< 1.5:1, Styles.needsEdge): 1.76:1 on bg -->
+    <color name="card_edge">#C9BC9F</color>
     <!-- locked Collection items, 2.03:1 on bg: dimmer than the unlocked ones (the state is also written) -->
     <color name="silhouette">#B8AFA0</color>
 </resources>

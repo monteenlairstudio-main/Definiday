@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Btn pressed: shrinks to 0.97 in 80 ms. Animations off (developer options, battery saver): the animator ends at once, a still state like the ripple veil. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:state_pressed="true">
+        <set>
+            <objectAnimator android:duration="80" android:propertyName="scaleX" android:valueTo="0.97" android:valueType="floatType" />
+            <objectAnimator android:duration="80" android:propertyName="scaleY" android:valueTo="0.97" android:valueType="floatType" />
+        </set>
+    </item>
+    <item>
+        <set>
+            <objectAnimator android:duration="80" android:propertyName="scaleX" android:valueTo="1" android:valueType="floatType" />
+            <objectAnimator android:duration="80" android:propertyName="scaleY" android:valueTo="1" android:valueType="floatType" />
+        </set>
+    </item>
+</selector>

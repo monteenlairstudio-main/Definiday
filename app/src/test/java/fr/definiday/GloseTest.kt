@@ -46,20 +46,70 @@ class GloseTest {
         overlays.filterKeys { it != "Glose_Eclats" }.forEach { (name, style) -> assertTrue(name, diff(base, render(R.drawable.glose_assis_vd, listOf(style))) > 50) }
     }
 
-    /** The unlock table, as agreed with the owner (thresholds count quizzes). */
+    /** The unlock table, as agreed with the owner (base: thresholds count quizzes; 2026 wave from the catalogue; d: = one quiz in the window). */
     @Test fun unlockTable() {
         val table = mapOf("assis" to "q0", "tigre" to "q0", "bordeaux" to "q0", "ecrit_mot" to "q1", "ecrit_encore" to "q1", "ecrit_bravo" to "r1",
             "noeud" to "p1", "soir" to "s3", "ecrit_dodo" to "s3", "moutarde" to "q5", "echarpe" to "s7", "livres" to "q10", "creme" to "p5",
             "bonnet" to "s14", "sauge" to "q20", "ecrit_rare" to "r30", "plume" to "r60", "rose" to "p15", "marque" to "q45",
-            "enluminure" to "r150", "nuit" to "s30")
-        assertEquals(table, Unlocks.items.associate { it.id to "${it.on}${it.need}" })
-        fun of(c: Char, n: Int) = Unlocks.of(if (c == 'q') n else 0, if (c == 'p') n else 0, if (c == 'r') n else 0, if (c == 's') n else 0)
+            "enluminure" to "r150", "nuit" to "s30",
+            "roux" to "q3", "smoking" to "q30", "lavande" to "q8", "bleu_prusse" to "c25", "vert_eau" to "r12", "reliure_bordeaux" to "q2",
+            "reliure_verte" to "m40", "monture_ecaille" to "c20", "ecrit_coucou" to "q3", "ecrit_ronron" to "s10", "grelot" to "q12", "beret" to "k15",
+            "reveil_tasse" to "q21", "echarpe_sucre_orge" to "d:12-01..12-31", "bonnet_neige" to "d:12-01..02-28", "ecrit_flocon" to "d:12-01..12-31",
+            "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20")
+        assertEquals(table, Unlocks.items.associate { it.id to (it.window?.let { w -> "d:$w" } ?: "${it.on}${it.need}") })
         Unlocks.items.filter { it.need > 0 }.forEach {
-            assertTrue(it.id, it.id in of(it.on, it.need))
-            assertFalse(it.id, it.id in of(it.on, it.need - 1))
+            assertTrue(it.id, it.id in Unlocks.of(mapOf(it.on to it.need)))
+            assertFalse(it.id, it.id in Unlocks.of(mapOf(it.on to it.need - 1)))
         }
-        assertEquals(setOf("assis", "tigre", "bordeaux"), Unlocks.of(0, 0, 0, 0))
-        assertEquals(Unlocks.items.map { it.id }.toSet(), Unlocks.of(150, 150, 150, 150))
+        assertEquals(setOf("assis", "tigre", "bordeaux"), Unlocks.of(emptyMap()))
+        assertEquals(Unlocks.items.filter { it.window == null }.map { it.id }.toSet(), Unlocks.of("qprsckm".associateWith { 150 }))
+    }
+
+    /** Every id is unique and resolves: poses to a drawable, other items (but the defaults) to an overlay that changes the picture; names never say "Glose". */
+    @Test fun unlockTableResolves() {
+        assertEquals(Unlocks.items.size, Unlocks.byId.size)
+        val base = render(R.drawable.glose_assis_vd)
+        Unlocks.items.forEach {
+            assertFalse(it.nom, it.nom.contains("Glose"))
+            if (it.kind.slot == Unlocks.Kind.POSE) assertTrue(it.id, painted(render(it.res)) > 2000)
+            else if (it.need > 0 || it.window != null) assertTrue(it.id, diff(base, Glose.bitmap(Glose.preview(ctx, it), 256, 256)) > 50)
+            else assertEquals(it.id, 0, it.style)
+            assertEquals(it.id, it.kind.slot == Unlocks.Kind.POSE, it.res != 0)
+        }
+    }
+
+    /** Windows any year, wrapping over the new year; seasonal hints say when they come back, never that they expired. */
+    @Test fun windowsAndCounters() {
+        fun d(s: String) = java.time.LocalDate.parse(s)
+        assertTrue(Unlocks.inWindow("12-01..02-28", d("2027-01-15")))
+        assertTrue(Unlocks.inWindow("12-01..02-28", d("2026-12-01")))
+        assertFalse(Unlocks.inWindow("12-01..02-28", d("2027-03-01")))
+        assertFalse(Unlocks.inWindow("01-02..01-20", d("2027-01-21")))
+        assertEquals(setOf("echarpe_sucre_orge", "bonnet_neige", "ecrit_flocon", "sapin_papier"), Unlocks.of(emptyMap(), d("2031-12-24")) - Unlocks.of(emptyMap()))
+        assertEquals(setOf("bonnet_neige", "couronne_rois"), Unlocks.of(emptyMap(), d("2027-01-06")) - Unlocks.of(emptyMap()))
+        // the last quiz's date unlocks, once; outside its window an item says when it comes back
+        val p = Prefs(ctx).apply { quizzes = 1; lastQuizDay = d("2026-12-24").toEpochDay() }
+        assertTrue(Unlocks.update(p).map { it.id }.containsAll(listOf("sapin_papier", "ecrit_flocon")))
+        assertEquals("Revient en janvier", Unlocks.hint(Unlocks.byId.getValue("couronne_rois"), p, d("2026-12-24").toEpochDay()))
+        assertEquals("Revient en décembre", Unlocks.hint(Unlocks.byId.getValue("bonnet_neige"), p, d("2027-06-01").toEpochDay()))
+        assertEquals("Un soir de quiz, en ce moment", Unlocks.hint(Unlocks.byId.getValue("couronne_rois"), p, d("2027-01-05").toEpochDay()))
+        // c, m, k: correct answers, words and quotes seen
+        History(ctx).run { mark("abaque", 1); mark("zinzolin", 2); mark("q:Le style est l’homme même.", 3) }
+        p.correctAnswers = 7
+        assertEquals(mapOf('c' to 7, 'm' to 2, 'k' to 1), Unlocks.counts(p).filterKeys { it in "cmk" })
+        assertEquals("Encore 38 mots découverts", Unlocks.hint(Unlocks.byId.getValue("reliure_verte"), p))
+        assertEquals("Encore 14 citations lues", Unlocks.hint(Unlocks.byId.getValue("beret"), p))
+        assertEquals("Encore 13 bonnes réponses", Unlocks.hint(Unlocks.byId.getValue("monture_ecaille"), p))
+    }
+
+    /** One item per slot; the single accessory saved before the slots existed is still worn; a binding goes before the pelage. */
+    @Test fun slotsKeepOldChoices() {
+        val p = Prefs(ctx).apply { unlocked = setOf("noeud", "beret", "nuit", "reliure_verte", "ecrit_coucou"); gloseAcc = "noeud"; glosePose = "ecrit_coucou" }
+        assertEquals("noeud", Glose.choice(p)[Unlocks.Kind.COU])
+        assertEquals(R.drawable.glose_ecrit_coucou, Glose.pose(Glose.choice(p)))
+        Glose.save(p, Glose.choice(p) + mapOf(Unlocks.Kind.TETE to "beret", Unlocks.Kind.LIVRE to "reliure_verte", Unlocks.Kind.PELAGE to "nuit"))
+        assertEquals("beret,noeud,reliure_verte", p.gloseAcc)
+        assertEquals(listOf(R.style.Glose_Livre_Verte, R.style.Glose_Pelage_Nuit, R.style.Glose_Acc_Beret, R.style.Glose_Acc_Noeud), Glose.styles(Glose.choice(p)))
     }
 
     @Test fun unlocksAreKeptAndAnnouncedOnce() {
@@ -94,6 +144,52 @@ class GloseTest {
         p.unlocked = setOf("soir")
         assertEquals(R.drawable.glose_assis, Glose.mainPose(p, hour = 20))
         assertEquals(R.drawable.glose_soir, Glose.mainPose(p, hour = 21))
+    }
+
+    /** The idle life stops by itself after IDLE_MS (WCAG 2.2.2); a tap replays a full period. Robolectric cannot run an infinite AVD,
+     *  so the drawable here only records start/stop. */
+    @Test fun idleLifeStopsThenReplays() {
+        var running = false
+        val d = object : AnimatedVectorDrawable() {
+            override fun start() { running = true }
+            override fun stop() { running = false }
+            override fun reset() {}
+            override fun isRunning() = running
+        }
+        val v = ImageView(ctx).apply { setImageDrawable(d) }
+        Robolectric.buildActivity(android.app.Activity::class.java).setup().get().setContentView(v)
+        val idle = { ms: Long -> org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(ms)) }
+        assertTrue(Glose.IDLE_MS in 20_000L..30_000L)
+        Glose.play(v)
+        idle(Glose.IDLE_MS - 1000)
+        assertTrue(running)
+        Glose.play(v) // a tap: the first period's stop is cancelled
+        idle(Glose.IDLE_MS - 1000)
+        assertTrue(running)
+        idle(2000)
+        assertFalse(running) // rests on its still frame
+        Glose.play(v); Glose.stop(v) // onPause
+        assertFalse(running)
+    }
+
+    /** A reaction plays once, then the idle drawable comes back; stop() (onPause) cancels that return. */
+    @Test fun reactionsGoBackToIdle() {
+        listOf(R.drawable.glose_icone_hoche, R.drawable.glose_icone_penche).forEach { res ->
+            val v = ImageView(ctx)
+            Robolectric.buildActivity(android.app.Activity::class.java).setup().get().setContentView(v)
+            Glose.once(v, res, R.drawable.glose_icone_vd, accessory = false)
+            val oneShot = v.drawable
+            assertTrue(oneShot is AnimatedVectorDrawable)
+            v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(2000))
+            assertFalse(v.drawable is AnimatedVectorDrawable) // back to the still icon
+            Glose.once(v, res, R.drawable.glose_icone, accessory = false)
+            v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+            val again = v.drawable
+            Glose.stop(v)
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(2000))
+            assertTrue(v.drawable === again)
+        }
     }
 
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {

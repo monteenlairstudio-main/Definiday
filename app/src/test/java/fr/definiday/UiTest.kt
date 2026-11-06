@@ -150,4 +150,44 @@ class UiTest {
         shadowOf(android.os.Looper.getMainLooper()).idle()
         assertTrue(card.isAccessibilityFocused)
     }
+
+    /** Pale palettes on cream (craie 1.02:1) and dark ones at night take a 1 dp edge; contrasted ones don't. */
+    @Test fun cardEdgeWhenThePaletteMeltsIntoThePage() {
+        val cream = android.graphics.Color.parseColor("#FAF7F0")
+        val night = android.graphics.Color.parseColor("#0F1424")
+        assertEquals(21.0, Styles.contrast(android.graphics.Color.BLACK, android.graphics.Color.WHITE), 0.01)
+        val pal = Styles.load(ctx).palettes.associateBy { it.id }
+        assertTrue(Styles.needsEdge(pal.getValue("craie"), cream))
+        assertTrue(Styles.needsEdge(pal.getValue("sepia"), cream)) // 1.66:1 at the bottom but 1.27:1 at the top
+        assertTrue(!Styles.needsEdge(pal.getValue("encre_de_chine"), cream))
+        assertTrue(Styles.needsEdge(pal.getValue("encre_de_chine"), night))
+        assertTrue(!Styles.needsEdge(pal.getValue("craie"), night))
+    }
+
+    /** End-of-quiz unboxing: at most 3 stamps, the rest counted. */
+    @Test fun quizStampsShowAtMostThree() {
+        assertEquals(listOf(1, 2) to 0, Quiz.stamps(listOf(1, 2)))
+        assertEquals(listOf(1, 2, 3) to 0, Quiz.stamps(listOf(1, 2, 3)))
+        assertEquals(listOf(3, 4, 5) to 2, Quiz.stamps(listOf(1, 2, 3, 4, 5)))
+        // first quiz, all right: 4 items at once (3 poses and the bow tie) -> 3 stamps and "+ 1 dans la collection"
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
+        val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
+        val defs = Words.load(ctx).associateBy { it.definition }
+        repeat(Words.seenToday(ctx).size) {
+            val w = views(a).filterIsInstance<TextView>().firstNotNullOf { defs[it.text.toString()] }
+            buttons(a).first { it.text == w.mot }.performClick()
+            buttons(a).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+        }
+        val texts = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()
+        val fresh = Unlocks.items.filter { it.id in Prefs(ctx).announced }
+        assertEquals(4, fresh.size)
+        assertEquals(3, fresh.count { it.nom in texts })
+        assertTrue(ctx.getString(R.string.unlock_more, 1) in texts)
+        assertTrue(buttons(a).any { it.text == ctx.getString(R.string.collection_see) })
+    }
+
+    @Test fun seasonalPropByMonth() {
+        assertEquals(listOf(R.drawable.saison_flocon, R.drawable.saison_flocon, R.drawable.saison_fleur, R.drawable.saison_feuille, 0),
+            listOf(12, 2, 4, 11, 7).map(MainActivity::season))
+    }
 }

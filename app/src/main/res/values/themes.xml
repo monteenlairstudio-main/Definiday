@@ -47,7 +47,7 @@
     </style>
     <style name="Btn" parent="android:Widget.Material.Button">
         <item name="android:background">@drawable/btn</item>
-        <item name="android:stateListAnimator">@null</item>
+        <item name="android:stateListAnimator">@animator/press</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/btn_text</item>
         <item name="android:textSize">16sp</item>
@@ -57,6 +57,10 @@
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
+    </style>
+    <!-- home chips of the day: pill-shaped -->
+    <style name="Chip" parent="Btn">
+        <item name="android:background">@drawable/btn_chip</item>
     </style>
     <!-- full-width row of the home actions and settings -->
     <style name="Row" parent="Btn">

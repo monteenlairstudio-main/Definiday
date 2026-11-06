@@ -1,11 +1,11 @@
 // node make_all.js [filtre]  -> régénère tous les livrables (SVG animés + PNG 1024/128) dans un seul Chromium.
 const { buildOne } = require('./build.js');
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright'); // PLAYWRIGHT=/opt/node-tools/node_modules/playwright si installé ailleurs
-const WORDS = ['mot', 'bravo', 'rare', 'dodo', 'encore'];
+const WORDS = ['mot', 'bravo', 'rare', 'dodo', 'encore', 'coucou', 'ronron', 'flocon'];
 const T = { assis: 1, livres: 1, ecrit: 4.5, soir: 1, icone: 1 };
 const jobs = [];
 const add = (pose, name, variant = {}, dir = '', sizes) => jobs.push({ pose, variant, out: `${dir}${name}.svg`, png: `rendus/${name}`, t: T[pose], sizes });
-add('assis', 'glose_assis'); add('livres', 'glose_livres'); add('soir', 'glose_soir');
+add('assis', 'glose_assis'); add('livres', 'glose_livres'); add('soir', 'glose_soir'); add('soir', 'glose_reveil', { awake: true });
 for (const w of WORDS) add('ecrit', `glose_ecrit_${w}`, { word: w });
 add('icone', 'glose_icone', {}, '', [1024, 128, 48]); add('icone', 'glose_icone_dort', { sleep: true }, '', [1024, 128, 48]);
 for (const skin of ['creme', 'enluminure', 'nuit']) for (const pose of ['assis', 'livres', 'soir']) add(pose, `glose_${pose}_pelage_${skin}`, { skin }, 'variantes/');

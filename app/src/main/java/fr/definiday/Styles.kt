@@ -31,6 +31,15 @@ object Styles {
         )
     }
 
+    /** WCAG contrast ratio of two opaque colors, 1 to 21. */
+    fun contrast(a: Int, b: Int): Double {
+        val (dark, light) = listOf(a, b).map { Color.luminance(it).toDouble() }.sorted()
+        return (light + 0.05) / (dark + 0.05)
+    }
+
+    /** The card's gradient nearly melts into the [page] at one end (pale palettes on cream, dark ones at night): it takes a 1 dp edge. */
+    fun needsEdge(p: Palette, page: Int) = minOf(contrast(p.haut, page), contrast(p.bas, page)) < 1.5
+
     fun load(ctx: Context): Catalog = parse(ctx.assets.open("styles.json").bufferedReader().use { it.readText() })
 
     /** The word's own choice if it is in the pool, else a stable pick from the pool (same word, same fallback). */

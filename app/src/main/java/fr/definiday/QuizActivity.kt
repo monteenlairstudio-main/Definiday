@@ -1,9 +1,14 @@
 package fr.definiday
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.HapticFeedbackConstants
 import android.view.View
+import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -22,6 +27,7 @@ class QuizActivity : Activity() {
     private var index = 0
     private var score = 0
     private var picked = -1 // option chosen for the current question, -1 = not answered yet
+    private var icon: ImageView? = null // small Glose at the top of each question: nods or tilts its head on answers
     private var done = false // that day's quiz was already counted when this one opened: its score won't count
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +48,11 @@ class QuizActivity : Activity() {
         box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
         next()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        icon?.let(Glose::stop) // a pending reaction never returns to idle on a hidden screen
     }
 
     override fun onSaveInstanceState(out: Bundle) {
@@ -70,11 +81,11 @@ class QuizActivity : Activity() {
     private fun next() {
         box.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
+        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO; icon = this })
         box.addView(title())
         if (day < LocalDate.now().toEpochDay()) box.addView(text(getString(R.string.quiz_eve), 13f))
         val q = questions[index]
-        val counter = text("${index + 1} / ${questions.size}", 13f).apply { contentDescription = getString(R.string.quiz_progress, index + 1, questions.size) }
+        val counter = progress()
         box.addView(counter)
         box.addView(text(getString(R.string.quiz_prompt), 15f))
         box.addView(text(q.answer.definition, 20f))
@@ -99,12 +110,43 @@ class QuizActivity : Activity() {
         buttons.forEachIndexed { i, b ->
             b.setOnClickListener {
                 picked = i
-                if (q.options[i] == q.answer) score++
+                val right = q.options[i] == q.answer
+                if (right) score++
                 reveal()
+                react(b, right)
             }
         }
         if (picked >= 0) reveal() // answered before a rotation: not twice
         focus(counter)
+    }
+
+    /** « 2 / 4 » as yarn balls, one per question, filled up to the current one; TalkBack reads « Question 2 sur 4 ». */
+    private fun progress() = LinearLayout(this).apply {
+        contentDescription = getString(R.string.quiz_progress, index + 1, questions.size)
+        if (Build.VERSION.SDK_INT >= 28) isScreenReaderFocusable = true
+        val px = (18 * resources.displayMetrics.density).toInt()
+        repeat(questions.size) { i ->
+            addView(ImageView(context).apply {
+                setImageDrawable(if (i <= index) Glose.mine(context, R.drawable.pelote) else getDrawable(R.drawable.pelote_vide))
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+            }, LinearLayout.LayoutParams(px, px).apply { marginEnd = px / 3 })
+        }
+        setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
+    }
+
+    /** One short pulse on the chosen button: right, it pops (1 → 1.04 → 1); wrong, it shakes gently (±6 dp), never the screen.
+     *  Haptics follow the system setting; motion is skipped when animations are off. */
+    private fun react(b: View, right: Boolean) {
+        if (Build.VERSION.SDK_INT >= 30) b.performHapticFeedback(if (right) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.REJECT)
+        else if (right) b.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        icon?.let { Glose.once(it, if (right) R.drawable.glose_icone_hoche else R.drawable.glose_icone_penche, R.drawable.glose_icone_vd, accessory = false) }
+        if (!ValueAnimator.areAnimatorsEnabled()) return
+        b.stateListAnimator = null // its release (to scale 1) would fight the pop; the button stays disabled until next()
+        if (right) b.animate().scaleX(1.04f).scaleY(1.04f).setDuration(90).withEndAction {
+            b.animate().scaleX(1f).scaleY(1f).setInterpolator(OvershootInterpolator(3f)).setDuration(130)
+        }
+        else ObjectAnimator.ofFloat(b, View.TRANSLATION_X, *floatArrayOf(0f, 1f, -1f, 1f, -1f, 0f).map { it * 6 * resources.displayMetrics.density }.toFloatArray())
+            .setDuration(250).start()
     }
 
     /** removeAllViews() drops TalkBack's focus: put it back on the new screen's first useful line. */
@@ -131,14 +173,41 @@ class QuizActivity : Activity() {
                 gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
             })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
+            else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
             if (fresh.isNotEmpty()) {
                 box.addView(text(getString(R.string.unlock_new), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
-                box.addView(text(fresh.joinToString("\n") { it.nom }, 16f).apply { gravity = Gravity.CENTER })
+                stamps(fresh, Glose.choice(p))
                 button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
             }
         }
         button(getString(R.string.quiz_close)).setOnClickListener { finish() }
+    }
+
+    /** Unboxing: up to 3 stamps (Glose wearing the item, its name), cascading in, then « + N dans la collection ». */
+    private fun stamps(fresh: List<Unlocks.Item>, c: Map<Unlocks.Kind, String>) {
+        val (shown, more) = Quiz.stamps(fresh)
+        val d = resources.displayMetrics.density
+        val row = LinearLayout(this).apply { gravity = Gravity.CENTER_HORIZONTAL; weightSum = 3f; setPadding(0, (8 * d).toInt(), 0, 0) }
+        val move = ValueAnimator.areAnimatorsEnabled()
+        shown.forEachIndexed { i, item ->
+            val stamp = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER_HORIZONTAL
+                setBackgroundResource(R.drawable.stamp)
+                val pad = (8 * d).toInt()
+                setPadding(pad, pad, pad, pad)
+                addView(glose(Glose.preview(context, item, c), 72).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
+                addView(text(item.nom, 14f).apply { gravity = Gravity.CENTER; setPadding(0, pad / 2, 0, 0) })
+            }
+            row.addView(stamp, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = (4 * d).toInt(); marginEnd = (4 * d).toInt() })
+            if (move) {
+                stamp.alpha = 0f; stamp.translationY = 16 * d
+                stamp.animate().alpha(1f).translationY(0f).setStartDelay(150L + 80L * i).setDuration(250).setInterpolator(OvershootInterpolator())
+            }
+        }
+        box.addView(row)
+        if (more > 0) box.addView(text(getString(R.string.unlock_more, more), 15f).apply { gravity = Gravity.CENTER; setPadding(0, (12 * d).toInt(), 0, (4 * d).toInt()) })
     }
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
@@ -164,6 +233,9 @@ object Quiz {
         val distractors = (same + others.shuffled(rnd)).distinct().take(3)
         Question(w, (distractors + w).shuffled(rnd))
     }
+
+    /** Unboxing: at most 3 stamps, the last (rarest, the one Glose wears) ones; the rest is only counted (« + N dans la collection »). */
+    fun <T> stamps(fresh: List<T>) = fresh.takeLast(3) to maxOf(0, fresh.size - 3)
 
     /** Passed = at most one mistake per 3 questions (1/1, 2/2, 2/3). */
     fun passed(score: Int, total: Int) = score * 3 >= total * 2

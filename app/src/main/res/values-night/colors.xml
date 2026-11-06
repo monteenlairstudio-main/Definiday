@@ -16,6 +16,8 @@
     <color name="switch_track_off">#6E6A62</color>
     <color name="switch_track_on">#595042</color>
     <color name="ripple">#40C9A96E</color>
+    <!-- 2.38:1 on bg: edge of the dark palettes' cards -->
+    <color name="card_edge">#4A5368</color>
     <!-- 1.83:1 on bg (was #B8AFA0, 8.45:1: brighter than the unlocked items) -->
     <color name="silhouette">#3A4256</color>
 </resources>
