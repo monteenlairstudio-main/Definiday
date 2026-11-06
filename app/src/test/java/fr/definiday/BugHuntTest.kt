@@ -250,7 +250,7 @@ class BugHuntTest {
         assertEquals(listOf(1, 8, 0, 21, 0, Prefs.MODE_NOTIF, 0, 120, 0), listOf(p.wordsPerDay, p.hour, p.minute, p.quizHour, p.quizMinute, p.mode, p.unlocks, p.durationMinutes, p.streak))
         assertTrue(p.enabled)
         // "nuit" is an unlocked PELAGE stored as the pose: getDrawable(0) used to crash every launch
-        assertEquals(mapOf(Unlocks.Kind.POSE to "assis", Unlocks.Kind.PELAGE to "tigre", Unlocks.Kind.PELOTE to "bordeaux", Unlocks.Kind.ACC to ""), Glose.choice(p))
+        assertEquals(mapOf(Unlocks.Kind.POSE to "assis", Unlocks.Kind.PELAGE to "tigre", Unlocks.Kind.PELOTE to "bordeaux") + Unlocks.ACC.associateWith { "" }, Glose.choice(p))
         assertEquals(R.drawable.glose_assis, Glose.pose(mapOf(Unlocks.Kind.POSE to "nuit")))
         assertTrue(History(ctx).all().isEmpty())
         Robolectric.buildActivity(MainActivity::class.java).setup()

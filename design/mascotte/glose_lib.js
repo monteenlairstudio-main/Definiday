@@ -71,6 +71,8 @@ const SKINS = {
   tigre:      { label: 'Gris tigré', fur: '#A4ACBC', furD: '#788196', cream: '#F8EEDD' },
   creme:      { label: 'Crème caramel', fur: '#E8D3B4', furD: '#B98E66', cream: '#FCF4E6' },
   enluminure: { label: 'Enluminure', fur: '#E9C477', furD: '#B47A2C', cream: '#FFF5DC', extra: 'gilt', rare: true },
+  roux:       { label: "Roux pain d'épices", fur: '#DE9457', furD: '#B4652F', stripe: '#B4652F', cream: '#FBEEDC' },
+  smoking:    { label: 'Smoking', fur: '#4A4448', furD: '#3A3438', stripe: '#433D41', cream: '#FFFAF2', bookCover: '#8E3A44', bookCoverD: '#6E2A33', cup: '#8E3A44', cupD: '#6E2A33' },
   nuit:       { label: "Nuit d'encre", fur: '#4A5A86', furD: '#2C3659', cream: '#DCE2F2', extra: 'stars', rare: true, noseC: '#D98A9A', rose: '#E6A0B0',
                 bookCover: '#8E3A44', bookCoverD: '#6E2A33', cup: '#8E3A44', cupD: '#6E2A33' }, // socle et tasse bordeaux : le pelage bleu nuit ne s'y fond pas
 };
@@ -79,14 +81,19 @@ const YARNS = {
   moutarde: { label: 'Moutarde', ball: '#D9A441', ballD: '#8A5F1E' },
   sauge:    { label: 'Sauge', ball: '#8FA585', ballD: '#4F6347' },
   rose:     { label: 'Rose poudré', ball: '#E7A3A0', ballD: '#9C5050' },
+  lavande:  { label: 'Lavande', ball: '#A99BC4', ballD: '#65587F' },
+  bleu_prusse: { label: 'Bleu de Prusse', ball: '#2F5B8C', ballD: '#173252' },
+  vert_eau: { label: "Vert d'eau", ball: '#A9D6C4', ballD: '#5E8E7C' },
 };
+const SPECS = { ecaille: '#8A5530' }; // monture (lunettes) ; défaut : C.gold
 function makeC(v) {
   v = Object.assign({ skin: 'tigre', yarn: 'bordeaux', acc: [] }, v || {});
   const C = Object.assign({}, BASE, SKINS[v.skin] || SKINS.tigre, YARNS[v.yarn] || YARNS.bordeaux);
   C.v = v; C.has = a => v.acc.includes(a);
+  C.stripe = C.stripe || C.furD; C.specs = SPECS[v.specs] || C.gold;
   // v.all (export Android) : tous les accessoires et détails rares dessinés, couleurs de socle/tasse en sentinelles ;
   // svg2avd.js les rend visibles ou non par attributs de thème (voir GATES et TOKENS dans android/svg2avd.js)
-  if (v.all) { C.has = () => true; C.S = { book: '#2C3A01', bookD: '#1F2901', top: '#2C3A02', topD: '#1F2902', low: '#9C6B03', lowD: '#7C5203', cup: '#2C3A04' }; }
+  if (v.all) { C.has = () => true; C.S = { book: '#2C3A01', bookD: '#1F2901', top: '#2C3A02', topD: '#1F2902', low: '#9C6B03', lowD: '#7C5203', cup: '#2C3A04' }; C.stripe = '#788101'; C.specs = '#D9A401'; }
   return C;
 }
 
@@ -172,37 +179,49 @@ function gloseHead(C, o = {}) {
   const gl = [[428, 386 + drop], [572, 386 + drop]];
   const lenses = gl.map(c => warp(circ(c, LR - 6), W));
   const rings = gl.map(c => warp(S(circ(c, LR + 6), circ(c, LR - 6)), W));
-  const dbl = (pts, w) => [line(curve(pts), w + 8), line(curve(pts), w, C.gold)];
+  const dbl = (pts, w) => [line(curve(pts), w + 8), line(curve(pts), w, C.specs)];
   const lx = wx(428 - LR), rx = wx(572 + LR), br = [wx(480), wx(500), wx(520)];
   const glare = G(pre + 'reflet', gl.map(([x, y]) => { const c = wx(x); return fill(poly([[c - 40, y + 70], [c - 14, y + 70], [c + 40, y - 70], [c + 14, y - 70]]), '#FFFFFF', 0.5); }));
   const glassItems = [
     ...lenses.map(l => fill(l.clone(NI), '#FFFFFF', 0.12)), o.glare === false ? null : clipIn(U(...lenses), [glare]),
     ...dbl([[332, 364 + drop], [lx + 4, 372 + drop]], 7), ...dbl([[668, 364 + drop], [rx - 4, 372 + drop]], 7),
     ...dbl([[br[0], 380 + drop], [br[1], 368 + drop], [br[2], 380 + drop]], 7),
-    ...rings.map(r => G(null, [fill(r.clone(NI), C.gold), fill(S(r, moved(r, -5, -6)), INK, 0.2), line(r, 4)])),
+    ...rings.map(r => G(null, [fill(r.clone(NI), C.specs), fill(S(r, moved(r, -5, -6)), INK, 0.2), line(r, 4)])),
     ...gl.map(([x, y]) => fill(circ([wx(x - 30), y - 34], 5.5), '#FFF6E6', 0.9))];
   const glasses = G(pre + 'lunettes', glassItems);
   if (o.glassesTilt) glasses.rotate(o.glassesTilt, [wx(500), 400]);
-  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.62, 0.82, 1], dur: 5.5, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
+  // vie au repos : chaque partie a sa propre période (paupières 9,4 = 2 × 4,7 s, reflet 11 s, bâillement 29 s, queue 7,3 s dans les poses),
+  // les cycles ne se recalent qu'après plusieurs minutes : le motif paraît irrégulier
+  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.8, 0.9, 1], dur: 11, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
   const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), 5, INK, 0.7), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), 5, INK, 0.7)]
     : [line(curve([[wx(396), 304], [wx(420), 294], [wx(446), 300]]), 5, INK, 0.8), line(curve([[wx(554), 300], [wx(580), 294], [wx(604), 304]]), 5, INK, 0.8)];
   const extra = skinExtra(C, head, 'head', [[wx(410), 250], [wx(600), 262], [wx(470), 300]]);
+  // bâillement (une fois par cycle de 29 s) : bouche ouverte et paupières closes, cachées (échelle 0) le reste du temps
+  const yawn = !sleep && o.yawn !== false, YK = [0, 0.5, 0.53, 0.6, 0.63, 1], YV = [[1, 0.001], [1, 0.001], [1, 1], [1, 1], [1, 0.001], [1, 0.001]];
+  const mouthO = yawn ? G(pre + 'baille', [vol(null, ell([wx(500), 466], [15 * W.k(500), 19]), '#7A3A3E', [fill(X(ell([wx(500), 482], [11 * W.k(500), 8]), ell([wx(500), 466], [15 * W.k(500), 19])), C.rose)], IN)]) : null;
   const headIn = [fill(X(U(innerL, innerR), head), C.rose), ...earHair,
-    fill(X(mMark, head), C.furD), shadowOf(head, 26, 30, 0.14), rimOf(head, 10, 12), fill(muzzle.clone(NI), C.cream), shadowOf(muzzle, 8, 12, 0.1),
+    fill(X(mMark, head), C.stripe), shadowOf(head, 26, 30, 0.14), rimOf(head, 10, 12), fill(muzzle.clone(NI), C.cream), shadowOf(muzzle, 8, 12, 0.1),
     ...extra,
     fill(ell([wx(386), 452], [28 * W.k(386), 16]), C.rose, sleep ? 0.85 : 0.7), fill(ell([wx(614), 452], [28 * W.k(614), 16]), C.rose, sleep ? 0.85 : 0.7),
-    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouthW([wx(500), 448]), lids, glasses, ...brows];
+    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouthW([wx(500), 448]), mouthO, lids,
+    ...(yawn ? [0, 1].map(i => G(pre + 'baille_' + 'gd'[i], [lids.children[i].children[0].clone(NI)])) : []), glasses, ...brows];
   const parts = [o.behind || null, C.has('plume') ? quill(C, turn) : null, vol(null, head, C.fur, headIn), ...whisk,
-    C.has('bonnet') ? nightcap(C, earL, earR, innerL, innerR, turn, pre) : null, ...(o.front || [])];
+    C.has('bonnet') ? nightcap(C, earL, earR, innerL, innerR, turn, pre) : null, C.has('beret') ? beret(C, W, pre) : null, C.has('couronne') ? crown(C, W, pre) : null, ...(o.front || [])];
   const g = G(pre + 'tete', parts);
   // placement dans la scène
   const at = P(o.at || [500, 352]), s = o.scale || 1, neck = P([500, 520]);
   const M = new Matrix().translate(at.subtract([500, 352])).rotate(o.tilt || 0, neck).scale(s, neck);
   g.transform(M);
   const T = q => xy(P(q).transform(M));
-  if (!sleep) {
-    const blink = { values: [[1, 0.001], [1, 0.001], [1, 1], [1, 0.001], [1, 0.001]], keyTimes: [0, 0.88, 0.92, 0.96, 1], dur: o.blinkDur || 4.6, begin: o.blinkBegin || 0.7, base: 'scale(1 0.001)' };
+  g.data = { pivot: T(neck) }; // pivot des réactions one-shot (svg2avd -> android:pivotX/Y du groupe « tete »)
+  if (!sleep) { // un clignement, puis un double clignement
+    const blink = { values: [[1, 0.001], [1, 0.001], [1, 1], [1, 0.001], [1, 0.001], [1, 1], [1, 0.001], [1, 1], [1, 0.001], [1, 0.001]], keyTimes: [0, 0.27, 0.3, 0.33, 0.86, 0.885, 0.91, 0.935, 0.96, 1], dur: 9.4, begin: o.blinkBegin || 0.7, base: 'scale(1 0.001)' };
     anims.push(Object.assign({ id: pre + 'paupiere_g', type: 'scale', pivot: T(eyeTops[0]) }, blink), Object.assign({ id: pre + 'paupiere_d', type: 'scale', pivot: T(eyeTops[1]) }, blink));
+  }
+  if (yawn) {
+    anims.push({ id: pre + 'baille', type: 'scale', pivot: T([wx(500), 448]), values: YV.map(([, y]) => [y, y]), keyTimes: YK, dur: 29, base: 'scale(0.001)' }); // caché en point, pas en trait
+    eyeTops.forEach((t, i) => anims.push({ id: pre + 'baille_' + 'gd'[i], type: 'scale', pivot: T(t), values: YV, keyTimes: YK, dur: 29, base: 'scale(1 0.001)' }));
+    anims.push({ id: pre + 'tete', type: 'translate', values: [[0, 0], [0, 0], [0, -7], [0, -7], [0, 0], [0, 0]], keyTimes: YK, dur: 29 });
   }
   return { group: g, anims, T, M, chin: T([wx(500), 500]), neck: T(neck), crown: T([wx(500), 206]), head };
 }
@@ -261,6 +280,52 @@ function nightcap(C, earL, earR, inL, inR, turn, pre) {
     vol(null, pompon, C.cream, [shadowOf(pompon, 10, 10, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([pp, pp.add(new Point(18, 0).rotate(a))]), 3, INK, 0.2))]),
   ]);
 }
+// béret de peintre penché sur l'oreille lointaine, queue de feutre au sommet (dans la tête : suit ses animations)
+function beret(C, W, pre) {
+  const col = '#4A5470', colD = '#343C55';
+  const cap = warp(blob([[372, 236], [392, 186], [460, 152], [548, 146], [626, 166], [668, 206], [652, 236], [560, 230], [470, 240]], 0.5), W);
+  cap.rotate(8, [520, 200]);
+  const band = X(warp(blob([[366, 244], [372, 218], [470, 226], [560, 216], [656, 222], [660, 246], [560, 252], [470, 258]], 0.5), W).rotate(8, [520, 200]), cap);
+  const stalk = warp(taper([[536, 156], [540, 132], [552, 118]], 13, 8), W).rotate(8, [520, 200]);
+  return G(pre + 'beret', [vol(null, stalk, colD, [], 6),
+    vol(null, cap, col, [fill(band.clone(NI), colD), shadowOf(cap, 18, 16, 0.18), rimOf(cap, 8, 10, 0.3), fill(ell([462, 180], [44, 12]).rotate(-12), '#FFFFFF', 0.16)])]);
+}
+// couronne des rois : papier doré de la galette, pointes et gemmes, posée entre les oreilles
+function crown(C, W, pre) {
+  const gold = '#E9BE55', goldD = '#B98A2A';
+  const pts = [[404, 250], [400, 196], [432, 150], [452, 196], [482, 140], [500, 192], [518, 140], [548, 196], [568, 150], [600, 196], [596, 250], [500, 262]];
+  const c = warp(rpoly(pts, [14, 4, 6, 4, 6, 4, 6, 4, 6, 4, 14, 30]), W);
+  const band = X(warp(blob([[396, 246], [398, 214], [500, 224], [602, 214], [604, 246], [500, 258]], 0.5), W), c);
+  const gems = [[[432, 236], '#C75B54'], [[500, 242], '#4A6FA5'], [[568, 236], '#5E9A6E']].map(([p, k]) => vol(null, warp(circ(p, 9), W), k, [fill(circ([p[0] - 3, p[1] - 3], 3), '#FFFFFF', 0.6)], 3));
+  return G(pre + 'couronne', [vol(null, c, gold, [fill(band.clone(NI), goldD, 0.55), shadowOf(c, 14, 14, 0.16), rimOf(c, 6, 8, 0.4), ...gems,
+    ...[[432, 150], [482, 140], [518, 140], [568, 150]].map(p => fill(warp(circ([p[0], p[1] + 14], 4), W), '#FFF6E6', 0.8))], 6)]);
+}
+// grelot doré sur un ruban : ruban sous la tête (calque « grelot_ruban »), grelot devant (« grelot »)
+function jingle(C, chin, o = {}) {
+  const c = P(chin), w = o.w || 64, s = o.s || 1, red = '#C75B54';
+  const rib = taper([xy(c.add([-w, -14])), xy(c.add([-w * 0.5, 4])), xy(c.add([0, 10])), xy(c.add([w * 0.5, 4])), xy(c.add([w, -14]))], 16, 16);
+  const bc = c.add([0, 10 + 24 * s]), r = 23 * s, ball = circ(bc, r);
+  const slit = U(taper([xy(bc.add([-r * 0.55, r * 0.28])), xy(bc.add([r * 0.55, r * 0.28]))], 5 * s, 5 * s), circ(bc.add([0, r * 0.32]), 5 * s));
+  return { band: G('grelot_ruban', [vol(null, rib, red, [shadowOf(rib, 4, 6, 0.2), rimOf(rib, 3, 4, 0.3)], IN)]),
+    bell: G('grelot', [vol(null, circ(bc.add([0, -r]), 8 * s), C.gold, [], 4),
+      vol(null, ball, C.gold, [shadowOf(ball, 8 * s, 10 * s, 0.25), rimOf(ball, 4, 5, 0.4), line(arc(bc.add([-r, -2]), bc.add([0, 6 * s]), bc.add([r, -2])), 3, INK, 0.45),
+        fill(slit, INK, 0.8), fill(circ(bc.add([-r * 0.4, -r * 0.42]), 5 * s), '#FFFFFF', 0.7)], IN)]) };
+}
+// petit sapin de papier plié : trois étages (pli clair / pli ombré), étoile dorée ; base au point `at`
+function paperTree(C, at, s = 1) {
+  const b = P(at), q = (x, y) => xy(b.add([x * s, y * s]));
+  const green = '#5E9A6E', greenD = '#3F7350', items = [];
+  [[0, 46, 22], [-30, 38, 18], [-58, 30, 14]].forEach(([y, hw, _], i) => {
+    const top = q(0, y - 58 + i * 2), L = q(-hw, y), R = q(hw, y);
+    const t = rpoly([top, R, q(0, y + 6), L], [4, 6, 8, 6]);
+    items.push(vol(null, t, green, [fill(X(poly([top, q(0, y + 10), q(-hw - 4, y + 4)]), t), '#FFFFFF', 0.18), fill(X(poly([top, q(hw + 4, y + 4), q(0, y + 10)]), t), greenD, 0.55),
+      line(curve([top, q(0, y + 5)]), 3, INK, 0.45)], 6));
+  });
+  const trunk = rpoly([q(-9, 4), q(9, 4), q(9, 22), q(-9, 22)], 3);
+  const star = sparkleShape(q(0, -120), 15 * s);
+  return G('sapin', [fill(ell(b.add([0, 22 * s]), [44 * s, 8 * s]), INK, 0.2), vol(null, trunk, C.sepia, [], 5), ...items, vol(null, star, C.gold, [], 4)]);
+}
+function sparkleShape(c, r) { c = P(c); return rpoly([c.add([0, -r]), c.add([r * 0.26, -r * 0.26]), c.add([r, 0]), c.add([r * 0.26, r * 0.26]), c.add([0, r]), c.add([-r * 0.26, r * 0.26]), c.add([-r, 0]), c.add([-r * 0.26, -r * 0.26])], r * 0.1); }
 // nœud papillon bleu nuit à pois d'or (posé sous le menton)
 function bowTie(C, at, rot = 0, s = 1.15) {
   const wL = rpoly([[494, 500], [436, 470], [430, 532]], [10, 14, 14]), wR = rpoly([[506, 500], [570, 532], [564, 470]], [10, 14, 14]);
@@ -381,6 +446,9 @@ const SCRIPT = {
   d: [[0, 0], [26, -40], [56, -84], [72, -96], [52, -100], [28, -88], [12, -50], [16, -12], [32, -2], [52, -18], [68, -70], [78, -140], [84, -196], [80, -150], [74, -80], [72, -24], [82, -2], [102, -10]],
   e: [[0, 0], [24, -20], [50, -46], [58, -76], [48, -94], [32, -88], [18, -64], [14, -30], [26, -6], [48, -2], [74, -16]],
   c: [[0, 0], [24, -52], [50, -90], [66, -98], [70, -88], [62, -84], [42, -94], [22, -70], [14, -34], [28, -6], [50, -2], [76, -16]],
+  u: [[0, 0], [10, -56], [18, -96], [16, -52], [18, -14], [32, -2], [50, -14], [60, -52], [66, -96], [64, -50], [66, -12], [76, -2], [94, -8]],
+  l: [[0, 0], [24, -80], [44, -160], [52, -196], [40, -202], [30, -176], [22, -110], [16, -40], [18, -6], [36, -2], [58, -10]],
+  f: [[0, 0], [24, -80], [44, -160], [52, -196], [40, -202], [30, -176], [22, -110], [16, -30], [12, 40], [12, 92], [20, 104], [32, 90], [32, 50], [24, 10], [34, -4], [52, -8], [66, -14]],
 };
 const HIGH = { o: 1, v: 1, b: 1 };
 // « mot » reprend tel quel le tracé validé en v2 (bézier), le « t » barré par sa boucle.
@@ -421,7 +489,7 @@ function seatedGlose(C, o = {}) {
   const bib = X(U(circ([522, 502], 70), circ([476, 548], 40), circ([566, 548], 37), circ([524, 594], 38), circ([498, 580], 30), circ([548, 580], 30)), body);
   const flank = U(taper([[330, 588], [374, 600]], 24, 6), taper([[334, 628], [382, 638]], 24, 6), taper([[346, 664], [386, 668]], 20, 6),
     taper([[664, 600], [630, 610]], 20, 6), taper([[660, 640], [626, 646]], 18, 6));
-  L.body = vol('corps', body, C.fur, [fill(X(flank, body), C.furD), shadowOf(body, 30, 30, 0.16), rimOf(body, 12, 12), ...skinExtra(C, body, 'body', [[404, 520], [612, 560], [380, 640]]),
+  L.body = vol('corps', body, C.fur, [fill(X(flank, body), C.stripe), shadowOf(body, 30, 30, 0.16), rimOf(body, 12, 12), ...skinExtra(C, body, 'body', [[404, 520], [612, 560], [380, 640]]),
     fill(bib.clone(NI), C.cream), shadowOf(bib, 10, 12, 0.1),
     line(curve([[370, 690], [382, 638], [420, 614]]), IN), line(curve([[632, 690], [622, 646], [594, 626]]), IN)]);
   anims.push({ id: 'corps', type: 'scale', pivot: [500, 700], values: [[1, 1], [1.015, 1.025], [1, 1]], dur: 3.8 });
@@ -431,10 +499,10 @@ function seatedGlose(C, o = {}) {
   const tailPts = [[614, 674], [670, 690], [688, 712], [664, 730], [604, 736], [546, 728], [520, 710], [526, 690], [544, 686]];
   const tailFull = taper(tailPts, 40, 22, t => 40 - 18 * Math.pow(t, 1.3) + 3 * Math.sin(Math.PI * t));
   const tail = S(tailFull, body);
-  L.tail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.46, 0.62], 34, 8), tail), C.furD), fill(X(circ([540, 688], 20), tail), C.furD),
+  L.tail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.46, 0.62], 34, 8), tail), C.stripe), fill(X(circ([540, 688], 20), tail), C.furD),
     shadowOf(tail, 10, 12, 0.18), rimOf(tail, 6, 6)]);
   L.tailShadow = fill(X(S(moved(tailFull, 6, 10), tailFull), B.top), INK, 0.18);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [640, 680], values: [0, 1.6, 0, -1.2, 0], dur: 4.4 });
+  anims.push({ id: 'queue', type: 'rotate', pivot: [640, 680], values: [0, 1.6, 0, -1.2, 0], dur: 7.3 });
   // tête : 3/4 vers la droite, penchée
   const H = gloseHead(C, Object.assign({ at: [514, 350], tilt: -6, turn: 0.17 }, o.head || {}));
   anims.push(...H.anims);
@@ -444,6 +512,8 @@ function seatedGlose(C, o = {}) {
   // accessoires du cou
   if (C.has('echarpe')) { const sc = scarf(C, { c: [512, 478], w: 132, h: 44, sag: 24, tail: [[430, 500], [418, 560], [424, 610]] }); L.scarfBack = sc.back; L.scarf = sc.band; }
   if (C.has('noeud')) L.bow = bowTie(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
+  if (C.has('grelot')) { const j = jingle(C, [H.chin[0] + 4, H.chin[1] - 4]); L.jingleBand = j.band; L.jingle = j.bell; }
+  if (C.has('sapin')) L.tree = paperTree(C, o.tree || [744, 676], 1.25);
   return { B, L, anims, H, body };
 }
 // bras : épaule -> coude -> poignet, patte ronde au bout, rayures qui suivent le membre, ombres et liseré
@@ -452,7 +522,7 @@ function arm(C, pts, w0, w1, paw, o = {}) {
   const a = U(taper(pts, w0, w1), pawS);
   const bands = ringsAlong(pts, o.bands || [0.38, 0.62], w0 * 0.75, 8);
   const tip = X(pawShape(paw.c, paw.rx + 6, paw.ry + 4, paw.rot || 0), a);
-  const det = [fill(X(bands, S(a, pawS)), C.furD), fill(tip.clone(NI), C.cream), shadowOf(a, 12, 12, 0.18), rimOf(a, 6, 7)];
+  const det = [fill(X(bands, S(a, pawS)), C.stripe), fill(tip.clone(NI), C.cream), shadowOf(a, 12, 12, 0.18), rimOf(a, 6, 7)];
   if (o.pads) det.push(fill(U(ell(P(paw.c).add([2, 8]), [15, 11]), circ(P(paw.c).add([-17, -10]), 7), circ(P(paw.c).add([1, -18]), 7), circ(P(paw.c).add([19, -10]), 7)), C.rose));
   else det.push(...toes(paw.c, paw.rot || 0, 3, 12, 15));
   if (o.elbow) det.push(line(curve(o.elbow), IN, INK, 0.8));
@@ -477,8 +547,8 @@ function crossingTail(C, name, pts, split, w0, w1, rings, cross, cr = 60) {
   const tipEnd = P(tipPts[tipPts.length - 1]), tipDark = X(circ(tipEnd, 18), tip);
   const disc = circ(cross, cr), patch = X(tip, disc);
   return { shape: full, group: G(name, [
-    vol(null, full, C.fur, [fill(ringsM.clone(NI), C.furD), fill(ringsT.clone(NI), C.furD), fill(tipDark.clone(NI), C.furD), shadowOf(full, 14, 12, 0.18), rimOf(full, 7, 5)]),
-    clipIn(patch, [fill(tip.clone(NI), C.fur), fill(ringsT, C.furD), fill(tipDark, C.furD), shadowOf(tip, 10, 10, 0.18), rimOf(tip, 5, 5),
+    vol(null, full, C.fur, [fill(ringsM.clone(NI), C.stripe), fill(ringsT.clone(NI), C.stripe), fill(tipDark.clone(NI), C.furD), shadowOf(full, 14, 12, 0.18), rimOf(full, 7, 5)]),
+    clipIn(patch, [fill(tip.clone(NI), C.fur), fill(ringsT, C.stripe), fill(tipDark, C.furD), shadowOf(tip, 10, 10, 0.18), rimOf(tip, 5, 5),
       fill(X(moved(tip, 6, 8), S(main, tip)), INK, 0.16)]),
     edgeLine(tip, disc)]) };
 }

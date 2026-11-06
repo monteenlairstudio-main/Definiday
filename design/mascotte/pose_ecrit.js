@@ -2,7 +2,7 @@
 // guide le fil qui écrit un mot en cursive d'un seul trait puis se rembobine (stroke-dashoffset ⇄ trimPathEnd).
 function draw(paper) {
   const C = makeC(VARIANT), word = C.v.word || 'mot';
-  const { L, anims, H } = seatedGlose(C, { head: { turn: 0.24, tilt: 2, at: [508, 352] } });
+  const { L, anims, H } = seatedGlose(C, { head: { turn: 0.24, tilt: 2, at: [508, 352] }, tree: [292, 686] });
   const DUR = 7, KT = [0, 0.08, 0.55, 0.86, 1]; // caché → écriture → tenu → rembobinage
 
   // pelote serrée contre lui (patte proche dessous), tourne quand le fil se dévide / se rembobine
@@ -41,7 +41,7 @@ function draw(paper) {
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([L.shadow, L.book, L.ribbon, L.seat, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
-    G('pattes', [near.group]), L.scarf, L.head, L.bow, fil, pinch, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([L.shadow, L.book, L.ribbon, L.seat, L.tree, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
+    G('pattes', [near.group]), L.scarf, L.jingleBand, L.head, L.bow, L.jingle, fil, pinch, glint.group].filter(Boolean));
   return { anims, viewBox: [170, 50, 900, 900], title: `Monsieur Glose écrit « ${word} » avec le fil de sa pelote` };
 }
