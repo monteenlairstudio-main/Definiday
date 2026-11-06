@@ -11,8 +11,10 @@ data class Word(
 )
 
 object Words {
-    /** A shown word may come back (daily or random) only after this many days (~4 months). */
-    const val COOLDOWN_DAYS = 120L
+    /** Days before a shown word (daily or random) may come back as a daily word (~9 months)... */
+    const val DAILY_COOLDOWN_DAYS = 270L
+    /** ...or as a random pick (~4 months). */
+    const val RANDOM_COOLDOWN_DAYS = 120L
 
     fun parse(json: String): List<Word> {
         val a = JSONArray(json)
@@ -23,22 +25,23 @@ object Words {
     }
 
     /** history: mot -> epoch day it was last shown. */
-    private fun cooledDown(w: Word, history: Map<String, Long>, today: Long) =
-        history[w.mot]?.let { today - it >= COOLDOWN_DAYS } ?: true
+    private fun cooledDown(w: Word, history: Map<String, Long>, today: Long, days: Long) =
+        history[w.mot]?.let { today - it >= days } ?: true
 
     private fun oldest(words: List<Word>, history: Map<String, Long>) = words.minBy { history[it.mot] ?: Long.MIN_VALUE }
 
-    /** Next daily word: never-shown words first (fixed shuffled order), then the longest-ago shown among cooled-down ones. */
+    /** Next daily word: never-shown words first (fixed shuffled order), then the longest-ago shown among those unseen for 9 months. */
     fun nextDaily(words: List<Word>, history: Map<String, Long>, today: Long): Word {
         val order = words.shuffled(Random(SEED))
         return order.firstOrNull { it.mot !in history }
-            ?: order.filter { cooledDown(it, history, today) }.takeIf { it.isNotEmpty() }?.let { oldest(it, history) }
+            // ponytail: if random picks eat the pool (> ~1 random/day with 3 daily words), falls back to the oldest-shown word
+            ?: order.filter { cooledDown(it, history, today, DAILY_COOLDOWN_DAYS) }.takeIf { it.isNotEmpty() }?.let { oldest(it, history) }
             ?: oldest(order, history)
     }
 
     /** Random word among never-shown and cooled-down words. */
     fun nextRandom(words: List<Word>, history: Map<String, Long>, today: Long, rnd: Random = Random.Default): Word =
-        words.filter { cooledDown(it, history, today) }.randomOrNull(rnd) ?: oldest(words, history)
+        words.filter { cooledDown(it, history, today, RANDOM_COOLDOWN_DAYS) }.randomOrNull(rnd) ?: oldest(words, history)
 
     /** Today's 1–3 words, picked once per day and remembered (stable across app, notifications and wallpaper). */
     fun today(ctx: Context): List<Word> {

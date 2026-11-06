@@ -33,19 +33,19 @@ class DefinidayTest {
         }
     }
 
-    /** 3 years of 3 daily words + 2 random ones a day: no word ever comes back within the cooldown, unseen words go first. */
+    /** 3 years of 3 daily words + 1 random a day: a daily word is never seen in the previous 9 months, a random one in the previous 4. */
     @Test fun historyKeepsWordsAwayForFourMonths() {
         val words = Words.load(ctx)
         val history = mutableMapOf<String, Long>()
         val rnd = kotlin.random.Random(1)
         for (day in 0L until 3 * 365) {
             repeat(3) { Words.nextDaily(words, history, day).let { w ->
-                history[w.mot]?.let { assertTrue("${w.mot} back after ${day - it} days", day - it >= Words.COOLDOWN_DAYS) }
+                history[w.mot]?.let { assertTrue("daily ${w.mot} back after ${day - it} days", day - it >= Words.DAILY_COOLDOWN_DAYS) }
                 if (history.size < words.size) assertTrue("${w.mot} repeated while unseen words remain", w.mot !in history)
                 history[w.mot] = day
             } }
-            repeat(2) { Words.nextRandom(words, history, day, rnd).let { w ->
-                history[w.mot]?.let { assertTrue("${w.mot} back after ${day - it} days", day - it >= Words.COOLDOWN_DAYS) }
+            repeat(1) { Words.nextRandom(words, history, day, rnd).let { w ->
+                history[w.mot]?.let { assertTrue("random ${w.mot} back after ${day - it} days", day - it >= Words.RANDOM_COOLDOWN_DAYS) }
                 history[w.mot] = day
             } }
         }
