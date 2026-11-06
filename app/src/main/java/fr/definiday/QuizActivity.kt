@@ -35,7 +35,7 @@ class QuizActivity : Activity() {
     private fun next() {
         box.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(Glose.drawable(this, R.drawable.glose_icone_vd), 56))
+        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56))
         box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
         val q = questions[index]
         box.addView(text("${index + 1} / ${questions.size}", 13f))
@@ -66,8 +66,8 @@ class QuizActivity : Activity() {
             Quiz.record(Prefs(this), score, questions.size, LocalDate.now().toEpochDay())
             val passed = Quiz.passed(score, questions.size)
             // the thread writes the word once and holds it; never mocking when failed
-            box.addView(glose(Glose.drawable(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
-                if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
+            box.addView(glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
+                extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
                 contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
                 Glose.play(this)
             })
@@ -84,7 +84,7 @@ class QuizActivity : Activity() {
         val fresh = Unlocks.update(p).ifEmpty { return }
         p.announced = p.announced + fresh.map { it.id }
         box.addView(text(getString(R.string.unlock_new, fresh.joinToString(", ") { it.nom }), 18f, bold = true).apply { gravity = Gravity.CENTER })
-        box.addView(glose(Glose.preview(this, fresh.last()), 160).apply { Glose.play(this) })
+        box.addView(glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 160).apply { Glose.play(this) })
         box.addView(Button(this).apply {
             text = getString(R.string.collection_see)
             setOnClickListener { startActivity(android.content.Intent(context, CollectionActivity::class.java)) }

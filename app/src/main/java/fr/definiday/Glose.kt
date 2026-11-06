@@ -36,9 +36,17 @@ object Glose {
     /** Theme overlays of a choice: pelage, pelote, accessory. */
     fun styles(c: Map<Unlocks.Kind, String>) = c.values.mapNotNull { Unlocks.byId[it]?.style }.filter { it != 0 }
 
-    /** Glose showing one collection item: its pose, or the seated pose wearing it. */
-    fun preview(ctx: Context, item: Unlocks.Item): Drawable =
-        drawable(ctx, if (item.res != 0) item.res else R.drawable.glose_assis, listOf(item.style).filter { it != 0 })
+    /** Glose showing one collection item on top of choice [c] (empty = defaults): its pose, or wearing it. */
+    fun preview(ctx: Context, item: Unlocks.Item, c: Map<Unlocks.Kind, String> = emptyMap()): Drawable {
+        val with = c + (item.kind to item.id)
+        return drawable(ctx, pose(with), styles(with))
+    }
+
+    /** The user's Glose in pose [res] ([accessory] false for the head icons, which crop hats and quills). */
+    fun mine(ctx: Context, res: Int, accessory: Boolean = true, extra: List<Int> = emptyList()): Drawable {
+        val c = choice(Prefs(ctx))
+        return drawable(ctx, res, styles(if (accessory) c else c - Unlocks.Kind.ACC) + extra)
+    }
 
     /** (Re)starts the view's animation from the beginning; stays a still image when animations are off (settings, battery saver). */
     fun play(v: ImageView) {

@@ -214,6 +214,9 @@ class DefinidayTest {
             save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
         capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app.png"))
+        Prefs(ctx).apply { unlocked = setOf("livres", "nuit", "sauge", "bonnet"); glosePose = "livres"; glosePelage = "nuit"; glosePelote = "sauge"; gloseAcc = "bonnet" }
+        capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app_choice.png"))
+        Prefs(ctx).apply { unlocked = emptySet(); glosePose = "assis"; glosePelage = "tigre"; glosePelote = "bordeaux"; gloseAcc = "" }
         Prefs(ctx).apply { quizzes = 12; perfectQuizzes = 6; passedQuizzes = 9; streak = 8 }
         Unlocks.update(Prefs(ctx))
         Prefs(ctx).apply { glosePelage = "creme"; gloseAcc = "echarpe" }
