@@ -1,10 +1,15 @@
 package fr.definiday
 
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -13,6 +18,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -26,13 +32,15 @@ import java.util.Locale
 
 class MainActivity : Activity() {
     companion object {
-        const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item"
+        const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item"; private const val STATE_REVEALED = "revealed"
 
         /** Small still prop beside Glose by month: snowflake in winter, leaf in autumn, flower in spring, none in summer. */
         fun season(month: Int) = when (month) { 12, 1, 2 -> R.drawable.saison_flocon; in 9..11 -> R.drawable.saison_feuille; in 3..5 -> R.drawable.saison_fleur; else -> 0 }
     }
 
     private var current: Item? = null
+    /** Key of the word whose definition was revealed (« Deviner avant de voir »): stays shown on the way back to the screen. */
+    private var revealed: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,16 +49,21 @@ class MainActivity : Activity() {
         if (!Prefs(this).onboarded) { startActivity(Intent(this, OnboardingActivity::class.java)); finish(); return }
         // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's). Shown in onResume.
         current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
+        revealed = savedInstanceState?.getString(STATE_REVEALED)
+        if (resources.configuration.fontScale > 1.5f) findViewById<GridLayout>(R.id.actions).columnCount = 2 // labels at full size, never cut
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             pick(w)
             Sounds.play(this, Sounds.PAGE)
-            DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen (said under the button)
+            DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen: said under the actions
+            if (Prefs(this).mode != Prefs.MODE_NOTIF) findViewById<View>(R.id.random_hint).visibility = View.VISIBLE
             warnIfHurried()
         }
+        findViewById<View>(R.id.share).setOnClickListener { current?.let(::share) }
+        findViewById<View>(R.id.reveal).setOnClickListener { reveal() }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
-        findViewById<Button>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
-        findViewById<Button>(R.id.settings_open).setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
+        findViewById<View>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
+        findViewById<View>(R.id.settings_open).setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         findViewById<View>(R.id.notif_banner).setOnClickListener {
             runCatching { startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, packageName)) }
         }
@@ -70,6 +83,7 @@ class MainActivity : Activity() {
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         current?.let { out.putString(STATE_ITEM, it.key) }
+        out.putString(STATE_REVEALED, revealed)
     }
 
     /** Any word or quote by key (history keys: mot, or "q:" + text). */
@@ -84,6 +98,11 @@ class MainActivity : Activity() {
         findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
         val done = p.lastQuizDay == java.time.LocalDate.now().toEpochDay()
         findViewById<Button>(R.id.quiz_open).setText(if (done) R.string.quiz_done else R.string.quiz_open)
+        val got = (p.unlocked + Unlocks.of(emptyMap())).count(Unlocks.byId::containsKey) // the default look counts from the start
+        findViewById<Button>(R.id.collection_open).apply {
+            text = getString(R.string.collection_count, got, Unlocks.items.size)
+            contentDescription = getString(R.string.collection_desc, got, Unlocks.items.size)
+        }
         findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
     }
 
@@ -118,11 +137,21 @@ class MainActivity : Activity() {
         val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = Styles.card(this, st.palette, 20f)
         findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
-        listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
+        listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
+        findViewById<Button>(R.id.reveal).apply { // a veil in the card's own ink, dashed edge; focused: solid 3 dp edge
+            setTextColor(st.palette.texte)
+            val dp = resources.displayMetrics.density
+            fun veil(edge: Float, dash: Float) = GradientDrawable().apply {
+                cornerRadius = 14 * dp; setColor(st.palette.texte and 0xFFFFFF or 0x1A000000); setStroke((edge * dp).toInt(), st.palette.texte, dash * dp, 4 * dp)
+            }
+            background = RippleDrawable(ColorStateList.valueOf(st.palette.texte and 0xFFFFFF or 0x33000000),
+                StateListDrawable().apply { addState(intArrayOf(android.R.attr.state_focused), veil(3f, 0f)); addState(intArrayOf(), veil(1f, 6f)) }, null)
+        }
         val daily = item.key in Prefs(this).dailyMots
         val academie = findViewById<Button>(R.id.academie)
         val cnrtl = findViewById<Button>(R.id.cnrtl)
+        findViewById<View>(R.id.random_hint).visibility = View.GONE // shown again by the random pick itself
         when (item) {
             is Quote -> {
                 text(R.id.label, getString(R.string.quote_label))
@@ -130,9 +159,10 @@ class MainActivity : Activity() {
                 text(R.id.nature, item.signature)
                 text(R.id.definition, "")
                 text(R.id.exemple, "")
-                findViewById<View>(R.id.anecdote_box).visibility = View.GONE
+                text(R.id.anecdote, "")
                 academie.visibility = View.GONE
-                cnrtl.text = getText(R.string.wikiquote)
+                cnrtl.setText(R.string.action_source)
+                cnrtl.contentDescription = getString(R.string.action_source_desc)
                 cnrtl.setOnClickListener { open(item.source) }
             }
             is Word -> {
@@ -142,23 +172,51 @@ class MainActivity : Activity() {
                 text(R.id.definition, item.definition)
                 text(R.id.exemple, if (item.exemple.isEmpty()) "" else "«\u00a0${item.exemple}\u00a0»")
                 text(R.id.anecdote, item.anecdote)
-                findViewById<View>(R.id.anecdote_box).visibility = if (item.anecdote.isEmpty()) View.GONE else View.VISIBLE
                 findViewById<Button>(R.id.source).setOnClickListener { open(item.source) }
                 academie.visibility = View.VISIBLE
                 academie.setOnClickListener { openAcademie(item.mot) }
-                cnrtl.text = getText(R.string.cnrtl)
+                cnrtl.setText(R.string.action_tlfi)
+                cnrtl.contentDescription = getString(R.string.action_tlfi_desc)
                 cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
             }
         }
+        hide(Prefs(this).guessFirst && item is Word && item.key != revealed)
         fit(findViewById(R.id.mot), if (item is Quote) 24f else 40f)
         showSeen()
         if (top) findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
     }
 
+    /** « Deviner avant de voir »: the definition keeps its room, invisible under « Touchez pour révéler »; example and anecdote wait too. */
+    private fun hide(hidden: Boolean) {
+        val def = findViewById<TextView>(R.id.definition)
+        if (def.text.isNotEmpty()) def.visibility = if (hidden) View.INVISIBLE else View.VISIBLE
+        findViewById<View>(R.id.reveal).visibility = if (hidden) View.VISIBLE else View.GONE
+        listOf(R.id.exemple to R.id.exemple_box, R.id.anecdote to R.id.anecdote_box).forEach { (t, box) ->
+            findViewById<View>(box).visibility = if (hidden || findViewById<TextView>(t).text.isEmpty()) View.GONE else View.VISIBLE
+        }
+    }
+
+    private fun reveal() {
+        revealed = current?.key
+        hide(false)
+        if (ValueAnimator.areAnimatorsEnabled()) findViewById<View>(R.id.definition).run { alpha = 0f; animate().alpha(1f).setDuration(300) }
+        focusCard() // the button is gone: TalkBack reads the card, definition included
+    }
+
+    /** Text and picture of the card (its palette and font), signed with Glose's head. */
+    private fun share(item: Item) {
+        val head = Glose.bitmap(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 128, 128)
+        // ponytail: drawn and compressed on the UI thread (~0.2 s on a tap), move to a thread if it stutters
+        val picture = runCatching { WordCard.share(item, Styles.of(this, item), head) }.getOrNull()
+        runCatching { startActivity(ShareProvider.intent(this, item, picture)) }
+    }
+
+    private fun focusCard() = findViewById<View>(R.id.card).run { post { performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) } }
+
     /** Chosen by the user (random pick, chip): shown, and TalkBack moves to the card, which reads the new item. */
     private fun pick(item: Item) {
         show(item)
-        findViewById<View>(R.id.card).run { post { performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) } }
+        focusCard()
     }
 
     /** Largest size up to [max] sp at which each piece (between spaces, or after a hyphen) holds on one line,
@@ -187,6 +245,7 @@ class MainActivity : Activity() {
             val chip = Button(this, null, 0, R.style.Chip).apply {
                 text = if (w is Word) w.mot else getString(R.string.quote_chip)
                 setOnClickListener { pick(w) }
+                isSelected = w.key == current?.key // the one in the card: outlined, and said by TalkBack
                 measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             }
             if (row == null || used + chip.measuredWidth > width) { row = LinearLayout(this).also(box::addView); used = 0 }

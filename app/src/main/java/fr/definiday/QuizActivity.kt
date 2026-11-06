@@ -177,6 +177,7 @@ class QuizActivity : Activity() {
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
             else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
+            if (Quiz.askRate(p, passed, counted = !done)) rate()
             if (fresh.isNotEmpty()) {
                 box.addView(text(getString(R.string.unlock_new), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
                 stamps(fresh, Glose.choice(p))
@@ -184,6 +185,24 @@ class QuizActivity : Activity() {
             }
         }
         button(getString(R.string.quiz_close)).setOnClickListener { finish() }
+    }
+
+    /** Gentle rate card, never blocking: « Plus tard » folds it, « Noter » opens the store page (the web page without the Play Store). */
+    private fun rate() {
+        val pad = (16 * resources.displayMetrics.density).toInt()
+        val card = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundResource(R.drawable.card_soft); setPadding(pad, pad, pad, pad / 2) }
+        card.addView(text(getString(R.string.rate_text), 16f))
+        val row = LinearLayout(this).apply { gravity = Gravity.END or Gravity.CENTER_VERTICAL }.also(card::addView)
+        row.addView(Button(this, null, 0, R.style.Link).apply { setText(R.string.rate_later); setOnClickListener { card.visibility = View.GONE } })
+        row.addView(Button(this).apply {
+            setText(R.string.rate_go)
+            setOnClickListener {
+                card.visibility = View.GONE
+                runCatching { startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=$packageName"))) }
+                    .recoverCatching { startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=$packageName"))) }
+            }
+        })
+        box.addView(card, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = pad })
     }
 
     /** Unboxing: up to 3 stamps (Glose wearing the item, its name), cascading in, then « + N dans la collection ». */
@@ -238,6 +257,16 @@ object Quiz {
 
     /** Unboxing: at most 3 stamps, the last (rarest, the one Glose wears) ones; the rest is only counted (« + N dans la collection »). */
     fun <T> stamps(fresh: List<T>) = fresh.takeLast(3) to maxOf(0, fresh.size - 3)
+
+    /** Rate card on: harmless before the Play Store listing (the store answers « not found », the web fallback too). */
+    const val RATE_PROMPT = true
+
+    /** The rate card, once: on the score screen of a passed quiz that counted, from the 5th passed one; never after a failed quiz. */
+    fun askRate(p: Prefs, passed: Boolean, counted: Boolean): Boolean {
+        if (!RATE_PROMPT || !passed || !counted || p.passedQuizzes < 5 || p.rateAsked) return false
+        p.rateAsked = true
+        return true
+    }
 
     /** Passed = at most one mistake per 3 questions (1/1, 2/2, 2/3). */
     fun passed(score: Int, total: Int) = score * 3 >= total * 2

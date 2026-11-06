@@ -62,6 +62,27 @@
     <style name="Chip" parent="Btn">
         <item name="android:background">@drawable/btn_chip</item>
     </style>
+    <!-- home: round icon (its disc is in the drawable) over a short sans-serif label; the whole cell is the 48 dp target.
+         Labels keep the font size; the row becomes 2 x 2 at large font sizes (MainActivity.onCreate). -->
+    <style name="Action" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:gravity">top|center_horizontal</item>
+        <item name="android:background">@drawable/btn_round</item>
+        <item name="android:stateListAnimator">@animator/press</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">2dp</item>
+        <item name="android:paddingEnd">2dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
     <!-- full-width row of the home actions and settings -->
     <style name="Row" parent="Btn">
         <item name="android:layout_width">match_parent</item>

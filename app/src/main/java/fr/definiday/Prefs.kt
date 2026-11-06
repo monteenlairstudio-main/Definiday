@@ -76,6 +76,14 @@ class Prefs(val ctx: Context) {
     var sounds: Boolean
         get() = bool("sounds", false)
         set(v) = sp.edit().putBoolean("sounds", v).apply()
+    /** « Deviner avant de voir »: the home card hides the definition until touched (never on the lock screen). */
+    var guessFirst: Boolean
+        get() = bool("guessFirst", false)
+        set(v) = sp.edit().putBoolean("guessFirst", v).apply()
+    /** The rate card was shown once (Quiz.askRate). */
+    var rateAsked: Boolean
+        get() = bool("rateAsked", false)
+        set(v) = sp.edit().putBoolean("rateAsked", v).apply()
     var quizEnabled: Boolean
         get() = bool("quizEnabled", true)
         set(v) = sp.edit().putBoolean("quizEnabled", v).apply()

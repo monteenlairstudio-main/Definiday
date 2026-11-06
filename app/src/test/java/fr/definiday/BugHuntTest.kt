@@ -289,7 +289,7 @@ class BugHuntTest {
         assertEquals(ctx.getString(R.string.quote_label), a.findViewById<TextView>(R.id.label).text.toString())
         assertEquals(View.GONE, a.findViewById<View>(R.id.academie).visibility)
         assertEquals(View.GONE, a.findViewById<View>(R.id.anecdote_box).visibility)
-        assertEquals(ctx.getString(R.string.wikiquote), a.findViewById<Button>(R.id.cnrtl).text.toString())
+        assertEquals(ctx.getString(R.string.action_source), a.findViewById<Button>(R.id.cnrtl).text.toString())
         assertTrue(History(ctx).all()[q.key] == LocalDate.now().toEpochDay()) // shown on the card
     }
 

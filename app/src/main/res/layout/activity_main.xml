@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="24dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="24dp">
 
         <!-- shown when the chosen mode needs notifications and they are off -->
         <TextView
@@ -26,29 +27,75 @@
             android:textSize="15sp"
             android:visibility="gone" />
 
+        <!-- Glose, with the top bar over the empty corners of his box -->
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/glose"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:contentDescription="@string/glose" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
-            <!-- seasonal prop by date (MainActivity.season): still, small, decorative -->
-            <ImageView
-                android:id="@+id/season"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="12dp"
-                android:importantForAccessibility="no"
-                android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/glose"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:contentDescription="@string/glose" />
+
+                <!-- seasonal prop by date (MainActivity.season): still, small, decorative -->
+                <ImageView
+                    android:id="@+id/season"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="12dp"
+                    android:importantForAccessibility="no"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- top bar: round buttons; room for one more next to Réglages (e.g. « Mes mots ») -->
+            <LinearLayout
+                android:id="@+id/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <!-- unlocked items « x/N » beside the yarn ball; TalkBack reads collection_desc -->
+                <Button
+                    android:id="@+id/collection_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_round"
+                    android:drawableStart="@drawable/ic_collection"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="sans-serif"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="0dp"
+                    android:paddingEnd="8dp"
+                    android:stateListAnimator="@animator/press"
+                    android:textColor="@color/accent"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/settings_open"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/btn_round"
+                    android:contentDescription="@string/settings"
+                    android:src="@drawable/ic_reglages"
+                    android:stateListAnimator="@animator/press" />
+            </LinearLayout>
         </FrameLayout>
 
-        <!-- one TalkBack stop reading label, word, nature, definition and example (API 28+) -->
+        <!-- one TalkBack stop reading label, word, nature and definition (API 28+) -->
         <LinearLayout
             android:id="@+id/card"
             android:layout_width="match_parent"
@@ -83,55 +130,108 @@
                 android:textSize="16sp"
                 android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/definition"
-                android:hyphenationFrequency="normal"
+            <!-- « Deviner avant de voir » (Prefs.guessFirst): the definition keeps its room, invisible under « Touchez pour révéler » -->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="serif"
-                android:lineSpacingMultiplier="1.2"
-                android:textSize="19sp" />
+                android:layout_marginTop="16dp">
 
-            <TextView
-                android:id="@+id/exemple"
-                android:hyphenationFrequency="normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="serif"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/definition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:hyphenationFrequency="normal"
+                    android:lineSpacingMultiplier="1.2"
+                    android:textSize="19sp" />
+
+                <Button
+                    android:id="@+id/reveal"
+                    style="@style/Btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/reveal_desc"
+                    android:text="@string/reveal"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+            </FrameLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <!-- round actions; Académie is gone for a quote, TLFi becomes its source -->
+        <GridLayout
+            android:id="@+id/actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="12dp"
+            android:columnCount="4">
 
             <Button
                 android:id="@+id/academie"
-                style="@style/Link"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/academie" />
+                style="@style/Action"
+                android:contentDescription="@string/action_academie_desc"
+                android:drawableTop="@drawable/ic_academie"
+                android:text="@string/action_academie" />
 
             <Button
                 android:id="@+id/cnrtl"
-                style="@style/Link"
-                android:layout_width="0dp"
+                style="@style/Action"
+                android:drawableTop="@drawable/ic_tlfi" />
+
+            <Button
+                android:id="@+id/share"
+                style="@style/Action"
+                android:contentDescription="@string/action_share_desc"
+                android:drawableTop="@drawable/ic_partager"
+                android:text="@string/action_share" />
+
+            <Button
+                android:id="@+id/new_word"
+                style="@style/Action"
+                android:contentDescription="@string/action_random_desc"
+                android:drawableTop="@drawable/ic_hasard"
+                android:text="@string/action_random" />
+        </GridLayout>
+
+        <!-- after a random pick, when the lock screen shows words -->
+        <TextView
+            android:id="@+id/random_hint"
+            style="@style/Help"
+            android:gravity="center_horizontal"
+            android:text="@string/random_hint"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/exemple_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_soft"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/exemple" />
+
+            <TextView
+                android:id="@+id/exemple"
+                style="@style/Body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cnrtl" />
+                android:layout_marginTop="8dp"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/anecdote_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/card_soft"
             android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp"
             android:visibility="gone">
 
             <TextView
@@ -150,29 +250,15 @@
                 style="@style/Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="-8dp"
                 android:text="@string/source" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/new_word"
-            style="@style/Row"
-            android:layout_marginTop="24dp"
-            android:text="@string/new_word" />
-
-        <TextView
-            style="@style/Help"
-            android:text="@string/new_word_hint" />
-
-        <Button
             android:id="@+id/quiz_open"
             style="@style/Primary"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="@string/quiz_open" />
-
-        <Button
-            android:id="@+id/collection_open"
-            style="@style/Row"
-            android:text="@string/collection_open" />
 
         <TextView
             style="@style/Label"
@@ -185,13 +271,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
-        <Button
-            android:id="@+id/settings_open"
-            style="@style/Link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/settings_link" />
     </LinearLayout>
 </ScrollView>

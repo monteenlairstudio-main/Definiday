@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Académie française: a small temple. Round 48 dp action icons (ic_*.xml): tinted disc, line drawing in ink with Glose's rounded strokes. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
+    <group android:translateX="12" android:translateY="12">
+        <path android:pathData="M4,9.5L12,4.5L20,9.5ZM6.5,12V17M10,12V17M14,12V17M17.5,12V17M4,19.5H20" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    </group>
+</vector>
