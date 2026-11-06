@@ -3,7 +3,7 @@ package fr.definiday
 import android.content.Context
 import org.json.JSONArray
 
-class Prefs(ctx: Context) {
+class Prefs(val ctx: Context) {
     companion object { const val MODE_BOTH = 0; const val MODE_NOTIF = 1; const val MODE_LOCK = 2 }
 
     private val sp = ctx.getSharedPreferences("definiday", Context.MODE_PRIVATE)
