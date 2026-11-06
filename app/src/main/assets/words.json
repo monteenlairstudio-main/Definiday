@@ -21,13 +21,6 @@
   "academie": true
  },
  {
-  "mot": "abois",
-  "nature": "n. m. pl.",
-  "definition": "Aboiements de la meute autour de la bête traquée ; « aux abois » : acculé, dans une situation désespérée.",
-  "exemple": "Criblé de dettes, l’imprimeur était aux abois.",
-  "academie": false
- },
- {
   "mot": "aboucher",
   "nature": "v. tr.",
   "definition": "Mettre deux personnes en rapport pour qu’elles s’entendent ; raccorder deux tuyaux bout à bout.",
@@ -42,13 +35,6 @@
   "academie": true
  },
  {
-  "mot": "abscons",
-  "nature": "adj.",
-  "definition": "Se dit d’un propos ou d’un texte si obscur qu’il en devient presque impossible à comprendre.",
-  "exemple": "Le notaire nous lut un paragraphe si abscons que personne n’osa demander d’explication.",
-  "academie": true
- },
- {
   "mot": "absoute",
   "nature": "n. f.",
   "definition": "Prières dites autour du cercueil après la messe des funérailles.",
@@ -60,13 +46,6 @@
   "nature": "adj. et n.",
   "definition": "Qui ne boit pas de vin, à l’origine au point de ne pouvoir communier sous cette espèce ; par extension, qui ne boit pas d’alcool.",
   "exemple": "Abstème depuis sa jeunesse, il trinquait à l’eau claire.",
-  "academie": false
- },
- {
-  "mot": "acabit",
-  "nature": "n. m.",
-  "definition": "Nature, qualité d’une personne ou d’une chose ; souvent péjoratif, dans « du même acabit ».",
-  "exemple": "Lui et ses complices sont tous du même acabit.",
   "academie": false
  },
  {
@@ -91,13 +70,6 @@
   "academie": true
  },
  {
-  "mot": "accointance",
-  "nature": "n. f.",
-  "definition": "Relation familière, fréquentation ; surtout au pluriel, souvent avec une nuance péjorative.",
-  "exemple": "On lui prêtait des accointances douteuses dans le milieu.",
-  "academie": false
- },
- {
   "mot": "accort",
   "nature": "adj.",
   "definition": "Gracieux, aimable et avenant ; s’emploie surtout au féminin.",
@@ -109,13 +81,6 @@
   "nature": "v. tr.",
   "definition": "Ne s’emploie qu’avec « faire » ou « laisser » : faire croire une chose fausse.",
   "exemple": "Il voulait nous faire accroire qu’il avait dîné avec le ministre.",
-  "academie": true
- },
- {
-  "mot": "acerbe",
-  "nature": "adj.",
-  "definition": "Qui blesse par sa dureté et sa méchanceté, en parlant de propos.",
-  "exemple": "Le critique publia un compte rendu acerbe de la pièce.",
   "academie": true
  },
  {
@@ -133,13 +98,6 @@
   "academie": true
  },
  {
-  "mot": "achopper",
-  "nature": "v. intr.",
-  "definition": "Se heurter à une difficulté qui arrête ; buter contre un obstacle.",
-  "exemple": "Les négociations ont achoppé sur la question des salaires.",
-  "academie": true
- },
- {
   "mot": "acmé",
   "nature": "n. f.",
   "definition": "Point culminant, plus haut degré d’intensité d’un phénomène.",
@@ -151,20 +109,6 @@
   "nature": "v. pron.",
   "definition": "Se lier, se mettre en fréquentation avec une ou des personnes peu recommandables.",
   "exemple": "À force de traîner au port, il s’était acoquiné avec une bande de contrebandiers.",
-  "academie": true
- },
- {
-  "mot": "acquit",
-  "nature": "n. m.",
-  "definition": "Reconnaissance écrite d’un paiement ; « par acquit de conscience » : pour n’avoir rien à se reprocher.",
-  "exemple": "Par acquit de conscience, elle vérifia une dernière fois que la porte était fermée.",
-  "academie": true
- },
- {
-  "mot": "acrimonie",
-  "nature": "n. f.",
-  "definition": "Aigreur mordante dans les paroles ou le comportement, née d’une rancœur ou d’une mauvaise humeur persistante.",
-  "exemple": "Elle répondit à la critique sans la moindre acrimonie, ce qui désarma son contradicteur.",
   "academie": true
  },
  {
@@ -189,13 +133,6 @@
   "academie": false
  },
  {
-  "mot": "adipeux",
-  "nature": "adj.",
-  "definition": "Qui contient de la graisse ; gras, bouffi de graisse.",
-  "exemple": "Un bourgeois adipeux somnolait sur la banquette du train.",
-  "academie": true
- },
- {
   "mot": "adjurer",
   "nature": "v. tr.",
   "definition": "Supplier quelqu’un avec insistance, prier instamment.",
@@ -207,13 +144,6 @@
   "nature": "v. tr.",
   "definition": "Réprimander sévèrement, faire une remontrance solennelle.",
   "exemple": "Le juge admonesta le jeune prévenu avant de le relâcher.",
-  "academie": true
- },
- {
-  "mot": "adouber",
-  "nature": "v. tr.",
-  "definition": "Armer chevalier en remettant les armes ; au figuré, reconnaître officiellement quelqu’un.",
-  "exemple": "Le roi adouba le jeune écuyer au lendemain de la bataille.",
   "academie": true
  },
  {
@@ -252,13 +182,6 @@
   "academie": true
  },
  {
-  "mot": "affabulation",
-  "nature": "n. f.",
-  "definition": "Récit inventé de toutes pièces et présenté comme vrai.",
-  "exemple": "Son prétendu passé d’aventurier n’était qu’une affabulation.",
-  "academie": true
- },
- {
   "mot": "afféterie",
   "nature": "n. f.",
   "definition": "Recherche maniérée et prétentieuse dans les manières ou le style.",
@@ -280,13 +203,6 @@
   "academie": true
  },
  {
-  "mot": "affres",
-  "nature": "n. f. pl.",
-  "definition": "Angoisses, tourments extrêmes.",
-  "exemple": "L’écrivain connut les affres de la page blanche pendant des mois.",
-  "academie": true
- },
- {
   "mot": "affriander",
   "nature": "v. tr.",
   "definition": "Attirer par l’appât d’une friandise ; allécher par quelque chose d’agréable.",
@@ -299,20 +215,6 @@
   "definition": "Attirer, séduire par l’appât d’un plaisir.",
   "exemple": "Les promesses de gains rapides affriolèrent bien des naïfs.",
   "academie": true
- },
- {
-  "mot": "affubler",
-  "nature": "v. tr.",
-  "definition": "Habiller de façon bizarre ou ridicule ; au figuré, attribuer quelque chose de ridicule.",
-  "exemple": "On l’avait affublé d’un chapeau à plumes et d’un surnom grotesque.",
-  "academie": true
- },
- {
-  "mot": "affût",
-  "nature": "n. m.",
-  "definition": "Endroit où l’on se poste pour guetter le gibier ; « être à l’affût » : guetter une occasion.",
-  "exemple": "Le journaliste était toujours à l’affût du moindre scandale.",
-  "academie": false
  },
  {
   "mot": "agacerie",
@@ -364,13 +266,6 @@
   "academie": true
  },
  {
-  "mot": "aguets",
-  "nature": "n. m. pl.",
-  "definition": "Ne s’emploie que dans « aux aguets » : en position de guetter, d’épier, sur ses gardes.",
-  "exemple": "Le chat restait aux aguets devant le trou de la souris.",
-  "academie": false
- },
- {
   "mot": "ahaner",
   "nature": "v. intr.",
   "definition": "Respirer bruyamment sous l’effort, peiner.",
@@ -420,13 +315,6 @@
   "academie": false
  },
  {
-  "mot": "alambiqué",
-  "nature": "adj.",
-  "definition": "Exagérément compliqué et raffiné, au point d’en être obscur.",
-  "exemple": "Il se perdit dans une explication alambiquée que nul ne comprit.",
-  "academie": false
- },
- {
   "mot": "alanguir",
   "nature": "v. tr.",
   "definition": "Rendre languissant, affaiblir l’énergie.",
@@ -438,13 +326,6 @@
   "nature": "n. m.",
   "definition": "Vase de terre poreuse dans lequel l’eau se rafraîchit par évaporation.",
   "exemple": "Sur la terrasse, l’alcarazas gardait l’eau fraîche malgré la canicule.",
-  "academie": true
- },
- {
-  "mot": "alcôve",
-  "nature": "n. f.",
-  "definition": "Renfoncement d’une chambre où l’on place un lit ; symbole de la vie amoureuse intime.",
-  "exemple": "Les secrets d’alcôve de la favorite alimentaient les ragots de la cour.",
   "academie": true
  },
  {
@@ -511,13 +392,6 @@
   "academie": true
  },
  {
-  "mot": "ambages",
-  "nature": "n. f. pl.",
-  "definition": "Détours de langage ; surtout dans « sans ambages » : sans détour, franchement.",
-  "exemple": "Elle lui annonça sans ambages qu’elle le quittait.",
-  "academie": false
- },
- {
   "mot": "amble",
   "nature": "n. m.",
   "definition": "Allure d’un quadrupède qui lève en même temps les deux jambes du même côté.",
@@ -539,13 +413,6 @@
   "academie": true
  },
  {
-  "mot": "amouracher",
-  "nature": "v. pron.",
-  "definition": "Se prendre d’un amour soudain et passager, souvent jugé peu raisonnable.",
-  "exemple": "À soixante ans, il s’amouracha d’une chanteuse de cabaret.",
-  "academie": true
- },
- {
   "mot": "amphibologie",
   "nature": "n. f.",
   "definition": "Ambiguïté d’une phrase qui peut s’interpréter de plusieurs façons.",
@@ -564,13 +431,6 @@
   "nature": "n. m.",
   "definition": "Hôte qui reçoit des convives à sa table et leur offre le repas.",
   "exemple": "Notre amphitryon avait prévu sept plats et autant de vins pour la soirée.",
-  "academie": true
- },
- {
-  "mot": "ampoulé",
-  "nature": "adj.",
-  "definition": "Emphatique et boursouflé, en parlant d’un style.",
-  "exemple": "Le maire prononça un discours ampoulé qui endormit l’auditoire.",
   "academie": true
  },
  {
@@ -602,13 +462,6 @@
   "academie": false
  },
  {
-  "mot": "anathème",
-  "nature": "n. m.",
-  "definition": "Excommunication solennelle ; condamnation, réprobation publique.",
-  "exemple": "Le philosophe fut frappé d’anathème par les autorités religieuses.",
-  "academie": true
- },
- {
   "mot": "ancillaire",
   "nature": "adj.",
   "definition": "Relatif aux servantes ; « amours ancillaires » : liaisons avec des servantes.",
@@ -630,13 +483,6 @@
   "academie": false
  },
  {
-  "mot": "anicroche",
-  "nature": "n. f.",
-  "definition": "Petit obstacle, difficulté imprévue qui retarde.",
-  "exemple": "Le voyage se déroula sans la moindre anicroche.",
-  "academie": true
- },
- {
   "mot": "animadversion",
   "nature": "n. f.",
   "definition": "Blâme, réprobation ; hostilité marquée envers quelqu’un.",
@@ -648,13 +494,6 @@
   "nature": "adv.",
   "definition": "Autrefois ; à l’origine, l’année précédente. S’emploie surtout dans « d’antan ».",
   "exemple": "Elle regrettait les bals d’antan.",
-  "academie": true
- },
- {
-  "mot": "antédiluvien",
-  "nature": "adj.",
-  "definition": "Antérieur au Déluge ; par plaisanterie, très ancien, démodé.",
-  "exemple": "Il conduisait une automobile antédiluvienne qui pétaradait.",
   "academie": true
  },
  {
@@ -693,32 +532,11 @@
   "academie": true
  },
  {
-  "mot": "antre",
-  "nature": "n. m.",
-  "definition": "Caverne, grotte profonde et obscure ; lieu inquiétant ou retiré.",
-  "exemple": "Le savant passait ses nuits dans l’antre encombré de son laboratoire.",
-  "academie": true
- },
- {
   "mot": "anuiter",
   "nature": "v. pron.",
   "definition": "Se laisser surprendre par la nuit en chemin.",
   "exemple": "Ne nous anuitons pas dans cette forêt mal famée.",
   "academie": true
- },
- {
-  "mot": "apanage",
-  "nature": "n. m.",
-  "definition": "Ce qui est le propre de quelqu’un ou de quelque chose ; à l’origine, terres données aux cadets des rois.",
-  "exemple": "La patience n’est pas l’apanage de la vieillesse.",
-  "academie": true
- },
- {
-  "mot": "aparté",
-  "nature": "n. m.",
-  "definition": "Paroles qu’un personnage dit à part soi ; entretien particulier au sein d’une réunion.",
-  "exemple": "Les deux ministres eurent un bref aparté dans le couloir.",
-  "academie": false
  },
  {
   "mot": "apocryphe",
@@ -733,13 +551,6 @@
   "definition": "Dont la vérité est nécessaire et démontrée, qui s’impose sans contestation.",
   "exemple": "Il présentait ses opinions avec une assurance apodictique.",
   "academie": true
- },
- {
-  "mot": "apologie",
-  "nature": "n. f.",
-  "definition": "Discours ou écrit qui défend, justifie ou fait l’éloge de quelqu’un ou de quelque chose.",
-  "exemple": "Le livre est une apologie passionnée de la lenteur.",
-  "academie": false
  },
  {
   "mot": "apologue",
@@ -767,13 +578,6 @@
   "nature": "n. f.",
   "definition": "Note ou recommandation ajoutée en marge ou au bas d’un écrit.",
   "exemple": "Le préfet ajouta une apostille favorable à la requête.",
-  "academie": true
- },
- {
-  "mot": "apostropher",
-  "nature": "v. tr.",
-  "definition": "Adresser brusquement la parole à quelqu’un, souvent avec rudesse.",
-  "exemple": "Un passant apostropha le conducteur qui avait grillé le feu.",
   "academie": true
  },
  {
@@ -840,13 +644,6 @@
   "academie": true
  },
  {
-  "mot": "arcane",
-  "nature": "n. m.",
-  "definition": "Secret, mystère réservé aux initiés ; surtout au pluriel.",
-  "exemple": "Elle connaissait tous les arcanes de la procédure administrative.",
-  "academie": true
- },
- {
   "mot": "archal",
   "nature": "n. m.",
   "definition": "Laiton ; « fil d’archal » : fil de laiton.",
@@ -872,13 +669,6 @@
   "nature": "n. m.",
   "definition": "Vieilli et péjoratif : agent de police ; autrefois, surveillant des forçats.",
   "exemple": "Deux argousins le cueillirent à la sortie du tripot.",
-  "academie": true
- },
- {
-  "mot": "arguer",
-  "nature": "v. tr. et intr.",
-  "definition": "Tirer une conséquence, déduire ; prétexter, invoquer comme argument.",
-  "exemple": "Il arguait de son grand âge pour refuser la corvée.",
   "academie": true
  },
  {
@@ -931,24 +721,10 @@
   "academie": true
  },
  {
-  "mot": "aspérité",
-  "nature": "n. f.",
-  "definition": "Saillie, inégalité d’une surface ; au figuré, rudesse du caractère.",
-  "exemple": "Le grimpeur s’agrippait aux moindres aspérités de la paroi.",
-  "academie": true
- },
- {
   "mot": "asphodèle",
   "nature": "n. m.",
   "definition": "Plante à fleurs blanches ou jaunes, associée dans la mythologie grecque au séjour des morts.",
   "exemple": "Les ombres erraient dans la prairie d’asphodèles.",
-  "academie": true
- },
- {
-  "mot": "asséner",
-  "nature": "v. tr.",
-  "definition": "Porter un coup avec force ; au figuré, énoncer avec brutalité.",
-  "exemple": "Il lui asséna un coup de poing, puis quelques vérités bien senties.",
   "academie": true
  },
  {
@@ -973,31 +749,10 @@
   "academie": true
  },
  {
-  "mot": "atavisme",
-  "nature": "n. m.",
-  "definition": "Réapparition de caractères d’un ancêtre ; par extension, hérédité des tendances.",
-  "exemple": "Par atavisme, il avait le goût de la mer comme ses aïeux marins.",
-  "academie": true
- },
- {
   "mot": "atermoiement",
   "nature": "n. m.",
   "definition": "Fait de remettre sans cesse une décision ou une action à plus tard ; hésitation qui retarde. S’emploie surtout au pluriel.",
   "exemple": "Après des mois d’atermoiements, la mairie a enfin lancé les travaux.",
-  "academie": true
- },
- {
-  "mot": "atone",
-  "nature": "adj.",
-  "definition": "Qui manque de vigueur, d’expression ; en phonétique, non accentué.",
-  "exemple": "Il fixait la fenêtre d’un regard atone.",
-  "academie": true
- },
- {
-  "mot": "atour",
-  "nature": "n. m.",
-  "definition": "Parure, ornement de toilette ; surtout au pluriel, dans « dans ses plus beaux atours ».",
-  "exemple": "Elle était parée de ses plus beaux atours pour le bal.",
   "academie": true
  },
  {
@@ -1022,13 +777,6 @@
   "academie": true
  },
  {
-  "mot": "attifer",
-  "nature": "v. tr.",
-  "definition": "Familier : habiller, parer avec mauvais goût ou de façon ridicule.",
-  "exemple": "Sa tante l’avait attifé d’un costume trop grand.",
-  "academie": false
- },
- {
   "mot": "attrition",
   "nature": "n. f.",
   "definition": "Regret d’avoir offensé Dieu, inspiré par la crainte du châtiment plutôt que par l’amour ; usure de corps durs par frottement.",
@@ -1040,13 +788,6 @@
   "nature": "n. f.",
   "definition": "Concert donné à l’aube sous les fenêtres de quelqu’un.",
   "exemple": "Les musiciens donnèrent une aubade à la jeune mariée.",
-  "academie": true
- },
- {
-  "mot": "augure",
-  "nature": "n. m.",
-  "definition": "Présage, signe de ce qui doit arriver ; dans l’Antiquité, prêtre chargé d’interpréter les présages.",
-  "exemple": "Cette première neige était de bon augure pour la saison.",
   "academie": true
  },
  {
@@ -1071,20 +812,6 @@
   "academie": true
  },
  {
-  "mot": "aune",
-  "nature": "n. f.",
-  "definition": "Ancienne mesure de longueur ; « à l’aune de » : en prenant pour critère.",
-  "exemple": "Il jugeait chaque projet à l’aune de sa rentabilité.",
-  "academie": true
- },
- {
-  "mot": "auspice",
-  "nature": "n. m.",
-  "definition": "Présage tiré du vol des oiseaux ; au pluriel, « sous les auspices de » : sous la protection de.",
-  "exemple": "Le festival s’est ouvert sous les meilleurs auspices.",
-  "academie": true
- },
- {
   "mot": "autan",
   "nature": "n. m.",
   "definition": "Vent violent venu du sud-est, qui souffle sur le Languedoc et la région toulousaine.",
@@ -1099,24 +826,10 @@
   "academie": true
  },
  {
-  "mot": "avachir",
-  "nature": "v. tr.",
-  "definition": "Rendre mou, déformé ; au figuré, priver d’énergie, de vigueur.",
-  "exemple": "L’oisiveté avait fini par l’avachir.",
-  "academie": true
- },
- {
   "mot": "avanie",
   "nature": "n. f.",
   "definition": "Affront humiliant, traitement vexatoire infligé publiquement à quelqu’un.",
   "exemple": "Il ne pardonna jamais l’avanie subie devant tout le conseil d’administration.",
-  "academie": true
- },
- {
-  "mot": "avenant",
-  "nature": "adj.",
-  "definition": "Qui plaît par sa bonne grâce, son amabilité ; « à l’avenant » : en accord, pareillement.",
-  "exemple": "L’hôtesse était avenante, et le repas à l’avenant.",
   "academie": true
  },
  {
@@ -1204,13 +917,6 @@
   "academie": true
  },
  {
-  "mot": "baliverne",
-  "nature": "n. f.",
-  "definition": "Propos futile ou mensonger, sans aucun sérieux.",
-  "exemple": "Ne m’en conte pas, ce ne sont que des balivernes pour amuser la galerie.",
-  "academie": true
- },
- {
   "mot": "bamboche",
   "nature": "n. f.",
   "definition": "Partie de plaisir où l’on s’amuse sans retenue, ripaille joyeuse et un peu débridée.",
@@ -1222,13 +928,6 @@
   "nature": "adj. et n.",
   "definition": "Familier. Bancal, de travers ; se dit aussi d’une personne aux jambes tordues.",
   "exemple": "Il s’assit prudemment sur un tabouret bancroche.",
-  "academie": true
- },
- {
-  "mot": "baragouin",
-  "nature": "n. m.",
-  "definition": "Langage incompréhensible ou langue qu’on parle très mal.",
-  "exemple": "Son baragouin mêlé d’anglais et d’italien faisait sourire les serveurs.",
   "academie": true
  },
  {
@@ -1293,13 +992,6 @@
   "definition": "D’une manière doucereuse et faussement innocente, avec un air de candeur affecté.",
   "exemple": "Il demanda benoîtement si quelqu’un avait vu le dernier morceau de gâteau.",
   "academie": false
- },
- {
-  "mot": "berlue",
-  "nature": "n. f.",
-  "definition": "Trouble passager de la vue ; avoir la berlue : se faire des illusions.",
-  "exemple": "J’ai cru avoir la berlue en voyant mon ancien professeur sur scène.",
-  "academie": true
  },
  {
   "mot": "bernique",
@@ -1397,13 +1089,6 @@
   "nature": "adj. et n. m.",
   "definition": "Couleur brun noirâtre, tirant sur le jaune.",
   "exemple": "Le soleil avait donné à sa peau une teinte bistre.",
-  "academie": true
- },
- {
-  "mot": "blanc-bec",
-  "nature": "n. m.",
-  "definition": "Jeune homme sans expérience qui se montre présomptueux.",
-  "exemple": "Ce blanc-bec prétendait apprendre le métier à des artisans chevronnés.",
   "academie": true
  },
  {
@@ -1596,38 +1281,10 @@
   "academie": true
  },
  {
-  "mot": "cabale",
-  "nature": "n. f.",
-  "definition": "Intrigue concertée contre quelqu’un ; ensemble de ceux qui la mènent.",
-  "exemple": "Une cabale de jaloux fit tomber la pièce dès la première.",
-  "academie": true
- },
- {
-  "mot": "cabotin",
-  "nature": "adj. et n.",
-  "definition": "Se dit d’une personne qui en fait trop pour se faire remarquer, comme un mauvais acteur.",
-  "exemple": "Cet élève cabotin ne rate jamais une occasion de faire rire la classe.",
-  "academie": true
- },
- {
-  "mot": "cabriole",
-  "nature": "n. f.",
-  "definition": "Saut léger et vif, culbute ; par extension, revirement brusque.",
-  "exemple": "Les enfants faisaient des cabrioles dans l’herbe fraîche.",
-  "academie": true
- },
- {
   "mot": "cacochyme",
   "nature": "adj.",
   "definition": "D’une santé faible et chancelante, d’une constitution maladive ; se dit souvent, avec ironie, d’un vieillard.",
   "exemple": "Un vieillard cacochyme somnolait sous la tonnelle, son chat sur les genoux.",
-  "academie": true
- },
- {
-  "mot": "caduc",
-  "nature": "adj.",
-  "definition": "Qui n’a plus cours ou n’a plus de valeur ; se dit aussi des feuilles qui tombent chaque année.",
-  "exemple": "Ce règlement, jamais appliqué, est devenu caduc.",
   "academie": true
  },
  {
@@ -1673,13 +1330,6 @@
   "academie": false
  },
  {
-  "mot": "camaïeu",
-  "nature": "n. m.",
-  "definition": "Peinture en une seule couleur à différents tons ; par extension, harmonie de nuances d’une même teinte.",
-  "exemple": "Le salon était décoré dans un camaïeu de bleus.",
-  "academie": true
- },
- {
   "mot": "camard",
   "nature": "adj. et n.",
   "definition": "Qui a le nez court et aplati ; la Camarde : la mort.",
@@ -1691,20 +1341,6 @@
   "nature": "n. f.",
   "definition": "Coterie de familiers influents qui entourent un dirigeant.",
   "exemple": "Le ministre ne prenait aucune décision sans consulter sa camarilla.",
-  "academie": true
- },
- {
-  "mot": "camouflet",
-  "nature": "n. m.",
-  "definition": "Affront humiliant infligé à quelqu’un.",
-  "exemple": "Le rejet de sa proposition fut un camouflet pour le maire.",
-  "academie": true
- },
- {
-  "mot": "cancan",
-  "nature": "n. m.",
-  "definition": "Commérage, bavardage malveillant ; aussi, danse de music-hall.",
-  "exemple": "Les cancans du village allaient bon train depuis son départ.",
   "academie": true
  },
  {
@@ -1729,24 +1365,10 @@
   "academie": true
  },
  {
-  "mot": "capharnaüm",
-  "nature": "n. m.",
-  "definition": "Lieu en grand désordre, encombré d’objets hétéroclites.",
-  "exemple": "Son atelier était un véritable capharnaüm de toiles et de pinceaux.",
-  "academie": true
- },
- {
   "mot": "capilotade",
   "nature": "n. f.",
   "definition": "En capilotade : en piteux état, écrasé, meurtri.",
   "exemple": "Après la randonnée, j’avais les pieds en capilotade.",
-  "academie": true
- },
- {
-  "mot": "capiteux",
-  "nature": "adj.",
-  "definition": "Qui monte à la tête, grise ; troublant, sensuel.",
-  "exemple": "Un parfum capiteux de jasmin flottait dans la serre.",
   "academie": true
  },
  {
@@ -1785,20 +1407,6 @@
   "academie": true
  },
  {
-  "mot": "carcan",
-  "nature": "n. m.",
-  "definition": "Collier de fer servant autrefois au supplice ; par extension, contrainte pesante.",
-  "exemple": "Elle voulait échapper au carcan des conventions familiales.",
-  "academie": true
- },
- {
-  "mot": "cassandre",
-  "nature": "n. f.",
-  "definition": "Personne qui prédit des malheurs sans être écoutée.",
-  "exemple": "Il joue les cassandres en annonçant la ruine de la ville.",
-  "academie": false
- },
- {
   "mot": "casuistique",
   "nature": "n. f.",
   "definition": "Raisonnement subtil, voire captieux, sur des cas de conscience.",
@@ -1824,13 +1432,6 @@
   "nature": "n. f.",
   "definition": "Prudence rusée, mêlée de méfiance et d’habileté à tromper.",
   "exemple": "Le vieux diplomate négociait avec une cautèle que nul ne parvenait à percer.",
-  "academie": true
- },
- {
-  "mot": "cerbère",
-  "nature": "n. m.",
-  "definition": "Gardien sévère et intraitable.",
-  "exemple": "Le cerbère de l’accueil refusa de me laisser monter.",
   "academie": true
  },
  {
@@ -1904,13 +1505,6 @@
   "academie": true
  },
  {
-  "mot": "chamailler",
-  "nature": "v. pron.",
-  "definition": "Familier. Se disputer pour des broutilles.",
-  "exemple": "Les deux sœurs se chamaillent pour le choix du film.",
-  "academie": true
- },
- {
   "mot": "chamarré",
   "nature": "adj.",
   "definition": "Orné de galons, de broderies ou de couleurs voyantes.",
@@ -1939,13 +1533,6 @@
   "academie": true
  },
  {
-  "mot": "chatoyer",
-  "nature": "v. intr.",
-  "definition": "Briller avec des reflets changeants selon la lumière.",
-  "exemple": "La soie de sa robe chatoyait sous les lustres.",
-  "academie": true
- },
- {
   "mot": "chattemite",
   "nature": "n. f.",
   "definition": "Personne qui affecte une douceur et une humilité hypocrites pour mieux tromper ou séduire.",
@@ -1960,25 +1547,11 @@
   "academie": true
  },
  {
-  "mot": "chenapan",
-  "nature": "n. m.",
-  "definition": "Garnement, vaurien ; se dit souvent d’un enfant espiègle.",
-  "exemple": "Ce petit chenapan a encore chipé les biscuits.",
-  "academie": false
- },
- {
   "mot": "chenu",
   "nature": "adj.",
   "definition": "Littéraire. Blanchi par l’âge.",
   "exemple": "Le vieillard au front chenu racontait les guerres d’autrefois.",
   "academie": false
- },
- {
-  "mot": "chicaner",
-  "nature": "v. tr. et intr.",
-  "definition": "Contester sur des vétilles, chercher querelle pour des riens.",
-  "exemple": "Il chicane sur chaque ligne du contrat.",
-  "academie": true
  },
  {
   "mot": "chiche",
@@ -2072,20 +1645,6 @@
   "academie": false
  },
  {
-  "mot": "clinquant",
-  "nature": "adj. et n. m.",
-  "definition": "Qui a un éclat voyant mais sans valeur réelle.",
-  "exemple": "Il préférait la sobriété au clinquant des palaces.",
-  "academie": true
- },
- {
-  "mot": "cloaque",
-  "nature": "n. m.",
-  "definition": "Lieu où s’amassent des eaux sales ; par extension, endroit malpropre ou corrompu.",
-  "exemple": "La cour de l’immeuble était devenue un cloaque après l’orage.",
-  "academie": true
- },
- {
   "mot": "clopin-clopant",
   "nature": "loc. adv.",
   "definition": "En boitillant ; par extension, tant bien que mal.",
@@ -2121,13 +1680,6 @@
   "academie": true
  },
  {
-  "mot": "cogiter",
-  "nature": "v. intr.",
-  "definition": "Plaisant. Réfléchir, méditer longuement.",
-  "exemple": "Laisse-moi cogiter un peu avant de te répondre.",
-  "academie": false
- },
- {
   "mot": "coi",
   "nature": "adj.",
   "definition": "Silencieux et immobile ; rester, demeurer coi : sans réaction.",
@@ -2139,13 +1691,6 @@
   "nature": "n. m.",
   "definition": "Petit objet de fantaisie, sans valeur.",
   "exemple": "Elle rapportait de chaque voyage une foule de colifichets.",
-  "academie": true
- },
- {
-  "mot": "collusion",
-  "nature": "n. f.",
-  "definition": "Entente secrète au détriment d’un tiers.",
-  "exemple": "L’enquête a révélé une collusion entre les deux entreprises.",
   "academie": true
  },
  {
@@ -2182,13 +1727,6 @@
   "definition": "Air de gravité recueillie ou affectée ; au sens religieux, regret d’avoir offensé Dieu.",
   "exemple": "Le majordome annonça le dîner avec componction.",
   "academie": true
- },
- {
-  "mot": "conciliabule",
-  "nature": "n. m.",
-  "definition": "Conversation à voix basse, à l’écart ; réunion plus ou moins secrète.",
-  "exemple": "Les élèves tenaient des conciliabules dans le fond de la cour.",
-  "academie": false
  },
  {
   "mot": "concupiscence",
@@ -2282,13 +1820,6 @@
   "academie": true
  },
  {
-  "mot": "cossu",
-  "nature": "adj.",
-  "definition": "Qui dénote l’aisance, la richesse.",
-  "exemple": "Ils habitaient un quartier cossu aux larges avenues.",
-  "academie": false
- },
- {
   "mot": "coterie",
   "nature": "n. f.",
   "definition": "Petit groupe fermé qui défend ses intérêts communs.",
@@ -2331,25 +1862,11 @@
   "academie": true
  },
  {
-  "mot": "crâner",
-  "nature": "v. intr.",
-  "definition": "Familier. Faire le fier, le vantard.",
-  "exemple": "Il crâne depuis qu’il a gagné la partie.",
-  "academie": true
- },
- {
   "mot": "crésus",
   "nature": "n. m.",
   "definition": "Homme extrêmement riche.",
   "exemple": "Ce crésus de l’immobilier possède la moitié des immeubles de la ville.",
   "academie": true
- },
- {
-  "mot": "croquemitaine",
-  "nature": "n. m.",
-  "definition": "Personnage imaginaire dont on menace les enfants ; personne qui fait peur.",
-  "exemple": "Le surveillant jouait les croquemitaines pour faire régner l’ordre.",
-  "academie": false
  },
  {
   "mot": "croquignolet",
@@ -2394,24 +1911,10 @@
   "academie": true
  },
  {
-  "mot": "dantesque",
-  "nature": "adj.",
-  "definition": "Qui évoque l’enfer décrit par Dante ; d’une grandeur effrayante, terrifiante.",
-  "exemple": "Les pompiers ont décrit un incendie dantesque, aux flammes hautes de trente mètres.",
-  "academie": false
- },
- {
   "mot": "darder",
   "nature": "v. tr.",
   "definition": "Lancer comme un dard ; se dit surtout du soleil qui envoie ses rayons, ou d’un regard vif.",
   "exemple": "En plein midi, le soleil dardait ses rayons sur la place déserte.",
-  "academie": true
- },
- {
-  "mot": "dare-dare",
-  "nature": "adv.",
-  "definition": "En toute hâte, très vite. Familier.",
-  "exemple": "Dès qu’il apprit la nouvelle, il rentra dare-dare à la maison.",
   "academie": true
  },
  {
@@ -2471,52 +1974,10 @@
   "academie": false
  },
  {
-  "mot": "déconfiture",
-  "nature": "n. f.",
-  "definition": "Défaite complète, échec cuisant ; par extension, ruine financière.",
-  "exemple": "La déconfiture de l’équipe favorite a stupéfié tout le stade.",
-  "academie": true
- },
- {
-  "mot": "décorum",
-  "nature": "n. m.",
-  "definition": "Ensemble des bienséances et du cérémonial à observer en certaines circonstances.",
-  "exemple": "La réception à l’ambassade se déroula dans le plus strict décorum.",
-  "academie": true
- },
- {
-  "mot": "décrépitude",
-  "nature": "n. f.",
-  "definition": "Affaiblissement extrême dû au grand âge ; par extension, déchéance avancée d’une chose ou d’une institution.",
-  "exemple": "Laissé à l’abandon, le manoir sombrait lentement dans la décrépitude.",
-  "academie": true
- },
- {
-  "mot": "dédale",
-  "nature": "n. m.",
-  "definition": "Réseau de chemins si embrouillé qu’on s’y perd ; au figuré, enchevêtrement de choses compliquées.",
-  "exemple": "Il s’est perdu dans le dédale des formulaires administratifs.",
-  "academie": true
- },
- {
   "mot": "déduit",
   "nature": "n. m.",
   "definition": "Vieilli : divertissement, passe-temps agréable ; spécialement, plaisir amoureux.",
   "exemple": "La chasse au faucon était le déduit favori des seigneurs du lieu.",
-  "academie": true
- },
- {
-  "mot": "défenestrer",
-  "nature": "v. tr.",
-  "definition": "Jeter quelqu’un ou quelque chose par la fenêtre.",
-  "exemple": "En 1618, deux représentants de l’empereur furent défenestrés au château de Prague.",
-  "academie": false
- },
- {
-  "mot": "déférence",
-  "nature": "n. f.",
-  "definition": "Considération respectueuse qui porte à s’incliner devant l’avis ou la volonté de quelqu’un.",
-  "exemple": "Il écoutait son aîné avec une déférence presque excessive.",
   "academie": true
  },
  {
@@ -2527,38 +1988,10 @@
   "academie": true
  },
  {
-  "mot": "dégingandé",
-  "nature": "adj.",
-  "definition": "Se dit d’une personne grande dont l’allure et les gestes semblent mal coordonnés, comme désarticulés.",
-  "exemple": "Un adolescent dégingandé traversa la cour en balançant ses longs bras.",
-  "academie": true
- },
- {
   "mot": "dégoiser",
   "nature": "v. tr.",
   "definition": "Débiter avec volubilité des paroles, souvent des sottises ou des médisances. Familier.",
   "exemple": "Elle dégoisait des ragots sur tous les voisins de l’immeuble.",
-  "academie": true
- },
- {
-  "mot": "dégoter",
-  "nature": "v. tr.",
-  "definition": "Familier : dénicher, trouver ce qu’on cherchait, souvent à grand-peine.",
-  "exemple": "J’ai dégoté une édition originale chez un bouquiniste des quais.",
-  "academie": true
- },
- {
-  "mot": "déguerpir",
-  "nature": "v. intr.",
-  "definition": "Quitter un lieu en hâte, souvent contraint ; s’enfuir.",
-  "exemple": "Au premier aboiement, les maraudeurs ont déguerpi du verger.",
-  "academie": true
- },
- {
-  "mot": "délectation",
-  "nature": "n. f.",
-  "definition": "Plaisir vif que l’on savoure pleinement et consciemment.",
-  "exemple": "Elle dégustait chaque bouchée de la tarte avec une évidente délectation.",
   "academie": true
  },
  {
@@ -2576,24 +2009,10 @@
   "academie": true
  },
  {
-  "mot": "déluré",
-  "nature": "adj.",
-  "definition": "Vif et dégourdi ; parfois, d’une liberté d’allure jugée effrontée.",
-  "exemple": "La gamine délurée avait déjà négocié trois bonbons avec le marchand.",
-  "academie": true
- },
- {
   "mot": "démantibuler",
   "nature": "v. tr.",
   "definition": "Familier : mettre en pièces, disloquer, démolir.",
   "exemple": "Les déménageurs ont démantibulé la vieille armoire en voulant la descendre.",
-  "academie": true
- },
- {
-  "mot": "démêlé",
-  "nature": "n. m.",
-  "definition": "Différend, querelle ; surtout au pluriel, dans « avoir des démêlés avec quelqu’un ».",
-  "exemple": "L’ancien maire a eu de nombreux démêlés avec la justice.",
   "academie": true
  },
  {
@@ -2639,41 +2058,6 @@
   "academie": true
  },
  {
-  "mot": "désopilant",
-  "nature": "adj.",
-  "definition": "Qui fait rire de bon cœur ; très drôle.",
-  "exemple": "Son imitation du directeur était proprement désopilante.",
-  "academie": true
- },
- {
-  "mot": "désuétude",
-  "nature": "n. f.",
-  "definition": "État de ce qui n’est plus en usage. « Tomber en désuétude » : cesser d’être pratiqué.",
-  "exemple": "Cette loi, jamais abrogée, est tombée en désuétude depuis longtemps.",
-  "academie": false
- },
- {
-  "mot": "désœuvrement",
-  "nature": "n. m.",
-  "definition": "État de quelqu’un qui n’a rien à faire, qui reste sans occupation.",
-  "exemple": "Par pur désœuvrement, il se mit à compter les tuiles du toit voisin.",
-  "academie": true
- },
- {
-  "mot": "détaler",
-  "nature": "v. intr.",
-  "definition": "Familier : s’enfuir au plus vite.",
-  "exemple": "Le lapin détala dès qu’il entendit craquer une branche.",
-  "academie": true
- },
- {
-  "mot": "déveine",
-  "nature": "n. f.",
-  "definition": "Familier : malchance persistante, en particulier au jeu.",
-  "exemple": "Quelle déveine : trois crevaisons dans la même semaine !",
-  "academie": true
- },
- {
   "mot": "diablerie",
   "nature": "n. f.",
   "definition": "Sortilège attribué au diable ; par extension, espièglerie, tour malicieux.",
@@ -2702,13 +2086,6 @@
   "academie": true
  },
  {
-  "mot": "diatribe",
-  "nature": "n. f.",
-  "definition": "Critique virulente, souvent injurieuse, orale ou écrite.",
-  "exemple": "Le député s’est lancé dans une longue diatribe contre le gouvernement.",
-  "academie": true
- },
- {
   "mot": "dictame",
   "nature": "n. m.",
   "definition": "Plante aromatique réputée guérir les plaies ; au figuré et littéraire, baume, adoucissement d’une peine.",
@@ -2728,13 +2105,6 @@
   "definition": "Amour pur et spirituel, d’abord au sens religieux ; littéraire : vive affection, préférence marquée.",
   "exemple": "Elle gardait pour ses vieux livres une dilection touchante.",
   "academie": true
- },
- {
-  "mot": "dilettante",
-  "nature": "n. m. et f.",
-  "definition": "Personne qui s’adonne à une activité pour son seul plaisir, sans s’y engager pleinement.",
-  "exemple": "Ce dilettante touche à la peinture, au violon et à la poésie sans rien approfondir.",
-  "academie": false
  },
  {
   "mot": "dionysiaque",
@@ -2779,13 +2149,6 @@
   "academie": false
  },
  {
-  "mot": "divaguer",
-  "nature": "v. intr.",
-  "definition": "Tenir des propos incohérents, déraisonner ; au sens propre, errer çà et là.",
-  "exemple": "La fièvre le faisait divaguer toute la nuit.",
-  "academie": true
- },
- {
   "mot": "docte",
   "nature": "adj.",
   "definition": "Qui possède un grand savoir, une vaste érudition ; se dit aussi, souvent avec ironie, d’un ton savant et pédant.",
@@ -2807,24 +2170,10 @@
   "academie": true
  },
  {
-  "mot": "doléance",
-  "nature": "n. f.",
-  "definition": "Plainte par laquelle on expose un grief ou une réclamation (surtout au pluriel).",
-  "exemple": "Le maire a reçu les doléances des riverains excédés par le bruit.",
-  "academie": true
- },
- {
   "mot": "donquichottisme",
   "nature": "n. m.",
   "definition": "Attitude généreuse mais chimérique de celui qui se pose en redresseur de torts.",
   "exemple": "Partir seul en guerre contre la multinationale relevait du pur donquichottisme.",
-  "academie": true
- },
- {
-  "mot": "dorloter",
-  "nature": "v. tr.",
-  "definition": "Entourer quelqu’un de soins tendres et attentifs ; choyer.",
-  "exemple": "Sa grand-mère le dorlotait comme un prince à chaque visite.",
   "academie": true
  },
  {
@@ -2833,20 +2182,6 @@
   "definition": "Autrefois, veuve jouissant d’un douaire ; familièrement, dame âgée de la haute société.",
   "exemple": "La vieille douairière recevait chaque jeudi dans son salon Empire.",
   "academie": true
- },
- {
-  "mot": "doucereux",
-  "nature": "adj.",
-  "definition": "D’une douceur fade ou affectée, qui sonne faux.",
-  "exemple": "Il nous accueillit avec un sourire doucereux qui ne m’inspira aucune confiance.",
-  "academie": true
- },
- {
-  "mot": "draconien",
-  "nature": "adj.",
-  "definition": "D’une sévérité extrême, en parlant de lois, de règles ou de mesures.",
-  "exemple": "Pour redresser les comptes, la direction a imposé des économies draconiennes.",
-  "academie": false
  },
  {
   "mot": "drille",
@@ -2888,13 +2223,6 @@
   "nature": "n. f.",
   "definition": "Femme dont on est épris, souvent avec une pointe d’ironie. Allusion à la bien-aimée de Don Quichotte.",
   "exemple": "Il traversa toute la ville sous la pluie pour apporter des roses à sa dulcinée.",
-  "academie": true
- },
- {
-  "mot": "duplicité",
-  "nature": "n. f.",
-  "definition": "Caractère de qui affiche des sentiments ou des intentions autres que les siens pour tromper ; fausseté.",
-  "exemple": "Sa duplicité éclata au grand jour lorsqu’on découvrit ses lettres.",
   "academie": true
  },
  {
@@ -2996,13 +2324,6 @@
   "academie": true
  },
  {
-  "mot": "endimanché",
-  "nature": "adj.",
-  "definition": "Vêtu de ses habits du dimanche, souvent avec une certaine gaucherie.",
-  "exemple": "Toute la famille, endimanchée, posait devant l’église.",
-  "academie": false
- },
- {
   "mot": "engeance",
   "nature": "n. f.",
   "definition": "Péjoratif : catégorie de personnes jugées méprisables.",
@@ -3014,13 +2335,6 @@
   "nature": "v. tr.",
   "definition": "Orner de guirlandes ; familièrement, réprimander vertement.",
   "exemple": "Il s’est fait enguirlander par sa mère pour son retard.",
-  "academie": true
- },
- {
-  "mot": "enorgueillir",
-  "nature": "v. pron.",
-  "definition": "Tirer orgueil de quelque chose.",
-  "exemple": "Le village s’enorgueillit de son église romane.",
   "academie": true
  },
  {
@@ -3087,13 +2401,6 @@
   "academie": true
  },
  {
-  "mot": "escient",
-  "nature": "n. m.",
-  "definition": "Vieilli : connaissance qu’on a d’une chose. Surtout dans « à bon escient » : avec discernement, à propos.",
-  "exemple": "Il faut employer ce mot à bon escient.",
-  "academie": true
- },
- {
   "mot": "escobarderie",
   "nature": "n. f.",
   "definition": "Vieilli : réponse ou conduite hypocrite et fuyante.",
@@ -3106,13 +2413,6 @@
   "definition": "Homme de grande taille, à l’allure dégingandée. Familier.",
   "exemple": "Un grand escogriffe se cogna la tête contre la poutre en entrant.",
   "academie": true
- },
- {
-  "mot": "esseulé",
-  "nature": "adj.",
-  "definition": "Laissé seul, délaissé.",
-  "exemple": "Un chien esseulé attendait sur le quai.",
-  "academie": false
  },
  {
   "mot": "estafette",
@@ -3134,13 +2434,6 @@
   "definition": "Ancienne épée longue et étroite, faite pour frapper de la pointe. « D’estoc et de taille » : avec la pointe et le tranchant.",
   "exemple": "Les chevaliers frappaient d’estoc et de taille.",
   "academie": false
- },
- {
-  "mot": "estocade",
-  "nature": "n. f.",
-  "definition": "Grand coup porté de la pointe de l’épée, notamment par le matador pour achever le taureau ; au figuré, coup décisif.",
-  "exemple": "Le dernier argument de l’avocat porta l’estocade.",
-  "academie": true
  },
  {
   "mot": "estomaquer",
@@ -3171,20 +2464,6 @@
   "academie": true
  },
  {
-  "mot": "expectative",
-  "nature": "n. f.",
-  "definition": "Attente fondée sur une promesse ou une probabilité. « Rester dans l’expectative » : attendre la suite sans se décider.",
-  "exemple": "Faute d’informations, il préféra rester dans l’expectative.",
-  "academie": true
- },
- {
-  "mot": "expédient",
-  "nature": "n. m.",
-  "definition": "Moyen de fortune pour se tirer d’embarras. « Vivre d’expédients » : de moyens douteux.",
-  "exemple": "Ruiné, il vivait d’expédients.",
-  "academie": true
- },
- {
   "mot": "extravaguer",
   "nature": "v. intr.",
   "definition": "Penser ou dire des choses dénuées de sens ; déraisonner.",
@@ -3206,31 +2485,10 @@
   "academie": true
  },
  {
-  "mot": "éborgner",
-  "nature": "v. tr.",
-  "definition": "Rendre quelqu’un borgne en lui crevant ou blessant un œil.",
-  "exemple": "Une branche basse a failli l’éborgner pendant sa course en forêt.",
-  "academie": true
- },
- {
-  "mot": "ébrouer",
-  "nature": "v. pron.",
-  "definition": "En parlant d’un cheval, souffler bruyamment des naseaux ; par extension, s’agiter, se secouer vivement.",
-  "exemple": "Sorti de la rivière, le chien s’ébroua en arrosant tout le monde.",
-  "academie": true
- },
- {
   "mot": "échalas",
   "nature": "n. m.",
   "definition": "Pieu qui soutient un cep de vigne ; familièrement, personne grande et maigre.",
   "exemple": "Ce grand échalas devait se baisser pour passer sous la porte.",
-  "academie": true
- },
- {
-  "mot": "échauffourée",
-  "nature": "n. f.",
-  "definition": "Bagarre confuse et brève ; accrochage de faible ampleur.",
-  "exemple": "Une échauffourée a éclaté entre supporters à la sortie du stade.",
   "academie": true
  },
  {
@@ -3318,52 +2576,10 @@
   "academie": false
  },
  {
-  "mot": "élucubration",
-  "nature": "n. f.",
-  "definition": "Théorie ou rêverie extravagante, fruit d’un raisonnement laborieux et peu convaincant. S’emploie surtout au pluriel.",
-  "exemple": "Personne ne prenait au sérieux ses élucubrations sur les pyramides.",
-  "academie": true
- },
- {
-  "mot": "émacié",
-  "nature": "adj.",
-  "definition": "Très amaigri, en particulier au visage.",
-  "exemple": "Après sa longue maladie, son visage émacié faisait peine à voir.",
-  "academie": true
- },
- {
-  "mot": "éméché",
-  "nature": "adj.",
-  "definition": "Familier : légèrement ivre.",
-  "exemple": "Un peu éméché, il entonna une chanson de marin.",
-  "academie": false
- },
- {
-  "mot": "émérite",
-  "nature": "adj.",
-  "definition": "Qui a acquis une grande compétence par une longue pratique ; se dit aussi d’un professeur honoraire.",
-  "exemple": "C’est une alpiniste émérite qui a gravi les plus hauts sommets.",
-  "academie": true
- },
- {
   "mot": "émonder",
   "nature": "v. tr.",
   "definition": "Débarrasser un arbre de ses branches inutiles ; au figuré, épurer.",
   "exemple": "Le jardinier émonde les tilleuls de l’allée chaque hiver.",
-  "academie": true
- },
- {
-  "mot": "émoustiller",
-  "nature": "v. tr.",
-  "definition": "Mettre de bonne humeur, exciter la gaieté ou les sens.",
-  "exemple": "Le champagne avait émoustillé les convives, qui se mirent à chanter.",
-  "academie": true
- },
- {
-  "mot": "épicurien",
-  "nature": "adj. et n.",
-  "definition": "Disciple d’Épicure ; par extension, qui recherche avant tout les plaisirs de la vie.",
-  "exemple": "En bon épicurien, il ne manquait jamais une fête des vendanges.",
   "academie": true
  },
  {
@@ -3416,13 +2632,6 @@
   "academie": true
  },
  {
-  "mot": "époustouflant",
-  "nature": "adj.",
-  "definition": "Familier : étonnant au point de couper le souffle.",
-  "exemple": "Le funambule a réalisé une traversée époustouflante.",
-  "academie": false
- },
- {
   "mot": "équanimité",
   "nature": "n. f.",
   "definition": "Égalité d’humeur, sérénité qui ne se laisse pas troubler.",
@@ -3434,13 +2643,6 @@
   "nature": "v. tr.",
   "definition": "Tailler à angles droits ; dépecer un animal mort.",
   "exemple": "Le charpentier équarrissait une poutre de chêne.",
-  "academie": true
- },
- {
-  "mot": "équipée",
-  "nature": "n. f.",
-  "definition": "Sortie, escapade ou aventure, souvent un peu folle.",
-  "exemple": "Notre équipée en solex jusqu’à la mer reste un souvenir mémorable.",
   "academie": true
  },
  {
@@ -3500,13 +2702,6 @@
   "academie": true
  },
  {
-  "mot": "évertuer",
-  "nature": "v. pron.",
-  "definition": "Faire tous ses efforts pour parvenir à quelque chose.",
-  "exemple": "Il s’évertuait à réparer la vieille horloge.",
-  "academie": true
- },
- {
   "mot": "faconde",
   "nature": "n. f.",
   "definition": "Facilité de parole abondante et souvent un peu trop intarissable.",
@@ -3563,13 +2758,6 @@
   "academie": true
  },
  {
-  "mot": "famélique",
-  "nature": "adj.",
-  "definition": "Tourmenté par la faim ; d’une maigreur qui trahit une nourriture insuffisante.",
-  "exemple": "Un chien famélique rôdait autour des étals du marché.",
-  "academie": true
- },
- {
   "mot": "fanfreluche",
   "nature": "n. f.",
   "definition": "Ornement léger de toilette (ruban, dentelle, volant), souvent jugé superflu.",
@@ -3582,13 +2770,6 @@
   "definition": "Homme méprisable, impertinent et sans valeur. Terme d’injure vieilli.",
   "exemple": "« Faquin ! » s’écria le baron en jetant son gant au visage de l’insolent.",
   "academie": true
- },
- {
-  "mot": "faramineux",
-  "nature": "adj.",
-  "definition": "Familier : étonnant par son ampleur, extraordinaire, en particulier en parlant d’un prix.",
-  "exemple": "Ils ont payé une somme faramineuse pour ce minuscule studio.",
-  "academie": false
  },
  {
   "mot": "faraud",
@@ -3647,24 +2828,10 @@
   "academie": true
  },
  {
-  "mot": "festoyer",
-  "nature": "v. intr.",
-  "definition": "Faire la fête, prendre part à un festin.",
-  "exemple": "Après les vendanges, on festoya jusqu’à l’aube.",
-  "academie": true
- },
- {
   "mot": "félon",
   "nature": "adj. et n.",
   "definition": "Qui trahit la foi due à son seigneur ; déloyal, traître.",
   "exemple": "Le vassal félon livra le château à l’ennemi.",
-  "academie": true
- },
- {
-  "mot": "féru",
-  "nature": "adj.",
-  "definition": "Passionné par un domaine et très savant en la matière (féru de).",
-  "exemple": "Féru d’astronomie, il passait ses nuits sur le toit.",
   "academie": true
  },
  {
@@ -3703,13 +2870,6 @@
   "academie": true
  },
  {
-  "mot": "fioriture",
-  "nature": "n. f.",
-  "definition": "Ornement ajouté à un chant, un dessin, un texte ; au pluriel, enjolivures superflues.",
-  "exemple": "Raconte-moi les faits, sans fioritures.",
-  "academie": true
- },
- {
   "mot": "flagorneur",
   "nature": "n. m.",
   "definition": "Personne qui flatte bassement et avec excès, surtout pour obtenir des faveurs.",
@@ -3729,13 +2889,6 @@
   "definition": "Vieilli : grand garçon mince, d’allure molle et gauche.",
   "exemple": "Un grand flandrin dégingandé vint nous ouvrir la porte.",
   "academie": false
- },
- {
-  "mot": "flapi",
-  "nature": "adj.",
-  "definition": "Familier : épuisé, à bout de forces.",
-  "exemple": "Après la randonnée, les enfants étaient flapis.",
-  "academie": true
  },
  {
   "mot": "flavescent",
@@ -3759,13 +2912,6 @@
   "academie": true
  },
  {
-  "mot": "florilège",
-  "nature": "n. m.",
-  "definition": "Recueil de morceaux choisis ; sélection de choses remarquables.",
-  "exemple": "Il nous offrit un florilège de ses meilleures répliques.",
-  "academie": true
- },
- {
   "mot": "flouer",
   "nature": "v. tr.",
   "definition": "Familier : duper, voler par ruse.",
@@ -3777,13 +2923,6 @@
   "nature": "v. intr.",
   "definition": "S’amuser de manière légère et enjouée, s’ébattre sans souci.",
   "exemple": "Les agneaux folâtraient dans le pré au premier soleil de mars.",
-  "academie": true
- },
- {
-  "mot": "folichon",
-  "nature": "adj.",
-  "definition": "Familier : gai, divertissant ; s’emploie surtout à la forme négative.",
-  "exemple": "Ce dîner chez les Durand n’avait rien de folichon.",
   "academie": true
  },
  {
@@ -3836,13 +2975,6 @@
   "academie": true
  },
  {
-  "mot": "fourvoyer",
-  "nature": "v. tr.",
-  "definition": "Égarer, détourner du bon chemin ; au pronominal, se tromper complètement.",
-  "exemple": "Ces mauvais conseils l’ont fourvoyé dans une impasse.",
-  "academie": true
- },
- {
   "mot": "fredaine",
   "nature": "n. f.",
   "definition": "Écart de conduite sans gravité, folie de jeunesse que l’on juge avec indulgence.",
@@ -3871,13 +3003,6 @@
   "academie": false
  },
  {
-  "mot": "fringant",
-  "nature": "adj.",
-  "definition": "Vif, plein d’entrain et d’allure.",
-  "exemple": "Un fringant cavalier caracolait en tête du cortège.",
-  "academie": true
- },
- {
   "mot": "friselis",
   "nature": "n. m.",
   "definition": "Léger frémissement ou doux bruissement, comme celui des feuilles ou de l’eau.",
@@ -3885,31 +3010,10 @@
   "academie": false
  },
  {
-  "mot": "frondeur",
-  "nature": "adj. et n.",
-  "definition": "Qui critique l’autorité et aime à la défier ; à l’origine, partisan de la Fronde.",
-  "exemple": "Il gardait de sa jeunesse un esprit frondeur.",
-  "academie": true
- },
- {
   "mot": "fuligineux",
   "nature": "adj.",
   "definition": "Qui a la couleur noirâtre ou l’aspect de la suie ; au figuré, obscur, confus.",
   "exemple": "Une fumée fuligineuse s’échappait de la cheminée de l’usine.",
-  "academie": true
- },
- {
-  "mot": "fulminer",
-  "nature": "v. tr. et intr.",
-  "definition": "Exploser de colère, se répandre en invectives ; prononcer solennellement une condamnation.",
-  "exemple": "Le capitaine fulminait contre l’incompétence de son équipage.",
-  "academie": true
- },
- {
-  "mot": "furibond",
-  "nature": "adj.",
-  "definition": "En proie à une fureur qui éclate au grand jour.",
-  "exemple": "Il sortit furibond de la salle d’audience.",
   "academie": true
  },
  {
@@ -3969,13 +3073,6 @@
   "academie": true
  },
  {
-  "mot": "galvauder",
-  "nature": "v. tr.",
-  "definition": "Compromettre, avilir par un mauvais usage.",
-  "exemple": "À force d’être galvaudé, le mot « génie » ne veut plus rien dire.",
-  "academie": true
- },
- {
   "mot": "gambiller",
   "nature": "v. intr.",
   "definition": "Familier : agiter les jambes ; danser.",
@@ -3987,13 +3084,6 @@
   "nature": "n. m.",
   "definition": "Jeune élégant désœuvré et un peu ridicule, soucieux surtout de sa mise, comme ceux des boulevards du Second Empire.",
   "exemple": "Un gandin à gilet brodé lorgnait les passantes depuis la terrasse.",
-  "academie": false
- },
- {
-  "mot": "gargantuesque",
-  "nature": "adj.",
-  "definition": "Démesuré, énorme, surtout en parlant d’un repas ou d’un appétit, à la façon du géant Gargantua.",
-  "exemple": "Après la randonnée, ils firent honneur à un petit-déjeuner gargantuesque.",
   "academie": false
  },
  {
@@ -4207,13 +3297,6 @@
   "academie": true
  },
  {
-  "mot": "grappiller",
-  "nature": "v. tr. et intr.",
-  "definition": "Cueillir les grappes restées après la vendange ; au figuré, ramasser de petits profits çà et là.",
-  "exemple": "Il grappillait quelques euros sur chaque commande.",
-  "academie": true
- },
- {
   "mot": "gredin",
   "nature": "n. m.",
   "definition": "Personne malhonnête, coquin ; souvent dit avec affection d’un enfant.",
@@ -4239,20 +3322,6 @@
   "nature": "n. f.",
   "definition": "Vieilli : jeune ouvrière coquette et de mœurs légères, au XIXe siècle.",
   "exemple": "Les étudiants courtisaient les grisettes du Quartier latin.",
-  "academie": true
- },
- {
-  "mot": "grivois",
-  "nature": "adj.",
-  "definition": "D’une gaieté libre et un peu osée.",
-  "exemple": "Il fredonnait une chanson grivoise en se rasant.",
-  "academie": true
- },
- {
-  "mot": "grommeler",
-  "nature": "v. tr. et intr.",
-  "definition": "Murmurer entre ses dents en manifestant son mécontentement.",
-  "exemple": "Il grommela quelques excuses et s’éloigna.",
   "academie": true
  },
  {
@@ -4389,13 +3458,6 @@
   "academie": false
  },
  {
-  "mot": "hébété",
-  "nature": "adj.",
-  "definition": "Rendu stupide, comme privé de ses facultés par un choc.",
-  "exemple": "Il resta hébété devant la lettre de licenciement.",
-  "academie": false
- },
- {
   "mot": "héraut",
   "nature": "n. m.",
   "definition": "Officier chargé des proclamations solennelles au Moyen Âge ; au figuré, celui qui annonce ou défend une cause.",
@@ -4408,13 +3470,6 @@
   "definition": "Fondateur ou chef d’une hérésie.",
   "exemple": "Le concile condamna l’hérésiarque et ses disciples.",
   "academie": true
- },
- {
-  "mot": "hétéroclite",
-  "nature": "adj.",
-  "definition": "Fait d’éléments disparates ; bizarre, qui s’écarte des règles.",
-  "exemple": "Le grenier abritait une collection hétéroclite de bibelots.",
-  "academie": false
  },
  {
   "mot": "hiémal",
@@ -4443,13 +3498,6 @@
   "definition": "Animal fabuleux, mi-cheval mi-griffon.",
   "exemple": "Dans le poème, le chevalier s’envole vers la lune sur un hippogriffe.",
   "academie": false
- },
- {
-  "mot": "hirsute",
-  "nature": "adj.",
-  "definition": "Dont les cheveux ou la barbe sont touffus et en désordre.",
-  "exemple": "Il sortit du lit hirsute et mal rasé.",
-  "academie": true
  },
  {
   "mot": "histrion",
@@ -4515,13 +3563,6 @@
   "academie": true
  },
  {
-  "mot": "hurluberlu",
-  "nature": "n. m.",
-  "definition": "Personne étourdie et fantasque, aux idées et aux manières extravagantes.",
-  "exemple": "Un hurluberlu en pyjama distribuait des poèmes devant la gare.",
-  "academie": true
- },
- {
   "mot": "hybris",
   "nature": "n. f.",
   "definition": "Dans la pensée grecque, démesure, orgueil excessif que les dieux finissent par châtier.",
@@ -4557,13 +3598,6 @@
   "academie": true
  },
  {
-  "mot": "iconoclaste",
-  "nature": "adj. et n.",
-  "definition": "Qui détruit les images saintes ; par extension, qui s’attaque aux traditions, aux idées reçues et aux valeurs établies.",
-  "exemple": "Ce metteur en scène iconoclaste a transposé la tragédie dans un parking souterrain.",
-  "academie": true
- },
- {
   "mot": "idiosyncrasie",
   "nature": "n. f.",
   "definition": "Manière d’être propre à chaque individu, qui le fait réagir à sa façon.",
@@ -4585,24 +3619,10 @@
   "academie": false
  },
  {
-  "mot": "ignominie",
-  "nature": "n. f.",
-  "definition": "Déshonneur extrême, infamie publique ; action ou conduite qui attire un tel opprobre.",
-  "exemple": "Trahir ses compagnons pour quelques pièces fut l’ignominie de sa vie.",
-  "academie": true
- },
- {
   "mot": "ilote",
   "nature": "n. m. et f.",
   "definition": "Dans l’ancienne Sparte, habitant réduit en servitude ; par extension, personne maintenue dans la misère, l’ignorance ou l’asservissement.",
   "exemple": "Le romancier décrit ces ouvriers comme les ilotes d’une industrie impitoyable.",
-  "academie": true
- },
- {
-  "mot": "imbroglio",
-  "nature": "n. m.",
-  "definition": "Situation embrouillée, confuse et difficile à démêler ; intrigue de théâtre très compliquée.",
-  "exemple": "Entre les deux contrats et les trois avocats, l’affaire tourna à l’imbroglio.",
   "academie": true
  },
  {
@@ -4627,13 +3647,6 @@
   "academie": false
  },
  {
-  "mot": "impénitent",
-  "nature": "adj.",
-  "definition": "Qui ne se repent pas de ses fautes ; par extension, qui persiste dans une habitude.",
-  "exemple": "Mon oncle est un fumeur impénitent qui rit des conseils de son médecin.",
-  "academie": true
- },
- {
   "mot": "impéritie",
   "nature": "n. f.",
   "definition": "Manque d’habileté ou ignorance de ce que l’on devrait savoir dans son métier.",
@@ -4645,13 +3658,6 @@
   "nature": "n. m.",
   "definition": "Personne qui a obtenu de l’autorité un titre, un diplôme, une charge ou un avantage.",
   "exemple": "Le diplôme doit porter la signature de l’impétrant.",
-  "academie": true
- },
- {
-  "mot": "impondérable",
-  "nature": "n. m.",
-  "definition": "Élément imprévisible dont on ne peut mesurer l’influence sur les événements.",
-  "exemple": "Malgré une préparation minutieuse, un impondérable fit échouer l’expédition.",
   "academie": true
  },
  {
@@ -4669,13 +3675,6 @@
   "academie": true
  },
  {
-  "mot": "inamovible",
-  "nature": "adj.",
-  "definition": "Qui ne peut être déplacé ou destitué de sa fonction ; par extension, qui reste toujours en place.",
-  "exemple": "Le président inamovible du club fêtait sa trentième réélection.",
-  "academie": true
- },
- {
   "mot": "inanité",
   "nature": "n. f.",
   "definition": "Caractère de ce qui est vain, inutile ou vide de sens.",
@@ -4688,13 +3687,6 @@
   "definition": "D’un rouge clair, un peu plus pâle que l’incarnat.",
   "exemple": "Le soleil couchant teintait les nuages d’un reflet incarnadin.",
   "academie": false
- },
- {
-  "mot": "incartade",
-  "nature": "n. f.",
-  "definition": "Léger écart de conduite, folie passagère.",
-  "exemple": "Ses parents lui pardonnèrent cette incartade de jeunesse.",
-  "academie": true
  },
  {
   "mot": "incoercible",
@@ -4795,39 +3787,11 @@
   "academie": true
  },
  {
-  "mot": "ingénu",
-  "nature": "adj. et n.",
-  "definition": "D’une franchise simple et naïve, sans malice.",
-  "exemple": "Elle posa la question d’un air ingénu qui désarma tout le monde.",
-  "academie": true
- },
- {
   "mot": "inique",
   "nature": "adj.",
   "definition": "Qui manque gravement à la justice et à l’équité.",
   "exemple": "Le peuple se souleva contre cet impôt inique.",
   "academie": false
- },
- {
-  "mot": "inopiné",
-  "nature": "adj.",
-  "definition": "Qui arrive sans qu’on s’y attende ; imprévu.",
-  "exemple": "La visite inopinée de l’inspecteur sema la panique dans l’atelier.",
-  "academie": true
- },
- {
-  "mot": "insanité",
-  "nature": "n. f.",
-  "definition": "Manque de bon sens, déraison ; parole ou action dénuée de sens.",
-  "exemple": "Il débita des insanités pendant tout le dîner.",
-  "academie": true
- },
- {
-  "mot": "intempestif",
-  "nature": "adj.",
-  "definition": "Qui se produit à contretemps, mal à propos.",
-  "exemple": "Ses remarques intempestives ont fini par lasser l’assemblée.",
-  "academie": true
  },
  {
   "mot": "intempérance",
@@ -4848,27 +3812,6 @@
   "nature": "adj.",
   "definition": "Qui se livre à des activités illégales ; par extension, louche, d’une honnêteté douteuse.",
   "exemple": "Le port abritait une faune interlope de contrebandiers et de receleurs.",
-  "academie": true
- },
- {
-  "mot": "invétéré",
-  "nature": "adj.",
-  "definition": "Enraciné par le temps ; se dit aussi de quelqu’un chez qui une habitude est profondément ancrée.",
-  "exemple": "C’est un joueur invétéré qui ne manque aucune course.",
-  "academie": false
- },
- {
-  "mot": "ipso facto",
-  "nature": "loc. adv.",
-  "definition": "Par le fait même, automatiquement.",
-  "exemple": "Tout retard de paiement entraîne ipso facto la résiliation du contrat.",
-  "academie": true
- },
- {
-  "mot": "irascible",
-  "nature": "adj.",
-  "definition": "Qui s’emporte facilement ; prompt à la colère.",
-  "exemple": "Le vieux concierge, irascible, chassait les enfants à coups de balai.",
   "academie": true
  },
  {
@@ -4904,13 +3847,6 @@
   "nature": "adj. inv.",
   "definition": "D’un jaune clair tirant sur le beige, en parlant surtout de la robe d’un cheval.",
   "exemple": "Le prince montait une jument isabelle.",
-  "academie": true
- },
- {
-  "mot": "itératif",
-  "nature": "adj.",
-  "definition": "Qui est fait ou répété plusieurs fois.",
-  "exemple": "Malgré ses demandes itératives, le dossier n’avançait pas.",
   "academie": true
  },
  {
@@ -4963,20 +3899,6 @@
   "academie": true
  },
  {
-  "mot": "jaser",
-  "nature": "v. intr.",
-  "definition": "Babiller sans fin ; médire, faire des commérages sur quelqu’un.",
-  "exemple": "Son mariage précipité a fait jaser tout le quartier.",
-  "academie": true
- },
- {
-  "mot": "jérémiade",
-  "nature": "n. f.",
-  "definition": "Plainte répétée et lassante, lamentation sans fin.",
-  "exemple": "Épargne-nous tes jérémiades et viens plutôt nous aider.",
-  "academie": true
- },
- {
   "mot": "jobard",
   "nature": "adj. et n.",
   "definition": "Naïf qui se laisse facilement duper (familier).",
@@ -5012,24 +3934,10 @@
   "academie": false
  },
  {
-  "mot": "jouvence",
-  "nature": "n. f.",
-  "definition": "Jeunesse (dans « fontaine de jouvence », « bain de jouvence ») : ce qui rajeunit, redonne vigueur.",
-  "exemple": "Cette semaine à la montagne fut pour lui un véritable bain de jouvence.",
-  "academie": true
- },
- {
   "mot": "jouvenceau",
   "nature": "n. m.",
   "definition": "Vieilli ou plaisant : tout jeune homme, encore presque adolescent.",
   "exemple": "Le jouvenceau rougit jusqu’aux oreilles en lui tendant la lettre.",
-  "academie": true
- },
- {
-  "mot": "jouxter",
-  "nature": "v. tr.",
-  "definition": "Être situé à côté de, toucher à.",
-  "exemple": "Notre jardin jouxte le cimetière du village.",
   "academie": true
  },
  {
@@ -5038,13 +3946,6 @@
   "definition": "Tribune transversale séparant le chœur de la nef dans certaines églises.",
   "exemple": "Le jubé sculpté de l’église est une merveille du gothique flamboyant.",
   "academie": true
- },
- {
-  "mot": "jugeote",
-  "nature": "n. f.",
-  "definition": "Bon sens, discernement (familier).",
-  "exemple": "Avec un peu de jugeote, tu aurais évité ce piège.",
-  "academie": false
  },
  {
   "mot": "jusant",
@@ -5068,24 +3969,10 @@
   "academie": false
  },
  {
-  "mot": "kermesse",
-  "nature": "n. f.",
-  "definition": "Fête patronale en plein air, avec foire, dans les Flandres ; fête de bienfaisance.",
-  "exemple": "Toute l’école se prépara pour la kermesse de juin.",
-  "academie": true
- },
- {
   "mot": "knout",
   "nature": "n. m.",
   "definition": "Fouet à lanières de cuir utilisé autrefois en Russie ; châtiment infligé avec ce fouet.",
   "exemple": "Le serf fut condamné au knout pour avoir fui le domaine.",
-  "academie": true
- },
- {
-  "mot": "kyrielle",
-  "nature": "n. f.",
-  "definition": "Longue suite de paroles, de choses ou de personnes qui n’en finit pas.",
-  "exemple": "Elle arriva avec une kyrielle d’excuses et de cousins.",
   "academie": true
  },
  {
@@ -5103,38 +3990,10 @@
   "academie": true
  },
  {
-  "mot": "laconique",
-  "nature": "adj.",
-  "definition": "Qui s’exprime en très peu de mots, de façon brève et concise.",
-  "exemple": "À toutes mes questions, il opposa un « peut-être » laconique.",
-  "academie": true
- },
- {
   "mot": "ladre",
   "nature": "adj. et n.",
   "definition": "Avare jusqu’à la mesquinerie (sens vieilli : lépreux).",
   "exemple": "Ce vieux ladre refusait même de chauffer sa maison.",
-  "academie": true
- },
- {
-  "mot": "laïus",
-  "nature": "n. m.",
-  "definition": "Discours long et creux (familier).",
-  "exemple": "Le maire nous a infligé un laïus de vingt minutes.",
-  "academie": true
- },
- {
-  "mot": "lambiner",
-  "nature": "v. intr.",
-  "definition": "Agir avec lenteur et mollesse, traîner en faisant ce qu’on a à faire.",
-  "exemple": "Cesse de lambiner devant ton bol, le car passe dans cinq minutes !",
-  "academie": true
- },
- {
-  "mot": "lambris",
-  "nature": "n. m.",
-  "definition": "Revêtement de menuiserie, de marbre ou de stuc sur les murs ou les plafonds d’une pièce.",
-  "exemple": "Les lambris dorés du salon brillaient sous les lustres.",
   "academie": true
  },
  {
@@ -5159,31 +4018,10 @@
   "academie": true
  },
  {
-  "mot": "lapidaire",
-  "nature": "adj.",
-  "definition": "Qui a la concision et la vigueur d’une inscription gravée.",
-  "exemple": "Sa réponse lapidaire coupa court à la discussion.",
-  "academie": true
- },
- {
-  "mot": "laquais",
-  "nature": "n. m.",
-  "definition": "Valet en livrée ; au figuré, homme d’une servilité méprisable.",
-  "exemple": "Deux laquais en perruque ouvrirent les portes du carrosse.",
-  "academie": true
- },
- {
   "mot": "latitudinaire",
   "nature": "adj. et n.",
   "definition": "Qui interprète avec largeur les règles religieuses ou morales ; trop accommodant.",
   "exemple": "Les jansénistes reprochaient aux jésuites une morale latitudinaire.",
-  "academie": true
- },
- {
-  "mot": "laudatif",
-  "nature": "adj.",
-  "definition": "Qui contient des éloges ; élogieux.",
-  "exemple": "Le critique a publié un article très laudatif sur le roman.",
   "academie": true
  },
  {
@@ -5219,13 +4057,6 @@
   "nature": "adj.",
   "definition": "Agile, prompt dans ses mouvements ; un peu trop libre, grivois.",
   "exemple": "Le chat, d’un bond leste, sauta sur l’armoire.",
-  "academie": true
- },
- {
-  "mot": "lèse-majesté",
-  "nature": "n. f.",
-  "definition": "Crime d’atteinte au souverain ; au figuré, atteinte à une personne ou une chose vénérée.",
-  "exemple": "Critiquer ce chef cuisinier passe ici pour un crime de lèse-majesté.",
   "academie": true
  },
  {
@@ -5271,13 +4102,6 @@
   "academie": true
  },
  {
-  "mot": "liesse",
-  "nature": "n. f.",
-  "definition": "Joie débordante partagée par une foule.",
-  "exemple": "Le village entier était en liesse après la victoire de son équipe.",
-  "academie": true
- },
- {
   "mot": "lige",
   "nature": "adj.",
   "definition": "Lié à son seigneur par un hommage d’obéissance absolue ; au figuré, entièrement dévoué.",
@@ -5313,13 +4137,6 @@
   "academie": true
  },
  {
-  "mot": "litote",
-  "nature": "n. f.",
-  "definition": "Figure qui consiste à dire moins pour faire entendre davantage.",
-  "exemple": "« Ce n’est pas mauvais » est une litote pour dire que c’est délicieux.",
-  "academie": false
- },
- {
   "mot": "logorrhée",
   "nature": "n. f.",
   "definition": "Flot de paroles intarissable et désordonné.",
@@ -5338,27 +4155,6 @@
   "nature": "adj. et n.",
   "definition": "Vêtu de loques, de haillons.",
   "exemple": "Un mendiant loqueteux tendait la main sous le porche.",
-  "academie": true
- },
- {
-  "mot": "loustic",
-  "nature": "n. m.",
-  "definition": "Plaisantin, farceur qui amuse son entourage (familier).",
-  "exemple": "Quel est le loustic qui a caché mes lunettes ?",
-  "academie": true
- },
- {
-  "mot": "louvoyer",
-  "nature": "v. intr.",
-  "definition": "Naviguer en zigzag contre le vent ; au figuré, user de détours pour éviter de se prononcer franchement.",
-  "exemple": "Le ministre louvoya une heure durant sans jamais répondre à la question.",
-  "academie": true
- },
- {
-  "mot": "lubie",
-  "nature": "n. f.",
-  "definition": "Fantaisie soudaine et capricieuse.",
-  "exemple": "Sa dernière lubie : élever des escargots sur le balcon.",
   "academie": true
  },
  {
@@ -5390,13 +4186,6 @@
   "academie": true
  },
  {
-  "mot": "luron",
-  "nature": "n. m.",
-  "definition": "Bon vivant, homme gai et insouciant (surtout dans « joyeux luron »).",
-  "exemple": "Mon grand-père était un joyeux luron qui chantait à chaque repas.",
-  "academie": true
- },
- {
   "mot": "lustral",
   "nature": "adj.",
   "definition": "Qui sert à purifier, dans les rites religieux.",
@@ -5425,13 +4214,6 @@
   "academie": true
  },
  {
-  "mot": "maestria",
-  "nature": "n. f.",
-  "definition": "Aisance et brio remarquables dans l’exécution d’une œuvre ou d’une tâche.",
-  "exemple": "Elle a dirigé l’orchestre avec une maestria qui a soulevé la salle.",
-  "academie": true
- },
- {
   "mot": "mafflu",
   "nature": "adj.",
   "definition": "Qui a de grosses joues, un visage plein et rebondi.",
@@ -5457,13 +4239,6 @@
   "nature": "n. m.",
   "definition": "Littéraire : brigand, rôdeur malfaisant ; par extension, personne malintentionnée.",
   "exemple": "Les voyageurs craignaient les malandrins qui hantaient la forêt.",
-  "academie": true
- },
- {
-  "mot": "malappris",
-  "nature": "adj. et n.",
-  "definition": "Qui manque d’éducation, de politesse.",
-  "exemple": "Ce malappris n’a même pas daigné dire bonjour.",
   "academie": true
  },
  {
@@ -5499,13 +4274,6 @@
   "nature": "n. f.",
   "definition": "Impôt extraordinaire levé autrefois en France ; par extension, perception abusive d’un droit.",
   "exemple": "Les villageois se révoltèrent contre une nouvelle maltôte sur le sel.",
-  "academie": true
- },
- {
-  "mot": "mamours",
-  "nature": "n. m. pl.",
-  "definition": "Démonstrations de tendresse, caresses câlines (familier).",
-  "exemple": "Le chat venait faire des mamours à sa maîtresse.",
   "academie": true
  },
  {
@@ -5565,13 +4333,6 @@
   "academie": true
  },
  {
-  "mot": "marotte",
-  "nature": "n. f.",
-  "definition": "Idée fixe, manie à laquelle on s’adonne avec passion.",
-  "exemple": "Collectionner les vieilles cartes postales est devenu sa marotte.",
-  "academie": false
- },
- {
   "mot": "maroufle",
   "nature": "n. m.",
   "definition": "Vieilli : rustre, homme grossier et sans scrupules.",
@@ -5611,13 +4372,6 @@
   "nature": "adj.",
   "definition": "Littéraire : qui appartient au matin, matinal.",
   "exemple": "Une brume matutinale enveloppait encore les vignes.",
-  "academie": true
- },
- {
-  "mot": "maugréer",
-  "nature": "v. intr.",
-  "definition": "Manifester sa mauvaise humeur en grommelant.",
-  "exemple": "Il partit sous la pluie en maugréant contre le mauvais temps.",
   "academie": true
  },
  {
@@ -5740,20 +4494,6 @@
   "academie": true
  },
  {
-  "mot": "minauder",
-  "nature": "v. intr.",
-  "definition": "Prendre des airs affectés pour plaire ou séduire.",
-  "exemple": "Elle minaudait devant le miroir en essayant son chapeau.",
-  "academie": true
- },
- {
-  "mot": "minois",
-  "nature": "n. m.",
-  "definition": "Visage jeune, délicat et gracieux.",
-  "exemple": "Son joli minois apparut à la fenêtre.",
-  "academie": true
- },
- {
   "mot": "mirifique",
   "nature": "adj.",
   "definition": "Plaisant ou ironique : merveilleux, d’une perfection trop belle pour être vraie.",
@@ -5803,24 +4543,10 @@
   "academie": true
  },
  {
-  "mot": "mordicus",
-  "nature": "adv.",
-  "definition": "Avec obstination, sans démordre.",
-  "exemple": "Il soutient mordicus qu’il a vu un loup dans le jardin.",
-  "academie": true
- },
- {
   "mot": "mordoré",
   "nature": "adj.",
   "definition": "D’un brun chaud aux reflets dorés.",
   "exemple": "Les feuilles mordorées de l’automne tapissaient l’allée.",
-  "academie": true
- },
- {
-  "mot": "morfondre",
-  "nature": "v. pron.",
-  "definition": "S’ennuyer à attendre, languir dans l’inaction.",
-  "exemple": "Il se morfondait sur le quai en attendant le dernier train.",
   "academie": true
  },
  {
@@ -5835,20 +4561,6 @@
   "nature": "v. tr.",
   "definition": "Réprimander avec insistance et un brin de pédantisme, faire la leçon à quelqu’un.",
   "exemple": "La concierge morigénait les enfants qui couraient dans l’escalier.",
-  "academie": true
- },
- {
-  "mot": "mortifier",
-  "nature": "v. tr.",
-  "definition": "Humilier profondément, blesser dans son amour-propre.",
-  "exemple": "Cette remarque publique l’a mortifié.",
-  "academie": true
- },
- {
-  "mot": "motus",
-  "nature": "interj.",
-  "definition": "S’emploie pour inviter à garder un secret.",
-  "exemple": "Motus et bouche cousue sur la fête surprise !",
   "academie": true
  },
  {
@@ -5894,13 +4606,6 @@
   "academie": false
  },
  {
-  "mot": "mutin",
-  "nature": "adj.",
-  "definition": "Malicieux et espiègle, d’une vivacité taquine.",
-  "exemple": "Elle lui lança un regard mutin par-dessus son livre.",
-  "academie": true
- },
- {
   "mot": "myrmidon",
   "nature": "n. m.",
   "definition": "Homme de petite taille et sans valeur, qui se donne des airs importants.",
@@ -5912,13 +4617,6 @@
   "nature": "n. m. et f.",
   "definition": "Dans l’Antiquité grecque, prêtre ou prêtresse chargé d’initier aux mystères religieux.",
   "exemple": "Le mystagogue conduisait les initiés vers le sanctuaire d’Éleusis.",
-  "academie": true
- },
- {
-  "mot": "nabab",
-  "nature": "n. m.",
-  "definition": "Homme extrêmement riche qui étale son luxe.",
-  "exemple": "Il menait un train de vie de nabab sur la Côte d’Azur.",
   "academie": true
  },
  {
@@ -5943,24 +4641,10 @@
   "academie": true
  },
  {
-  "mot": "narquois",
-  "nature": "adj.",
-  "definition": "Moqueur et malicieux.",
-  "exemple": "Il me regardait avec un sourire narquois.",
-  "academie": true
- },
- {
   "mot": "nasarde",
   "nature": "n. f.",
   "definition": "Chiquenaude donnée sur le nez ; au figuré, affront moqueur.",
   "exemple": "Le clown reçut une nasarde qui fit rire les enfants.",
-  "academie": true
- },
- {
-  "mot": "nasiller",
-  "nature": "v. intr.",
-  "definition": "Parler ou chanter du nez.",
-  "exemple": "La vieille radio nasillait une chanson d’avant-guerre.",
   "academie": true
  },
  {
@@ -6039,13 +4723,6 @@
   "definition": "Entourer d’un nimbe, d’un halo lumineux.",
   "exemple": "Le soleil couchant nimbait la colline d’une lumière rose.",
   "academie": true
- },
- {
-  "mot": "nippe",
-  "nature": "n. f.",
-  "definition": "Vêtement usé ou de peu de valeur (surtout au pluriel, familier).",
-  "exemple": "Il rassembla ses nippes dans un baluchon et partit.",
-  "academie": false
  },
  {
   "mot": "nitescence",
@@ -6174,24 +4851,10 @@
   "academie": true
  },
  {
-  "mot": "obséquieux",
-  "nature": "adj.",
-  "definition": "Qui pousse la politesse et les égards jusqu’à la servilité.",
-  "exemple": "Le serveur obséquieux s’inclinait à chaque phrase.",
-  "academie": true
- },
- {
   "mot": "obsidional",
   "nature": "adj.",
   "definition": "Relatif au siège d’une ville.",
   "exemple": "Pendant le siège, on frappa une monnaie obsidionale.",
-  "academie": true
- },
- {
-  "mot": "obtempérer",
-  "nature": "v. tr. ind.",
-  "definition": "Obéir, se soumettre à un ordre (« obtempérer à »).",
-  "exemple": "Le conducteur a refusé d’obtempérer aux injonctions des gendarmes.",
   "academie": true
  },
  {
@@ -6235,13 +4898,6 @@
   "definition": "Pharmacie, lieu où l’on prépare les médicaments ; péjorativement, lieu où se trame quelque chose de louche.",
   "exemple": "Ces rumeurs sortaient d’une officine de propagande.",
   "academie": true
- },
- {
-  "mot": "oindre",
-  "nature": "v. tr.",
-  "definition": "Frotter d’huile ou d’une substance grasse ; consacrer par une onction.",
-  "exemple": "Le prêtre oignit le front du nouveau roi.",
-  "academie": false
  },
  {
   "mot": "oiseux",
@@ -6293,13 +4949,6 @@
   "academie": true
  },
  {
-  "mot": "opprobre",
-  "nature": "n. m.",
-  "definition": "Honte publique, déshonneur ; état d’abjection qui en résulte.",
-  "exemple": "Son mensonge le couvrit d’opprobre aux yeux de tout le village.",
-  "academie": true
- },
- {
   "mot": "opuscule",
   "nature": "n. m.",
   "definition": "Petit ouvrage, court écrit.",
@@ -6318,13 +4967,6 @@
   "nature": "n. f.",
   "definition": "Au Moyen Âge, épreuve physique imposée à un accusé pour établir, par jugement de Dieu, son innocence ou sa culpabilité.",
   "exemple": "L’accusé dut subir l’ordalie du fer rouge.",
-  "academie": true
- },
- {
-  "mot": "orée",
-  "nature": "n. f.",
-  "definition": "Bordure, lisière d’un bois.",
-  "exemple": "Une biche apparut à l’orée de la forêt.",
   "academie": true
  },
  {
@@ -6412,24 +5054,10 @@
   "academie": true
  },
  {
-  "mot": "outrance",
-  "nature": "n. f.",
-  "definition": "Excès, exagération ; « à outrance » : à l’excès.",
-  "exemple": "Ce roman pèche par l’outrance de ses descriptions.",
-  "academie": true
- },
- {
   "mot": "outrecuidance",
   "nature": "n. f.",
   "definition": "Confiance excessive en soi qui mène à l’arrogance ; insolence, effronterie.",
   "exemple": "Il eut l’outrecuidance de corriger le prix Nobel sur sa propre théorie.",
-  "academie": true
- },
- {
-  "mot": "ouvrer",
-  "nature": "v. tr. et intr.",
-  "definition": "Travailler, façonner une matière (vieilli).",
-  "exemple": "Ces artisans savent ouvrer le cuivre comme personne.",
   "academie": true
  },
  {
@@ -6444,13 +5072,6 @@
   "nature": "adj. et n.",
   "definition": "Qui aime les plaisirs charnels ; se dit aussi de propos ou de chansons grivois.",
   "exemple": "Au dessert, les convives entonnèrent des chansons paillardes.",
-  "academie": true
- },
- {
-  "mot": "palabre",
-  "nature": "n. f.",
-  "definition": "Discussion interminable et souvent sans résultat. S’emploie surtout au pluriel.",
-  "exemple": "Après des heures de palabres, le comité n’avait toujours rien décidé.",
   "academie": true
  },
  {
@@ -6531,13 +5152,6 @@
   "academie": true
  },
  {
-  "mot": "pantois",
-  "nature": "adj.",
-  "definition": "Stupéfait au point de rester sans voix devant l’inattendu.",
-  "exemple": "La réponse de l’enfant laissa l’inspecteur pantois.",
-  "academie": true
- },
- {
   "mot": "papelard",
   "nature": "adj. et n.",
   "definition": "Vieilli. Faussement dévot, d’une douceur hypocrite.",
@@ -6556,13 +5170,6 @@
   "nature": "adj.",
   "definition": "Qui a l’aspect, la couleur et la sécheresse du parchemin, en parlant surtout de la peau.",
   "exemple": "Le vieil homme tendit vers le feu une main parcheminée.",
-  "academie": true
- },
- {
-  "mot": "parcimonie",
-  "nature": "n. f.",
-  "definition": "Épargne minutieuse qui veille aux plus petites dépenses ; extrême retenue dans l’usage ou le don d’une chose.",
-  "exemple": "Le vieux professeur distribuait les compliments avec parcimonie.",
   "academie": true
  },
  {
@@ -6605,13 +5212,6 @@
   "nature": "adj.",
   "definition": "Qui évoque le gibet ; se dit surtout d’une mine inquiétante, digne d’un malfaiteur.",
   "exemple": "Deux individus à la mine patibulaire faisaient le guet devant la banque.",
-  "academie": true
- },
- {
-  "mot": "pavaner",
-  "nature": "v. pron.",
-  "definition": "Se pavaner : marcher avec des airs fiers et satisfaits, pour se faire admirer.",
-  "exemple": "Le jeune lauréat se pavanait dans les couloirs avec son diplôme.",
   "academie": true
  },
  {
@@ -6671,13 +5271,6 @@
   "academie": true
  },
  {
-  "mot": "pécune",
-  "nature": "n. f.",
-  "definition": "Vieilli. Argent, monnaie.",
-  "exemple": "Faute de pécune, le poète dut renoncer à son voyage en Italie.",
-  "academie": true
- },
- {
   "mot": "pénates",
   "nature": "n. m. pl.",
   "definition": "Dieux protecteurs du foyer chez les Romains ; par plaisanterie, la demeure, le chez-soi.",
@@ -6689,13 +5282,6 @@
   "nature": "n. f.",
   "definition": "Voyage long et compliqué, fait d’étapes et de détours nombreux (s’emploie surtout au pluriel).",
   "exemple": "Il racontait ses pérégrinations à travers les Andes avec un plaisir communicatif.",
-  "academie": true
- },
- {
-  "mot": "péricliter",
-  "nature": "v. intr.",
-  "definition": "Aller à sa ruine, décliner peu à peu.",
-  "exemple": "Faute de repreneur, l’entreprise familiale périclitait d’année en année.",
   "academie": true
  },
  {
@@ -6755,13 +5341,6 @@
   "academie": true
  },
  {
-  "mot": "piaffer",
-  "nature": "v. intr.",
-  "definition": "En parlant d’un cheval, frapper le sol des pieds de devant sans avancer ; figurément, s’agiter d’impatience.",
-  "exemple": "Les enfants piaffaient d’impatience devant la porte du salon.",
-  "academie": true
- },
- {
   "mot": "picaresque",
   "nature": "adj.",
   "definition": "Se dit d’un récit qui suit les aventures d’un héros marginal et vagabond, à la manière de certains romans espagnols anciens.",
@@ -6780,34 +5359,6 @@
   "nature": "v. intr.",
   "definition": "Vieilli. Manger du bout des dents, par petits morceaux et sans appétit.",
   "exemple": "Boudeuse, la fillette pignochait dans son assiette sans rien avaler.",
-  "academie": true
- },
- {
-  "mot": "pilori",
-  "nature": "n. m.",
-  "definition": "Poteau où l’on exposait un condamné aux yeux de la foule ; mettre au pilori, livrer au mépris public.",
-  "exemple": "La presse a mis le ministre au pilori après le scandale.",
-  "academie": true
- },
- {
-  "mot": "pinacle",
-  "nature": "n. m.",
-  "definition": "Sommet d’un édifice ; au figuré, position la plus élevée. Porter au pinacle : combler de louanges.",
-  "exemple": "Porté au pinacle après son premier roman, il fut oublié dès le second.",
-  "academie": true
- },
- {
-  "mot": "pingre",
-  "nature": "adj. et n.",
-  "definition": "Familier. Avare, qui regarde à la moindre dépense.",
-  "exemple": "Trop pingre pour laisser un pourboire, il recompta sa monnaie au centime près.",
-  "academie": true
- },
- {
-  "mot": "pitance",
-  "nature": "n. f.",
-  "definition": "Ration de nourriture, souvent maigre, qui suffit à peine à subsister.",
-  "exemple": "Les prisonniers recevaient pour pitance du pain noir et une soupe claire.",
   "academie": true
  },
  {
@@ -6860,13 +5411,6 @@
   "academie": false
  },
  {
-  "mot": "poncif",
-  "nature": "n. m.",
-  "definition": "Idée, formule ou thème rebattu, devenu banal à force d’être repris.",
-  "exemple": "Ce roman accumule les poncifs du genre : château hanté, orage et héritière.",
-  "academie": true
- },
- {
   "mot": "pontifier",
   "nature": "v. intr.",
   "definition": "Parler ou se comporter avec une solennité pédante et prétentieuse.",
@@ -6895,13 +5439,6 @@
   "academie": false
  },
  {
-  "mot": "pourfendre",
-  "nature": "v. tr.",
-  "definition": "Fendre de haut en bas d’un coup d’épée ; au figuré, attaquer avec vigueur.",
-  "exemple": "Dans ses chroniques, il pourfendait les hypocrites de tout bord.",
-  "academie": true
- },
- {
   "mot": "poussah",
   "nature": "n. m.",
   "definition": "Jouet lesté qui se redresse toujours ; par extension, homme gros et court.",
@@ -6921,13 +5458,6 @@
   "definition": "Littéraire. Supériorité, excellence qui l’emporte sur toute autre.",
   "exemple": "Nul ne contestait la précellence de son style parmi les écrivains de sa génération.",
   "academie": false
- },
- {
-  "mot": "prélasser",
-  "nature": "v. pron.",
-  "definition": "Se prélasser : se laisser aller nonchalamment, en prenant toutes ses aises.",
-  "exemple": "Le chat se prélassait au soleil sur le muret du jardin.",
-  "academie": true
  },
  {
   "mot": "prévarication",
@@ -7028,13 +5558,6 @@
   "academie": false
  },
  {
-  "mot": "pugnace",
-  "nature": "adj.",
-  "definition": "Littéraire. Combatif, qui aime la lutte et la polémique.",
-  "exemple": "Avocate pugnace, elle ne lâchait jamais un dossier avant le verdict.",
-  "academie": false
- },
- {
   "mot": "puîné",
   "nature": "adj. et n.",
   "definition": "Né après un frère ou une sœur ; cadet.",
@@ -7105,20 +5628,6 @@
   "academie": true
  },
  {
-  "mot": "quatrain",
-  "nature": "n. m.",
-  "definition": "Strophe ou poème de quatre vers.",
-  "exemple": "Nostradamus a rédigé ses prophéties sous forme de quatrains.",
-  "academie": true
- },
- {
-  "mot": "quenotte",
-  "nature": "n. f.",
-  "definition": "Familier. Petite dent, surtout d’enfant.",
-  "exemple": "Le bébé montrait fièrement ses deux premières quenottes.",
-  "academie": true
- },
- {
   "mot": "quenouille",
   "nature": "n. f.",
   "definition": "Bâton garni de fibres textiles que la fileuse étire et tord pour en faire du fil.",
@@ -7130,13 +5639,6 @@
   "nature": "n. m.",
   "definition": "Vieilli. Cuisinier ; s’emploie surtout dans « maître queux ».",
   "exemple": "Le maître queux du château préparait un paon rôti pour le banquet.",
-  "academie": true
- },
- {
-  "mot": "quémander",
-  "nature": "v. tr. et intr.",
-  "definition": "Solliciter avec insistance et de façon importune.",
-  "exemple": "Il passait ses journées à quémander des faveurs auprès des ministres.",
   "academie": true
  },
  {
@@ -7154,20 +5656,6 @@
   "academie": false
  },
  {
-  "mot": "qui-vive",
-  "nature": "n. m.",
-  "definition": "Vigilance inquiète de qui s’attend à un danger, surtout dans « être sur le qui-vive ».",
-  "exemple": "Depuis le cambriolage, toute la maisonnée vit sur le qui-vive.",
-  "academie": true
- },
- {
-  "mot": "quidam",
-  "nature": "n. m.",
-  "definition": "Individu quelconque, dont on ignore ou tait le nom.",
-  "exemple": "Un quidam s’arrêta pour nous indiquer le chemin de la gare.",
-  "academie": true
- },
- {
   "mot": "quiddité",
   "nature": "n. f.",
   "definition": "En philosophie, ce qui fait qu’une chose est ce qu’elle est ; son essence.",
@@ -7180,13 +5668,6 @@
   "definition": "Doctrine mystique du XVIIe siècle prônant l’abandon passif de l’âme à Dieu ; par extension, attitude de passivité.",
   "exemple": "Bossuet combattit âprement le quiétisme défendu par Fénelon.",
   "academie": false
- },
- {
-  "mot": "quiétude",
-  "nature": "n. f.",
-  "definition": "Littéraire. Calme paisible, tranquillité de l’âme.",
-  "exemple": "Rien ne troublait la quiétude du village endormi sous la neige.",
-  "academie": true
  },
  {
   "mot": "quignon",
@@ -7217,24 +5698,10 @@
   "academie": true
  },
  {
-  "mot": "quintessence",
-  "nature": "n. f.",
-  "definition": "Ce qu’il y a de plus essentiel, de plus fin et de meilleur dans une chose.",
-  "exemple": "Ce petit poème est la quintessence de son art.",
-  "academie": true
- },
- {
   "mot": "quinteux",
   "nature": "adj.",
   "definition": "Littéraire. Fantasque, sujet à de brusques accès de mauvaise humeur.",
   "exemple": "Le vieux comte, quinteux, renvoyait ses valets pour un rien.",
-  "academie": true
- },
- {
-  "mot": "quiproquo",
-  "nature": "n. m.",
-  "definition": "Méprise qui fait prendre une personne ou une chose pour une autre.",
-  "exemple": "Toute la pièce repose sur un quiproquo entre deux jumeaux.",
   "academie": true
  },
  {
@@ -7252,38 +5719,10 @@
   "academie": true
  },
  {
-  "mot": "rabat-joie",
-  "nature": "adj. et n.",
-  "definition": "Personne qui trouble ou gâche la joie des autres.",
-  "exemple": "Ne fais pas ton rabat-joie et viens danser avec nous !",
-  "academie": true
- },
- {
-  "mot": "rabâcher",
-  "nature": "v. tr. et intr.",
-  "definition": "Répéter sans cesse et inutilement les mêmes choses.",
-  "exemple": "Grand-père rabâche toujours les mêmes souvenirs de régiment.",
-  "academie": true
- },
- {
   "mot": "rabelaisien",
   "nature": "adj.",
   "definition": "Qui rappelle la verve truculente et joyeusement gaillarde de Rabelais.",
   "exemple": "Le banquet fut d’une gaieté toute rabelaisienne.",
-  "academie": true
- },
- {
-  "mot": "rabougri",
-  "nature": "adj.",
-  "definition": "Mal développé, chétif et resté de petite taille.",
-  "exemple": "Seuls quelques chênes rabougris poussaient sur la lande.",
-  "academie": false
- },
- {
-  "mot": "ragaillardir",
-  "nature": "v. tr.",
-  "definition": "Redonner de l’entrain et de la vigueur.",
-  "exemple": "Un bol de soupe chaude ragaillardit les randonneurs transis.",
   "academie": true
  },
  {
@@ -7364,13 +5803,6 @@
   "academie": false
  },
  {
-  "mot": "reclus",
-  "nature": "adj. et n.",
-  "definition": "Qui vit enfermé, retiré du monde.",
-  "exemple": "Depuis son veuvage, elle vit recluse dans sa maison.",
-  "academie": false
- },
- {
   "mot": "recru",
   "nature": "adj.",
   "definition": "Littéraire. Harassé, épuisé de fatigue.",
@@ -7399,53 +5831,11 @@
   "academie": true
  },
  {
-  "mot": "reliquat",
-  "nature": "n. m.",
-  "definition": "Ce qui reste d’une somme, d’un compte ou de quelque chose.",
-  "exemple": "Le reliquat de l’héritage servit à refaire la toiture.",
-  "academie": true
- },
- {
-  "mot": "remontrance",
-  "nature": "n. f.",
-  "definition": "Reproche adressé à quelqu’un pour lui faire voir ses torts et l’amener à se corriger.",
-  "exemple": "Le directeur lui adressa de sévères remontrances pour ses retards.",
-  "academie": true
- },
- {
   "mot": "remugle",
   "nature": "n. m.",
   "definition": "Odeur désagréable de renfermé ou de moisi.",
   "exemple": "En ouvrant la cave, nous fûmes saisis par un remugle de champignon.",
   "academie": false
- },
- {
-  "mot": "renâcler",
-  "nature": "v. intr.",
-  "definition": "Rechigner, montrer de la répugnance à faire quelque chose.",
-  "exemple": "Il renâclait à l’idée de repeindre la clôture.",
-  "academie": true
- },
- {
-  "mot": "renégat",
-  "nature": "n. m.",
-  "definition": "Personne qui a renié sa religion, ses convictions ou son camp.",
-  "exemple": "Ses anciens camarades le traitaient de renégat depuis qu’il avait changé de parti.",
-  "academie": false
- },
- {
-  "mot": "renfrogné",
-  "nature": "adj.",
-  "definition": "Dont le visage contracté exprime le mécontentement.",
-  "exemple": "Il resta renfrogné dans son coin toute la soirée.",
-  "academie": true
- },
- {
-  "mot": "rengaine",
-  "nature": "n. f.",
-  "definition": "Familier. Propos ou air répété jusqu’à la lassitude.",
-  "exemple": "C’est toujours la même rengaine : pas le temps, pas d’argent.",
-  "academie": true
  },
  {
   "mot": "rengorger",
@@ -7476,13 +5866,6 @@
   "academie": true
  },
  {
-  "mot": "rébarbatif",
-  "nature": "adj.",
-  "definition": "Rebutant, peu engageant ; ennuyeux et sans attrait.",
-  "exemple": "Le sujet est rébarbatif, mais le professeur sait le rendre vivant.",
-  "academie": false
- },
- {
   "mot": "récipiendaire",
   "nature": "n. m. et f.",
   "definition": "Personne reçue solennellement dans une compagnie, ou qui reçoit un diplôme, une distinction.",
@@ -7497,25 +5880,11 @@
   "academie": true
  },
  {
-  "mot": "rédhibitoire",
-  "nature": "adj.",
-  "definition": "Qui constitue un obstacle radical ; défaut si grave qu’il rend une chose inacceptable.",
-  "exemple": "Pour ce poste, l’absence de permis de conduire est rédhibitoire.",
-  "academie": true
- },
- {
   "mot": "résipiscence",
   "nature": "n. f.",
   "definition": "Littéraire. Reconnaissance de sa faute, accompagnée d’un retour au bien.",
   "exemple": "Après des années d’égarement, il vint enfin à résipiscence.",
   "academie": true
- },
- {
-  "mot": "résurgence",
-  "nature": "n. f.",
-  "definition": "Réapparition à l’air libre d’un cours d’eau souterrain ; par extension, retour de ce qui avait disparu.",
-  "exemple": "On observe une résurgence de vieilles superstitions dans les campagnes.",
-  "academie": false
  },
  {
   "mot": "rétif",
@@ -7525,24 +5894,10 @@
   "academie": true
  },
  {
-  "mot": "rêvasser",
-  "nature": "v. intr.",
-  "definition": "S’abandonner à des rêveries vagues.",
-  "exemple": "Accoudé à la fenêtre, il rêvassait au lieu de faire ses devoirs.",
-  "academie": true
- },
- {
   "mot": "rhéteur",
   "nature": "n. m.",
   "definition": "Maître de rhétorique dans l’Antiquité ; péjorativement, orateur au style emphatique et creux.",
   "exemple": "Ce n’est qu’un rhéteur : de belles phrases, aucune idée.",
-  "academie": true
- },
- {
-  "mot": "ribambelle",
-  "nature": "n. f.",
-  "definition": "Familier. Longue suite de personnes ou de choses.",
-  "exemple": "Une ribambelle d’enfants courait derrière la roulotte du cirque.",
   "academie": true
  },
  {
@@ -7581,20 +5936,6 @@
   "academie": true
  },
  {
-  "mot": "risette",
-  "nature": "n. f.",
-  "definition": "Petit sourire d’enfant ; faire risette, sourire gentiment.",
-  "exemple": "Le bébé faisait risette à tous les passants.",
-  "academie": true
- },
- {
-  "mot": "rixe",
-  "nature": "n. f.",
-  "definition": "Querelle violente accompagnée de coups.",
-  "exemple": "Une rixe éclata devant le cabaret à l’heure de la fermeture.",
-  "academie": true
- },
- {
   "mot": "robinsonnade",
   "nature": "n. f.",
   "definition": "Récit d’aventures d’un personnage isolé, à la manière de Robinson Crusoé ; vie solitaire, à l’écart du monde.",
@@ -7602,38 +5943,10 @@
   "academie": false
  },
  {
-  "mot": "rocailleux",
-  "nature": "adj.",
-  "definition": "Couvert de pierres ; au figuré, rude et heurté.",
-  "exemple": "Il parlait d’une voix rocailleuse, usée par le tabac.",
-  "academie": true
- },
- {
-  "mot": "rocambolesque",
-  "nature": "adj.",
-  "definition": "Plein de péripéties extravagantes et invraisemblables.",
-  "exemple": "Il nous raconta l’histoire rocambolesque de son retour d’Amérique.",
-  "academie": false
- },
- {
-  "mot": "rococo",
-  "nature": "adj.",
-  "definition": "Relatif au style décoratif chargé du XVIIIe siècle ; par extension, surchargé ou démodé.",
-  "exemple": "Avec ses dorures et ses angelots, le salon était franchement rococo.",
-  "academie": true
- },
- {
   "mot": "rodomontade",
   "nature": "n. f.",
   "definition": "Vantardise, fanfaronnade de quelqu’un qui se prétend brave ou puissant.",
   "exemple": "Malgré ses rodomontades, il n’osa pas sauter du grand plongeoir.",
-  "academie": true
- },
- {
-  "mot": "rogne",
-  "nature": "n. f.",
-  "definition": "Familier. Mauvaise humeur, colère.",
-  "exemple": "Il est en rogne depuis qu’on a rayé sa voiture.",
   "academie": true
  },
  {
@@ -7658,13 +5971,6 @@
   "academie": true
  },
  {
-  "mot": "roucouler",
-  "nature": "v. intr.",
-  "definition": "En parlant du pigeon, faire entendre son cri doux et monotone ; par plaisanterie, tenir des propos tendres.",
-  "exemple": "Sur le banc du parc, les amoureux roucoulaient sans voir personne.",
-  "academie": true
- },
- {
   "mot": "roué",
   "nature": "adj.",
   "definition": "Sans principes ni scrupules, habile à duper les autres par ses manœuvres.",
@@ -7679,31 +5985,10 @@
   "academie": false
  },
  {
-  "mot": "rudoyer",
-  "nature": "v. tr.",
-  "definition": "Traiter durement, malmener en paroles ou en actes.",
-  "exemple": "Le contremaître rudoyait les apprentis.",
-  "academie": true
- },
- {
   "mot": "ruffian",
   "nature": "n. m.",
   "definition": "Vieilli. Débauché, souteneur ; par extension, voyou.",
   "exemple": "Le tripot était fréquenté par des ruffians et des joueurs ruinés.",
-  "academie": true
- },
- {
-  "mot": "rustre",
-  "nature": "adj. et n.",
-  "definition": "Personne grossière, sans éducation ni délicatesse.",
-  "exemple": "Ce rustre ne s’est même pas excusé de m’avoir bousculée.",
-  "academie": true
- },
- {
-  "mot": "rutilant",
-  "nature": "adj.",
-  "definition": "Qui brille d’un vif éclat, souvent rougeoyant.",
-  "exemple": "Il arriva au volant d’une décapotable rutilante.",
   "academie": true
  },
  {
@@ -7805,13 +6090,6 @@
   "academie": true
  },
  {
-  "mot": "saugrenu",
-  "nature": "adj.",
-  "definition": "Qui est inattendu au point d’en être bizarre, voire absurde.",
-  "exemple": "Il a eu l’idée saugrenue de repeindre son chat en bleu.",
-  "academie": true
- },
- {
   "mot": "savantasse",
   "nature": "n. m.",
   "definition": "Personne qui fait étalage d’une érudition pédante et confuse.",
@@ -7910,13 +6188,6 @@
   "academie": true
  },
  {
-  "mot": "simagrée",
-  "nature": "n. f.",
-  "definition": "Manière affectée destinée à tromper ou à se faire remarquer ; surtout au pluriel.",
-  "exemple": "Cesse tes simagrées, tout le monde sait que tu n’es pas malade.",
-  "academie": true
- },
- {
   "mot": "simonie",
   "nature": "n. f.",
   "definition": "Trafic de biens spirituels ou de charges ecclésiastiques.",
@@ -7956,13 +6227,6 @@
   "nature": "n. m.",
   "definition": "Personne qui se perd en projets chimériques.",
   "exemple": "Ce songe-creux prétend faire fortune en élevant des escargots volants.",
-  "academie": true
- },
- {
-  "mot": "sornette",
-  "nature": "n. f.",
-  "definition": "Propos frivole et sans fondement ; surtout au pluriel.",
-  "exemple": "Ne crois pas à ses sornettes de trésor caché.",
   "academie": true
  },
  {
@@ -8155,20 +6419,6 @@
   "academie": false
  },
  {
-  "mot": "taloche",
-  "nature": "n. f.",
-  "definition": "Familier : tape donnée du plat de la main sur la tête ou le visage.",
-  "exemple": "Le gamin reçut une taloche pour avoir volé des cerises.",
-  "academie": true
- },
- {
-  "mot": "tambouille",
-  "nature": "n. f.",
-  "definition": "Populaire : cuisine médiocre, nourriture préparée sans soin.",
-  "exemple": "Il nous a servi une tambouille de pommes de terre et de lard.",
-  "academie": false
- },
- {
   "mot": "tancer",
   "nature": "v. tr.",
   "definition": "Réprimander vivement.",
@@ -8204,25 +6454,11 @@
   "academie": true
  },
  {
-  "mot": "tatillon",
-  "nature": "adj. et n.",
-  "definition": "Qui s’attache avec excès aux petits détails.",
-  "exemple": "Un contrôleur tatillon vérifia chaque virgule du formulaire.",
-  "academie": true
- },
- {
   "mot": "tavelé",
   "nature": "adj.",
   "definition": "Marqué de petites taches.",
   "exemple": "Il caressa la peau tavelée de ses vieilles mains.",
   "academie": false
- },
- {
-  "mot": "tergiverser",
-  "nature": "v. intr.",
-  "definition": "Hésiter, user de faux-fuyants pour retarder une décision.",
-  "exemple": "Cesse de tergiverser et dis-nous enfin si tu viens.",
-  "academie": true
  },
  {
   "mot": "térébrant",
@@ -8267,13 +6503,6 @@
   "academie": true
  },
  {
-  "mot": "tintamarre",
-  "nature": "n. m.",
-  "definition": "Grand bruit discordant et confus.",
-  "exemple": "Les casseroles des enfants faisaient un tintamarre infernal.",
-  "academie": true
- },
- {
   "mot": "tintinnabuler",
   "nature": "v. intr.",
   "definition": "Tinter d’un son léger, clair et aigu, comme une clochette.",
@@ -8285,20 +6514,6 @@
   "nature": "n. m.",
   "definition": "Familier : souci, embarras que cause une affaire ; aussi, vacarme.",
   "exemple": "Organiser ce mariage, quel tintouin !",
-  "academie": true
- },
- {
-  "mot": "tohu-bohu",
-  "nature": "n. m.",
-  "definition": "Désordre bruyant, confusion générale.",
-  "exemple": "À la sortie de l’école régnait un joyeux tohu-bohu.",
-  "academie": true
- },
- {
-  "mot": "tonitruant",
-  "nature": "adj.",
-  "definition": "Qui fait un bruit de tonnerre, d’une sonorité retentissante.",
-  "exemple": "Il salua l’assemblée d’une voix tonitruante.",
   "academie": true
  },
  {
@@ -8351,13 +6566,6 @@
   "academie": false
  },
  {
-  "mot": "transi",
-  "nature": "adj.",
-  "definition": "Pénétré et engourdi par le froid ; ou comme paralysé par une émotion violente.",
-  "exemple": "Il attendait sous la neige, transi de froid.",
-  "academie": false
- },
- {
   "mot": "trébuchet",
   "nature": "n. m.",
   "definition": "Piège à oiseaux ; petite balance de précision ; machine de siège.",
@@ -8384,20 +6592,6 @@
   "definition": "Familier : manipuler, truquer ou remanier de façon malhonnête (des comptes, un texte).",
   "exemple": "Le comptable avait tripatouillé les chiffres du bilan.",
   "academie": false
- },
- {
-  "mot": "tripot",
-  "nature": "n. m.",
-  "definition": "Maison de jeu mal famée.",
-  "exemple": "Il perdit son héritage dans les tripots du port.",
-  "academie": true
- },
- {
-  "mot": "trompe-l’œil",
-  "nature": "n. m.",
-  "definition": "Peinture qui donne l’illusion du relief et de la réalité.",
-  "exemple": "Une fenêtre en trompe-l’œil égayait le mur aveugle.",
-  "academie": true
  },
  {
   "mot": "trotte-menu",
@@ -8475,20 +6669,6 @@
   "definition": "Décrier publiquement quelqu’un, le dénigrer à grand bruit.",
   "exemple": "Le pamphlétaire tympanisait le ministre dans toutes ses chroniques.",
   "academie": true
- },
- {
-  "mot": "ubiquité",
-  "nature": "n. f.",
-  "definition": "Faculté d’être présent en plusieurs lieux à la fois.",
-  "exemple": "Je n’ai pas le don d’ubiquité : choisis la fête ou le match.",
-  "academie": true
- },
- {
-  "mot": "ubuesque",
-  "nature": "adj.",
-  "definition": "D’une absurdité grotesque, souvent cruelle ou cynique, à la manière du Père Ubu d’Alfred Jarry.",
-  "exemple": "Situation ubuesque : pour obtenir le formulaire, il fallait l’avoir déjà rempli.",
-  "academie": false
  },
  {
   "mot": "uchronie",
@@ -8582,13 +6762,6 @@
   "academie": true
  },
  {
-  "mot": "vadrouille",
-  "nature": "n. f.",
-  "definition": "Familier : promenade sans but précis, balade.",
-  "exemple": "Ils sont partis en vadrouille dans les ruelles du vieux port.",
-  "academie": false
- },
- {
   "mot": "vagissement",
   "nature": "n. m.",
   "definition": "Cri du nouveau-né.",
@@ -8645,24 +6818,10 @@
   "academie": true
  },
  {
-  "mot": "verbiage",
-  "nature": "n. m.",
-  "definition": "Abondance de paroles creuses.",
-  "exemple": "Derrière ce verbiage, aucune proposition concrète.",
-  "academie": true
- },
- {
   "mot": "vergogne",
   "nature": "n. f.",
   "definition": "Honte, pudeur ; ne s’emploie plus guère que dans « sans vergogne ».",
   "exemple": "Il a menti sans vergogne devant tout le monde.",
-  "academie": true
- },
- {
-  "mot": "vermoulu",
-  "nature": "adj.",
-  "definition": "Rongé par les vers ; au figuré, vieux et décrépit.",
-  "exemple": "Le plancher vermoulu craquait à chaque pas.",
   "academie": true
  },
  {
@@ -8792,13 +6951,6 @@
   "academie": false
  },
  {
-  "mot": "vivoter",
-  "nature": "v. intr.",
-  "definition": "Vivre petitement, avec peine.",
-  "exemple": "Il vivotait de leçons particulières.",
-  "academie": true
- },
- {
   "mot": "vulgum pecus",
   "nature": "n. m.",
   "definition": "Le commun des mortels, la masse des profanes (expression plaisante).",
@@ -8825,13 +6977,6 @@
   "definition": "Chêne vert, arbre méditerranéen au feuillage persistant.",
   "exemple": "Nous pique-niquâmes à l’ombre d’une vieille yeuse.",
   "academie": true
- },
- {
-  "mot": "yoyoter",
-  "nature": "v. intr.",
-  "definition": "Familier : divaguer, perdre un peu la raison.",
-  "exemple": "Il commence à yoyoter, il m’a appelé par le nom de son chien.",
-  "academie": false
  },
  {
   "mot": "zazou",
@@ -8869,24 +7014,10 @@
   "academie": true
  },
  {
-  "mot": "zizanie",
-  "nature": "n. f.",
-  "definition": "Mésentente, discorde (surtout dans « semer la zizanie »).",
-  "exemple": "Cette histoire d’héritage a semé la zizanie dans la famille.",
-  "academie": true
- },
- {
   "mot": "zoïle",
   "nature": "n. m.",
   "definition": "Critique envieux et injuste.",
   "exemple": "Les zoïles du journal ont éreinté sa pièce sans la voir.",
   "academie": true
- },
- {
-  "mot": "zozoter",
-  "nature": "v. intr.",
-  "definition": "Familier : prononcer défectueusement les sons « s » et « z » en avançant la langue ; zézayer.",
-  "exemple": "Le petit zozotait de façon attendrissante.",
-  "academie": false
  }
 ]
