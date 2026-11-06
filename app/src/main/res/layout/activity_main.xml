@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -11,6 +12,7 @@
         android:padding="24dp">
 
         <TextView
+            android:id="@+id/label"
             style="@style/Label"
             android:text="@string/today" />
 
@@ -103,6 +105,26 @@
                 android:text="@string/cnrtl" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/new_word"
+            style="@style/Row"
+            android:text="@string/new_word" />
+
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="16dp"
+            android:text="@string/seen_today" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/seen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </HorizontalScrollView>
+
         <TextView
             style="@style/Label"
             android:layout_marginTop="32dp"
@@ -116,6 +138,16 @@
         <Button
             android:id="@+id/time"
             style="@style/Row" />
+
+        <TextView
+            style="@style/Row"
+            android:layout_marginBottom="0dp"
+            android:text="@string/per_day" />
+
+        <Spinner
+            android:id="@+id/per_day"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
 
         <TextView
             style="@style/Row"

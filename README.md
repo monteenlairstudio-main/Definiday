@@ -5,8 +5,10 @@ Appli Android : chaque jour, à l’heure choisie, un mot français rare ou savo
 ## Fonctionnement
 - **Notification publique** (visible sur l’écran de verrouillage), retirée automatiquement après la durée choisie (`setTimeoutAfter`).
 - **Option fond d’écran de verrouillage** : le mot est dessiné en plein écran (`WallpaperManager`, `FLAG_LOCK`), puis retiré à la fin de la durée. L’écran de verrouillage reprend alors le fond d’accueil.
-- Réglages : activation, heure, durée (15 min à 24 h), mode fond d’écran, bouton « Afficher maintenant ».
-- Un mot par jour, identique pour tous, sans répétition avant d’avoir parcouru toute la liste.
+- Réglages : activation, heure, 1 à 3 mots par jour (une notification par mot), durée (15 min à 24 h), mode fond d’écran (premier mot du jour), bouton « Afficher maintenant ».
+- Bouton « Nouveau mot au hasard » et liste des mots déjà vus aujourd’hui.
+- Historique local : un mot montré (du jour ou au hasard) ne revient pas avant 120 jours (~4 mois) ; les mots jamais vus passent en premier.
+- Anecdote (« Le saviez-vous ? ») avec lien vers sa source Wiktionnaire/Wikipédia quand elle existe.
 
 ## Sources
 Les définitions et exemples sont **rédigés pour Definiday** et vérifiés avec le [Wiktionnaire](https://fr.wiktionary.org) (CC BY-SA). Ils ne sont pas copiés depuis le Dictionnaire de l’Académie française ni depuis le TLFi : les CGU de dictionnaire-academie.fr interdisent la reproduction et l’extraction automatisée.

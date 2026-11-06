@@ -12,6 +12,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
@@ -22,6 +24,8 @@ import java.net.URL
 import java.net.URLEncoder
 
 class MainActivity : Activity() {
+    companion object { const val EXTRA_MOT = "mot" }
+
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,18 +34,9 @@ class MainActivity : Activity() {
         if (Build.VERSION.SDK_INT >= 33) requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
 
         val p = Prefs(this)
-        val w = Words.today(this)
-        text(R.id.mot, w.mot)
-        text(R.id.nature, w.nature)
-        text(R.id.definition, w.definition)
-        text(R.id.exemple, if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»")
-        if (w.anecdote.isNotEmpty()) {
-            text(R.id.anecdote, w.anecdote)
-            findViewById<View>(R.id.anecdote_box).visibility = View.VISIBLE
-            findViewById<Button>(R.id.source).setOnClickListener { open(w.source) }
-        }
-        findViewById<Button>(R.id.academie).setOnClickListener { openAcademie(w.mot) }
-        findViewById<Button>(R.id.cnrtl).setOnClickListener { open(cnrtl(w.mot)) }
+        val daily = Words.today(this)
+        show(daily.firstOrNull { it.mot == intent.getStringExtra(EXTRA_MOT) } ?: daily.first())
+        findViewById<Button>(R.id.new_word).setOnClickListener { show(Words.random(this)) }
 
         findViewById<Switch>(R.id.enabled).apply {
             isChecked = p.enabled
@@ -55,13 +50,9 @@ class MainActivity : Activity() {
                 p.hour = h; p.minute = m; showTime(); DailyReceiver.scheduleNext(this)
             }, p.hour, p.minute, true).show()
         }
-        findViewById<Spinner>(R.id.duration).apply {
-            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, durations.map(::label))
-            setSelection(durations.indexOf(p.durationMinutes).coerceAtLeast(0))
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(a: AdapterView<*>?, v: View?, pos: Int, id: Long) { p.durationMinutes = durations[pos] }
-                override fun onNothingSelected(a: AdapterView<*>?) {}
-            }
+        spinner(R.id.duration, durations.map(::label), durations.indexOf(p.durationMinutes)) { p.durationMinutes = durations[it] }
+        spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
+            if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this); showSeen() }
         }
         findViewById<Switch>(R.id.wallpaper).apply {
             isChecked = p.wallpaper
@@ -73,6 +64,45 @@ class MainActivity : Activity() {
         }
         DailyReceiver.scheduleNext(this)
     }
+
+    /** Displays one word in the card; links follow it. */
+    private fun show(w: Word) {
+        text(R.id.label, getString(if (w.mot in Prefs(this).dailyMots) R.string.today else R.string.random))
+        text(R.id.mot, w.mot)
+        text(R.id.nature, w.nature)
+        text(R.id.definition, w.definition)
+        text(R.id.exemple, if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»")
+        text(R.id.anecdote, w.anecdote)
+        findViewById<View>(R.id.anecdote_box).visibility = if (w.anecdote.isEmpty()) View.GONE else View.VISIBLE
+        findViewById<Button>(R.id.source).setOnClickListener { open(w.source) }
+        findViewById<Button>(R.id.academie).setOnClickListener { openAcademie(w.mot) }
+        findViewById<Button>(R.id.cnrtl).setOnClickListener { open(cnrtl(w.mot)) }
+        showSeen()
+        findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
+    }
+
+    /** One tappable chip per word already shown today. */
+    private fun showSeen() {
+        val row = findViewById<LinearLayout>(R.id.seen)
+        row.removeAllViews()
+        Words.seenToday(this).forEach { w ->
+            row.addView(Button(this, null, android.R.attr.borderlessButtonStyle).apply {
+                text = w.mot
+                isAllCaps = false
+                setOnClickListener { show(w) }
+            })
+        }
+    }
+
+    private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
+        findViewById<Spinner>(id).apply {
+            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, labels)
+            setSelection(selected.coerceAtLeast(0))
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(a: AdapterView<*>?, v: View?, pos: Int, id: Long) = onPick(pos)
+                override fun onNothingSelected(a: AdapterView<*>?) {}
+            }
+        }
 
     private fun text(id: Int, s: String) { findViewById<TextView>(id).text = s }
 

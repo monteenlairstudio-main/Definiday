@@ -17,4 +17,8 @@
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
     <string name="anecdote">LE SAVIEZ-VOUS ?</string>
     <string name="source">Source</string>
+    <string name="random">MOT AU HASARD</string>
+    <string name="new_word">Nouveau mot au hasard</string>
+    <string name="seen_today">DÉJÀ VUS AUJOURD’HUI</string>
+    <string name="per_day">Nombre de mots par jour</string>
 </resources>

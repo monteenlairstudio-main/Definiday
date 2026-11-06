@@ -27,4 +27,21 @@ class Prefs(ctx: Context) {
     var wallpaperId: Int
         get() = sp.getInt("wallpaperId", -1)
         set(v) = sp.edit().putInt("wallpaperId", v).apply()
+    var wordsPerDay: Int
+        get() = sp.getInt("wordsPerDay", 1)
+        set(v) = sp.edit().putInt("wordsPerDay", v).apply()
+    /** Epoch day and lemmas of the daily words already picked for that day. */
+    var dailyDay: Long
+        get() = sp.getLong("dailyDay", Long.MIN_VALUE)
+        set(v) = sp.edit().putLong("dailyDay", v).apply()
+    var dailyMots: List<String>
+        get() = sp.getString("dailyMots", "")!!.split('|').filter { it.isNotEmpty() }
+        set(v) = sp.edit().putString("dailyMots", v.joinToString("|")).apply()
+}
+
+/** mot -> epoch day it was last shown (daily or random). */
+class History(ctx: Context) {
+    private val sp = ctx.getSharedPreferences("history", Context.MODE_PRIVATE)
+    fun all(): Map<String, Long> = sp.all.mapValues { it.value as Long }
+    fun mark(mot: String, day: Long) = sp.edit().putLong(mot, day).apply()
 }

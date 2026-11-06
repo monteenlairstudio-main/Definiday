@@ -61,9 +61,10 @@ class DailyReceiver : BroadcastReceiver() {
 
         fun show(ctx: Context) {
             val p = Prefs(ctx)
-            val w = Words.today(ctx)
+            val words = Words.today(ctx)
             val durationMs = p.durationMinutes * 60_000L
-            notify(ctx, w, durationMs)
+            words.forEachIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }
+            val w = words.first() // ponytail: wallpaper shows only the first daily word; stack them if 2-3 words should fit
             if (p.wallpaper) {
                 val m = ctx.resources.displayMetrics // portrait size whatever the current orientation
                 val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
@@ -87,14 +88,15 @@ class DailyReceiver : BroadcastReceiver() {
             p.wallpaperEndAt = 0
         }
 
-        private fun notify(ctx: Context, w: Word, durationMs: Long) {
+        private fun notify(ctx: Context, w: Word, durationMs: Long, id: Int) {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             nm.createNotificationChannel(
                 NotificationChannel(CHANNEL, ctx.getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT)
                     .apply { lockscreenVisibility = Notification.VISIBILITY_PUBLIC; setShowBadge(false) },
             )
             val open = PendingIntent.getActivity(
-                ctx, 0, Intent(ctx, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE,
+                ctx, id, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot),
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
             )
             val body = "${w.nature} · ${w.definition}" + (if (w.exemple.isNotEmpty()) "\n«\u00a0${w.exemple}\u00a0»" else "") +
                 (if (w.anecdote.isNotEmpty()) "\n\n${w.anecdote}" else "")
@@ -108,7 +110,7 @@ class DailyReceiver : BroadcastReceiver() {
                 .setAutoCancel(true)
                 .setTimeoutAfter(durationMs)
                 .build()
-            runCatching { nm.notify(1, n) } // SecurityException if POST_NOTIFICATIONS denied: wallpaper mode still works
+            runCatching { nm.notify(id, n) } // SecurityException if POST_NOTIFICATIONS denied: wallpaper mode still works
         }
     }
 }

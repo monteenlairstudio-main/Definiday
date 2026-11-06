@@ -23,7 +23,7 @@ import java.time.ZonedDateTime
 class DefinidayTest {
     private val ctx = RuntimeEnvironment.getApplication()
 
-    @Test fun datasetIsCleanAndCyclesWithoutRepeat() {
+    @Test fun datasetIsClean() {
         val words = Words.load(ctx)
         assertTrue("need 3 years without repeat, got ${words.size}", words.size >= 3 * 365)
         assertEquals(words.size, words.map { it.mot.lowercase() }.toSet().size)
@@ -31,7 +31,36 @@ class DefinidayTest {
         words.filter { it.anecdote.isNotEmpty() }.forEach {
             assertTrue(it.mot, it.anecdote.length <= 280 && Regex("https://fr\\.(wiktionary|wikipedia)\\.org/.+").matches(it.source))
         }
-        assertEquals(words.toSet(), (0L until words.size).map { Words.forDay(words, 20_000 + it) }.toSet())
+    }
+
+    /** 3 years of 3 daily words + 2 random ones a day: no word ever comes back within the cooldown, unseen words go first. */
+    @Test fun historyKeepsWordsAwayForFourMonths() {
+        val words = Words.load(ctx)
+        val history = mutableMapOf<String, Long>()
+        val rnd = kotlin.random.Random(1)
+        for (day in 0L until 3 * 365) {
+            repeat(3) { Words.nextDaily(words, history, day).let { w ->
+                history[w.mot]?.let { assertTrue("${w.mot} back after ${day - it} days", day - it >= Words.COOLDOWN_DAYS) }
+                if (history.size < words.size) assertTrue("${w.mot} repeated while unseen words remain", w.mot !in history)
+                history[w.mot] = day
+            } }
+            repeat(2) { Words.nextRandom(words, history, day, rnd).let { w ->
+                history[w.mot]?.let { assertTrue("${w.mot} back after ${day - it} days", day - it >= Words.COOLDOWN_DAYS) }
+                history[w.mot] = day
+            } }
+        }
+    }
+
+    @Test fun dailyWordsAreStableAndMarkedSeen() {
+        val p = Prefs(ctx).apply { wordsPerDay = 2 }
+        val first = Words.today(ctx)
+        assertEquals(2, first.size)
+        assertEquals(first, Words.today(ctx)) // same words all day
+        val r = Words.random(ctx)
+        assertTrue(r !in first)
+        assertEquals(first + r, Words.seenToday(ctx))
+        p.wordsPerDay = 3
+        assertEquals(first, Words.today(ctx).take(2)) // raising the count keeps the earlier picks
     }
 
     @Test fun nextTriggerIsTodayOrTomorrow() {
@@ -47,7 +76,10 @@ class DefinidayTest {
         val n = ctx.getSystemService(NotificationManager::class.java).activeNotifications.single().notification
         assertEquals(Notification.VISIBILITY_PUBLIC, n.visibility)
         assertEquals(30 * 60_000L, n.timeoutAfter)
-        assertEquals(Words.today(ctx).mot, n.extras.getString(Notification.EXTRA_TITLE))
+        assertEquals(Words.today(ctx).single().mot, n.extras.getString(Notification.EXTRA_TITLE))
+        Prefs(ctx).wordsPerDay = 3
+        DailyReceiver.show(ctx)
+        assertEquals(3, ctx.getSystemService(NotificationManager::class.java).activeNotifications.size)
     }
 
     @Test fun wallpaperIsRemovedOnlyWhenDueAndStillOurs() {
@@ -66,7 +98,7 @@ class DefinidayTest {
     @Test fun renderDemoImages() {
         val out = File("build/demo").apply { mkdirs() }
         val words = Words.load(ctx)
-        listOf(Words.today(ctx), words.maxBy { it.definition.length + it.exemple.length }).forEachIndexed { i, w ->
+        listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }).forEachIndexed { i, w ->
             save(WordCard.render(w, 1080, 2340), File(out, "lockscreen_$i.png"))
         }
         val activity = Robolectric.buildActivity(MainActivity::class.java).setup().get()
