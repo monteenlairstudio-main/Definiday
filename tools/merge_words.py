@@ -1,10 +1,19 @@
-"""Merge lexicon batches into app/src/main/assets/words.json (dedup by lemma, sorted)."""
-import json, sys
+"""Merge lexicon batches into app/src/main/assets/words.json.
+
+Usage: python3 tools/merge_words.py batch1.json batch2.json ... [qa_patch.json ...]
+Later files override earlier ones for the same lemma; {"mot": ..., "_supprimer": true} removes it.
+"""
+import json, sys, unicodedata
+
 words = {}
 for path in sys.argv[1:]:
     for w in json.load(open(path, encoding="utf-8")):
-        w = {k: v.replace("'", "’") if isinstance(v, str) else v for k, v in w.items()}  # French typographic apostrophe
-        words.setdefault(w["mot"].lower(), w)
-out = sorted(words.values(), key=lambda w: w["mot"].lower())
+        key = w["mot"].replace("'", "’").lower()
+        if w.get("_supprimer"):
+            words.pop(key, None)
+            continue
+        # French typographic apostrophe; drop QA-only keys like "_raison"
+        words[key] = {k: v.replace("'", "’") if isinstance(v, str) else v for k, v in w.items() if not k.startswith("_")}
+out = sorted(words.values(), key=lambda w: unicodedata.normalize("NFD", w["mot"].lower()))  # é sorts with e
 json.dump(out, open("app/src/main/assets/words.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(len(out), "mots")

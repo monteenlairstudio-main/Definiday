@@ -17,6 +17,7 @@ object Words {
     }
 
     /** Fixed shuffle + day index: every word is shown once before any repeats, same word for everyone on a given day. */
+    // ponytail: adding words reshuffles the whole sequence (a few early repeats); store a shown-history if that starts to matter
     fun forDay(words: List<Word>, epochDay: Long): Word =
         words.shuffled(Random(SEED))[Math.floorMod(epochDay, words.size)]
 

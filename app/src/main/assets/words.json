@@ -28,6 +28,13 @@
   "academie": false
  },
  {
+  "mot": "aménité",
+  "nature": "n. f.",
+  "definition": "Douceur aimable et courtoise dans les manières ou le ton ; au sens ancien, agrément d’un lieu.",
+  "exemple": "La libraire conseillait chaque client avec une aménité qui faisait revenir tout le quartier.",
+  "academie": true
+ },
+ {
   "mot": "amphigouri",
   "nature": "n. m.",
   "definition": "Discours ou écrit embrouillé, dont les phrases confuses ne débouchent sur aucun sens clair.",
@@ -39,13 +46,6 @@
   "nature": "n. m.",
   "definition": "Hôte qui reçoit des convives à sa table et leur offre le repas.",
   "exemple": "Notre amphitryon avait prévu sept plats et autant de vins pour la soirée.",
-  "academie": true
- },
- {
-  "mot": "aménité",
-  "nature": "n. f.",
-  "definition": "Douceur aimable et courtoise dans les manières ou le ton ; au sens ancien, agrément d’un lieu.",
-  "exemple": "La libraire conseillait chaque client avec une aménité qui faisait revenir tout le quartier.",
   "academie": true
  },
  {
@@ -119,6 +119,20 @@
   "academie": false
  },
  {
+  "mot": "béjaune",
+  "nature": "n. m.",
+  "definition": "Jeune homme naïf et inexpérimenté. À l’origine, jeune oiseau de fauconnerie au bec encore jaune.",
+  "exemple": "Le vieux marin se moquait volontiers du béjaune qui n’avait jamais vu la mer.",
+  "academie": true
+ },
+ {
+  "mot": "bélître",
+  "nature": "n. m.",
+  "definition": "Homme de rien, sans valeur ni mérite ; terme d’injure vieilli.",
+  "exemple": "« Hors d’ici, bélître ! » lança le marquis au valet maladroit.",
+  "academie": true
+ },
+ {
   "mot": "billevesée",
   "nature": "n. f.",
   "definition": "Idée creuse, propos frivole et sans fondement. S’emploie surtout au pluriel.",
@@ -144,20 +158,6 @@
   "nature": "n. m.",
   "definition": "Raillerie piquante, trait moqueur lancé contre quelqu’un.",
   "exemple": "Le ministre essuya les brocards des chansonniers pendant toute la saison.",
-  "academie": true
- },
- {
-  "mot": "béjaune",
-  "nature": "n. m.",
-  "definition": "Jeune homme naïf et inexpérimenté. À l’origine, jeune oiseau de fauconnerie au bec encore jaune.",
-  "exemple": "Le vieux marin se moquait volontiers du béjaune qui n’avait jamais vu la mer.",
-  "academie": true
- },
- {
-  "mot": "bélître",
-  "nature": "n. m.",
-  "definition": "Homme de rien, sans valeur ni mérite ; terme d’injure vieilli.",
-  "exemple": "« Hors d’ici, bélître ! » lança le marquis au valet maladroit.",
   "academie": true
  },
  {
@@ -193,6 +193,13 @@
   "nature": "n. f.",
   "definition": "Prudence rusée, mêlée de méfiance et d’habileté à tromper.",
   "exemple": "Le vieux diplomate négociait avec une cautèle que nul ne parvenait à percer.",
+  "academie": true
+ },
+ {
+  "mot": "céans",
+  "nature": "adv.",
+  "definition": "Ici, à l’intérieur de cette maison. Le maître de céans : le maître des lieux.",
+  "exemple": "Le maître de céans nous accueillit en robe de chambre et pantoufles.",
   "academie": true
  },
  {
@@ -238,13 +245,6 @@
   "academie": true
  },
  {
-  "mot": "céans",
-  "nature": "adv.",
-  "definition": "Ici, à l’intérieur de cette maison. Le maître de céans : le maître des lieux.",
-  "exemple": "Le maître de céans nous accueillit en robe de chambre et pantoufles.",
-  "academie": true
- },
- {
   "mot": "dare-dare",
   "nature": "adv.",
   "definition": "En toute hâte, très vite. Familier.",
@@ -256,6 +256,27 @@
   "nature": "adv.",
   "definition": "Une seconde fois, de nouveau. Littéraire.",
   "exemple": "Le chat, chassé de la table, y sauta derechef.",
+  "academie": true
+ },
+ {
+  "mot": "dégoiser",
+  "nature": "v. tr.",
+  "definition": "Débiter avec volubilité des paroles, souvent des sottises ou des médisances. Familier.",
+  "exemple": "Elle dégoisait des ragots sur tous les voisins de l’immeuble.",
+  "academie": true
+ },
+ {
+  "mot": "délétère",
+  "nature": "adj.",
+  "definition": "Nuisible à la santé, voire mortel ; au figuré, qui exerce une influence pernicieuse.",
+  "exemple": "Un climat délétère s’était installé dans l’équipe depuis la réorganisation.",
+  "academie": true
+ },
+ {
+  "mot": "déliquescence",
+  "nature": "n. f.",
+  "definition": "Décomposition progressive, état de décadence avancée. Au sens premier, fait pour un solide de se liquéfier à l’air humide.",
+  "exemple": "Le roman dépeint une aristocratie en pleine déliquescence.",
   "academie": true
  },
  {
@@ -280,13 +301,6 @@
   "academie": true
  },
  {
-  "mot": "dulcinée",
-  "nature": "n. f.",
-  "definition": "Femme dont on est épris, souvent avec une pointe d’ironie. Allusion à la bien-aimée de Don Quichotte.",
-  "exemple": "Il traversa toute la ville sous la pluie pour apporter des roses à sa dulcinée.",
-  "academie": true
- },
- {
   "mot": "duègne",
   "nature": "n. f.",
   "definition": "Femme âgée chargée de veiller sur la conduite d’une jeune fille, à la manière espagnole.",
@@ -294,24 +308,10 @@
   "academie": true
  },
  {
-  "mot": "dégoiser",
-  "nature": "v. tr.",
-  "definition": "Débiter avec volubilité des paroles, souvent des sottises ou des médisances. Familier.",
-  "exemple": "Elle dégoisait des ragots sur tous les voisins de l’immeuble.",
-  "academie": true
- },
- {
-  "mot": "déliquescence",
+  "mot": "dulcinée",
   "nature": "n. f.",
-  "definition": "Décomposition progressive, état de décadence avancée. Au sens premier, fait pour un solide de se liquéfier à l’air humide.",
-  "exemple": "Le roman dépeint une aristocratie en pleine déliquescence.",
-  "academie": true
- },
- {
-  "mot": "délétère",
-  "nature": "adj.",
-  "definition": "Nuisible à la santé, voire mortel ; au figuré, qui exerce une influence pernicieuse.",
-  "exemple": "Un climat délétère s’était installé dans l’équipe depuis la réorganisation.",
+  "definition": "Femme dont on est épris, souvent avec une pointe d’ironie. Allusion à la bien-aimée de Don Quichotte.",
+  "exemple": "Il traversa toute la ville sous la pluie pour apporter des roses à sa dulcinée.",
   "academie": true
  },
  {
@@ -354,6 +354,41 @@
   "nature": "n. m.",
   "definition": "Homme de grande taille, à l’allure dégingandée. Familier.",
   "exemple": "Un grand escogriffe se cogna la tête contre la poutre en entrant.",
+  "academie": true
+ },
+ {
+  "mot": "ébaubi",
+  "nature": "adj.",
+  "definition": "Si étonné qu’on en reste sans voix. Familier.",
+  "exemple": "Les enfants, ébaubis, regardaient le magicien sortir un lapin du chapeau.",
+  "academie": true
+ },
+ {
+  "mot": "élucubration",
+  "nature": "n. f.",
+  "definition": "Théorie ou rêverie extravagante, fruit d’un raisonnement laborieux et peu convaincant. S’emploie surtout au pluriel.",
+  "exemple": "Personne ne prenait au sérieux ses élucubrations sur les pyramides.",
+  "academie": true
+ },
+ {
+  "mot": "émoustiller",
+  "nature": "v. tr.",
+  "definition": "Mettre de bonne humeur, exciter la gaieté ou les sens.",
+  "exemple": "Le champagne avait émoustillé les convives, qui se mirent à chanter.",
+  "academie": true
+ },
+ {
+  "mot": "épigone",
+  "nature": "n. m.",
+  "definition": "Successeur ou disciple qui imite un maître ou un courant, souvent sans originalité.",
+  "exemple": "Le peintre eut de nombreux épigones, mais aucun n’égala sa lumière.",
+  "academie": false
+ },
+ {
+  "mot": "épistolier",
+  "nature": "n. m.",
+  "definition": "Personne qui écrit beaucoup de lettres ou qui excelle dans l’art de la correspondance.",
+  "exemple": "Épistolier infatigable, il envoyait trois lettres par jour à ses amis.",
   "academie": true
  },
  {
@@ -462,17 +497,17 @@
   "academie": true
  },
  {
-  "mot": "galimatias",
-  "nature": "n. m.",
-  "definition": "Propos embrouillé et confus, qui semble vouloir dire quelque chose mais reste inintelligible.",
-  "exemple": "Le contrat était rédigé dans un galimatias que même l’avocat ne démêlait pas.",
-  "academie": true
- },
- {
   "mot": "galéjade",
   "nature": "n. f.",
   "definition": "Histoire inventée ou enjolivée pour amuser, à la manière provençale ; plaisanterie qui exagère tout.",
   "exemple": "Ne le crois pas : son combat contre trois sangliers n’est qu’une galéjade.",
+  "academie": true
+ },
+ {
+  "mot": "galimatias",
+  "nature": "n. m.",
+  "definition": "Propos embrouillé et confus, qui semble vouloir dire quelque chose mais reste inintelligible.",
+  "exemple": "Le contrat était rédigé dans un galimatias que même l’avocat ne démêlait pas.",
   "academie": true
  },
  {
@@ -553,11 +588,11 @@
   "academie": true
  },
  {
-  "mot": "histrion",
-  "nature": "n. m.",
-  "definition": "Dans l’Antiquité, acteur de farces ; par extension, personnage qui se donne en spectacle par des effets outranciers.",
-  "exemple": "Ce tribun n’est qu’un histrion qui confond l’hémicycle avec les tréteaux.",
-  "academie": false
+  "mot": "hâbleur",
+  "nature": "adj.",
+  "definition": "Qui parle avec exagération et vantardise, en se donnant le beau rôle.",
+  "exemple": "Ce pêcheur hâbleur décrit chaque truite comme un monstre du lac.",
+  "academie": true
  },
  {
   "mot": "hiémal",
@@ -574,17 +609,17 @@
   "academie": true
  },
  {
+  "mot": "histrion",
+  "nature": "n. m.",
+  "definition": "Dans l’Antiquité, acteur de farces ; par extension, personnage qui se donne en spectacle par des effets outranciers.",
+  "exemple": "Ce tribun n’est qu’un histrion qui confond l’hémicycle avec les tréteaux.",
+  "academie": false
+ },
+ {
   "mot": "hurluberlu",
   "nature": "n. m.",
   "definition": "Personne étourdie et fantasque, aux idées et aux manières extravagantes.",
   "exemple": "Un hurluberlu en pyjama distribuait des poèmes devant la gare.",
-  "academie": true
- },
- {
-  "mot": "hâbleur",
-  "nature": "adj.",
-  "definition": "Qui parle avec exagération et vantardise, en se donnant le beau rôle.",
-  "exemple": "Ce pêcheur hâbleur décrit chaque truite comme un monstre du lac.",
   "academie": true
  },
  {
@@ -658,6 +693,13 @@
   "academie": true
  },
  {
+  "mot": "jérémiade",
+  "nature": "n. f.",
+  "definition": "Plainte répétée et lassante, lamentation sans fin.",
+  "exemple": "Épargne-nous tes jérémiades et viens plutôt nous aider.",
+  "academie": true
+ },
+ {
   "mot": "jocrisse",
   "nature": "n. m.",
   "definition": "Benêt naïf qui se laisse mener par n’importe qui.",
@@ -669,13 +711,6 @@
   "nature": "n. m.",
   "definition": "Vieilli ou plaisant : tout jeune homme, encore presque adolescent.",
   "exemple": "Le jouvenceau rougit jusqu’aux oreilles en lui tendant la lettre.",
-  "academie": true
- },
- {
-  "mot": "jérémiade",
-  "nature": "n. f.",
-  "definition": "Plainte répétée et lassante, lamentation sans fin.",
-  "exemple": "Épargne-nous tes jérémiades et viens plutôt nous aider.",
   "academie": true
  },
  {
@@ -721,6 +756,13 @@
   "academie": true
  },
  {
+  "mot": "lénifiant",
+  "nature": "adj.",
+  "definition": "Qui apaise et adoucit ; souvent péjoratif, d’une douceur fade qui endort l’esprit critique.",
+  "exemple": "Le communiqué, lénifiant à souhait, n’annonçait aucune mesure concrète.",
+  "academie": false
+ },
+ {
   "mot": "liesse",
   "nature": "n. f.",
   "definition": "Joie débordante partagée par une foule.",
@@ -739,13 +781,6 @@
   "nature": "adj.",
   "definition": "Qui fuit la lumière, en parlant notamment d’animaux vivant dans l’obscurité.",
   "exemple": "Les cloportes, créatures lucifuges, filèrent sous la pierre retournée.",
-  "academie": false
- },
- {
-  "mot": "lénifiant",
-  "nature": "adj.",
-  "definition": "Qui apaise et adoucit ; souvent péjoratif, d’une douceur fade qui endort l’esprit critique.",
-  "exemple": "Le communiqué, lénifiant à souhait, n’annonçait aucune mesure concrète.",
   "academie": false
  },
  {
@@ -791,6 +826,13 @@
   "academie": true
  },
  {
+  "mot": "méphitique",
+  "nature": "adj.",
+  "definition": "Se dit d’une exhalaison nauséabonde et nocive ; au figuré, d’une atmosphère malsaine.",
+  "exemple": "Une odeur méphitique montait du marais en plein mois d’août.",
+  "academie": false
+ },
+ {
   "mot": "mirifique",
   "nature": "adj.",
   "definition": "Plaisant ou ironique : merveilleux, d’une perfection trop belle pour être vraie.",
@@ -824,13 +866,6 @@
   "definition": "Générosité magnifique, penchant à faire de grandes largesses.",
   "exemple": "Grâce à la munificence d’un mécène, le musée put rouvrir.",
   "academie": true
- },
- {
-  "mot": "méphitique",
-  "nature": "adj.",
-  "definition": "Se dit d’une exhalaison nauséabonde et nocive ; au figuré, d’une atmosphère malsaine.",
-  "exemple": "Une odeur méphitique montait du marais en plein mois d’août.",
-  "academie": false
  },
  {
   "mot": "naguère",
@@ -942,41 +977,6 @@
   "nature": "v. pron.",
   "definition": "Se lier, se mettre en fréquentation avec une ou des personnes peu recommandables.",
   "exemple": "À force de traîner au port, il s’était acoquiné avec une bande de contrebandiers.",
-  "academie": true
- },
- {
-  "mot": "ébaubi",
-  "nature": "adj.",
-  "definition": "Si étonné qu’on en reste sans voix. Familier.",
-  "exemple": "Les enfants, ébaubis, regardaient le magicien sortir un lapin du chapeau.",
-  "academie": true
- },
- {
-  "mot": "élucubration",
-  "nature": "n. f.",
-  "definition": "Théorie ou rêverie extravagante, fruit d’un raisonnement laborieux et peu convaincant. S’emploie surtout au pluriel.",
-  "exemple": "Personne ne prenait au sérieux ses élucubrations sur les pyramides.",
-  "academie": true
- },
- {
-  "mot": "émoustiller",
-  "nature": "v. tr.",
-  "definition": "Mettre de bonne humeur, exciter la gaieté ou les sens.",
-  "exemple": "Le champagne avait émoustillé les convives, qui se mirent à chanter.",
-  "academie": true
- },
- {
-  "mot": "épigone",
-  "nature": "n. m.",
-  "definition": "Successeur ou disciple qui imite un maître ou un courant, souvent sans originalité.",
-  "exemple": "Le peintre eut de nombreux épigones, mais aucun n’égala sa lumière.",
-  "academie": false
- },
- {
-  "mot": "épistolier",
-  "nature": "n. m.",
-  "definition": "Personne qui écrit beaucoup de lettres ou qui excelle dans l’art de la correspondance.",
-  "exemple": "Épistolier infatigable, il envoyait trois lettres par jour à ses amis.",
   "academie": true
  }
 ]
