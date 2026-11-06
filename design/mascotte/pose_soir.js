@@ -44,23 +44,27 @@ function draw(paper) {
   // ---------- Glose dans la tasse ----------
   const body = blob([[330, 600], [346, 520], [440, 466], [580, 440], [660, 462], [698, 530], [692, 600], [340, 610]], 0.5);
   const bodyStripes = X(body, U(...[[590, 458], [632, 474], [672, 506]].map(([x, y], i) => taper([[x, y - 8], [x - 10 - i * 4, y + 66]], 30 - i * 3, 6))));
-  const gBody = G('corps', [vol(null, body, C.fur, [fill(bodyStripes, C.furD), shadowOf(body, 40, 14, 0.16), rimOf(body, 12, 10, 0.3, C.glow),
+  const gBody = G('corps', [vol(null, body, C.fur, [fill(bodyStripes, C.stripe), shadowOf(body, 40, 14, 0.16), rimOf(body, 12, 10, 0.3, C.glow),
     ...skinExtra(C, body, 'body', [[620, 500], [700, 540]])])]);
   anims.push({ id: 'corps', type: 'scale', pivot: [540, 600], values: [[1, 1], [1.012, 1.035], [1, 1]], dur: 4.2 });
   // queue drapée par-dessus le bord, à gauche, bout relevé
   const tailPts = [[352, 584], [314, 600], [296, 642], [300, 694], [306, 732], [286, 760], [260, 752], [258, 730]];
   const tail = taper(tailPts, 46, 26);
-  const gTail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.5, 0.7], 40, 8), tail), C.furD), fill(X(circ([258, 730], 22), tail), C.furD),
+  const gTail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.5, 0.7], 40, 8), tail), C.stripe), fill(X(circ([258, 730], 22), tail), C.furD),
     shadowOf(tail, 12, 10, 0.16), rimOf(tail, 8, 6, 0.35, C.glow)]);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [350, 586], values: [0, 2.5, 0], dur: 5 });
+  anims.push({ id: 'queue', type: 'rotate', pivot: [350, 586], values: [0, 2.5, 0], dur: 7.3 });
   // tête endormie posée sur le bord, pattes croisées dessous
-  const H = gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
+  const awake = !!C.v.awake; // « Réveil dans la tasse » : yeux ouverts, lunettes en place, bougie éteinte, sans « z »
+  const H = awake ? gloseHead(C, { at: [486, 432], tilt: -6, turn: -0.08 }) : gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
+  anims.push(...H.anims);
   const pawL = pawShape([430, 610], 48, 28, -8), pawR = pawShape([548, 616], 46, 27, 6);
   const paws = G('pattes', [pawR, pawL].map(p => vol(null, p, C.cream, [shadowOf(p, 12, 10, 0.12), ...toes(p.position, 0, 2, 12, 24)])));
   let scarfG = null, bow = null;
   if (C.has('echarpe')) { const sc = scarf(C, { c: [620, 600], w: 70, h: 34, sag: 10, tail: [[640, 600], [652, 650], [650, 700]], tailFront: true }); scarfG = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 1);
-  const gHead = G('dormeur', [paws, H.group, bow]);
+  const jg = C.has('grelot') ? jingle(C, [H.chin[0] + 14, H.chin[1] - 6], { w: 50, s: 0.85 }) : {};
+  const tree = C.has('sapin') ? paperTree(C, [868, 788], 0.8) : null;
+  const gHead = G('dormeur', [paws, jg.band, H.group, bow, jg.bell]);
   anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], values: [[1, 1], [1.008, 1.02], [1, 1]], dur: 4.2 });
 
   // ---------- bougie ----------
@@ -75,10 +79,10 @@ function draw(paper) {
   halo.fillColor = { gradient: { stops: [[C.glow, 0], [new Color(1, 0.84, 0.56, 0.35), 0.45], [new Color(1, 0.84, 0.56, 0), 1]], radial: true }, origin: [CX, FY - 30], destination: [CX + 190, FY - 30] };
   const gCandle = G('bougie', [vol(null, holder, C.gold, [shadowOf(holder, 30, 0, 0.2)]), vol(null, wax, C.white, [shadowOf(wax, 22, 0, 0.12), fill(ell([CX, CT], [24, 5]), INK, 0.12)]),
     line(curve([[CX, CT - 6], [CX + 2, FY - 4]]), 5),
-    G('flamme', [fill(flameO.clone(NI), C.gold), fill(flameI, C.glow), outline(flameO, IN)])]);
-  anims.push({ id: 'flamme', type: 'scale', pivot: [CX + 2, FY], values: [[1, 1], [0.9, 1.1], [1.06, 0.94], [0.94, 1.06], [1, 1]], dur: 1.7 });
-  const gHalo = G('halo', [halo]);
-  anims.push({ id: 'halo', attr: 'opacity', values: [0.8, 1, 0.85, 0.8], keyTimes: [0, 0.4, 0.7, 1], dur: 2.4 });
+    awake ? null : G('flamme', [fill(flameO.clone(NI), C.gold), fill(flameI, C.glow), outline(flameO, IN)])]);
+  const gHalo = awake ? null : G('halo', [halo]);
+  if (!awake) anims.push({ id: 'flamme', type: 'scale', pivot: [CX + 2, FY], values: [[1, 1], [0.9, 1.1], [1.06, 0.94], [0.94, 1.06], [1, 1]], dur: 1.7 },
+    { id: 'halo', attr: 'opacity', values: [0.8, 1, 0.85, 0.8], keyTimes: [0, 0.4, 0.7, 1], dur: 2.4 });
 
   // ---------- vapeur, « z », sachet ----------
   const steam = (id, x, y, d) => {
@@ -97,14 +101,14 @@ function draw(paper) {
     return G(id, [z]);
   };
   const ear = H.T([346, 140]);
-  const zG = G('zzz', [zz('z1', ear[0] - 34, ear[1] + 34, 13, 0), zz('z2', ear[0] - 62, ear[1] - 12, 18, -1.2), zz('z3', ear[0] - 84, ear[1] - 70, 24, -2.4)]);
+  const zG = awake ? null : G('zzz', [zz('z1', ear[0] - 34, ear[1] + 34, 13, 0), zz('z2', ear[0] - 62, ear[1] - 12, 18, -1.2), zz('z3', ear[0] - 84, ear[1] - 70, 24, -2.4)]);
   const tag = rpoly([[732, 622], [776, 622], [776, 674], [732, 674]], 6), leaf = blob([[754, 634], [766, 646], [754, 666], [742, 646]], 0.5);
   const gTea = G('sachet', [line(curve([[742, 554], [750, 572], [754, 594], [754, 622]]), 3.5), vol(null, tag, C.white, [shadowOf(tag, 8, 0, 0.12), fill(leaf, C.gold), line(curve([[754, 640], [754, 662]]), 2.5)], IN)]);
   anims.push({ id: 'sachet', type: 'rotate', pivot: [744, 556], values: [-4, 4, -4], dur: 4.2 });
   const ground = fill(ell([540, 964], [440, 22]), INK, 0.14);
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, B2.group, bookSh, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, scarfG, gHead, gCandle, zG, glint.group].filter(Boolean));
-  return { anims, viewBox: [60, 110, 920, 920], title: 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
+  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, B2.group, bookSh, tree, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, scarfG, gHead, gCandle, zG, glint.group].filter(Boolean));
+  return { anims, viewBox: [60, 110, 920, 920], title: awake ? 'Monsieur Glose réveillé dans sa tasse, le thé du matin' : 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
 }
-function sparkleShape(c, r) { c = P(c); return rpoly([c.add([0, -r]), c.add([r * 0.26, -r * 0.26]), c.add([r, 0]), c.add([r * 0.26, r * 0.26]), c.add([0, r]), c.add([-r * 0.26, r * 0.26]), c.add([-r, 0]), c.add([-r * 0.26, -r * 0.26])], r * 0.1); }
+

@@ -8,9 +8,11 @@
 const fs = require('fs'), path = require('path');
 const TOKENS = { '#a4acbc': 'gloseFur', '#788196': 'gloseFurD', '#f8eedd': 'gloseCream', '#9a4250': 'gloseBall', '#5a2230': 'gloseBallD',
   '#e98c8c': 'gloseNose', '#f0a6a2': 'gloseRose', '#18203a': 'gloseCupIn', '#4a5e92': 'gloseCupLit', '#2c3a04': 'gloseCup',
-  '#2c3a01': 'gloseBook', '#1f2901': 'gloseBookD', '#2c3a02': 'gloseBookTop', '#1f2902': 'gloseBookTopD', '#9c6b03': 'gloseBookLow', '#7c5203': 'gloseBookLowD' };
+  '#2c3a01': 'gloseBook', '#1f2901': 'gloseBookD', '#2c3a02': 'gloseBookTop', '#1f2902': 'gloseBookTopD', '#9c6b03': 'gloseBookLow', '#7c5203': 'gloseBookLowD',
+  '#d9a401': 'gloseSpecs', '#788101': 'gloseStripe' }; // monture des lunettes et rayures : sentinelles du mode {all:true}
 const GATES = [[/^noeud$/, 'Noeud'], [/^echarpe(_dos)?$/, 'Echarpe'], [/bonnet$/, 'Bonnet'], [/^plume$/, 'Plume'], [/^marque_page$/, 'Marque'],
-  [/^ruban$/, 'Ruban'], [/^paillettes_/, 'Gilt'], [/^etoiles_/, 'Stars'], [/eclats$/, 'Glint']];
+  [/^ruban$/, 'Ruban'], [/^paillettes_/, 'Gilt'], [/^etoiles_/, 'Stars'], [/eclats$/, 'Glint'], [/^grelot(_ruban)?$/, 'Grelot'], [/beret$/, 'Beret'],
+  [/couronne$/, 'Couronne'], [/^sapin$/, 'Sapin']];
 
 function convert(src, name, resDir, opts = {}) {
 const gates = {}; // attr -> valeur (hex ou ?attr/token) quand la porte est ouverte
@@ -101,6 +103,8 @@ function emit(e, alpha, gate, out, inh = {}) {
     const tr = /translate\(([-\d.e]+)[ ,]*([-\d.e]*)\)/.exec(t), sc = /scale\(([-\d.e]+)[ ,]*([-\d.e]*)\)/.exec(t);
     if (tr) attrs += ` android:translateX="${f(tr[1])}" android:translateY="${f(tr[2] || 0)}"`;
     if (sc) attrs += ` android:scaleX="${sc[1]}" android:scaleY="${sc[2] || sc[1]}"`;
+    const pv = a['data-paper-data'] && JSON.parse(a['data-paper-data']).pivot; // pivot des réactions one-shot (groupe « tete »)
+    if (pv) attrs += ` android:pivotX="${f(pv[0])}" android:pivotY="${f(pv[1])}"`;
     const g = a.id && GATES.find(([re]) => re.test(a.id));
     const holders = [];
     if (anim) {

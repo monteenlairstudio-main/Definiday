@@ -13,7 +13,7 @@ function draw(paper) {
   // corps en pain
   const body = blob([[452, 650], [440, 566], [492, 484], [612, 450], [738, 460], [810, 516], [830, 596], [812, 650], [640, 660]], 0.5);
   const stripes = [560, 628, 694, 756].map((sx, i) => taper([[sx - 4, 440], [sx + 10, 492], [sx + 4 + i * 4, 540]], 30, 6));
-  const bodyG = vol('corps', body, C.fur, [fill(X(U(...stripes), body), C.furD), shadowOf(body, 30, 34, 0.17), rimOf(body, 12, 14),
+  const bodyG = vol('corps', body, C.fur, [fill(X(U(...stripes), body), C.stripe), shadowOf(body, 30, 34, 0.17), rimOf(body, 12, 14),
     ...skinExtra(C, body, 'body', [[600, 500], [720, 520], [660, 600]]), line(curve([[694, 652], [702, 592], [748, 552], [806, 566]]), IN)]);
   anims.push({ id: 'corps', type: 'scale', pivot: [640, 655], values: [[1, 1], [1.012, 1.03], [1, 1]], dur: 3.6 });
   const seat = fill(X(moved(body, 8, 14), S(B3.top, body)), INK, 0.2);
@@ -21,7 +21,7 @@ function draw(paper) {
   // queue en virgule
   const T = crossingTail(C, 'queue', [[770, 628], [812, 666], [826, 732], [818, 800], [786, 846], [736, 864], [692, 840], [682, 792], [706, 756], [752, 746], [800, 762], [846, 794]], 6, 50, 22,
     [[0.3, 0.46, 0.62, 0.8], [0.28, 0.55, 0.8]], [818, 774], 56);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [770, 636], values: [0, 4, 0, -3, 0], dur: 3.2 });
+  anims.push({ id: 'queue', type: 'rotate', pivot: [770, 636], values: [0, 4, 0, -3, 0], dur: 7.3 });
 
   // patte rentrée posée au bord du livre
   const paw2 = ell([588, 652], [44, 27]);
@@ -37,13 +37,15 @@ function draw(paper) {
   anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], values: [0, 4, -2, 0, 0], keyTimes: [0, 0.18, 0.36, 0.55, 1], dur: 2.6 });
 
   // tête : tournée vers la pelote (3/4 gauche), penchée
-  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, blinkDur: 4.2 });
+  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16 });
   anims.push(...H.anims);
   anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.6 });
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 1.5, 0], dur: 6 });
   let scarfB = null, scarfF = null, bow = null;
   if (C.has('echarpe')) { const sc = scarf(C, { c: [520, 566], w: 96, h: 38, sag: 20, tail: [[642, 578], [664, 628], [674, 688]], tailFront: true }); scarfF = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0], H.chin[1] + 2], -10);
+  const jg = C.has('grelot') ? jingle(C, [H.chin[0], H.chin[1] - 4], { w: 56 }) : {};
+  const tree = C.has('sapin') ? paperTree(C, [892, 904], 1.05) : null;
 
   const ballG0 = yarn('pelote', [240, 864], 64, C, [line(curve([[198, 836], [228, 822], [264, 828]]), 6, C.ballD)]);
   const loose = strand([[194, 906], [164, 920], [136, 910], [118, 920]], C, 8);
@@ -52,6 +54,6 @@ function draw(paper) {
   const shadow = G('ombre', [floorShadow([580, 916], [330, 24], 0.32), floorShadow([236, 920], [80, 13], 0.32)]);
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([shadow, B1.group, rib, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, scarfF, H.group, bow, ballG, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([shadow, B1.group, rib, tree, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, scarfF, jg.band, H.group, bow, jg.bell, ballG, glint.group].filter(Boolean));
   return { anims, viewBox: [90, 150, 860, 860], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
 }

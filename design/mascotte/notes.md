@@ -151,3 +151,23 @@ tout régénéré.
 Restants : mot du fil à 128 px lisible mais petit pour « encore » (6 lettres) ; boucle triangulaire du « t » ;
 brin qui pend du livre un peu raide ; ficelle du sachet invisible en petit ; les phases négatives SMIL des « z » et de
 la vapeur deviennent des départs différés en AnimatedVectorDrawable (premier cycle légèrement vide).
+
+## Première vague de la collection (lot 2) et vie au repos
+Vie au repos : périodes propres à chaque partie (paupières 9,4 s = un clignement puis un double, queue 7,3 s, reflet 11 s,
+bâillement 29 s : bouche ouverte `baille` + paupières `baille_g/d` + tête qui se soulève, à 14,5 s), respiration 3,8 s inchangée.
+L'appli arrête la boucle au bout de 26 s (`Glose.IDLE_MS`), un toucher la relance. Groupe `tete` : pivot au cou (`data` Paper.js
+→ `android:pivotX/Y`) pour les réactions one-shot `glose_icone_hoche` / `glose_icone_penche` (animateurs seuls, sur `glose_icone_vd`).
+Jetons : `C.specs` (monture, sentinelle #D9A401 → `gloseSpecs`) et `C.stripe` (rayures, #788101 → `gloseStripe`) ; `furD` ne colore plus
+que le bout de la queue. Rendu Robolectric avant/après : poses et anciennes surcouches identiques au pixel (icône : 5 px à ≤ 3 %).
+Nouveaux : pelages `roux`, `smoking` (socle et tasse bordeaux comme « Nuit d'encre ») ; pelotes lavande, bleu de Prusse, vert d'eau ;
+reliures ; monture écaille ; béret, couronne des rois (dans `gloseHead`) ; grelot (ruban sous la tête, grelot devant, 3 familles de
+poses) ; petit sapin de papier (sur le livre, au sol à droite de la pile, sous l'anse de la tasse) ; écharpe sucre d'orge et bonnet
+des neiges (`swap` de couleurs d'une porte) ; mots « coucou », « ronron », « flocon » (lettres u, l, f ajoutées) ; pose `reveil`
+(soir {awake} : yeux ouverts, lunettes en place, bougie éteinte, sans « z »).
+### Itération 1 (iter/sheet1)
+1. Sapin trop petit sur le livre (illisible à 96 dp) → ×1,25 ; à gauche dans « écrit » (le bras levé occupe la droite).
+2. « f » de « flocon » confondu avec « l » → jambage descendant à boucle fermée à droite.
+3. Bouche du bâillement cachée en `scale(1 0.001)` : un trait d'un pixel sous le nez → cachée en point (`scale(0.001)`).
+Restants : sapin encore petit dans la pose « pile » et sous l'anse ; grelot en partie caché par le menton dans la tasse ;
+la monture écaille est un aplat (pas de marbrure) ; poids : +272 Ko sur l'APK release (les accessoires sont dessinés dans
+chaque pose : passer aux calques par emplacement avant le 20e).
