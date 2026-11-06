@@ -3,8 +3,6 @@
     <string name="app_name">Definiday</string>
     <string name="channel_name">Mot du jour et quiz</string>
     <string name="today">Mot du jour</string>
-    <string name="academie"><u>Académie française</u></string>
-    <string name="cnrtl"><u>TLFi (CNRTL)</u></string>
     <string name="settings">Réglages</string>
     <string name="enabled">Afficher un mot chaque jour</string>
     <string name="time">Heure d’affichage\u202F: %1$02d:%2$02d</string>
@@ -18,10 +16,10 @@
     <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
     <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
-    <string name="anecdote">Le saviez-vous\u00A0?</string>
+    <string name="anecdote">Anecdote</string>
     <string name="source"><u>Source de l’anecdote</u></string>
     <string name="random">Mot au hasard</string>
-    <string name="new_word">Nouveau mot au hasard</string>
+    <string name="deja_vu">Déjà vu</string>
     <string name="seen_today">Aujourd’hui</string>
     <string name="per_day">Nombre de mots par jour</string>
     <string name="styles_row">Couleurs et polices</string>
@@ -44,7 +42,6 @@
     <string name="slow_title">Prenez le temps</string>
     <string name="slow_default">Un mot savouré vaut mieux que dix effleurés : relisez sa définition, essayez-le dans une phrase.</string>
     <string name="quote_label">Citation du jour</string>
-    <string name="wikiquote"><u>Source (Wikiquote)</u></string>
     <string name="more_quotes">Plus de citations</string>
     <string name="glose">Monsieur Glose, chat bibliothécaire</string>
     <string name="glose_bravo">Monsieur Glose écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
@@ -53,7 +50,6 @@
     <string name="quiz_passed">Joli travail\u202F: ces mots sont un peu plus à vous ce soir.</string>
     <string name="unlock_new">Monsieur Glose a gagné\u202F:</string>
     <string name="unlock_more">+\u00A0%1$d dans la collection</string>
-    <string name="collection_open">Collection de Monsieur Glose</string>
     <string name="collection_see">Voir la collection</string>
     <string name="collection_title">Collection de Monsieur Glose</string>
     <string name="collection_choose">Choisir</string>
@@ -100,7 +96,6 @@
     <string name="exact_no">Le mot peut arriver jusqu’à 1\u00A0h en retard, et la fin au déverrouillage peut échouer. Autorisez «\u202FAlarmes et rappels\u202F» pour l’éviter.</string>
     <string name="exact_ask">Autoriser «\u202FAlarmes et rappels\u202F»</string>
     <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Touchez ici pour les réactiver.</string>
-    <string name="new_word_hint">Il remplace aussi le mot affiché sur l’écran de verrouillage.</string>
     <string name="quote_chip">Citation</string>
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
     <string name="quiz_right">Bien vu\u202F!</string>
@@ -113,4 +108,101 @@
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
+    <!-- Onboarding (OnboardingActivity): Monsieur Glose speaks -->
+    <string name="onb_progress">Étape %1$d sur %2$d</string>
+    <string name="onb_welcome_title">Enchanté.</string>
+    <string name="onb_welcome">Je suis Monsieur Glose, chat bibliothécaire. Chaque jour, je vous apporte un mot rare, sa définition et son histoire, jusque sur votre écran de verrouillage.\n\nTrois petites questions, et je vous laisse lire.</string>
+    <string name="onb_start">Commencer</string>
+    <string name="onb_skip">Passer</string>
+    <string name="onb_next">Suivant</string>
+    <string name="onb_done">Découvrir mon premier mot</string>
+    <string name="onb_later">Plus tard</string>
+    <string name="onb_where_title">Où lirez-vous votre mot\u202F?</string>
+    <string name="mode_both">Notification et écran de verrouillage</string>
+    <string name="mode_notif">Notification seulement</string>
+    <string name="mode_lock">Écran de verrouillage seulement</string>
+    <string name="onb_preview">Aperçu de l’écran de verrouillage avec le mot %1$s</string>
+    <string name="onb_unlock_once">Retirer le mot au premier déverrouillage</string>
+    <string name="onb_when_title">À quelle heure passerai-je\u202F?</string>
+    <string name="onb_quiz_hint">Le soir, je vous demande si vous reconnaissez les mots de la journée\u202F: c’est ainsi qu’ils restent.</string>
+    <string name="onb_ask_title">Avec votre permission</string>
+    <string name="onb_notif_why">Pour déposer %1$s dans vos notifications, Android me demande votre accord. Vous pourrez changer d’avis à tout moment.</string>
+    <string name="onb_notif_both">le mot du jour et le rappel du quiz du soir</string>
+    <string name="onb_notif_word">le mot du jour</string>
+    <string name="onb_notif_quiz">le rappel du quiz du soir</string>
+    <string name="onb_allow">Autoriser les notifications</string>
+    <!-- home-screen widget -->
+    <string name="widget_description">Le mot du jour sur l’écran d’accueil, dans ses couleurs. Gratuit, comme tout Definiday.</string>
+    <string name="widget_add">Ajouter le widget</string>
+    <string name="widget_add_hint">Le mot du jour sur l’écran d’accueil, gratuit. Touchez-le pour ouvrir sa fiche.</string>
+    <string name="widget_manual">Appuyez longuement sur l’écran d’accueil, puis choisissez Widgets et Definiday.</string>
+    <string name="widget_sample_mot">sérendipité</string>
+    <string name="widget_sample_nature">n. f.</string>
+    <string name="widget_sample_texte">Fait de découvrir par hasard quelque chose d’heureux ou d’utile en cherchant autre chose.</string>
+    <!-- home: round actions (label under the icon; the description, read by TalkBack, starts with it) -->
+    <string name="action_academie">Académie</string>
+    <string name="action_academie_desc">Académie française, article du dictionnaire</string>
+    <string name="action_tlfi">TLFi</string>
+    <string name="action_tlfi_desc">TLFi, article du CNRTL</string>
+    <string name="action_source">Source</string>
+    <string name="action_source_desc">Source de la citation, Wikiquote</string>
+    <string name="action_share">Partager</string>
+    <string name="action_share_desc">Partager ce mot</string>
+    <string name="action_random">Au hasard</string>
+    <string name="action_random_desc">Au hasard, un nouveau mot</string>
+    <string name="random_hint">Ce mot remplace aussi celui de l’écran de verrouillage.</string>
+    <string name="collection_count">%1$d/%2$d</string>
+    <string name="collection_desc">Collection de Monsieur Glose, %1$d objets sur %2$d</string>
+    <string name="exemple">Exemple</string>
+    <string name="reveal">Touchez pour révéler</string>
+    <string name="reveal_desc">Touchez pour révéler la définition</string>
+    <string name="share_title">Partager le mot</string>
+    <string name="share_via">via Definiday</string>
+    <string name="guess">Deviner avant de voir</string>
+    <string name="guess_hint">Sur l’accueil, la définition reste cachée jusqu’à ce que vous la touchiez. Le temps d’y réfléchir…</string>
+    <string name="rate_text">Definiday vous plaît\u202F? Un mot sur le Play Store aide beaucoup.</string>
+    <string name="rate_later">Plus tard</string>
+    <string name="rate_go">Noter</string>
+    <!-- Quiz du soir : révisions et phrases à trous -->
+    <string name="quiz_review">Un mot déjà croisé, pour la mémoire</string>
+    <string name="quiz_prompt_cloze">Quel mot complète cette phrase ?</string>
+    <string name="quiz_blank">(mot manquant)</string>
+    <!-- Mes mots (MotsActivity) -->
+    <string name="mots_open">Mes mots</string>
+    <string name="mots_title">Mes mots</string>
+    <string name="mots_search">Chercher un mot ou un sens</string>
+    <string name="mots_favourites">Favoris seulement</string>
+    <string name="favori">Favori</string>
+    <string name="mots_none">Vos mots viendront se ranger ici, au fil des jours.</string>
+    <string name="mots_none_found">Aucun mot ne correspond à cette recherche.</string>
+    <string name="mots_none_favourites">Pas encore de favori : touchez l’étoile d’un mot pour le retrouver ici.</string>
+    <string name="stat_tile">%1$s %2$s</string>
+    <plurals name="stat_seen">
+        <item quantity="one">mot découvert</item>
+        <item quantity="many">mots découverts</item>
+        <item quantity="other">mots découverts</item>
+    </plurals>
+    <plurals name="stat_favourites">
+        <item quantity="one">favori</item>
+        <item quantity="many">favoris</item>
+        <item quantity="other">favoris</item>
+    </plurals>
+    <plurals name="stat_quizzes">
+        <item quantity="one">quiz fait</item>
+        <item quantity="many">quiz faits</item>
+        <item quantity="other">quiz faits</item>
+    </plurals>
+    <string name="stat_rate">%1$d %%</string>
+    <string name="stat_rate_label">de révisions réussies</string>
+    <string name="stat_rate_none">révisions, dès le 3ᵉ soir</string>
+    <plurals name="stat_streak">
+        <item quantity="one">soir de quiz d’affilée</item>
+        <item quantity="many">soirs de quiz d’affilée</item>
+        <item quantity="other">soirs de quiz d’affilée</item>
+    </plurals>
+    <plurals name="stat_fragile">
+        <item quantity="one">mot fragile</item>
+        <item quantity="many">mots fragiles</item>
+        <item quantity="other">mots fragiles</item>
+    </plurals>
 </resources>

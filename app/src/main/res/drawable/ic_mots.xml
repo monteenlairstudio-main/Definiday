@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mes mots: a card-index box (three filed cards), in the stroke style of the other home icons. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
+    <group android:translateX="12" android:translateY="12">
+        <path android:pathData="M4,11H20V19.5H4ZM6.5,11V6.5H17.5V11M8.5,6.5V3.5H15.5V6.5M10,15H14" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    </group>
+</vector>

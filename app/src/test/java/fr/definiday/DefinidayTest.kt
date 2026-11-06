@@ -234,6 +234,12 @@ class DefinidayTest {
         Quotes.load(ctx).filter { it.auteur.contains("Joubert") || it.auteur.contains("Monselet") }.take(2).forEachIndexed { i, q ->
             save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
+        val head = Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_vd, accessory = false), 128, 128)
+        (listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }) + Quotes.load(ctx).first { it.texte.length > 120 })
+            .forEachIndexed { i, w -> save(WordCard.share(w, Styles.of(ctx, w), head), File(out, "share_$i.png")) }
+        listOf(R.drawable.ic_launcher_fg to "icon_fg.png", R.drawable.ic_launcher_mono to "icon_mono.png").forEach { (r, f) ->
+            save(Glose.bitmap(android.graphics.drawable.LayerDrawable(arrayOf(android.graphics.drawable.ColorDrawable(ctx.getColor(R.color.icon_bg)), ctx.getDrawable(r)!!)), 432, 432), File(out, f))
+        }
         capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app.png"))
         Prefs(ctx).apply { unlocked = setOf("livres", "nuit", "sauge", "bonnet"); glosePose = "livres"; glosePelage = "nuit"; glosePelote = "sauge"; gloseAcc = "bonnet" }
         capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app_choice.png"))
@@ -251,7 +257,7 @@ class DefinidayTest {
         renderInterface(File(out, "ui").apply { mkdirs() })
     }
 
-    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, Couleurs et polices, quiz steps, Collection. */
+    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, onboarding steps, Couleurs et polices, quiz steps, Collection. */
     private fun renderInterface(ui: File) {
         val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
         fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
@@ -265,9 +271,15 @@ class DefinidayTest {
         }
         fun views(a: android.app.Activity) = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
         fun answer(a: android.app.Activity, right: Boolean) {
-            val defs = Words.load(ctx).associateBy { it.definition }
-            val w = views(a).filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
-            views(a).filterIsInstance<android.widget.Button>().first { (it.text == w.mot) == right }.performClick()
+            val mot = quizAnswer(a)
+            views(a).filterIsInstance<android.widget.Button>().first { (it.text == mot) == right }.performClick()
+        }
+        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 shows both requests
+        fun onboarding(suffix: String) {
+            p.unlocks = 1; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(false)
+            (0..3).forEach { n -> capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
+                .also { a -> repeat(n) { a.findViewById<View>(R.id.next).performClick() } }, File(ui, "onboarding_${n + 1}$suffix.png")) }
+            p.unlocks = 0; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(true)
         }
         val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key
         capture(main(), File(ui, "home_light.png"))
@@ -283,6 +295,7 @@ class DefinidayTest {
         RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
         capture(main(long), File(ui, "home_w360_font200_long.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_w360_font200.png"))
+        onboarding("_w360_font200")
         capture(styles(), File(ui, "styles_w360_font200.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
         RuntimeEnvironment.setFontScale(1.3f)
@@ -294,15 +307,22 @@ class DefinidayTest {
         capture(main(), File(ui, "home_notifications_off.png"))
         org.robolectric.Shadows.shadowOf(ctx.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(true)
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_light.png"))
+        onboarding("_light")
         capture(styles(), File(ui, "styles_light.png"))
         capture(quiz(), File(ui, "quiz_question.png"))
         capture(quiz().also { answer(it, right = true) }, File(ui, "quiz_juste.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_faux.png"))
         capture(quizEnd(right = 2), File(ui, "quiz_fin.png"))
         capture(quizEnd(right = 3), File(ui, "quiz_fin_refait.png")) // same day: score not counted
+        p.apply { lastQuizDay = Long.MIN_VALUE; passedQuizzes = 4 }
+        capture(quizEnd(right = 3), File(ui, "quiz_fin_noter.png")) // 5th passed quiz: the rate card, once
+        p.guessFirst = true
+        capture(main(), File(ui, "home_deviner.png"))
+        p.guessFirst = false
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_dark.png"))
+        onboarding("_dark")
         capture(styles(), File(ui, "styles_dark.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_dark_faux.png"))
         p.lastQuizDay = Long.MIN_VALUE
@@ -311,16 +331,39 @@ class DefinidayTest {
         capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_dark.png"))
         RuntimeEnvironment.setQualifiers("+notnight")
         capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_light.png"))
+        // Mes mots and the review questions: 9 past words, 2 missed twice (fragile), 6 reviewed right and due again tonight, 3 favourites
+        val today = java.time.LocalDate.now().toEpochDay()
+        val past = Words.load(ctx).shuffled(kotlin.random.Random(7)).take(9)
+        past.forEachIndexed { i, w -> History(ctx).mark(w.mot, today - 2 - i * 3) }
+        Memory(ctx).run {
+            past.take(2).forEach { w -> repeat(2) { answered(w.mot, false, today - 1, today - 10, review = true) } }
+            past.drop(2).take(6).forEach { answered(it.mot, true, today - 1, today - 30, review = true) }
+            favourites = setOf(past[3].mot, past[5].mot, Words.seenToday(ctx).first().mot)
+        }
+        p.apply { lastQuizDay = today - 1; streak = 8 }
+        fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
+        capture(mots(), File(ui, "mots_light.png"))
+        capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
+            File(ui, "quiz_revision.png"))
+        val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }
+        capture(cloze.also { answer(it, right = false) }, File(ui, "quiz_trous_faux.png"))
+        RuntimeEnvironment.setFontScale(2f)
+        RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
+        capture(mots(), File(ui, "mots_w360_font200.png"))
+        RuntimeEnvironment.setFontScale(1f)
+        RuntimeEnvironment.setQualifiers("+w411dp-h891dp")
+        RuntimeEnvironment.setQualifiers("+night")
+        capture(mots(), File(ui, "mots_dark.png"))
+        RuntimeEnvironment.setQualifiers("+notnight")
     }
 
     /** Plays the evening quiz with [right] good answers and returns the activity on its score screen. */
     private fun quizEnd(right: Int): android.app.Activity {
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
         fun views() = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
         for (i in Words.seenToday(ctx).indices) {
-            val answer = views().filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
-            views().filterIsInstance<android.widget.Button>().first { (it.text == answer.mot) == (i < right) }.performClick()
+            val answer = quizAnswer(a)
+            views().filterIsInstance<android.widget.Button>().first { (it.text == answer) == (i < right) }.performClick()
             views().filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
         }
         return a

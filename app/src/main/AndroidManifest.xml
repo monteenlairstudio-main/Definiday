@@ -28,10 +28,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".OnboardingActivity" android:exported="false" />
         <activity android:name=".QuizActivity" android:exported="false" />
         <activity android:name=".CollectionActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
         <activity android:name=".StylesActivity" android:exported="false" />
+        <activity android:name=".MotsActivity" android:exported="false" />
+
+        <!-- the shared card picture, read through the share intent's grant only -->
+        <provider
+            android:name=".ShareProvider"
+            android:authorities="fr.definiday.share"
+            android:exported="false"
+            android:grantUriPermissions="true" />
 
         <receiver
             android:name=".DailyReceiver"
@@ -43,6 +52,17 @@
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
             </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".Widget"
+            android:exported="false"
+            android:label="@string/today">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
         </receiver>
         <service
             android:name=".UnlockService"

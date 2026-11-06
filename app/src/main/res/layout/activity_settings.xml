@@ -73,10 +73,29 @@
             style="@style/Help"
             android:text="@string/more_quotes_hint" />
 
+        <Switch
+            android:id="@+id/guess"
+            style="@style/Toggle"
+            android:text="@string/guess" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/guess_hint" />
+
         <Button
             android:id="@+id/test"
             style="@style/Row"
             android:text="@string/test" />
+
+        <!-- free home-screen widget: the launcher's pin dialog (Widget.pin) -->
+        <Button
+            android:id="@+id/widget_add"
+            style="@style/Row"
+            android:text="@string/widget_add" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/widget_add_hint" />
 
         <!-- Écran de verrouillage -->
         <TextView

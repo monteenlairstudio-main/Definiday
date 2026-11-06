@@ -36,7 +36,7 @@ class UiTest {
 
     @Test fun settingsButtonOpensSettings() {
         val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
-        a.findViewById<Button>(R.id.settings_open).performClick()
+        a.findViewById<View>(R.id.settings_open).performClick()
         assertEquals(SettingsActivity::class.java.name, shadowOf(a).nextStartedActivity.component!!.className)
         Robolectric.buildActivity(SettingsActivity::class.java).setup() // inflates and wires every control
     }
@@ -61,15 +61,14 @@ class UiTest {
     @Test fun quizMarksAnswersInText() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
-        val answer = views(a).filterIsInstance<TextView>().firstNotNullOf { defs[it.text.toString()] }
-        val wrong = buttons(a).first { b -> b.text != answer.mot }
+        val answer = quizAnswer(a)
+        val wrong = buttons(a).first { b -> b.text != answer }
         val wrongMot = wrong.text.toString()
         wrong.performClick()
         assertEquals("✗ $wrongMot", wrong.text.toString())
-        assertTrue(buttons(a).any { it.text == "✓ ${answer.mot}" })
+        assertTrue(buttons(a).any { it.text == "✓ $answer" })
         assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
-            it.text == ctx.getString(R.string.quiz_wrong, answer.mot) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
+            it.text == ctx.getString(R.string.quiz_wrong, answer) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
     }
 
@@ -172,10 +171,9 @@ class UiTest {
         // first quiz, all right: 4 items at once (3 poses and the bow tie) -> 3 stamps and "+ 1 dans la collection"
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
         repeat(Words.seenToday(ctx).size) {
-            val w = views(a).filterIsInstance<TextView>().firstNotNullOf { defs[it.text.toString()] }
-            buttons(a).first { it.text == w.mot }.performClick()
+            val mot = quizAnswer(a)
+            buttons(a).first { it.text == mot }.performClick()
             buttons(a).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
         }
         val texts = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()
@@ -184,6 +182,79 @@ class UiTest {
         assertEquals(3, fresh.count { it.nom in texts })
         assertTrue(ctx.getString(R.string.unlock_more, 1) in texts)
         assertTrue(buttons(a).any { it.text == ctx.getString(R.string.collection_see) })
+    }
+
+    /** « Partager »: a chooser over ACTION_SEND with the text (word, nature, definition, example, « via Definiday ») and the card
+     *  picture served read-only by our provider; a quote shares its author and work. */
+    @Test fun shareSendsTextAndCardPicture() {
+        val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
+        a.findViewById<View>(R.id.share).performClick()
+        val chooser = shadowOf(a).nextStartedActivity
+        assertEquals(Intent.ACTION_CHOOSER, chooser.action)
+        @Suppress("DEPRECATION") val send = chooser.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)!!
+        assertEquals(Intent.ACTION_SEND, send.action)
+        val text = send.getStringExtra(Intent.EXTRA_TEXT)!!
+        listOf(w.mot, w.nature, w.definition, w.exemple, "via Definiday").forEach { assertTrue(it, it in text) }
+        @Suppress("DEPRECATION") val uri = send.getParcelableExtra<android.net.Uri>(Intent.EXTRA_STREAM)!!
+        assertEquals("image/png", send.type)
+        assertEquals(ShareProvider.AUTHORITY, uri.authority)
+        assertTrue(send.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0)
+        assertEquals(uri, send.clipData!!.getItemAt(0).uri)
+        val provider = Robolectric.setupContentProvider(ShareProvider::class.java, ShareProvider.AUTHORITY)
+        val png = android.os.ParcelFileDescriptor.AutoCloseInputStream(provider.openFile(uri, "r")).use { android.graphics.BitmapFactory.decodeStream(it) }
+        assertEquals(1080 to 1350, png.width to png.height)
+        val q = Quotes.load(ctx).first { it.oeuvre.isNotEmpty() }
+        val qt = ShareProvider.text(ctx, q)
+        assertTrue(q.texte in qt && q.auteur in qt && q.oeuvre in qt)
+    }
+
+    /** Rate card: once, from the 5th passed quiz, only after a passed quiz that counted. */
+    @Test fun rateCardOnceAfterTheFifthPassedQuiz() {
+        val p = Prefs(ctx).apply { passedQuizzes = 4 }
+        assertTrue(!Quiz.askRate(p, passed = true, counted = true))
+        p.passedQuizzes = 5
+        assertTrue(!Quiz.askRate(p, passed = false, counted = true)) // never after a failed quiz
+        assertTrue(!Quiz.askRate(p, passed = true, counted = false)) // nor after a redone one
+        assertTrue(Quiz.askRate(p, passed = true, counted = true))
+        assertTrue(!Quiz.askRate(Prefs(ctx).apply { passedQuizzes = 9 }, passed = true, counted = true)) // only once
+        // on the score screen: shown after the 5th passed quiz, « Plus tard » folds it
+        p.apply { rateAsked = false; passedQuizzes = 4; lastQuizDay = Long.MIN_VALUE }
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
+        val q = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
+        repeat(Words.seenToday(ctx).size) { // a question may be the definition or a blanked example: quizAnswer() reads both
+            val answer = quizAnswer(q)
+            buttons(q).first { it.text == answer }.performClick()
+            buttons(q).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+        }
+        val rate = views(q).filterIsInstance<TextView>().single { it.text == ctx.getString(R.string.rate_text) }
+        buttons(q).first { it.text == ctx.getString(R.string.rate_later) }.performClick()
+        assertTrue(!rate.isShown)
+    }
+
+    /** « Deviner avant de voir » (off by default): the definition waits under « Touchez pour révéler », and stays revealed on resume. */
+    @Test fun guessFirstHidesTheDefinitionUntilTouched() {
+        assertTrue(!Prefs(ctx).guessFirst)
+        val s = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        s.findViewById<android.widget.Switch>(R.id.guess).performClick()
+        assertTrue(Prefs(ctx).guessFirst)
+        val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        val c = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup()
+        val a = c.get()
+        val reveal = a.findViewById<Button>(R.id.reveal)
+        assertEquals(View.INVISIBLE, a.findViewById<View>(R.id.definition).visibility)
+        assertEquals(View.GONE, a.findViewById<View>(R.id.exemple_box).visibility)
+        assertEquals(View.VISIBLE, reveal.visibility)
+        assertEquals(ctx.getString(R.string.reveal_desc), reveal.contentDescription)
+        reveal.performClick()
+        assertEquals(View.VISIBLE, a.findViewById<View>(R.id.definition).visibility)
+        assertEquals(View.VISIBLE, a.findViewById<View>(R.id.exemple_box).visibility)
+        assertEquals(View.GONE, reveal.visibility)
+        c.pause().resume()
+        assertEquals(View.VISIBLE, a.findViewById<View>(R.id.definition).visibility)
+        a.findViewById<Button>(R.id.new_word).performClick() // a new word: hidden again
+        assertEquals(View.VISIBLE, reveal.visibility)
+        Prefs(ctx).guessFirst = false
     }
 
     @Test fun seasonalPropByMonth() {

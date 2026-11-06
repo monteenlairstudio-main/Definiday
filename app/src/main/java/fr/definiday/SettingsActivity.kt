@@ -46,10 +46,15 @@ class SettingsActivity : Activity() {
             isChecked = p.moreQuotes
             setOnCheckedChangeListener { _, on -> p.moreQuotes = on } // applies to the next days' picks
         }
+        findViewById<Switch>(R.id.guess).apply {
+            isChecked = p.guessFirst
+            setOnCheckedChangeListener { _, on -> p.guessFirst = on }
+        }
         findViewById<Button>(R.id.test).setOnClickListener {
             DailyReceiver.show(this)
             Toast.makeText(this, if (p.mode == Prefs.MODE_NOTIF) R.string.test_done_notif else R.string.test_done, Toast.LENGTH_LONG).show()
         }
+        findViewById<Button>(R.id.widget_add).setOnClickListener { Widget.pin(this) }
 
         // Écran de verrouillage
         val lockOnly = listOf(R.id.wallpaper_hint, R.id.unlocks_label, R.id.unlocks, R.id.unlocks_hint, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }

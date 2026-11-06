@@ -1,0 +1,6 @@
+---
+category: research
+subject: proust-audit-2026-11-06
+---
+
+Proust (iOS id6758053954, Play com.proust.app by MKa Studio, 10k+ installs, 4.3/556 on Play, 4.6 iOS, #58 Education FR). Success: TikTok @proustapp 31.9k, Instagram ads hooked on the lock-screen word, release every ~11 days, long onboarding ending in premium trial. Weakness: forced card trial dominates bad reviews (27/57 Play, 12/21 iOS); widget (lock-screen word) is paid; store screenshots claim 4,8 and +50 000 users (contradicted), placeholder text, iPhone frames on Play; no dark mode. Design: 3 colours, 2 fonts (Newsreader + Plus Jakarta Sans), one dominant element per screen, borderless soft cards, mascot-head icon, one promise per store caption. Copy (patterns only, never their art/texts/colours/name): free home widget, optional hidden definition (off by default), spaced review in evening quiz, history + favourites, share card image, light stats, 3-screen onboarding without paywall, rate prompt via market://, round labelled actions under the card, top bar with Collection badge, Glose head as app icon, fill-in-the-blank quiz from exemple. Do NOT copy: forced trial, daily limit, weekly subscription, league, their mascot/colours/captions/'opopanax'.
