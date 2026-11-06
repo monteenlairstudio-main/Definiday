@@ -44,7 +44,8 @@ class Widget : AppWidgetProvider() {
 
         /** One layout per size the launcher may show (API 31+: it picks), else for the smallest one (portrait width, landscape height). */
         fun views(ctx: Context, item: Item, options: Bundle): RemoteViews {
-            val sizes = if (Build.VERSION.SDK_INT >= 31) options.getParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, SizeF::class.java) else null
+            @Suppress("DEPRECATION") // the typed overload is API 33
+            val sizes = if (Build.VERSION.SDK_INT >= 31) options.getParcelableArrayList<SizeF>(AppWidgetManager.OPTION_APPWIDGET_SIZES) else null
             return if (!sizes.isNullOrEmpty()) RemoteViews(sizes.associateWith { views(ctx, item, it.width, it.height) })
             else views(ctx, item, options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110).toFloat(),
                 options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110).toFloat())
@@ -67,7 +68,7 @@ class Widget : AppWidgetProvider() {
                 }
                 is Quote -> {
                     text(R.id.widget_mot, "", pal.mot); text(R.id.widget_nature, ctx.getString(R.string.quote_label), pal.nature)
-                    text(R.id.widget_texte, "« ${item.texte} »", pal.mot); text(R.id.widget_auteur, item.signature, pal.nature)
+                    text(R.id.widget_texte, "«\u00a0${item.texte}\u00a0»", pal.mot); text(R.id.widget_auteur, item.signature, pal.nature)
                 }
             }
             // ponytail: sizes estimated from widget.xml (padding 2 x 16 + 6 dp, Glose 40 + 8 dp, lines ~1.2 em); measure the layout if they drift

@@ -52,7 +52,7 @@ class WidgetTest {
         val q = Quotes.load(ctx).first()
         today(q)
         val v = widgets.getViewFor(widgets.createWidget(Widget::class.java, R.layout.widget))
-        assertEquals(listOf("", ctx.getString(R.string.quote_label), "« ${q.texte} »", q.signature), texts(v))
+        assertEquals(listOf("", ctx.getString(R.string.quote_label), "«\u00a0${q.texte}\u00a0»", q.signature), texts(v))
     }
 
     /** The daily alarm's show() redraws it; a resize keeps the texts. */
@@ -63,9 +63,14 @@ class WidgetTest {
         today(w)
         DailyReceiver.show(ctx)
         assertEquals(w.mot, texts(widgets.getViewFor(id))[0])
-        val small = Bundle().apply { putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110); putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110) }
-        widgets.getAppWidgetProviderFor(id).onAppWidgetOptionsChanged(ctx, am, id, small)
-        assertEquals(listOf(w.mot, w.nature, w.definition, ""), texts(widgets.getViewFor(id)))
+        // pre-12 options, then the 12+ list of sizes (one layout each)
+        val sizes = arrayListOf(android.util.SizeF(110f, 110f), android.util.SizeF(340f, 160f))
+        listOf(Bundle().apply { putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110); putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110) },
+            Bundle().apply { putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, sizes) }).forEach { o ->
+            am.updateAppWidgetOptions(id, o)
+            widgets.getAppWidgetProviderFor(id).onAppWidgetOptionsChanged(ctx, am, id, o)
+            assertEquals(listOf(w.mot, w.nature, w.definition, ""), texts(widgets.getViewFor(id)))
+        }
     }
 
     /** Daily word off: the alarm still runs while a widget is on the home screen, to change it. */
