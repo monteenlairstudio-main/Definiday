@@ -113,4 +113,27 @@
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
+    <!-- Onboarding (OnboardingActivity): Monsieur Glose speaks -->
+    <string name="onb_progress">Étape %1$d sur %2$d</string>
+    <string name="onb_welcome_title">Enchanté.</string>
+    <string name="onb_welcome">Je suis Monsieur Glose, chat bibliothécaire. Chaque jour, je vous apporte un mot rare, sa définition et son histoire, jusque sur votre écran de verrouillage.\n\nTrois petites questions, et je vous laisse lire.</string>
+    <string name="onb_start">Commencer</string>
+    <string name="onb_skip">Passer</string>
+    <string name="onb_next">Suivant</string>
+    <string name="onb_done">Découvrir mon premier mot</string>
+    <string name="onb_later">Plus tard</string>
+    <string name="onb_where_title">Où lirez-vous votre mot\u202F?</string>
+    <string name="mode_both">Notification et écran de verrouillage</string>
+    <string name="mode_notif">Notification seulement</string>
+    <string name="mode_lock">Écran de verrouillage seulement</string>
+    <string name="onb_preview">Aperçu de l’écran de verrouillage avec le mot %1$s</string>
+    <string name="onb_unlock_once">Retirer le mot au premier déverrouillage</string>
+    <string name="onb_when_title">À quelle heure passerai-je\u202F?</string>
+    <string name="onb_quiz_hint">Le soir, je vous demande si vous reconnaissez les mots de la journée\u202F: c’est ainsi qu’ils restent.</string>
+    <string name="onb_ask_title">Avec votre permission</string>
+    <string name="onb_notif_why">Pour déposer %1$s dans vos notifications, Android me demande votre accord. Vous pourrez changer d’avis à tout moment.</string>
+    <string name="onb_notif_both">le mot du jour et le rappel du quiz du soir</string>
+    <string name="onb_notif_word">le mot du jour</string>
+    <string name="onb_notif_quiz">le rappel du quiz du soir</string>
+    <string name="onb_allow">Autoriser les notifications</string>
 </resources>

@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".OnboardingActivity" android:exported="false" />
         <activity android:name=".QuizActivity" android:exported="false" />
         <activity android:name=".CollectionActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
