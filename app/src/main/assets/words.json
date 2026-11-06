@@ -1576,8 +1576,8 @@
  },
  {
   "mot": "capon",
-  "nature": "adj. et n.",
-  "definition": "Vieilli et familier. Peureux, poltron, qui manque de courage.",
+  "nature": "adj. et n. m.",
+  "definition": "Vieilli et familier. Peureux, poltron ; jadis aussi flatteur hypocrite, ou joueur rusé qui triche.",
   "exemple": "Ne fais pas le capon : saute, la rivière n’est pas si froide !",
   "academie": true
  },
@@ -1731,7 +1731,7 @@
  {
   "mot": "chantepleure",
   "nature": "n. f.",
-  "definition": "Entonnoir à long tuyau percé de trous, servant à verser un liquide dans un tonneau sans le troubler ; robinet de tonneau.",
+  "definition": "Entonnoir à long bec percé de trous, qui permet d’emplir un tonneau sans remuer la lie ; par extension, robinet de tonneau.",
   "exemple": "Le tonnelier fixa la chantepleure et remplit le fût sans agiter la lie.",
   "academie": false
  },
@@ -2605,8 +2605,8 @@
  },
  {
   "mot": "embéguiner",
-  "nature": "v. pron.",
-  "definition": "S’enticher, se coiffer de quelqu’un ou de quelque chose au point d’en perdre le jugement.",
+  "nature": "v. tr.",
+  "definition": "Coiffer d’un béguin ; au figuré, entêter, infatuer. Surtout à la forme pronominale : s’enticher de quelqu’un ou de quelque chose au point d’en perdre le jugement.",
   "exemple": "À soixante ans, il s’était embéguiné d’une danseuse de l’Opéra.",
   "academie": true
  },
@@ -2725,7 +2725,7 @@
  {
   "mot": "engeigner",
   "nature": "v. tr.",
-  "definition": "Tromper quelqu’un par ruse, le duper.",
+  "definition": "Vieux. Tromper quelqu’un par ruse, le duper.",
   "exemple": "Le marchand avait si bien engeigné le paysan qu’il lui vendit une vache borgne.",
   "academie": false
  },
@@ -3194,7 +3194,7 @@
  {
   "mot": "évagation",
   "nature": "n. f.",
-  "definition": "Disposition de l’esprit qui l’empêche de se fixer sur un objet ; vagabondage de la pensée, notamment pendant la prière.",
+  "definition": "Dans la langue religieuse, égarement de l’esprit qui n’arrive pas à rester attaché à un objet, notamment pendant la prière ; vagabondage de la pensée.",
   "exemple": "Le prédicateur mettait ses fidèles en garde contre l’évagation pendant l’office.",
   "academie": true
  },
@@ -3599,9 +3599,9 @@
  },
  {
   "mot": "gaber",
-  "nature": "v. intr.",
-  "definition": "Plaisanter en se moquant, railler.",
-  "exemple": "Les écuyers aimaient gaber à la veillée en se lançant des défis absurdes.",
+  "nature": "v. tr.",
+  "definition": "Vieux. Se moquer de quelqu’un, le railler.",
+  "exemple": "À la veillée, les écuyers aimaient gaber le nouveau venu sur sa barbe naissante.",
   "academie": false
  },
  {
@@ -3740,7 +3740,7 @@
  {
   "mot": "gimblette",
   "nature": "n. f.",
-  "definition": "Petite pâtisserie dure et sèche en forme d’anneau.",
+  "definition": "Petit gâteau sec et croquant en forme de couronne, que l’on poche à l’eau bouillante avant de le cuire au four.",
   "exemple": "Il trempait des gimblettes dans son vin doux en écoutant la radio.",
   "academie": true
  },
@@ -4034,7 +4034,7 @@
  {
   "mot": "hamadryade",
   "nature": "n. f.",
-  "definition": "Nymphe des bois qui naissait et mourait avec l’arbre dont elle avait la garde.",
+  "definition": "Dans la mythologie grecque, nymphe liée à un arbre précis : elle venait au monde et périssait en même temps que lui.",
   "exemple": "Les bûcherons craignaient de blesser l’hamadryade du vieux chêne.",
   "academie": true
  },
@@ -4223,7 +4223,7 @@
  {
   "mot": "hongreline",
   "nature": "n. f.",
-  "definition": "Ancien corsage ajusté à longues basques, que les femmes du peuple portaient par-dessus la jupe.",
+  "definition": "Autrefois, corsage serré à la taille et prolongé de longues basques, que les paysannes et femmes du peuple mettaient par-dessus leur jupe.",
   "exemple": "Sur le portrait, l’aïeule portait une hongreline de drap bleu.",
   "academie": false
  },
@@ -4601,7 +4601,7 @@
  {
   "mot": "issir",
   "nature": "v. intr.",
-  "definition": "Sortir, provenir de quelque part ; descendre d’une lignée.",
+  "definition": "Vieux. Sortir, provenir de quelque part ; descendre d’une lignée.",
   "exemple": "Le chevalier vit issir du bois une troupe de pèlerins fourbus.",
   "academie": false
  },
@@ -4622,7 +4622,7 @@
  {
   "mot": "jaboter",
   "nature": "v. intr.",
-  "definition": "Bavarder ensemble à voix basse et sans fin, comme des oiseaux qui gonflent leur jabot.",
+  "definition": "Familier. Bavarder à plusieurs, sans fin ; se dit d’abord de certains oiseaux qui crient en agitant leur jabot.",
   "exemple": "Les commères jabotaient sur le pas des portes jusqu’au soir.",
   "academie": false
  },

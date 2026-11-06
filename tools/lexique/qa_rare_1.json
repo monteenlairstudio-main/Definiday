@@ -1,0 +1,90 @@
+[
+ {
+  "mot": "capon",
+  "nature": "adj. et n. m.",
+  "definition": "Vieilli et familier. Peureux, poltron ; jadis aussi flatteur hypocrite, ou joueur rusé qui triche.",
+  "exemple": "Ne fais pas le capon : saute, la rivière n'est pas si froide !",
+  "academie": true,
+  "_raison": "Nature « n. » sans genre ; ajout des sens anciens (flatteur, joueur rusé) attestés."
+ },
+ {
+  "mot": "embéguiner",
+  "nature": "v. tr.",
+  "definition": "Coiffer d'un béguin ; au figuré, entêter, infatuer. Surtout à la forme pronominale : s'enticher de quelqu'un ou de quelque chose au point d'en perdre le jugement.",
+  "exemple": "À soixante ans, il s'était embéguiné d'une danseuse de l'Opéra.",
+  "academie": true,
+  "_raison": "Verbe transitif à l'origine (coiffer d'un béguin, infatuer) ; « v. pron. » seul injustifié."
+ },
+ {
+  "mot": "gaber",
+  "nature": "v. tr.",
+  "definition": "Vieux. Se moquer de quelqu'un, le railler.",
+  "exemple": "À la veillée, les écuyers aimaient gaber le nouveau venu sur sa barbe naissante.",
+  "academie": false,
+  "_raison": "Verbe transitif (gaber quelqu'un), pas intransitif ; registre « vieux » manquant ; exemple adapté à la construction."
+ },
+ {
+  "mot": "jaboter",
+  "nature": "v. intr.",
+  "definition": "Familier. Bavarder à plusieurs, sans fin ; se dit d'abord de certains oiseaux qui crient en agitant leur jabot.",
+  "exemple": "Les commères jabotaient sur le pas des portes jusqu'au soir.",
+  "academie": false,
+  "_raison": "Nuance « à voix basse » inventée ; sens premier (cri d'oiseau) déformé en fausse image."
+ },
+ {
+  "mot": "engeigner",
+  "nature": "v. tr.",
+  "definition": "Vieux. Tromper quelqu'un par ruse, le duper.",
+  "exemple": "Le marchand avait si bien engeigné le paysan qu'il lui vendit une vache borgne.",
+  "academie": false,
+  "_raison": "Registre manquant : mot sorti d'usage, présenté comme courant."
+ },
+ {
+  "mot": "issir",
+  "nature": "v. intr.",
+  "definition": "Vieux. Sortir, provenir de quelque part ; descendre d'une lignée.",
+  "exemple": "Le chevalier vit issir du bois une troupe de pèlerins fourbus.",
+  "academie": false,
+  "_raison": "Registre manquant : verbe archaïque défectif présenté comme courant."
+ },
+ {
+  "mot": "évagation",
+  "nature": "n. f.",
+  "definition": "Dans la langue religieuse, égarement de l'esprit qui n'arrive pas à rester attaché à un objet, notamment pendant la prière ; vagabondage de la pensée.",
+  "exemple": "Le prédicateur mettait ses fidèles en garde contre l'évagation pendant l'office.",
+  "academie": true,
+  "_raison": "Première partie recopiée mot pour mot d'un dictionnaire ; reformulation."
+ },
+ {
+  "mot": "gimblette",
+  "nature": "n. f.",
+  "definition": "Petit gâteau sec et croquant en forme de couronne, que l'on poche à l'eau bouillante avant de le cuire au four.",
+  "exemple": "Il trempait des gimblettes dans son vin doux en écoutant la radio.",
+  "academie": true,
+  "_raison": "Définition recopiée mot pour mot d'un dictionnaire ; reformulation avec précision sur l'échaudage."
+ },
+ {
+  "mot": "hongreline",
+  "nature": "n. f.",
+  "definition": "Autrefois, corsage serré à la taille et prolongé de longues basques, que les paysannes et femmes du peuple mettaient par-dessus leur jupe.",
+  "exemple": "Sur le portrait, l'aïeule portait une hongreline de drap bleu.",
+  "academie": false,
+  "_raison": "Définition quasi recopiée d'un dictionnaire ; reformulation."
+ },
+ {
+  "mot": "hamadryade",
+  "nature": "n. f.",
+  "definition": "Dans la mythologie grecque, nymphe liée à un arbre précis : elle venait au monde et périssait en même temps que lui.",
+  "exemple": "Les bûcherons craignaient de blesser l'hamadryade du vieux chêne.",
+  "academie": true,
+  "_raison": "Définition quasi recopiée d'un dictionnaire ; reformulation."
+ },
+ {
+  "mot": "chantepleure",
+  "nature": "n. f.",
+  "definition": "Entonnoir à long bec percé de trous, qui permet d'emplir un tonneau sans remuer la lie ; par extension, robinet de tonneau.",
+  "exemple": "Le tonnelier fixa la chantepleure et remplit le fût sans agiter la lie.",
+  "academie": false,
+  "_raison": "Définition quasi recopiée d'un dictionnaire ; reformulation."
+ }
+]
