@@ -22,7 +22,8 @@ import java.io.File
 @Config(qualifiers = "fr-w411dp-h891dp-xxhdpi")
 class GloseTest {
     private val ctx = RuntimeEnvironment.getApplication()
-    private val all = R.drawable::class.java.fields.filter { it.name.startsWith("glose_") }.associate { it.name to it.getInt(null) }
+    private val parts = GloseLayers.layers.values.flatten().map { it.second }.toSet() - GloseLayers.layers.keys // layers alone are not drawings
+    private val all = R.drawable::class.java.fields.filter { it.name.startsWith("glose_") }.associate { it.name to it.getInt(null) }.filterValues { it !in parts }
     private val overlays = R.style::class.java.fields.filter { it.name.startsWith("Glose_") }.associate { it.name to it.getInt(null) }
 
     private fun render(res: Int, styles: List<Int> = emptyList(), size: Int = 256) = Glose.bitmap(Glose.drawable(ctx, res, styles), size, size)
@@ -195,11 +196,11 @@ class GloseTest {
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)
-        val d = v.drawable as AnimatedVectorDrawable
+        val d = (v.drawable as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>()
         v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888))) // the AVD's animator really starts at its first draw
-        assertTrue(d.isRunning)
+        assertTrue(d.isNotEmpty() && d.all { it.isRunning })
         c.pause()
-        assertFalse(d.isRunning)
+        assertFalse(d.any { it.isRunning })
     }
 
     /** Not a check: control PNGs (every pose, every overlay on the seated pose) in app/build/demo/glose. */

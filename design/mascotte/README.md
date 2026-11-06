@@ -14,3 +14,9 @@ node android/make_android.js         # dessins Android -> app/src/main/res (XML 
 dessinés à leur place), puis `android/svg2avd.js` remplace leurs couleurs par des attributs de thème : transparents dans
 le style `Glose`, posés par `Glose.Acc.*` / `Glose.Pelage.*` (`values/glose_styles.xml`, généré). Pelages et pelotes :
 jetons `?attr/gloseFur`… Aucun `?attr` sur un attribut de groupe (non documenté).
+Calques par emplacement : chaque pièce d'accessoire (et les éclats des pelages rares) est un dessin à part, de même viewport,
+qui recopie ses groupes parents animés (la tête) avec les mêmes animateurs ; le corps est coupé là où une pièce s'intercale.
+`GloseLayers.kt` (généré) donne les calques de chaque dessin, de l'arrière vers l'avant ; `Glose.drawable` en fait un
+`LayerDrawable` avec les seules pièces portées. Les fichiers identiques (mots du fil, familles de poses) ne sont écrits qu'une
+fois (`values/glose_layers.xml` : alias des noms partagés). Une réaction « animateurs seuls » sur une pose passe par
+`animated(nom, dessin_vd, { groupe: objectAnimator })` de `svg2avd.js` : les accessoires suivent alors la tête.

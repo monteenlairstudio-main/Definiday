@@ -111,6 +111,14 @@ Code : une fonction pure `Unlocks.of(quizzes, perfect, passed, correct, streak):
   dessin. À faire au passage en production (environ 1 h).
 
 ### 3.3 Accessoires : groupes dans le même dessin
+> **Remplacé (0.9.x) par des calques par emplacement** : voir `README.md`. Chaque pièce d'accessoire est un dessin à part
+> (même viewport, groupes parents animés recopiés avec les mêmes animateurs), le corps est coupé là où une pièce
+> s'intercale (3 à 6 parties selon la pose), et `Glose.drawable` compose un `LayerDrawable`. Rendu Robolectric avant/après
+> (16 poses × 19 combinaisons, fixe et à 6 instants de l'animation) : écart maximal 64/255 sur un pixel, au plus 3 pixels
+> au-delà de 8/255 par image (anticrénelage des bords). APK release : 1 909 454 → 1 700 637 octets. À vérifier sur appareil :
+> synchronisme des calques sur le RenderThread, mémoire (un cache bitmap par calque affiché).
+
+Historique :
 - Chaque accessoire est un groupe nommé (`noeud`, `echarpe`, `bonnet`, `plume`, `marque_page`) déjà placé dans la
   bonne couche : bonnet et plume DANS le groupe `tete` (ils suivent ses animations), nœud et écharpe au cou, marque-page
   sur le livre. Le convertisseur leur met `android:scaleX/scaleY="?attr/gloseAccX"` (0 = caché, 1 = porté).

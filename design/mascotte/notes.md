@@ -171,3 +171,14 @@ des neiges (`swap` de couleurs d'une porte) ; mots « coucou », « ronron », �
 Restants : sapin encore petit dans la pose « pile » et sous l'anse ; grelot en partie caché par le menton dans la tasse ;
 la monture écaille est un aplat (pas de marbrure) ; poids : +272 Ko sur l'APK release (les accessoires sont dessinés dans
 chaque pose : passer aux calques par emplacement avant le 20e).
+
+## Calques par emplacement
+Chaque pièce d'accessoire (`noeud`, `echarpe_dos`, `echarpe`, `grelot_ruban`, `grelot`, `plume`, chapeaux, `marque_page`,
+`sapin`) et les éclats des pelages rares deviennent un calque ; le corps est coupé là où une pièce s'intercale, dans le même
+ordre de dessin qu'avant. Ordres retouchés sans effet visible pour réduire les coupes : ombre d'assise avant le ruban
+(assis, écrit), pelote au sol après la patte (pile), bougie avant l'écharpe (soir). Restent 3 parties (assis, pile),
+4 (écrit : le mot suit les chapeaux), 5 (réveil), 6 (soir : pattes entre écharpe et ruban du grelot, « z » devant les chapeaux).
+Les icônes de tête ne portent rien (`Glose.WORN`) : exportées sans accessoires (75 → 32 Ko). Les mots du fil partagent tout
+sauf la partie du mot. Dessins XML : 3,1 Mo → 1,4 Mo ; APK release −209 Ko. Rendu Robolectric avant/après identique à
+l'anticrénelage près (max 64/255 sur un pixel), animations comprises (jeux d'animateurs calés au même instant).
+La collection affiche ses vignettes en bitmap (un cache au lieu d'un par calque ; l'estompage s'applique à l'ensemble).

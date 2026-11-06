@@ -7,6 +7,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.view.ContextThemeWrapper
 import android.widget.ImageView
 import fr.definiday.Unlocks.Kind
@@ -18,12 +19,18 @@ object Glose {
     /** Worn on the head or beside it: cropped from the head icons. */
     private val WORN = setOf(Kind.TETE, Kind.COU, Kind.OBJET)
 
-    /** [res] themed with style Glose then each overlay of [styles] (pelage, pelote, accessoire). */
+    /** [res] themed with style Glose then each overlay of [styles] (pelage, pelote, accessoire). A layered pose (GloseLayers) is a
+     *  LayerDrawable of its body parts and of the accessory pieces whose gate one of [styles] opens, in drawing order. */
     fun drawable(ctx: Context, res: Int, styles: List<Int> = emptyList()): Drawable {
         val t = ContextThemeWrapper(ctx, R.style.Glose)
         styles.forEach { t.theme.applyStyle(it, true) }
-        return t.getDrawable(res)!!
+        val layers = GloseLayers.layers[res] ?: return t.getDrawable(res)!!
+        val open = GloseLayers.gates.filter { it.first in styles }.map { it.second }
+        return LayerDrawable(layers.filter { it.first.isEmpty() || it.first in open }.map { t.getDrawable(it.second)!! }.toTypedArray())
     }
+
+    /** The animated layers of [d] (itself when it is one AVD). */
+    private fun avds(d: Drawable?) = (if (d is LayerDrawable) (0 until d.numberOfLayers).map(d::getDrawable) else listOf(d)).filterIsInstance<AnimatedVectorDrawable>()
 
     /** The user's choice (pose, pelage, pelote, one item or "" per accessory slot), each falling back to the default unless unlocked and of that slot.
      *  Prefs.gloseAcc holds the worn accessories, comma-separated (a single id before the slots existed). */
@@ -67,18 +74,17 @@ object Glose {
      *  stays the still image when animations are off (settings, battery saver): no reset() then, it would rewind the thread to before it
      *  writes and the "le fil écrit…" poses would lose their word. The pending stop lives in the view's tag. */
     fun play(v: ImageView) {
-        val d = v.drawable as? AnimatedVectorDrawable ?: return
+        val d = avds(v.drawable).ifEmpty { return }
         if (!ValueAnimator.areAnimatorsEnabled()) return
-        d.reset()
-        d.start()
+        d.forEach { it.reset(); it.start() } // all layers in the same frame: they share their timeline
         v.removeCallbacks(v.tag as? Runnable)
-        v.tag = Runnable { d.stop() }.also { v.postDelayed(it, IDLE_MS) }
+        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, IDLE_MS) }
     }
 
     /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once]. */
     fun stop(v: ImageView) {
         v.removeCallbacks(v.tag as? Runnable)
-        (v.drawable as? AnimatedVectorDrawable)?.run { clearAnimationCallbacks(); stop() }
+        avds(v.drawable).forEach { it.clearAnimationCallbacks(); it.stop() }
     }
 
     /** Plays the one-shot [res] (R.drawable.glose_icone_hoche: nods; glose_icone_penche: tilts the head, curious) on [v],
@@ -87,16 +93,19 @@ object Glose {
     fun once(v: ImageView, res: Int, idle: Int, accessory: Boolean = true) {
         if (!ValueAnimator.areAnimatorsEnabled()) return
         stop(v)
-        val d = mine(v.context, res, accessory) as AnimatedVectorDrawable
-        d.registerAnimationCallback(object : Animatable2.AnimationCallback() {
+        val d = mine(v.context, res, accessory)
+        val layers = avds(d)
+        var left = layers.size // back to idle once every animated layer has ended
+        layers.forEach { a -> a.registerAnimationCallback(object : Animatable2.AnimationCallback() {
             override fun onAnimationEnd(x: Drawable) {
-                d.clearAnimationCallbacks()
+                a.clearAnimationCallbacks()
+                if (--left > 0) return
                 v.setImageDrawable(mine(v.context, idle, accessory))
                 play(v)
             }
-        })
+        }) }
         v.setImageDrawable(d)
-        d.start()
+        layers.forEach { it.start() }
     }
 
     /** Still image (notifications, tests): the drawable fitted and centred in a w x h bitmap. */

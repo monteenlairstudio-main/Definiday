@@ -86,7 +86,7 @@ class CollectionActivity : Activity() {
                 background = GradientDrawable().apply { cornerRadius = 12 * dp; setStroke((2 * dp).toInt(), getColor(R.color.ink2), 6 * dp, 4 * dp) }
                 layoutParams = LinearLayout.LayoutParams(size).apply { setMargins(0, 0, 0, (4 * dp).toInt()) }
             }) else addView(ImageView(context).apply {
-                setImageDrawable(Glose.preview(context, item)) // still: the AVD is never started here
+                setImageBitmap(Glose.bitmap(Glose.preview(context, item), size.width, size.height)) // still: one bitmap, not one cache per layer; alpha fades it as a whole
                 if (!open && item.kind in FADED) imageAlpha = 89 // 35 %: the colour to come, not yet worn
                 else if (!open) setColorFilter(getColor(R.color.silhouette), PorterDuff.Mode.SRC_IN)
                 layoutParams = size
