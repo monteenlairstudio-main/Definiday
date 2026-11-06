@@ -1,0 +1,814 @@
+[
+  {
+    "mot": "factieux",
+    "nature": "adj. et n.",
+    "definition": "Qui fomente des troubles contre le pouvoir établi ; qui pousse à la sédition.",
+    "exemple": "Les meneurs factieux furent arrêtés avant d'avoir pu soulever la ville.",
+    "academie": true
+  },
+  {
+    "mot": "factotum",
+    "nature": "n. m.",
+    "definition": "Personne qui s'occupe de tout dans une maison ou un service, chargée des tâches les plus diverses.",
+    "exemple": "Jardinier, chauffeur et confident, Firmin était le factotum du vieux notaire.",
+    "academie": true
+  },
+  {
+    "mot": "fagoter",
+    "nature": "v. tr.",
+    "definition": "Habiller sans goût, d'une manière ridicule ou négligée.",
+    "exemple": "Qui donc t'a fagoté de la sorte pour un mariage ?",
+    "academie": true
+  },
+  {
+    "mot": "faisandé",
+    "nature": "adj.",
+    "definition": "Se dit d'un gibier qui a pris un fumet prononcé en commençant à se décomposer ; au figuré, corrompu, malsain.",
+    "exemple": "Il régnait dans ce cercle une élégance faisandée qui l'écœura vite.",
+    "academie": false
+  },
+  {
+    "mot": "falot",
+    "nature": "adj.",
+    "definition": "Terne, effacé, dépourvu de personnalité.",
+    "exemple": "Le nouveau directeur, personnage falot, ne laissa aucun souvenir.",
+    "academie": true
+  },
+  {
+    "mot": "famélique",
+    "nature": "adj.",
+    "definition": "Tourmenté par la faim ; d'une maigreur qui trahit une nourriture insuffisante.",
+    "exemple": "Un chien famélique rôdait autour des étals du marché.",
+    "academie": true
+  },
+  {
+    "mot": "fanfreluche",
+    "nature": "n. f.",
+    "definition": "Ornement léger de toilette (ruban, dentelle, volant), souvent jugé superflu.",
+    "exemple": "Elle préférait les robes sobres aux fanfreluches de sa sœur.",
+    "academie": true
+  },
+  {
+    "mot": "faramineux",
+    "nature": "adj.",
+    "definition": "Familier : étonnant par son ampleur, extraordinaire, en particulier en parlant d'un prix.",
+    "exemple": "Ils ont payé une somme faramineuse pour ce minuscule studio.",
+    "academie": false
+  },
+  {
+    "mot": "faraud",
+    "nature": "adj. et n.",
+    "definition": "Qui affiche avec fatuité sa satisfaction de lui-même ; fanfaron.",
+    "exemple": "Il revint tout faraud de sa première victoire au tournoi.",
+    "academie": true
+  },
+  {
+    "mot": "farfadet",
+    "nature": "n. m.",
+    "definition": "Petit lutin espiègle des croyances populaires.",
+    "exemple": "Selon la légende, un farfadet tressait la nuit la crinière des chevaux.",
+    "academie": true
+  },
+  {
+    "mot": "fatras",
+    "nature": "n. m.",
+    "definition": "Amas confus et désordonné d'objets ou d'idées.",
+    "exemple": "Il retrouva la lettre sous un fatras de journaux et de factures.",
+    "academie": true
+  },
+  {
+    "mot": "fatuité",
+    "nature": "n. f.",
+    "definition": "Satisfaction de soi excessive et ridicule ; vanité.",
+    "exemple": "Il parlait de ses succès avec une fatuité insupportable.",
+    "academie": true
+  },
+  {
+    "mot": "fauteur",
+    "nature": "n. m.",
+    "definition": "Personne qui provoque ou favorise quelque chose de blâmable, comme dans « fauteur de troubles ».",
+    "exemple": "Les fauteurs de troubles furent expulsés de la salle.",
+    "academie": true
+  },
+  {
+    "mot": "félon",
+    "nature": "adj. et n.",
+    "definition": "Qui trahit la foi due à son seigneur ; déloyal, traître.",
+    "exemple": "Le vassal félon livra le château à l'ennemi.",
+    "academie": true
+  },
+  {
+    "mot": "fenaison",
+    "nature": "n. f.",
+    "definition": "Coupe et récolte des foins ; époque de l'année où elle a lieu.",
+    "exemple": "Pendant la fenaison, tout le village prêtait main-forte.",
+    "academie": true
+  },
+  {
+    "mot": "férule",
+    "nature": "n. f.",
+    "definition": "Palette avec laquelle on frappait autrefois la main des écoliers ; au figuré, autorité sévère.",
+    "exemple": "Les élèves vivaient sous la férule d'un maître intraitable.",
+    "academie": true
+  },
+  {
+    "mot": "féru",
+    "nature": "adj.",
+    "definition": "Passionné par un domaine et très savant en la matière (féru de).",
+    "exemple": "Féru d'astronomie, il passait ses nuits sur le toit.",
+    "academie": true
+  },
+  {
+    "mot": "festoyer",
+    "nature": "v. intr.",
+    "definition": "Faire la fête, prendre part à un festin.",
+    "exemple": "Après les vendanges, on festoya jusqu'à l'aube.",
+    "academie": true
+  },
+  {
+    "mot": "fétu",
+    "nature": "n. m.",
+    "definition": "Brin de paille ; par extension, chose sans valeur.",
+    "exemple": "Prise dans la crue, la barque fut ballottée comme un fétu.",
+    "academie": true
+  },
+  {
+    "mot": "fifrelin",
+    "nature": "n. m.",
+    "definition": "Vieilli : chose sans valeur, menue monnaie, surtout dans « ne pas valoir un fifrelin ».",
+    "exemple": "Sa promesse ne vaut pas un fifrelin.",
+    "academie": false
+  },
+  {
+    "mot": "filandreux",
+    "nature": "adj.",
+    "definition": "Rempli de fibres coriaces ; au figuré, se dit d'un discours long et embrouillé.",
+    "exemple": "Il se perdit dans une démonstration filandreuse que personne ne suivit.",
+    "academie": true
+  },
+  {
+    "mot": "flamberge",
+    "nature": "n. f.",
+    "definition": "Ancienne longue épée ; par plaisanterie, épée, comme dans « mettre flamberge au vent ».",
+    "exemple": "Le mousquetaire mit flamberge au vent et chargea.",
+    "academie": true
+  },
+  {
+    "mot": "flandrin",
+    "nature": "n. m.",
+    "definition": "Vieilli : grand garçon mince, d'allure molle et gauche.",
+    "exemple": "Un grand flandrin dégingandé vint nous ouvrir la porte.",
+    "academie": false
+  },
+  {
+    "mot": "flapi",
+    "nature": "adj.",
+    "definition": "Familier : épuisé, à bout de forces.",
+    "exemple": "Après la randonnée, les enfants étaient flapis.",
+    "academie": true
+  },
+  {
+    "mot": "flavescent",
+    "nature": "adj.",
+    "definition": "Poétique : qui tire sur le jaune, d'un jaune doré, en parlant notamment des blés mûrissants.",
+    "exemple": "La lumière flavescente du soir dorait les blés.",
+    "academie": true
+  },
+  {
+    "mot": "flibustier",
+    "nature": "n. m.",
+    "definition": "Pirate des mers américaines aux XVIIe et XVIIIe siècles ; par extension, aventurier peu scrupuleux.",
+    "exemple": "Les flibustiers guettaient les galions chargés d'or.",
+    "academie": true
+  },
+  {
+    "mot": "flonflon",
+    "nature": "n. m.",
+    "definition": "Air bruyant et facile de musique populaire (surtout au pluriel).",
+    "exemple": "Les flonflons du bal montaient jusqu'à nos fenêtres.",
+    "academie": true
+  },
+  {
+    "mot": "florilège",
+    "nature": "n. m.",
+    "definition": "Recueil de morceaux choisis ; sélection de choses remarquables.",
+    "exemple": "Il nous offrit un florilège de ses meilleures répliques.",
+    "academie": true
+  },
+  {
+    "mot": "folichon",
+    "nature": "adj.",
+    "definition": "Familier : gai, divertissant ; s'emploie surtout à la forme négative.",
+    "exemple": "Ce dîner chez les Durand n'avait rien de folichon.",
+    "academie": true
+  },
+  {
+    "mot": "folliculaire",
+    "nature": "n. m. et f.",
+    "definition": "Péjoratif : journaliste ou écrivain médiocre et sans scrupules.",
+    "exemple": "Il méprisait ces folliculaires qui vendaient leur plume au plus offrant.",
+    "academie": true
+  },
+  {
+    "mot": "fondrière",
+    "nature": "n. f.",
+    "definition": "Trou plein d'eau ou de boue dans un chemin défoncé.",
+    "exemple": "La charrette s'enlisa dans une fondrière.",
+    "academie": true
+  },
+  {
+    "mot": "forban",
+    "nature": "n. m.",
+    "definition": "Pirate ; par extension, individu sans scrupules.",
+    "exemple": "Ce forban a ruiné plus d'un actionnaire.",
+    "academie": true
+  },
+  {
+    "mot": "forligner",
+    "nature": "v. intr.",
+    "definition": "Vieilli : démériter de ses ancêtres, déchoir de la vertu de sa lignée.",
+    "exemple": "Le jeune comte, disait-on, avait forligné par sa conduite.",
+    "academie": true
+  },
+  {
+    "mot": "foucade",
+    "nature": "n. f.",
+    "definition": "Littéraire : élan soudain et passager, caprice.",
+    "exemple": "Ce voyage en Islande n'était qu'une foucade de plus.",
+    "academie": true
+  },
+  {
+    "mot": "fouailler",
+    "nature": "v. tr.",
+    "definition": "Frapper à coups de fouet répétés ; au figuré, cingler de critiques.",
+    "exemple": "Le cocher fouaillait ses chevaux pour gravir la côte.",
+    "academie": true
+  },
+  {
+    "mot": "fourvoyer",
+    "nature": "v. tr.",
+    "definition": "Égarer, détourner du bon chemin ; au pronominal, se tromper complètement.",
+    "exemple": "Ces mauvais conseils l'ont fourvoyé dans une impasse.",
+    "academie": true
+  },
+  {
+    "mot": "frelaté",
+    "nature": "adj.",
+    "definition": "Altéré par un mélange frauduleux ; au figuré, qui a perdu sa pureté, artificiel.",
+    "exemple": "On leur servit un vin frelaté qui donnait mal au crâne.",
+    "academie": false
+  },
+  {
+    "mot": "freluquet",
+    "nature": "n. m.",
+    "definition": "Jeune homme frivole et prétentieux, sans consistance.",
+    "exemple": "Ce n'est pas un freluquet qui va m'apprendre mon métier !",
+    "academie": true
+  },
+  {
+    "mot": "frimas",
+    "nature": "n. m.",
+    "definition": "Brouillard givrant ; au pluriel, le froid de l'hiver.",
+    "exemple": "Les premiers frimas annonçaient un hiver rigoureux.",
+    "academie": false
+  },
+  {
+    "mot": "fringant",
+    "nature": "adj.",
+    "definition": "Vif, plein d'entrain et d'allure.",
+    "exemple": "Un fringant cavalier caracolait en tête du cortège.",
+    "academie": true
+  },
+  {
+    "mot": "fulminer",
+    "nature": "v. tr. et intr.",
+    "definition": "Exploser de colère, se répandre en invectives ; prononcer solennellement une condamnation.",
+    "exemple": "Le capitaine fulminait contre l'incompétence de son équipage.",
+    "academie": true
+  },
+  {
+    "mot": "furibond",
+    "nature": "adj.",
+    "definition": "En proie à une fureur qui éclate au grand jour.",
+    "exemple": "Il sortit furibond de la salle d'audience.",
+    "academie": true
+  },
+  {
+    "mot": "futaie",
+    "nature": "n. f.",
+    "definition": "Forêt de grands arbres aux troncs élancés, qu'on laisse atteindre leur pleine hauteur.",
+    "exemple": "Nous marchions sous la futaie, dans une pénombre de cathédrale.",
+    "academie": true
+  },
+  {
+    "mot": "fioriture",
+    "nature": "n. f.",
+    "definition": "Ornement ajouté à un chant, un dessin, un texte ; au pluriel, enjolivures superflues.",
+    "exemple": "Raconte-moi les faits, sans fioritures.",
+    "academie": true
+  },
+  {
+    "mot": "flouer",
+    "nature": "v. tr.",
+    "definition": "Familier : duper, voler par ruse.",
+    "exemple": "Le brocanteur l'avait floué sur le prix de la commode.",
+    "academie": true
+  },
+  {
+    "mot": "frondeur",
+    "nature": "adj. et n.",
+    "definition": "Qui critique l'autorité et aime à la défier ; à l'origine, partisan de la Fronde.",
+    "exemple": "Il gardait de sa jeunesse un esprit frondeur.",
+    "academie": true
+  },
+  {
+    "mot": "galantin",
+    "nature": "n. m.",
+    "definition": "Vieilli : homme qui fait le galant de façon ridicule auprès des femmes.",
+    "exemple": "Un vieux galantin poudré faisait la cour à toutes les veuves.",
+    "academie": true
+  },
+  {
+    "mot": "galetas",
+    "nature": "n. m.",
+    "definition": "Logement misérable, souvent sous les toits.",
+    "exemple": "Le poète vivait dans un galetas glacial.",
+    "academie": false
+  },
+  {
+    "mot": "galimafrée",
+    "nature": "n. f.",
+    "definition": "Ragoût fait de restes ; mets peu appétissant.",
+    "exemple": "La cantine nous servit encore une galimafrée indéfinissable.",
+    "academie": true
+  },
+  {
+    "mot": "galvauder",
+    "nature": "v. tr.",
+    "definition": "Compromettre, avilir par un mauvais usage.",
+    "exemple": "À force d'être galvaudé, le mot « génie » ne veut plus rien dire.",
+    "academie": true
+  },
+  {
+    "mot": "gambiller",
+    "nature": "v. intr.",
+    "definition": "Familier : agiter les jambes ; danser.",
+    "exemple": "Ils ont gambillé toute la nuit au bal des pompiers.",
+    "academie": true
+  },
+  {
+    "mot": "gasconnade",
+    "nature": "n. f.",
+    "definition": "Vantardise, fanfaronnade.",
+    "exemple": "Ses prétendus exploits de chasse tenaient de la gasconnade.",
+    "academie": true
+  },
+  {
+    "mot": "gâte-sauce",
+    "nature": "n. m.",
+    "definition": "Mauvais cuisinier ; aide de cuisine, marmiton.",
+    "exemple": "Ce gâte-sauce a réussi à brûler une simple omelette.",
+    "academie": true
+  },
+  {
+    "mot": "gaudriole",
+    "nature": "n. f.",
+    "definition": "Familier : propos gai et leste, plaisanterie grivoise.",
+    "exemple": "Au dessert, l'oncle Paul se lança dans la gaudriole.",
+    "academie": true
+  },
+  {
+    "mot": "gémonies",
+    "nature": "n. f. pl.",
+    "definition": "S'emploie dans « vouer aux gémonies » : accabler publiquement de mépris.",
+    "exemple": "Adulé hier, le ministre est aujourd'hui voué aux gémonies.",
+    "academie": true
+  },
+  {
+    "mot": "gent",
+    "nature": "n. f.",
+    "definition": "Vieilli ou plaisant : peuple, espèce, groupe d'êtres réunis par un trait commun.",
+    "exemple": "La gent trotte-menu avait pillé le garde-manger.",
+    "academie": false
+  },
+  {
+    "mot": "gerfaut",
+    "nature": "n. m.",
+    "definition": "Grand faucon des régions arctiques, très prisé en fauconnerie.",
+    "exemple": "Le roi chassait au gerfaut dans les plaines de Beauce.",
+    "academie": true
+  },
+  {
+    "mot": "gésir",
+    "nature": "v. intr.",
+    "definition": "Être couché, étendu sans mouvement ; reposer dans la tombe (ci-gît).",
+    "exemple": "Le blessé gisait au bord du chemin.",
+    "academie": true
+  },
+  {
+    "mot": "gibus",
+    "nature": "n. m.",
+    "definition": "Chapeau haut de forme monté sur ressorts, qui peut s'aplatir.",
+    "exemple": "Il glissa son gibus aplati sous son bras en entrant au théâtre.",
+    "academie": false
+  },
+  {
+    "mot": "girandole",
+    "nature": "n. f.",
+    "definition": "Chandelier à plusieurs branches ; guirlande lumineuse ; gerbe de feu d'artifice.",
+    "exemple": "Des girandoles éclairaient la longue table du banquet.",
+    "academie": true
+  },
+  {
+    "mot": "giron",
+    "nature": "n. m.",
+    "definition": "Partie du corps allant de la ceinture aux genoux d'une personne assise ; au figuré, sein d'un groupe.",
+    "exemple": "Après dix ans d'exil, il revint dans le giron familial.",
+    "academie": true
+  },
+  {
+    "mot": "glèbe",
+    "nature": "n. f.",
+    "definition": "Terre cultivée ; sous la féodalité, sol auquel le serf était attaché.",
+    "exemple": "Les serfs étaient attachés à la glèbe.",
+    "academie": true
+  },
+  {
+    "mot": "gloriole",
+    "nature": "n. f.",
+    "definition": "Vanité tirée de petites choses.",
+    "exemple": "Il racontait par gloriole qu'il avait dîné avec un ministre.",
+    "academie": false
+  },
+  {
+    "mot": "gnognote",
+    "nature": "n. f.",
+    "definition": "Familier : chose de peu de valeur, comme dans « c'est de la gnognote ».",
+    "exemple": "À côté de son potager, le mien, c'est de la gnognote.",
+    "academie": false
+  },
+  {
+    "mot": "gnomique",
+    "nature": "adj.",
+    "definition": "Qui exprime des vérités morales sous forme de sentences.",
+    "exemple": "La poésie gnomique grecque abonde en maximes.",
+    "academie": true
+  },
+  {
+    "mot": "godiche",
+    "nature": "adj. et n.",
+    "definition": "Familier : maladroit, benêt, gauche.",
+    "exemple": "Il se sentait godiche dans son costume neuf.",
+    "academie": false
+  },
+  {
+    "mot": "goguette",
+    "nature": "n. f.",
+    "definition": "S'emploie dans « en goguette » : de joyeuse humeur, un peu émoustillé par la boisson.",
+    "exemple": "Une bande de marins en goguette chantait sur le quai.",
+    "academie": true
+  },
+  {
+    "mot": "gonfalon",
+    "nature": "n. m.",
+    "definition": "Bannière à plusieurs pointes suspendue à une traverse, en usage au Moyen Âge.",
+    "exemple": "Le gonfalon de la ville flottait en tête de la procession.",
+    "academie": true
+  },
+  {
+    "mot": "gouailleur",
+    "nature": "adj. et n.",
+    "definition": "Qui raille avec une verve populaire ; moqueur.",
+    "exemple": "Le titi gouailleur répondit au gendarme par une pirouette.",
+    "academie": true
+  },
+  {
+    "mot": "gourd",
+    "nature": "adj.",
+    "definition": "Engourdi, raidi par le froid.",
+    "exemple": "J'avais les doigts si gourds que je ne pouvais plus boutonner mon manteau.",
+    "academie": true
+  },
+  {
+    "mot": "gourmander",
+    "nature": "v. tr.",
+    "definition": "Réprimander vivement, sermonner.",
+    "exemple": "Sa grand-mère le gourmanda pour ses chaussures crottées.",
+    "academie": true
+  },
+  {
+    "mot": "gourme",
+    "nature": "n. f.",
+    "definition": "Maladie des jeunes chevaux ; éruption du cuir chevelu des enfants. « Jeter sa gourme » : faire ses premières folies de jeunesse.",
+    "exemple": "Il avait jeté sa gourme avant de reprendre l'étude de son père.",
+    "academie": true
+  },
+  {
+    "mot": "gousset",
+    "nature": "n. m.",
+    "definition": "Petite poche du gilet ou de la ceinture du pantalon, destinée à la montre.",
+    "exemple": "Il tira de son gousset une montre en or.",
+    "academie": true
+  },
+  {
+    "mot": "grappiller",
+    "nature": "v. tr. et intr.",
+    "definition": "Cueillir les grappes restées après la vendange ; au figuré, ramasser de petits profits çà et là.",
+    "exemple": "Il grappillait quelques euros sur chaque commande.",
+    "academie": true
+  },
+  {
+    "mot": "gredin",
+    "nature": "n. m.",
+    "definition": "Personne malhonnête, coquin ; souvent dit avec affection d'un enfant.",
+    "exemple": "Petit gredin, tu as encore mangé toute la confiture !",
+    "academie": true
+  },
+  {
+    "mot": "grimaud",
+    "nature": "n. m.",
+    "definition": "Vieilli : écolier ignorant ; écrivain médiocre et pédant.",
+    "exemple": "Le critique traitait de grimaud quiconque osait le contredire.",
+    "academie": true
+  },
+  {
+    "mot": "grisette",
+    "nature": "n. f.",
+    "definition": "Vieilli : jeune ouvrière coquette et de mœurs légères, au XIXe siècle.",
+    "exemple": "Les étudiants courtisaient les grisettes du Quartier latin.",
+    "academie": true
+  },
+  {
+    "mot": "grivois",
+    "nature": "adj.",
+    "definition": "D'une gaieté libre et un peu osée.",
+    "exemple": "Il fredonnait une chanson grivoise en se rasant.",
+    "academie": true
+  },
+  {
+    "mot": "grommeler",
+    "nature": "v. tr. et intr.",
+    "definition": "Murmurer entre ses dents en manifestant son mécontentement.",
+    "exemple": "Il grommela quelques excuses et s'éloigna.",
+    "academie": true
+  },
+  {
+    "mot": "guerroyer",
+    "nature": "v. intr.",
+    "definition": "Faire la guerre.",
+    "exemple": "Le duc guerroya vingt ans contre ses voisins.",
+    "academie": true
+  },
+  {
+    "mot": "gueux",
+    "nature": "n. m.",
+    "definition": "Personne réduite à la mendicité ; vagabond misérable.",
+    "exemple": "Un gueux en haillons tendait la main sous le porche.",
+    "academie": true
+  },
+  {
+    "mot": "guigne",
+    "nature": "n. f.",
+    "definition": "Petite cerise douce ; familier, malchance persistante.",
+    "exemple": "Décidément, j'ai la guigne : encore un pneu crevé !",
+    "academie": false
+  },
+  {
+    "mot": "guilledou",
+    "nature": "n. m.",
+    "definition": "S'emploie dans « courir le guilledou » : chercher les aventures galantes.",
+    "exemple": "Le jeune vicomte courait le guilledou au lieu d'étudier.",
+    "academie": true
+  },
+  {
+    "mot": "guingois",
+    "nature": "n. m.",
+    "definition": "S'emploie dans « de guingois » : de travers.",
+    "exemple": "Le tableau pendait de guingois au-dessus de la cheminée.",
+    "academie": true
+  },
+  {
+    "mot": "géhenne",
+    "nature": "n. f.",
+    "definition": "Dans la Bible, lieu de supplice des damnés ; au figuré, souffrance extrême.",
+    "exemple": "Ces années de captivité furent pour lui une véritable géhenne.",
+    "academie": true
+  },
+  {
+    "mot": "hallali",
+    "nature": "n. m.",
+    "definition": "Cri ou sonnerie annonçant que la bête est aux abois ; au figuré, annonce de la défaite, de la fin de quelqu'un.",
+    "exemple": "La meute aboyait, et les cors sonnèrent l'hallali.",
+    "academie": true
+  },
+  {
+    "mot": "hallier",
+    "nature": "n. m.",
+    "definition": "Groupe de buissons épais et touffus.",
+    "exemple": "Le sanglier se terra dans un hallier.",
+    "academie": true
+  },
+  {
+    "mot": "hanap",
+    "nature": "n. m.",
+    "definition": "Grand vase à boire, souvent en métal et à couvercle, en usage au Moyen Âge.",
+    "exemple": "Le seigneur leva son hanap à la santé de ses hôtes.",
+    "academie": true
+  },
+  {
+    "mot": "happelourde",
+    "nature": "n. f.",
+    "definition": "Vieilli : pierre fausse imitant une gemme ; personne d'apparence brillante mais sans valeur.",
+    "exemple": "Ce prétendu diamant n'était qu'une happelourde.",
+    "academie": true
+  },
+  {
+    "mot": "haquenée",
+    "nature": "n. f.",
+    "definition": "Cheval ou jument d'allure douce, allant l'amble, que montaient notamment les dames.",
+    "exemple": "La princesse traversa la forêt sur une haquenée blanche.",
+    "academie": true
+  },
+  {
+    "mot": "haridelle",
+    "nature": "n. f.",
+    "definition": "Cheval maigre et efflanqué.",
+    "exemple": "Une haridelle tirait péniblement la carriole du rémouleur.",
+    "academie": true
+  },
+  {
+    "mot": "haro",
+    "nature": "interj.",
+    "definition": "Ancien cri pour en appeler à la justice ; « crier haro sur » : dénoncer avec indignation.",
+    "exemple": "Toute la presse cria haro sur le malheureux arbitre.",
+    "academie": true
+  },
+  {
+    "mot": "haruspice",
+    "nature": "n. m.",
+    "definition": "Devin de l'Antiquité qui lisait l'avenir dans les entrailles des victimes.",
+    "exemple": "L'haruspice examina le foie de la brebis avant la bataille.",
+    "academie": true
+  },
+  {
+    "mot": "hâve",
+    "nature": "adj.",
+    "definition": "Pâle et amaigri par la faim, la fatigue ou la maladie.",
+    "exemple": "Des visages hâves se pressaient aux grilles de l'usine.",
+    "academie": true
+  },
+  {
+    "mot": "hébété",
+    "nature": "adj.",
+    "definition": "Rendu stupide, comme privé de ses facultés par un choc.",
+    "exemple": "Il resta hébété devant la lettre de licenciement.",
+    "academie": false
+  },
+  {
+    "mot": "hère",
+    "nature": "n. m.",
+    "definition": "S'emploie dans « pauvre hère » : homme misérable, sans considération.",
+    "exemple": "Le pauvre hère n'avait plus un sou pour se loger.",
+    "academie": false
+  },
+  {
+    "mot": "héraut",
+    "nature": "n. m.",
+    "definition": "Officier chargé des proclamations solennelles au Moyen Âge ; au figuré, celui qui annonce ou défend une cause.",
+    "exemple": "Il se fit le héraut de la cause écologique.",
+    "academie": true
+  },
+  {
+    "mot": "hérésiarque",
+    "nature": "n. m.",
+    "definition": "Fondateur ou chef d'une hérésie.",
+    "exemple": "Le concile condamna l'hérésiarque et ses disciples.",
+    "academie": true
+  },
+  {
+    "mot": "hétéroclite",
+    "nature": "adj.",
+    "definition": "Fait d'éléments disparates ; bizarre, qui s'écarte des règles.",
+    "exemple": "Le grenier abritait une collection hétéroclite de bibelots.",
+    "academie": false
+  },
+  {
+    "mot": "heur",
+    "nature": "n. m.",
+    "definition": "Vieilli : chance, bonne fortune, comme dans « avoir l'heur de plaire ».",
+    "exemple": "Je n'ai pas eu l'heur de lui plaire.",
+    "academie": true
+  },
+  {
+    "mot": "hiérophante",
+    "nature": "n. m.",
+    "definition": "Prêtre qui présidait aux mystères et initiait les fidèles, dans l'Antiquité grecque.",
+    "exemple": "Le hiérophante d'Éleusis révélait les mystères aux initiés.",
+    "academie": false
+  },
+  {
+    "mot": "hippogriffe",
+    "nature": "n. m.",
+    "definition": "Animal fabuleux, mi-cheval mi-griffon.",
+    "exemple": "Dans le poème, le chevalier s'envole vers la lune sur un hippogriffe.",
+    "academie": false
+  },
+  {
+    "mot": "hirsute",
+    "nature": "adj.",
+    "definition": "Dont les cheveux ou la barbe sont touffus et en désordre.",
+    "exemple": "Il sortit du lit hirsute et mal rasé.",
+    "academie": true
+  },
+  {
+    "mot": "hobereau",
+    "nature": "n. m.",
+    "definition": "Petit faucon ; gentilhomme campagnard de petite noblesse.",
+    "exemple": "Le hobereau régnait sur trois fermes et un moulin.",
+    "academie": false
+  },
+  {
+    "mot": "homélie",
+    "nature": "n. f.",
+    "definition": "Sermon sur l'Évangile ; au figuré, discours moralisateur et ennuyeux.",
+    "exemple": "Épargne-moi tes homélies sur la ponctualité.",
+    "academie": true
+  },
+  {
+    "mot": "homoncule",
+    "nature": "n. m.",
+    "definition": "Petit être vivant que les alchimistes prétendaient créer ; petit homme chétif.",
+    "exemple": "L'alchimiste rêvait de faire naître un homoncule dans sa cornue.",
+    "academie": false
+  },
+  {
+    "mot": "honnir",
+    "nature": "v. tr.",
+    "definition": "Couvrir de honte, vouer au mépris public.",
+    "exemple": "Honni par ses anciens alliés, il s'exila.",
+    "academie": true
+  },
+  {
+    "mot": "horion",
+    "nature": "n. m.",
+    "definition": "Coup violent.",
+    "exemple": "La bagarre se solda par quelques horions et un nez cassé.",
+    "academie": true
+  },
+  {
+    "mot": "houlette",
+    "nature": "n. f.",
+    "definition": "Bâton de berger ; « sous la houlette de » : sous la direction de.",
+    "exemple": "Le chœur a progressé sous la houlette d'un chef exigeant.",
+    "academie": true
+  },
+  {
+    "mot": "houppelande",
+    "nature": "n. f.",
+    "definition": "Ample manteau long, sans manches ou à larges manches.",
+    "exemple": "Le cocher s'emmitouflait dans sa houppelande.",
+    "academie": true
+  },
+  {
+    "mot": "hourvari",
+    "nature": "n. m.",
+    "definition": "Grand tumulte, vacarme.",
+    "exemple": "Le chat renversa la vaisselle dans un hourvari épouvantable.",
+    "academie": true
+  },
+  {
+    "mot": "hybris",
+    "nature": "n. f.",
+    "definition": "Dans la pensée grecque, démesure, orgueil excessif que les dieux finissent par châtier.",
+    "exemple": "Les Grecs voyaient dans l'hybris la cause de la chute des héros.",
+    "academie": false
+  },
+  {
+    "mot": "hyménée",
+    "nature": "n. m.",
+    "definition": "Poétique : mariage.",
+    "exemple": "Les poètes célébraient l'hyménée du prince et de la bergère.",
+    "academie": false
+  },
+  {
+    "mot": "hypocoristique",
+    "nature": "adj.",
+    "definition": "Qui exprime une intention affectueuse, comme les diminutifs et les redoublements (« Jojo », « fifille »).",
+    "exemple": "« Mamie » est un terme hypocoristique.",
+    "academie": false
+  },
+  {
+    "mot": "hypocras",
+    "nature": "n. m.",
+    "definition": "Vin adouci de miel ou de sucre et parfumé d'épices, en vogue au Moyen Âge.",
+    "exemple": "On servit de l'hypocras chaud aux invités de la veillée.",
+    "academie": true
+  },
+  {
+    "mot": "herboriser",
+    "nature": "v. intr.",
+    "definition": "Cueillir des plantes pour les étudier ou en faire un herbier.",
+    "exemple": "Rousseau aimait herboriser dans les collines.",
+    "academie": true
+  }
+]

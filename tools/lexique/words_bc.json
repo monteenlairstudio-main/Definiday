@@ -1,0 +1,1052 @@
+[
+  {
+    "mot": "bacchanale",
+    "nature": "n. f.",
+    "definition": "Fête bruyante et débridée, où l'on boit et danse sans retenue.",
+    "exemple": "La fin des examens tourna à la bacchanale dans l'appartement du troisième.",
+    "academie": true
+  },
+  {
+    "mot": "badauder",
+    "nature": "v. intr.",
+    "definition": "Flâner en s'arrêtant devant tout ce qui attire la curiosité, à la manière d'un badaud.",
+    "exemple": "Le dimanche, il aimait badauder sur les quais en regardant les bouquinistes.",
+    "academie": true
+  },
+  {
+    "mot": "baguenauder",
+    "nature": "v. intr.",
+    "definition": "Perdre son temps à des riens, se promener sans but.",
+    "exemple": "Au lieu de réviser, elle a baguenaudé tout l'après-midi dans les jardins.",
+    "academie": true
+  },
+  {
+    "mot": "baliverne",
+    "nature": "n. f.",
+    "definition": "Propos futile ou mensonger, sans aucun sérieux.",
+    "exemple": "Ne m'en conte pas, ce ne sont que des balivernes pour amuser la galerie.",
+    "academie": true
+  },
+  {
+    "mot": "baragouin",
+    "nature": "n. m.",
+    "definition": "Langage incompréhensible ou langue qu'on parle très mal.",
+    "exemple": "Son baragouin mêlé d'anglais et d'italien faisait sourire les serveurs.",
+    "academie": true
+  },
+  {
+    "mot": "barbon",
+    "nature": "n. m.",
+    "definition": "Homme d'âge mûr ou vieillard, considéré avec une nuance de moquerie.",
+    "exemple": "Dans la comédie, le barbon jaloux veut épouser sa jeune pupille.",
+    "academie": true
+  },
+  {
+    "mot": "bastringue",
+    "nature": "n. m.",
+    "definition": "Bal populaire de guinguette ; par extension, vacarme ou attirail encombrant.",
+    "exemple": "Ils ont emporté tout le bastringue pour trois jours de camping.",
+    "academie": true
+  },
+  {
+    "mot": "bégueule",
+    "nature": "adj. et n.",
+    "definition": "Se dit d'une personne d'une pruderie excessive ou affectée.",
+    "exemple": "Ne fais pas ta bégueule, ce film n'a rien de choquant.",
+    "academie": true
+  },
+  {
+    "mot": "bellâtre",
+    "nature": "n. m.",
+    "definition": "Homme d'une beauté fade, imbu de son apparence.",
+    "exemple": "Ce bellâtre passait plus de temps devant le miroir qu'à écouter les autres.",
+    "academie": true
+  },
+  {
+    "mot": "béotien",
+    "nature": "adj. et n.",
+    "definition": "Se dit d'une personne peu cultivée ou profane dans un domaine.",
+    "exemple": "Je suis un parfait béotien en matière d'opéra, éclairez-moi.",
+    "academie": true
+  },
+  {
+    "mot": "bernique",
+    "nature": "interj.",
+    "definition": "Exclamation marquant une déception, un espoir déçu : rien à faire !",
+    "exemple": "J'espérais un peu de soleil pour le pique-nique, mais bernique !",
+    "academie": false
+  },
+  {
+    "mot": "bésicles",
+    "nature": "n. f. pl.",
+    "definition": "Anciennes lunettes ; aujourd'hui, désigne plaisamment des lunettes.",
+    "exemple": "Le grand-père chaussa ses bésicles pour déchiffrer la lettre.",
+    "academie": false
+  },
+  {
+    "mot": "bêtifier",
+    "nature": "v. intr.",
+    "definition": "Parler ou se comporter de manière niaise, souvent pour imiter un enfant.",
+    "exemple": "Il se met à bêtifier dès qu'il prend un bébé dans ses bras.",
+    "academie": false
+  },
+  {
+    "mot": "billebaude",
+    "nature": "n. f.",
+    "definition": "Désordre, confusion ; à la billebaude : sans ordre, n'importe comment.",
+    "exemple": "Les livres étaient rangés à la billebaude sur les étagères.",
+    "academie": true
+  },
+  {
+    "mot": "bimbelot",
+    "nature": "n. m.",
+    "definition": "Petit jouet ou menu objet de pacotille.",
+    "exemple": "La vitrine de l'antiquaire débordait de bimbelots poussiéreux.",
+    "academie": true
+  },
+  {
+    "mot": "blandice",
+    "nature": "n. f.",
+    "definition": "Littéraire. Flatterie caressante, charme qui séduit et trompe ; s'emploie surtout au pluriel.",
+    "exemple": "Elle ne se laissa pas prendre aux blandices du courtisan.",
+    "academie": false
+  },
+  {
+    "mot": "bléser",
+    "nature": "v. intr.",
+    "definition": "Prononcer certaines consonnes de travers, notamment zézayer.",
+    "exemple": "Enfant, il blésait et disait « zeval » pour « cheval ».",
+    "academie": true
+  },
+  {
+    "mot": "bombance",
+    "nature": "n. f.",
+    "definition": "Repas copieux et joyeux ; faire bombance : festoyer.",
+    "exemple": "Après la moisson, tout le village fit bombance jusqu'à l'aube.",
+    "academie": true
+  },
+  {
+    "mot": "bonace",
+    "nature": "n. f.",
+    "definition": "Calme de la mer après ou avant une tempête.",
+    "exemple": "Les voiliers restèrent immobiles, prisonniers de la bonace.",
+    "academie": false
+  },
+  {
+    "mot": "borborygme",
+    "nature": "n. m.",
+    "definition": "Gargouillement produit par les gaz dans l'intestin ; par extension, parole confuse.",
+    "exemple": "Un borborygme sonore trahit sa faim au milieu de la réunion.",
+    "academie": true
+  },
+  {
+    "mot": "bourrelé",
+    "nature": "adj.",
+    "definition": "Tourmenté ; s'emploie surtout dans « bourrelé de remords ».",
+    "exemple": "Bourrelé de remords, il finit par avouer sa faute.",
+    "academie": false
+  },
+  {
+    "mot": "brandon",
+    "nature": "n. m.",
+    "definition": "Torche de paille enflammée ou débris qui brûle ; brandon de discorde : cause de querelle.",
+    "exemple": "Cet héritage fut un brandon de discorde entre les deux frères.",
+    "academie": true
+  },
+  {
+    "mot": "bravache",
+    "nature": "adj. et n. m.",
+    "definition": "Faux brave qui affiche une hardiesse fanfaronne.",
+    "exemple": "Il jouait les bravaches, mais tremblait à la moindre ombre.",
+    "academie": true
+  },
+  {
+    "mot": "brinquebaler",
+    "nature": "v. intr.",
+    "definition": "Se balancer, ballotter de façon désordonnée en cahotant.",
+    "exemple": "La vieille charrette brinquebalait sur le chemin caillouteux.",
+    "academie": false
+  },
+  {
+    "mot": "brouillamini",
+    "nature": "n. m.",
+    "definition": "Situation confuse et embrouillée, désordre.",
+    "exemple": "Le dossier tournait au brouillamini administratif le plus complet.",
+    "academie": true
+  },
+  {
+    "mot": "brumasser",
+    "nature": "v. impers.",
+    "definition": "Se dit d'une brume légère qui tombe.",
+    "exemple": "Il brumassait ce matin-là sur les prés encore endormis.",
+    "academie": false
+  },
+  {
+    "mot": "butor",
+    "nature": "n. m.",
+    "definition": "Homme grossier et maladroit ; aussi, oiseau échassier des marais.",
+    "exemple": "Ce butor a renversé son verre sans même s'excuser.",
+    "academie": true
+  },
+  {
+    "mot": "barbacane",
+    "nature": "n. f.",
+    "definition": "Ouvrage fortifié avancé protégeant une porte ; ouverture étroite dans un mur.",
+    "exemple": "La barbacane défendait l'accès au pont-levis du château.",
+    "academie": true
+  },
+  {
+    "mot": "bayer",
+    "nature": "v. intr.",
+    "definition": "Tenir la bouche ouverte en regardant ; bayer aux corneilles : rêvasser niaisement.",
+    "exemple": "Au lieu de travailler, l'apprenti bayait aux corneilles près de la fenêtre.",
+    "academie": true
+  },
+  {
+    "mot": "berlue",
+    "nature": "n. f.",
+    "definition": "Trouble passager de la vue ; avoir la berlue : se faire des illusions.",
+    "exemple": "J'ai cru avoir la berlue en voyant mon ancien professeur sur scène.",
+    "academie": true
+  },
+  {
+    "mot": "bonasse",
+    "nature": "adj.",
+    "definition": "D'une bonté simple et sans malice, qui confine à la mollesse ou à la niaiserie.",
+    "exemple": "Son air bonasse encourageait tous les profiteurs du quartier.",
+    "academie": true
+  },
+  {
+    "mot": "boutefeu",
+    "nature": "n. m.",
+    "definition": "Personne qui suscite des querelles et attise les conflits.",
+    "exemple": "Ce boutefeu ne manquait jamais une occasion d'envenimer les débats.",
+    "academie": true
+  },
+  {
+    "mot": "brigue",
+    "nature": "n. f.",
+    "definition": "Manœuvre secrète pour obtenir une faveur ou une place.",
+    "exemple": "Il obtint ce poste par la brigue plutôt que par le mérite.",
+    "academie": true
+  },
+  {
+    "mot": "brouet",
+    "nature": "n. m.",
+    "definition": "Bouillon clair ; par dénigrement, potage peu appétissant.",
+    "exemple": "On ne leur servit qu'un maigre brouet de légumes.",
+    "academie": true
+  },
+  {
+    "mot": "bruire",
+    "nature": "v. intr.",
+    "definition": "Produire un bruit léger, confus et continu.",
+    "exemple": "Les feuilles des peupliers bruissaient sous la brise du soir.",
+    "academie": true
+  },
+  {
+    "mot": "byzantin",
+    "nature": "adj.",
+    "definition": "Se dit d'une discussion d'une subtilité excessive et oiseuse.",
+    "exemple": "Ils se perdaient en querelles byzantines sur la place d'une virgule.",
+    "academie": true
+  },
+  {
+    "mot": "bancroche",
+    "nature": "adj. et n.",
+    "definition": "Familier. Bancal, de travers ; se dit aussi d'une personne aux jambes tordues.",
+    "exemple": "Il s'assit prudemment sur un tabouret bancroche.",
+    "academie": true
+  },
+  {
+    "mot": "basoche",
+    "nature": "n. f.",
+    "definition": "Autrefois, corporation des clercs de justice ; par extension, les gens de loi.",
+    "exemple": "Ce jeune clerc rêvait de briller dans la basoche parisienne.",
+    "academie": true
+  },
+  {
+    "mot": "bisaïeul",
+    "nature": "n. m.",
+    "definition": "Arrière-grand-père.",
+    "exemple": "La montre de gousset venait de son bisaïeul, horloger à Besançon.",
+    "academie": false
+  },
+  {
+    "mot": "bistre",
+    "nature": "adj. et n. m.",
+    "definition": "Couleur brun noirâtre, tirant sur le jaune.",
+    "exemple": "Le soleil avait donné à sa peau une teinte bistre.",
+    "academie": true
+  },
+  {
+    "mot": "blanc-bec",
+    "nature": "n. m.",
+    "definition": "Jeune homme sans expérience qui se montre présomptueux.",
+    "exemple": "Ce blanc-bec prétendait apprendre le métier à des artisans chevronnés.",
+    "academie": true
+  },
+  {
+    "mot": "bisquer",
+    "nature": "v. intr.",
+    "definition": "Familier. Éprouver du dépit, de la mauvaise humeur.",
+    "exemple": "Son frère bisquait de ne pas avoir été invité.",
+    "academie": true
+  },
+  {
+    "mot": "boursicoter",
+    "nature": "v. intr.",
+    "definition": "Faire en Bourse de petites opérations spéculatives.",
+    "exemple": "À la retraite, il boursicotait pour se distraire.",
+    "academie": true
+  },
+  {
+    "mot": "bretteur",
+    "nature": "n. m.",
+    "definition": "Celui qui aime se battre à l'épée ; homme querelleur.",
+    "exemple": "Ce bretteur provoquait en duel quiconque le regardait de travers.",
+    "academie": true
+  },
+  {
+    "mot": "bailler",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Donner ; vous me la baillez belle : vous vous moquez de moi.",
+    "exemple": "Vous me la baillez belle avec vos promesses de remboursement !",
+    "academie": true
+  },
+  {
+    "mot": "bréhaigne",
+    "nature": "adj. f.",
+    "definition": "Se dit d'une femelle d'animal stérile.",
+    "exemple": "Le berger écarta du troupeau la brebis bréhaigne.",
+    "academie": true
+  },
+  {
+    "mot": "busqué",
+    "nature": "adj.",
+    "definition": "Se dit d'un nez ou d'un profil courbé en bosse.",
+    "exemple": "Son nez busqué lui donnait un profil d'aigle.",
+    "academie": false
+  },
+  {
+    "mot": "bucéphale",
+    "nature": "n. m.",
+    "definition": "Plaisant ou ironique. Cheval, en particulier cheval de parade ou de bataille.",
+    "exemple": "Le notaire arriva juché sur un vieux bucéphale fourbu.",
+    "academie": false
+  },
+  {
+    "mot": "bramer",
+    "nature": "v. intr.",
+    "definition": "Pousser son cri, en parlant du cerf ; par extension, crier fort.",
+    "exemple": "À l'automne, on entend les cerfs bramer au fond de la forêt.",
+    "academie": true
+  },
+  {
+    "mot": "bure",
+    "nature": "n. f.",
+    "definition": "Grosse étoffe de laine brune ; vêtement fait de cette étoffe, notamment de moine.",
+    "exemple": "Le frère portait une bure rapiécée serrée par une corde.",
+    "academie": true
+  },
+  {
+    "mot": "cabale",
+    "nature": "n. f.",
+    "definition": "Intrigue concertée contre quelqu'un ; ensemble de ceux qui la mènent.",
+    "exemple": "Une cabale de jaloux fit tomber la pièce dès la première.",
+    "academie": true
+  },
+  {
+    "mot": "cabotin",
+    "nature": "adj. et n.",
+    "definition": "Se dit d'une personne qui en fait trop pour se faire remarquer, comme un mauvais acteur.",
+    "exemple": "Cet élève cabotin ne rate jamais une occasion de faire rire la classe.",
+    "academie": true
+  },
+  {
+    "mot": "cabriole",
+    "nature": "n. f.",
+    "definition": "Saut léger et vif, culbute ; par extension, revirement brusque.",
+    "exemple": "Les enfants faisaient des cabrioles dans l'herbe fraîche.",
+    "academie": true
+  },
+  {
+    "mot": "caduc",
+    "nature": "adj.",
+    "definition": "Qui n'a plus cours ou n'a plus de valeur ; se dit aussi des feuilles qui tombent chaque année.",
+    "exemple": "Ce règlement, jamais appliqué, est devenu caduc.",
+    "academie": true
+  },
+  {
+    "mot": "cagot",
+    "nature": "adj. et n.",
+    "definition": "Littéraire. Faux dévot, hypocrite en matière de religion.",
+    "exemple": "Le cagot récitait ses prières à voix haute pour être remarqué.",
+    "academie": true
+  },
+  {
+    "mot": "cahin-caha",
+    "nature": "adv.",
+    "definition": "Tant bien que mal, avec difficulté.",
+    "exemple": "L'entreprise avance cahin-caha malgré la crise.",
+    "academie": true
+  },
+  {
+    "mot": "calamistré",
+    "nature": "adj.",
+    "definition": "Se dit de cheveux ondulés au fer ou lustrés de pommade.",
+    "exemple": "Il arriva au bal la moustache cirée et les cheveux calamistrés.",
+    "academie": false
+  },
+  {
+    "mot": "camaïeu",
+    "nature": "n. m.",
+    "definition": "Peinture en une seule couleur à différents tons ; par extension, harmonie de nuances d'une même teinte.",
+    "exemple": "Le salon était décoré dans un camaïeu de bleus.",
+    "academie": true
+  },
+  {
+    "mot": "camarilla",
+    "nature": "n. f.",
+    "definition": "Coterie de familiers influents qui entourent un dirigeant.",
+    "exemple": "Le ministre ne prenait aucune décision sans consulter sa camarilla.",
+    "academie": true
+  },
+  {
+    "mot": "camard",
+    "nature": "adj. et n.",
+    "definition": "Qui a le nez court et aplati ; la Camarde : la mort.",
+    "exemple": "Le vieux soldat disait avoir croisé la Camarde plus d'une fois.",
+    "academie": true
+  },
+  {
+    "mot": "camouflet",
+    "nature": "n. m.",
+    "definition": "Affront humiliant infligé à quelqu'un.",
+    "exemple": "Le rejet de sa proposition fut un camouflet pour le maire.",
+    "academie": true
+  },
+  {
+    "mot": "cancan",
+    "nature": "n. m.",
+    "definition": "Commérage, bavardage malveillant ; aussi, danse de music-hall.",
+    "exemple": "Les cancans du village allaient bon train depuis son départ.",
+    "academie": true
+  },
+  {
+    "mot": "cantonade",
+    "nature": "n. f.",
+    "definition": "Au théâtre, les coulisses ; à la cantonade : en s'adressant à tout le monde, sans viser personne en particulier.",
+    "exemple": "Il lança un « bonjour » à la cantonade en entrant dans le bureau.",
+    "academie": true
+  },
+  {
+    "mot": "capharnaüm",
+    "nature": "n. m.",
+    "definition": "Lieu en grand désordre, encombré d'objets hétéroclites.",
+    "exemple": "Son atelier était un véritable capharnaüm de toiles et de pinceaux.",
+    "academie": true
+  },
+  {
+    "mot": "capilotade",
+    "nature": "n. f.",
+    "definition": "En capilotade : en piteux état, écrasé, meurtri.",
+    "exemple": "Après la randonnée, j'avais les pieds en capilotade.",
+    "academie": true
+  },
+  {
+    "mot": "caracoler",
+    "nature": "v. intr.",
+    "definition": "Faire des voltes à cheval ; par extension, avancer avec aisance, notamment en tête.",
+    "exemple": "Le candidat caracole en tête des sondages depuis un mois.",
+    "academie": true
+  },
+  {
+    "mot": "cassandre",
+    "nature": "n. f.",
+    "definition": "Personne qui prédit des malheurs sans être écoutée.",
+    "exemple": "Il joue les cassandres en annonçant la ruine de la ville.",
+    "academie": false
+  },
+  {
+    "mot": "casuistique",
+    "nature": "n. f.",
+    "definition": "Raisonnement subtil, voire captieux, sur des cas de conscience.",
+    "exemple": "À force de casuistique, il justifiait les pires compromissions.",
+    "academie": true
+  },
+  {
+    "mot": "catilinaire",
+    "nature": "n. f.",
+    "definition": "Discours violemment hostile dirigé contre une personne.",
+    "exemple": "Le député prononça une véritable catilinaire contre le gouvernement.",
+    "academie": false
+  },
+  {
+    "mot": "caudataire",
+    "nature": "n. m.",
+    "definition": "Celui qui portait la queue de la robe d'un prélat ; par extension, flatteur servile.",
+    "exemple": "Entouré de caudataires, le directeur n'entendait plus aucune critique.",
+    "academie": true
+  },
+  {
+    "mot": "céladon",
+    "nature": "adj. et n. m.",
+    "definition": "D'un vert pâle ; aussi, littéraire, amoureux tendre et langoureux.",
+    "exemple": "Elle portait une robe de soie céladon.",
+    "academie": false
+  },
+  {
+    "mot": "cénacle",
+    "nature": "n. m.",
+    "definition": "Cercle restreint d'écrivains, d'artistes ou de penseurs réunis par des idées communes.",
+    "exemple": "Il fut enfin admis dans le cénacle des poètes du quartier Latin.",
+    "academie": true
+  },
+  {
+    "mot": "cénobite",
+    "nature": "n. m.",
+    "definition": "Moine vivant en communauté.",
+    "exemple": "Les cénobites partageaient leurs repas en silence.",
+    "academie": true
+  },
+  {
+    "mot": "cénotaphe",
+    "nature": "n. m.",
+    "definition": "Monument funéraire ne contenant pas le corps du défunt.",
+    "exemple": "Un cénotaphe honore les marins disparus en mer.",
+    "academie": true
+  },
+  {
+    "mot": "cerbère",
+    "nature": "n. m.",
+    "definition": "Gardien sévère et intraitable.",
+    "exemple": "Le cerbère de l'accueil refusa de me laisser monter.",
+    "academie": true
+  },
+  {
+    "mot": "céruléen",
+    "nature": "adj.",
+    "definition": "Littéraire. D'un bleu de ciel.",
+    "exemple": "Le lac reflétait un ciel céruléen sans le moindre nuage.",
+    "academie": false
+  },
+  {
+    "mot": "chamade",
+    "nature": "n. f.",
+    "definition": "Autrefois, signal de reddition donné au tambour ou à la trompette ; battre la chamade : se dit du cœur qui bat très fort.",
+    "exemple": "En apercevant la lettre, elle sentit son cœur battre la chamade.",
+    "academie": true
+  },
+  {
+    "mot": "chamarré",
+    "nature": "adj.",
+    "definition": "Orné de galons, de broderies ou de couleurs voyantes.",
+    "exemple": "Le portier arborait un uniforme chamarré d'or.",
+    "academie": false
+  },
+  {
+    "mot": "charivari",
+    "nature": "n. m.",
+    "definition": "Vacarme assourdissant, tapage.",
+    "exemple": "Le charivari des casseroles réveilla tout l'immeuble.",
+    "academie": true
+  },
+  {
+    "mot": "chatoyer",
+    "nature": "v. intr.",
+    "definition": "Briller avec des reflets changeants selon la lumière.",
+    "exemple": "La soie de sa robe chatoyait sous les lustres.",
+    "academie": true
+  },
+  {
+    "mot": "chausse-trape",
+    "nature": "n. f.",
+    "definition": "Piège dissimulé ; difficulté cachée destinée à tromper.",
+    "exemple": "L'examen était semé de chausse-trapes pour les candidats distraits.",
+    "academie": true
+  },
+  {
+    "mot": "chenapan",
+    "nature": "n. m.",
+    "definition": "Garnement, vaurien ; se dit souvent d'un enfant espiègle.",
+    "exemple": "Ce petit chenapan a encore chipé les biscuits.",
+    "academie": false
+  },
+  {
+    "mot": "chenu",
+    "nature": "adj.",
+    "definition": "Littéraire. Blanchi par l'âge.",
+    "exemple": "Le vieillard au front chenu racontait les guerres d'autrefois.",
+    "academie": false
+  },
+  {
+    "mot": "chicaner",
+    "nature": "v. tr. et intr.",
+    "definition": "Contester sur des vétilles, chercher querelle pour des riens.",
+    "exemple": "Il chicane sur chaque ligne du contrat.",
+    "academie": true
+  },
+  {
+    "mot": "chiourme",
+    "nature": "n. f.",
+    "definition": "Ensemble des forçats d'un bagne ou des rameurs d'une galère.",
+    "exemple": "Le garde-chiourme surveillait les rameurs enchaînés.",
+    "academie": true
+  },
+  {
+    "mot": "choir",
+    "nature": "v. intr.",
+    "definition": "Littéraire. Tomber ; laisser choir : abandonner.",
+    "exemple": "Elle a laissé choir ses projets de voyage sans regret.",
+    "academie": true
+  },
+  {
+    "mot": "cicérone",
+    "nature": "n. m.",
+    "definition": "Guide qui fait visiter une ville ou un monument.",
+    "exemple": "Un cicérone bavard nous fit découvrir les ruelles de Rome.",
+    "academie": false
+  },
+  {
+    "mot": "circonvenir",
+    "nature": "v. tr.",
+    "definition": "Manœuvrer quelqu'un avec habileté pour obtenir ce qu'on veut.",
+    "exemple": "L'escroc avait circonvenu la vieille dame pour capter son héritage.",
+    "academie": true
+  },
+  {
+    "mot": "clabauder",
+    "nature": "v. intr.",
+    "definition": "Médire bruyamment, crier sans raison contre quelqu'un.",
+    "exemple": "Les envieux clabaudaient contre son succès.",
+    "academie": true
+  },
+  {
+    "mot": "clampin",
+    "nature": "n. m.",
+    "definition": "Familier. Personne paresseuse ou traînarde.",
+    "exemple": "Allez, les clampins, on presse le pas !",
+    "academie": true
+  },
+  {
+    "mot": "clinquant",
+    "nature": "adj. et n. m.",
+    "definition": "Qui a un éclat voyant mais sans valeur réelle.",
+    "exemple": "Il préférait la sobriété au clinquant des palaces.",
+    "academie": true
+  },
+  {
+    "mot": "clopin-clopant",
+    "nature": "loc. adv.",
+    "definition": "En boitillant ; par extension, tant bien que mal.",
+    "exemple": "Après sa chute, il rentra chez lui clopin-clopant.",
+    "academie": true
+  },
+  {
+    "mot": "cloaque",
+    "nature": "n. m.",
+    "definition": "Lieu où s'amassent des eaux sales ; par extension, endroit malpropre ou corrompu.",
+    "exemple": "La cour de l'immeuble était devenue un cloaque après l'orage.",
+    "academie": true
+  },
+  {
+    "mot": "coche",
+    "nature": "n. m.",
+    "definition": "Ancienne voiture de voyageurs ; manquer le coche : laisser passer une occasion.",
+    "exemple": "En hésitant trop longtemps, il a manqué le coche.",
+    "academie": true
+  },
+  {
+    "mot": "cocagne",
+    "nature": "n. f.",
+    "definition": "Pays de cocagne : contrée imaginaire où l'on vit dans l'abondance.",
+    "exemple": "Pour les enfants, la pâtisserie de la tante était un pays de cocagne.",
+    "academie": false
+  },
+  {
+    "mot": "cogiter",
+    "nature": "v. intr.",
+    "definition": "Plaisant. Réfléchir, méditer longuement.",
+    "exemple": "Laisse-moi cogiter un peu avant de te répondre.",
+    "academie": false
+  },
+  {
+    "mot": "coi",
+    "nature": "adj.",
+    "definition": "Silencieux et immobile ; rester, demeurer coi : sans réaction.",
+    "exemple": "Devant cette question inattendue, l'orateur demeura coi.",
+    "academie": true
+  },
+  {
+    "mot": "collusion",
+    "nature": "n. f.",
+    "definition": "Entente secrète au détriment d'un tiers.",
+    "exemple": "L'enquête a révélé une collusion entre les deux entreprises.",
+    "academie": true
+  },
+  {
+    "mot": "colifichet",
+    "nature": "n. m.",
+    "definition": "Petit objet de fantaisie, sans valeur.",
+    "exemple": "Elle rapportait de chaque voyage une foule de colifichets.",
+    "academie": true
+  },
+  {
+    "mot": "comminatoire",
+    "nature": "adj.",
+    "definition": "Qui contient une menace.",
+    "exemple": "Il reçut une lettre au ton comminatoire de son propriétaire.",
+    "academie": true
+  },
+  {
+    "mot": "componction",
+    "nature": "n. f.",
+    "definition": "Air de gravité recueillie ou affectée ; au sens religieux, regret d'avoir offensé Dieu.",
+    "exemple": "Le majordome annonça le dîner avec componction.",
+    "academie": true
+  },
+  {
+    "mot": "concupiscence",
+    "nature": "n. f.",
+    "definition": "Désir ardent des biens terrestres, notamment des plaisirs sensuels.",
+    "exemple": "Il regardait le buffet avec une concupiscence non dissimulée.",
+    "academie": true
+  },
+  {
+    "mot": "conciliabule",
+    "nature": "n. m.",
+    "definition": "Conversation à voix basse, à l'écart ; réunion plus ou moins secrète.",
+    "exemple": "Les élèves tenaient des conciliabules dans le fond de la cour.",
+    "academie": false
+  },
+  {
+    "mot": "contempteur",
+    "nature": "n. m.",
+    "definition": "Littéraire. Personne qui méprise, dénigre quelque chose.",
+    "exemple": "Ce contempteur de la modernité écrivait encore à la plume.",
+    "academie": true
+  },
+  {
+    "mot": "controuvé",
+    "nature": "adj.",
+    "definition": "Inventé de toutes pièces, mensonger.",
+    "exemple": "Le journal dut démentir une anecdote entièrement controuvée.",
+    "academie": true
+  },
+  {
+    "mot": "coruscant",
+    "nature": "adj.",
+    "definition": "Littéraire. Qui brille d'un vif éclat.",
+    "exemple": "Le diadème coruscant attirait tous les regards.",
+    "academie": false
+  },
+  {
+    "mot": "coterie",
+    "nature": "n. f.",
+    "definition": "Petit groupe fermé qui défend ses intérêts communs.",
+    "exemple": "Ce prix littéraire semblait réservé à une coterie d'initiés.",
+    "academie": true
+  },
+  {
+    "mot": "couard",
+    "nature": "adj. et n.",
+    "definition": "Littéraire. Lâche, poltron.",
+    "exemple": "Le chevalier couard s'enfuit dès le premier assaut.",
+    "academie": true
+  },
+  {
+    "mot": "courroucer",
+    "nature": "v. tr.",
+    "definition": "Littéraire. Mettre en colère.",
+    "exemple": "Ce retard répété finit par courroucer le directeur.",
+    "academie": true
+  },
+  {
+    "mot": "crésus",
+    "nature": "n. m.",
+    "definition": "Homme extrêmement riche.",
+    "exemple": "Ce crésus de l'immobilier possède la moitié des immeubles de la ville.",
+    "academie": true
+  },
+  {
+    "mot": "croquemitaine",
+    "nature": "n. m.",
+    "definition": "Personnage imaginaire dont on menace les enfants ; personne qui fait peur.",
+    "exemple": "Le surveillant jouait les croquemitaines pour faire régner l'ordre.",
+    "academie": false
+  },
+  {
+    "mot": "croquignolet",
+    "nature": "adj.",
+    "definition": "Familier. Mignon, charmant ; souvent ironique.",
+    "exemple": "Ils habitaient une petite maison croquignolette au bord du canal.",
+    "academie": false
+  },
+  {
+    "mot": "curée",
+    "nature": "n. f.",
+    "definition": "Part du gibier donnée aux chiens après la chasse ; par extension, ruée avide sur un butin.",
+    "exemple": "Après sa disgrâce, ce fut la curée pour récupérer ses fonctions.",
+    "academie": true
+  },
+  {
+    "mot": "chaland",
+    "nature": "n. m.",
+    "definition": "Vieilli. Client habituel d'un marchand ; aussi, bateau plat de transport fluvial.",
+    "exemple": "Le marchand de quatre-saisons attirait le chaland avec ses cris.",
+    "academie": true
+  },
+  {
+    "mot": "coquebin",
+    "nature": "n. m.",
+    "definition": "Vieilli. Jeune homme niais et sans expérience.",
+    "exemple": "Ce coquebin rougissait dès qu'une femme lui adressait la parole.",
+    "academie": false
+  },
+  {
+    "mot": "cornaquer",
+    "nature": "v. tr.",
+    "definition": "Familier. Guider, piloter quelqu'un.",
+    "exemple": "Elle a cornaqué la délégation étrangère pendant toute la visite.",
+    "academie": false
+  },
+  {
+    "mot": "cossu",
+    "nature": "adj.",
+    "definition": "Qui dénote l'aisance, la richesse.",
+    "exemple": "Ils habitaient un quartier cossu aux larges avenues.",
+    "academie": false
+  },
+  {
+    "mot": "coulpe",
+    "nature": "n. f.",
+    "definition": "Battre sa coulpe : se repentir, reconnaître ses torts.",
+    "exemple": "Le ministre a battu sa coulpe devant les caméras.",
+    "academie": true
+  },
+  {
+    "mot": "courtaud",
+    "nature": "adj. et n.",
+    "definition": "De taille courte et ramassée.",
+    "exemple": "Un homme courtaud aux épaules larges ouvrit la porte.",
+    "academie": true
+  },
+  {
+    "mot": "caparaçonner",
+    "nature": "v. tr.",
+    "definition": "Couvrir un cheval d'un caparaçon ; par extension, revêtir d'une protection épaisse.",
+    "exemple": "Pour le tournoi, on caparaçonna les destriers de velours rouge.",
+    "academie": true
+  },
+  {
+    "mot": "capiteux",
+    "nature": "adj.",
+    "definition": "Qui monte à la tête, grise ; troublant, sensuel.",
+    "exemple": "Un parfum capiteux de jasmin flottait dans la serre.",
+    "academie": true
+  },
+  {
+    "mot": "caligineux",
+    "nature": "adj.",
+    "definition": "Littéraire. Brumeux, sombre comme le brouillard.",
+    "exemple": "Un matin caligineux enveloppait la vallée.",
+    "academie": false
+  },
+  {
+    "mot": "cantilène",
+    "nature": "n. f.",
+    "definition": "Chant lent et mélancolique ; poème lyrique ancien.",
+    "exemple": "La nourrice fredonnait une cantilène pour endormir l'enfant.",
+    "academie": true
+  },
+  {
+    "mot": "caqueter",
+    "nature": "v. intr.",
+    "definition": "Pousser son cri, en parlant de la poule ; par extension, bavarder bruyamment.",
+    "exemple": "Les commères caquetaient sur le pas des portes.",
+    "academie": true
+  },
+  {
+    "mot": "carcan",
+    "nature": "n. m.",
+    "definition": "Collier de fer servant autrefois au supplice ; par extension, contrainte pesante.",
+    "exemple": "Elle voulait échapper au carcan des conventions familiales.",
+    "academie": true
+  },
+  {
+    "mot": "charmille",
+    "nature": "n. f.",
+    "definition": "Allée ou berceau de charmes taillés.",
+    "exemple": "Ils se promenaient à l'ombre de la charmille du parc.",
+    "academie": true
+  },
+  {
+    "mot": "chienlit",
+    "nature": "n. f.",
+    "definition": "Désordre, pagaille ; autrefois, masque de carnaval.",
+    "exemple": "Le chef de l'État dénonça la chienlit dans la rue.",
+    "academie": true
+  },
+  {
+    "mot": "clystère",
+    "nature": "n. m.",
+    "definition": "Vieilli. Lavement intestinal.",
+    "exemple": "Les médecins de Molière prescrivaient saignées et clystères.",
+    "academie": true
+  },
+  {
+    "mot": "cocardier",
+    "nature": "adj.",
+    "definition": "Qui manifeste un patriotisme chauvin et étroit.",
+    "exemple": "Le discours cocardier du général enflamma la foule.",
+    "academie": false
+  },
+  {
+    "mot": "comparoir",
+    "nature": "v. intr.",
+    "definition": "Droit, vieilli. Comparaître en justice.",
+    "exemple": "Il fut assigné à comparoir devant le tribunal.",
+    "academie": true
+  },
+  {
+    "mot": "conspuer",
+    "nature": "v. tr.",
+    "definition": "Manifester bruyamment et publiquement son mépris envers quelqu'un.",
+    "exemple": "L'arbitre fut conspué par tout le stade.",
+    "academie": true
+  },
+  {
+    "mot": "coryphée",
+    "nature": "n. m.",
+    "definition": "Chef du chœur dans le théâtre antique ; par extension, chef de file d'un mouvement.",
+    "exemple": "Il se posait en coryphée de la nouvelle école romanesque.",
+    "academie": true
+  },
+  {
+    "mot": "coupe-jarret",
+    "nature": "n. m.",
+    "definition": "Vieilli. Brigand, assassin.",
+    "exemple": "Il n'osait traverser la forêt, de peur d'y croiser des coupe-jarrets.",
+    "academie": true
+  },
+  {
+    "mot": "crâner",
+    "nature": "v. intr.",
+    "definition": "Familier. Faire le fier, le vantard.",
+    "exemple": "Il crâne depuis qu'il a gagné la partie.",
+    "academie": true
+  },
+  {
+    "mot": "cuider",
+    "nature": "v. tr.",
+    "definition": "Vieux. Croire, penser, s'imaginer.",
+    "exemple": "Il cuidait triompher sans peine, mais la fortune en décida autrement.",
+    "academie": false
+  },
+  {
+    "mot": "ci-devant",
+    "nature": "n. m. et f.",
+    "definition": "Sous la Révolution, désignait un ancien noble.",
+    "exemple": "Les ci-devant émigrèrent en masse vers Coblence.",
+    "academie": true
+  },
+  {
+    "mot": "chiche",
+    "nature": "adj.",
+    "definition": "Qui donne avec parcimonie ; maigre, peu abondant.",
+    "exemple": "On nous servit une portion bien chiche de purée.",
+    "academie": true
+  },
+  {
+    "mot": "claudiquer",
+    "nature": "v. intr.",
+    "definition": "Littéraire. Boiter.",
+    "exemple": "Depuis son entorse, il claudique dans les escaliers.",
+    "academie": false
+  },
+  {
+    "mot": "consomption",
+    "nature": "n. f.",
+    "definition": "Amaigrissement et épuisement progressifs dus à la maladie.",
+    "exemple": "La jeune héroïne du roman mourut de consomption.",
+    "academie": true
+  },
+  {
+    "mot": "contrepèterie",
+    "nature": "n. f.",
+    "definition": "Jeu de mots qui consiste à intervertir des sons pour obtenir une phrase cocasse.",
+    "exemple": "Il passa le dîner à chercher des contrepèteries, au grand désespoir de ses voisins.",
+    "academie": false
+  },
+  {
+    "mot": "carabin",
+    "nature": "n. m.",
+    "definition": "Familier. Étudiant en médecine.",
+    "exemple": "Les carabins entonnaient leurs chansons paillardes à la fin du banquet.",
+    "academie": true
+  },
+  {
+    "mot": "capucinade",
+    "nature": "n. f.",
+    "definition": "Vieilli. Sermon plat ou discours moralisateur et banal.",
+    "exemple": "Épargne-nous tes capucinades sur la vertu du travail.",
+    "academie": true
+  },
+  {
+    "mot": "chapitrer",
+    "nature": "v. tr.",
+    "definition": "Réprimander vivement quelqu'un, lui faire la leçon.",
+    "exemple": "Sa mère l'a chapitré sur ses notes du trimestre.",
+    "academie": true
+  },
+  {
+    "mot": "chiquenaude",
+    "nature": "n. f.",
+    "definition": "Petit coup donné en détendant brusquement un doigt replié ; légère impulsion.",
+    "exemple": "D'une chiquenaude, il chassa la miette de sa manche.",
+    "academie": true
+  },
+  {
+    "mot": "claquemurer",
+    "nature": "v. tr.",
+    "definition": "Enfermer étroitement ; souvent pronominal : se cloîtrer chez soi.",
+    "exemple": "Il s'est claquemuré dans son bureau pour finir son roman.",
+    "academie": true
+  },
+  {
+    "mot": "compassé",
+    "nature": "adj.",
+    "definition": "Dont l'attitude est raide, guindée, d'une correction affectée.",
+    "exemple": "Son ton compassé glaça l'assemblée.",
+    "academie": false
+  },
+  {
+    "mot": "concussion",
+    "nature": "n. f.",
+    "definition": "Perception illégale d'argent par un agent public dans l'exercice de ses fonctions.",
+    "exemple": "Le receveur des impôts fut condamné pour concussion.",
+    "academie": true
+  },
+  {
+    "mot": "convoler",
+    "nature": "v. intr.",
+    "definition": "Plaisant. Se marier ; convoler en justes noces.",
+    "exemple": "Après dix ans de vie commune, ils ont convolé en justes noces.",
+    "academie": true
+  },
+  {
+    "mot": "chaloupé",
+    "nature": "adj.",
+    "definition": "Se dit d'une démarche ou d'une danse balancée et souple.",
+    "exemple": "Elle traversa la piste d'un pas chaloupé.",
+    "academie": false
+  },
+  {
+    "mot": "chamailler",
+    "nature": "v. pron.",
+    "definition": "Familier. Se disputer pour des broutilles.",
+    "exemple": "Les deux sœurs se chamaillent pour le choix du film.",
+    "academie": true
+  }
+]

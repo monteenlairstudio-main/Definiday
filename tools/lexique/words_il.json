@@ -1,0 +1,702 @@
+[
+  {
+    "mot": "idoine",
+    "nature": "adj.",
+    "definition": "Qui convient parfaitement à l'usage ou à la situation considérés ; approprié.",
+    "exemple": "Il attendit le moment idoine pour annoncer la nouvelle à son père.",
+    "academie": true
+  },
+  {
+    "mot": "ignominie",
+    "nature": "n. f.",
+    "definition": "Déshonneur extrême, infamie publique ; action ou conduite qui attire un tel opprobre.",
+    "exemple": "Trahir ses compagnons pour quelques pièces fut l'ignominie de sa vie.",
+    "academie": true
+  },
+  {
+    "mot": "ilote",
+    "nature": "n. m. et f.",
+    "definition": "Dans l'ancienne Sparte, habitant réduit en servitude ; par extension, personne maintenue dans la misère, l'ignorance ou l'asservissement.",
+    "exemple": "Le romancier décrit ces ouvriers comme les ilotes d'une industrie impitoyable.",
+    "academie": true
+  },
+  {
+    "mot": "imbroglio",
+    "nature": "n. m.",
+    "definition": "Situation embrouillée, confuse et difficile à démêler ; intrigue de théâtre très compliquée.",
+    "exemple": "Entre les deux contrats et les trois avocats, l'affaire tourna à l'imbroglio.",
+    "academie": true
+  },
+  {
+    "mot": "immarcescible",
+    "nature": "adj.",
+    "definition": "Qui ne peut se flétrir ; au figuré, qui ne s'altère pas, impérissable.",
+    "exemple": "Le poète chante la gloire immarcescible des héros disparus.",
+    "academie": true
+  },
+  {
+    "mot": "impavide",
+    "nature": "adj.",
+    "definition": "Qui ne manifeste aucune peur, aucun trouble face au danger.",
+    "exemple": "Impavide sous l'orage, le capitaine continuait de donner ses ordres.",
+    "academie": false
+  },
+  {
+    "mot": "impécunieux",
+    "nature": "adj.",
+    "definition": "Qui manque d'argent ; peu fortuné.",
+    "exemple": "Ce poète impécunieux payait souvent ses repas avec des sonnets.",
+    "academie": false
+  },
+  {
+    "mot": "impénitent",
+    "nature": "adj.",
+    "definition": "Qui ne se repent pas de ses fautes ; par extension, qui persiste dans une habitude.",
+    "exemple": "Mon oncle est un fumeur impénitent qui rit des conseils de son médecin.",
+    "academie": true
+  },
+  {
+    "mot": "impétrant",
+    "nature": "n. m.",
+    "definition": "Personne qui a obtenu de l'autorité un titre, un diplôme, une charge ou un avantage.",
+    "exemple": "Le diplôme doit porter la signature de l'impétrant.",
+    "academie": true
+  },
+  {
+    "mot": "incoercible",
+    "nature": "adj.",
+    "definition": "Qu'on ne peut contenir, réprimer ou empêcher.",
+    "exemple": "Un fou rire incoercible la saisit au beau milieu du sermon.",
+    "academie": true
+  },
+  {
+    "mot": "incunable",
+    "nature": "n. m.",
+    "definition": "Livre imprimé dans les premiers temps de l'imprimerie, avant 1501.",
+    "exemple": "La bibliothèque municipale conserve un précieux incunable vénitien.",
+    "academie": true
+  },
+  {
+    "mot": "inexpugnable",
+    "nature": "adj.",
+    "definition": "Qu'on ne peut prendre par la force ; au figuré, qui résiste à toute attaque.",
+    "exemple": "Perchée sur son rocher, la citadelle passait pour inexpugnable.",
+    "academie": true
+  },
+  {
+    "mot": "infatuation",
+    "nature": "n. f.",
+    "definition": "Satisfaction excessive et ridicule de soi-même ; vanité.",
+    "exemple": "Son infatuation le rendait sourd à toute critique.",
+    "academie": true
+  },
+  {
+    "mot": "infrangible",
+    "nature": "adj.",
+    "definition": "Qui ne peut être brisé ; au figuré, que rien ne peut rompre.",
+    "exemple": "Une amitié infrangible unissait les deux vieux marins.",
+    "academie": true
+  },
+  {
+    "mot": "ingambe",
+    "nature": "adj.",
+    "definition": "Qui a les jambes alertes ; qui se meut avec aisance et vivacité.",
+    "exemple": "À quatre-vingt-dix ans, ma grand-tante est encore ingambe.",
+    "academie": true
+  },
+  {
+    "mot": "inique",
+    "nature": "adj.",
+    "definition": "Qui manque gravement à la justice et à l'équité.",
+    "exemple": "Le peuple se souleva contre cet impôt inique.",
+    "academie": false
+  },
+  {
+    "mot": "inénarrable",
+    "nature": "adj.",
+    "definition": "Qu'on ne peut raconter ; par plaisanterie, d'une drôlerie ou d'une bizarrerie extraordinaire.",
+    "exemple": "Nous avons eu droit au récit inénarrable de ses vacances en camping-car.",
+    "academie": true
+  },
+  {
+    "mot": "invétéré",
+    "nature": "adj.",
+    "definition": "Enraciné par le temps ; se dit aussi de quelqu'un chez qui une habitude est profondément ancrée.",
+    "exemple": "C'est un joueur invétéré qui ne manque aucune course.",
+    "academie": false
+  },
+  {
+    "mot": "irascible",
+    "nature": "adj.",
+    "definition": "Qui s'emporte facilement ; prompt à la colère.",
+    "exemple": "Le vieux concierge, irascible, chassait les enfants à coups de balai.",
+    "academie": true
+  },
+  {
+    "mot": "itératif",
+    "nature": "adj.",
+    "definition": "Qui est fait ou répété plusieurs fois.",
+    "exemple": "Malgré ses demandes itératives, le dossier n'avançait pas.",
+    "academie": true
+  },
+  {
+    "mot": "ivraie",
+    "nature": "n. f.",
+    "definition": "Graminée qui pousse parmi les céréales ; au figuré, ce qui est nuisible et se mêle au bon.",
+    "exemple": "Il faut savoir séparer le bon grain de l'ivraie.",
+    "academie": true
+  },
+  {
+    "mot": "incarnadin",
+    "nature": "adj.",
+    "definition": "D'un rouge clair, un peu plus pâle que l'incarnat.",
+    "exemple": "Le soleil couchant teintait les nuages d'un reflet incarnadin.",
+    "academie": false
+  },
+  {
+    "mot": "imprécation",
+    "nature": "n. f.",
+    "definition": "Malédiction lancée contre quelqu'un ; souhait véhément de malheur.",
+    "exemple": "La sorcière proféra une terrible imprécation contre le village.",
+    "academie": true
+  },
+  {
+    "mot": "ingénu",
+    "nature": "adj. et n.",
+    "definition": "D'une franchise simple et naïve, sans malice.",
+    "exemple": "Elle posa la question d'un air ingénu qui désarma tout le monde.",
+    "academie": true
+  },
+  {
+    "mot": "intercesseur",
+    "nature": "n. m.",
+    "definition": "Personne qui intervient en faveur d'une autre pour obtenir une grâce, un pardon.",
+    "exemple": "Il servit d'intercesseur auprès du roi pour sauver son ami.",
+    "academie": true
+  },
+  {
+    "mot": "isabelle",
+    "nature": "adj. inv.",
+    "definition": "D'un jaune clair tirant sur le beige, en parlant surtout de la robe d'un cheval.",
+    "exemple": "Le prince montait une jument isabelle.",
+    "academie": true
+  },
+  {
+    "mot": "impondérable",
+    "nature": "n. m.",
+    "definition": "Élément imprévisible dont on ne peut mesurer l'influence sur les événements.",
+    "exemple": "Malgré une préparation minutieuse, un impondérable fit échouer l'expédition.",
+    "academie": true
+  },
+  {
+    "mot": "incartade",
+    "nature": "n. f.",
+    "definition": "Léger écart de conduite, folie passagère.",
+    "exemple": "Ses parents lui pardonnèrent cette incartade de jeunesse.",
+    "academie": true
+  },
+  {
+    "mot": "inféoder",
+    "nature": "v. tr.",
+    "definition": "Donner une terre en fief ; au figuré, placer sous la dépendance de quelqu'un.",
+    "exemple": "Ce petit parti s'est inféodé à son puissant voisin.",
+    "academie": true
+  },
+  {
+    "mot": "infus",
+    "nature": "adj.",
+    "definition": "Que l'on possède naturellement, sans l'avoir appris (surtout dans « science infuse »).",
+    "exemple": "Il croit avoir la science infuse et ne lit jamais rien.",
+    "academie": true
+  },
+  {
+    "mot": "irréfragable",
+    "nature": "adj.",
+    "definition": "Qu'on ne peut contester ni récuser.",
+    "exemple": "L'enquêteur apporta une preuve irréfragable de sa culpabilité.",
+    "academie": true
+  },
+  {
+    "mot": "irrémissible",
+    "nature": "adj.",
+    "definition": "Qui ne peut être pardonné ; indigne de toute rémission.",
+    "exemple": "Abandonner un enfant lui paraissait une faute irrémissible.",
+    "academie": true
+  },
+  {
+    "mot": "ignivome",
+    "nature": "adj.",
+    "definition": "Qui vomit du feu.",
+    "exemple": "La légende parle d'un dragon ignivome tapi sous la montagne.",
+    "academie": false
+  },
+  {
+    "mot": "intempérance",
+    "nature": "n. f.",
+    "definition": "Manque de modération, surtout dans les plaisirs de la table et de la boisson.",
+    "exemple": "Son intempérance lui avait ruiné la santé.",
+    "academie": true
+  },
+  {
+    "mot": "idiosyncrasie",
+    "nature": "n. f.",
+    "definition": "Manière d'être propre à chaque individu, qui le fait réagir à sa façon.",
+    "exemple": "Ces manies font partie de l'idiosyncrasie de notre directeur.",
+    "academie": true
+  },
+  {
+    "mot": "inamovible",
+    "nature": "adj.",
+    "definition": "Qui ne peut être déplacé ou destitué de sa fonction ; par extension, qui reste toujours en place.",
+    "exemple": "Le président inamovible du club fêtait sa trentième réélection.",
+    "academie": true
+  },
+  {
+    "mot": "itou",
+    "nature": "adv.",
+    "definition": "Aussi, de même (familier et vieilli).",
+    "exemple": "Tu vas au bal ? Et moi itou !",
+    "academie": false
+  },
+  {
+    "mot": "icelui",
+    "nature": "pron. dém.",
+    "definition": "Vieilli ou plaisant : celui-ci, ce dernier (féminin icelle).",
+    "exemple": "Le notaire remit les clés au fermier, et icelui s'en alla content.",
+    "academie": true
+  },
+  {
+    "mot": "ipso facto",
+    "nature": "loc. adv.",
+    "definition": "Par le fait même, automatiquement.",
+    "exemple": "Tout retard de paiement entraîne ipso facto la résiliation du contrat.",
+    "academie": true
+  },
+  {
+    "mot": "in petto",
+    "nature": "loc. adv.",
+    "definition": "En son for intérieur, sans le dire.",
+    "exemple": "Il approuva poliment, mais se moqua in petto de ce projet absurde.",
+    "academie": true
+  },
+  {
+    "mot": "iconoclaste",
+    "nature": "adj. et n.",
+    "definition": "Qui détruit les images saintes ; par extension, qui s'attaque aux traditions, aux idées reçues et aux valeurs établies.",
+    "exemple": "Ce metteur en scène iconoclaste a transposé la tragédie dans un parking souterrain.",
+    "academie": true
+  },
+  {
+    "mot": "inexpiable",
+    "nature": "adj.",
+    "definition": "Qui ne peut être expié, racheté par aucune pénitence.",
+    "exemple": "Il porta toute sa vie le poids d'une faute inexpiable.",
+    "academie": true
+  },
+  {
+    "mot": "insanité",
+    "nature": "n. f.",
+    "definition": "Manque de bon sens, déraison ; parole ou action dénuée de sens.",
+    "exemple": "Il débita des insanités pendant tout le dîner.",
+    "academie": true
+  },
+  {
+    "mot": "intempestif",
+    "nature": "adj.",
+    "definition": "Qui se produit à contretemps, mal à propos.",
+    "exemple": "Ses remarques intempestives ont fini par lasser l'assemblée.",
+    "academie": true
+  },
+  {
+    "mot": "inopiné",
+    "nature": "adj.",
+    "definition": "Qui arrive sans qu'on s'y attende ; imprévu.",
+    "exemple": "La visite inopinée de l'inspecteur sema la panique dans l'atelier.",
+    "academie": true
+  },
+  {
+    "mot": "jaculatoire",
+    "nature": "adj.",
+    "definition": "Se dit d'une prière courte et fervente, lancée vers Dieu d'un élan du cœur.",
+    "exemple": "La vieille femme murmurait des oraisons jaculatoires en égrenant son chapelet.",
+    "academie": true
+  },
+  {
+    "mot": "jaser",
+    "nature": "v. intr.",
+    "definition": "Babiller sans fin ; médire, faire des commérages sur quelqu'un.",
+    "exemple": "Son mariage précipité a fait jaser tout le quartier.",
+    "academie": true
+  },
+  {
+    "mot": "jobard",
+    "nature": "adj. et n.",
+    "definition": "Naïf qui se laisse facilement duper (familier).",
+    "exemple": "Il fallait être bien jobard pour croire à cette histoire de trésor.",
+    "academie": true
+  },
+  {
+    "mot": "joliesse",
+    "nature": "n. f.",
+    "definition": "Caractère de ce qui est joli, gracieux.",
+    "exemple": "On admirait la joliesse de ses aquarelles.",
+    "academie": true
+  },
+  {
+    "mot": "jouvence",
+    "nature": "n. f.",
+    "definition": "Jeunesse (dans « fontaine de jouvence », « bain de jouvence ») : ce qui rajeunit, redonne vigueur.",
+    "exemple": "Cette semaine à la montagne fut pour lui un véritable bain de jouvence.",
+    "academie": true
+  },
+  {
+    "mot": "jusquiame",
+    "nature": "n. f.",
+    "definition": "Plante herbacée vénéneuse aux propriétés narcotiques.",
+    "exemple": "Les sorcières, disait-on, mêlaient la jusquiame à leurs breuvages.",
+    "academie": true
+  },
+  {
+    "mot": "jouailler",
+    "nature": "v. intr.",
+    "definition": "Jouer petit jeu, pour le seul amusement ; jouer médiocrement, sans application (familier).",
+    "exemple": "Le soir, les vieux jouaillaient aux cartes pour quelques sous.",
+    "academie": false
+  },
+  {
+    "mot": "jubé",
+    "nature": "n. m.",
+    "definition": "Tribune transversale séparant le chœur de la nef dans certaines églises.",
+    "exemple": "Le jubé sculpté de l'église est une merveille du gothique flamboyant.",
+    "academie": true
+  },
+  {
+    "mot": "jugeote",
+    "nature": "n. f.",
+    "definition": "Bon sens, discernement (familier).",
+    "exemple": "Avec un peu de jugeote, tu aurais évité ce piège.",
+    "academie": false
+  },
+  {
+    "mot": "jusant",
+    "nature": "n. m.",
+    "definition": "Marée descendante, reflux.",
+    "exemple": "Les pêcheurs attendaient le jusant pour ramasser les coques.",
+    "academie": true
+  },
+  {
+    "mot": "jouxter",
+    "nature": "v. tr.",
+    "definition": "Être situé à côté de, toucher à.",
+    "exemple": "Notre jardin jouxte le cimetière du village.",
+    "academie": true
+  },
+  {
+    "mot": "jaquemart",
+    "nature": "n. m.",
+    "definition": "Figurine de métal qui frappe les heures sur la cloche d'une horloge.",
+    "exemple": "À midi, les touristes guettent le jaquemart du beffroi.",
+    "academie": true
+  },
+  {
+    "mot": "jonchée",
+    "nature": "n. f.",
+    "definition": "Herbes, fleurs ou branchages répandus sur le sol lors d'une cérémonie ; par analogie, grande quantité de choses éparses.",
+    "exemple": "Une jonchée de pétales couvrait le parvis après la noce.",
+    "academie": false
+  },
+  {
+    "mot": "jacquerie",
+    "nature": "n. f.",
+    "definition": "Révolte paysanne, d'après celle de 1358 ; soulèvement populaire.",
+    "exemple": "La hausse des taxes provoqua une jacquerie dans la province.",
+    "academie": true
+  },
+  {
+    "mot": "janotisme",
+    "nature": "n. m.",
+    "definition": "Construction de phrase maladroite et ridicule, prêtant à l'équivoque.",
+    "exemple": "« Il a mangé une pomme sur la table qui était pourrie » est un beau janotisme.",
+    "academie": false
+  },
+  {
+    "mot": "knout",
+    "nature": "n. m.",
+    "definition": "Fouet à lanières de cuir utilisé autrefois en Russie ; châtiment infligé avec ce fouet.",
+    "exemple": "Le serf fut condamné au knout pour avoir fui le domaine.",
+    "academie": true
+  },
+  {
+    "mot": "kermesse",
+    "nature": "n. f.",
+    "definition": "Fête patronale en plein air, avec foire, dans les Flandres ; fête de bienfaisance.",
+    "exemple": "Toute l'école se prépara pour la kermesse de juin.",
+    "academie": true
+  },
+  {
+    "mot": "keepsake",
+    "nature": "n. m.",
+    "definition": "Album romantique richement illustré, offert en cadeau au XIXᵉ siècle.",
+    "exemple": "Elle feuilletait un vieux keepsake aux gravures jaunies.",
+    "academie": false
+  },
+  {
+    "mot": "labile",
+    "nature": "adj.",
+    "definition": "Qui se dégrade ou change facilement ; instable.",
+    "exemple": "Son humeur labile déconcertait ses proches.",
+    "academie": false
+  },
+  {
+    "mot": "lacis",
+    "nature": "n. m.",
+    "definition": "Réseau de fils, de vaisseaux ou de chemins entrelacés.",
+    "exemple": "Nous nous perdîmes dans le lacis des ruelles de la médina.",
+    "academie": true
+  },
+  {
+    "mot": "ladre",
+    "nature": "adj. et n.",
+    "definition": "Avare jusqu'à la mesquinerie (sens vieilli : lépreux).",
+    "exemple": "Ce vieux ladre refusait même de chauffer sa maison.",
+    "academie": true
+  },
+  {
+    "mot": "laïus",
+    "nature": "n. m.",
+    "definition": "Discours long et creux (familier).",
+    "exemple": "Le maire nous a infligé un laïus de vingt minutes.",
+    "academie": true
+  },
+  {
+    "mot": "lambris",
+    "nature": "n. m.",
+    "definition": "Revêtement de menuiserie, de marbre ou de stuc sur les murs ou les plafonds d'une pièce.",
+    "exemple": "Les lambris dorés du salon brillaient sous les lustres.",
+    "academie": true
+  },
+  {
+    "mot": "languide",
+    "nature": "adj.",
+    "definition": "Qui est languissant, sans force, empreint de langueur.",
+    "exemple": "Elle lui jeta un regard languide par-dessus son éventail.",
+    "academie": true
+  },
+  {
+    "mot": "lapidaire",
+    "nature": "adj.",
+    "definition": "Qui a la concision et la vigueur d'une inscription gravée.",
+    "exemple": "Sa réponse lapidaire coupa court à la discussion.",
+    "academie": true
+  },
+  {
+    "mot": "laquais",
+    "nature": "n. m.",
+    "definition": "Valet en livrée ; au figuré, homme d'une servilité méprisable.",
+    "exemple": "Deux laquais en perruque ouvrirent les portes du carrosse.",
+    "academie": true
+  },
+  {
+    "mot": "latitudinaire",
+    "nature": "adj. et n.",
+    "definition": "Qui interprète avec largeur les règles religieuses ou morales ; trop accommodant.",
+    "exemple": "Les jansénistes reprochaient aux jésuites une morale latitudinaire.",
+    "academie": true
+  },
+  {
+    "mot": "laudatif",
+    "nature": "adj.",
+    "definition": "Qui contient des éloges ; élogieux.",
+    "exemple": "Le critique a publié un article très laudatif sur le roman.",
+    "academie": true
+  },
+  {
+    "mot": "lavis",
+    "nature": "n. m.",
+    "definition": "Procédé de dessin à l'encre ou à la couleur délayées d'eau ; œuvre ainsi exécutée.",
+    "exemple": "Le peintre exposa une série de lavis à l'encre de Chine.",
+    "academie": true
+  },
+  {
+    "mot": "lazaret",
+    "nature": "n. m.",
+    "definition": "Établissement où l'on isolait les voyageurs ou marchandises suspects de contagion.",
+    "exemple": "Les passagers du navire durent passer dix jours au lazaret.",
+    "academie": true
+  },
+  {
+    "mot": "lendore",
+    "nature": "n. m.",
+    "definition": "Personne lente, engourdie, toujours à moitié endormie (vieilli).",
+    "exemple": "Dépêche-toi donc, grand lendore, le car va partir !",
+    "academie": false
+  },
+  {
+    "mot": "leste",
+    "nature": "adj.",
+    "definition": "Agile, prompt dans ses mouvements ; un peu trop libre, grivois.",
+    "exemple": "Le chat, d'un bond leste, sauta sur l'armoire.",
+    "academie": true
+  },
+  {
+    "mot": "libation",
+    "nature": "n. f.",
+    "definition": "Offrande d'un liquide répandu en l'honneur d'une divinité ; par plaisanterie, action de boire abondamment et gaiement.",
+    "exemple": "Après de copieuses libations, les convives entonnèrent des chansons.",
+    "academie": true
+  },
+  {
+    "mot": "libelle",
+    "nature": "n. m.",
+    "definition": "Petit écrit satirique, diffamatoire ou injurieux.",
+    "exemple": "Un libelle anonyme contre le ministre circulait dans les cafés.",
+    "academie": true
+  },
+  {
+    "mot": "liard",
+    "nature": "n. m.",
+    "definition": "Ancienne petite monnaie de cuivre ; par extension, somme insignifiante.",
+    "exemple": "Il n'avait plus un liard en poche.",
+    "academie": true
+  },
+  {
+    "mot": "limbes",
+    "nature": "n. m. pl.",
+    "definition": "Séjour des âmes des justes avant la venue du Christ ; au figuré, état incertain, mal défini.",
+    "exemple": "Le projet est resté dans les limbes pendant dix ans.",
+    "academie": true
+  },
+  {
+    "mot": "linéament",
+    "nature": "n. m.",
+    "definition": "Trait, ligne élémentaire d'une forme ; au figuré, ébauche, premiers éléments.",
+    "exemple": "On distingue déjà les linéaments d'une nouvelle politique.",
+    "academie": false
+  },
+  {
+    "mot": "lippe",
+    "nature": "n. f.",
+    "definition": "Lèvre inférieure épaisse et proéminente ; « faire la lippe » : bouder.",
+    "exemple": "L'enfant, vexé, fit la lippe toute la soirée.",
+    "academie": true
+  },
+  {
+    "mot": "litote",
+    "nature": "n. f.",
+    "definition": "Figure qui consiste à dire moins pour faire entendre davantage.",
+    "exemple": "« Ce n'est pas mauvais » est une litote pour dire que c'est délicieux.",
+    "academie": false
+  },
+  {
+    "mot": "longanimité",
+    "nature": "n. f.",
+    "definition": "Patience à supporter les offenses ou les maux ; indulgence de celui qui pourrait punir.",
+    "exemple": "Il abusa longtemps de la longanimité de ses créanciers.",
+    "academie": true
+  },
+  {
+    "mot": "loustic",
+    "nature": "n. m.",
+    "definition": "Plaisantin, farceur qui amuse son entourage (familier).",
+    "exemple": "Quel est le loustic qui a caché mes lunettes ?",
+    "academie": true
+  },
+  {
+    "mot": "lucre",
+    "nature": "n. m.",
+    "definition": "Gain, profit recherché avec avidité (péjoratif).",
+    "exemple": "Il agissait par goût du lucre plus que par conviction.",
+    "academie": true
+  },
+  {
+    "mot": "ludion",
+    "nature": "n. m.",
+    "definition": "Petit objet creux qui monte et descend dans un bocal d'eau selon la pression exercée ; au figuré, personne légère et fantasque.",
+    "exemple": "Les enfants s'amusaient à faire danser le ludion dans la bouteille.",
+    "academie": true
+  },
+  {
+    "mot": "lumignon",
+    "nature": "n. m.",
+    "definition": "Bout de mèche d'une chandelle ou d'une bougie qui brûle ; petite lumière faible.",
+    "exemple": "Un lumignon éclairait à peine la chambre du malade.",
+    "academie": true
+  },
+  {
+    "mot": "lustral",
+    "nature": "adj.",
+    "definition": "Qui sert à purifier, dans les rites religieux.",
+    "exemple": "Le prêtre aspergea la foule d'eau lustrale.",
+    "academie": true
+  },
+  {
+    "mot": "lycanthrope",
+    "nature": "n. m. et f.",
+    "definition": "Être humain capable de se changer en loup ; loup-garou.",
+    "exemple": "Le village entier croyait qu'un lycanthrope rôdait les nuits de pleine lune.",
+    "academie": true
+  },
+  {
+    "mot": "lige",
+    "nature": "adj.",
+    "definition": "Lié à son seigneur par un hommage d'obéissance absolue ; au figuré, entièrement dévoué.",
+    "exemple": "Le ministre était l'homme lige du président.",
+    "academie": true
+  },
+  {
+    "mot": "liminaire",
+    "nature": "adj.",
+    "definition": "Placé en tête d'un ouvrage ou d'un discours ; préliminaire.",
+    "exemple": "L'auteur s'en explique dans une note liminaire.",
+    "academie": true
+  },
+  {
+    "mot": "loqueteux",
+    "nature": "adj. et n.",
+    "definition": "Vêtu de loques, de haillons.",
+    "exemple": "Un mendiant loqueteux tendait la main sous le porche.",
+    "academie": true
+  },
+  {
+    "mot": "luron",
+    "nature": "n. m.",
+    "definition": "Bon vivant, homme gai et insouciant (surtout dans « joyeux luron »).",
+    "exemple": "Mon grand-père était un joyeux luron qui chantait à chaque repas.",
+    "academie": true
+  },
+  {
+    "mot": "léonin",
+    "nature": "adj.",
+    "definition": "Propre au lion ; se dit d'un partage ou d'un contrat qui avantage scandaleusement une partie.",
+    "exemple": "Il a signé un contrat léonin qui le prive de tout bénéfice.",
+    "academie": true
+  },
+  {
+    "mot": "logorrhée",
+    "nature": "n. f.",
+    "definition": "Flot de paroles intarissable et désordonné.",
+    "exemple": "Personne ne pouvait endiguer la logorrhée du conférencier.",
+    "academie": false
+  },
+  {
+    "mot": "lèse-majesté",
+    "nature": "n. f.",
+    "definition": "Crime d'atteinte au souverain ; au figuré, atteinte à une personne ou une chose vénérée.",
+    "exemple": "Critiquer ce chef cuisinier passe ici pour un crime de lèse-majesté.",
+    "academie": true
+  },
+  {
+    "mot": "lice",
+    "nature": "n. f.",
+    "definition": "Champ clos où se déroulaient tournois et joutes ; « entrer en lice » : s'engager dans une lutte.",
+    "exemple": "Trois candidats sont entrés en lice pour la mairie.",
+    "academie": true
+  },
+  {
+    "mot": "lubie",
+    "nature": "n. f.",
+    "definition": "Fantaisie soudaine et capricieuse.",
+    "exemple": "Sa dernière lubie : élever des escargots sur le balcon.",
+    "academie": true
+  }
+]
