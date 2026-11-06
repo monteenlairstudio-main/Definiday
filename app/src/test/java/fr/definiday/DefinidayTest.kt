@@ -271,9 +271,8 @@ class DefinidayTest {
         }
         fun views(a: android.app.Activity) = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
         fun answer(a: android.app.Activity, right: Boolean) {
-            val defs = Words.load(ctx).associateBy { it.definition }
-            val w = views(a).filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
-            views(a).filterIsInstance<android.widget.Button>().first { (it.text == w.mot) == right }.performClick()
+            val mot = quizAnswer(a)
+            views(a).filterIsInstance<android.widget.Button>().first { (it.text == mot) == right }.performClick()
         }
         // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 shows both requests
         fun onboarding(suffix: String) {
@@ -332,16 +331,39 @@ class DefinidayTest {
         capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_dark.png"))
         RuntimeEnvironment.setQualifiers("+notnight")
         capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_light.png"))
+        // Mes mots and the review questions: 9 past words, 2 missed twice (fragile), 6 reviewed right and due again tonight, 3 favourites
+        val today = java.time.LocalDate.now().toEpochDay()
+        val past = Words.load(ctx).shuffled(kotlin.random.Random(7)).take(9)
+        past.forEachIndexed { i, w -> History(ctx).mark(w.mot, today - 2 - i * 3) }
+        Memory(ctx).run {
+            past.take(2).forEach { w -> repeat(2) { answered(w.mot, false, today - 1, today - 10, review = true) } }
+            past.drop(2).take(6).forEach { answered(it.mot, true, today - 1, today - 30, review = true) }
+            favourites = setOf(past[3].mot, past[5].mot, Words.seenToday(ctx).first().mot)
+        }
+        p.apply { lastQuizDay = today - 1; streak = 8 }
+        fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
+        capture(mots(), File(ui, "mots_light.png"))
+        capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
+            File(ui, "quiz_revision.png"))
+        val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }
+        capture(cloze.also { answer(it, right = false) }, File(ui, "quiz_trous_faux.png"))
+        RuntimeEnvironment.setFontScale(2f)
+        RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
+        capture(mots(), File(ui, "mots_w360_font200.png"))
+        RuntimeEnvironment.setFontScale(1f)
+        RuntimeEnvironment.setQualifiers("+w411dp-h891dp")
+        RuntimeEnvironment.setQualifiers("+night")
+        capture(mots(), File(ui, "mots_dark.png"))
+        RuntimeEnvironment.setQualifiers("+notnight")
     }
 
     /** Plays the evening quiz with [right] good answers and returns the activity on its score screen. */
     private fun quizEnd(right: Int): android.app.Activity {
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
         fun views() = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
         for (i in Words.seenToday(ctx).indices) {
-            val answer = views().filterIsInstance<android.widget.TextView>().firstNotNullOf { defs[it.text.toString()] }
-            views().filterIsInstance<android.widget.Button>().first { (it.text == answer.mot) == (i < right) }.performClick()
+            val answer = quizAnswer(a)
+            views().filterIsInstance<android.widget.Button>().first { (it.text == answer) == (i < right) }.performClick()
             views().filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
         }
         return a

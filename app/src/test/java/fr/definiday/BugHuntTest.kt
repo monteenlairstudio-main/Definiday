@@ -33,9 +33,8 @@ class BugHuntTest {
     private fun progress(a: android.app.Activity) = views(a).mapNotNull { it.contentDescription?.toString() }.toList()
     /** Answers the current question (first option) and goes to the next one. */
     private fun answerOne(a: android.app.Activity) {
-        val defs = Words.load(ctx).map { it.definition }.toSet()
-        val q = texts(a).first { it in defs }
-        views(a).filterIsInstance<Button>().first { b -> Words.load(ctx).any { it.mot == b.text.toString() && it.definition == q } }.performClick()
+        val mot = quizAnswer(a)
+        views(a).filterIsInstance<Button>().first { it.text == mot }.performClick()
         views(a).filterIsInstance<Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
     }
 
@@ -174,9 +173,8 @@ class BugHuntTest {
     @Test fun answeredQuestionStaysAnsweredOnRotation() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
-        val defs = Words.load(ctx).map { it.definition }.toSet()
-        val q = texts(c.get()).first { it in defs }
-        views(c.get()).filterIsInstance<Button>().first { b -> Words.load(ctx).any { it.mot == b.text.toString() && it.definition == q } }.performClick()
+        val mot = quizAnswer(c.get())
+        views(c.get()).filterIsInstance<Button>().first { it.text == mot }.performClick()
         c.recreate()
         assertTrue(views(c.get()).filterIsInstance<Button>().filter { it.text != ctx.getString(R.string.quiz_next) }.none { it.isEnabled })
         assertTrue(views(c.get()).filterIsInstance<Button>().any { it.text == ctx.getString(R.string.quiz_next) })

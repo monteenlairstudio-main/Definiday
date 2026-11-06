@@ -63,6 +63,7 @@ class MainActivity : Activity() {
         findViewById<View>(R.id.reveal).setOnClickListener { reveal() }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
         findViewById<View>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
+        findViewById<View>(R.id.mots_open).setOnClickListener { startActivity(Intent(this, MotsActivity::class.java)) }
         findViewById<View>(R.id.settings_open).setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         findViewById<View>(R.id.notif_banner).setOnClickListener {
             runCatching { startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, packageName)) }
@@ -137,6 +138,7 @@ class MainActivity : Activity() {
         val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = Styles.card(this, st.palette, 20f)
         findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
+        findViewById<android.widget.CheckBox>(R.id.favori).buttonTintList = android.content.res.ColorStateList.valueOf(st.palette.mot) // readable on the card like the word
         listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
         findViewById<Button>(R.id.reveal).apply { // a veil in the card's own ink, dashed edge; focused: solid 3 dp edge
@@ -181,6 +183,11 @@ class MainActivity : Activity() {
             }
         }
         hide(Prefs(this).guessFirst && item is Word && item.key != revealed)
+        findViewById<android.widget.CheckBox>(R.id.favori).apply { // words only; set before listening: showing is not a tap
+            visibility = if (item is Word) View.VISIBLE else View.GONE
+            setOnCheckedChangeListener(null); isChecked = item.key in Memory(context).favourites
+            setOnCheckedChangeListener { _, on -> Memory(context).favourite(item.key, on) }
+        }
         fit(findViewById(R.id.mot), if (item is Quote) 24f else 40f)
         showSeen()
         if (top) findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)

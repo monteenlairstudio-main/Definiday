@@ -85,6 +85,16 @@
                     android:layout_weight="1" />
 
                 <ImageButton
+                    android:id="@+id/mots_open"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/btn_round"
+                    android:contentDescription="@string/mots_open"
+                    android:src="@drawable/ic_mots"
+                    android:stateListAnimator="@animator/press" />
+
+                <ImageButton
                     android:id="@+id/settings_open"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -94,6 +104,10 @@
                     android:stateListAnimator="@animator/press" />
             </LinearLayout>
         </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <!-- one TalkBack stop reading label, word, nature and definition (API 28+) -->
         <LinearLayout
@@ -156,6 +170,16 @@
                     android:visibility="gone" />
             </FrameLayout>
         </LinearLayout>
+            <!-- favourite star (words only, Memory.favourites): its own TalkBack stop, tinted with the card's word colour -->
+            <CheckBox
+                android:id="@+id/favori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:background="@null"
+                android:button="@drawable/favori"
+                android:contentDescription="@string/favori" />
+        </FrameLayout>
 
         <!-- round actions; Académie is gone for a quote, TLFi becomes its source -->
         <GridLayout

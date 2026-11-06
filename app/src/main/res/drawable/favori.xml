@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CheckBox button of a favourite (home card, Mes mots): a 24 dp star centred in its 48 dp touch target, full when checked, an outline otherwise
+     (the state is told by the shape, not the color alone); accent 4.7:1 on bg. A selector of two still vectors, not one vector with a color
+     state list: that state lives in the vector's shared constant state, so every star of a list would take the last row's. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <item android:state_checked="true">
+        <aapt:attr name="android:drawable">
+            <vector android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+                <group android:translateX="12" android:translateY="12">
+                    <path android:pathData="M12,17.27L18.18,21l-1.64,-7.03L22,9.24l-7.19,-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z"
+                        android:fillColor="@color/accent" android:strokeColor="@color/accent" android:strokeWidth="1.5" android:strokeLineJoin="round" />
+                </group>
+            </vector>
+        </aapt:attr>
+    </item>
+    <item>
+        <aapt:attr name="android:drawable">
+            <vector android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+                <group android:translateX="12" android:translateY="12">
+                    <path android:pathData="M12,17.27L18.18,21l-1.64,-7.03L22,9.24l-7.19,-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z"
+                        android:strokeColor="@color/accent" android:strokeWidth="1.5" android:strokeLineJoin="round" />
+                </group>
+            </vector>
+        </aapt:attr>
+    </item>
+</selector>
