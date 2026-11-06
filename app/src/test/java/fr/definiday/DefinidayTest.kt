@@ -191,6 +191,18 @@ class DefinidayTest {
         assertEquals(6, p.passedQuizzes); assertEquals(5, p.perfectQuizzes)
     }
 
+    @Test fun quizNotificationShowsSleepingGlose() {
+        Words.today(ctx); Words.random(ctx)
+        Prefs(ctx).unlocked = setOf("soir")
+        DailyReceiver().onReceive(ctx, android.content.Intent(ctx, DailyReceiver::class.java).setAction(DailyReceiver.ACTION_QUIZ))
+        val n = ctx.getSystemService(NotificationManager::class.java).activeNotifications.single { it.id == 50 }.notification
+        val picture = n.extras.getParcelable(Notification.EXTRA_PICTURE, Bitmap::class.java)!!
+        assertEquals(512, picture.width); assertEquals(256, picture.height)
+        assertTrue(n.getLargeIcon() != null)
+        File("build/demo").mkdirs()
+        save(picture, File("build/demo/notif_quiz.png"))
+    }
+
     @Test fun randomPickReplacesTheLockScreenWord() {
         Prefs(ctx).apply { mode = Prefs.MODE_BOTH; wordsPerDay = 3 }
         DailyReceiver.show(ctx)

@@ -58,10 +58,10 @@ object Glose {
     fun stop(v: ImageView) = (v.drawable as? AnimatedVectorDrawable)?.stop()
 
     /** Still image (notifications, tests): the drawable fitted and centred in a w x h bitmap. */
-    fun bitmap(ctx: Context, res: Int, w: Int, h: Int, styles: List<Int> = emptyList()): Bitmap {
+    fun bitmap(d: Drawable, w: Int, h: Int): Bitmap {
         val b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val s = minOf(w, h)
-        drawable(ctx, res, styles).apply { setBounds((w - s) / 2, (h - s) / 2, (w + s) / 2, (h + s) / 2) }.draw(Canvas(b))
+        d.apply { setBounds((w - s) / 2, (h - s) / 2, (w + s) / 2, (h + s) / 2) }.draw(Canvas(b))
         return b
     }
 }

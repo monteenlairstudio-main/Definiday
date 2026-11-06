@@ -25,7 +25,7 @@ class GloseTest {
     private val all = R.drawable::class.java.fields.filter { it.name.startsWith("glose_") }.associate { it.name to it.getInt(null) }
     private val overlays = R.style::class.java.fields.filter { it.name.startsWith("Glose_") }.associate { it.name to it.getInt(null) }
 
-    private fun render(res: Int, styles: List<Int> = emptyList(), size: Int = 256) = Glose.bitmap(ctx, res, size, size, styles)
+    private fun render(res: Int, styles: List<Int> = emptyList(), size: Int = 256) = Glose.bitmap(Glose.drawable(ctx, res, styles), size, size)
     private fun painted(b: Bitmap) = IntArray(b.width * b.height).also { b.getPixels(it, 0, b.width, 0, 0, b.width, b.height) }.count { Color.alpha(it) > 0 }
     private fun diff(a: Bitmap, b: Bitmap) = (0 until a.width * a.height).count { a.getPixel(it % a.width, it / a.width) != b.getPixel(it % a.width, it / a.width) }
 

@@ -9,6 +9,7 @@ import android.app.WallpaperManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.os.Build
 import java.time.ZonedDateTime
 
@@ -65,8 +66,12 @@ class DailyReceiver : BroadcastReceiver() {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             channel(nm, ctx)
             val open = PendingIntent.getActivity(ctx, QUIZ_ID, Intent(ctx, QuizActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+            // a notification cannot play an AVD: still images of the user's Glose, asleep in his cup once that pose is unlocked
+            val pose = if ("soir" in Prefs(ctx).unlocked) R.drawable.glose_soir_vd else R.drawable.glose_assis_vd
             val n = Notification.Builder(ctx, CHANNEL)
                 .setSmallIcon(R.drawable.ic_stat)
+                .setLargeIcon(Icon.createWithBitmap(Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_dort_vd, accessory = false), 192, 192)))
+                .setStyle(Notification.BigPictureStyle().bigPicture(Glose.bitmap(Glose.mine(ctx, pose), 512, 256)))
                 .setContentTitle(ctx.getString(R.string.quiz_title))
                 .setContentText(ctx.getString(R.string.quiz_notif, Words.seenToday(ctx).size))
                 .setContentIntent(open)
