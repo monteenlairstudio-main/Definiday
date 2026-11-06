@@ -19,6 +19,7 @@
     <string name="anecdote">Anecdote</string>
     <string name="source"><u>Source de l’anecdote</u></string>
     <string name="random">Mot au hasard</string>
+    <string name="deja_vu">Déjà vu</string>
     <string name="seen_today">Aujourd’hui</string>
     <string name="per_day">Nombre de mots par jour</string>
     <string name="styles_row">Couleurs et polices</string>

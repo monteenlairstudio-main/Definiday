@@ -178,6 +178,10 @@ class MemoryTest {
         views(a).filterIsInstance<View>().first { (it as? TextView)?.text == "abâtardir" }.let { (it.parent.parent as View).performClick() }
         val open = shadowOf(a).nextStartedActivity
         assertEquals("abâtardir", open.getStringExtra(MainActivity.EXTRA_MOT))
+        assertTrue(open.getBooleanExtra(MainActivity.EXTRA_DEJA_VU, false))
+        // the card it opens says « Déjà vu », not « Mot au hasard »
+        val card = Robolectric.buildActivity(MainActivity::class.java, open).setup().get()
+        assertEquals(ctx.getString(R.string.deja_vu), card.findViewById<TextView>(R.id.label).text.toString())
         val star = views(a).filterIsInstance<CheckBox>().last()
         star.performClick()
         assertEquals(setOf("abâtardir"), Memory(ctx).favourites)

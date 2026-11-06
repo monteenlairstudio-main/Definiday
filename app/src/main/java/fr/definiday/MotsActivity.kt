@@ -141,7 +141,7 @@ class MotsActivity : Activity() {
             val texts = row.getChildAt(0) as LinearLayout
             (texts.getChildAt(0) as TextView).text = w.mot
             (texts.getChildAt(1) as TextView).text = w.definition
-            row.setOnClickListener { startActivity(Intent(this@MotsActivity, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)) }
+            row.setOnClickListener { startActivity(Intent(this@MotsActivity, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot).putExtra(MainActivity.EXTRA_DEJA_VU, true)) }
             (row.getChildAt(1) as CheckBox).apply {
                 setOnCheckedChangeListener(null) // a recycled row: not a tap
                 isChecked = w.mot in memory.favourites

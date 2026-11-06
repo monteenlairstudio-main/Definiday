@@ -33,6 +33,8 @@ import java.util.Locale
 class MainActivity : Activity() {
     companion object {
         const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item"; private const val STATE_REVEALED = "revealed"
+        /** Opened from « Mes mots »: the card says « Déjà vu », not « Mot au hasard ». */
+        const val EXTRA_DEJA_VU = "dejaVu"; private const val STATE_DEJA_VU = "dejaVu"
 
         /** Small still prop beside Glose by month: snowflake in winter, leaf in autumn, flower in spring, none in summer. */
         fun season(month: Int) = when (month) { 12, 1, 2 -> R.drawable.saison_flocon; in 9..11 -> R.drawable.saison_feuille; in 3..5 -> R.drawable.saison_fleur; else -> 0 }
@@ -41,6 +43,7 @@ class MainActivity : Activity() {
     private var current: Item? = null
     /** Key of the word whose definition was revealed (« Deviner avant de voir »): stays shown on the way back to the screen. */
     private var revealed: String? = null
+    private var dejaVu = false // the card's word came from « Mes mots »
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +53,7 @@ class MainActivity : Activity() {
         // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's). Shown in onResume.
         current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
         revealed = savedInstanceState?.getString(STATE_REVEALED)
+        dejaVu = savedInstanceState?.getBoolean(STATE_DEJA_VU) ?: intent.getBooleanExtra(EXTRA_DEJA_VU, false)
         if (resources.configuration.fontScale > 1.5f) findViewById<GridLayout>(R.id.actions).columnCount = 2 // labels at full size, never cut
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
@@ -78,13 +82,14 @@ class MainActivity : Activity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        find(intent.getStringExtra(EXTRA_MOT))?.let(::show)
+        find(intent.getStringExtra(EXTRA_MOT))?.let { dejaVu = intent.getBooleanExtra(EXTRA_DEJA_VU, false); show(it) }
     }
 
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         current?.let { out.putString(STATE_ITEM, it.key) }
         out.putString(STATE_REVEALED, revealed)
+        out.putBoolean(STATE_DEJA_VU, dejaVu)
     }
 
     /** Any word or quote by key (history keys: mot, or "q:" + text). */
@@ -168,7 +173,7 @@ class MainActivity : Activity() {
                 cnrtl.setOnClickListener { open(item.source) }
             }
             is Word -> {
-                text(R.id.label, getString(if (daily) R.string.today else R.string.random))
+                text(R.id.label, getString(if (daily) R.string.today else if (dejaVu) R.string.deja_vu else R.string.random))
                 text(R.id.mot, item.mot)
                 text(R.id.nature, item.nature)
                 text(R.id.definition, item.definition)
@@ -222,6 +227,7 @@ class MainActivity : Activity() {
 
     /** Chosen by the user (random pick, chip): shown, and TalkBack moves to the card, which reads the new item. */
     private fun pick(item: Item) {
+        dejaVu = false // a random pick or one of today's chips
         show(item)
         focusCard()
     }
