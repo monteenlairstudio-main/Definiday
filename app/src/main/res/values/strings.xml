@@ -82,6 +82,8 @@
     <string name="quiz_prompt">Quel mot correspond à cette définition\u202F?</string>
     <string name="quiz_progress">Question %1$d sur %2$d</string>
     <string name="quiz_score_desc">Score\u202F: %1$d sur %2$d</string>
+    <string name="sounds">Sons</string>
+    <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
 </resources>

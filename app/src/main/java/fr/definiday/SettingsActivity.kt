@@ -86,6 +86,10 @@ class SettingsActivity : Activity() {
         val cat = Styles.load(this)
         pool(R.id.palettes, R.string.palettes, R.string.palettes_title, cat.palettes.map { it.id to it.nom }, { p.palettes }) { p.palettes = it }
         pool(R.id.polices, R.string.polices, R.string.polices_title, cat.polices.map { it.id to it.nom }, { p.polices }) { p.polices = it }
+        findViewById<Switch>(R.id.sounds).apply {
+            isChecked = p.sounds
+            setOnCheckedChangeListener { _, on -> p.sounds = on; if (on) Sounds.play(context, Sounds.PAGE) } // a sample, so the choice is heard
+        }
     }
 
     override fun onResume() {

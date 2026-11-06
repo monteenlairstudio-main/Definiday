@@ -173,6 +173,15 @@
             android:id="@+id/polices"
             style="@style/Setting" />
 
+        <Switch
+            android:id="@+id/sounds"
+            style="@style/Toggle"
+            android:text="@string/sounds" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/sounds_hint" />
+
         <TextView
             style="@style/Label"
             android:layout_marginTop="32dp"

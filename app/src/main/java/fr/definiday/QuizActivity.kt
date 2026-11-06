@@ -139,6 +139,7 @@ class QuizActivity : Activity() {
     private fun react(b: View, right: Boolean) {
         if (Build.VERSION.SDK_INT >= 30) b.performHapticFeedback(if (right) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.REJECT)
         else if (right) b.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        Sounds.play(this, if (right) Sounds.RIGHT else Sounds.WRONG)
         icon?.let { Glose.once(it, if (right) R.drawable.glose_icone_hoche else R.drawable.glose_icone_penche, R.drawable.glose_icone_vd, accessory = false) }
         if (!ValueAnimator.areAnimatorsEnabled()) return
         b.stateListAnimator = null // its release (to scale 1) would fight the pop; the button stays disabled until next()
@@ -162,6 +163,7 @@ class QuizActivity : Activity() {
             val passed = Quiz.passed(score, questions.size)
             val fresh = Unlocks.update(p) // announced once each
             p.announced = p.announced + fresh.map { it.id }
+            Sounds.play(this, if (fresh.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
             // something unlocked: one Glose, wearing the last (rarest) one; else the thread writes the word once and holds it, never mocking when failed
             box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
             else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,

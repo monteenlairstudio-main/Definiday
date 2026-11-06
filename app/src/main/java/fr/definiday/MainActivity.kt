@@ -49,6 +49,7 @@ class MainActivity : Activity() {
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             pick(w)
+            Sounds.play(this, Sounds.PAGE)
             DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen (said under the button)
             warnIfHurried()
         }
