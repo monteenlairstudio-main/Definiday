@@ -1,0 +1,15 @@
+[
+ {
+  "mot": "s'acoquiner",
+  "_supprimer": true,
+  "_raison": "remplacé par acoquiner"
+ },
+ {
+  "mot": "acoquiner",
+  "nature": "v. pron.",
+  "definition": "Se lier, se mettre en fréquentation avec une ou des personnes peu recommandables.",
+  "exemple": "À force de traîner au port, il s’était acoquiné avec une bande de contrebandiers.",
+  "academie": true,
+  "_raison": "lemme sans pronom, comme gausser (liens CNRTL/Académie)"
+ }
+]

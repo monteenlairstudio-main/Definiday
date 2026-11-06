@@ -33,7 +33,7 @@ class MainActivity : Activity() {
         text(R.id.mot, w.mot)
         text(R.id.nature, w.nature)
         text(R.id.definition, w.definition)
-        text(R.id.exemple, if (w.exemple.isEmpty()) "" else "« ${w.exemple} »")
+        text(R.id.exemple, if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»")
         findViewById<Button>(R.id.academie).setOnClickListener { openAcademie(w.mot) }
         findViewById<Button>(R.id.cnrtl).setOnClickListener { open(cnrtl(w.mot)) }
 

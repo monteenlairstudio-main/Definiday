@@ -28,7 +28,7 @@ object WordCard {
             w.mot to paint(if (w.mot.length > 12) 0.09f else 0.12f, Typeface.BOLD, Color.WHITE),
             w.nature to paint(0.042f, Typeface.ITALIC, 0xFFC9A96E.toInt()),
             w.definition to paint(0.05f, Typeface.NORMAL, 0xFFE8E8EE.toInt()),
-            (if (w.exemple.isEmpty()) "" else "« ${w.exemple} »") to paint(0.042f, Typeface.ITALIC, 0xFFA0A6B8.toInt()),
+            (if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»") to paint(0.042f, Typeface.ITALIC, 0xFFA0A6B8.toInt()),
         ).filter { it.first.isNotEmpty() }.map {
             StaticLayout.Builder.obtain(it.first, 0, it.first.length, it.second, textW)
                 .setAlignment(Layout.Alignment.ALIGN_NORMAL).setLineSpacing(0f, 1.15f).build()

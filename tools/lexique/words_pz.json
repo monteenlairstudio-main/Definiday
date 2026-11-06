@@ -1,0 +1,492 @@
+[
+  {
+    "mot": "palinodie",
+    "nature": "n. f.",
+    "definition": "Revirement complet d'opinion ; fait de désavouer ce que l'on avait soutenu auparavant.",
+    "exemple": "Après tant de promesses, ses palinodies successives ont fini par lasser ses électeurs.",
+    "academie": true
+  },
+  {
+    "mot": "pusillanime",
+    "nature": "adj.",
+    "definition": "Qui manque de courage et d'audace, que la moindre difficulté ou le moindre risque fait reculer.",
+    "exemple": "Trop pusillanime pour contredire son chef, il approuva le projet en silence.",
+    "academie": true
+  },
+  {
+    "mot": "pandémonium",
+    "nature": "n. m.",
+    "definition": "Réunion tumultueuse de gens qui complotent et font le mal ; par ext., lieu de désordre, d'agitation et de vacarme.",
+    "exemple": "À l'heure de la sortie, la cour de l'école devient un véritable pandémonium.",
+    "academie": true
+  },
+  {
+    "mot": "panégyrique",
+    "nature": "n. m.",
+    "definition": "Discours ou écrit qui fait l'éloge appuyé, souvent sans nuance, d'une personne ou d'une chose.",
+    "exemple": "Son allocution d'adieu tourna au panégyrique du directeur sortant.",
+    "academie": true
+  },
+  {
+    "mot": "parangon",
+    "nature": "n. m.",
+    "definition": "Modèle accompli, exemple parfait d'une qualité ou d'un défaut.",
+    "exemple": "Dans tout le quartier, on la citait comme le parangon de la patience.",
+    "academie": true
+  },
+  {
+    "mot": "pérégrination",
+    "nature": "n. f.",
+    "definition": "Voyage long et compliqué, fait d'étapes et de détours nombreux (s'emploie surtout au pluriel).",
+    "exemple": "Il racontait ses pérégrinations à travers les Andes avec un plaisir communicatif.",
+    "academie": true
+  },
+  {
+    "mot": "philippique",
+    "nature": "n. f.",
+    "definition": "Discours violent et virulent dirigé contre quelqu'un, à la manière de Démosthène contre Philippe de Macédoine.",
+    "exemple": "Le député lança une philippique contre le ministre sous les applaudissements de ses amis.",
+    "academie": true
+  },
+  {
+    "mot": "picrocholin",
+    "nature": "adj.",
+    "definition": "Se dit d'un conflit déclenché pour des motifs dérisoires, comme la guerre du roi Picrochole chez Rabelais.",
+    "exemple": "La querelle picrocholine des deux voisins portait sur une haie de vingt centimètres.",
+    "academie": false
+  },
+  {
+    "mot": "pleutre",
+    "nature": "adj.",
+    "definition": "Qui manque totalement de courage, lâche.",
+    "exemple": "Il se montra pleutre et laissa son ami affronter seul les reproches.",
+    "academie": false
+  },
+  {
+    "mot": "prolixe",
+    "nature": "adj.",
+    "definition": "Qui s'étend trop longuement en paroles ou en écrits, qui manque de concision.",
+    "exemple": "Le rapport, trop prolixe, aurait gagné à perdre une centaine de pages.",
+    "academie": true
+  },
+  {
+    "mot": "prosélyte",
+    "nature": "n.",
+    "definition": "Personne nouvellement convertie à une religion ou à une doctrine ; par ext., partisan zélé qui cherche à rallier autrui.",
+    "exemple": "En nouveau prosélyte du vélo, il voulait convertir tout le bureau.",
+    "academie": true
+  },
+  {
+    "mot": "psittacisme",
+    "nature": "n. m.",
+    "definition": "Répétition mécanique de mots ou de phrases sans en comprendre le sens, à la manière d'un perroquet.",
+    "exemple": "Réciter la leçon sans la comprendre, c'est du pur psittacisme.",
+    "academie": false
+  },
+  {
+    "mot": "palimpseste",
+    "nature": "n. m.",
+    "definition": "Parchemin dont on a effacé le texte primitif pour en écrire un nouveau ; par ext., ce qui garde la trace de couches successives.",
+    "exemple": "La vieille ville est un palimpseste où chaque siècle a laissé sa marque.",
+    "academie": true
+  },
+  {
+    "mot": "pétaudière",
+    "nature": "n. f.",
+    "definition": "Lieu ou assemblée où règne la confusion, où chacun fait ce qu'il veut faute d'autorité.",
+    "exemple": "Sans président de séance, la réunion tourna vite à la pétaudière.",
+    "academie": true
+  },
+  {
+    "mot": "patelin",
+    "nature": "adj.",
+    "definition": "Doucereux et flatteur, qui use d'une douceur hypocrite pour parvenir à ses fins.",
+    "exemple": "D'un ton patelin, le vendeur nous assura que c'était une affaire unique.",
+    "academie": true
+  },
+  {
+    "mot": "persifler",
+    "nature": "v. tr.",
+    "definition": "Railler quelqu'un avec ironie, souvent en feignant de le louer.",
+    "exemple": "Elle persiflait ses collègues avec une politesse exquise.",
+    "academie": true
+  },
+  {
+    "mot": "quolibet",
+    "nature": "n. m.",
+    "definition": "Plaisanterie moqueuse, souvent grossière, lancée à l'adresse de quelqu'un.",
+    "exemple": "L'arbitre quitta le terrain sous les quolibets du public.",
+    "academie": true
+  },
+  {
+    "mot": "quérulent",
+    "nature": "adj.",
+    "definition": "Qui se plaint sans cesse et revendique de manière obsessionnelle la réparation de torts qu'il croit avoir subis.",
+    "exemple": "Ce voisin quérulent avait déjà écrit vingt lettres au maire pour un lampadaire.",
+    "academie": false
+  },
+  {
+    "mot": "quidam",
+    "nature": "n. m.",
+    "definition": "Individu quelconque, dont on ignore ou tait le nom.",
+    "exemple": "Un quidam s'arrêta pour nous indiquer le chemin de la gare.",
+    "academie": true
+  },
+  {
+    "mot": "quinaud",
+    "nature": "adj.",
+    "definition": "Vieilli. Honteux et confus, penaud d'avoir été pris en défaut.",
+    "exemple": "Pris la main dans le pot de confiture, l'enfant resta tout quinaud.",
+    "academie": true
+  },
+  {
+    "mot": "quarteron",
+    "nature": "n. m.",
+    "definition": "Petit nombre, poignée de personnes (souvent péjoratif) ; à l'origine, quart d'un cent.",
+    "exemple": "Un quarteron de mécontents bloquait l'entrée de la mairie.",
+    "academie": true
+  },
+  {
+    "mot": "rodomontade",
+    "nature": "n. f.",
+    "definition": "Vantardise, fanfaronnade de quelqu'un qui se prétend brave ou puissant.",
+    "exemple": "Malgré ses rodomontades, il n'osa pas sauter du grand plongeoir.",
+    "academie": true
+  },
+  {
+    "mot": "rasséréner",
+    "nature": "v. tr.",
+    "definition": "Rendre le calme et la sérénité à quelqu'un, l'apaiser.",
+    "exemple": "Le sourire de l'infirmière suffit à rasséréner le petit patient.",
+    "academie": true
+  },
+  {
+    "mot": "ratiociner",
+    "nature": "v. intr.",
+    "definition": "Raisonner de façon excessive et pointilleuse, se perdre en raisonnements subtils et vains.",
+    "exemple": "Au lieu d'agir, il passait des heures à ratiociner sur des détails.",
+    "academie": true
+  },
+  {
+    "mot": "récipiendaire",
+    "nature": "n.",
+    "definition": "Personne reçue solennellement dans une compagnie, ou qui reçoit un diplôme, une distinction.",
+    "exemple": "Le récipiendaire prononça l'éloge de son prédécesseur sous la Coupole.",
+    "academie": true
+  },
+  {
+    "mot": "regimber",
+    "nature": "v. intr.",
+    "definition": "Résister en se rebiffant, refuser d'obéir ; à l'origine, ruer, en parlant d'un cheval.",
+    "exemple": "Quand on lui demanda de ranger sa chambre, l'adolescent regimba.",
+    "academie": true
+  },
+  {
+    "mot": "ripaille",
+    "nature": "n. f.",
+    "definition": "Repas copieux et joyeux, bombance (surtout dans « faire ripaille »).",
+    "exemple": "Après la moisson, tout le village fit ripaille jusqu'à l'aube.",
+    "academie": true
+  },
+  {
+    "mot": "roué",
+    "nature": "adj.",
+    "definition": "Sans principes ni scrupules, habile à duper les autres par ses manœuvres.",
+    "exemple": "Ce négociateur roué obtenait tout sans jamais rien céder.",
+    "academie": false
+  },
+  {
+    "mot": "rubicond",
+    "nature": "adj.",
+    "definition": "Rouge, très coloré, en parlant du visage.",
+    "exemple": "Le visage rubicond du cuisinier trahissait la chaleur des fourneaux.",
+    "academie": false
+  },
+  {
+    "mot": "remugle",
+    "nature": "n. m.",
+    "definition": "Odeur désagréable de renfermé ou de moisi.",
+    "exemple": "En ouvrant la cave, nous fûmes saisis par un remugle de champignon.",
+    "academie": false
+  },
+  {
+    "mot": "rasibus",
+    "nature": "adv.",
+    "definition": "Familier. Au ras, tout près, en effleurant presque.",
+    "exemple": "La balle passa rasibus au-dessus de sa tête.",
+    "academie": true
+  },
+  {
+    "mot": "sérendipité",
+    "nature": "n. f.",
+    "definition": "Fait de découvrir par hasard quelque chose d'heureux ou d'utile en cherchant autre chose.",
+    "exemple": "C'est par sérendipité qu'elle trouva ce manuscrit en cherchant un livre de cuisine.",
+    "academie": false
+  },
+  {
+    "mot": "sycophante",
+    "nature": "n. m.",
+    "definition": "Dans l'Antiquité grecque, délateur professionnel ; par ext., dénonciateur fourbe, flatteur menteur.",
+    "exemple": "Le tyran s'entourait de sycophantes prêts à dénoncer leurs voisins.",
+    "academie": true
+  },
+  {
+    "mot": "sibyllin",
+    "nature": "adj.",
+    "definition": "Dont le sens est obscur, énigmatique, difficile à saisir.",
+    "exemple": "Elle partit en laissant un message sibyllin sur la table.",
+    "academie": true
+  },
+  {
+    "mot": "sémillant",
+    "nature": "adj.",
+    "definition": "Plein de vivacité et d'entrain, d'une gaieté pétillante.",
+    "exemple": "Sémillant malgré ses quatre-vingts ans, il dansa toute la soirée.",
+    "academie": true
+  },
+  {
+    "mot": "spécieux",
+    "nature": "adj.",
+    "definition": "Qui n'a qu'une apparence de vérité ou de justesse, propre à tromper.",
+    "exemple": "Son argument, quoique spécieux, convainquit une partie de l'auditoire.",
+    "academie": true
+  },
+  {
+    "mot": "stentor",
+    "nature": "n. m.",
+    "definition": "Homme à la voix puissante (surtout dans « voix de stentor »).",
+    "exemple": "Avec sa voix de stentor, le guide n'avait nul besoin de micro.",
+    "academie": true
+  },
+  {
+    "mot": "superfétatoire",
+    "nature": "adj.",
+    "definition": "Qui s'ajoute inutilement à ce qui suffit déjà, superflu.",
+    "exemple": "Après une explication aussi claire, toute précision serait superfétatoire.",
+    "academie": false
+  },
+  {
+    "mot": "satrape",
+    "nature": "n. m.",
+    "definition": "Gouverneur de province dans l'ancienne Perse ; par ext., homme puissant et despotique qui vit dans le faste.",
+    "exemple": "Le baron régnait sur sa vallée comme un satrape.",
+    "academie": true
+  },
+  {
+    "mot": "subreptice",
+    "nature": "adj.",
+    "definition": "Qui se fait en cachette, de manière furtive ou illicite.",
+    "exemple": "Il jeta un regard subreptice sur la copie de son voisin.",
+    "academie": true
+  },
+  {
+    "mot": "stipendier",
+    "nature": "v. tr.",
+    "definition": "Payer quelqu'un pour qu'il accomplisse une besogne, souvent méprisable.",
+    "exemple": "Le comte avait stipendié quelques brigands pour intimider ses fermiers.",
+    "academie": true
+  },
+  {
+    "mot": "sardonique",
+    "nature": "adj.",
+    "definition": "D'une moquerie méchante et amère.",
+    "exemple": "Il accueillit nos excuses avec un rire sardonique.",
+    "academie": true
+  },
+  {
+    "mot": "sustenter",
+    "nature": "v. tr.",
+    "definition": "Nourrir, entretenir les forces par des aliments ; au pronominal, plaisant : se restaurer.",
+    "exemple": "Après la randonnée, nous avions grand besoin de nous sustenter.",
+    "academie": true
+  },
+  {
+    "mot": "thuriféraire",
+    "nature": "n. m.",
+    "definition": "Celui qui porte l'encensoir dans une cérémonie ; par ext., flatteur zélé, admirateur servile.",
+    "exemple": "Le ministre ne s'entourait que de thuriféraires.",
+    "academie": true
+  },
+  {
+    "mot": "tartufe",
+    "nature": "n. m.",
+    "definition": "Hypocrite qui affiche une fausse dévotion ou une fausse vertu.",
+    "exemple": "Ce tartufe prêchait la sobriété en cachant des bouteilles dans son bureau.",
+    "academie": true
+  },
+  {
+    "mot": "tergiverser",
+    "nature": "v. intr.",
+    "definition": "Hésiter, user de faux-fuyants pour retarder une décision.",
+    "exemple": "Cesse de tergiverser et dis-nous enfin si tu viens.",
+    "academie": true
+  },
+  {
+    "mot": "thaumaturge",
+    "nature": "n.",
+    "definition": "Personne qui accomplit ou prétend accomplir des miracles.",
+    "exemple": "On le présentait comme un thaumaturge capable de guérir d'un regard.",
+    "academie": true
+  },
+  {
+    "mot": "truculent",
+    "nature": "adj.",
+    "definition": "Haut en couleur, d'un pittoresque savoureux et parfois cru.",
+    "exemple": "Sa grand-mère, conteuse truculente, faisait rire toute la tablée.",
+    "academie": true
+  },
+  {
+    "mot": "turpitude",
+    "nature": "n. f.",
+    "definition": "Bassesse morale, conduite ignoble ; action honteuse.",
+    "exemple": "Le roman dévoile les turpitudes d'une famille en apparence respectable.",
+    "academie": true
+  },
+  {
+    "mot": "trublion",
+    "nature": "n. m.",
+    "definition": "Personne qui sème le trouble, agitateur.",
+    "exemple": "Ce trublion avait encore interrompu la séance du conseil.",
+    "academie": true
+  },
+  {
+    "mot": "turlupiner",
+    "nature": "v. tr.",
+    "definition": "Familier. Tracasser, tourmenter l'esprit de quelqu'un.",
+    "exemple": "Cette question me turlupine depuis ce matin.",
+    "academie": true
+  },
+  {
+    "mot": "ubuesque",
+    "nature": "adj.",
+    "definition": "D'une absurdité grotesque, souvent cruelle ou cynique, à la manière du Père Ubu d'Alfred Jarry.",
+    "exemple": "Situation ubuesque : pour obtenir le formulaire, il fallait l'avoir déjà rempli.",
+    "academie": false
+  },
+  {
+    "mot": "urbanité",
+    "nature": "n. f.",
+    "definition": "Politesse raffinée, courtoisie de bon ton.",
+    "exemple": "Il nous reçut avec une urbanité d'un autre siècle.",
+    "academie": true
+  },
+  {
+    "mot": "ukase",
+    "nature": "n. m.",
+    "definition": "Édit du tsar ; par ext., décision autoritaire et sans appel.",
+    "exemple": "La direction a publié un ukase interdisant le café dans les bureaux.",
+    "academie": true
+  },
+  {
+    "mot": "ululer",
+    "nature": "v. intr.",
+    "definition": "Pousser son cri, en parlant des oiseaux de nuit comme la chouette ou le hibou.",
+    "exemple": "Toute la nuit, une chouette ulula dans le grand chêne.",
+    "academie": true
+  },
+  {
+    "mot": "uchronie",
+    "nature": "n. f.",
+    "definition": "Récit qui imagine ce qu'aurait été l'histoire si un événement passé s'était déroulé autrement.",
+    "exemple": "Ce roman est une uchronie où Napoléon triomphe à Waterloo.",
+    "academie": false
+  },
+  {
+    "mot": "vergogne",
+    "nature": "n. f.",
+    "definition": "Honte, pudeur ; ne s'emploie plus guère que dans « sans vergogne ».",
+    "exemple": "Il a menti sans vergogne devant tout le monde.",
+    "academie": true
+  },
+  {
+    "mot": "vilipender",
+    "nature": "v. tr.",
+    "definition": "Traiter avec un grand mépris, dénigrer publiquement.",
+    "exemple": "La critique vilipenda le film dès sa sortie.",
+    "academie": false
+  },
+  {
+    "mot": "vitupérer",
+    "nature": "v. tr.",
+    "definition": "Blâmer avec violence ; s'emploie aussi en construction intransitive (« vitupérer contre »).",
+    "exemple": "Chaque matin, il vitupérait contre les embouteillages.",
+    "academie": true
+  },
+  {
+    "mot": "velléitaire",
+    "nature": "adj.",
+    "definition": "Qui a des intentions mais ne passe jamais à l'acte, faute de volonté.",
+    "exemple": "Velléitaire, il commençait chaque année un régime qu'il abandonnait aussitôt.",
+    "academie": false
+  },
+  {
+    "mot": "vétille",
+    "nature": "n. f.",
+    "definition": "Chose sans importance, bagatelle.",
+    "exemple": "Ils se sont brouillés pour une vétille.",
+    "academie": true
+  },
+  {
+    "mot": "vésanie",
+    "nature": "n. f.",
+    "definition": "Vieilli. Folie, démence.",
+    "exemple": "Le poète voyait dans cette passion une forme de vésanie.",
+    "academie": true
+  },
+  {
+    "mot": "vaticiner",
+    "nature": "v. intr.",
+    "definition": "Prophétiser ; souvent péjoratif : faire des prédictions avec emphase ou de façon délirante.",
+    "exemple": "Le vieux savant vaticinait sur la fin prochaine du monde.",
+    "academie": true
+  },
+  {
+    "mot": "vespéral",
+    "nature": "adj.",
+    "definition": "Littéraire. Qui a trait au soir, qui se produit le soir.",
+    "exemple": "La lumière vespérale dorait les façades du port.",
+    "academie": true
+  },
+  {
+    "mot": "vindicte",
+    "nature": "n. f.",
+    "definition": "Poursuite d'un crime au nom de la société (« vindicte publique ») ; par ext., désir collectif de châtiment.",
+    "exemple": "Le suspect fut livré à la vindicte populaire avant même son procès.",
+    "academie": true
+  },
+  {
+    "mot": "yeuse",
+    "nature": "n. f.",
+    "definition": "Chêne vert, arbre méditerranéen au feuillage persistant.",
+    "exemple": "Nous pique-niquâmes à l'ombre d'une vieille yeuse.",
+    "academie": true
+  },
+  {
+    "mot": "zélateur",
+    "nature": "n. m.",
+    "definition": "Partisan zélé, défenseur ardent d'une cause ou d'une personne.",
+    "exemple": "Zélateur de la marche à pied, il refusait de prendre l'ascenseur.",
+    "academie": true
+  },
+  {
+    "mot": "zizanie",
+    "nature": "n. f.",
+    "definition": "Mésentente, discorde (surtout dans « semer la zizanie »).",
+    "exemple": "Cette histoire d'héritage a semé la zizanie dans la famille.",
+    "academie": true
+  },
+  {
+    "mot": "zéphyr",
+    "nature": "n. m.",
+    "definition": "Littéraire. Vent doux et léger.",
+    "exemple": "Un zéphyr agitait à peine les rideaux de la terrasse.",
+    "academie": true
+  },
+  {
+    "mot": "zinzolin",
+    "nature": "adj.",
+    "definition": "D'une couleur violet rougeâtre.",
+    "exemple": "Elle portait une écharpe zinzolin sur son manteau gris.",
+    "academie": true
+  }
+]

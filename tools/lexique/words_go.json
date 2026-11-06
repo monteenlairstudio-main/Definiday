@@ -1,0 +1,492 @@
+[
+  {
+    "mot": "gabegie",
+    "nature": "n. f.",
+    "definition": "Désordre ruineux né d'une gestion négligente ou dépensière, dans une administration, une entreprise ou un État.",
+    "exemple": "Entre les doublons et les factures perdues, la mairie vivait en pleine gabegie.",
+    "academie": true
+  },
+  {
+    "mot": "gabelou",
+    "nature": "n. m.",
+    "definition": "Autrefois, agent chargé de percevoir l'impôt sur le sel ; par plaisanterie, douanier ou employé des taxes.",
+    "exemple": "Le gabelou fouilla nos valises jusqu'au dernier chausson.",
+    "academie": true
+  },
+  {
+    "mot": "galéjade",
+    "nature": "n. f.",
+    "definition": "Histoire inventée ou enjolivée pour amuser, à la manière provençale ; plaisanterie qui exagère tout.",
+    "exemple": "Ne le crois pas : son combat contre trois sangliers n'est qu'une galéjade.",
+    "academie": true
+  },
+  {
+    "mot": "galimatias",
+    "nature": "n. m.",
+    "definition": "Propos embrouillé et confus, qui semble vouloir dire quelque chose mais reste inintelligible.",
+    "exemple": "Le contrat était rédigé dans un galimatias que même l'avocat ne démêlait pas.",
+    "academie": true
+  },
+  {
+    "mot": "gandin",
+    "nature": "n. m.",
+    "definition": "Jeune élégant désœuvré et un peu ridicule, soucieux surtout de sa mise, comme ceux des boulevards du Second Empire.",
+    "exemple": "Un gandin à gilet brodé lorgnait les passantes depuis la terrasse.",
+    "academie": false
+  },
+  {
+    "mot": "gargantuesque",
+    "nature": "adj.",
+    "definition": "Démesuré, énorme, surtout en parlant d'un repas ou d'un appétit, à la façon du géant Gargantua.",
+    "exemple": "Après la randonnée, ils firent honneur à un petit-déjeuner gargantuesque.",
+    "academie": false
+  },
+  {
+    "mot": "gausser",
+    "nature": "v. pron.",
+    "definition": "Se gausser de quelqu'un ou de quelque chose : s'en moquer ouvertement.",
+    "exemple": "Toute la classe se gaussait de son chapeau à plumes.",
+    "academie": true
+  },
+  {
+    "mot": "gloser",
+    "nature": "v. tr.",
+    "definition": "Expliquer ou commenter un texte au moyen de notes ; par extension, discourir longuement et avec malice sur quelque chose.",
+    "exemple": "Des générations d'érudits ont glosé chaque vers de ce poème obscur.",
+    "academie": true
+  },
+  {
+    "mot": "godelureau",
+    "nature": "n. m.",
+    "definition": "Jeune homme prétentieux qui joue les galants auprès des femmes.",
+    "exemple": "Ce godelureau offrait des roses à toutes les invitées du bal.",
+    "academie": false
+  },
+  {
+    "mot": "goguenard",
+    "nature": "adj.",
+    "definition": "Qui manifeste une moquerie narquoise, un air de raillerie amusée.",
+    "exemple": "Il observait nos efforts d'un œil goguenard, les mains dans les poches.",
+    "academie": true
+  },
+  {
+    "mot": "gourgandine",
+    "nature": "n. f.",
+    "definition": "Vieilli et plaisant : femme aux mœurs légères, qui collectionne les conquêtes.",
+    "exemple": "Dans le vaudeville, la tante outrée traite la soubrette de gourgandine.",
+    "academie": true
+  },
+  {
+    "mot": "gourmé",
+    "nature": "adj.",
+    "definition": "Qui affecte une attitude raide, grave et compassée.",
+    "exemple": "Le notaire, gourmé dans son col empesé, lut le testament sans sourire.",
+    "academie": true
+  },
+  {
+    "mot": "gracile",
+    "nature": "adj.",
+    "definition": "Mince, fin et délicat, d'une légèreté élancée.",
+    "exemple": "Une gracile silhouette de danseuse traversa la scène.",
+    "academie": true
+  },
+  {
+    "mot": "grigou",
+    "nature": "n. m.",
+    "definition": "Avare qui, bien qu'ayant de quoi vivre, se donne des airs pauvres pour ne rien dépenser.",
+    "exemple": "Ce vieux grigou réutilise ses sachets de thé trois fois.",
+    "academie": true
+  },
+  {
+    "mot": "hapax",
+    "nature": "n. m.",
+    "definition": "Mot ou emploi dont on ne connaît qu'une seule occurrence dans un corpus ; par extension, chose qui n'arrive qu'une fois.",
+    "exemple": "Ce terme est un hapax : on ne le trouve qu'une fois dans toute l'œuvre de Rabelais.",
+    "academie": true
+  },
+  {
+    "mot": "hâbleur",
+    "nature": "adj.",
+    "definition": "Qui parle avec exagération et vantardise, en se donnant le beau rôle.",
+    "exemple": "Ce pêcheur hâbleur décrit chaque truite comme un monstre du lac.",
+    "academie": true
+  },
+  {
+    "mot": "hiémal",
+    "nature": "adj.",
+    "definition": "Qui se rapporte à l'hiver ; se dit aussi de plantes qui poussent en hiver.",
+    "exemple": "La lumière hiémale donnait au jardin des reflets d'acier.",
+    "academie": true
+  },
+  {
+    "mot": "hiératique",
+    "nature": "adj.",
+    "definition": "Qui relève des choses sacrées ; au figuré, d'une raideur solennelle et majestueuse, comme figée par un rite.",
+    "exemple": "La reine se tenait droite, hiératique, sans un battement de cils.",
+    "academie": true
+  },
+  {
+    "mot": "histrion",
+    "nature": "n. m.",
+    "definition": "Dans l'Antiquité, acteur de farces ; par extension, personnage qui se donne en spectacle par des effets outranciers.",
+    "exemple": "Ce tribun n'est qu'un histrion qui confond l'hémicycle avec les tréteaux.",
+    "academie": false
+  },
+  {
+    "mot": "hurluberlu",
+    "nature": "n. m.",
+    "definition": "Personne étourdie et fantasque, aux idées et aux manières extravagantes.",
+    "exemple": "Un hurluberlu en pyjama distribuait des poèmes devant la gare.",
+    "academie": true
+  },
+  {
+    "mot": "impéritie",
+    "nature": "n. f.",
+    "definition": "Manque d'habileté ou ignorance de ce que l'on devrait savoir dans son métier.",
+    "exemple": "L'impéritie du pilote faillit coûter la vie à tout l'équipage.",
+    "academie": true
+  },
+  {
+    "mot": "incontinent",
+    "nature": "adv.",
+    "definition": "Littéraire : aussitôt, sur-le-champ, sans le moindre délai.",
+    "exemple": "Le roi ordonna qu'on lui amène incontinent le messager.",
+    "academie": true
+  },
+  {
+    "mot": "incurie",
+    "nature": "n. f.",
+    "definition": "Négligence coupable, absence totale de soin ou d'attention.",
+    "exemple": "Faute d'entretien, le château s'effondre, victime de l'incurie de ses propriétaires.",
+    "academie": true
+  },
+  {
+    "mot": "inanité",
+    "nature": "n. f.",
+    "definition": "Caractère de ce qui est vain, inutile ou vide de sens.",
+    "exemple": "Il mesura soudain l'inanité de ses efforts pour la convaincre.",
+    "academie": true
+  },
+  {
+    "mot": "ineffable",
+    "nature": "adj.",
+    "definition": "Qui ne peut être exprimé par des mots, tant il est intense ou sublime ; par ironie, d'un ridicule indescriptible.",
+    "exemple": "Face à la mer au lever du jour, elle éprouva un bonheur ineffable.",
+    "academie": true
+  },
+  {
+    "mot": "inextinguible",
+    "nature": "adj.",
+    "definition": "Qu'on ne peut éteindre ; au figuré, qu'on ne parvient ni à apaiser ni à réprimer.",
+    "exemple": "La blague déclencha chez sa sœur un fou rire inextinguible.",
+    "academie": true
+  },
+  {
+    "mot": "interlope",
+    "nature": "adj.",
+    "definition": "Qui se livre à des activités illégales ; par extension, louche, d'une honnêteté douteuse.",
+    "exemple": "Le port abritait une faune interlope de contrebandiers et de receleurs.",
+    "academie": true
+  },
+  {
+    "mot": "ire",
+    "nature": "n. f.",
+    "definition": "Littéraire : colère.",
+    "exemple": "Le chef, plein d'ire, jeta la sauce ratée par la fenêtre.",
+    "academie": false
+  },
+  {
+    "mot": "irénique",
+    "nature": "adj.",
+    "definition": "Qui recherche la paix et la conciliation entre opinions opposées, parfois au point de fermer les yeux sur les désaccords.",
+    "exemple": "Son discours irénique ne réglait aucun des différends entre les deux clans.",
+    "academie": false
+  },
+  {
+    "mot": "jactance",
+    "nature": "n. f.",
+    "definition": "Habitude de se vanter, de se mettre en valeur par des paroles orgueilleuses.",
+    "exemple": "Sa jactance lassait tout le monde : à l'entendre, il avait tout inventé.",
+    "academie": true
+  },
+  {
+    "mot": "jérémiade",
+    "nature": "n. f.",
+    "definition": "Plainte répétée et lassante, lamentation sans fin.",
+    "exemple": "Épargne-nous tes jérémiades et viens plutôt nous aider.",
+    "academie": true
+  },
+  {
+    "mot": "jocrisse",
+    "nature": "n. m.",
+    "definition": "Benêt naïf qui se laisse mener par n'importe qui.",
+    "exemple": "Le pauvre jocrisse a signé tout ce que le vendeur lui a tendu.",
+    "academie": true
+  },
+  {
+    "mot": "jouvenceau",
+    "nature": "n. m.",
+    "definition": "Vieilli ou plaisant : tout jeune homme, encore presque adolescent.",
+    "exemple": "Le jouvenceau rougit jusqu'aux oreilles en lui tendant la lettre.",
+    "academie": true
+  },
+  {
+    "mot": "kyrielle",
+    "nature": "n. f.",
+    "definition": "Longue suite de paroles, de choses ou de personnes qui n'en finit pas.",
+    "exemple": "Elle arriva avec une kyrielle d'excuses et de cousins.",
+    "academie": true
+  },
+  {
+    "mot": "laconique",
+    "nature": "adj.",
+    "definition": "Qui s'exprime en très peu de mots, de façon brève et concise.",
+    "exemple": "À toutes mes questions, il opposa un « peut-être » laconique.",
+    "academie": true
+  },
+  {
+    "mot": "lambiner",
+    "nature": "v. intr.",
+    "definition": "Agir avec lenteur et mollesse, traîner en faisant ce qu'on a à faire.",
+    "exemple": "Cesse de lambiner devant ton bol, le car passe dans cinq minutes !",
+    "academie": true
+  },
+  {
+    "mot": "lanterner",
+    "nature": "v. intr.",
+    "definition": "Perdre son temps à des riens, hésiter sans se décider ; vieilli, faire attendre quelqu'un par de vaines promesses.",
+    "exemple": "Assez lanterné : il faut choisir une date pour le mariage.",
+    "academie": true
+  },
+  {
+    "mot": "lapalissade",
+    "nature": "n. f.",
+    "definition": "Affirmation d'une évidence si plate qu'elle prête à sourire.",
+    "exemple": "« Quand il pleut, le sol est mouillé » : voilà une belle lapalissade.",
+    "academie": true
+  },
+  {
+    "mot": "lazzi",
+    "nature": "n. m.",
+    "definition": "Au théâtre, jeu de scène bouffon ; par extension, plaisanterie moqueuse lancée contre quelqu'un.",
+    "exemple": "L'orateur dut parler sous les lazzis d'un public hilare.",
+    "academie": true
+  },
+  {
+    "mot": "lénifiant",
+    "nature": "adj.",
+    "definition": "Qui apaise et adoucit ; souvent péjoratif, d'une douceur fade qui endort l'esprit critique.",
+    "exemple": "Le communiqué, lénifiant à souhait, n'annonçait aucune mesure concrète.",
+    "academie": false
+  },
+  {
+    "mot": "liesse",
+    "nature": "n. f.",
+    "definition": "Joie débordante partagée par une foule.",
+    "exemple": "Le village entier était en liesse après la victoire de son équipe.",
+    "academie": true
+  },
+  {
+    "mot": "louvoyer",
+    "nature": "v. intr.",
+    "definition": "Naviguer en zigzag contre le vent ; au figuré, user de détours pour éviter de se prononcer franchement.",
+    "exemple": "Le ministre louvoya une heure durant sans jamais répondre à la question.",
+    "academie": true
+  },
+  {
+    "mot": "lucifuge",
+    "nature": "adj.",
+    "definition": "Qui fuit la lumière, en parlant notamment d'animaux vivant dans l'obscurité.",
+    "exemple": "Les cloportes, créatures lucifuges, filèrent sous la pierre retournée.",
+    "academie": false
+  },
+  {
+    "mot": "malandrin",
+    "nature": "n. m.",
+    "definition": "Littéraire : brigand, rôdeur malfaisant ; par extension, personne malintentionnée.",
+    "exemple": "Les voyageurs craignaient les malandrins qui hantaient la forêt.",
+    "academie": true
+  },
+  {
+    "mot": "mansuétude",
+    "nature": "n. f.",
+    "definition": "Bonté d'âme qui incline à l'indulgence et au pardon.",
+    "exemple": "Le juge fit preuve de mansuétude envers ce voleur de pommes affamé.",
+    "academie": true
+  },
+  {
+    "mot": "marmoréen",
+    "nature": "adj.",
+    "definition": "Qui a la nature ou l'aspect du marbre ; au figuré, froid, blanc et impassible comme une statue.",
+    "exemple": "Elle resta marmoréenne pendant tout le récit de ses mésaventures.",
+    "academie": true
+  },
+  {
+    "mot": "maroufle",
+    "nature": "n. m.",
+    "definition": "Vieilli : rustre, homme grossier et sans scrupules.",
+    "exemple": "« Hors d'ici, maroufle ! » s'écria le marquis offensé.",
+    "academie": true
+  },
+  {
+    "mot": "matamore",
+    "nature": "n. m.",
+    "definition": "Faux brave, fanfaron qui se montre plus courageux en paroles qu'en actes.",
+    "exemple": "Ce matamore promettait de tout casser, puis s'enfuit au premier aboiement.",
+    "academie": true
+  },
+  {
+    "mot": "matutinal",
+    "nature": "adj.",
+    "definition": "Littéraire : qui appartient au matin, matinal.",
+    "exemple": "Une brume matutinale enveloppait encore les vignes.",
+    "academie": true
+  },
+  {
+    "mot": "méphitique",
+    "nature": "adj.",
+    "definition": "Se dit d'une exhalaison nauséabonde et nocive ; au figuré, d'une atmosphère malsaine.",
+    "exemple": "Une odeur méphitique montait du marais en plein mois d'août.",
+    "academie": false
+  },
+  {
+    "mot": "mirifique",
+    "nature": "adj.",
+    "definition": "Plaisant ou ironique : merveilleux, d'une perfection trop belle pour être vraie.",
+    "exemple": "Le vendeur nous promettait des rendements mirifiques.",
+    "academie": true
+  },
+  {
+    "mot": "misonéisme",
+    "nature": "n. m.",
+    "definition": "Aversion pour toute nouveauté, refus systématique du changement.",
+    "exemple": "Son misonéisme l'empêche d'adopter même la machine à laver.",
+    "academie": false
+  },
+  {
+    "mot": "mithridatiser",
+    "nature": "v. tr.",
+    "definition": "Immuniser contre un poison par l'absorption progressive de doses croissantes ; au figuré, endurcir par l'habitude.",
+    "exemple": "Des années d'open space l'ont mithridatisé contre le bruit.",
+    "academie": true
+  },
+  {
+    "mot": "morigéner",
+    "nature": "v. tr.",
+    "definition": "Réprimander avec insistance et un brin de pédantisme, faire la leçon à quelqu'un.",
+    "exemple": "La concierge morigénait les enfants qui couraient dans l'escalier.",
+    "academie": true
+  },
+  {
+    "mot": "munificence",
+    "nature": "n. f.",
+    "definition": "Générosité magnifique, penchant à faire de grandes largesses.",
+    "exemple": "Grâce à la munificence d'un mécène, le musée put rouvrir.",
+    "academie": true
+  },
+  {
+    "mot": "naguère",
+    "nature": "adv.",
+    "definition": "Il y a peu de temps ; dans l'usage moderne, souvent employé pour « autrefois ».",
+    "exemple": "Ce quartier, naguère paisible, est devenu le plus animé de la ville.",
+    "academie": true
+  },
+  {
+    "mot": "nitescence",
+    "nature": "n. f.",
+    "definition": "Littéraire : clarté douce, lueur.",
+    "exemple": "La nitescence de la lune argentait les toits.",
+    "academie": false
+  },
+  {
+    "mot": "nonobstant",
+    "nature": "prép.",
+    "definition": "Soutenu ou juridique : malgré, sans tenir compte de.",
+    "exemple": "Nonobstant la pluie, la fanfare défila jusqu'au bout.",
+    "academie": false
+  },
+  {
+    "mot": "nuitamment",
+    "nature": "adv.",
+    "definition": "Pendant la nuit, à la faveur de l'obscurité.",
+    "exemple": "Les cambrioleurs s'introduisirent nuitamment dans la bijouterie.",
+    "academie": true
+  },
+  {
+    "mot": "numineux",
+    "nature": "adj.",
+    "definition": "Qui se rapporte au divin et inspire un sentiment mêlé de mystère, de crainte et de fascination.",
+    "exemple": "Sous la voûte de la cathédrale, il ressentit une présence numineuse.",
+    "academie": false
+  },
+  {
+    "mot": "nyctalope",
+    "nature": "adj.",
+    "definition": "Qui voit dans l'obscurité.",
+    "exemple": "Le chat, nyctalope, traversa sans peine le grenier plongé dans le noir.",
+    "academie": true
+  },
+  {
+    "mot": "oaristys",
+    "nature": "n. f.",
+    "definition": "Littéraire et rare : entretien tendre entre amoureux ; par extension, idylle.",
+    "exemple": "Le banc du parc abrita leur première oaristys.",
+    "academie": false
+  },
+  {
+    "mot": "objurgation",
+    "nature": "n. f.",
+    "definition": "Parole vive par laquelle on tente de dissuader quelqu'un d'agir ; reproche pressant.",
+    "exemple": "Malgré les objurgations de sa mère, il partit faire le tour du monde.",
+    "academie": true
+  },
+  {
+    "mot": "obombrer",
+    "nature": "v. tr.",
+    "definition": "Couvrir de son ombre ; au figuré et littéraire, assombrir, attrister.",
+    "exemple": "Un grand cèdre obombrait la terrasse ; un souci obombrait son front.",
+    "academie": true
+  },
+  {
+    "mot": "obvie",
+    "nature": "adj.",
+    "definition": "Didactique : se dit du sens qui se présente naturellement à l'esprit, sans recherche ; évident.",
+    "exemple": "Le sens obvie de la phrase suffit, inutile d'y chercher un message caché.",
+    "academie": false
+  },
+  {
+    "mot": "oiseux",
+    "nature": "adj.",
+    "definition": "Inutile, vain, qui n'apporte rien à la pensée ni à l'action.",
+    "exemple": "Laissons là ces discussions oiseuses et passons au vote.",
+    "academie": false
+  },
+  {
+    "mot": "olibrius",
+    "nature": "n. m.",
+    "definition": "Familier : individu bizarre ou ridicule qui se donne des airs importants.",
+    "exemple": "Quel est cet olibrius qui dirige la circulation en cape ?",
+    "academie": true
+  },
+  {
+    "mot": "opprobre",
+    "nature": "n. m.",
+    "definition": "Honte publique, déshonneur ; état d'abjection qui en résulte.",
+    "exemple": "Son mensonge le couvrit d'opprobre aux yeux de tout le village.",
+    "academie": true
+  },
+  {
+    "mot": "oripeau",
+    "nature": "n. m.",
+    "definition": "Surtout au pluriel : vêtements voyants mais usés, ou faux éclat qui ne cache rien de solide.",
+    "exemple": "Le vieux comédien paradait dans les oripeaux de ses gloires passées.",
+    "academie": true
+  },
+  {
+    "mot": "outrecuidance",
+    "nature": "n. f.",
+    "definition": "Confiance excessive en soi qui mène à l'arrogance ; insolence, effronterie.",
+    "exemple": "Il eut l'outrecuidance de corriger le prix Nobel sur sa propre théorie.",
+    "academie": true
+  }
+]

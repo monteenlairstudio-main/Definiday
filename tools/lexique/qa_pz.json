@@ -1,0 +1,58 @@
+[
+ {
+  "mot": "sycophante",
+  "nature": "n. m.",
+  "definition": "Dans l'Antiquité grecque, délateur professionnel ; par ext., dénonciateur fourbe et menteur.",
+  "exemple": "Le tyran s'entourait de sycophantes prêts à dénoncer leurs voisins.",
+  "academie": true,
+  "_raison": "« flatteur » est un anglicisme (sycophant) : en français, délateur, fourbe, menteur"
+ },
+ {
+  "mot": "zinzolin",
+  "nature": "adj.",
+  "definition": "D'une couleur violet rougeâtre.",
+  "exemple": "Elle portait une écharpe zinzoline sur son manteau gris.",
+  "academie": true,
+  "_raison": "adjectif variable (zinzoline) : accord manquant"
+ },
+ {
+  "mot": "prosélyte",
+  "nature": "n. m. et f.",
+  "definition": "Personne nouvellement convertie à une religion ou à une doctrine ; par ext., partisan zélé qui cherche à rallier autrui.",
+  "exemple": "En nouveau prosélyte du vélo, il voulait convertir tout le bureau.",
+  "academie": true,
+  "_raison": "genre à préciser"
+ },
+ {
+  "mot": "récipiendaire",
+  "nature": "n. m. et f.",
+  "definition": "Personne reçue solennellement dans une compagnie, ou qui reçoit un diplôme, une distinction.",
+  "exemple": "Le récipiendaire prononça l'éloge de son prédécesseur sous la Coupole.",
+  "academie": true,
+  "_raison": "genre à préciser"
+ },
+ {
+  "mot": "thaumaturge",
+  "nature": "n. m. et f.",
+  "definition": "Personne qui accomplit ou prétend accomplir des miracles.",
+  "exemple": "On le présentait comme un thaumaturge capable de guérir d'un regard.",
+  "academie": true,
+  "_raison": "genre à préciser"
+ },
+ {
+  "mot": "quinaud",
+  "nature": "adj.",
+  "definition": "Vieilli. Confus et honteux d'avoir eu le dessous, d'avoir échoué devant autrui.",
+  "exemple": "Battu à plate couture dans la dispute, le beau parleur resta tout quinaud.",
+  "academie": true,
+  "_raison": "sens : honte d'avoir eu le dessous (contestation), non simple faute découverte"
+ },
+ {
+  "mot": "philippique",
+  "nature": "n. f.",
+  "definition": "Discours violent, souvent satirique, dirigé contre quelqu'un, à l'image des harangues de Démosthène contre Philippe de Macédoine.",
+  "exemple": "Le député lança une philippique contre le ministre sous les applaudissements de ses amis.",
+  "academie": true,
+  "_raison": "pléonasme « violent et virulent »"
+ }
+]
