@@ -227,7 +227,7 @@
    "fond_haut": "#EADBC4",
    "fond_bas": "#D6BF9D",
    "mot": "#3A2717",
-   "nature": "#6E4A2F",
+   "nature": "#69462D",
    "texte": "#3B2C1F",
    "exemple": "#57422F",
    "evoque": "photographie, nostalgie, passé, famille, souvenir"
@@ -239,7 +239,7 @@
    "fond_haut": "#F3E2D3",
    "fond_bas": "#E7C9B2",
    "mot": "#7A2614",
-   "nature": "#9A3B22",
+   "nature": "#963921",
    "texte": "#3F231A",
    "exemple": "#62392B",
    "evoque": "dessin, chair, Renaissance, atelier, corps"
@@ -263,7 +263,7 @@
    "fond_haut": "#EEE8F6",
    "fond_bas": "#D9CDEB",
    "mot": "#3F2A63",
-   "nature": "#6A548F",
+   "nature": "#644F87",
    "texte": "#2F2640",
    "exemple": "#4E4363",
    "evoque": "Provence, douceur, parfum, calme, linge"
@@ -275,7 +275,7 @@
    "fond_haut": "#F2F7FA",
    "fond_bas": "#D9E7EF",
    "mot": "#1E3D59",
-   "nature": "#4A6F8C",
+   "nature": "#466884",
    "texte": "#22313D",
    "exemple": "#3F5566",
    "evoque": "hiver, froid, pureté, silence, glace"
@@ -287,7 +287,7 @@
    "fond_haut": "#FCE9DC",
    "fond_bas": "#F3CFC4",
    "mot": "#7D2E4A",
-   "nature": "#A04A5B",
+   "nature": "#904352",
    "texte": "#3A2730",
    "exemple": "#5A3E48",
    "evoque": "matin, naissance, espoir, douceur, éveil"
@@ -299,7 +299,7 @@
    "fond_haut": "#EEF3DC",
    "fond_bas": "#D7E3B5",
    "mot": "#2F4A12",
-   "nature": "#55702D",
+   "nature": "#4E6729",
    "texte": "#2A3320",
    "exemple": "#46522F",
    "evoque": "printemps, jardin, fraîcheur, botanique, enfance"

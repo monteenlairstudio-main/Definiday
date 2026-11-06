@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -22,6 +23,7 @@ class QuizActivity : Activity() {
     private var index = 0
     private var score = 0
     private var picked = -1 // option chosen for the current question, -1 = not answered yet
+    private var done = false // that day's quiz was already counted when this one opened: its score won't count
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class QuizActivity : Activity() {
         index = s?.getInt("index") ?: 0
         score = s?.getInt("score") ?: 0
         picked = s?.getInt("picked") ?: -1
+        done = s?.getBoolean("done") ?: Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
         val pad = (24 * resources.displayMetrics.density).toInt()
         box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
@@ -44,42 +47,63 @@ class QuizActivity : Activity() {
 
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
-        out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked)
+        out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked); out.putBoolean("done", done)
         out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot }))
     }
 
-    private fun text(s: String, size: Float, bold: Boolean = false) = TextView(this).apply {
+    private fun text(s: String, size: Float, bold: Boolean = false) = TextView(this, null, 0, R.style.Body).apply {
         text = s; textSize = size; if (bold) setTypeface(typeface, android.graphics.Typeface.BOLD)
         setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
+    }
+
+    private fun title() = TextView(this, null, 0, R.style.Label).apply {
+        text = getString(R.string.quiz_title); setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
+    }
+
+    /** Full-width button, 8 dp apart. */
+    private fun button(s: String) = Button(this).apply {
+        text = s
+        layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            .apply { topMargin = (8 * resources.displayMetrics.density).toInt() }
+        box.addView(this)
     }
 
     private fun next() {
         box.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56))
-        box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
+        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
+        box.addView(title())
         if (day < LocalDate.now().toEpochDay()) box.addView(text(getString(R.string.quiz_eve), 13f))
         val q = questions[index]
         box.addView(text("${index + 1} / ${questions.size}", 13f))
         box.addView(text(q.answer.definition, 20f))
-        val buttons = q.options.map { w ->
-            Button(this).apply { text = w.mot; isAllCaps = false; box.addView(this) }
-        }
+        val buttons = q.options.map { button(it.mot) }
         fun reveal() {
             buttons.forEachIndexed { j, o ->
                 o.isEnabled = false
-                if (q.options[j] == q.answer) o.setBackgroundColor(GOOD) else if (j == picked) o.setBackgroundColor(BAD)
+                val good = q.options[j] == q.answer
+                if (good || j == picked) { // said in the text, not by the color alone; tint keeps the button's shape
+                    o.text = (if (good) "✓ " else "✗ ") + q.options[j].mot
+                    o.background.mutate().setTint(if (good) GOOD else BAD)
+                    o.setTextColor(ON_COLOR)
+                }
             }
-            box.addView(Button(this).apply {
-                text = getString(R.string.quiz_next); setOnClickListener { index++; picked = -1; next() }
-            })
+            button(getString(R.string.quiz_next)).setOnClickListener { index++; picked = -1; next() }
         }
-        buttons.forEachIndexed { i, b -> b.setOnClickListener { picked = i; if (q.options[i] == q.answer) score++; reveal() } }
+        buttons.forEachIndexed { i, b ->
+            b.setOnClickListener {
+                picked = i
+                val right = q.options[i] == q.answer
+                if (right) score++
+                reveal()
+                box.announceForAccessibility(if (right) getString(R.string.quiz_right) else getString(R.string.quiz_wrong, q.answer.mot))
+            }
+        }
         if (picked >= 0) reveal() // answered before a rotation: not twice
     }
 
     private fun finishQuiz() {
-        box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
+        box.addView(title())
         if (questions.isEmpty()) {
             box.addView(text(getString(R.string.quiz_empty), 18f))
         } else {
@@ -93,9 +117,10 @@ class QuizActivity : Activity() {
             })
             box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply { gravity = Gravity.CENTER })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
+            if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
             announce()
         }
-        box.addView(Button(this).apply { text = getString(R.string.quiz_close); setOnClickListener { finish() } })
+        button(getString(R.string.quiz_close)).setOnClickListener { finish() }
     }
 
     /** "Nouveau : …" once per unlocked item, with Glose showing the last (rarest) one. */
@@ -105,10 +130,7 @@ class QuizActivity : Activity() {
         p.announced = p.announced + fresh.map { it.id }
         box.addView(text(getString(R.string.unlock_new, fresh.joinToString(", ") { it.nom }), 18f, bold = true).apply { gravity = Gravity.CENTER })
         box.addView(glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 160).apply { Glose.play(this) })
-        box.addView(Button(this).apply {
-            text = getString(R.string.collection_see)
-            setOnClickListener { startActivity(android.content.Intent(context, CollectionActivity::class.java)) }
-        })
+        button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
     }
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
@@ -121,8 +143,10 @@ class QuizActivity : Activity() {
     companion object {
         /** Epoch day of the quiz (the reminder's day); only that day or the eve is accepted. */
         const val EXTRA_DAY = "day"
+        // dark text on both, light or dark theme: 7.4:1 on GOOD, 6.7:1 on BAD
         private val GOOD = Color.parseColor("#7FB77E")
         private val BAD = Color.parseColor("#E08A7E")
+        private val ON_COLOR = Color.parseColor("#1F1A14")
     }
 }
 
@@ -140,14 +164,20 @@ object Quiz {
     /** Passed = at most one mistake per 3 questions (1/1, 2/2, 2/3). */
     fun passed(score: Int, total: Int) = score * 3 >= total * 2
 
+    /** A quiz on [day] would continue the streak: last quiz that day, the eve, or before days without a word
+     *  (quote-only slots, current settings); gap bounded (and MIN_VALUE overflows out of it). */
+    fun unbroken(p: Prefs, day: Long): Boolean {
+        val last = p.lastQuizDay
+        return day - last in 0..7 && (last + 1 until day).all { Words.quotesOnly(it, p.wordsPerDay, p.moreQuotes) }
+    }
+
     /** Counters the mascot unlocks read. A quiz counts once per day (the eve's, finished after today's, not at all). */
     fun record(p: Prefs, score: Int, total: Int, day: Long) {
         val last = p.lastQuizDay
         if (last == day || last == day + 1) return
         p.passedQuizzes += if (passed(score, total)) 1 else 0 // read before perfectQuizzes moves: its default is perfectQuizzes
         // days without a word (quote-only slots, current settings) don't break the streak; gap bounded (and MIN_VALUE overflows out of it)
-        val unbroken = day - last in 1..7 && (last + 1 until day).all { Words.quotesOnly(it, p.wordsPerDay, p.moreQuotes) }
-        p.streak = if (unbroken) p.streak + 1 else 1
+        p.streak = if (unbroken(p, day)) p.streak + 1 else 1
         p.lastQuizDay = day
         p.quizzes += 1
         if (score == total) p.perfectQuizzes += 1

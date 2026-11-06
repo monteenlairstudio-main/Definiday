@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- WCAG on bg: accent 8.2:1, ink2 8.1:1; on surface: ink 12.9:1, ink2 7.1:1; ink on warn 10.4:1 -->
     <color name="accent">#C9A96E</color>
     <color name="bg">#0F1424</color>
+    <color name="surface">#1A2135</color>
+    <color name="surface_off">#141A2B</color>
+    <color name="ink">#EDE6D6</color>
+    <color name="ink2">#B5AC9A</color>
+    <color name="warn">#3D3014</color>
 </resources>

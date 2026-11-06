@@ -3,22 +3,20 @@ package fr.definiday
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.TimePickerDialog
+import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import android.widget.Spinner
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import org.json.JSONObject
@@ -29,76 +27,27 @@ import java.net.URLEncoder
 class MainActivity : Activity() {
     companion object { const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item" }
 
-    private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
+    private var current: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (Build.VERSION.SDK_INT >= 33) requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
-
-        val p = Prefs(this)
-        // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's)
-        show(find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first())
+        // asked once (not at each rotation); refused: banner, see onResume
+        if (Build.VERSION.SDK_INT >= 33 && savedInstanceState == null && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's). Shown in onResume.
+        current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             show(w)
-            DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen
+            DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen (said under the button)
             warnIfHurried()
         }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
         findViewById<Button>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
-
-        findViewById<Switch>(R.id.enabled).apply {
-            isChecked = p.enabled
-            setOnCheckedChangeListener { _, on -> p.enabled = on; DailyReceiver.scheduleNext(context) }
-        }
-        val time = findViewById<Button>(R.id.time)
-        fun showTime() { time.text = getString(R.string.time, p.hour, p.minute) }
-        showTime()
-        time.setOnClickListener {
-            TimePickerDialog(this, { _, h, m ->
-                p.hour = h; p.minute = m; showTime(); DailyReceiver.scheduleNext(this)
-            }, p.hour, p.minute, true).show()
-        }
-        spinner(R.id.duration, durations.map(::label), durations.indexOf(p.durationMinutes)) { p.durationMinutes = durations[it] }
-        spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
-            if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this); showSeen() }
-        }
-        val unlocks = listOf(R.id.unlocks_label, R.id.unlocks, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
-        fun showUnlocks() = unlocks.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
-        // order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK
-        spinner(R.id.mode, listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), p.mode) {
-            p.mode = it; showUnlocks()
-        }
-        showUnlocks()
-        spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
-            p.unlocks = it; UnlockService.sync(this) // applies to the word already on the lock screen
-        }
-        spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) {
-            p.textBottom = it == 0
-        }
-        findViewById<Switch>(R.id.more_quotes).apply {
-            isChecked = p.moreQuotes
-            setOnCheckedChangeListener { _, on -> p.moreQuotes = on } // applies to the next days' picks
-        }
-        findViewById<Switch>(R.id.quiz_enabled).apply {
-            isChecked = p.quizEnabled
-            setOnCheckedChangeListener { _, on -> p.quizEnabled = on; DailyReceiver.scheduleQuiz(context) }
-        }
-        val quizTime = findViewById<Button>(R.id.quiz_time)
-        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute) }
-        showQuizTime()
-        quizTime.setOnClickListener {
-            TimePickerDialog(this, { _, h, m ->
-                p.quizHour = h; p.quizMinute = m; showQuizTime(); DailyReceiver.scheduleQuiz(this)
-            }, p.quizHour, p.quizMinute, true).show()
-        }
-        val cat = Styles.load(this)
-        pool(R.id.palettes, R.string.palettes, cat.palettes.map { it.id to it.nom }, { p.palettes }) { p.palettes = it }
-        pool(R.id.polices, R.string.polices, cat.polices.map { it.id to it.nom }, { p.polices }) { p.polices = it }
-        findViewById<Button>(R.id.test).setOnClickListener {
-            DailyReceiver.show(this)
-            Toast.makeText(this, R.string.test_done, Toast.LENGTH_LONG).show()
+        findViewById<Button>(R.id.settings_open).setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
+        findViewById<View>(R.id.notif_banner).setOnClickListener {
+            runCatching { startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, packageName)) }
         }
         DailyReceiver.scheduleNext(this)
         DailyReceiver.scheduleQuiz(this)
@@ -120,9 +69,21 @@ class MainActivity : Activity() {
     /** Any word or quote by key (history keys: mot, or "q:" + text). */
     private fun find(key: String?): Item? = key?.let { k -> (Words.load(this) + Quotes.load(this)).firstOrNull { it.key == k } }
 
+    /** Also on the way back from Settings (palettes, fonts, words a day, mode), the quiz (done ✓) and the system notification page. */
     override fun onResume() {
         super.onResume()
-        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(Prefs(context)))); Glose.play(this) }
+        val p = Prefs(this)
+        current?.let { show(it, top = false) }
+        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); Glose.play(this) }
+        val done = p.lastQuizDay == java.time.LocalDate.now().toEpochDay()
+        findViewById<Button>(R.id.quiz_open).setText(if (done) R.string.quiz_done else R.string.quiz_open)
+        findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
+    }
+
+    /** Refused at the Android 13+ prompt, turned off for the app, or the word's channel turned off. */
+    private fun notificationsOff(): Boolean {
+        val nm = getSystemService(NotificationManager::class.java)
+        return !nm.areNotificationsEnabled() || nm.getNotificationChannel(DailyReceiver.CHANNEL)?.importance == NotificationManager.IMPORTANCE_NONE
     }
 
     override fun onPause() {
@@ -143,17 +104,15 @@ class MainActivity : Activity() {
             .show()
     }
 
-    private var current: Item? = null
-
-    /** Displays one word or quote in the card, in its palette and font; links follow it. */
-    private fun show(item: Item) {
+    /** Displays one word or quote in the card, in its palette and font; links follow it. [top]: scroll back to the card. */
+    private fun show(item: Item, top: Boolean = true) {
         current = item
         Words.shown(this, listOf(item)) // the card shows it: seen today (history, quiz)
         val st = Styles.of(this, item)
         findViewById<View>(R.id.card).background = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
         ).apply { cornerRadius = 16 * resources.displayMetrics.density }
-        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot); textSize = if (item is Quote) 24f else 40f }
+        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
         listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
         val daily = item.key in Prefs(this).dailyMots
@@ -168,7 +127,7 @@ class MainActivity : Activity() {
                 text(R.id.exemple, "")
                 findViewById<View>(R.id.anecdote_box).visibility = View.GONE
                 academie.visibility = View.GONE
-                cnrtl.text = getString(R.string.wikiquote)
+                cnrtl.text = getText(R.string.wikiquote)
                 cnrtl.setOnClickListener { open(item.source) }
             }
             is Word -> {
@@ -182,60 +141,47 @@ class MainActivity : Activity() {
                 findViewById<Button>(R.id.source).setOnClickListener { open(item.source) }
                 academie.visibility = View.VISIBLE
                 academie.setOnClickListener { openAcademie(item.mot) }
-                cnrtl.text = getString(R.string.cnrtl)
+                cnrtl.text = getText(R.string.cnrtl)
                 cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
             }
         }
+        fit(findViewById(R.id.mot), if (item is Quote) 24f else 40f)
         showSeen()
-        findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
+        if (top) findViewById<ScrollView>(R.id.scroll)?.smoothScrollTo(0, 0)
     }
 
-    /** One tappable chip per word of the day (shown or not yet, e.g. 2nd-3rd words in lock-only mode) and per random pick seen today. */
+    /** Largest size up to [max] sp at which each piece (between spaces, or after a hyphen) holds on one line:
+     *  a long word at a large font size or on a small screen is never cut in the middle. */
+    private fun fit(v: TextView, max: Float) {
+        val width = (resources.configuration.screenWidthDp - 2 * 16 - 2 * 20) * resources.displayMetrics.density // page and card padding (activity_main.xml)
+        val pieces = v.text.split(Regex("[ \u00a0]|(?<=-)"))
+        var sp = max
+        v.textSize = sp
+        while (sp > 12 && pieces.any { v.paint.measureText(it) > width }) { sp -= 2; v.textSize = sp }
+    }
+
+    /** One chip per item of the day (word or quote, shown or not yet, e.g. 2nd-3rd in lock-only mode) and per random pick seen today. */
     private fun showSeen() {
-        val row = findViewById<LinearLayout>(R.id.seen)
-        row.removeAllViews()
-        (Words.today(this).filterIsInstance<Word>() + Words.seenToday(this)).distinct().forEach { w ->
-            row.addView(Button(this, null, android.R.attr.borderlessButtonStyle).apply {
-                text = w.mot
-                isAllCaps = false
+        val box = findViewById<LinearLayout>(R.id.seen)
+        box.removeAllViews()
+        val gap = (8 * resources.displayMetrics.density).toInt()
+        val width = (resources.configuration.screenWidthDp - 2 * 16) * resources.displayMetrics.density // page padding
+        var row: LinearLayout? = null
+        var used = 0
+        (Words.today(this) + Words.seenToday(this)).distinctBy { it.key }.forEach { w ->
+            val chip = Button(this).apply {
+                text = if (w is Word) w.mot else getString(R.string.quote_chip)
                 setOnClickListener { show(w) }
-            })
-        }
-    }
-
-    /** Button opening a multi-choice list of the catalog; an empty choice means "all". */
-    private fun pool(id: Int, label: Int, items: List<Pair<String, String>>, get: () -> Set<String>?, set: (Set<String>?) -> Unit) {
-        val b = findViewById<Button>(id)
-        fun refresh() { b.text = getString(label, get()?.size ?: items.size, items.size) }
-        refresh()
-        b.setOnClickListener {
-            val checked = BooleanArray(items.size) { get()?.contains(items[it].first) ?: true }
-            AlertDialog.Builder(this)
-                .setMultiChoiceItems(items.map { it.second }.toTypedArray(), checked) { _, i, on -> checked[i] = on }
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val kept = items.filterIndexed { i, _ -> checked[i] }.map { it.first }.toSet()
-                    set(if (kept.isEmpty() || kept.size == items.size) null else kept)
-                    refresh()
-                    current?.let(::show)
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .show()
-        }
-    }
-
-    private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
-        findViewById<Spinner>(id).apply {
-            adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, labels)
-            setSelection(selected.coerceAtLeast(0))
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(a: AdapterView<*>?, v: View?, pos: Int, id: Long) = onPick(pos)
-                override fun onNothingSelected(a: AdapterView<*>?) {}
+                measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             }
+            if (row == null || used + chip.measuredWidth > width) { row = LinearLayout(this).also(box::addView); used = 0 }
+            row!!.addView(chip, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .apply { marginEnd = gap; topMargin = gap })
+            used += chip.measuredWidth + gap
         }
+    }
 
-    private fun text(id: Int, s: String) { findViewById<TextView>(id).text = s }
-
-    private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
+    private fun text(id: Int, s: String) = findViewById<TextView>(id).run { text = s; visibility = if (s.isEmpty()) View.GONE else View.VISIBLE }
 
     /** Opens https links only (data-provided URLs), in a browser. */
     private fun open(url: String) {
@@ -249,21 +195,24 @@ class MainActivity : Activity() {
     }
 
     /** One lookup on the Académie's own search, triggered by the user's tap, to reach the article page. Falls back to CNRTL. */
-    private fun openAcademie(mot: String) = Thread {
-        val started = System.currentTimeMillis()
-        val url = runCatching {
-            val c = URL("https://www.dictionnaire-academie.fr/search").openConnection() as HttpURLConnection
-            c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 5000; c.readTimeout = 5000
-            c.setRequestProperty("X-Requested-With", "XMLHttpRequest")
-            c.setRequestProperty("Accept", "application/json") // without it the server answers with a redirect
-            c.outputStream.use { it.write("term=${URLEncoder.encode(mot, "UTF-8")}&options=1".toByteArray()) }
-            JSONObject(c.inputStream.bufferedReader().use { r -> // at most 64 KiB: a truncated answer fails to parse and falls back to the CNRTL
-                buildString { generateSequence { r.read().takeIf { it >= 0 } }.take(64 * 1024).forEach { append(it.toChar()) } } }).getJSONArray("result").getJSONObject(0).getString("url")
-                .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
-        }.getOrDefault(cnrtl(mot))
-        // DNS isn't bounded by the socket timeouts: give up if the lookup took too long or the screen is gone
-        runOnUiThread { if (!isDestroyed && System.currentTimeMillis() - started < 12_000) open(url) }
-    }.start()
+    private fun openAcademie(mot: String) {
+        val b = findViewById<Button>(R.id.academie).apply { isEnabled = false } // one lookup at a time
+        Thread {
+            val started = System.currentTimeMillis()
+            val url = runCatching {
+                val c = URL("https://www.dictionnaire-academie.fr/search").openConnection() as HttpURLConnection
+                c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 5000; c.readTimeout = 5000
+                c.setRequestProperty("X-Requested-With", "XMLHttpRequest")
+                c.setRequestProperty("Accept", "application/json") // without it the server answers with a redirect
+                c.outputStream.use { it.write("term=${URLEncoder.encode(mot, "UTF-8")}&options=1".toByteArray()) }
+                JSONObject(c.inputStream.bufferedReader().use { r -> // at most 64 KiB: a truncated answer fails to parse and falls back to the CNRTL
+                    buildString { generateSequence { r.read().takeIf { it >= 0 } }.take(64 * 1024).forEach { append(it.toChar()) } } }).getJSONArray("result").getJSONObject(0).getString("url")
+                    .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
+            }.getOrDefault(cnrtl(mot))
+            // DNS isn't bounded by the socket timeouts: give up if the lookup took too long or the screen is gone
+            runOnUiThread { b.isEnabled = true; if (!isDestroyed && System.currentTimeMillis() - started < 12_000) open(url) }
+        }.start()
+    }
 
     private fun cnrtl(mot: String) = "https://www.cnrtl.fr/definition/" + Uri.encode(mot)
 }

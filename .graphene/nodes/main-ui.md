@@ -1,6 +1,6 @@
 ---
 type: subsystem
-summary: Main Activity: Monsieur Glose header, today's word card, random word, seen-today chips, quiz and collection buttons, settings (time, count, duration, mode, unlocks, style pools)
+summary: Home screen: notifications-off banner, Glose, word/quote card, links, anecdote, 3 actions (random, quiz with fait ✓, Collection), today's chips, Settings button; app theme (Btn/Link/Label styles, ink/surface colors, night variants)
 entry_points:
   - app/src/main/java/fr/definiday/MainActivity.kt
   - app/src/main/res/layout/activity_main.xml
@@ -9,12 +9,13 @@ covers:
   - app/src/main/res/layout/
   - app/src/main/res/values/
   - app/src/main/res/values-night/
-last_commit: c311c83
+last_commit: 6fc6deb
 edges:
   - to: word-selection type: depends_on reason: today/random/seenToday
   - to: styles type: depends_on reason: card colors, pool settings
   - to: quotes type: depends_on reason: slow-down dialog
   - to: mascot type: depends_on reason: Glose header, Collection button
+  - to: settings type: depends_on reason: Settings button; onResume re-reads prefs
 ---
 
 - Académie link: no deterministic article URL; on tap, one POST to dictionnaire-academie.fr/search with X-Requested-With and Accept: application/json (without Accept the server answers 302 then 404), URL accepted only if it starts with https://www.dictionnaire-academie.fr/, CNRTL fallback. ACTION_VIEW wrapped in try/catch ActivityNotFoundException. <!-- id:ea96 -->
@@ -23,3 +24,6 @@ edges:
 - Step 8: Glose.mainPose(p, hour) returns glose_soir from 21:00 local time until midnight once 'soir' is unlocked, else the collection pose; evaluated in onResume (a screen left open across 21:00 switches on next resume). Version 0.6.0 (versionCode 6) ships the mascot; release APK 1.61 MB. <!-- id:38cc -->
 - Prefs hardening (2026-11-06, audit N4/N5): backed-up prefs may be restored or tampered. Prefs reads go through private helpers int/long/bool/str/strings wrapped in runCatching (wrong type -> default) and int() takes a valid range (out of range -> DEFAULT, not clamp): hour/quizHour 0..23, minute/quizMinute 0..59, wordsPerDay 1..3, mode 0..2, unlocks 0..3, duration 1..1440. History.all() drops non-Long entries. dailyMots is stored as a JSON array (keys may contain '|'); legacy 'a|b|c' still read. Glose.choice only keeps an id that is unlocked AND of the slot's kind; Glose.pose also checks kind (a pelage id as pose used to give res 0 -> Resources.NotFoundException at every launch). Test BugHuntTest.tamperedPrefsFallBackToSafeDefaults. <!-- id:82d1 -->
 - MainActivity (2026-11-06): launchMode singleTop + onNewIntent, so a notification tapped while the app is open shows its item instead of stacking; the card's item comes from savedInstanceState ('item' key) after a rotation, else from EXTRA_MOT looked up in Words.load + Quotes.load (random picks and earlier days' notifications open THAT item), else today's first. show(item) marks it seen (Words.shown). Unlocks spinner calls UnlockService.sync. Tests: BugHuntTest mainScreenShowsADailyQuote (quote branch of show), fourthRandomPickWarnsOnce (warnIfHurried: 1 dialog past 3 random picks, once a day, ShadowDialog.getShownDialogs), notificationTappedWhileOpenShowsItsItem (ActivityController.newIntent). The Settings screen being built by another agent must keep calling UnlockService.sync after unlocks changes and may call DailyReceiver.show after raising wordsPerDay if today's time has passed (new picks are otherwise only reachable via the home chips). <!-- id:96a6 -->
+- Interface redo (6fc6deb, audit docs/audits/interface.md): MainActivity only resolves `current` in onCreate; onResume shows it (show(item, top=false)) so palettes/fonts/words-a-day changed in Settings apply on return, and refreshes the quiz button ('Quiz du soir (fait ✓)' when lastQuizDay == today) and the B2 banner (p.enabled && mode != MODE_LOCK && (!areNotificationsEnabled || daily_word channel IMPORTANCE_NONE) -> opens ACTION_APP_NOTIFICATION_SETTINGS). POST_NOTIFICATIONS asked only when savedInstanceState == null and not granted. DailyReceiver.CHANNEL is public for that check. Chips = today's items (quote as 'Citation') + seen random picks, wrapped into rows by measuring each chip (no FlowLayout without AndroidX). Académie button disabled during its lookup. Empty card TextViews are GONE (quote card). <!-- id:db45 -->
+- Long words: fit() shrinks the headword from 40 sp (24 for quotes) by 2 sp down to 12 until every piece (split on spaces, after hyphens) fits the width computed from configuration.screenWidthDp minus page padding 16dp*2 and card padding 20dp*2 (constants coupled to activity_main.xml). Headword hyphenationFrequency none; definition/exemple and style Body use hyphenationFrequency normal so a long word inside running text breaks between syllables (verified in Robolectric: 'ultracrépidaria-nisme'). Test UiTest.longWordFitsAtLargeFont (w360dp, fontScale 2). <!-- id:f55b -->
+- Theme (values/themes.xml): Base = Theme.Material.Light.NoActionBar / values-night Theme.Material.NoActionBar; AppTheme sets textColorPrimary=@color/ink, textColorSecondary=@color/ink2 and android:buttonStyle=@style/Btn so every Button (XML and `Button(this)` in code) gets drawable/btn.xml (ripple > selector: rounded 12dp surface + 1dp accent outline; disabled flat surface_off) and color/btn_text.xml (disabled = ink2, still readable). Styles: Row (full-width Btn), Link (borderless, accent, strings wrapped in <u>, set with getText to keep the span), Label (textAllCaps + accessibilityHeading: strings are in normal case), Title, Body (serif), Help, Field, Toggle. Colors (light/night): accent #886A34/#C9A96E, bg, surface, surface_off, ink, ink2, warn; contrasts in colors.xml comments. Captures: renderDemoImages -> app/build/demo/ui (capture width = screenWidthDp*density, height cap 16000 px). <!-- id:e628 -->

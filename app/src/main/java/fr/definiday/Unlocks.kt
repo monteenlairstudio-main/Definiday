@@ -46,8 +46,9 @@ object Unlocks {
     }
 
     /** What is still missing, in plain words ("Encore 3 soirs d’affilée"). */
-    fun hint(it: Item, p: Prefs): String {
-        val n = it.need - value(it.on, p.quizzes, p.perfectQuizzes, p.passedQuizzes, p.streak)
+    fun hint(it: Item, p: Prefs, today: Long = java.time.LocalDate.now().toEpochDay()): String {
+        val streak = if (Quiz.unbroken(p, today)) p.streak else 0 // broken since the last quiz: p.streak only restarts at the next one
+        val n = it.need - value(it.on, p.quizzes, p.perfectQuizzes, p.passedQuizzes, streak)
         val s = if (n > 1) "s" else ""
         return "Encore $n " + when (it.on) { 'p' -> "quiz sans faute"; 'r' -> "quiz réussi$s"; 's' -> "soir$s de quiz d’affilée"; else -> "quiz" }
     }
