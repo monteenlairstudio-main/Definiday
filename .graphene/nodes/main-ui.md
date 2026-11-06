@@ -9,7 +9,7 @@ covers:
   - app/src/main/res/layout/
   - app/src/main/res/values/
   - app/src/main/res/values-night/
-last_commit: 0ce50ba
+last_commit: 1e17e43
 edges:
   - to: word-selection type: depends_on reason: today/random/seenToday
   - to: styles type: depends_on reason: card colors, pool settings
@@ -21,3 +21,4 @@ edges:
 - Past 3 random picks in a day, a 'Prenez le temps' dialog shows once (Prefs.warnedDay) with a quote of theme 'lenteur' (fallback string if citations.json missing). <!-- id:bf9e -->
 - Monsieur Glose (ImageView R.id.glose, 160 dp) sits above the word card: drawable refreshed in onResume (pose/overlays may have changed in Collection), Glose.play() = AVD.reset()+start() only if ValueAnimator.areAnimatorsEnabled(), stopped in onPause, tap replays. <!-- id:d9cd -->
 - Step 8: Glose.mainPose(p, hour) returns glose_soir from 21:00 local time until midnight once 'soir' is unlocked, else the collection pose; evaluated in onResume (a screen left open across 21:00 switches on next resume). Version 0.6.0 (versionCode 6) ships the mascot; release APK 1.61 MB. <!-- id:38cc -->
+- Prefs hardening (2026-11-06, audit N4/N5): backed-up prefs may be restored or tampered. Prefs reads go through private helpers int/long/bool/str/strings wrapped in runCatching (wrong type -> default) and int() takes a valid range (out of range -> DEFAULT, not clamp): hour/quizHour 0..23, minute/quizMinute 0..59, wordsPerDay 1..3, mode 0..2, unlocks 0..3, duration 1..1440. History.all() drops non-Long entries. dailyMots is stored as a JSON array (keys may contain '|'); legacy 'a|b|c' still read. Glose.choice only keeps an id that is unlocked AND of the slot's kind; Glose.pose also checks kind (a pelage id as pose used to give res 0 -> Resources.NotFoundException at every launch). Test BugHuntTest.tamperedPrefsFallBackToSafeDefaults. <!-- id:82d1 -->

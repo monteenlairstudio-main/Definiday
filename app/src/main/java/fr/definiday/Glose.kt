@@ -18,12 +18,12 @@ object Glose {
         return t.getDrawable(res)!!
     }
 
-    /** The user's choice (pose, pelage, pelote, accessory or ""), each falling back to the default unless unlocked. */
+    /** The user's choice (pose, pelage, pelote, accessory or ""), each falling back to the default unless unlocked and of that kind. */
     fun choice(p: Prefs): Map<Unlocks.Kind, String> {
         val ok = p.unlocked + Unlocks.of(0, 0, 0, 0)
-        fun pick(id: String, default: String) = if (id in ok) id else default
-        return mapOf(Unlocks.Kind.POSE to pick(p.glosePose, "assis"), Unlocks.Kind.PELAGE to pick(p.glosePelage, "tigre"),
-            Unlocks.Kind.PELOTE to pick(p.glosePelote, "bordeaux"), Unlocks.Kind.ACC to pick(p.gloseAcc, ""))
+        fun pick(kind: Unlocks.Kind, id: String, default: String) = if (id in ok && Unlocks.byId[id]?.kind == kind) id else default
+        return mapOf(Unlocks.Kind.POSE to pick(Unlocks.Kind.POSE, p.glosePose, "assis"), Unlocks.Kind.PELAGE to pick(Unlocks.Kind.PELAGE, p.glosePelage, "tigre"),
+            Unlocks.Kind.PELOTE to pick(Unlocks.Kind.PELOTE, p.glosePelote, "bordeaux"), Unlocks.Kind.ACC to pick(Unlocks.Kind.ACC, p.gloseAcc, ""))
     }
 
     fun save(p: Prefs, c: Map<Unlocks.Kind, String>) {
@@ -31,7 +31,7 @@ object Glose {
         p.glosePelote = c.getValue(Unlocks.Kind.PELOTE); p.gloseAcc = c.getValue(Unlocks.Kind.ACC)
     }
 
-    fun pose(c: Map<Unlocks.Kind, String>) = Unlocks.byId[c[Unlocks.Kind.POSE]]?.res ?: R.drawable.glose_assis
+    fun pose(c: Map<Unlocks.Kind, String>) = Unlocks.byId[c[Unlocks.Kind.POSE]]?.takeIf { it.kind == Unlocks.Kind.POSE }?.res ?: R.drawable.glose_assis
 
     /** Main-screen pose: asleep in his cup from 21:00 (local time) once unlocked, else the chosen pose. */
     fun mainPose(p: Prefs, hour: Int = java.time.LocalTime.now().hour) =

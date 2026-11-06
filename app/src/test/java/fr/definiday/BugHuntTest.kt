@@ -235,4 +235,38 @@ class BugHuntTest {
         p.unlocks = 0; UnlockService.sync(ctx)
         assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStoppedService.component!!.className)
     }
+
+    /** Restored or tampered prefs (wrong types, out-of-range values, wrong-kind Glose ids, junk history) never crash and read as defaults. */
+    @Test fun tamperedPrefsFallBackToSafeDefaults() {
+        ctx.getSharedPreferences("definiday", 0).edit()
+            .putInt("wordsPerDay", 1_000_000).putInt("hour", 25).putString("minute", "x").putInt("quizHour", -1).putInt("quizMinute", 99)
+            .putInt("mode", 9).putInt("unlocks", 7).putInt("duration", -5).putString("enabled", "oui").putString("streak", "beaucoup")
+            .putStringSet("unlocked", setOf("nuit", "soir", "noeud")).putString("glosePose", "nuit").putString("glosePelage", "soir")
+            .putString("glosePelote", "noeud").putString("gloseAcc", "tigre").putString("dailyMots", "[1,2").putInt("dailyDay", 3)
+            .commit()
+        ctx.getSharedPreferences("history", 0).edit().putString("abaque", "hier").putInt("q:x", 2).commit()
+        val p = Prefs(ctx)
+        assertEquals(listOf(1, 8, 0, 21, 0, Prefs.MODE_NOTIF, 0, 120, 0), listOf(p.wordsPerDay, p.hour, p.minute, p.quizHour, p.quizMinute, p.mode, p.unlocks, p.durationMinutes, p.streak))
+        assertTrue(p.enabled)
+        // "nuit" is an unlocked PELAGE stored as the pose: getDrawable(0) used to crash every launch
+        assertEquals(mapOf(Unlocks.Kind.POSE to "assis", Unlocks.Kind.PELAGE to "tigre", Unlocks.Kind.PELOTE to "bordeaux", Unlocks.Kind.ACC to ""), Glose.choice(p))
+        assertEquals(R.drawable.glose_assis, Glose.pose(mapOf(Unlocks.Kind.POSE to "nuit")))
+        assertTrue(History(ctx).all().isEmpty())
+        Robolectric.buildActivity(MainActivity::class.java).setup()
+        listOf(Intent.ACTION_BOOT_COMPLETED, DailyReceiver.ACTION_SHOW, DailyReceiver.ACTION_QUIZ).forEach {
+            DailyReceiver().onReceive(ctx, Intent(ctx, DailyReceiver::class.java).setAction(it))
+        }
+        Robolectric.buildActivity(QuizActivity::class.java).setup()
+        Robolectric.buildActivity(CollectionActivity::class.java).setup()
+        assertEquals(1, Words.today(ctx).size)
+    }
+
+    /** dailyMots keys may contain the old "|" separator; the old "a|b" format still reads. */
+    @Test fun dailyMotsKeepsAnyKey() {
+        val p = Prefs(ctx)
+        p.dailyMots = listOf("q:Oui | non", "abaque")
+        assertEquals(listOf("q:Oui | non", "abaque"), p.dailyMots)
+        ctx.getSharedPreferences("definiday", 0).edit().putString("dailyMots", "abaque|q:x").commit()
+        assertEquals(listOf("abaque", "q:x"), p.dailyMots)
+    }
 }
