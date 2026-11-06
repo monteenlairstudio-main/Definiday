@@ -113,4 +113,12 @@
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
+    <!-- home-screen widget -->
+    <string name="widget_description">Le mot du jour sur l’écran d’accueil, dans ses couleurs. Gratuit, comme tout Definiday.</string>
+    <string name="widget_add">Ajouter le widget</string>
+    <string name="widget_add_hint">Le mot du jour sur l’écran d’accueil, gratuit. Touchez-le pour ouvrir sa fiche.</string>
+    <string name="widget_manual">Appuyez longuement sur l’écran d’accueil, puis choisissez Widgets et Definiday.</string>
+    <string name="widget_sample_mot">sérendipité</string>
+    <string name="widget_sample_nature">n. f.</string>
+    <string name="widget_sample_texte">Fait de découvrir par hasard quelque chose d’heureux ou d’utile en cherchant autre chose.</string>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Over widget_bg, tinted with the palette's bottom color (SRC_ATOP keeps this alpha): together, the card's top-to-bottom gradient -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:angle="270" android:startColor="#00FFFFFF" android:endColor="#FFFFFFFF" />
+    <corners android:radius="@dimen/widget_radius" />
+</shape>

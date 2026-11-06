@@ -78,6 +78,16 @@
             style="@style/Row"
             android:text="@string/test" />
 
+        <!-- free home-screen widget: the launcher's pin dialog (Widget.pin) -->
+        <Button
+            android:id="@+id/widget_add"
+            style="@style/Row"
+            android:text="@string/widget_add" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/widget_add_hint" />
+
         <!-- Écran de verrouillage -->
         <TextView
             style="@style/Label"
