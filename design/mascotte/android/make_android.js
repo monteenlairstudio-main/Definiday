@@ -61,6 +61,7 @@ const REACTIONS = {
       if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, WRITTEN], vd: `${name}_vd` });
     }
   } finally { await b.close(); }
+  require('./reactions.js')(RES); // réactions au toucher (glose_<pose>_tap / _special), un AVD par calque animé
   for (const [name, [dur, props]] of Object.entries(REACTIONS)) {
     const h = Object.entries(props).map(([p, kf]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">` +
       kf.map(([t, v], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i ? ' android:interpolator="@interpolator/glose_ease"' : ''}/>`).join('') + '</propertyValuesHolder>').join('');

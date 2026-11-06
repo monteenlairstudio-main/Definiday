@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Couleurs et polices (StylesActivity): live card of today's word, then palettes and fonts as tiles filled in code -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp">
+
+        <TextView
+            style="@style/Title"
+            android:text="@string/styles_title" />
+
+        <!-- same look as the home card; one TalkBack stop (API 28+) -->
+        <LinearLayout
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:screenReaderFocusable="true">
+
+            <TextView
+                android:id="@+id/preview_label"
+                style="@style/Label"
+                android:text="@string/today" />
+
+            <TextView
+                android:id="@+id/preview_mot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="serif"
+                android:hyphenationFrequency="full"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/preview_nature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="serif"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/preview_definition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="serif"
+                android:hyphenationFrequency="normal"
+                android:lineSpacingMultiplier="1.2"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/preview_hint"
+            style="@style/Help"
+            android:layout_marginTop="12dp"
+            android:accessibilityLiveRegion="polite" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/styles_rule" />
+
+        <!-- Palettes -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/palettes_group" />
+
+        <TextView
+            android:id="@+id/palettes_count"
+            style="@style/Field"
+            android:layout_marginTop="8dp"
+            android:accessibilityLiveRegion="polite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/palettes_all"
+                style="@style/Row"
+                android:layout_width="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/all_f" />
+
+            <Button
+                android:id="@+id/palettes_none"
+                style="@style/Row"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/none_f" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Field"
+            android:text="@string/palettes_light" />
+
+        <LinearLayout
+            android:id="@+id/palettes_claires"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            style="@style/Field"
+            android:layout_marginTop="24dp"
+            android:text="@string/palettes_dark" />
+
+        <LinearLayout
+            android:id="@+id/palettes_sombres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- Polices -->
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/polices_group" />
+
+        <TextView
+            android:id="@+id/polices_count"
+            style="@style/Field"
+            android:layout_marginTop="8dp"
+            android:accessibilityLiveRegion="polite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/polices_all"
+                style="@style/Row"
+                android:layout_width="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/all_f" />
+
+            <Button
+                android:id="@+id/polices_none"
+                style="@style/Row"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/none_f" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Field"
+            android:text="@string/polices_text" />
+
+        <LinearLayout
+            android:id="@+id/polices_texte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            style="@style/Field"
+            android:layout_marginTop="24dp"
+            android:text="@string/polices_deco" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/polices_deco_hint" />
+
+        <LinearLayout
+            android:id="@+id/polices_deco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </LinearLayout>
+</ScrollView>

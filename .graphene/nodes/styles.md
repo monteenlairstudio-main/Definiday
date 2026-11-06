@@ -3,13 +3,14 @@ type: subsystem
 summary: Palette/font catalog (18 palettes, 14 OFL fonts) and per-word style picked within the user's pools
 entry_points:
   - app/src/main/java/fr/definiday/Styles.kt
+  - app/src/main/java/fr/definiday/StylesActivity.kt
   - app/src/main/assets/styles.json
 covers:
   - app/src/main/java/fr/definiday/Styles.kt
   - app/src/main/assets/styles.json
   - app/src/main/res/font/
   - app/src/main/assets/licences/
-last_commit: 7b46493
+last_commit: 0b51177
 edges:
   - to: lexicon-data type: related_to reason: each word carries palette/police ids
 ---
@@ -17,3 +18,4 @@ edges:
 - Fonts are used only for the headword; body text stays system serif. 13 of 14 fonts lack U+202F (narrow nbsp) but have U+00A0; Android falls back per glyph. Palettes pass WCAG: text/example >= 4.5:1, word/nature >= 3:1 on both gradient ends (checked by the design agent's build.py). <!-- id:6e67 -->
 - Contrast pass (6fc6deb, audit I7): nature is also the card label (12 sp bold) and the signature, so it must reach 4.5:1, not 3:1 as in the design agent's build.py. Darkened nature: aube #904352, pistache #4E6729, givre #466884, lavande #644F87, sepia #69462D, sanguine #963921. All 18 palettes now: texte/exemple/nature >= 4.5:1 and mot >= 3:1 against both fond_haut and fond_bas. Edit styles.json by hand (build.py writes to the main checkout and would revert these). <!-- id:b671 -->
 - Owner decision 2026-11-06: display-only fonts (DISPLAY_ONLY) are used only for words of at most 8 characters; longer words and quotes take a text face (Styles.of, filter when item is Quote or Word with mot.length > 8). Unit test with only Unifraktur kept. <!-- id:7305 -->
+- 0b51177: palette/font picker is StylesActivity « Couleurs et polices » (from Settings > Apparence row with counts, refreshed onResume). Live card preview of today's word ('Il porte la palette X et la police Y', '+ Il préférerait Z, que vous avez retirée'), pool rule sentence, tiles as CheckBoxes (tick + 3dp accent ring), palettes grouped Claires/Sombres (Palette.sombre read from styles.json), fonts grouped 'Pour tous les mots'/'Décoratives' (note: 8 letters max, never quotes). Saves to Prefs on every tap (no saved state needed). 'Toutes'/'Aucune'; Aucune keeps the word's own; last kept tile can't be removed (toast). Styles.card() shared with MainActivity; Style carries its picked font. Styles.kept() still falls back to all for junk ids. Gotchas: TypefaceSpan(Typeface) needs API 28 (font tiles set CheckBox typeface, name line TypefaceSpan('serif')); RuntimeEnvironment.setQualifiers can't take '+notnight-w360dp' in one string. Removing any palette can change words that never used it (hash pick): the preview hint shows it. Test UiTest.stylesTilesToggleThePool. <!-- id:c9bd -->

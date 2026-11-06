@@ -165,13 +165,24 @@
             android:layout_marginTop="32dp"
             android:text="@string/group_look" />
 
+        <!-- opens StylesActivity: tiles drawn in each palette and font, live card -->
         <Button
-            android:id="@+id/palettes"
-            style="@style/Setting" />
+            android:id="@+id/styles_open"
+            style="@style/Setting"
+            android:text="@string/styles_row" />
 
-        <Button
-            android:id="@+id/polices"
-            style="@style/Setting" />
+        <TextView
+            android:id="@+id/styles_hint"
+            style="@style/Help" />
+
+        <Switch
+            android:id="@+id/sounds"
+            style="@style/Toggle"
+            android:text="@string/sounds" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/sounds_hint" />
 
         <TextView
             style="@style/Label"

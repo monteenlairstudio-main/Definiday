@@ -37,7 +37,8 @@ class CollectionActivity : Activity() {
         preview = ImageView(this).apply {
             contentDescription = getString(R.string.glose)
             layoutParams = LinearLayout.LayoutParams((160 * dp).toInt(), (160 * dp).toInt()).apply { gravity = Gravity.CENTER_HORIZONTAL }
-            setOnClickListener { Glose.play(this) }
+            val taps = Glose.Taps()
+            setOnClickListener { Glose.tap(this, taps, Glose.pose(trial)) { Glose.drawable(context, it, Glose.styles(trial)) } }
         }
         head.addView(preview)
         choose = Button(this).apply {

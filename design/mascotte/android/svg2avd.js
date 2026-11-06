@@ -205,7 +205,7 @@ for (const [gate, key] of order) {
   const body = []; emit(svg, 1, null, body);
   const vd = `<?xml version="1.0" encoding="utf-8"?>\n<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:width="${W}dp" android:height="${W}dp" android:viewportWidth="${vw}" android:viewportHeight="${vh}">\n<group android:name="cadre" android:translateX="${-vx}" android:translateY="${-vy}">${body.join('\n')}</group>\n</vector>\n`;
   const vdName = put(resDir, base + key, vd, !key), avd = targets.length || !key ? put(resDir, name + key, avdXml(vdName, targets), !key) : null;
-  layers.push({ gate, key, vd: vdName, res: targets.length ? avd : vdName, names: new Set([...vd.matchAll(/android:name="([^"]+)"/g)].map(m => m[1])) });
+  layers.push({ gate, key, vd: vdName, xml: vd, res: targets.length ? avd : vdName, names: new Set([...vd.matchAll(/android:name="([^"]+)"/g)].map(m => m[1])) });
   size += vd.length;
 }
 if (layers.length > 1) { LAYERS[name] = layers.map(l => [l.gate, l.res]); if (!opts.vd) LAYERS[base] = layers.map(l => [l.gate, l.vd]); }
@@ -223,4 +223,4 @@ function animated(name, vdName, targets, resDir) {
   });
   if (layers.length > 1) LAYERS[name] = layers;
 }
-module.exports = { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES };
+module.exports = { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES, PARTS };

@@ -7,7 +7,6 @@ import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -49,6 +48,7 @@ class MainActivity : Activity() {
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             pick(w)
+            Sounds.play(this, Sounds.PAGE)
             DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen (said under the button)
             warnIfHurried()
         }
@@ -60,7 +60,8 @@ class MainActivity : Activity() {
         }
         DailyReceiver.scheduleNext(this)
         DailyReceiver.scheduleQuiz(this)
-        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.play(it as ImageView) } // a tap replays it
+        val taps = Glose.Taps()
+        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.tap(it as ImageView, taps, Glose.mainPose(Prefs(this))) } // reacts, then its idle life
     }
 
     /** singleTop: a notification tapped while the app is open shows its item here instead of stacking a new screen. */
@@ -119,12 +120,7 @@ class MainActivity : Activity() {
         current = item
         Words.shown(this, listOf(item)) // the card shows it: seen today (history, quiz)
         val st = Styles.of(this, item)
-        findViewById<View>(R.id.card).background = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(st.palette.haut, st.palette.bas),
-        ).apply {
-            cornerRadius = 20 * resources.displayMetrics.density
-            if (Styles.needsEdge(st.palette, getColor(R.color.bg))) setStroke(resources.displayMetrics.density.toInt().coerceAtLeast(1), getColor(R.color.card_edge))
-        }
+        findViewById<View>(R.id.card).background = Styles.card(this, st.palette, 20f)
         findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
         listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte, R.id.exemple to st.palette.exemple)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
