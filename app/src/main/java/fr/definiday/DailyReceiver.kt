@@ -17,11 +17,11 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZonedDateTime
 
-/** Daily alarm -> show the word; END alarm -> remove our lock wallpaper; boot/update -> reschedule. */
+/** Daily alarm -> show the word (only refresh the home widget when the daily word is off); END alarm -> remove our lock wallpaper; boot/update -> reschedule. */
 class DailyReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         when (intent.action) {
-            ACTION_SHOW -> { show(ctx); scheduleNext(ctx) }
+            ACTION_SHOW -> { if (Prefs(ctx).enabled) show(ctx) else Widget.update(ctx); scheduleNext(ctx) }
             ACTION_QUIZ -> { quizReminder(ctx); scheduleQuiz(ctx) }
             ACTION_END -> clearWallpaper(ctx)
             // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED, exact-alarm access granted: re-anchor alarms
@@ -55,7 +55,7 @@ class DailyReceiver : BroadcastReceiver() {
             val p = Prefs(ctx)
             val am = ctx.getSystemService(AlarmManager::class.java)
             val pi = pending(ctx, ACTION_SHOW)
-            if (!p.enabled) { am.cancel(pi); return }
+            if (!p.enabled && Widget.ids(ctx).isEmpty()) { am.cancel(pi); return } // a home widget still changes daily
             val at = nextTrigger(ZonedDateTime.now(), p.hour, p.minute).toInstant().toEpochMilli()
             set(am, at, pi)
         }
@@ -128,6 +128,7 @@ class DailyReceiver : BroadcastReceiver() {
                 }
             }
             Words.shown(ctx, shown)
+            Widget.update(ctx)
         }
 
         /** force = Nth unlock reached (before the duration ran out). */

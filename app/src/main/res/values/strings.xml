@@ -136,4 +136,12 @@
     <string name="onb_notif_word">le mot du jour</string>
     <string name="onb_notif_quiz">le rappel du quiz du soir</string>
     <string name="onb_allow">Autoriser les notifications</string>
+    <!-- home-screen widget -->
+    <string name="widget_description">Le mot du jour sur l’écran d’accueil, dans ses couleurs. Gratuit, comme tout Definiday.</string>
+    <string name="widget_add">Ajouter le widget</string>
+    <string name="widget_add_hint">Le mot du jour sur l’écran d’accueil, gratuit. Touchez-le pour ouvrir sa fiche.</string>
+    <string name="widget_manual">Appuyez longuement sur l’écran d’accueil, puis choisissez Widgets et Definiday.</string>
+    <string name="widget_sample_mot">sérendipité</string>
+    <string name="widget_sample_nature">n. f.</string>
+    <string name="widget_sample_texte">Fait de découvrir par hasard quelque chose d’heureux ou d’utile en cherchant autre chose.</string>
 </resources>

@@ -38,7 +38,7 @@ class StylesActivity : Activity() {
         p = Prefs(this)
         cat = Styles.load(this)
         word = Words.today(this).filterIsInstance<Word>().firstOrNull() ?: Words.load(this).first() // today's slot may hold a quote
-        palettes = Pool(cat.palettes.associate { it.id to it.nom }, { p.palettes }, { p.palettes = it }, R.id.palettes_count, word.palette)
+        palettes = Pool(cat.palettes.associate { it.id to it.nom }, { p.palettes }, { p.palettes = it; Widget.update(this) }, R.id.palettes_count, word.palette)
         polices = Pool(cat.polices.associate { it.id to it.nom }, { p.polices }, { p.polices = it }, R.id.polices_count, word.police)
         findViewById<Button>(R.id.palettes_all).setOnClickListener { palettes.all() }
         findViewById<Button>(R.id.palettes_none).setOnClickListener { palettes.none() }

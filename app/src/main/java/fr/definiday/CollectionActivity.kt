@@ -43,7 +43,7 @@ class CollectionActivity : Activity() {
         head.addView(preview)
         choose = Button(this).apply {
             text = getString(R.string.collection_choose)
-            setOnClickListener { Glose.save(p, trial); refresh() }
+            setOnClickListener { Glose.save(p, trial); refresh(); Widget.update(context) }
         }
         head.addView(choose)
         root.addView(ScrollView(this).apply { addView(box) }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f))
