@@ -1,0 +1,436 @@
+[
+  {
+    "mot": "emberlucoquer",
+    "nature": "v. pron.",
+    "definition": "S'enticher d'une idée au point de ne plus en démordre ; s'attacher aveuglément à une opinion.",
+    "exemple": "Il s'est emberlucoqué de cette théorie fumeuse et n'écoute plus personne.",
+    "academie": false
+  },
+  {
+    "mot": "engeigner",
+    "nature": "v. tr.",
+    "definition": "Tromper quelqu'un par ruse, le duper.",
+    "exemple": "Le marchand avait si bien engeigné le paysan qu'il lui vendit une vache borgne.",
+    "academie": false
+  },
+  {
+    "mot": "enfançon",
+    "nature": "n. m.",
+    "definition": "Tout petit enfant, enfant en bas âge.",
+    "exemple": "La nourrice berçait l'enfançon en fredonnant une vieille complainte.",
+    "academie": true
+  },
+  {
+    "mot": "évagation",
+    "nature": "n. f.",
+    "definition": "Disposition de l'esprit qui l'empêche de se fixer sur un objet ; vagabondage de la pensée, notamment pendant la prière.",
+    "exemple": "Le prédicateur mettait ses fidèles en garde contre l'évagation pendant l'office.",
+    "academie": true
+  },
+  {
+    "mot": "éburnéen",
+    "nature": "adj.",
+    "definition": "Qui a la blancheur ou l'aspect de l'ivoire.",
+    "exemple": "Sous la lampe, ses épaules prenaient une pâleur éburnéenne.",
+    "academie": true
+  },
+  {
+    "mot": "éristique",
+    "nature": "adj.",
+    "definition": "Qui relève de la controverse pour elle-même ; se dit d'un esprit chicaneur, porté aux disputes subtiles.",
+    "exemple": "Son goût éristique transformait chaque dîner en tournoi d'arguties.",
+    "academie": true
+  },
+  {
+    "mot": "embéguiner",
+    "nature": "v. pron.",
+    "definition": "S'enticher, se coiffer de quelqu'un ou de quelque chose au point d'en perdre le jugement.",
+    "exemple": "À soixante ans, il s'était embéguiné d'une danseuse de l'Opéra.",
+    "academie": true
+  },
+  {
+    "mot": "euphuisme",
+    "nature": "n. m.",
+    "definition": "Style précieux et maniéré, à la mode à la cour d'Élisabeth Ire ; par extension, toute affectation du style.",
+    "exemple": "Ses lettres d'amour sombraient dans un euphuisme que personne ne parvenait à suivre.",
+    "academie": true
+  },
+  {
+    "mot": "eutrapélie",
+    "nature": "n. f.",
+    "definition": "Disposition à plaisanter avec esprit et mesure ; enjouement de bon ton dans la conversation.",
+    "exemple": "Son eutrapélie détendait les réunions les plus compassées sans jamais blesser.",
+    "academie": false
+  },
+  {
+    "mot": "enchifrené",
+    "nature": "adj.",
+    "definition": "Qui a le nez pris et la voix nasillarde à cause d'un rhume de cerveau.",
+    "exemple": "Tout enchifrené, le ténor dut renoncer à chanter ce soir-là.",
+    "academie": false
+  },
+  {
+    "mot": "émerillonné",
+    "nature": "adj.",
+    "definition": "Gai, vif et éveillé, comme le petit faucon nommé émerillon.",
+    "exemple": "Elle avait l'œil émerillonné des enfants qui préparent une farce.",
+    "academie": true
+  },
+  {
+    "mot": "épiphonème",
+    "nature": "n. m.",
+    "definition": "Exclamation sentencieuse qui conclut un récit ou un raisonnement en en tirant la leçon.",
+    "exemple": "Le conteur termina sur un épiphonème : « Tant la vanité coûte cher ! »",
+    "academie": true
+  },
+  {
+    "mot": "épanorthose",
+    "nature": "n. f.",
+    "definition": "Figure de style par laquelle on revient sur ce qu'on vient de dire pour le corriger, l'atténuer ou le renforcer.",
+    "exemple": "« Il est habile, que dis-je, retors » : voilà une épanorthose bien sentie.",
+    "academie": false
+  },
+  {
+    "mot": "empyreume",
+    "nature": "n. m.",
+    "definition": "Odeur et saveur âcres que prennent les matières végétales ou animales soumises à un feu violent.",
+    "exemple": "Le café trop torréfié avait pris un empyreume désagréable.",
+    "academie": true
+  },
+  {
+    "mot": "enfeu",
+    "nature": "n. m.",
+    "definition": "Niche à fond plat ménagée dans le mur d'une église pour abriter un tombeau.",
+    "exemple": "Le chevalier repose dans un enfeu, sous une arcade gothique du chœur.",
+    "academie": false
+  },
+  {
+    "mot": "équipollent",
+    "nature": "adj.",
+    "definition": "Qui a la même valeur qu'une autre chose ; équivalent.",
+    "exemple": "Pour lui, une promesse verbale était équipollente à un contrat signé.",
+    "academie": true
+  },
+  {
+    "mot": "érugineux",
+    "nature": "adj.",
+    "definition": "Qui a la couleur verte de la rouille du cuivre, du vert-de-gris.",
+    "exemple": "Les gouttières érugineuses striaient la façade de traînées verdâtres.",
+    "academie": true
+  },
+  {
+    "mot": "escarbot",
+    "nature": "n. m.",
+    "definition": "Ancien nom de divers coléoptères, notamment des scarabées qui vivent dans le fumier.",
+    "exemple": "Un escarbot luisant roulait sa boulette au bord du chemin.",
+    "academie": true
+  },
+  {
+    "mot": "estafier",
+    "nature": "n. m.",
+    "definition": "Autrefois, grand laquais armé qui escortait son maître ; par extension, homme de main, spadassin.",
+    "exemple": "Le marquis ne sortait jamais sans deux estafiers à la mine patibulaire.",
+    "academie": true
+  },
+  {
+    "mot": "estrapade",
+    "nature": "n. f.",
+    "definition": "Ancien supplice où l'on hissait le condamné, mains liées dans le dos, avant de le laisser retomber brutalement.",
+    "exemple": "On infligeait jadis l'estrapade aux déserteurs devant toute la troupe.",
+    "academie": true
+  },
+  {
+    "mot": "escopette",
+    "nature": "n. f.",
+    "definition": "Ancienne arme à feu courte, sorte de carabine qu'on portait en bandoulière.",
+    "exemple": "Le bandit des grands chemins épaula son escopette rouillée.",
+    "academie": true
+  },
+  {
+    "mot": "eulogie",
+    "nature": "n. f.",
+    "definition": "Formule de bénédiction ou de louange ; aussi, pain béni distribué aux fidèles.",
+    "exemple": "Après la messe, le prêtre distribua les eulogies aux pèlerins.",
+    "academie": false
+  },
+  {
+    "mot": "étésien",
+    "nature": "adj.",
+    "definition": "Se dit des vents du nord qui soufflent chaque été sur la Méditerranée orientale.",
+    "exemple": "Les vents étésiens gonflaient les voiles des caïques en mer Égée.",
+    "academie": true
+  },
+  {
+    "mot": "fruition",
+    "nature": "n. f.",
+    "definition": "Jouissance pleine et entière de quelque chose.",
+    "exemple": "Il attendait la retraite pour la paisible fruition de son jardin.",
+    "academie": false
+  },
+  {
+    "mot": "falourde",
+    "nature": "n. f.",
+    "definition": "Gros fagot de bûches liées ensemble, destiné au chauffage.",
+    "exemple": "Le charbonnier livrait les falourdes avant les premiers froids.",
+    "academie": false
+  },
+  {
+    "mot": "fortrait",
+    "nature": "adj.",
+    "definition": "Se dit d'un cheval épuisé, rendu malade par un excès de fatigue.",
+    "exemple": "Après trois jours de poste, la jument était fortraite et refusait d'avancer.",
+    "academie": false
+  },
+  {
+    "mot": "fescennin",
+    "nature": "adj.",
+    "definition": "Se dit d'une poésie antique, grossière et licencieuse, née en Étrurie ; par extension, grivois.",
+    "exemple": "Les noces romaines s'accompagnaient de vers fescennins chantés à tue-tête.",
+    "academie": false
+  },
+  {
+    "mot": "flexueux",
+    "nature": "adj.",
+    "definition": "Qui se courbe plusieurs fois sur sa longueur ; sinueux, ondoyant.",
+    "exemple": "Le sentier flexueux serpentait entre les vignes jusqu'au hameau.",
+    "academie": true
+  },
+  {
+    "mot": "fallace",
+    "nature": "n. f.",
+    "definition": "Tromperie, fourberie.",
+    "exemple": "Sous ses airs de dévot se cachait une fallace digne de Tartuffe.",
+    "academie": false
+  },
+  {
+    "mot": "frairie",
+    "nature": "n. f.",
+    "definition": "Partie de plaisir et de bonne chère entre amis.",
+    "exemple": "Chaque automne, les vendangeurs terminaient la saison par une joyeuse frairie.",
+    "academie": true
+  },
+  {
+    "mot": "géronte",
+    "nature": "n. m.",
+    "definition": "Vieillard crédule et faible qui se laisse facilement duper, comme le personnage de comédie.",
+    "exemple": "Les neveux flattaient le vieil oncle comme on manœuvre un géronte de Molière.",
+    "academie": true
+  },
+  {
+    "mot": "gobelotter",
+    "nature": "v. intr.",
+    "definition": "Boire souvent par petites quantités ; aimer à faire ripaille.",
+    "exemple": "Ils passaient la soirée à gobelotter au cabaret du coin.",
+    "academie": true
+  },
+  {
+    "mot": "godailler",
+    "nature": "v. intr.",
+    "definition": "Faire bombance, boire et manger avec excès.",
+    "exemple": "Au lieu de travailler, les apprentis godaillaient dès que le maître s'absentait.",
+    "academie": true
+  },
+  {
+    "mot": "grègues",
+    "nature": "n. f. pl.",
+    "definition": "Ancien haut-de-chausses ample ; « tirer ses grègues » signifiait s'enfuir.",
+    "exemple": "Voyant venir le guet, le larron tira ses grègues sans demander son reste.",
+    "academie": true
+  },
+  {
+    "mot": "grivèlerie",
+    "nature": "n. f.",
+    "definition": "Délit qui consiste à consommer dans un restaurant, un café ou un hôtel en sachant qu'on ne pourra pas payer.",
+    "exemple": "Il fut arrêté pour grivèlerie après un festin d'huîtres impayé.",
+    "academie": true
+  },
+  {
+    "mot": "gyrovague",
+    "nature": "adj. et n. m.",
+    "definition": "Se disait d'un moine errant, sans monastère ; par extension, vagabond excentrique.",
+    "exemple": "Ce poète gyrovague dormait chaque nuit dans une ville différente.",
+    "academie": false
+  },
+  {
+    "mot": "gibbeux",
+    "nature": "adj.",
+    "definition": "Qui présente une bosse ou des renflements ; bossu.",
+    "exemple": "Le vieux saule gibbeux penchait au-dessus de la mare.",
+    "academie": true
+  },
+  {
+    "mot": "gaber",
+    "nature": "v. intr.",
+    "definition": "Plaisanter en se moquant, railler.",
+    "exemple": "Les écuyers aimaient gaber à la veillée en se lançant des défis absurdes.",
+    "academie": false
+  },
+  {
+    "mot": "gobichonner",
+    "nature": "v. intr.",
+    "definition": "Faire bonne chère, festoyer gaiement.",
+    "exemple": "Le dimanche, toute la famille gobichonnait chez la grand-mère.",
+    "academie": false
+  },
+  {
+    "mot": "gravelure",
+    "nature": "n. f.",
+    "definition": "Propos licencieux, plaisanterie un peu grossière.",
+    "exemple": "L'oncle Albert ne pouvait s'empêcher de glisser quelque gravelure au dessert.",
+    "academie": true
+  },
+  {
+    "mot": "gribouille",
+    "nature": "n. m.",
+    "definition": "Personne naïve qui, pour éviter un mal, se jette dans un pire.",
+    "exemple": "En vendant tout par peur de la baisse, il a agi en vrai gribouille.",
+    "academie": false
+  },
+  {
+    "mot": "girie",
+    "nature": "n. f.",
+    "definition": "Plainte affectée, lamentation hypocrite ; au pluriel, simagrées, minauderies.",
+    "exemple": "Cesse tes giries : tout le monde sait que tu n'as pas mal.",
+    "academie": false
+  },
+  {
+    "mot": "gimblette",
+    "nature": "n. f.",
+    "definition": "Petite pâtisserie dure et sèche en forme d'anneau.",
+    "exemple": "Il trempait des gimblettes dans son vin doux en écoutant la radio.",
+    "academie": true
+  },
+  {
+    "mot": "gongorisme",
+    "nature": "n. m.",
+    "definition": "Style précieux et contourné, chargé de métaphores recherchées, à la manière du poète espagnol Góngora.",
+    "exemple": "Le critique reprocha au jeune romancier un gongorisme indigeste.",
+    "academie": false
+  },
+  {
+    "mot": "hypallage",
+    "nature": "n. f.",
+    "definition": "Figure de style qui attribue à un mot ce qui convient logiquement à un autre mot de la phrase.",
+    "exemple": "« Il fumait une pipe pensive » : l'hypallage prête à la pipe la rêverie du fumeur.",
+    "academie": true
+  },
+  {
+    "mot": "hamadryade",
+    "nature": "n. f.",
+    "definition": "Nymphe des bois qui naissait et mourait avec l'arbre dont elle avait la garde.",
+    "exemple": "Les bûcherons craignaient de blesser l'hamadryade du vieux chêne.",
+    "academie": true
+  },
+  {
+    "mot": "hispide",
+    "nature": "adj.",
+    "definition": "Hérissé de poils rudes et espacés ; au figuré, d'humeur revêche.",
+    "exemple": "Il émergea du maquis, barbe hispide et regard méfiant.",
+    "academie": true
+  },
+  {
+    "mot": "hoirie",
+    "nature": "n. f.",
+    "definition": "Ensemble des biens d'une succession, héritage ; « avance d'hoirie » : don fait par anticipation sur un héritage.",
+    "exemple": "Ses parents lui ont cédé la maison en avance d'hoirie.",
+    "academie": true
+  },
+  {
+    "mot": "hoqueton",
+    "nature": "n. m.",
+    "definition": "Casaque brodée que portaient autrefois certains archers ; par extension, l'archer qui la portait.",
+    "exemple": "Deux hoquetons du prévôt gardaient la porte du palais.",
+    "academie": true
+  },
+  {
+    "mot": "huchet",
+    "nature": "n. m.",
+    "definition": "Petit cor de chasse ou cornet servant à appeler de loin.",
+    "exemple": "Le veneur emboucha son huchet pour rallier la meute.",
+    "academie": true
+  },
+  {
+    "mot": "hircin",
+    "nature": "adj.",
+    "definition": "Qui se rapporte au bouc ou lui ressemble, notamment par l'odeur.",
+    "exemple": "Une odeur hircine flottait dans l'étable mal aérée.",
+    "academie": false
+  },
+  {
+    "mot": "hippiatre",
+    "nature": "n. m.",
+    "definition": "Vétérinaire spécialisé dans les maladies des chevaux.",
+    "exemple": "On fit venir l'hippiatre pour soigner le pur-sang boiteux.",
+    "academie": false
+  },
+  {
+    "mot": "hongreline",
+    "nature": "n. f.",
+    "definition": "Ancien corsage ajusté à longues basques, que les femmes du peuple portaient par-dessus la jupe.",
+    "exemple": "Sur le portrait, l'aïeule portait une hongreline de drap bleu.",
+    "academie": false
+  },
+  {
+    "mot": "improbe",
+    "nature": "adj.",
+    "definition": "Qui manque de probité, malhonnête.",
+    "exemple": "Un juge improbe avait vendu ses sentences au plus offrant.",
+    "academie": true
+  },
+  {
+    "mot": "irrépréhensible",
+    "nature": "adj.",
+    "definition": "Qu'on ne saurait blâmer ni reprendre ; irréprochable.",
+    "exemple": "Sa conduite irrépréhensible désarmait même ses adversaires.",
+    "academie": false
+  },
+  {
+    "mot": "issir",
+    "nature": "v. intr.",
+    "definition": "Sortir, provenir de quelque part ; descendre d'une lignée.",
+    "exemple": "Le chevalier vit issir du bois une troupe de pèlerins fourbus.",
+    "academie": false
+  },
+  {
+    "mot": "insipience",
+    "nature": "n. f.",
+    "definition": "Manque de sagesse et de jugement ; sottise.",
+    "exemple": "Il déplorait l'insipience de ceux qui confondent bruit et talent.",
+    "academie": false
+  },
+  {
+    "mot": "impollu",
+    "nature": "adj.",
+    "definition": "Qui n'a subi aucune souillure, pur.",
+    "exemple": "Les neiges impollues des sommets brillaient au soleil levant.",
+    "academie": false
+  },
+  {
+    "mot": "jaboter",
+    "nature": "v. intr.",
+    "definition": "Bavarder ensemble à voix basse et sans fin, comme des oiseaux qui gonflent leur jabot.",
+    "exemple": "Les commères jabotaient sur le pas des portes jusqu'au soir.",
+    "academie": false
+  },
+  {
+    "mot": "jaseran",
+    "nature": "n. m.",
+    "definition": "Collier ou chaîne d'or à fines mailles servant à suspendre une croix ou un médaillon.",
+    "exemple": "Elle portait à son cou un jaseran d'où pendait un camée.",
+    "academie": false
+  },
+  {
+    "mot": "jarnicoton",
+    "nature": "interj.",
+    "definition": "Juron plaisant d'autrefois, exprimant la surprise ou l'impatience.",
+    "exemple": "Jarnicoton ! s'écria le capitaine en voyant le mât se rompre.",
+    "academie": false
+  },
+  {
+    "mot": "kakemono",
+    "nature": "n. m.",
+    "definition": "Peinture ou calligraphie japonaise sur soie ou papier, montée en rouleau vertical qu'on suspend au mur.",
+    "exemple": "Un kakemono représentant une grue ornait le salon de thé.",
+    "academie": false
+  }
+]

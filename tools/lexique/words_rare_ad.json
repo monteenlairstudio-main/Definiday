@@ -1,0 +1,352 @@
+[
+  {
+    "mot": "abonnir",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Rendre meilleur, améliorer la qualité de quelque chose.",
+    "exemple": "Le vigneron assurait que trois ans de cave suffiraient à abonnir ce vin encore rude.",
+    "academie": true
+  },
+  {
+    "mot": "adirer",
+    "nature": "v. tr.",
+    "definition": "Vieilli, surtout en droit. Égarer, perdre, notamment un titre ou une pièce officielle.",
+    "exemple": "Le notaire, confus, avoua avoir adiré l'acte de vente quelque part dans ses dossiers.",
+    "academie": true
+  },
+  {
+    "mot": "adoniser",
+    "nature": "v. tr.",
+    "definition": "Vieilli et plaisant. Parer quelqu'un avec un soin excessif, l'apprêter avec une recherche affectée.",
+    "exemple": "Avant le bal, il passa une heure à adoniser son fils, pommade et rubans compris.",
+    "academie": true
+  },
+  {
+    "mot": "anacréontique",
+    "nature": "adj.",
+    "definition": "Qui rappelle la poésie d'Anacréon, légère et gracieuse, célébrant l'amour, le vin et les plaisirs.",
+    "exemple": "Le vieux poète griffonnait des vers anacréontiques entre deux verres de muscat.",
+    "academie": true
+  },
+  {
+    "mot": "arlequinade",
+    "nature": "n. f.",
+    "definition": "Bouffonnerie digne d'Arlequin ; par extension, conduite ou discours ridicule et sans sérieux.",
+    "exemple": "Le débat tourna vite à l'arlequinade, chaque orateur cherchant le bon mot plutôt que l'argument.",
+    "academie": true
+  },
+  {
+    "mot": "aronde",
+    "nature": "n. f.",
+    "definition": "Ancien nom de l'hirondelle.",
+    "exemple": "Les arondes revenues tournoyaient au-dessus du clocher dès les premiers jours d'avril.",
+    "academie": true
+  },
+  {
+    "mot": "assoter",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Rendre sot ; à la forme pronominale, s'éprendre de quelqu'un de façon déraisonnable.",
+    "exemple": "Ce flatteur a fini par assoter le vieux marquis, qui ne jure plus que par lui.",
+    "academie": true
+  },
+  {
+    "mot": "aveindre",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Tirer une chose de l'endroit où elle était rangée ou serrée.",
+    "exemple": "Elle grimpa sur l'escabeau pour aveindre le grand plat du haut de l'armoire.",
+    "academie": true
+  },
+  {
+    "mot": "alliciant",
+    "nature": "adj.",
+    "definition": "Littéraire et rare. Qui attire, qui séduit.",
+    "exemple": "Une odeur alliciante de brioche s'échappait de la boulangerie et ralentissait les passants.",
+    "academie": false
+  },
+  {
+    "mot": "alouvi",
+    "nature": "adj.",
+    "definition": "Vieilli. Affamé comme un loup, d'une faim insatiable.",
+    "exemple": "Revenus de la moisson, les garçons se jetèrent alouvis sur la soupe.",
+    "academie": false
+  },
+  {
+    "mot": "apertement",
+    "nature": "adv.",
+    "definition": "Vieilli et littéraire. De manière manifeste, ouvertement, sans rien cacher.",
+    "exemple": "Il avoua apertement sa faute devant le conseil, à la stupeur de tous.",
+    "academie": false
+  },
+  {
+    "mot": "aposiopèse",
+    "nature": "n. f.",
+    "definition": "Figure de style par laquelle on interrompt sa phrase avant la fin, laissant la pensée inachevée.",
+    "exemple": "« Si jamais je t'attrape… » : sa menace restait suspendue, belle aposiopèse.",
+    "academie": false
+  },
+  {
+    "mot": "apparesser",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Rendre paresseux, engourdir l'esprit ou le corps.",
+    "exemple": "La chaleur de l'après-midi finit par apparesser tout le village.",
+    "academie": false
+  },
+  {
+    "mot": "avette",
+    "nature": "n. f.",
+    "definition": "Vieux mot poétique désignant l'abeille.",
+    "exemple": "Les avettes bourdonnaient dans les lavandes, ivres de soleil.",
+    "academie": false
+  },
+  {
+    "mot": "bachelette",
+    "nature": "n. f.",
+    "definition": "Vieilli. Jeune fille gracieuse, en âge d'être courtisée.",
+    "exemple": "Au bal du village, chaque bachelette espérait être invitée par le fils du meunier.",
+    "academie": true
+  },
+  {
+    "mot": "bavolet",
+    "nature": "n. m.",
+    "definition": "Vieilli. Coiffe paysanne prolongée sur la nuque par une pièce d'étoffe ; ruban ornant l'arrière d'un chapeau de femme.",
+    "exemple": "Sous son bavolet blanc, la fermière rougit en recevant le bouquet.",
+    "academie": true
+  },
+  {
+    "mot": "bobèche",
+    "nature": "n. f.",
+    "definition": "Petite coupelle à rebord, percée au centre, que l'on fixe sur un chandelier pour recueillir la cire.",
+    "exemple": "La bougie avait coulé jusqu'à remplir la bobèche de cire figée.",
+    "academie": true
+  },
+  {
+    "mot": "boquillon",
+    "nature": "n. m.",
+    "definition": "Vieilli. Bûcheron.",
+    "exemple": "Le boquillon rentrait au crépuscule, sa cognée sur l'épaule.",
+    "academie": true
+  },
+  {
+    "mot": "boulingrin",
+    "nature": "n. m.",
+    "definition": "Parterre de gazon, souvent bordé et entouré de talus, ornant un jardin.",
+    "exemple": "Les enfants avaient interdiction de courir sur le boulingrin du château.",
+    "academie": true
+  },
+  {
+    "mot": "brandiller",
+    "nature": "v. tr. et intr.",
+    "definition": "Vieilli. Agiter de-ci de-là, balancer ; se balancer d'un côté et de l'autre.",
+    "exemple": "Assis sur le muret, le gamin brandillait ses jambes en sifflotant.",
+    "academie": true
+  },
+  {
+    "mot": "bergamasque",
+    "nature": "n. f.",
+    "definition": "Danse populaire originaire de Bergame, et air sur lequel on la danse.",
+    "exemple": "Les musiciens attaquèrent une bergamasque et toute la noce se mit à tourner.",
+    "academie": false
+  },
+  {
+    "mot": "bonnetade",
+    "nature": "n. f.",
+    "definition": "Vieilli. Salut que l'on fait en se découvrant, en ôtant son bonnet.",
+    "exemple": "Il distribuait les bonnetades à tous les notables pour obtenir sa place.",
+    "academie": false
+  },
+  {
+    "mot": "bibus",
+    "nature": "n. m.",
+    "definition": "Vieilli. Chose futile, sans importance ni valeur.",
+    "exemple": "Ne t'emporte pas pour ce bibus, nous avons des soucis plus sérieux.",
+    "academie": false
+  },
+  {
+    "mot": "billebarrer",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Bigarrer de couleurs mal assorties, formant un mélange bizarre.",
+    "exemple": "Le peintre amateur avait billebarré la façade de rouge, de vert et de violet.",
+    "academie": false
+  },
+  {
+    "mot": "brouée",
+    "nature": "n. f.",
+    "definition": "Vieilli. Brouillard léger ou bruine ; brève averse passagère.",
+    "exemple": "Une brouée matinale noyait la vallée avant que le soleil ne la dissipe.",
+    "academie": false
+  },
+  {
+    "mot": "bergerette",
+    "nature": "n. f.",
+    "definition": "Vieilli. Jeune bergère ; aussi, petite chanson pastorale.",
+    "exemple": "Le troubadour chanta une bergerette où il était question de moutons et d'amours sages.",
+    "academie": true
+  },
+  {
+    "mot": "canéphore",
+    "nature": "n. f.",
+    "definition": "Dans l'Antiquité grecque, jeune fille portant sur la tête la corbeille sacrée lors des fêtes ; statue qui la représente.",
+    "exemple": "Deux canéphores de marbre encadraient l'entrée du jardin.",
+    "academie": true
+  },
+  {
+    "mot": "capitan",
+    "nature": "n. m.",
+    "definition": "Fanfaron qui se vante d'une bravoure qu'il n'a pas, à l'image du personnage de la comédie italienne.",
+    "exemple": "Ce capitan raconte ses duels imaginaires mais pâlit devant un chien qui aboie.",
+    "academie": true
+  },
+  {
+    "mot": "capon",
+    "nature": "adj. et n.",
+    "definition": "Vieilli et familier. Peureux, poltron, qui manque de courage.",
+    "exemple": "Ne fais pas le capon : saute, la rivière n'est pas si froide !",
+    "academie": true
+  },
+  {
+    "mot": "chambrière",
+    "nature": "n. f.",
+    "definition": "Vieilli. Servante, femme de chambre.",
+    "exemple": "La chambrière monta un bouillon chaud à sa maîtresse alitée.",
+    "academie": true
+  },
+  {
+    "mot": "chantepleure",
+    "nature": "n. f.",
+    "definition": "Entonnoir à long tuyau percé de trous, servant à verser un liquide dans un tonneau sans le troubler ; robinet de tonneau.",
+    "exemple": "Le tonnelier fixa la chantepleure et remplit le fût sans agiter la lie.",
+    "academie": false
+  },
+  {
+    "mot": "chevance",
+    "nature": "n. f.",
+    "definition": "Vieilli. Ensemble des biens que l'on possède, avoir, fortune.",
+    "exemple": "Le vieil avare comptait sa chevance chaque soir à la lueur de la chandelle.",
+    "academie": true
+  },
+  {
+    "mot": "concetti",
+    "nature": "n. m. pl.",
+    "definition": "Traits d'esprit recherchés, plus brillants que justes, dont on émaille un discours ou un ouvrage.",
+    "exemple": "Son sonnet croulait sous les concetti, si bien qu'on n'y trouvait plus aucune émotion.",
+    "academie": true
+  },
+  {
+    "mot": "conjouir",
+    "nature": "v. pron.",
+    "definition": "Vieilli. Se réjouir avec quelqu'un d'un événement heureux qui lui est arrivé.",
+    "exemple": "Toute la famille vint se conjouir avec elle de la naissance de son fils.",
+    "academie": true
+  },
+  {
+    "mot": "contrister",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Causer une vive tristesse, affliger profondément.",
+    "exemple": "La nouvelle de son départ contrista tous ceux qui l'avaient connu.",
+    "academie": true
+  },
+  {
+    "mot": "coquemar",
+    "nature": "n. m.",
+    "definition": "Pot de terre ou de métal à anse, servant à faire bouillir de l'eau ou chauffer un liquide.",
+    "exemple": "Le coquemar chantait sur les braises, prêt pour la tisane du soir.",
+    "academie": true
+  },
+  {
+    "mot": "cailletage",
+    "nature": "n. m.",
+    "definition": "Familier et péjoratif. Bavardage frivole et futile, propos de commères.",
+    "exemple": "Elle n'avait que faire du cailletage des voisines sur ses fréquentations.",
+    "academie": true
+  },
+  {
+    "mot": "chape-chute",
+    "nature": "n. f.",
+    "definition": "Vieilli. Aubaine que l'on tire de la mésaventure d'autrui.",
+    "exemple": "Le portefeuille oublié sur le banc fut une belle chape-chute pour le premier passant.",
+    "academie": false
+  },
+  {
+    "mot": "coquefredouille",
+    "nature": "n. m.",
+    "definition": "Vieilli. Pauvre diable, personnage ridicule.",
+    "exemple": "Ce coquefredouille croit que la cour entière admire son pourpoint jaune.",
+    "academie": false
+  },
+  {
+    "mot": "décours",
+    "nature": "n. m.",
+    "definition": "Vieilli. Période où la lune décroît ; par extension, déclin d'une chose, d'une maladie.",
+    "exemple": "Les anciens jardiniers ne semaient les carottes qu'au décours de la lune.",
+    "academie": true
+  },
+  {
+    "mot": "dépriser",
+    "nature": "v. tr.",
+    "definition": "Estimer quelqu'un ou quelque chose au-dessous de sa valeur, en faire peu de cas.",
+    "exemple": "Il aimait dépriser les romans à la mode pour se donner un air de connaisseur.",
+    "academie": true
+  },
+  {
+    "mot": "désheurer",
+    "nature": "v. tr.",
+    "definition": "Déranger quelqu'un dans l'ordre réglé de ses occupations, bouleverser ses habitudes horaires.",
+    "exemple": "Ce dîner tardif l'avait désheuré et il ne trouva pas le sommeil.",
+    "academie": true
+  },
+  {
+    "mot": "déshonnête",
+    "nature": "adj.",
+    "definition": "Contraire à la pudeur et à la bienséance.",
+    "exemple": "Sa grand-mère jugeait déshonnête qu'une jeune fille sorte sans chapeau.",
+    "academie": true
+  },
+  {
+    "mot": "désaimer",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Cesser d'aimer.",
+    "exemple": "On ne choisit pas plus de désaimer qu'on n'a choisi d'aimer.",
+    "academie": true
+  },
+  {
+    "mot": "déparler",
+    "nature": "v. intr.",
+    "definition": "Vieilli. Cesser de parler ; surtout employé avec une négation.",
+    "exemple": "Depuis le début du repas, l'oncle Jules ne déparle pas une seconde.",
+    "academie": true
+  },
+  {
+    "mot": "déprier",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Annuler une invitation faite à quelqu'un, le décommander.",
+    "exemple": "Faute de place, elle dut déprier deux cousins qu'elle avait conviés au mariage.",
+    "academie": false
+  },
+  {
+    "mot": "déconforter",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Ôter le courage, abattre, affliger.",
+    "exemple": "Ce troisième refus acheva de déconforter le jeune auteur.",
+    "academie": false
+  },
+  {
+    "mot": "devantier",
+    "nature": "n. m.",
+    "definition": "Vieilli. Tablier de femme.",
+    "exemple": "Elle essuya ses mains farineuses sur son devantier avant d'ouvrir la porte.",
+    "academie": false
+  },
+  {
+    "mot": "dariolette",
+    "nature": "n. f.",
+    "definition": "Vieilli. Confidente qui favorise des amours secrètes, entremetteuse.",
+    "exemple": "La nourrice servait de dariolette et portait les billets doux de la princesse.",
+    "academie": false
+  },
+  {
+    "mot": "détraction",
+    "nature": "n. f.",
+    "definition": "Action de dénigrer, de rabaisser le mérite d'autrui.",
+    "exemple": "Il pratiquait la détraction avec tant d'art que ses victimes le remerciaient presque.",
+    "academie": false
+  }
+]

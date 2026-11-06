@@ -1,0 +1,352 @@
+[
+  {
+    "mot": "lacrymatoire",
+    "nature": "n. m.",
+    "definition": "Petit vase antique que l'on croyait destiné à recueillir les larmes versées pour un défunt.",
+    "exemple": "Le musée exposait un lacrymatoire de verre irisé trouvé dans une tombe romaine.",
+    "academie": true
+  },
+  {
+    "mot": "lambrequin",
+    "nature": "n. m.",
+    "definition": "Bandeau d'étoffe ou de bois découpé qui orne le haut d'une fenêtre, d'un store ou d'une tente.",
+    "exemple": "Des lambrequins de velours grenat surmontaient chaque fenêtre du salon.",
+    "academie": true
+  },
+  {
+    "mot": "landier",
+    "nature": "n. m.",
+    "definition": "Grand chenet de fer dont on se servait autrefois dans les cuisines.",
+    "exemple": "Les broches reposaient sur les landiers de fer devant l'âtre.",
+    "academie": true
+  },
+  {
+    "mot": "lantiponner",
+    "nature": "v. intr.",
+    "definition": "Débiter des propos futiles et importuns, parler pour ne rien dire.",
+    "exemple": "Cessez de lantiponner et dites-moi enfin ce que vous voulez.",
+    "academie": false
+  },
+  {
+    "mot": "lanturlu",
+    "nature": "n. m.",
+    "definition": "Refrain d'autrefois ; par extension, refus moqueur ou réponse évasive.",
+    "exemple": "À toutes ses réclamations, elle n'opposait qu'un lanturlu narquois.",
+    "academie": false
+  },
+  {
+    "mot": "latrie",
+    "nature": "n. f.",
+    "definition": "Culte d'adoration qui n'est rendu qu'à Dieu seul, distinct de la vénération des saints.",
+    "exemple": "Le théologien rappelait que le culte de latrie ne saurait s'adresser à une statue.",
+    "academie": true
+  },
+  {
+    "mot": "loquèle",
+    "nature": "n. f.",
+    "definition": "Facilité à parler, mais pour ne débiter que des banalités et des lieux communs.",
+    "exemple": "Sa loquèle intarissable n'avait jamais produit une idée neuve.",
+    "academie": false
+  },
+  {
+    "mot": "lorette",
+    "nature": "n. f.",
+    "definition": "Au XIXe siècle, jeune femme élégante et légère, vivant aux dépens de ses amants.",
+    "exemple": "Le jeune clerc avait dilapidé son héritage pour une lorette du quartier Notre-Dame.",
+    "academie": false
+  },
+  {
+    "mot": "lémure",
+    "nature": "n. m.",
+    "definition": "Chez les Romains, ombre d'un mort qui revenait tourmenter les vivants.",
+    "exemple": "La nuit, la vieille demeure semblait hantée par des lémures.",
+    "academie": true
+  },
+  {
+    "mot": "léthifère",
+    "nature": "adj.",
+    "definition": "Qui apporte la mort, mortel.",
+    "exemple": "Les marais exhalaient, disait-on, des vapeurs léthifères.",
+    "academie": true
+  },
+  {
+    "mot": "maltalent",
+    "nature": "n. m.",
+    "definition": "Mauvaise disposition envers quelqu'un, rancune, ressentiment.",
+    "exemple": "Il garda contre son frère un maltalent qui ne s'éteignit jamais.",
+    "academie": true
+  },
+  {
+    "mot": "mamamouchi",
+    "nature": "n. m.",
+    "definition": "Titre burlesque inventé par Molière ; par plaisanterie, personnage qui se donne des airs importants.",
+    "exemple": "Depuis sa promotion, il se pavane en vrai mamamouchi du service.",
+    "academie": false
+  },
+  {
+    "mot": "margouillis",
+    "nature": "n. m.",
+    "definition": "Lieu plein de boue et d'ordures ; par extension, mélange confus de choses diverses.",
+    "exemple": "Après l'orage, la cour de la ferme n'était plus qu'un margouillis.",
+    "academie": true
+  },
+  {
+    "mot": "marjolet",
+    "nature": "n. m.",
+    "definition": "Petit homme qui fait l'empressé et le galant auprès des femmes.",
+    "exemple": "Ce marjolet tournait autour de toutes les invitées du bal.",
+    "academie": false
+  },
+  {
+    "mot": "marmouset",
+    "nature": "n. m.",
+    "definition": "Petite figure grotesque sculptée ; par plaisanterie, petit garçon ou petit homme mal bâti.",
+    "exemple": "Des marmousets grimaçants ornaient les accoudoirs des stalles.",
+    "academie": true
+  },
+  {
+    "mot": "matassin",
+    "nature": "n. m.",
+    "definition": "Danseur bouffon d'autrefois, costumé et armé, qui exécutait des danses grotesques.",
+    "exemple": "Une troupe de matassins vint égayer la fin du banquet.",
+    "academie": true
+  },
+  {
+    "mot": "maupiteux",
+    "nature": "adj.",
+    "definition": "Qui inspire la pitié, piteux ; anciennement, cruel et sans pitié.",
+    "exemple": "Il prit un air maupiteux pour obtenir un délai.",
+    "academie": true
+  },
+  {
+    "mot": "mazarinade",
+    "nature": "n. f.",
+    "definition": "Pamphlet satirique ou burlesque publié contre Mazarin pendant la Fronde.",
+    "exemple": "On vendait sous le manteau des mazarinades plus cruelles les unes que les autres.",
+    "academie": false
+  },
+  {
+    "mot": "mirliflore",
+    "nature": "n. m.",
+    "definition": "Jeune élégant prétentieux et content de lui.",
+    "exemple": "Un mirliflore pommadé faisait la roue devant les demoiselles.",
+    "academie": true
+  },
+  {
+    "mot": "monomachie",
+    "nature": "n. f.",
+    "definition": "Combat singulier, duel.",
+    "exemple": "Le différend des deux chevaliers devait se régler par une monomachie.",
+    "academie": false
+  },
+  {
+    "mot": "morbidesse",
+    "nature": "n. f.",
+    "definition": "En peinture, souplesse délicate dans le rendu des chairs ; grâce alanguie et un peu maladive.",
+    "exemple": "Le peintre rendait avec morbidesse le teint pâle de son modèle.",
+    "academie": true
+  },
+  {
+    "mot": "mugueter",
+    "nature": "v. tr.",
+    "definition": "Faire le galant auprès d'une femme, la courtiser avec empressement.",
+    "exemple": "Il passait ses soirées à mugueter les belles du voisinage.",
+    "academie": true
+  },
+  {
+    "mot": "nacarat",
+    "nature": "n. m.",
+    "definition": "Couleur d'un rouge clair, entre cerise et rose, aux reflets nacrés.",
+    "exemple": "Le nacarat de sa robe tranchait sur le gris du salon.",
+    "academie": false
+  },
+  {
+    "mot": "naumachie",
+    "nature": "n. f.",
+    "definition": "Dans l'Antiquité, spectacle de combat naval donné dans un bassin aménagé.",
+    "exemple": "L'empereur fit inonder l'arène pour offrir une naumachie au peuple.",
+    "academie": true
+  },
+  {
+    "mot": "nidoreux",
+    "nature": "adj.",
+    "definition": "Qui a une odeur et un goût de pourri, comme un œuf gâté.",
+    "exemple": "Une odeur nidoreuse montait du garde-manger oublié.",
+    "academie": true
+  },
+  {
+    "mot": "nymphée",
+    "nature": "n. m.",
+    "definition": "Construction monumentale destinée à recevoir des eaux, ornée de statues et de vasques, à l'origine vouée aux nymphes.",
+    "exemple": "Au fond du parc, un nymphée de rocaille abritait une source.",
+    "academie": true
+  },
+  {
+    "mot": "nénie",
+    "nature": "n. f.",
+    "definition": "Dans la Rome antique, chant funèbre de lamentation exécuté par des pleureuses aux funérailles.",
+    "exemple": "Les pleureuses entonnèrent une nénie autour du bûcher.",
+    "academie": true
+  },
+  {
+    "mot": "opime",
+    "nature": "adj.",
+    "definition": "Riche, abondant ; « dépouilles opimes » : celles qu'un général romain prenait au chef ennemi tué de sa main.",
+    "exemple": "Il revint du tournoi chargé de dépouilles opimes.",
+    "academie": true
+  },
+  {
+    "mot": "orchestique",
+    "nature": "n. f.",
+    "definition": "Dans l'Antiquité grecque, art de la danse et de la gestuelle.",
+    "exemple": "Le traité décrivait l'orchestique des chœurs tragiques.",
+    "academie": true
+  },
+  {
+    "mot": "orfroi",
+    "nature": "n. m.",
+    "definition": "Bande d'étoffe tissée ou brodée d'or servant de parement à une chape ou à une chasuble.",
+    "exemple": "La chasuble était bordée d'orfrois finement brodés.",
+    "academie": true
+  },
+  {
+    "mot": "oribus",
+    "nature": "n. m.",
+    "definition": "Chandelle de résine ; « poudre d'oribus » : remède sans aucune efficacité.",
+    "exemple": "Il lisait à la lueur fumeuse d'un oribus.",
+    "academie": false
+  },
+  {
+    "mot": "oréade",
+    "nature": "n. f.",
+    "definition": "Nymphe des montagnes, dans la mythologie grecque.",
+    "exemple": "Les poètes peuplaient ces sommets d'oréades insaisissables.",
+    "academie": true
+  },
+  {
+    "mot": "oscitation",
+    "nature": "n. f.",
+    "definition": "Action de bâiller ; bâillement.",
+    "exemple": "Les oscitations de l'assistance trahissaient l'ennui du discours.",
+    "academie": false
+  },
+  {
+    "mot": "pandour",
+    "nature": "n. m.",
+    "definition": "Soldat d'une milice irrégulière d'Europe centrale, réputé brutal et pillard ; par extension, homme aux manières rudes.",
+    "exemple": "Les pandours ravagèrent la contrée avant de disparaître.",
+    "academie": true
+  },
+  {
+    "mot": "paraguante",
+    "nature": "n. f.",
+    "definition": "Présent fait en remerciement d'un service rendu.",
+    "exemple": "Le valet attendait sa paraguante sur le seuil.",
+    "academie": true
+  },
+  {
+    "mot": "paranymphe",
+    "nature": "n. m.",
+    "definition": "Chez les Anciens, jeune homme ou jeune fille qui conduisait les mariés à la maison nuptiale.",
+    "exemple": "Le paranymphe ouvrait le cortège nuptial, flambeau à la main.",
+    "academie": true
+  },
+  {
+    "mot": "pastourelle",
+    "nature": "n. f.",
+    "definition": "Poème médiéval où un chevalier courtise une bergère.",
+    "exemple": "La pastourelle met en scène une bergère qui éconduit le chevalier.",
+    "academie": false
+  },
+  {
+    "mot": "peccamineux",
+    "nature": "adj.",
+    "definition": "Qui relève du péché ou y incline.",
+    "exemple": "Il chassait ces pensées peccamineuses par la prière.",
+    "academie": false
+  },
+  {
+    "mot": "philautie",
+    "nature": "n. f.",
+    "definition": "Amour excessif de soi-même.",
+    "exemple": "Sa philautie l'empêchait d'entendre la moindre critique.",
+    "academie": false
+  },
+  {
+    "mot": "piaculaire",
+    "nature": "adj.",
+    "definition": "Qui sert à expier une faute, expiatoire.",
+    "exemple": "On offrit un sacrifice piaculaire pour apaiser les dieux.",
+    "academie": true
+  },
+  {
+    "mot": "picorée",
+    "nature": "n. f.",
+    "definition": "Maraude, petits larcins commis à la campagne, notamment par des soldats ; butin ainsi obtenu.",
+    "exemple": "Les soudards allaient à la picorée dans les fermes voisines.",
+    "academie": true
+  },
+  {
+    "mot": "pied-plat",
+    "nature": "n. m.",
+    "definition": "Homme lâche ou grossier, qui ne mérite aucune considération.",
+    "exemple": "Seul un pied-plat abandonnerait ainsi ses compagnons dans le danger.",
+    "academie": true
+  },
+  {
+    "mot": "pindariser",
+    "nature": "v. intr.",
+    "definition": "Écrire ou parler avec une emphase affectée, à l'imitation de Pindare.",
+    "exemple": "Au lieu d'expliquer simplement, il se mit à pindariser.",
+    "academie": true
+  },
+  {
+    "mot": "porphyrogénète",
+    "nature": "adj.",
+    "definition": "Se disait d'un enfant d'empereur byzantin né pendant le règne de son père.",
+    "exemple": "Constantin VII, prince porphyrogénète, était né dans la chambre de pourpre.",
+    "academie": true
+  },
+  {
+    "mot": "pouacre",
+    "nature": "adj. et n.",
+    "definition": "Sale, malpropre et repoussant ; se dit aussi d'une personne ainsi faite.",
+    "exemple": "Ce pouacre n'avait pas changé de chemise depuis la Saint-Jean.",
+    "academie": true
+  },
+  {
+    "mot": "poulaine",
+    "nature": "n. f.",
+    "definition": "Soulier à pointe très allongée, à la mode à la fin du Moyen Âge.",
+    "exemple": "Le seigneur marchait avec peine dans ses poulaines démesurées.",
+    "academie": true
+  },
+  {
+    "mot": "prestolet",
+    "nature": "n. m.",
+    "definition": "Ecclésiastique sans importance ni considération.",
+    "exemple": "Un prestolet de campagne vint bénir la nouvelle grange.",
+    "academie": true
+  },
+  {
+    "mot": "pyrrhique",
+    "nature": "n. f.",
+    "definition": "Danse guerrière de la Grèce antique, exécutée en armes.",
+    "exemple": "Les jeunes Spartiates s'exerçaient à la pyrrhique.",
+    "academie": true
+  },
+  {
+    "mot": "pétrarquiser",
+    "nature": "v. intr.",
+    "definition": "Imiter Pétrarque en composant des poèmes d'amour raffinés.",
+    "exemple": "Le jeune poète pétrarquisait pour une belle qui ne le lisait pas.",
+    "academie": false
+  },
+  {
+    "mot": "pétun",
+    "nature": "n. m.",
+    "definition": "Ancien nom du tabac.",
+    "exemple": "Le marin bourrait sa pipe d'un pétun noir et âcre.",
+    "academie": true
+  }
+]
