@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Teintes recolorables de Monsieur Glose (pelage, pelote) et visibilité des accessoires (0 = caché, 1 = porté) -->
+    <attr name="gloseFur" format="color"/>
+    <attr name="gloseFurD" format="color"/>
+    <attr name="gloseCream" format="color"/>
+    <attr name="gloseBall" format="color"/>
+    <attr name="gloseBallD" format="color"/>
+    <attr name="gloseAccNoeud" format="float"/>
+    <attr name="gloseAccEcharpe" format="float"/>
+    <attr name="gloseAccBonnet" format="float"/>
+    <attr name="gloseAccPlume" format="float"/>
+    <attr name="gloseAccMarque" format="float"/>
+</resources>
