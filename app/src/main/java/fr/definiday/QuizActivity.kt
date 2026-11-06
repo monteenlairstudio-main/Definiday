@@ -35,7 +35,7 @@ class QuizActivity : Activity() {
     private fun next() {
         box.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(R.drawable.glose_icone_vd, 56))
+        box.addView(glose(Glose.drawable(this, R.drawable.glose_icone_vd), 56))
         box.addView(text(getString(R.string.quiz_title), 13f, bold = true))
         val q = questions[index]
         box.addView(text("${index + 1} / ${questions.size}", 13f))
@@ -66,19 +66,29 @@ class QuizActivity : Activity() {
             Quiz.record(Prefs(this), score, questions.size, LocalDate.now().toEpochDay())
             val passed = Quiz.passed(score, questions.size)
             // the thread writes the word once and holds it; never mocking when failed
-            box.addView(glose(if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin, 200,
-                if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()).apply {
+            box.addView(glose(Glose.drawable(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
+                if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
                 contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
                 Glose.play(this)
             })
             box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply { gravity = Gravity.CENTER })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
+            announce()
         }
         box.addView(Button(this).apply { text = getString(R.string.quiz_close); setOnClickListener { finish() } })
     }
 
-    private fun glose(res: Int, dp: Int, styles: List<Int> = emptyList()) = ImageView(this).apply {
-        setImageDrawable(Glose.drawable(context, res, styles))
+    /** "Nouveau : …" once per unlocked item, with Glose showing the last (rarest) one. */
+    private fun announce() {
+        val p = Prefs(this)
+        val fresh = Unlocks.update(p).ifEmpty { return }
+        p.announced = p.announced + fresh.map { it.id }
+        box.addView(text(getString(R.string.unlock_new, fresh.joinToString(", ") { it.nom }), 18f, bold = true).apply { gravity = Gravity.CENTER })
+        box.addView(glose(Glose.preview(this, fresh.last()), 160).apply { Glose.play(this) })
+    }
+
+    private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
+        setImageDrawable(d)
         contentDescription = getString(R.string.glose)
         val px = (dp * resources.displayMetrics.density).toInt()
         layoutParams = LinearLayout.LayoutParams(px, px).apply { gravity = Gravity.CENTER_HORIZONTAL }

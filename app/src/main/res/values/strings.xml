@@ -45,4 +45,5 @@
     <string name="glose_bravo">Monsieur Glose écrit « bravo » avec le fil de sa pelote</string>
     <string name="glose_encore">Monsieur Glose écrit « encore » avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u00A0?</string>
+    <string name="unlock_new">Nouveau\u00A0: %1$s</string>
 </resources>

@@ -4,10 +4,14 @@ summary: Monsieur Glose mascot: Paper.js sources + Node pipeline (design/mascott
 entry_points:
   - design/mascotte/android/make_android.js
   - design/mascotte/android/svg2avd.js
-  - design/mascotte/glose_lib.js
+  - app/src/main/java/fr/definiday/Glose.kt
+  - app/src/main/java/fr/definiday/Unlocks.kt
   - app/src/main/res/values/glose_styles.xml
 covers:
   - design/mascotte/
+  - app/src/main/java/fr/definiday/Glose.kt
+  - app/src/main/java/fr/definiday/Unlocks.kt
+  - app/src/test/java/fr/definiday/GloseTest.kt
   - app/src/main/res/drawable/glose_*
   - app/src/main/res/values/glose_attrs.xml
   - app/src/main/res/values/glose_styles.xml
@@ -20,3 +24,4 @@ edges:
 - Accessory choice (2026-11-06, no emulator): NOT scaleX=?attr on groups (undocumented) and NOT overlay drawables (z-order breaks: quill is behind the skull, scarf under the chin, bookmark replaces the ribbon; redrawing translucent shading doubles it). Color theme attrs only, documented and verified in Robolectric. Cost: all-mode VDs ~180 KB text each, release APK 1.24 -> 1.61 MB. <!-- id:1db9 -->
 - Step 1 verification without emulator: GloseTest (Robolectric GraphicsMode NATIVE, real framework VectorDrawable inflation) inflates every glose_* VD/AVD with and without all overlays, asserts each Glose.* overlay changes pixels, and writes app/build/demo/glose/{poses,overlays_assis,combos}.png. Attr-to-attr gate values (bonnet ear tips = ?attr/gloseFur) resolve correctly. Icons (glose_icone*) crop the bonnet and quill: apply only pelage/pelote overlays to icons. Glose.drawable(ctx, res, styles) = ContextThemeWrapper(ctx, R.style.Glose) + theme.applyStyle(each, true). <!-- id:2b0e -->
 - AVD gotcha: framework AVD uses the RenderThread animator, which only really starts at the first draw; isRunning() stays false until then (in Robolectric, draw the view on a software canvas first, which falls back to the UI-thread animator). <!-- id:b91f -->
+- Unlocks.items is the owner's table (thresholds on quizzes/perfect/passed/streak, never correctAnswers): written words are pose items (ecrit_mot, ecrit_encore, ecrit_bravo, ecrit_dodo, ecrit_rare). Unlocks.of() is pure; Unlocks.update(p) unions into Prefs.unlocked (never shrinks, broken streak loses nothing) and returns items not in Prefs.announced; QuizActivity announces them once ('Nouveau : ...', Glose previewing the last/rarest). Test unlockTable holds the table as data + boundary checks. <!-- id:add7 -->

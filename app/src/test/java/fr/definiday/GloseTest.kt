@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.widget.ImageView
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -43,6 +44,32 @@ class GloseTest {
         assertTrue(diff(base, render(R.drawable.glose_assis_vd)) == 0)
         // éclats are scaled to 0 in the still frame
         overlays.filterKeys { it != "Glose_Eclats" }.forEach { (name, style) -> assertTrue(name, diff(base, render(R.drawable.glose_assis_vd, listOf(style))) > 50) }
+    }
+
+    /** The unlock table, as agreed with the owner (thresholds count quizzes). */
+    @Test fun unlockTable() {
+        val table = mapOf("assis" to "q0", "tigre" to "q0", "bordeaux" to "q0", "ecrit_mot" to "q1", "ecrit_encore" to "q1", "ecrit_bravo" to "r1",
+            "noeud" to "p1", "soir" to "s3", "ecrit_dodo" to "s3", "moutarde" to "q5", "echarpe" to "s7", "livres" to "q10", "creme" to "p5",
+            "bonnet" to "s14", "sauge" to "q20", "ecrit_rare" to "r30", "plume" to "r60", "rose" to "p15", "marque" to "q45",
+            "enluminure" to "r150", "nuit" to "s30")
+        assertEquals(table, Unlocks.items.associate { it.id to "${it.on}${it.need}" })
+        fun of(c: Char, n: Int) = Unlocks.of(if (c == 'q') n else 0, if (c == 'p') n else 0, if (c == 'r') n else 0, if (c == 's') n else 0)
+        Unlocks.items.filter { it.need > 0 }.forEach {
+            assertTrue(it.id, it.id in of(it.on, it.need))
+            assertFalse(it.id, it.id in of(it.on, it.need - 1))
+        }
+        assertEquals(setOf("assis", "tigre", "bordeaux"), Unlocks.of(0, 0, 0, 0))
+        assertEquals(Unlocks.items.map { it.id }.toSet(), Unlocks.of(150, 150, 150, 150))
+    }
+
+    @Test fun unlocksAreKeptAndAnnouncedOnce() {
+        val p = Prefs(ctx).apply { quizzes = 1; streak = 3 }
+        assertEquals(setOf("ecrit_mot", "ecrit_encore", "soir", "ecrit_dodo"), Unlocks.update(p).map { it.id }.toSet())
+        p.announced = p.announced + Unlocks.update(p).map { it.id }
+        p.streak = 1 // broken streak: nothing is lost, nothing new
+        assertTrue(Unlocks.update(p).isEmpty())
+        assertTrue("soir" in p.unlocked)
+        assertEquals("Encore 2 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("soir"), p))
     }
 
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {

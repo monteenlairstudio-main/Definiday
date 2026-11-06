@@ -18,6 +18,10 @@ object Glose {
         return t.getDrawable(res)!!
     }
 
+    /** Glose showing one collection item: its pose, or the seated pose wearing it. */
+    fun preview(ctx: Context, item: Unlocks.Item): Drawable =
+        drawable(ctx, if (item.res != 0) item.res else R.drawable.glose_assis, listOf(item.style).filter { it != 0 })
+
     /** (Re)starts the view's animation from the beginning; stays a still image when animations are off (settings, battery saver). */
     fun play(v: ImageView) {
         val d = v.drawable as? AnimatedVectorDrawable ?: return

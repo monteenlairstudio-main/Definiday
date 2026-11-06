@@ -86,6 +86,13 @@ class Prefs(ctx: Context) {
     var correctAnswers: Int
         get() = sp.getInt("correctAnswers", 0)
         set(v) = sp.edit().putInt("correctAnswers", v).apply()
+    /** Glose's collection: ids ever unlocked (kept when a streak breaks) and ids already announced. */
+    var unlocked: Set<String>
+        get() = sp.getStringSet("unlocked", null).orEmpty().toSet()
+        set(v) = sp.edit().putStringSet("unlocked", v).apply()
+    var announced: Set<String>
+        get() = sp.getStringSet("announced", null).orEmpty().toSet()
+        set(v) = sp.edit().putStringSet("announced", v).apply()
     /** Random picks warned about today (warning shown once a day, past 3 picks). */
     var warnedDay: Long
         get() = sp.getLong("warnedDay", Long.MIN_VALUE)
