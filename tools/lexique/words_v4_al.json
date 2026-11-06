@@ -1,0 +1,493 @@
+[
+  {
+    "mot": "alumelle",
+    "nature": "n. f.",
+    "definition": "Vieilli. Lame étroite et allongée, celle d'un couteau ou d'une épée.",
+    "exemple": "Le colporteur sortit de sa besace un canif à l'alumelle ébréchée.",
+    "academie": true
+  },
+  {
+    "mot": "aposter",
+    "nature": "v. tr.",
+    "definition": "Littéraire. Poster quelqu'un en embuscade pour qu'il épie ou accomplisse une besogne, souvent malveillante.",
+    "exemple": "Le duc avait aposté deux spadassins au coin de la rue.",
+    "academie": true
+  },
+  {
+    "mot": "arroi",
+    "nature": "n. m.",
+    "definition": "Vieilli. Ensemble de l'équipage, de la suite et de l'apparat qui accompagnent un personnage.",
+    "exemple": "La comtesse fit son entrée dans le bourg en grand arroi, suivie de six laquais.",
+    "academie": true
+  },
+  {
+    "mot": "automédon",
+    "nature": "n. m.",
+    "definition": "Par plaisanterie. Celui qui mène une voiture, un cocher, ainsi nommé d'après un conducteur de char de la légende grecque.",
+    "exemple": "Notre automédon fouetta ses chevaux et le fiacre s'élança sur les pavés.",
+    "academie": true,
+    "anecdote": "Dans la mythologie grecque, Automédon conduisait le char d'Achille pendant la guerre de Troie, puis celui de son fils Néoptolème.",
+    "source": "https://fr.wikipedia.org/wiki/Automédon"
+  },
+  {
+    "mot": "balèvre",
+    "nature": "n. f.",
+    "definition": "Vieilli. Lèvres projetées en avant, comme dans une moue boudeuse.",
+    "exemple": "L'enfant, vexé, nous opposa une balèvre obstinée.",
+    "academie": true
+  },
+  {
+    "mot": "brelandier",
+    "nature": "n. m.",
+    "definition": "Vieilli. Joueur invétéré qui passe son temps aux cartes ou dans les tripots.",
+    "exemple": "Ce brelandier avait perdu au pharaon tout l'héritage de sa tante.",
+    "academie": true
+  },
+  {
+    "mot": "brucolaque",
+    "nature": "n. m.",
+    "definition": "Vieilli. Dans les croyances grecques modernes, mort excommunié censé revenir tourmenter les vivants.",
+    "exemple": "Les villageois juraient qu'un brucolaque rôdait chaque nuit autour du cimetière.",
+    "academie": true
+  },
+  {
+    "mot": "carrousse",
+    "nature": "n. f.",
+    "definition": "Désuet. Partie de débauche, festin où l'on boit et mange sans retenue.",
+    "exemple": "Après la vendange, la carrousse dura jusqu'à l'aube.",
+    "academie": true
+  },
+  {
+    "mot": "chacunière",
+    "nature": "n. f.",
+    "definition": "Familier et plaisant. Le logis de chacun, sa maison à soi.",
+    "exemple": "La fête finie, les convives regagnèrent chacun sa chacunière.",
+    "academie": true,
+    "anecdote": "Le mot semble avoir été forgé par Rabelais, qui l'emploie au chapitre 14 de Pantagruel : « Ainsi chacun s'en va à sa chacunière ».",
+    "source": "https://fr.wiktionary.org/wiki/chacunière"
+  },
+  {
+    "mot": "chanteau",
+    "nature": "n. m.",
+    "definition": "Vieilli. Gros quignon découpé dans une miche de pain.",
+    "exemple": "Le berger tira de sa musette un chanteau de pain et un morceau de lard.",
+    "academie": true
+  },
+  {
+    "mot": "coint",
+    "nature": "adj.",
+    "definition": "Désuet ou plaisant. Gracieux et agréable, surtout à regarder.",
+    "exemple": "Elle avait une mine fort cointe sous son chaperon de velours.",
+    "academie": true
+  },
+  {
+    "mot": "campos",
+    "nature": "n. m.",
+    "definition": "Désuet. Jour de congé donné aux écoliers ; par extension, moment de répit qu'on s'octroie.",
+    "exemple": "Le maître, de bonne humeur, nous donna campos pour l'après-midi.",
+    "academie": true,
+    "anecdote": "Le mot vient d'une tournure latine signifiant « donner les champs » : on laissait les écoliers quitter la classe pour courir la campagne.",
+    "source": "https://fr.wiktionary.org/wiki/campos"
+  },
+  {
+    "mot": "dameret",
+    "nature": "n. m.",
+    "definition": "Vieilli. Homme très attentif à sa toilette et toujours empressé auprès des femmes.",
+    "exemple": "Ce dameret passait plus de temps devant son miroir qu'au conseil.",
+    "academie": true
+  },
+  {
+    "mot": "dardanaire",
+    "nature": "n. m. et f.",
+    "definition": "Celui ou celle qui accapare une marchandise pour en tirer profit, ou qui prête à usure.",
+    "exemple": "En temps de disette, les dardanaires cachaient le blé pour en faire monter le prix.",
+    "academie": true
+  },
+  {
+    "mot": "duriuscule",
+    "nature": "adj.",
+    "definition": "Désuet et plaisant. Qui est un tantinet dur.",
+    "exemple": "Ce pain de la veille est duriuscule, mais trempé dans la soupe il fera l'affaire.",
+    "academie": true
+  },
+  {
+    "mot": "effondrilles",
+    "nature": "n. f. pl.",
+    "definition": "Vieilli. Dépôt grossier qui reste au fond d'un récipient après une cuisson ou une infusion.",
+    "exemple": "Elle jeta au jardin les effondrilles de la tisane.",
+    "academie": true
+  },
+  {
+    "mot": "estramaçon",
+    "nature": "n. m.",
+    "definition": "Vieilli. Tranchant d'une épée, ou coup porté avec ce tranchant ; aussi, lourde épée de guerre.",
+    "exemple": "D'un estramaçon, le reître fendit le chapeau de son adversaire.",
+    "academie": true
+  },
+  {
+    "mot": "faguenas",
+    "nature": "n. m.",
+    "definition": "Désuet. Relent fade et écœurant, comme celui d'un corps malpropre ou d'une salle d'hôpital.",
+    "exemple": "Un faguenas tenace flottait dans la chambrée mal aérée.",
+    "academie": true
+  },
+  {
+    "mot": "goffe",
+    "nature": "adj.",
+    "definition": "Désuet. Grossier, maladroitement fait.",
+    "exemple": "Il nous montra une statuette bien goffe, taillée au couteau.",
+    "academie": true
+  },
+  {
+    "mot": "grimelin",
+    "nature": "n. m.",
+    "definition": "Désuet. Petit garçon ; aussi, joueur qui ne mise que des sommes infimes, avec mesquinerie.",
+    "exemple": "Ce grimelin ne risquait jamais plus d'un sou à la table de jeu.",
+    "academie": true
+  },
+  {
+    "mot": "halenée",
+    "nature": "n. f.",
+    "definition": "Vieilli. Bouffée d'haleine, le plus souvent chargée d'une odeur forte.",
+    "exemple": "Le cocher m'envoya au visage une halenée d'ail et de vin.",
+    "academie": true
+  },
+  {
+    "mot": "hapelopin",
+    "nature": "n. m.",
+    "definition": "Désuet. Personne qui chipe dans les cuisines tout ce qui lui tombe sous la main.",
+    "exemple": "Le cuisinier chassa à coups de louche le hapelopin qui lorgnait les pâtés.",
+    "academie": true
+  },
+  {
+    "mot": "harpailler",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Chercher querelle à quelqu'un, le provoquer ou l'injurier.",
+    "exemple": "Ivre, il harpaillait tous les passants qui croisaient son chemin.",
+    "academie": true
+  },
+  {
+    "mot": "jointée",
+    "nature": "n. f.",
+    "definition": "Vieilli. Quantité que peuvent contenir les deux mains réunies en coupe.",
+    "exemple": "La meunière jeta une jointée de grain aux poules.",
+    "academie": true
+  },
+  {
+    "mot": "locatis",
+    "nature": "n. m.",
+    "definition": "Désuet. Méchant cheval ou piètre voiture de louage ; aussi, logement meublé qu'on loue.",
+    "exemple": "Nous fîmes la route dans un locatis brinquebalant tiré par une rosse.",
+    "academie": true
+  },
+  {
+    "mot": "écarbouiller",
+    "nature": "v. tr.",
+    "definition": "Vieilli et populaire. Écraser une chose jusqu'à la mettre en morceaux.",
+    "exemple": "Le gamin écarbouilla la citrouille d'un coup de talon.",
+    "academie": true
+  },
+  {
+    "mot": "écaché",
+    "nature": "adj.",
+    "definition": "Vieilli et familier. Se dit d'un nez camus, comme écrasé.",
+    "exemple": "Le vieux lutteur avait le nez écaché par trop de combats.",
+    "academie": true
+  },
+  {
+    "mot": "ginguet",
+    "nature": "adj.",
+    "definition": "Vieilli. Se dit d'un vin un peu vert et acide ; au figuré, maigre, de peu de valeur ; d'un habit, étriqué.",
+    "exemple": "On nous servit un petit vin ginguet qui faisait grimacer.",
+    "academie": false
+  },
+  {
+    "mot": "lendit",
+    "nature": "n. m.",
+    "definition": "Grande foire médiévale tenue en juin dans la plaine entre Paris et Saint-Denis ; par extension, congé donné aux écoliers à cette occasion.",
+    "exemple": "Les étudiants de la montagne Sainte-Geneviève attendaient le lendit avec impatience.",
+    "academie": true,
+    "anecdote": "Du IXe au XVIe siècle, la foire du Lendit compta parmi les plus importantes de France ; on y vendait notamment le parchemin dont se servaient l'université de Paris et ses étudiants.",
+    "source": "https://fr.wikipedia.org/wiki/Foire_du_Lendit"
+  },
+  {
+    "mot": "barbacole",
+    "nature": "n. m.",
+    "definition": "Désuet. Maître d'école de village, magister.",
+    "exemple": "Le barbacole du hameau enseignait l'alphabet à coups de férule.",
+    "academie": false,
+    "anecdote": "Le mot est tiré de Barbacola, le magister de l'opéra Le Carnaval de Lully, créé en 1675 ; La Fontaine est le premier à l'employer.",
+    "source": "https://fr.wiktionary.org/wiki/barbacole"
+  },
+  {
+    "mot": "antanaclase",
+    "nature": "n. f.",
+    "definition": "Figure de style qui reprend un même mot en lui donnant chaque fois un sens différent.",
+    "exemple": "« Le cœur a ses raisons que la raison ne connaît point » est une célèbre antanaclase.",
+    "academie": true
+  },
+  {
+    "mot": "battologie",
+    "nature": "n. f.",
+    "definition": "Redite inutile, répétition oiseuse de la même chose.",
+    "exemple": "Son discours n'était que battologie : il redisait trois fois chaque idée.",
+    "academie": true,
+    "anecdote": "Le mot dérive du nom de Battos Ier, ancien roi de Libye, qui était bègue.",
+    "source": "https://fr.wiktionary.org/wiki/battologie"
+  },
+  {
+    "mot": "aumusse",
+    "nature": "n. f.",
+    "definition": "Fourrure à capuchon que chanoines et chantres portaient sur les épaules, puis sur le bras ; au Moyen Âge, bonnet fourré.",
+    "exemple": "Le chanoine replia son aumusse sur son bras avant d'entrer au chœur.",
+    "academie": true
+  },
+  {
+    "mot": "éjouir",
+    "nature": "v. pron.",
+    "definition": "Désuet. Être gagné par une vive allégresse, s'abandonner à la gaieté.",
+    "exemple": "Tout le village s'éjouit à l'annonce de la paix.",
+    "academie": false
+  },
+  {
+    "mot": "alourder",
+    "nature": "v. tr.",
+    "definition": "Vieilli. Fatiguer quelqu'un de bavardages ; aussi, l'abuser, le duper.",
+    "exemple": "Le notaire nous alourda d'anecdotes pendant tout le dîner.",
+    "academie": false
+  },
+  {
+    "mot": "angarier",
+    "nature": "v. tr.",
+    "definition": "Désuet. Molester, tracasser, faire subir des vexations.",
+    "exemple": "Le bailli se plaisait à angarier les paysans du domaine.",
+    "academie": false
+  },
+  {
+    "mot": "attrapette",
+    "nature": "n. f.",
+    "definition": "Vieilli. Petite farce, tromperie sans gravité.",
+    "exemple": "Ce poisson d'avril n'était qu'une attrapette sans malice.",
+    "academie": false
+  },
+  {
+    "mot": "bicêtre",
+    "nature": "n. m.",
+    "definition": "Vieux. Malheur, revers de fortune.",
+    "exemple": "Quel bicêtre ! La grêle a couché tout le blé.",
+    "academie": false,
+    "anecdote": "Il remonte au latin bissextum : dès l'époque romaine, le jour intercalaire des années bissextiles passait pour porter malheur.",
+    "source": "https://fr.wiktionary.org/wiki/bicêtre"
+  },
+  {
+    "mot": "cacouac",
+    "nature": "n. m.",
+    "definition": "Par plaisanterie. Sobriquet moqueur dont les adversaires des Lumières affublaient les encyclopédistes et les philosophes.",
+    "exemple": "Le pamphlet raillait Diderot et ses amis, ces cacouacs incorrigibles.",
+    "academie": false,
+    "anecdote": "Inventé en 1757 pour railler les auteurs de l'Encyclopédie, le terme accole le grec kakos, « mauvais », au mot « couac ».",
+    "source": "https://fr.wikipedia.org/wiki/Cacouac"
+  },
+  {
+    "mot": "cassade",
+    "nature": "n. f.",
+    "definition": "Vieilli. Mensonge lancé par jeu, ou pour se tirer d'affaire par une excuse.",
+    "exemple": "Sa prétendue entorse n'était qu'une cassade pour éviter le bal.",
+    "academie": false
+  },
+  {
+    "mot": "chinfreneau",
+    "nature": "n. m.",
+    "definition": "Vieilli et populaire. Coup assené sur la tête ou au visage.",
+    "exemple": "Il reçut un chinfreneau qui l'envoya rouler sous la table.",
+    "academie": false
+  },
+  {
+    "mot": "corsin",
+    "nature": "n. m.",
+    "definition": "Vieilli. Prêteur à usure.",
+    "exemple": "Ruiné, le baron dut emprunter à un corsin à vingt pour cent.",
+    "academie": false,
+    "anecdote": "Le mot vient de l'ancien français caorsin, qui désignait à la fois l'habitant de Cahors et l'usurier.",
+    "source": "https://fr.wiktionary.org/wiki/corsin"
+  },
+  {
+    "mot": "cunctateur",
+    "nature": "n. m.",
+    "definition": "Rare. Personne qui temporise, qui diffère sans cesse le moment d'agir.",
+    "exemple": "En cunctateur avisé, le ministre laissa la crise s'éteindre d'elle-même.",
+    "academie": false,
+    "anecdote": "Le mot reprend le latin cunctator, surnom du Romain Quintus Fabius Maximus, dit « le Temporisateur ».",
+    "source": "https://fr.wikipedia.org/wiki/Quintus_Fabius_Maximus_Verrucosus"
+  },
+  {
+    "mot": "dicacité",
+    "nature": "n. f.",
+    "definition": "Rare. Goût pour les railleries mordantes ; ces railleries mêmes.",
+    "exemple": "Sa dicacité lui valut autant d'ennemis que d'admirateurs.",
+    "academie": false
+  },
+  {
+    "mot": "désultoire",
+    "nature": "adj.",
+    "definition": "Rare. Qui saute d'un sujet à l'autre sans suite, décousu.",
+    "exemple": "Leur conversation désultoire passa de la météo au théâtre sans transition.",
+    "academie": false,
+    "anecdote": "Il vient du latin desultor, le cavalier qui saute à bas de son cheval ; Rabelais appelait « desultoires » les chevaux de voltige.",
+    "source": "https://fr.wiktionary.org/wiki/désultoire"
+  },
+  {
+    "mot": "diablezot",
+    "nature": "interj.",
+    "definition": "Familier et désuet. Exclamation pour signifier qu'on n'est pas dupe : on ne m'y prendra pas !",
+    "exemple": "« Vous prêter encore cent écus ? Diablezot ! »",
+    "academie": false,
+    "anecdote": "Selon Furetière, la locution complète était « au diable zot » ; ce zot de mépris pourrait être l'ancêtre de notre « zut ».",
+    "source": "https://fr.wiktionary.org/wiki/diablezot"
+  },
+  {
+    "mot": "estrif",
+    "nature": "n. m.",
+    "definition": "Désuet. Dispute, querelle, combat.",
+    "exemple": "Un long estrif opposait les deux familles pour un bout de pré.",
+    "academie": false
+  },
+  {
+    "mot": "faciende",
+    "nature": "n. f.",
+    "definition": "Désuet. Intrigue, manigance, cabale.",
+    "exemple": "Toute la cour bruissait de la faciende ourdie contre le chancelier.",
+    "academie": false
+  },
+  {
+    "mot": "fafelu",
+    "nature": "adj.",
+    "definition": "Vieilli et familier. Espiègle ; se dit aussi d'une personne grasse.",
+    "exemple": "Ce petit fafelu avait caché les lunettes de son grand-père.",
+    "academie": false
+  },
+  {
+    "mot": "faitardise",
+    "nature": "n. f.",
+    "definition": "Vieilli. Paresse, goût de ne rien faire.",
+    "exemple": "Il vivait dans une douce faitardise, entre sa pipe et son hamac.",
+    "academie": false
+  },
+  {
+    "mot": "gonin",
+    "nature": "n. m.",
+    "definition": "Désuet et péjoratif. Homme rusé et habile à duper, fripon.",
+    "exemple": "Méfiez-vous de ce gonin : il vous vendrait un âne pour un cheval.",
+    "academie": false,
+    "anecdote": "Littré y voyait peut-être le nom de Gonin, porté par plusieurs prestidigitateurs aux XVIe et XVIIIe siècles.",
+    "source": "https://fr.wiktionary.org/wiki/gonin"
+  },
+  {
+    "mot": "guerdon",
+    "nature": "n. m.",
+    "definition": "Vieilli. Récompense, prix d'un service rendu.",
+    "exemple": "Pour guerdon de sa bravoure, le chevalier reçut un fief.",
+    "academie": false
+  },
+  {
+    "mot": "haguignète",
+    "nature": "n. f.",
+    "definition": "Désuet. Modeste cadeau, présent de peu d'importance.",
+    "exemple": "Chaque nouvel an, la marraine apportait une haguignète à ses filleuls.",
+    "academie": false,
+    "anecdote": "Le mot est une altération d'aguilanneuf, c'est-à-dire « au gui l'an neuf ».",
+    "source": "https://fr.wiktionary.org/wiki/haguignète"
+  },
+  {
+    "mot": "hutin",
+    "nature": "adj.",
+    "definition": "Désuet. Querelleur, prompt à s'emporter.",
+    "exemple": "Ce garçon hutin cherchait noise à tout le quartier.",
+    "academie": false,
+    "anecdote": "Louis X fut surnommé « le Hutin » non pour son humeur querelleuse, mais à cause du tumulte qui marqua le début de son règne.",
+    "source": "https://fr.wikipedia.org/wiki/Louis_X_de_France"
+  },
+  {
+    "mot": "imbriaque",
+    "nature": "adj.",
+    "definition": "Désuet. Pris de vin ; insensé, stupide.",
+    "exemple": "Il rentra imbriaque, chantant à tue-tête sous les fenêtres du curé.",
+    "academie": false
+  },
+  {
+    "mot": "irréméable",
+    "nature": "adj.",
+    "definition": "Rare. Qui ne permet aucun retour, dont on ne revient pas.",
+    "exemple": "Les Anciens tenaient le Styx pour un fleuve irréméable.",
+    "academie": false
+  },
+  {
+    "mot": "lampon",
+    "nature": "n. m.",
+    "definition": "Désuet. Couplet satirique, raillerie mise en chanson.",
+    "exemple": "On chantait sous le manteau des lampons contre le ministre.",
+    "academie": false,
+    "anecdote": "Il vient du refrain « Lampons ! » (« buvons ! ») d'une chanson raillant Jacques II Stuart en fuite en 1691 ; l'anglais en a tiré lampoon, toujours vivant.",
+    "source": "https://fr.wiktionary.org/wiki/lampon"
+  },
+  {
+    "mot": "lovelace",
+    "nature": "n. m.",
+    "definition": "Vieilli. Séducteur raffiné et sans scrupule, don Juan.",
+    "exemple": "Méfie-toi de ce lovelace aux gants beurre frais.",
+    "academie": false,
+    "anecdote": "Lovelace est le séducteur du roman Clarisse Harlowe (1748) de Samuel Richardson ; son nom est passé en français dès 1751.",
+    "source": "https://fr.wiktionary.org/wiki/lovelace"
+  },
+  {
+    "mot": "ébouffer",
+    "nature": "v. pron.",
+    "definition": "Désuet. Éclater d'un rire qu'on ne peut contenir.",
+    "exemple": "À cette réponse, toute la classe s'ébouffa.",
+    "academie": false
+  },
+  {
+    "mot": "asinifier",
+    "nature": "v. pron.",
+    "definition": "Désuet et plaisant. Faire une cure de lait d'ânesse.",
+    "exemple": "Sur l'avis de son médecin, la marquise s'asinifiait chaque printemps.",
+    "academie": false
+  },
+  {
+    "mot": "linostole",
+    "nature": "n. m.",
+    "definition": "Par plaisanterie. Docteur de Sorbonne, dans la langue moqueuse de Voltaire.",
+    "exemple": "Les linostoles condamnèrent le livre sans l'avoir lu.",
+    "academie": false,
+    "anecdote": "Formé sur lin et le latin stola, « robe », le mot signifie littéralement « vêtu de lin ».",
+    "source": "https://fr.wiktionary.org/wiki/linostole"
+  },
+  {
+    "mot": "bobillonner",
+    "nature": "v. intr.",
+    "definition": "Désuet. Hésiter, avancer à tâtons.",
+    "exemple": "Il bobillonna longtemps avant de signer le contrat.",
+    "academie": false
+  },
+  {
+    "mot": "gélasin",
+    "nature": "adj.",
+    "definition": "Rare. Qui a trait au rire.",
+    "exemple": "Cette comédie possède une puissance gélasine irrésistible.",
+    "academie": false
+  },
+  {
+    "mot": "balandras",
+    "nature": "n. m.",
+    "definition": "Vieilli. Ancien manteau fait de deux pans d'étoffe superposés des épaules à mi-corps, entre lesquels on passait les bras.",
+    "exemple": "Le voyageur s'emmitoufla dans son balandras pour affronter la bise.",
+    "academie": true
+  },
+  {
+    "mot": "badelaire",
+    "nature": "n. m.",
+    "definition": "Au Moyen Âge, épée à lame courte, proche du coutelas.",
+    "exemple": "Le sergent portait un badelaire passé à sa ceinture.",
+    "academie": false
+  }
+]
