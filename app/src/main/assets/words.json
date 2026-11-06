@@ -1068,14 +1068,18 @@
   "nature": "n. m.",
   "definition": "Bal populaire de guinguette ; par extension, vacarme ou attirail encombrant.",
   "exemple": "Ils ont emporté tout le bastringue pour trois jours de camping.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot a eu bien des vies : il a désigné un juke-box, un instrument volontairement désaccordé et même, en sylviculture, un compas forestier.",
+  "source": "https://fr.wiktionary.org/wiki/bastringue"
  },
  {
   "mot": "batifoler",
   "nature": "v. intr.",
   "definition": "S’amuser de manière folâtre, comme un enfant ; par extension, flirter avec légèreté.",
   "exemple": "Les chiots batifolaient dans l’herbe haute du verger.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Selon Littré, il remonte à l’italien battifolle, un rempart où les jeunes gens allaient s’amuser ; en bas latin, batifollum désignait même un bastion ou une machine de guerre.",
+  "source": "https://fr.wiktionary.org/wiki/batifoler"
  },
  {
   "mot": "bavolet",
@@ -1089,7 +1093,9 @@
   "nature": "v. intr.",
   "definition": "Tenir la bouche ouverte en regardant ; bayer aux corneilles : rêvasser niaisement.",
   "exemple": "Au lieu de travailler, l’apprenti bayait aux corneilles près de la fenêtre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Simple variante de bâiller, ce verbe ne survit plus que dans « bayer aux corneilles » : partout ailleurs, son doublet béer l’a supplanté.",
+  "source": "https://fr.wiktionary.org/wiki/bayer"
  },
  {
   "mot": "bellâtre",
@@ -1103,35 +1109,45 @@
   "nature": "adv.",
   "definition": "D’une manière doucereuse et faussement innocente, avec un air de candeur affecté.",
   "exemple": "Il demanda benoîtement si quelqu’un avait vu le dernier morceau de gâteau.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Benoît, c’est « béni » : le mot vient du latin benedictus, que le wallon conserve dans benoete aiwe, l’eau bénite.",
+  "source": "https://fr.wiktionary.org/wiki/benoît"
  },
  {
   "mot": "bergamasque",
   "nature": "n. f.",
   "definition": "Danse populaire originaire de Bergame, et air sur lequel on la danse.",
   "exemple": "Les musiciens attaquèrent une bergamasque et toute la noce se mit à tourner.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Debussy l’a rendu célèbre avec sa Suite bergamasque, publiée en 1905, dont le troisième mouvement est le fameux Clair de lune ; le titre fait écho aux « masques et bergamasques » d’un poème de Verlaine.",
+  "source": "https://fr.wikipedia.org/wiki/Suite_bergamasque"
  },
  {
   "mot": "bergerette",
   "nature": "n. f.",
   "definition": "Vieilli. Jeune bergère ; aussi, petite chanson pastorale.",
   "exemple": "Le troubadour chanta une bergerette où il était question de moutons et d’amours sages.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au XVe siècle, la bergerette était un poème à forme fixe sur des thèmes pastoraux, apparenté au rondeau ; dans certaines régions, on la disait ou la dansait le jour de Pâques.",
+  "source": "https://fr.wikipedia.org/wiki/Bergerette"
  },
  {
   "mot": "bernique",
   "nature": "interj.",
   "definition": "Exclamation marquant une déception, un espoir déçu : rien à faire !",
   "exemple": "J’espérais un peu de soleil pour le pique-nique, mais bernique !",
-  "academie": false
+  "academie": false,
+  "anecdote": "Son origine reste obscure, mais on le rapproche de breniquet, « coffre à mettre le son », et de l’ancien bren, qui désignait à la fois le son… et l’excrément.",
+  "source": "https://fr.wiktionary.org/wiki/bernique"
  },
  {
   "mot": "bégueule",
   "nature": "adj. et n.",
   "definition": "Qualifie quelqu’un dont la pudeur est outrée ou feinte.",
   "exemple": "Ne fais pas ta bégueule, ce film n’a rien de choquant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Littéralement « gueule bée » : la bégueule est d’abord celle qui reste bouche ouverte, d’étonnement ou de sottise. Le mot sert déjà d’injure en 1470.",
+  "source": "https://fr.wiktionary.org/wiki/bégueule"
  },
  {
   "mot": "béjaune",
@@ -1145,21 +1161,27 @@
   "nature": "n. m.",
   "definition": "Homme de rien, sans valeur ni mérite ; terme d’injure vieilli.",
   "exemple": "« Hors d’ici, bélître ! » lança le marquis au valet maladroit.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Cousin de l’allemand Bettler, « gueux », il a longtemps hésité sur sa forme, belleudre en 1408, belistre en 1460, bellitre en 1493, avant de se fixer en bélître.",
+  "source": "https://fr.wiktionary.org/wiki/bélître"
  },
  {
   "mot": "béotien",
   "nature": "adj. et n.",
   "definition": "Se dit d’une personne peu cultivée ou profane dans un domaine.",
   "exemple": "Je suis un parfait béotien en matière d’opéra, éclairez-moi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de la Béotie, région de Grèce dont les habitants passaient pour des rustres aux yeux des autres Grecs.",
+  "source": "https://fr.wiktionary.org/wiki/béotien"
  },
  {
   "mot": "bésicles",
   "nature": "n. f. pl.",
   "definition": "Anciennes lunettes ; aujourd’hui, désigne plaisamment des lunettes.",
   "exemple": "Le grand-père chaussa ses bésicles pour déchiffrer la lettre.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Les bésicles doivent leur nom au béryl : l’ancien français bericle désignait cette pierre, et le r s’est changé en s dans la prononciation.",
+  "source": "https://fr.wiktionary.org/wiki/besicles"
  },
  {
   "mot": "bêtifier",
@@ -1173,7 +1195,9 @@
   "nature": "n. m.",
   "definition": "Vieilli. Chose futile, sans importance ni valeur.",
   "exemple": "Ne t’emporte pas pour ce bibus, nous avons des soucis plus sérieux.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il partage avec babiole, bibelot, bimbelot et même rabibocher un vieux radical bib, qui désignait une menue chose.",
+  "source": "https://fr.wiktionary.org/wiki/bibus"
  },
  {
   "mot": "billebarrer",
@@ -1187,14 +1211,18 @@
   "nature": "n. f.",
   "definition": "Désordre, confusion ; à la billebaude : sans ordre, n’importe comment.",
   "exemple": "Les livres étaient rangés à la billebaude sur les étagères.",
-  "academie": true
+  "academie": true,
+  "anecdote": "D’après le linguiste Dauzat, c’était un terme de jeu : « à la bille hardie », de bille et de l’ancien français baud, « joyeux, fier ».",
+  "source": "https://fr.wiktionary.org/wiki/billebaude"
  },
  {
   "mot": "billevesée",
   "nature": "n. f.",
   "definition": "Idée creuse, propos frivole et sans fondement. S’emploie surtout au pluriel.",
   "exemple": "Il balaya d’un geste ces billevesées sur les fantômes du grenier.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En ancien français, la billevese était une cornemuse : un boyau (beille) que l’on gonfle (veser). Pas étonnant que le mot finisse par désigner du vent !",
+  "source": "https://fr.wiktionary.org/wiki/billevesée"
  },
  {
   "mot": "bimbelot",
@@ -1215,14 +1243,18 @@
   "nature": "n. f.",
   "definition": "Petite querelle, brouille passagère pour des motifs futiles.",
   "exemple": "Les deux sœurs sont encore en bisbille pour une histoire de pull emprunté.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Venu au XVIe siècle de l’italien bisbiglio, « murmure » : à l’origine, la bisbille se chuchote, le verbe bisbigliare étant d’origine onomatopéique.",
+  "source": "https://fr.wiktionary.org/wiki/bisbille"
  },
  {
   "mot": "bisquer",
   "nature": "v. intr.",
   "definition": "Familier. Éprouver du dépit, de la mauvaise humeur.",
   "exemple": "Son frère bisquait de ne pas avoir été invité.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté à l’occitan biscar, « pester », il survit dans la formule moqueuse « bisque, bisque, rage ! ».",
+  "source": "https://fr.wiktionary.org/wiki/bisquer"
  },
  {
   "mot": "bistre",
@@ -1250,21 +1282,27 @@
   "nature": "n. f.",
   "definition": "Petite coupelle à rebord, percée au centre, que l’on fixe sur un chandelier pour recueillir la cire.",
   "exemple": "La bougie avait coulé jusqu’à remplir la bobèche de cire figée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Un homonyme masculin désigne un joueur de parade, un pitre : ce bobèche-là viendrait de l’ancien français bobert, « fat, orgueilleux, sot ».",
+  "source": "https://fr.wiktionary.org/wiki/bobèche"
  },
  {
   "mot": "bombance",
   "nature": "n. f.",
   "definition": "Repas copieux et joyeux ; faire bombance : festoyer.",
   "exemple": "Après la moisson, tout le village fit bombance jusqu’à l’aube.",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est une forme nasalisée de l’ancien français bobance, qui signifiait « pompe, arrogance » ; le mot est à rapprocher de bobard.",
+  "source": "https://fr.wiktionary.org/wiki/bombance"
  },
  {
   "mot": "bonace",
   "nature": "n. f.",
   "definition": "Mer calme, sans vent, juste avant un orage ou juste après.",
   "exemple": "Les voiliers restèrent immobiles, prisonniers de la bonace.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Corneille en fait une image dans Le Menteur : « Je changeai d’un seul mot la tempête en bonace » ; Rimbaud évoque dans Le Bateau ivre « des écroulements d’eaux au milieu des bonaces ».",
+  "source": "https://fr.wiktionary.org/wiki/bonace"
  },
  {
   "mot": "bonasse",
@@ -1285,7 +1323,9 @@
   "nature": "n. m.",
   "definition": "Vieilli. Bûcheron.",
   "exemple": "Le boquillon rentrait au crépuscule, sa cognée sur l’épaule.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La Fontaine l’emploie dans Le Bûcheron et Mercure : « Et boquillons de perdre leur outil, / Et de crier pour se le faire rendre. » Le mot vient de l’ancien français bosc, le bois.",
+  "source": "https://fr.wiktionary.org/wiki/boquillon"
  },
  {
   "mot": "borborygme",
@@ -1299,14 +1339,18 @@
   "nature": "n. m.",
   "definition": "Parterre de gazon, souvent bordé et entouré de talus, ornant un jardin.",
   "exemple": "Les enfants avaient interdiction de courir sur le boulingrin du château.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le boulingrin vient tout droit de l’anglais bowling green, une pelouse où l’on jouait aux boules ; le mot est attesté en français dès 1663.",
+  "source": "https://fr.wiktionary.org/wiki/boulingrin"
  },
  {
   "mot": "bourrelé",
   "nature": "adj.",
   "definition": "Tourmenté ; s’emploie surtout dans « bourrelé de remords ».",
   "exemple": "Bourrelé de remords, il finit par avouer sa faute.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il vient de l’ancien français bourrel, tiré de bourrer, et le Wiktionnaire le rapproche de bourreau : être bourrelé de remords, c’est avoir son bourreau intérieur.",
+  "source": "https://fr.wiktionary.org/wiki/bourreler"
  },
  {
   "mot": "boursicoter",
@@ -1320,14 +1364,18 @@
   "nature": "n. m.",
   "definition": "Personne qui suscite des querelles et attise les conflits.",
   "exemple": "Ce boutefeu ne manquait jamais une occasion d’envenimer les débats.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être un fauteur de troubles, le boutefeu était une baguette garnie d’une mèche d’étoupe servant à mettre le feu aux canons ou aux mines, puis celui qui la maniait.",
+  "source": "https://fr.wiktionary.org/wiki/boutefeu"
  },
  {
   "mot": "bramer",
   "nature": "v. intr.",
   "definition": "Pousser son cri, en parlant du cerf ; par extension, crier fort.",
   "exemple": "À l’automne, on entend les cerfs bramer au fond de la forêt.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’ancien occitan bramar, « chanter, désirer ardemment », lui-même issu du gotique : le cerf qui brame chante donc son désir.",
+  "source": "https://fr.wiktionary.org/wiki/bramer"
  },
  {
   "mot": "brandiller",
@@ -1341,7 +1389,9 @@
   "nature": "n. m.",
   "definition": "Torche de paille enflammée ou débris qui brûle ; brandon de discorde : cause de querelle.",
   "exemple": "Cet héritage fut un brandon de discorde entre les deux frères.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Issu de l’ancien français brande, « flamme », il est apparenté à l’allemand Brand, « feu », et à l’anglais brand.",
+  "source": "https://fr.wiktionary.org/wiki/brandon"
  },
  {
   "mot": "bravache",
@@ -1355,14 +1405,18 @@
   "nature": "n. m.",
   "definition": "Amateur de duels à l’épée ; par extension, homme prompt à chercher querelle.",
   "exemple": "Ce bretteur provoquait en duel quiconque le regardait de travers.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La brette était une épée « bretonne » : en ancien français, l’adjectif bret signifiait « issu de Bretagne ». Le bretteur manie donc, à l’origine, une lame venue de Bretagne.",
+  "source": "https://fr.wiktionary.org/wiki/brette"
  },
  {
   "mot": "bréhaigne",
   "nature": "adj. f.",
   "definition": "Se dit d’une femelle d’animal stérile.",
   "exemple": "Le berger écarta du troupeau la brebis bréhaigne.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On le trouve dès 1119, sous la forme baraigne, dans le Livre des créatures de Philippe de Thaon ; il reposerait sur un radical antérieur au latin.",
+  "source": "https://fr.wiktionary.org/wiki/bréhaigne"
  },
  {
   "mot": "brigue",
@@ -1376,7 +1430,9 @@
   "nature": "n. m.",
   "definition": "Petit objet de peu de valeur, colifichet sans utilité.",
   "exemple": "Sa vitrine était encombrée de brimborions rapportés de chaque voyage.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au XVIe siècle, le mot désignait des prières mal prononcées : il déforme le latin breviarium, le bréviaire, que l’on prononçait alors « breviarion ».",
+  "source": "https://fr.wiktionary.org/wiki/brimborion"
  },
  {
   "mot": "brinquebaler",
@@ -1390,14 +1446,18 @@
   "nature": "n. m.",
   "definition": "Raillerie piquante, trait moqueur lancé contre quelqu’un.",
   "exemple": "Le ministre essuya les brocards des chansonniers pendant toute la saison.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On le rattache, probablement, à Brocardus, nom latin de Burchard, évêque de Worms, qui publia au début du XIe siècle un livre de sentences.",
+  "source": "https://fr.wiktionary.org/wiki/brocard"
  },
  {
   "mot": "brouet",
   "nature": "n. m.",
   "definition": "Bouillon clair ; par dénigrement, potage peu appétissant.",
   "exemple": "On ne leur servit qu’un maigre brouet de légumes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Plat populaire de bouillon de viande très réduit, le brouet doit sans doute son sens péjoratif à son emploi dans une fable de La Fontaine.",
+  "source": "https://fr.wikipedia.org/wiki/Brouet"
  },
  {
   "mot": "brouée",
@@ -1411,14 +1471,18 @@
   "nature": "n. m.",
   "definition": "Situation confuse et embrouillée, désordre.",
   "exemple": "Le dossier tournait au brouillamini administratif le plus complet.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il déforme le latin boli armenii, « pilules d’Arménie », un remède à base de boules d’argile ; le sens de confusion apparaît en 1566.",
+  "source": "https://fr.wiktionary.org/wiki/brouillamini"
  },
  {
   "mot": "bruire",
   "nature": "v. intr.",
   "definition": "Produire un bruit léger, confus et continu.",
   "exemple": "Les feuilles des peupliers bruissaient sous la brise du soir.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son participe présent traditionnel, c’est bruyant ! Devenu adjectif, il a cédé la place à bruissant, d’où vient bruissement.",
+  "source": "https://fr.wiktionary.org/wiki/bruire"
  },
  {
   "mot": "brumasser",
@@ -1432,14 +1496,18 @@
   "nature": "n. m.",
   "definition": "Plaisant ou ironique. Cheval, en particulier cheval de parade ou de bataille.",
   "exemple": "Le notaire arriva juché sur un vieux bucéphale fourbu.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Bucéphale était le cheval d’Alexandre le Grand, que lui seul sut dresser ; à sa mort, en 326 av. J.-C., Alexandre fonda en son honneur la cité de Bucéphalie, au Pendjab.",
+  "source": "https://fr.wikipedia.org/wiki/Bucéphale"
  },
  {
   "mot": "bure",
   "nature": "n. f.",
   "definition": "Grosse étoffe de laine brune ; vêtement fait de cette étoffe, notamment de moine.",
   "exemple": "Le frère portait une bure rapiécée serrée par une corde.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Paradoxe : cette étoffe brune tire son nom du latin burrus, qui signifiait « roux ».",
+  "source": "https://fr.wiktionary.org/wiki/bure"
  },
  {
   "mot": "busqué",
@@ -1453,70 +1521,90 @@
   "nature": "n. m.",
   "definition": "Homme grossier et maladroit ; aussi, oiseau échassier des marais.",
   "exemple": "Ce butor a renversé son verre sans même s’excuser.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il viendrait du latin buteo, « buse », et taurus, « taureau », car le cri de l’oiseau rappelle un mugissement ; buteo servait déjà à traiter les sots dans l’Antiquité.",
+  "source": "https://fr.wiktionary.org/wiki/butor"
  },
  {
   "mot": "byzantin",
   "nature": "adj.",
   "definition": "Se dit d’une discussion d’une subtilité excessive et oiseuse.",
   "exemple": "Ils se perdaient en querelles byzantines sur la place d’une virgule.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le sens de « subtil à l’excès » fait allusion aux discussions théologiques futiles des derniers temps de l’Empire byzantin.",
+  "source": "https://fr.wiktionary.org/wiki/byzantin"
  },
  {
   "mot": "cacochyme",
   "nature": "adj.",
   "definition": "D’une santé faible et chancelante, d’une constitution maladive ; se dit souvent, avec ironie, d’un vieillard.",
   "exemple": "Un vieillard cacochyme somnolait sous la tonnelle, son chat sur les genoux.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté au XVIIe siècle au grec kakókhumos, « qui contient ou produit un mauvais suc » : avant d’être vieux et souffreteux, le cacochyme avait de mauvais sucs.",
+  "source": "https://fr.wiktionary.org/wiki/cacochyme"
  },
  {
   "mot": "cagot",
   "nature": "adj. et n.",
   "definition": "Littéraire. Faux dévot, hypocrite en matière de religion.",
   "exemple": "Le cagot récitait ses prières à voix haute pour être remarqué.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté en 1535 à l’occitan cagòt, « lépreux, crétin », lui-même tiré de caga, le caca : le faux dévot a des origines peu reluisantes.",
+  "source": "https://fr.wiktionary.org/wiki/cagot"
  },
  {
   "mot": "cahin-caha",
   "nature": "adv.",
   "definition": "Tant bien que mal, avec difficulté.",
   "exemple": "L’entreprise avance cahin-caha malgré la crise.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rabelais l’emploie en 1552 dans le prologue du Quart Livre ; l’expression viendrait du latin qua hinc, qua hac, « deçà et delà ».",
+  "source": "https://fr.wiktionary.org/wiki/cahin-caha"
  },
  {
   "mot": "cailletage",
   "nature": "n. m.",
   "definition": "Familier et péjoratif. Bavardage frivole et futile, propos de commères.",
   "exemple": "Elle n’avait que faire du cailletage des voisines sur ses fréquentations.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Derrière le cailletage se cache la caillette, femme bavarde dont le nom viendrait d’un bouffon de Louis XII ; selon Suard, Mme de Sévigné était la première caillette de son siècle.",
+  "source": "https://fr.wiktionary.org/wiki/caillette"
  },
  {
   "mot": "calamistré",
   "nature": "adj.",
   "definition": "Se dit de cheveux ondulés au fer ou lustrés de pommade.",
   "exemple": "Il arriva au bal la moustache cirée et les cheveux calamistrés.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le calamistrum latin était un fer à friser, nommé d’après le grec kalamos, « roseau », car l’outil ressemblait à une tige de roseau.",
+  "source": "https://fr.wiktionary.org/wiki/calamistrer"
  },
  {
   "mot": "calembredaine",
   "nature": "n. f.",
   "definition": "Propos extravagant ou mensonger, histoire sans queue ni tête. S’emploie surtout au pluriel.",
   "exemple": "Cessez donc ces calembredaines et dites-nous où vous étiez hier soir !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Elle descend de calembourdaine, issu de calembour ; sa seconde moitié est apparentée à la bourde, au sens de « parole en l’air ».",
+  "source": "https://fr.wiktionary.org/wiki/calembredaine"
  },
  {
   "mot": "caligineux",
   "nature": "adj.",
   "definition": "Littéraire. Brumeux, sombre comme le brouillard.",
   "exemple": "Un matin caligineux enveloppait la vallée.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Jean Molinet l’aurait employé le premier, vers 1482 ; à la fin du XVIIIe siècle, ce latinisme jugé burlesque servait surtout à faire rire.",
+  "source": "https://fr.wiktionary.org/wiki/caligineux"
  },
  {
   "mot": "callipyge",
   "nature": "adj.",
   "definition": "Dont le postérieur est beau et bien fait. Surnom donné à une statue fameuse de Vénus.",
   "exemple": "Au musée, les visiteurs s’attardaient devant la Vénus callipyge.",
-  "academie": false
+  "academie": false,
+  "anecdote": "La Vénus callipyge est une Aphrodite qui soulève son péplos pour admirer ses fesses par-dessus l’épaule ; une légende sur ce culte, rapportée par Athénée, a inspiré un conte en vers à La Fontaine.",
+  "source": "https://fr.wikipedia.org/wiki/Vénus_callipyge"
  },
  {
   "mot": "camard",
@@ -1530,28 +1618,36 @@
   "nature": "n. f.",
   "definition": "Coterie de familiers influents qui entourent un dirigeant.",
   "exemple": "Le ministre ne prenait aucune décision sans consulter sa camarilla.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En espagnol, la camarilla était une petite chambre, le cabinet privé du roi ; le mot a pris de l’importance en Allemagne, pour l’entourage de Frédéric-Guillaume IV de Prusse puis celui de Hindenburg.",
+  "source": "https://fr.wikipedia.org/wiki/Camarilla"
  },
  {
   "mot": "canéphore",
   "nature": "n. f.",
   "definition": "Dans l’Antiquité grecque, jeune fille portant sur la tête la corbeille sacrée lors des fêtes ; statue qui la représente.",
   "exemple": "Deux canéphores de marbre encadraient l’entrée du jardin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À Athènes, ces jeunes filles de distinction attachées au service d’Athéna défilaient lors des Panathénées ; la charge était réservée aux plus belles.",
+  "source": "https://fr.wikipedia.org/wiki/Canéphore"
  },
  {
   "mot": "cantilène",
   "nature": "n. f.",
   "definition": "Chant lent et mélancolique ; poème lyrique ancien.",
   "exemple": "La nourrice fredonnait une cantilène pour endormir l’enfant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La Cantilène de sainte Eulalie, composée vers 880, est le plus ancien texte littéraire connu écrit dans une langue romane distincte du latin : un ancêtre du français.",
+  "source": "https://fr.wikipedia.org/wiki/Séquence_de_sainte_Eulalie"
  },
  {
   "mot": "cantonade",
   "nature": "n. f.",
   "definition": "Au théâtre, les coulisses ; à la cantonade : en s’adressant à tout le monde, sans viser personne en particulier.",
   "exemple": "Il lança un « bonjour » à la cantonade en entrant dans le bureau.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’occitan cantonada, « coin de rue ». Clin d’œil : un homonyme rare, cantonade, désigne aussi une action à la manière du footballeur Éric Cantona !",
+  "source": "https://fr.wiktionary.org/wiki/cantonade"
  },
  {
   "mot": "caparaçonner",
@@ -1565,7 +1661,9 @@
   "nature": "n. f.",
   "definition": "En capilotade : en piteux état, écrasé, meurtri.",
   "exemple": "Après la randonnée, j’avais les pieds en capilotade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant de désigner un piteux état, la capilotade était un ragoût de morceaux de viandes déjà cuites ; le mot vient de l’espagnol capirotada.",
+  "source": "https://fr.wiktionary.org/wiki/capilotade"
  },
  {
   "mot": "capitan",
@@ -1600,35 +1698,45 @@
   "nature": "v. intr.",
   "definition": "Pousser son cri, en parlant de la poule ; par extension, bavarder bruyamment.",
   "exemple": "Les commères caquetaient sur le pas des portes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Déjà présent dans Les Cent Nouvelles Nouvelles en 1462, il serait né d’une onomatopée en « kak » imitant les rumeurs de la basse-cour.",
+  "source": "https://fr.wiktionary.org/wiki/caqueter"
  },
  {
   "mot": "carabin",
   "nature": "n. m.",
   "definition": "Futur médecin encore sur les bancs de la faculté. Familier.",
   "exemple": "Les carabins entonnaient leurs chansons paillardes à la fin du banquet.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Chez Brantôme, il désignait des capitaines étrangers ; l’escarrabin, lui, enterrait vêtu de noir les morts de la peste, avant que « carabin de Saint-Côme » ne désigne ironiquement le chirurgien.",
+  "source": "https://fr.wiktionary.org/wiki/carabin"
  },
  {
   "mot": "caracoler",
   "nature": "v. intr.",
   "definition": "Faire des voltes à cheval ; par extension, avancer avec aisance, notamment en tête.",
   "exemple": "Le candidat caracole en tête des sondages depuis un mois.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le cheval qui caracole décrit des zigzags, et pour cause : l’espagnol caracol signifie à la fois « escargot » et « zigzag ».",
+  "source": "https://fr.wiktionary.org/wiki/caracole"
  },
  {
   "mot": "casuistique",
   "nature": "n. f.",
   "definition": "Raisonnement subtil, voire captieux, sur des cas de conscience.",
   "exemple": "À force de casuistique, il justifiait les pires compromissions.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En 1656, Pascal attaque dans Les Provinciales la casuistique des jésuites, qu’il juge laxiste : elle permettrait, écrit-il, de justifier les péchés en leur trouvant une intention pure.",
+  "source": "https://fr.wikipedia.org/wiki/Casuistique"
  },
  {
   "mot": "catilinaire",
   "nature": "n. f.",
   "definition": "Discours violemment hostile dirigé contre une personne.",
   "exemple": "Le député prononça une véritable catilinaire contre le gouvernement.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot renvoie aux quatre discours que Cicéron prononça en 63 av. J.-C. contre Catilina, qui conspirait contre la République ; le premier fut lancé au Sénat, en présence de l’accusé.",
+  "source": "https://fr.wikipedia.org/wiki/Catilinaires"
  },
  {
   "mot": "caudataire",
@@ -1656,28 +1764,36 @@
   "nature": "adj. et n. m.",
   "definition": "D’un vert pâle ; aussi, littéraire, amoureux tendre et langoureux.",
   "exemple": "Elle portait une robe de soie céladon.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Céladon est le héros de L’Astrée d’Honoré d’Urfé (1607), amant d’une tendresse un peu fade dont l’habit de berger était orné de rubans verts : d’où la couleur.",
+  "source": "https://fr.wiktionary.org/wiki/céladon"
  },
  {
   "mot": "cénacle",
   "nature": "n. m.",
   "definition": "Cercle restreint d’écrivains, d’artistes ou de penseurs réunis par des idées communes.",
   "exemple": "Il fut enfin admis dans le cénacle des poètes du quartier Latin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À l’origine, c’est le lieu où l’on mange, comme le Cénacle de Jérusalem, où aurait eu lieu la Cène. Au XIXe siècle, le Cénacle réunit de jeunes romantiques autour de Nodier et de Victor Hugo.",
+  "source": "https://fr.wikipedia.org/wiki/Cénacle"
  },
  {
   "mot": "cénobite",
   "nature": "n. m.",
   "definition": "Moine vivant en communauté.",
   "exemple": "Les cénobites partageaient leurs repas en silence.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Aux premiers temps du christianisme, l’ermite égyptien Pacôme le Grand donna des règles de vie commune aux disciples installés près de lui ; en grec, koinos signifie « en commun » et bios « vie ».",
+  "source": "https://fr.wikipedia.org/wiki/Cénobitisme"
  },
  {
   "mot": "cénotaphe",
   "nature": "n. m.",
   "definition": "Monument funéraire ne contenant pas le corps du défunt.",
   "exemple": "Un cénotaphe honore les marins disparus en mer.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le monument aux morts est le plus souvent un cénotaphe. Une vraie tombe peut aussi en devenir un quand le corps n’y repose plus, comme pour Lully, Rossini ou Alphonse Allais.",
+  "source": "https://fr.wikipedia.org/wiki/Cénotaphe"
  },
  {
   "mot": "céruléen",
@@ -1691,14 +1807,18 @@
   "nature": "adj.",
   "definition": "Qui a une mine sournoise et rusée ; populaire, aussi : bougon, maussade.",
   "exemple": "Avec son air chafouin, il semblait toujours préparer un mauvais coup.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le chafouin, c’est le chat et le fouin, mâle de la fouine ; en Charente, chafouin est d’ailleurs resté le surnom du fouin.",
+  "source": "https://fr.wiktionary.org/wiki/chafouin"
  },
  {
   "mot": "chaland",
   "nature": "n. m.",
   "definition": "Vieilli. Client habituel d’un marchand ; aussi, bateau plat de transport fluvial.",
   "exemple": "Le marchand de quatre-saisons attirait le chaland avec ses cris.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Deux mots se cachent ici : le client vient du vieux verbe chaloir, « avoir de l’intérêt », tandis que le bateau remonte au grec khelándion, un navire rapide.",
+  "source": "https://fr.wiktionary.org/wiki/chaland"
  },
  {
   "mot": "chaloupé",
@@ -1712,7 +1832,9 @@
   "nature": "n. f.",
   "definition": "Autrefois, signal de reddition donné au tambour ou à la trompette ; battre la chamade : se dit du cœur qui bat très fort.",
   "exemple": "En apercevant la lettre, elle sentit son cœur battre la chamade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "De l’italien chiamata, « appel » : battre la chamade, c’était signaler à l’ennemi que les assiégés voulaient parlementer, avant que l’expression ne passe au cœur.",
+  "source": "https://fr.wiktionary.org/wiki/chamade"
  },
  {
   "mot": "chamarré",
@@ -1726,56 +1848,72 @@
   "nature": "n. f.",
   "definition": "Bonne attachée au service personnel d’une dame. Vieilli.",
   "exemple": "La chambrière monta un bouillon chaud à sa maîtresse alitée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Outre la servante, le mot a désigné un fouet de manège, une béquille de charrette, un chandelier et même un petit ruban qui tenait la quenouille.",
+  "source": "https://fr.wiktionary.org/wiki/chambrière"
  },
  {
   "mot": "chantepleure",
   "nature": "n. f.",
   "definition": "Entonnoir à long bec percé de trous, qui permet d’emplir un tonneau sans remuer la lie ; par extension, robinet de tonneau.",
   "exemple": "Le tonnelier fixa la chantepleure et remplit le fût sans agiter la lie.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Son nom marie deux verbes, chanter et pleurer, par analogie avec le bruit du liquide qui s’écoule.",
+  "source": "https://fr.wiktionary.org/wiki/chantepleure"
  },
  {
   "mot": "chape-chute",
   "nature": "n. f.",
   "definition": "Vieilli. Aubaine que l’on tire de la mésaventure d’autrui.",
   "exemple": "Le portefeuille oublié sur le banc fut une belle chape-chute pour le premier passant.",
-  "academie": false
+  "academie": false,
+  "anecdote": "La chape étant un manteau, la chape-chute, c’est l’aubaine d’un manteau tombé que l’on attend de ramasser.",
+  "source": "https://fr.wiktionary.org/wiki/chape-chute"
  },
  {
   "mot": "chapitrer",
   "nature": "v. tr.",
   "definition": "Réprimander vivement quelqu’un, lui faire la leçon.",
   "exemple": "Sa mère l’a chapitré sur ses notes du trimestre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au début du XVe siècle, chapitrer, c’était réprimander un religieux en plein chapitre ; le sens général de « faire la leçon » ne date que du début du XXe siècle.",
+  "source": "https://fr.wiktionary.org/wiki/chapitrer"
  },
  {
   "mot": "charivari",
   "nature": "n. m.",
   "definition": "Vacarme assourdissant, tapage.",
   "exemple": "Le charivari des casseroles réveilla tout l’immeuble.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté en 1316 sous la forme chalivali, il désignait d’abord un chahut organisé contre un mariage mal assorti ; le sens de « vacarme » ne s’impose qu’au XVIIe siècle.",
+  "source": "https://fr.wiktionary.org/wiki/charivari"
  },
  {
   "mot": "charmille",
   "nature": "n. f.",
   "definition": "Allée ou berceau de charmes taillés.",
   "exemple": "Ils se promenaient à l’ombre de la charmille du parc.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le feuillage du charme étant marcescent, les charmilles ne se dégarnissent pas l’hiver ; elles attirent aussi des colonies de mésanges qui débarrassent les cultures des insectes.",
+  "source": "https://fr.wikipedia.org/wiki/Charmille"
  },
  {
   "mot": "chattemite",
   "nature": "n. f.",
   "definition": "Personne qui affecte une douceur et une humilité hypocrites pour mieux tromper ou séduire.",
   "exemple": "Ne vous fiez pas à cette chattemite : elle répète tout au directeur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Chattemite, c’est la chatte deux fois : en ancien français populaire, mite désignait aussi la chatte, nom qu’on retrouve dans mitaine et emmitoufler.",
+  "source": "https://fr.wiktionary.org/wiki/chattemite"
  },
  {
   "mot": "chausse-trape",
   "nature": "n. f.",
   "definition": "Piège dissimulé ; difficulté cachée destinée à tromper.",
   "exemple": "L’examen était semé de chausse-trapes pour les candidats distraits.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’ancien chauchetrepe, formé de deux verbes, chauchier et treper, qui signifiaient tous deux « marcher sur quelque chose ».",
+  "source": "https://fr.wiktionary.org/wiki/chausse-trape"
  },
  {
   "mot": "chenu",
@@ -1796,21 +1934,27 @@
   "nature": "adj.",
   "definition": "Qui donne avec parcimonie ; maigre, peu abondant.",
   "exemple": "On nous servit une portion bien chiche de purée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin ciccum, la pellicule de la grenade, chose sans valeur ; l’interjection « Chiche ! » met au défi de risquer au moins ce petit rien.",
+  "source": "https://fr.wiktionary.org/wiki/chiche"
  },
  {
   "mot": "chienlit",
   "nature": "n. f.",
   "definition": "Désordre, pagaille ; autrefois, masque de carnaval.",
   "exemple": "Le chef de l’État dénonça la chienlit dans la rue.",
-  "academie": true
+  "academie": true,
+  "anecdote": "D’abord écrit chie-en-lit, c’était un personnage typique du Carnaval de Paris ; de Gaulle a popularisé le mot en mai 1968 pour qualifier le désordre ambiant.",
+  "source": "https://fr.wikipedia.org/wiki/Chienlit"
  },
  {
   "mot": "chiourme",
   "nature": "n. f.",
   "definition": "Ensemble des forçats d’un bagne ou des rameurs d’une galère.",
   "exemple": "Le garde-chiourme surveillait les rameurs enchaînés.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Elle remonte au grec keleusma, « ordre », devenu en latin la cadence donnée aux rameurs ; l’italien ciurma a nommé ce rythme avant l’équipage de la galère.",
+  "source": "https://fr.wiktionary.org/wiki/chiourme"
  },
  {
   "mot": "chiquenaude",
@@ -1831,14 +1975,18 @@
   "nature": "n. m. et f.",
   "definition": "Sous la Révolution, désignait un ancien noble.",
   "exemple": "Les ci-devant émigrèrent en masse vers Coblence.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’expression, attestée bien avant la Révolution, signifiait simplement « auparavant » ; sous la Révolution, elle qualifie ce qui avait joui d’un privilège de l’Ancien Régime, avant de désigner l’ancienne noblesse.",
+  "source": "https://fr.wikipedia.org/wiki/Ci-devant"
  },
  {
   "mot": "cicérone",
   "nature": "n. m.",
   "definition": "Guide qui fait visiter une ville ou un monument.",
   "exemple": "Un cicérone bavard nous fit découvrir les ruelles de Rome.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Hérité de Cicéron, ce guide commentait avec faconde les sites de l’Italie du Grand Tour, aux XVIIIe et XIXe siècles, quand plans et guides imprimés manquaient encore.",
+  "source": "https://fr.wiktionary.org/wiki/cicérone"
  },
  {
   "mot": "circonlocution",
@@ -1859,21 +2007,27 @@
   "nature": "v. intr.",
   "definition": "Médire bruyamment, crier sans raison contre quelqu’un.",
   "exemple": "Les envieux clabaudaient contre son succès.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le clabaud était un chien de chasse aux oreilles pendantes qui aboyait sans raison ; le verbe, attesté en 1560, est vite passé des chiens aux hommes.",
+  "source": "https://fr.wiktionary.org/wiki/clabauder"
  },
  {
   "mot": "clampin",
   "nature": "n. m.",
   "definition": "Familier. Personne paresseuse ou traînarde.",
   "exemple": "Allez, les clampins, on presse le pas !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le clampin est d’abord un boiteux : le mot déforme clopin, peut-être sous l’influence de lambin. Feydeau l’emploie en 1896 dans Le Dindon.",
+  "source": "https://fr.wiktionary.org/wiki/clampin"
  },
  {
   "mot": "claquemurer",
   "nature": "v. tr.",
   "definition": "Enfermer étroitement ; souvent pronominal : se cloîtrer chez soi.",
   "exemple": "Il s’est claquemuré dans son bureau pour finir son roman.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Littéralement « jeter dans des murs » ; au XVIIe siècle, le Dictionnaire d’Antoine Oudin mentionne aussi un claquemur, sorte de jeu.",
+  "source": "https://fr.wiktionary.org/wiki/claquemurer"
  },
  {
   "mot": "claudiquer",
@@ -1887,42 +2041,54 @@
   "nature": "loc. adv.",
   "definition": "En boitillant ; par extension, tant bien que mal.",
   "exemple": "Après sa chute, il rentra chez lui clopin-clopant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’expression signifie littéralement « boiteux boitant » : clopin voulait dire « boiteux », et clopant est le participe de l’ancien verbe cloper, « boiter ».",
+  "source": "https://fr.wiktionary.org/wiki/clopin-clopant"
  },
  {
   "mot": "clystère",
   "nature": "n. m.",
   "definition": "Vieilli. Lavement intestinal.",
   "exemple": "Les médecins de Molière prescrivaient saignées et clystères.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Très administré aux XVIIe et XVIIIe siècles, il se donnait avec une grande seringue, souvent en étain : on a même parlé d’« âge de l’étain » pour les XVIe et XVIIe siècles.",
+  "source": "https://fr.wikipedia.org/wiki/Clystère"
  },
  {
   "mot": "cocagne",
   "nature": "n. f.",
   "definition": "Pays de cocagne : contrée imaginaire où l’on vit dans l’abondance.",
   "exemple": "Pour les enfants, la pâtisserie de la tante était un pays de cocagne.",
-  "academie": false
+  "academie": false,
+  "anecdote": "On le rattache au Fabliau de Coquaigne, vers 1250. Selon Furetière, la cocagne était aussi une boule de pastel vendue si cher aux teinturiers qu’elle enrichit le triangle Albi-Carcassonne-Toulouse.",
+  "source": "https://fr.wiktionary.org/wiki/cocagne"
  },
  {
   "mot": "cocardier",
   "nature": "adj.",
   "definition": "Qui manifeste un patriotisme chauvin et étroit.",
   "exemple": "Le discours cocardier du général enflamma la foule.",
-  "academie": false
+  "academie": false,
+  "anecdote": "En Camargue, le cocardier est aussi un taureau de manade qui porte une cocarde, que le raseteur doit lui ôter.",
+  "source": "https://fr.wiktionary.org/wiki/cocardier"
  },
  {
   "mot": "coche",
   "nature": "n. m.",
   "definition": "Ancienne voiture de voyageurs ; manquer le coche : laisser passer une occasion.",
   "exemple": "En hésitant trop longtemps, il a manqué le coche.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le coche doit son nom à Kocs, village hongrois dont les charrons construisaient des voitures à suspension ; le mot entre en français en 1545 et a essaimé jusqu’à l’anglais coach.",
+  "source": "https://fr.wikipedia.org/wiki/Kocs"
  },
  {
   "mot": "coi",
   "nature": "adj.",
   "definition": "Silencieux et immobile ; rester, demeurer coi : sans réaction.",
   "exemple": "Devant cette question inattendue, l’orateur demeura coi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Brassens l’a remis en chanson dans La Mauvaise Réputation (1952) : « Que je me démène ou que je reste coi / Je passe pour un je-ne-sais-quoi ! »",
+  "source": "https://fr.wiktionary.org/wiki/coi"
  },
  {
   "mot": "colifichet",
@@ -1957,35 +2123,45 @@
   "nature": "adv.",
   "definition": "De façon brève et résumée, en ne gardant que l’essentiel.",
   "exemple": "Le guide nous exposa compendieusement mille ans d’histoire du château.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Racine s’en amuse dans Les Plaideurs (1669) : un personnage promet d’exposer sa cause « compendieusement »… mais « sans rien omettre » !",
+  "source": "https://fr.wiktionary.org/wiki/compendieusement"
  },
  {
   "mot": "componction",
   "nature": "n. f.",
   "definition": "Air de gravité recueillie ou affectée ; au sens religieux, regret d’avoir offensé Dieu.",
   "exemple": "Le majordome annonça le dîner avec componction.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin compunctio, de compungere, « piquer fort » : la componction est, à l’origine, un remords qui pique.",
+  "source": "https://fr.wiktionary.org/wiki/componction"
  },
  {
   "mot": "concetti",
   "nature": "n. m. pl.",
   "definition": "Traits d’esprit recherchés, plus brillants que justes, dont on émaille un discours ou un ouvrage.",
   "exemple": "Son sonnet croulait sous les concetti, si bien qu’on n’y trouvait plus aucune émotion.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot arrive d’Italie quand le poète Cavalier Marin brille à la cour de Marie de Médicis : on appelle alors concetti les pensées subtiles à sa manière, le « marinisme ».",
+  "source": "https://fr.wikipedia.org/wiki/Concetti"
  },
  {
   "mot": "concupiscence",
   "nature": "n. f.",
   "definition": "Désir ardent des biens terrestres, notamment des plaisirs sensuels.",
   "exemple": "Il regardait le buffet avec une concupiscence non dissimulée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En théologie chrétienne, elle est le « foyer du péché » ; on la confond parfois avec la seule libido freudienne.",
+  "source": "https://fr.wikipedia.org/wiki/Concupiscence"
  },
  {
   "mot": "concussion",
   "nature": "n. f.",
   "definition": "Perception illégale d’argent par un agent public dans l’exercice de ses fonctions.",
   "exemple": "Le receveur des impôts fut condamné pour concussion.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin concussio voulait dire à la fois « secousse » et « extorsion », du verbe concutere, « secouer ».",
+  "source": "https://fr.wiktionary.org/wiki/concussion"
  },
  {
   "mot": "conjouir",
@@ -2006,7 +2182,9 @@
   "nature": "v. tr.",
   "definition": "Manifester bruyamment et publiquement son mépris envers quelqu’un.",
   "exemple": "L’arbitre fut conspué par tout le stade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin conspuere, « cracher » : conspuer quelqu’un, c’est, au sens premier, lui cracher dessus.",
+  "source": "https://fr.wiktionary.org/wiki/conspuer"
  },
  {
   "mot": "contempteur",
@@ -2020,7 +2198,9 @@
   "nature": "n. f.",
   "definition": "Jeu de mots qui consiste à intervertir des sons pour obtenir une phrase cocasse.",
   "exemple": "Il passa le dîner à chercher des contrepèteries, au grand désespoir de ses voisins.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Les premières contrepèteries apparaissent au XVIe siècle, notamment chez Rabelais ; jusqu’au début du XXe siècle, on les appelait aussi « antistrophes » ou « équivoques ».",
+  "source": "https://fr.wikipedia.org/wiki/Contrepèterie"
  },
  {
   "mot": "contrister",
@@ -2055,56 +2235,72 @@
   "nature": "n. f.",
   "definition": "Animal imaginaire et burlesque ; par extension, idée chimérique, sornette.",
   "exemple": "Il nous racontait des coquecigrues sur un trésor enfoui sous le lavoir.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rabelais l’emploie le premier dans Gargantua : une vieille sorcière prédit au vaincu Picrochole qu’il retrouvera son royaume « à la venue des coquecigrues ».",
+  "source": "https://fr.wiktionary.org/wiki/coquecigrue"
  },
  {
   "mot": "coquefredouille",
   "nature": "n. m.",
   "definition": "Vieilli. Malheureux sot, individu dont on se moque.",
   "exemple": "Ce coquefredouille croit que la cour entière admire son pourpoint jaune.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il serait formé comme coquecigrue : c’est un « coq qui fredouille », verbe apparenté à frétiller.",
+  "source": "https://fr.wiktionary.org/wiki/coquefredouille"
  },
  {
   "mot": "coquemar",
   "nature": "n. m.",
   "definition": "Pot de terre ou de métal à anse, servant à faire bouillir de l’eau ou chauffer un liquide.",
   "exemple": "Le coquemar chantait sur les braises, prêt pour la tisane du soir.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il déforme le latin cucuma, « marmite », de coquere, « cuire » : le coquemar est donc cousin de cuisine et de queux.",
+  "source": "https://fr.wiktionary.org/wiki/coquemar"
  },
  {
   "mot": "cornaquer",
   "nature": "v. tr.",
   "definition": "Familier. Guider, piloter quelqu’un.",
   "exemple": "Elle a cornaqué la délégation étrangère pendant toute la visite.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il vient de cornac, le conducteur d’éléphants, mot passé par le portugais cornaca et issu du cinghalais kūrawa-nāyaka, « dresseur d’éléphants ».",
+  "source": "https://fr.wiktionary.org/wiki/cornac"
  },
  {
   "mot": "coruscant",
   "nature": "adj.",
   "definition": "Littéraire. Qui brille d’un vif éclat.",
   "exemple": "Le diadème coruscant attirait tous les regards.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Timothy Zahn en a fait le nom de la capitale de l’Empire galactique dans son roman L’Héritier de l’Empire (1991) ; la deuxième trilogie Star Wars a ensuite repris cette planète Coruscant.",
+  "source": "https://fr.wikipedia.org/wiki/Coruscant"
  },
  {
   "mot": "coryphée",
   "nature": "n. m.",
   "definition": "Chef du chœur dans le théâtre antique ; par extension, chef de file d’un mouvement.",
   "exemple": "Il se posait en coryphée de la nouvelle école romanesque.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient du grec koruphê, « sommet de la tête » ; par confusion avec le mot « chœur », on l’a parfois écrit choryphée.",
+  "source": "https://fr.wikipedia.org/wiki/Coryphée"
  },
  {
   "mot": "coterie",
   "nature": "n. f.",
   "definition": "Petit groupe fermé qui défend ses intérêts communs.",
   "exemple": "Ce prix littéraire semblait réservé à une coterie d’initiés.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au Moyen Âge, la coterie était une association de paysans tenant ensemble une terre d’un seigneur ; le mot est cousin de cottage.",
+  "source": "https://fr.wiktionary.org/wiki/coterie"
  },
  {
   "mot": "couard",
   "nature": "adj. et n.",
   "definition": "Littéraire. Lâche, poltron.",
   "exemple": "Le chevalier couard s’enfuit dès le premier assaut.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le couard est littéralement « celui qui porte la queue basse » : le mot vient de l’ancien français coue, « queue », avec le suffixe péjoratif -ard.",
+  "source": "https://fr.wiktionary.org/wiki/couard"
  },
  {
   "mot": "coulpe",
@@ -2125,7 +2321,9 @@
   "nature": "v. tr.",
   "definition": "Littéraire. Mettre en colère.",
   "exemple": "Ce retard répété finit par courroucer le directeur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Courroucer et corrompre sont parents : le verbe remonte au latin populaire corruptiare, refait sur corruptus, participe de corrumpere.",
+  "source": "https://fr.wiktionary.org/wiki/courroucer"
  },
  {
   "mot": "courtaud",
@@ -3231,7 +3429,9 @@
   "nature": "n. m.",
   "definition": "Homme à tout faire : dans un foyer ou un bureau, c’est lui qu’on charge de besognes de toute nature.",
   "exemple": "Jardinier, chauffeur et confident, Firmin était le factotum du vieux notaire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rossini lui offre son heure de gloire en 1816 avec « Largo al factotum », l’air du Barbier de Séville ; Charles Bukowski en fera le titre d’un roman en 1975.",
+  "source": "https://fr.wikipedia.org/wiki/Factotum"
  },
  {
   "mot": "fadaise",
@@ -3259,21 +3459,27 @@
   "nature": "n. m.",
   "definition": "Bande d’étoffe plissée ornant une robe ou un rideau ; au pluriel, ornements tapageurs et superflus.",
   "exemple": "Elle arriva au bal dans une robe chargée de falbalas et de rubans.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot a aussi fait carrière en Gaule : dans la bande dessinée Astérix, Falbala est le nom d’un personnage féminin.",
+  "source": "https://fr.wikipedia.org/wiki/Falbala"
  },
  {
   "mot": "fallace",
   "nature": "n. f.",
   "definition": "Ruse, duperie.",
   "exemple": "Sous ses airs de dévot se cachait une fallace digne de Tartuffe.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il descend du latin fallere, « tromper », le même verbe qui a donné faillir et même falloir : ce qu’il faut et ce qui trompe sont cousins.",
+  "source": "https://fr.wiktionary.org/wiki/fallace"
  },
  {
   "mot": "falot",
   "nature": "adj.",
   "definition": "Terne, effacé, dépourvu de personnalité.",
   "exemple": "Le nouveau directeur, personnage falot, ne laissa aucun souvenir.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Une hypothèse le rattache à l’anglais fellow : sa première attestation, « mon gentil fallot », traduisait « good fellow », avant que le mot ne devienne adjectif et péjoratif.",
+  "source": "https://fr.wiktionary.org/wiki/falot"
  },
  {
   "mot": "falourde",
@@ -3287,28 +3493,36 @@
   "nature": "n. f.",
   "definition": "Ornement léger de toilette (ruban, dentelle, volant), souvent jugé superflu.",
   "exemple": "Elle préférait les robes sobres aux fanfreluches de sa sœur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rabelais l’emploie en 1534 dans Gargantua, qui contient un chapitre intitulé « Les Fanfreluches antidotées ». Plus loin, le mot remonte au grec pomphólyx, « bulle d’air ».",
+  "source": "https://fr.wiktionary.org/wiki/fanfreluche"
  },
  {
   "mot": "faquin",
   "nature": "n. m.",
   "definition": "Homme méprisable, impertinent et sans valeur. Terme d’injure vieilli.",
   "exemple": "« Faquin ! » s’écria le baron en jetant son gant au visage de l’insolent.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rabelais l’emploie en 1534 au sens de « portefaix ». Une piste le relie, par l’italien facchino, à l’arabe faqih, le juriste spécialiste du droit islamique.",
+  "source": "https://fr.wiktionary.org/wiki/faquin"
  },
  {
   "mot": "faraud",
   "nature": "adj. et n.",
   "definition": "Qui affiche avec fatuité sa satisfaction de lui-même ; fanfaron.",
   "exemple": "Il revint tout faraud de sa première victoire au tournoi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’espagnol faraute, d’abord messager de guerre, puis acteur chargé du prologue des comédies, rôle jugé ennuyeux. Et faraute était lui-même emprunté au français héraut !",
+  "source": "https://fr.wiktionary.org/wiki/faraud"
  },
  {
   "mot": "farfadet",
   "nature": "n. m.",
   "definition": "Petit lutin espiègle des croyances populaires.",
   "exemple": "Selon la légende, un farfadet tressait la nuit la crinière des chevaux.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En Vendée et en Poitou, ce lutin espiègle du folklore français porte le nom local de fradet ; en Provence, on parle de fadets.",
+  "source": "https://fr.wikipedia.org/wiki/Farfadet_(créature)"
  },
  {
   "mot": "faribole",
@@ -3336,7 +3550,9 @@
   "nature": "n. m.",
   "definition": "Personne qui provoque ou favorise quelque chose de blâmable, comme dans « fauteur de troubles ».",
   "exemple": "Les fauteurs de troubles furent expulsés de la salle.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rien à voir avec la faute : le latin fautor désignait « celui qui favorise ». Le fauteur de troubles est donc, au départ, celui qui les favorise.",
+  "source": "https://fr.wiktionary.org/wiki/fauteur"
  },
  {
   "mot": "fenaison",
@@ -3350,35 +3566,45 @@
   "nature": "adj.",
   "definition": "Se dit d’une poésie antique, grossière et licencieuse, née en Étrurie ; par extension, grivois.",
   "exemple": "Les noces romaines s’accompagnaient de vers fescennins chantés à tue-tête.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ces chants satiriques et lestes de la Rome antique étaient lancés par des danseurs masqués lors des fêtes des vendanges et des moissons, mais aussi pendant les noces.",
+  "source": "https://fr.wikipedia.org/wiki/Fescennins"
  },
  {
   "mot": "fesse-mathieu",
   "nature": "n. m.",
   "definition": "Avare, usurier qui prête à taux exorbitant. Vieilli et familier.",
   "exemple": "Ce fesse-mathieu comptait les morceaux de sucre avant de fermer le placard.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot serait une déformation insultante de « face de saint Matthieu » : avant sa conversion, l’apôtre était publicain, et sans doute usurier.",
+  "source": "https://fr.wiktionary.org/wiki/fesse-mathieu"
  },
  {
   "mot": "félon",
   "nature": "adj. et n.",
   "definition": "Vassal parjure envers son seigneur ; par extension, qui manque à sa parole, perfide.",
   "exemple": "Le vassal félon livra le château à l’ennemi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans le droit féodal, la félonie consistait à rompre le contrat de vassalité, et ce crime pouvait être commis aussi bien par le vassal que par son suzerain.",
+  "source": "https://fr.wikipedia.org/wiki/Félonie"
  },
  {
   "mot": "férule",
   "nature": "n. f.",
   "definition": "Palette avec laquelle on frappait autrefois la main des écoliers ; au figuré, autorité sévère.",
   "exemple": "Les élèves vivaient sous la férule d’un maître intraitable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Prométhée aurait dérobé le feu sacré dans une tige de férule, la plante. Mais la palette des maîtres d’école viendrait peut-être d’un autre ferula, formé sur ferio, « frapper ».",
+  "source": "https://fr.wikipedia.org/wiki/Férule"
  },
  {
   "mot": "fétu",
   "nature": "n. m.",
   "definition": "Brin de paille ; par extension, chose sans valeur.",
   "exemple": "Prise dans la crue, la barque fut ballottée comme un fétu.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient du latin festuca, qui désignait la fétuque, une herbe : le brin de paille a gardé le souvenir de cette graminée.",
+  "source": "https://fr.wiktionary.org/wiki/fétu"
  },
  {
   "mot": "fieffé",
@@ -3392,7 +3618,9 @@
   "nature": "n. m.",
   "definition": "Vieilli : chose sans valeur, menue monnaie, surtout dans « ne pas valoir un fifrelin ».",
   "exemple": "Sa promesse ne vaut pas un fifrelin.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il vient de l’allemand Pfifferling, « girolle », et l’allemand dit lui aussi « das ist keinen Pfifferling wert » : ça ne vaut pas un champignon.",
+  "source": "https://fr.wiktionary.org/wiki/fifrelin"
  },
  {
   "mot": "filandreux",
@@ -3413,14 +3641,18 @@
   "nature": "n. f.",
   "definition": "Ancienne longue épée ; par plaisanterie, épée, comme dans « mettre flamberge au vent ».",
   "exemple": "Le mousquetaire mit flamberge au vent et chargea.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au XIIe siècle, on disait froberge, puis floberge ; c’est en 1581 que l’épée devient flamberge, sous l’influence de flambe, la « flamme ».",
+  "source": "https://fr.wiktionary.org/wiki/flamberge"
  },
  {
   "mot": "flandrin",
   "nature": "n. m.",
   "definition": "Vieilli : grand garçon mince, d’allure molle et gauche.",
   "exemple": "Un grand flandrin dégingandé vint nous ouvrir la porte.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce grand garçon dégingandé tient son nom de la Flandre, avec le suffixe -in.",
+  "source": "https://fr.wiktionary.org/wiki/flandrin"
  },
  {
   "mot": "flavescent",
@@ -3441,7 +3673,9 @@
   "nature": "n. m.",
   "definition": "Pirate des mers américaines aux XVIIe et XVIIIe siècles ; par extension, aventurier peu scrupuleux.",
   "exemple": "Les flibustiers guettaient les galions chargés d’or.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Tombé en désuétude au XVIIIe siècle avec la fin de la piraterie aux Caraïbes, le mot ressuscite au milieu du XIXe pour désigner des Américains fomentant des insurrections en Amérique latine.",
+  "source": "https://fr.wikipedia.org/wiki/Flibustier"
  },
  {
   "mot": "flonflon",
@@ -3455,7 +3689,9 @@
   "nature": "v. tr.",
   "definition": "Familier : duper, voler par ruse.",
   "exemple": "Le brocanteur l’avait floué sur le prix de la commode.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté dès 1527, le mot a connu une seconde jeunesse à partir de 1827 grâce à un texte de Grandval. On le rapproche de frouer, « tricher au jeu ».",
+  "source": "https://fr.wiktionary.org/wiki/flouer"
  },
  {
   "mot": "folâtrer",
@@ -3469,7 +3705,9 @@
   "nature": "n. m. et f.",
   "definition": "Péjoratif : journaliste ou écrivain médiocre et sans scrupules.",
   "exemple": "Il méprisait ces folliculaires qui vendaient leur plume au plus offrant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Voltaire l’immortalise dans Candide (1759) : « Qu’appelez-vous un folliculaire ? » demande le héros ; réponse de l’abbé : « un faiseur de feuilles, un Fréron ».",
+  "source": "https://fr.wiktionary.org/wiki/folliculaire"
  },
  {
   "mot": "fondrière",
@@ -3483,7 +3721,9 @@
   "nature": "n. m.",
   "definition": "Pirate ; par extension, individu sans scrupules.",
   "exemple": "Ce forban a ruiné plus d’un actionnaire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Littéralement, c’est celui qui est rejeté hors du ban : le mot vient d’un ancien verbe forbannir, « bannir », d’origine francique.",
+  "source": "https://fr.wiktionary.org/wiki/forban"
  },
  {
   "mot": "forfanterie",
@@ -3504,28 +3744,36 @@
   "nature": "adj.",
   "definition": "Se dit d’un cheval épuisé, rendu malade par un excès de fatigue.",
   "exemple": "Après trois jours de poste, la jument était fortraite et refusait d’avancer.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Défini dans Le parfait Mareschal de Jacques de Solleysel puis recopié par les dictionnaires classiques, le mot semblait mort depuis le XVIIIe siècle avant que des romans ne le ressuscitent dans les années 1980.",
+  "source": "https://fr.wiktionary.org/wiki/fortrait"
  },
  {
   "mot": "fouailler",
   "nature": "v. tr.",
   "definition": "Frapper à coups de fouet répétés ; au figuré, cingler de critiques.",
   "exemple": "Le cocher fouaillait ses chevaux pour gravir la côte.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il dérive de fouet, qui vient lui-même de fou, ancien nom du hêtre (latin fagus).",
+  "source": "https://fr.wiktionary.org/wiki/fouailler"
  },
  {
   "mot": "foucade",
   "nature": "n. f.",
   "definition": "Littéraire : élan soudain et passager, caprice.",
   "exemple": "Ce voyage en Islande n’était qu’une foucade de plus.",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est une variante de l’ancien fougade, dérivé de fougue, à rapprocher de fougasse au sens de « mine explosive ».",
+  "source": "https://fr.wiktionary.org/wiki/foucade"
  },
  {
   "mot": "frairie",
   "nature": "n. f.",
   "definition": "Partie de plaisir et de bonne chère entre amis.",
   "exemple": "Chaque automne, les vendangeurs terminaient la saison par une joyeuse frairie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin fratria, qui nous a aussi donné fratrie : la partie de plaisir était d’abord une « assemblée » de frères, avant de devenir fête et gala.",
+  "source": "https://fr.wiktionary.org/wiki/frairie"
  },
  {
   "mot": "fredaine",
@@ -3546,7 +3794,9 @@
   "nature": "n. m.",
   "definition": "Jeune homme frivole et prétentieux, sans consistance.",
   "exemple": "Ce n’est pas un freluquet qui va m’apprendre mon métier !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il dérive de freluque, « mèche de cheveux » : le freluquet ne pèse guère plus lourd qu’une mèche.",
+  "source": "https://fr.wiktionary.org/wiki/freluquet"
  },
  {
   "mot": "frimas",
@@ -3581,14 +3831,18 @@
   "nature": "n. f.",
   "definition": "Forêt de grands arbres aux troncs élancés, qu’on laisse atteindre leur pleine hauteur.",
   "exemple": "Nous marchions sous la futaie, dans une pénombre de cathédrale.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’Académie française l’écrit fustaye en 1694 et 1718, puis fûtaie en 1740, avant d’adopter futaie en 1762 : trois graphies pour une même forêt.",
+  "source": "https://fr.wiktionary.org/wiki/futaie"
  },
  {
   "mot": "gabegie",
   "nature": "n. f.",
   "definition": "Désordre ruineux né d’une gestion négligente ou dépensière, dans une administration, une entreprise ou un État.",
   "exemple": "Entre les doublons et les factures perdues, la mairie vivait en pleine gabegie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté en 1790, il se rattache sans doute à gaber, « railler », issu du norrois gabb, tandis que sa finale semble calquée sur celle de tabagie.",
+  "source": "https://fr.wiktionary.org/wiki/gabegie"
  },
  {
   "mot": "gabelou",
@@ -3602,7 +3856,9 @@
   "nature": "v. tr.",
   "definition": "Vieux. Se moquer de quelqu’un, le railler.",
   "exemple": "À la veillée, les écuyers aimaient gaber le nouveau venu sur sa barbe naissante.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce verbe de moquerie vient de l’ancien français, lui-même issu du norrois gabb, « railler » ; c’est sans doute de la même racine que vient la gabegie.",
+  "source": "https://fr.wiktionary.org/wiki/gabegie"
  },
  {
   "mot": "galantin",
@@ -3616,42 +3872,54 @@
   "nature": "n. m.",
   "definition": "Logement misérable, souvent sous les toits.",
   "exemple": "Le poète vivait dans un galetas glacial.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot vient de la tour de Galata, à Constantinople : en ancien français, galatas désignait un logement situé en haut d’un édifice.",
+  "source": "https://fr.wiktionary.org/wiki/galetas"
  },
  {
   "mot": "galéjade",
   "nature": "n. f.",
   "definition": "Histoire inventée ou enjolivée pour amuser, à la manière provençale ; plaisanterie qui exagère tout.",
   "exemple": "Ne le crois pas : son combat contre trois sangliers n’est qu’une galéjade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot entre en français en 1881, emprunté à l’occitan ; Frédéric Mistral l’avait consigné sous la forme galejado dans son Trésor du Félibrige (1878).",
+  "source": "https://fr.wiktionary.org/wiki/galéjade"
  },
  {
   "mot": "galimafrée",
   "nature": "n. f.",
   "definition": "Ragoût fait de restes ; mets peu appétissant.",
   "exemple": "La cantine nous servit encore une galimafrée indéfinissable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En 1393, la calimafree était une sorte de sauce. Le mot associerait galer, « s’amuser », et le picard mafrer, « manger beaucoup ».",
+  "source": "https://fr.wiktionary.org/wiki/galimafrée"
  },
  {
   "mot": "galimatias",
   "nature": "n. m.",
   "definition": "Propos embrouillé et confus, qui semble vouloir dire quelque chose mais reste inintelligible.",
   "exemple": "Le contrat était rédigé dans un galimatias que même l’avocat ne démêlait pas.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Une légende veut qu’un avocat, plaidant en latin pour le coq d’un certain Matthias, ait dit « galli Matthias » au lieu de « gallus Matthiae ». Littré jugeait déjà l’anecdote inventée.",
+  "source": "https://fr.wiktionary.org/wiki/galimatias"
  },
  {
   "mot": "gambiller",
   "nature": "v. intr.",
   "definition": "Familier : agiter les jambes ; danser.",
   "exemple": "Ils ont gambillé toute la nuit au bal des pompiers.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il remonte à gambe, ancien mot pour « jambe », qui a aussi donné nos gambettes.",
+  "source": "https://fr.wiktionary.org/wiki/gambiller"
  },
  {
   "mot": "gandin",
   "nature": "n. m.",
   "definition": "Jeune élégant désœuvré et un peu ridicule, soucieux surtout de sa mise, comme ceux des boulevards du Second Empire.",
   "exemple": "Un gandin à gilet brodé lorgnait les passantes depuis la terrasse.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot doit sa vogue à Paul Gandin, personnage des Parisiens de Théodore Barrière (1855). On l’a rattaché, à tort, au boulevard de Gand, rendez-vous des élégants, aujourd’hui boulevard des Italiens.",
+  "source": "https://fr.wiktionary.org/wiki/gandin"
  },
  {
   "mot": "gasconnade",
@@ -3665,7 +3933,9 @@
   "nature": "n. f.",
   "definition": "Familier : propos gai et leste, plaisanterie grivoise.",
   "exemple": "Au dessert, l’oncle Paul se lança dans la gaudriole.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot pourrait naître du croisement de gaudir, « manifester sa joie » (du latin gaudium), et de cabriole.",
+  "source": "https://fr.wiktionary.org/wiki/gaudriole"
  },
  {
   "mot": "gausser",
@@ -3693,56 +3963,72 @@
   "nature": "n. m.",
   "definition": "Grand faucon des régions arctiques, très prisé en fauconnerie.",
   "exemple": "Le roi chassait au gerfaut dans les plaines de Beauce.",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est le plus grand et le plus lourd de tous les faucons : son envergure atteint 1,35 m et il pèse généralement entre 1 et 1,6 kg.",
+  "source": "https://fr.wikipedia.org/wiki/Faucon_gerfaut"
  },
  {
   "mot": "géhenne",
   "nature": "n. f.",
   "definition": "Dans la Bible, lieu de supplice des damnés ; au figuré, souffrance extrême.",
   "exemple": "Ces années de captivité furent pour lui une véritable géhenne.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient de la vallée de Hinnom, au sud de Jérusalem. Devenue un dépotoir dont la puanteur portait à des lieues, elle s’est muée dans les textes en lieu de souffrance des pécheurs.",
+  "source": "https://fr.wikipedia.org/wiki/Géhenne"
  },
  {
   "mot": "gémonies",
   "nature": "n. f. pl.",
   "definition": "S’emploie dans « vouer aux gémonies » : accabler publiquement de mépris.",
   "exemple": "Adulé hier, le ministre est aujourd’hui voué aux gémonies.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans la Rome impériale, l’escalier des Gémonies était l’endroit où l’on exposait publiquement les corps des suppliciés avant de les jeter dans le Tibre.",
+  "source": "https://fr.wikipedia.org/wiki/Escalier_des_Gémonies"
  },
  {
   "mot": "géronte",
   "nature": "n. m.",
   "definition": "Vieillard crédule et faible qui se laisse facilement duper, comme le personnage de comédie.",
   "exemple": "Les neveux flattaient le vieil oncle comme on manœuvre un géronte de Molière.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ce vieillard berné, dont le nom vient du grec gérôn, « vieillard », a reçu sa physionomie définitive de Molière, dans Le Médecin malgré lui et Les Fourberies de Scapin.",
+  "source": "https://fr.wikipedia.org/wiki/Géronte"
  },
  {
   "mot": "gésir",
   "nature": "v. intr.",
   "definition": "Être couché, étendu sans mouvement ; reposer dans la tombe (ci-gît).",
   "exemple": "Le blessé gisait au bord du chemin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Verbe défectif, il ne survit guère que dans gisant, dans l’épitaphe « ci-gît » et dans l’expression « c’est là que gît le lièvre ».",
+  "source": "https://fr.wiktionary.org/wiki/gésir"
  },
  {
   "mot": "gibbeux",
   "nature": "adj.",
   "definition": "Qui présente une bosse ou des renflements ; bossu.",
   "exemple": "Le vieux saule gibbeux penchait au-dessus de la mare.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Les astronomes l’emploient pour la lune : entre le premier quartier et la pleine lune, elle est dite « gibbeuse croissante ».",
+  "source": "https://fr.wikipedia.org/wiki/Phase_de_la_Lune"
  },
  {
   "mot": "gibus",
   "nature": "n. m.",
   "definition": "Chapeau haut de forme monté sur ressorts, qui peut s’aplatir.",
   "exemple": "Il glissa son gibus aplati sous son bras en entrant au théâtre.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce chapeau à ressorts porte le nom de son inventeur, Antoine Gibus.",
+  "source": "https://fr.wiktionary.org/wiki/gibus"
  },
  {
   "mot": "gimblette",
   "nature": "n. f.",
   "definition": "Petit gâteau sec et croquant en forme de couronne, que l’on poche à l’eau bouillante avant de le cuire au four.",
   "exemple": "Il trempait des gimblettes dans son vin doux en écoutant la radio.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient du latin gibba, « bosse », par l’occitan gimbeleto : la petite pâtisserie est donc de la même famille que l’adjectif gibbeux.",
+  "source": "https://fr.wiktionary.org/wiki/gimblette"
  },
  {
   "mot": "girandole",
@@ -3756,7 +4042,9 @@
   "nature": "n. f.",
   "definition": "Plainte affectée, lamentation hypocrite ; au pluriel, simagrées, minauderies.",
   "exemple": "Cesse tes giries : tout le monde sait que tu n’as pas mal.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot viendrait de l’abbé de Giry, de l’Académie française, connu, selon une parente, pour « les gémissements un peu trop tendres » de son éloquence.",
+  "source": "https://fr.wiktionary.org/wiki/girie"
  },
  {
   "mot": "giron",
@@ -3777,7 +4065,9 @@
   "nature": "n. f.",
   "definition": "Vanité tirée de petites choses.",
   "exemple": "Il racontait par gloriole qu’il avait dîné avec un ministre.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot est attribué à Charles-Irénée Castel de Saint-Pierre, en 1735, qui l’a tiré du latin gloriola, diminutif de gloria.",
+  "source": "https://fr.wiktionary.org/wiki/gloriole"
  },
  {
   "mot": "gloser",
@@ -3791,7 +4081,9 @@
   "nature": "n. f.",
   "definition": "Familier : chose de peu de valeur, comme dans « c’est de la gnognote ».",
   "exemple": "À côté de son potager, le mien, c’est de la gnognote.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot a d’abord désigné un alcool bon marché : il dérive de gnôle, avec redoublement moqueur de la première syllabe et le suffixe péjoratif -ote.",
+  "source": "https://fr.wiktionary.org/wiki/gnognote"
  },
  {
   "mot": "gnomique",
@@ -3812,7 +4104,9 @@
   "nature": "v. intr.",
   "definition": "Faire bonne chère, festoyer gaiement.",
   "exemple": "Le dimanche, toute la famille gobichonnait chez la grand-mère.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Mélange de gober et de bichonner, le mot apparaît en 1835 et sa première attestation se trouve chez Balzac.",
+  "source": "https://fr.wiktionary.org/wiki/gobichonner"
  },
  {
   "mot": "godailler",
@@ -3833,7 +4127,9 @@
   "nature": "adj. et n.",
   "definition": "Familier : maladroit, benêt, gauche.",
   "exemple": "Il se sentait godiche dans son costume neuf.",
-  "academie": false
+  "academie": false,
+  "anecdote": "En 1743, Godiche est d’abord un prénom, diminutif de Claude ; le sens de « niais » n’arrive qu’en 1809, peut-être par rapprochement avec godet, comme pour cruche ou potiche.",
+  "source": "https://fr.wiktionary.org/wiki/godiche"
  },
  {
   "mot": "goguenard",
@@ -3847,21 +4143,27 @@
   "nature": "n. f.",
   "definition": "S’emploie dans « en goguette » : de joyeuse humeur, un peu émoustillé par la boisson.",
   "exemple": "Une bande de marins en goguette chantait sur le quai.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En ancien français, gogette était un diminutif de gogue, « plaisanterie, propos joyeux », mot qui a aussi donné goguenard.",
+  "source": "https://fr.wiktionary.org/wiki/goguette"
  },
  {
   "mot": "gonfalon",
   "nature": "n. m.",
   "definition": "Bannière à plusieurs pointes suspendue à une traverse, en usage au Moyen Âge.",
   "exemple": "Le gonfalon de la ville flottait en tête de la procession.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le porteur de cette bannière s’appelait le gonfalonier ; l’étymologie ferait pourtant préférer la forme gonfanon, l’autre nom de l’étendard.",
+  "source": "https://fr.wikipedia.org/wiki/Gonfanon"
  },
  {
   "mot": "gongorisme",
   "nature": "n. m.",
   "definition": "Style précieux et contourné, chargé de métaphores recherchées, à la manière du poète espagnol Góngora.",
   "exemple": "Le critique reprocha au jeune romancier un gongorisme indigeste.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot vient du poète baroque Góngora, dont le poème Soledades a creusé un fossé entre langue courante et langue poétique, à force d’inversions à la grecque et à la latine et d’allusions mythologiques.",
+  "source": "https://fr.wikipedia.org/wiki/Gongorisme"
  },
  {
   "mot": "gouailleur",
@@ -3910,49 +4212,63 @@
   "nature": "n. m.",
   "definition": "Petite poche du gilet ou de la ceinture du pantalon, destinée à la montre.",
   "exemple": "Il tira de son gousset une montre en or.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être la poche de la montre, le gousset désignait le creux de l’aisselle.",
+  "source": "https://fr.wiktionary.org/wiki/gousset"
  },
  {
   "mot": "gracile",
   "nature": "adj.",
   "definition": "Mince, fin et délicat, d’une légèreté élancée.",
   "exemple": "Une gracile silhouette de danseuse traversa la scène.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Forme savante issue du latin gracilis, il a un doublet populaire bien connu : grêle.",
+  "source": "https://fr.wiktionary.org/wiki/gracile"
  },
  {
   "mot": "gravelure",
   "nature": "n. f.",
   "definition": "Propos licencieux, plaisanterie un peu grossière.",
   "exemple": "L’oncle Albert ne pouvait s’empêcher de glisser quelque gravelure au dessert.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Diderot l’emploie dès 1765 au sens de « licencieux ». Le mot vient de gravelle, nom ancien des calculs de la vessie : une gêne pour la conscience comme pour le corps.",
+  "source": "https://fr.wiktionary.org/wiki/gravelure"
  },
  {
   "mot": "gredin",
   "nature": "n. m.",
   "definition": "Personne malhonnête, coquin ; souvent dit avec affection d’un enfant.",
   "exemple": "Petit gredin, tu as encore mangé toute la confiture !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il viendrait de l’ancien normand gredinc, « cupide », d’origine scandinave : le gredin était d’abord un avide.",
+  "source": "https://fr.wiktionary.org/wiki/gredin"
  },
  {
   "mot": "grègues",
   "nature": "n. f. pl.",
   "definition": "Ancien haut-de-chausses ample ; « tirer ses grègues » signifiait s’enfuir.",
   "exemple": "Voyant venir le guet, le larron tira ses grègues sans demander son reste.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ces chausses ont un nom grec : le mot vient de l’espagnol greguesco, dérivé de griego, « grec ».",
+  "source": "https://fr.wiktionary.org/wiki/grègues"
  },
  {
   "mot": "gribouille",
   "nature": "n. m.",
   "definition": "Personne naïve qui, pour éviter un mal, se jette dans un pire.",
   "exemple": "En vendant tout par peur de la baisse, il a agi en vrai gribouille.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot vient d’un personnage populaire, Gribouille, qui se jette à l’eau par peur de la pluie.",
+  "source": "https://fr.wikipedia.org/wiki/Gribouille"
  },
  {
   "mot": "grigou",
   "nature": "n. m.",
   "definition": "Avare qui, bien qu’ayant de quoi vivre, se donne des airs pauvres pour ne rien dépenser.",
   "exemple": "Ce vieux grigou réutilise ses sachets de thé trois fois.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’occitan grigou, « gredin », dérivé de grec, mot qui avait pris dans le Midi le sens de malhonnête ou de pingre.",
+  "source": "https://fr.wiktionary.org/wiki/grigou"
  },
  {
   "mot": "grimaud",
@@ -3966,14 +4282,18 @@
   "nature": "n. f.",
   "definition": "Vieilli : jeune ouvrière coquette et de mœurs légères, au XIXe siècle.",
   "exemple": "Les étudiants courtisaient les grisettes du Quartier latin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au-delà de la jeune ouvrière, le nom désigne aussi un champignon, deux papillons, une fauvette et des bonbons de Montpellier.",
+  "source": "https://fr.wikipedia.org/wiki/Grisette"
  },
  {
   "mot": "grivèlerie",
   "nature": "n. f.",
   "definition": "Délit qui consiste à consommer dans un restaurant, un café ou un hôtel en sachant qu’on ne pourra pas payer.",
   "exemple": "Il fut arrêté pour grivèlerie après un festin d’huîtres impayé.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Une explication ancienne y voit le plumage bigarré de la grive, à l’image des Grecs qui appelaient les voleurs et menteurs « truites », pour les marques de leur dos.",
+  "source": "https://fr.wiktionary.org/wiki/grivèlerie"
  },
  {
   "mot": "guerroyer",
@@ -3987,42 +4307,54 @@
   "nature": "n. m.",
   "definition": "Personne réduite à la mendicité ; vagabond misérable.",
   "exemple": "Un gueux en haillons tendait la main sous le porche.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Au XVIe siècle, à Bruxelles, l’injure est lancée aux nobles qui s’opposent à la répression des protestants ; ils la revendiquent lors d’un banquet où ils se déguisent en pauvres, avec la devise « gueux jusqu’à la besace ».",
+  "source": "https://fr.wiktionary.org/wiki/gueux"
  },
  {
   "mot": "guigne",
   "nature": "n. f.",
   "definition": "Petite cerise douce ; familier, malchance persistante.",
   "exemple": "Décidément, j’ai la guigne : encore un pneu crevé !",
-  "academie": false
+  "academie": false,
+  "anecdote": "La petite cerise a une vaste famille : elle remonte au francique wīhsila, « griotte », parent de l’allemand Weichsel et rapproché du russe víšnja, « cerise ».",
+  "source": "https://fr.wiktionary.org/wiki/guigne"
  },
  {
   "mot": "guilledou",
   "nature": "n. m.",
   "definition": "S’emploie dans « courir le guilledou » : chercher les aventures galantes.",
   "exemple": "Le jeune vicomte courait le guilledou au lieu d’étudier.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté dès 1620 sous la forme guildrou, il pourrait venir de l’ancien verbe guiller, « tromper, séduire », associé à doux.",
+  "source": "https://fr.wiktionary.org/wiki/guilledou"
  },
  {
   "mot": "guingois",
   "nature": "n. m.",
   "definition": "S’emploie dans « de guingois » : de travers.",
   "exemple": "Le tableau pendait de guingois au-dessus de la cheminée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il viendrait de l’ancien verbe ginguer, « sautiller », et de gigue, nom d’une sorte de mandoline.",
+  "source": "https://fr.wiktionary.org/wiki/guingois"
  },
  {
   "mot": "gyrovague",
   "nature": "adj. et n. m.",
   "definition": "Se disait d’un moine errant, sans monastère ; par extension, vagabond excentrique.",
   "exemple": "Ce poète gyrovague dormait chaque nuit dans une ville différente.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce moine errant passait de monastère en monastère sans appartenir à aucun, un mode de vie condamné par plusieurs conciles.",
+  "source": "https://fr.wikipedia.org/wiki/Gyrovague"
  },
  {
   "mot": "hallali",
   "nature": "n. m.",
   "definition": "Cri ou sonnerie annonçant que la bête est aux abois ; au figuré, annonce de la défaite, de la fin de quelqu’un.",
   "exemple": "La meute aboyait, et les cors sonnèrent l’hallali.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le cri est formé de haler, « exciter par des cris », et des mots « a li » : littéralement « à lui ! ».",
+  "source": "https://fr.wiktionary.org/wiki/hallali"
  },
  {
   "mot": "hallier",
@@ -4036,7 +4368,9 @@
   "nature": "n. f.",
   "definition": "Divinité sylvestre grecque unie à un seul arbre : née avec lui, elle mourait quand il mourait.",
   "exemple": "Les bûcherons craignaient de blesser l’hamadryade du vieux chêne.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Contrairement aux autres dryades, chaque hamadryade est liée à un seul arbre, et meurt avec lui s’il est abattu.",
+  "source": "https://fr.wikipedia.org/wiki/Hamadryades"
  },
  {
   "mot": "hanap",
@@ -4050,42 +4384,54 @@
   "nature": "n. m.",
   "definition": "Terme ou sens attesté une seule fois dans un ensemble de textes ; au figuré, événement unique.",
   "exemple": "Ce terme est un hapax : on ne le trouve qu’une fois dans toute l’œuvre de Rabelais.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le terme a été forgé en 1654 par John Trapp, à partir du grec hápax legómenon, « dit une seule fois ». En français, le Larousse pour tous l’accueille en 1922.",
+  "source": "https://fr.wikipedia.org/wiki/Hapax"
  },
  {
   "mot": "happelourde",
   "nature": "n. f.",
   "definition": "Vieilli : pierre fausse imitant une gemme ; personne d’apparence brillante mais sans valeur.",
   "exemple": "Ce prétendu diamant n’était qu’une happelourde.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot est formé de happer et de lourd, au sens ancien de « sot » : une happelourde est littéralement un attrape-nigaud.",
+  "source": "https://fr.wiktionary.org/wiki/happelourde"
  },
  {
   "mot": "haquenée",
   "nature": "n. f.",
   "definition": "Cheval ou jument d’allure douce, allant l’amble, que montaient notamment les dames.",
   "exemple": "La princesse traversa la forêt sur une haquenée blanche.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Elle vient de l’anglais hackney : c’est pendant la guerre de Cent Ans que le mot est passé la Manche.",
+  "source": "https://fr.wiktionary.org/wiki/haquenée"
  },
  {
   "mot": "haridelle",
   "nature": "n. f.",
   "definition": "Mauvais cheval décharné, aux flancs creux.",
   "exemple": "Une haridelle tirait péniblement la carriole du rémouleur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot dérive de l’archaïque aridelle, « squelette », le h aspiré venant de harin ou harotte, autres noms du vieux cheval.",
+  "source": "https://fr.wiktionary.org/wiki/haridelle"
  },
  {
   "mot": "haro",
   "nature": "interj.",
   "definition": "Ancien cri pour en appeler à la justice ; « crier haro sur » : dénoncer avec indignation.",
   "exemple": "Toute la presse cria haro sur le malheureux arbitre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La clameur de haro, recours légal de Normandie pour faire comparaître sur-le-champ quelqu’un devant un juge, survit encore aujourd’hui dans les îles Anglo-Normandes.",
+  "source": "https://fr.wikipedia.org/wiki/Clameur_de_haro"
  },
  {
   "mot": "haruspice",
   "nature": "n. m.",
   "definition": "Devin de l’Antiquité qui lisait l’avenir dans les entrailles des victimes.",
   "exemple": "L’haruspice examina le foie de la brebis avant la bataille.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son nom mêle l’étrusque haru, « entrailles », et le latin spicio, « regarder » : l’haruspice est littéralement celui qui regarde les entrailles.",
+  "source": "https://fr.wiktionary.org/wiki/haruspice"
  },
  {
   "mot": "hâbleur",
@@ -4099,7 +4445,9 @@
   "nature": "adj.",
   "definition": "Pâle et amaigri par la faim, la fatigue ou la maladie.",
   "exemple": "Des visages hâves se pressaient aux grilles de l’usine.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient du francique haswa-, « gris comme le lièvre », parent de l’allemand Hase, « lièvre ».",
+  "source": "https://fr.wiktionary.org/wiki/hâve"
  },
  {
   "mot": "herboriser",
@@ -4113,28 +4461,36 @@
   "nature": "n. m.",
   "definition": "Vieilli : chance, bonne fortune, comme dans « avoir l’heur de plaire ».",
   "exemple": "Je n’ai pas eu l’heur de lui plaire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le h n’a rien d’étymologique : issu du latin augurium, « présage », le mot l’a reçu au Moyen Âge par confusion avec heure, dans bonheur et malheur.",
+  "source": "https://fr.wiktionary.org/wiki/heur"
  },
  {
   "mot": "hère",
   "nature": "n. m.",
   "definition": "S’emploie dans « pauvre hère » : homme misérable, sans considération.",
   "exemple": "Le pauvre hère n’avait plus un sou pour se loger.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Pour « pauvre hère », une hypothèse invoque l’allemand Herr, « seigneur », employé par dérision.",
+  "source": "https://fr.wiktionary.org/wiki/hère"
  },
  {
   "mot": "héraut",
   "nature": "n. m.",
   "definition": "Officier chargé des proclamations solennelles au Moyen Âge ; au figuré, celui qui annonce ou défend une cause.",
   "exemple": "Il se fit le héraut de la cause écologique.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot, d’origine francique (« chef d’armée »), apparaît d’abord comme nom propre chez Tacite, avec Chariovalda, un duc des Bataves ; on le retrouve ensuite dans des noms comme Harald.",
+  "source": "https://fr.wiktionary.org/wiki/héraut"
  },
  {
   "mot": "hérésiarque",
   "nature": "n. m.",
   "definition": "Fondateur ou chef d’une hérésie.",
   "exemple": "Le concile condamna l’hérésiarque et ses disciples.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’identification de ces chefs d’hérésie est délicate, leurs écrits ayant souvent été détruits : on doute même que Nestorius ait tenu les opinions qu’on lui prête.",
+  "source": "https://fr.wikipedia.org/wiki/Hérésiarque"
  },
  {
   "mot": "hiémal",
@@ -4148,28 +4504,36 @@
   "nature": "adj.",
   "definition": "Qui relève des choses sacrées ; au figuré, d’une raideur solennelle et majestueuse, comme figée par un rite.",
   "exemple": "La reine se tenait droite, hiératique, sans un battement de cils.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’écriture hiératique, « sacerdotale », servait aux scribes égyptiens pour des textes littéraires, mais aussi pour des notes de blanchisserie et des bordereaux de livraison.",
+  "source": "https://fr.wikipedia.org/wiki/Écriture_hiératique"
  },
  {
   "mot": "hiérophante",
   "nature": "n. m.",
   "definition": "Prêtre qui présidait aux mystères et initiait les fidèles, dans l’Antiquité grecque.",
   "exemple": "Le hiérophante d’Éleusis révélait les mystères aux initiés.",
-  "academie": false
+  "academie": false,
+  "anecdote": "À Éleusis, il présidait aux célèbres mystères et instruisait les initiés ; dans le tarot de Marseille, le nom désigne parfois l’arcane du Pape.",
+  "source": "https://fr.wikipedia.org/wiki/Hiérophante"
  },
  {
   "mot": "hippiatre",
   "nature": "n. m.",
   "definition": "Médecin des chevaux.",
   "exemple": "On fit venir l’hippiatre pour soigner le pur-sang boiteux.",
-  "academie": false
+  "academie": false,
+  "anecdote": "L’hippiatrie, ancêtre de la médecine équine, mêlait saignées, théorie des humeurs, rituels et formules magiques.",
+  "source": "https://fr.wikipedia.org/wiki/Hippiatrie"
  },
  {
   "mot": "hippogriffe",
   "nature": "n. m.",
   "definition": "Monstre de légende tenant à la fois du cheval et du griffon.",
   "exemple": "Dans le poème, le chevalier s’envole vers la lune sur un hippogriffe.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Clairement défini pour la première fois par l’Arioste dans le Roland furieux, il emporte Astolphe jusque sur la lune. La saga Harry Potter l’a popularisé avec Buck.",
+  "source": "https://fr.wikipedia.org/wiki/Hippogriffe"
  },
  {
   "mot": "hircin",
@@ -4190,14 +4554,18 @@
   "nature": "n. m.",
   "definition": "Dans l’Antiquité, acteur de farces ; par extension, personnage qui se donne en spectacle par des effets outranciers.",
   "exemple": "Ce tribun n’est qu’un histrion qui confond l’hémicycle avec les tréteaux.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot viendrait de l’étrusque ister : en Étrurie, ces acteurs, surtout des mimes, jouaient accompagnés à la flûte, avant que Rome n’adopte le genre.",
+  "source": "https://fr.wikipedia.org/wiki/Histrion"
  },
  {
   "mot": "hobereau",
   "nature": "n. m.",
   "definition": "Petit faucon ; gentilhomme campagnard de petite noblesse.",
   "exemple": "Le hobereau régnait sur trois fermes et un moulin.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Avant de désigner le petit noble campagnard, le hobereau est un faucon : le mot vient de l’ancien français hobier, « faucon ».",
+  "source": "https://fr.wiktionary.org/wiki/hobereau"
  },
  {
   "mot": "hoirie",
@@ -4211,14 +4579,18 @@
   "nature": "n. f.",
   "definition": "Sermon sur l’Évangile ; au figuré, discours moralisateur et ennuyeux.",
   "exemple": "Épargne-moi tes homélies sur la ponctualité.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le grec homilía signifiait d’abord « réunion, assemblée », avant de désigner la leçon d’un maître.",
+  "source": "https://fr.wiktionary.org/wiki/homélie"
  },
  {
   "mot": "homoncule",
   "nature": "n. m.",
   "definition": "Petit être vivant que les alchimistes prétendaient créer ; petit homme chétif.",
   "exemple": "L’alchimiste rêvait de faire naître un homoncule dans sa cornue.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Dans Les Grandes Blondes (1995) de Jean Echenoz, un homoncule nommé Béliard se perche par intermittence sur l’épaule de l’héroïne, Gloria Stella.",
+  "source": "https://fr.wikipedia.org/wiki/Homoncule"
  },
  {
   "mot": "hongreline",
@@ -4232,91 +4604,117 @@
   "nature": "v. tr.",
   "definition": "Couvrir de honte, vouer au mépris public.",
   "exemple": "Honni par ses anciens alliés, il s’exila.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La devise s’écrit « honi soit qui mal y pense », avec un seul n, à l’écart de l’orthographe actuelle qui voudrait « honni ».",
+  "source": "https://fr.wiktionary.org/wiki/honnir"
  },
  {
   "mot": "hoqueton",
   "nature": "n. m.",
   "definition": "Casaque brodée que portaient autrefois certains archers ; par extension, l’archer qui la portait.",
   "exemple": "Deux hoquetons du prévôt gardaient la porte du palais.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son nom vient de l’arabe al-qoton, « le coton ». À partir de 1370, cette casaque matelassée remplace la cotte de mailles et peut arrêter les flèches légères.",
+  "source": "https://fr.wikipedia.org/wiki/Hoqueton"
  },
  {
   "mot": "horion",
   "nature": "n. m.",
   "definition": "Coup violent.",
   "exemple": "La bagarre se solda par quelques horions et un nez cassé.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot apparaît en 1527 dans l’histoire du chevalier Bayart par le Loyal Serviteur. Il aurait signifié « casque », d’où peut-être le glissement vers le coup sur la tête.",
+  "source": "https://fr.wiktionary.org/wiki/horion"
  },
  {
   "mot": "houlette",
   "nature": "n. f.",
   "definition": "Bâton de berger ; « sous la houlette de » : sous la direction de.",
   "exemple": "Le chœur a progressé sous la houlette d’un chef exigeant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Elle vient de l’ancien verbe houler, « jeter » : son bout recourbé servait à lancer des mottes de terre sur les brebis qui s’écartaient du troupeau.",
+  "source": "https://fr.wiktionary.org/wiki/houlette"
  },
  {
   "mot": "houppelande",
   "nature": "n. f.",
   "definition": "Ample manteau long, sans manches ou à larges manches.",
   "exemple": "Le cocher s’emmitouflait dans sa houppelande.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Star des garde-robes des XIVe et XVe siècles, elle se porte d’abord par les deux sexes avec d’immenses manches, puis devient vers 1425 un habit d’homme plus ajusté. Sa version mi-longue avait son propre nom : le haincelin.",
+  "source": "https://fr.wikipedia.org/wiki/Houppelande"
  },
  {
   "mot": "hourvari",
   "nature": "n. m.",
   "definition": "Grand tumulte, vacarme.",
   "exemple": "Le chat renversa la vaisselle dans un hourvari épouvantable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être un vacarme, c’est un terme de chasse : la ruse de la bête traquée qui revient sur ses traces pour dérouter les chiens, puis le cri ou le ton de trompe qui remet la meute sur la bonne voie.",
+  "source": "https://fr.wiktionary.org/wiki/hourvari"
  },
  {
   "mot": "huchet",
   "nature": "n. m.",
   "definition": "Petit cor de chasse ou cornet servant à appeler de loin.",
   "exemple": "Le veneur emboucha son huchet pour rallier la meute.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son nom vient de hucher, « appeler d’une voix forte ». Le petit cor a même gagné les blasons : en héraldique, le huchet est un meuble des armoiries.",
+  "source": "https://fr.wiktionary.org/wiki/huchet"
  },
  {
   "mot": "hybris",
   "nature": "n. f.",
   "definition": "Dans la pensée grecque, démesure, orgueil excessif que les dieux finissent par châtier.",
   "exemple": "Les Grecs voyaient dans l’hybris la cause de la chute des héros.",
-  "academie": false
+  "academie": false,
+  "anecdote": "En Grèce antique, l’hybris n’était pas qu’un défaut moral : c’était aussi un crime, englobant voies de fait ou vol de biens sacrés. Démosthène plaida ainsi pour « outrages » dans Contre Midias et Contre Conon.",
+  "source": "https://fr.wikipedia.org/wiki/Hubris"
  },
  {
   "mot": "hyménée",
   "nature": "n. m.",
   "definition": "Poétique : mariage.",
   "exemple": "Les poètes célébraient l’hyménée du prince et de la bergère.",
-  "academie": false
+  "academie": false,
+  "anecdote": "C’est d’abord le nom du dieu qui présidait au mariage. Les poètes lui prêtaient des parents variés, parmi lesquels Apollon et une muse, Calliope ou Terpsichore.",
+  "source": "https://fr.wikipedia.org/wiki/Hymen_(mythologie)"
  },
  {
   "mot": "hypallage",
   "nature": "n. f.",
   "definition": "Figure de style qui attribue à un mot ce qui convient logiquement à un autre mot de la phrase.",
   "exemple": "« Il fumait une pipe pensive » : l’hypallage prête à la pipe la rêverie du fumeur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Octave Mirbeau en offre un bel exemple avec « l’habit obséquieux » des garçons d’hôtel, dans Les Vingt et un Jours d’un neurasthénique : la servilité des serveurs glisse sur leur vêtement.",
+  "source": "https://fr.wiktionary.org/wiki/hypallage"
  },
  {
   "mot": "hypocoristique",
   "nature": "adj.",
   "definition": "Qui exprime une intention affectueuse, comme les diminutifs et les redoublements (« Jojo », « fifille »).",
   "exemple": "« Mamie » est un terme hypocoristique.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Un mot bien savant pour parler de tendresse : il remonte au grec hypokoristikós, « caressant, propre à atténuer ».",
+  "source": "https://fr.wiktionary.org/wiki/hypocoristique"
  },
  {
   "mot": "hypocras",
   "nature": "n. m.",
   "definition": "Vin adouci de miel ou de sucre et parfumé d’épices, en vogue au Moyen Âge.",
   "exemple": "On servit de l’hypocras chaud aux invités de la veillée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La légende attribue son invention au médecin grec Hippocrate, mais le nom n’apparaît qu’au milieu du XIVe siècle ; au Moyen Âge, on appelait d’abord cette boisson « claret » ou « piment ».",
+  "source": "https://fr.wikipedia.org/wiki/Hypocras"
  },
  {
   "mot": "icelui",
   "nature": "pron. dém.",
   "definition": "Vieilli ou plaisant : celui-ci, ce dernier (féminin icelle).",
   "exemple": "Le notaire remit les clés au fermier, et icelui s’en alla content.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il est né de la soudure de « y celui » en moyen français, où y voulait dire « ici ». Le même latin hic a donné notre « ici » et le « -ci » de celui-ci.",
+  "source": "https://fr.wiktionary.org/wiki/icelui"
  },
  {
   "mot": "idiosyncrasie",
@@ -4337,14 +4735,18 @@
   "nature": "adj.",
   "definition": "Qui vomit du feu.",
   "exemple": "La légende parle d’un dragon ignivome tapi sous la montagne.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Dans Le Rhin (1842), Victor Hugo décrit un char attelé de deux dragons ailés et ignivomes, que les compagnes de Proserpine s’efforcent d’arrêter.",
+  "source": "https://fr.wiktionary.org/wiki/ignivome"
  },
  {
   "mot": "ilote",
   "nature": "n. m. et f.",
   "definition": "Dans l’ancienne Sparte, habitant réduit en servitude ; par extension, personne maintenue dans la misère, l’ignorance ou l’asservissement.",
   "exemple": "Le romancier décrit ces ouvriers comme les ilotes d’une industrie impitoyable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot remonte, par le latin, au grec heílôs, « habitant d’Hélos » : le nom de ces asservis de Sparte désignait d’abord les gens d’un seul endroit.",
+  "source": "https://fr.wiktionary.org/wiki/ilote"
  },
  {
   "mot": "immarcescible",
@@ -4365,7 +4767,9 @@
   "nature": "adj.",
   "definition": "Qui manque d’argent ; peu fortuné.",
   "exemple": "Ce poète impécunieux payait souvent ses repas avec des sonnets.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Giono le place en Provence : c’est l’heure où, à Aix, « les étudiants impécunieux font le pied de grue devant le café des Deux-Garçons ».",
+  "source": "https://fr.wiktionary.org/wiki/impécunieux"
  },
  {
   "mot": "impéritie",
@@ -4407,42 +4811,54 @@
   "nature": "loc. adv.",
   "definition": "En son for intérieur, sans le dire.",
   "exemple": "Il approuva poliment, mais se moqua in petto de ce projet absurde.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté à l’italien en 1666, il vient du latin in pectore, « dans la poitrine » : ce qu’on pense in petto reste enfermé dans son cœur.",
+  "source": "https://fr.wiktionary.org/wiki/in_petto"
  },
  {
   "mot": "inanité",
   "nature": "n. f.",
   "definition": "Caractère de ce qui est vain, inutile ou vide de sens.",
   "exemple": "Il mesura soudain l’inanité de ses efforts pour la convaincre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Mallarmé l’a logé dans un vers de ses Poésies : « Aboli bibelot d’inanité sonore », à propos du mystérieux ptyx absent d’un salon vide.",
+  "source": "https://fr.wiktionary.org/wiki/inanité"
  },
  {
   "mot": "incarnadin",
   "nature": "adj.",
   "definition": "Teinte rose vif, légèrement atténuée par rapport à l’incarnat.",
   "exemple": "Le soleil couchant teintait les nuages d’un reflet incarnadin.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Verlaine l’emploie dans « L’Allée » (Fêtes galantes, 1869) pour une bouche « incarnadine, grasse, et divine d’orgueil ». Le mot vient de l’italien incarnadino, diminutif d’incarnato.",
+  "source": "https://fr.wiktionary.org/wiki/incarnadin"
  },
  {
   "mot": "incoercible",
   "nature": "adj.",
   "definition": "Qu’on ne peut contenir, réprimer ou empêcher.",
   "exemple": "Un fou rire incoercible la saisit au beau milieu du sermon.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans Voyage au bout de la nuit (1932), Céline prête à un personnage une toux incoercible dont il se demande encore où il a bien pu l’attraper.",
+  "source": "https://fr.wiktionary.org/wiki/incoercible"
  },
  {
   "mot": "incontinent",
   "nature": "adv.",
   "definition": "Littéraire : aussitôt, sur-le-champ, sans le moindre délai.",
   "exemple": "Le roi ordonna qu’on lui amène incontinent le messager.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’adverbe vient du latin in continenti (tempore), « dans le moment qui suit tout de suite » : à l’origine, rien à voir avec l’adjectif incontinent, « qui ne se retient pas ».",
+  "source": "https://fr.wiktionary.org/wiki/incontinent"
  },
  {
   "mot": "incunable",
   "nature": "n. m.",
   "definition": "Livre imprimé dans les premiers temps de l’imprimerie, avant 1501.",
   "exemple": "La bibliothèque municipale conserve un précieux incunable vénitien.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot sort d’un titre : Incunabula typographiæ (« Origines de la typographie »), catalogue des premiers livres imprimés publié à Amsterdam en 1688 par Cornelius Beughem.",
+  "source": "https://fr.wiktionary.org/wiki/incunable"
  },
  {
   "mot": "incurie",
@@ -4456,7 +4872,9 @@
   "nature": "adj.",
   "definition": "Qui ne peut être exprimé par des mots, tant il est intense ou sublime ; par ironie, d’un ridicule indescriptible.",
   "exemple": "Face à la mer au lever du jour, elle éprouva un bonheur ineffable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Rimbaud l’emploie dans Le Bateau ivre : « Et d’ineffables vents m’ont ailé par instants. » Le mot se rattache au latin fari, « dire » : l’ineffable est ce qui ne peut se dire.",
+  "source": "https://fr.wiktionary.org/wiki/ineffable"
  },
  {
   "mot": "inexpiable",
@@ -4470,7 +4888,9 @@
   "nature": "adj.",
   "definition": "Qu’on ne peut prendre par la force ; au figuré, qui résiste à toute attaque.",
   "exemple": "Perchée sur son rocher, la citadelle passait pour inexpugnable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Zola l’emploie avec ironie dans La Fortune des Rougon (1871) : les hauteurs de Sainte-Roure sont « une position inexpugnable, pour qui aurait su la défendre ».",
+  "source": "https://fr.wiktionary.org/wiki/inexpugnable"
  },
  {
   "mot": "inextinguible",
@@ -4484,7 +4904,9 @@
   "nature": "adj.",
   "definition": "Qu’on ne peut raconter ; par plaisanterie, d’une drôlerie ou d’une bizarrerie extraordinaire.",
   "exemple": "Nous avons eu droit au récit inénarrable de ses vacances en camping-car.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Pierre Loti l’emploie dans Aziyadé (1879) pour un bouge où l’on finit par dénicher un certain vieux Dimitraki.",
+  "source": "https://fr.wiktionary.org/wiki/inénarrable"
  },
  {
   "mot": "infatuation",
@@ -4505,7 +4927,9 @@
   "nature": "adj.",
   "definition": "Qui ne peut être brisé ; au figuré, que rien ne peut rompre.",
   "exemple": "Une amitié infrangible unissait les deux vieux marins.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans Du côté de chez Swann, Proust prête aux petits vitraux en losange « l’infrangible dureté de saphirs » juxtaposés sur un immense pectoral.",
+  "source": "https://fr.wiktionary.org/wiki/infrangible"
  },
  {
   "mot": "infus",
@@ -4519,28 +4943,36 @@
   "nature": "adj.",
   "definition": "Qui a les jambes alertes ; qui se meut avec aisance et vivacité.",
   "exemple": "À quatre-vingt-dix ans, ma grand-tante est encore ingambe.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de l’italien (essere) in gamba, littéralement « (être) en jambe », c’est-à-dire alerte et en bonne santé.",
+  "source": "https://fr.wiktionary.org/wiki/ingambe"
  },
  {
   "mot": "inique",
   "nature": "adj.",
   "definition": "Qui manque gravement à la justice et à l’équité.",
   "exemple": "Le peuple se souleva contre cet impôt inique.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Au départ, l’inique est l’inégal : le mot vient du latin iniquus, « inégal ». L’injustice y est d’abord une affaire de balance.",
+  "source": "https://fr.wiktionary.org/wiki/inique"
  },
  {
   "mot": "insipience",
   "nature": "n. f.",
   "definition": "Manque de sagesse et de jugement ; sottise.",
   "exemple": "Il déplorait l’insipience de ceux qui confondent bruit et talent.",
-  "academie": false
+  "academie": false,
+  "anecdote": "C’est l’envers exact de la sapience : le mot latin insipientia associe le préfixe négatif in- à sapientia, « sagesse ».",
+  "source": "https://fr.wiktionary.org/wiki/insipience"
  },
  {
   "mot": "intempérance",
   "nature": "n. f.",
   "definition": "Manque de modération, surtout dans les plaisirs de la table et de la boisson.",
   "exemple": "Son intempérance lui avait ruiné la santé.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Voltaire, dans Zadig (1748), juge l’art de concilier intempérance et santé « aussi chimérique que la pierre philosophale ».",
+  "source": "https://fr.wiktionary.org/wiki/intempérance"
  },
  {
   "mot": "intercesseur",
@@ -4554,7 +4986,9 @@
   "nature": "adj.",
   "definition": "Qui se livre à des activités illégales ; par extension, louche, d’une honnêteté douteuse.",
   "exemple": "Le port abritait une faune interlope de contrebandiers et de receleurs.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté en 1685 à l’anglais interloper, de to interlope, « courir entre » : celui qui se glisse entre deux parties pour trafiquer dans un domaine réservé à d’autres.",
+  "source": "https://fr.wiktionary.org/wiki/interlope"
  },
  {
   "mot": "ire",
@@ -4575,7 +5009,9 @@
   "nature": "adj.",
   "definition": "Impossible à réfuter ou à rejeter.",
   "exemple": "L’enquêteur apporta une preuve irréfragable de sa culpabilité.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il remonte au latin refragari, « voter contre, s’opposer à » : un argument irréfragable, c’est celui contre lequel personne ne peut voter.",
+  "source": "https://fr.wiktionary.org/wiki/irréfragable"
  },
  {
   "mot": "irrémissible",
@@ -4596,98 +5032,126 @@
   "nature": "adj. inv.",
   "definition": "D’un jaune clair tirant sur le beige, en parlant surtout de la robe d’un cheval.",
   "exemple": "Le prince montait une jument isabelle.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La légende veut qu’Isabelle d’Espagne ait juré en 1601 de ne pas quitter sa chemise avant la prise d’Ostende, siège qui dura plus de trois ans. Hélas, le mot est attesté dès 1595.",
+  "source": "https://fr.wiktionary.org/wiki/isabelle"
  },
  {
   "mot": "issir",
   "nature": "v. intr.",
   "definition": "Vieux. Sortir, provenir de quelque part ; descendre d’une lignée.",
   "exemple": "Le chevalier vit issir du bois une troupe de pèlerins fourbus.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Colette le fait revivre dans Le Fanal bleu (1949) : sept oiseaux « couleur de souris » issirent de dessous son lit.",
+  "source": "https://fr.wiktionary.org/wiki/issir"
  },
  {
   "mot": "itou",
   "nature": "adv.",
   "definition": "Aussi, de même (familier et vieilli).",
   "exemple": "Tu vas au bal ? Et moi itou !",
-  "academie": false
+  "academie": false,
+  "anecdote": "Malgré les apparences, il n’a aucun lien avec l’anglais too : il viendrait de l’ancien français atout, « avec », et a des cousins en picard, en normand ou en wallon.",
+  "source": "https://fr.wiktionary.org/wiki/itou"
  },
  {
   "mot": "ivraie",
   "nature": "n. f.",
   "definition": "Graminée qui pousse parmi les céréales ; au figuré, ce qui est nuisible et se mêle au bon.",
   "exemple": "Il faut savoir séparer le bon grain de l’ivraie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’ivraie de la parabole du bon grain, dans l’Évangile de Matthieu, serait l’ivraie enivrante. Le texte grec la nomme zizanion, qui a donné notre « zizanie ».",
+  "source": "https://fr.wikipedia.org/wiki/Lolium_temulentum"
  },
  {
   "mot": "jaboter",
   "nature": "v. intr.",
   "definition": "Familier. Bavarder à plusieurs, sans fin ; se dit d’abord de certains oiseaux qui crient en agitant leur jabot.",
   "exemple": "Les commères jabotaient sur le pas des portes jusqu’au soir.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Bâti sur jabot, le verbe est attesté en 1691 et apparaît d’abord sous la plume de Gherardi.",
+  "source": "https://fr.wiktionary.org/wiki/jaboter"
  },
  {
   "mot": "jacquerie",
   "nature": "n. f.",
   "definition": "Révolte paysanne, d’après celle de 1358 ; soulèvement populaire.",
   "exemple": "La hausse des taxes provoqua une jacquerie dans la province.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Jacques était le sobriquet des paysans au XIVe siècle. Leur soulèvement de 1358, pendant la captivité du roi Jean le Bon, est resté dans l’Histoire sous le nom de Jacquerie.",
+  "source": "https://fr.wiktionary.org/wiki/jacquerie"
  },
  {
   "mot": "jactance",
   "nature": "n. f.",
   "definition": "Habitude de se vanter, de se mettre en valeur par des paroles orgueilleuses.",
   "exemple": "Sa jactance lassait tout le monde : à l’entendre, il avait tout inventé.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Théophile Gautier l’emploie dans Le Capitaine Fracasse (1863) : une « belle haine du sexe » affichée avec tant de jactance, mise en déroute par le premier minois venu.",
+  "source": "https://fr.wiktionary.org/wiki/jactance"
  },
  {
   "mot": "jaculatoire",
   "nature": "adj.",
   "definition": "Se dit d’une prière courte et fervente, lancée vers Dieu d’un élan du cœur.",
   "exemple": "La vieille femme murmurait des oraisons jaculatoires en égrenant son chapelet.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin jaculor, « lancer, darder ». Flaubert en gratifie Pécuchet, qui boit de l’eau de la Salette et se livre, portes closes, à des « oraisons jaculatoires ».",
+  "source": "https://fr.wiktionary.org/wiki/jaculatoire"
  },
  {
   "mot": "janotisme",
   "nature": "n. m.",
   "definition": "Construction de phrase maladroite et ridicule, prêtant à l’équivoque.",
   "exemple": "« Il a mangé une pomme sur la table qui était pourrie » est un beau janotisme.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il doit son nom à Janot, personnage de comédie incarnant la sottise, mis à la mode à la fin du XVIIIe siècle par le dramaturge Dorvigny dans une série de pièces courtes.",
+  "source": "https://fr.wikipedia.org/wiki/Janot_(personnage)"
  },
  {
   "mot": "jaquemart",
   "nature": "n. m.",
   "definition": "Figurine de métal qui frappe les heures sur la cloche d’une horloge.",
   "exemple": "À midi, les touristes guettent le jaquemart du beffroi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Derrière ce nom se cache un Jacques : il vient de l’occitan jacomart, formé sur Jaqueme, forme occitane de Jacques, avec le suffixe -art.",
+  "source": "https://fr.wiktionary.org/wiki/jaquemart"
  },
  {
   "mot": "jarnicoton",
   "nature": "interj.",
   "definition": "Juron plaisant d’autrefois, exprimant la surprise ou l’impatience.",
   "exemple": "Jarnicoton ! s’écria le capitaine en voyant le mât se rompre.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Henri IV jurait « jarnidieu ». Repris par son confesseur, le père Coton, le roi objecta qu’aucun nom ne lui était plus familier que celui de Dieu, sauf celui du père Coton. « Dites jarnicoton ! » répliqua le jésuite.",
+  "source": "https://fr.wiktionary.org/wiki/jarnicoton"
  },
  {
   "mot": "jaseran",
   "nature": "n. m.",
   "definition": "Collier ou chaîne d’or à fines mailles servant à suspendre une croix ou un médaillon.",
   "exemple": "Elle portait à son cou un jaseran d’où pendait un camée.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le philologue Friedrich Diez y voyait un objet « d’Alger », ville réputée pour ses cottes de maille. Une étymologie très reprise… mais qu’aucun texte n’atteste.",
+  "source": "https://fr.wiktionary.org/wiki/jaseran"
  },
  {
   "mot": "jobard",
   "nature": "adj. et n.",
   "definition": "Naïf qui se laisse facilement duper (familier).",
   "exemple": "Il fallait être bien jobard pour croire à cette histoire de trésor.",
-  "academie": true
+  "academie": true,
+  "anecdote": "« Dans jobard il y a Job, mon ami », lit-on dans Les Caves du Vatican d’André Gide (1914). Le mot vient en réalité de jobe, « niais, sot ».",
+  "source": "https://fr.wiktionary.org/wiki/jobard"
  },
  {
   "mot": "jocrisse",
   "nature": "n. m.",
   "definition": "Benêt naïf qui se laisse mener par n’importe qui.",
   "exemple": "Le pauvre jocrisse a signé tout ce que le vendeur lui a tendu.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Jocrisse est d’abord un personnage de comédie, type du valet bouffon. Molière l’emploie déjà dans Les Femmes savantes (1672) : « Je ne l’aimerais point, s’il faisait le jocrisse. »",
+  "source": "https://fr.wiktionary.org/wiki/jocrisse"
  },
  {
   "mot": "joliesse",
@@ -4701,7 +5165,9 @@
   "nature": "n. f.",
   "definition": "Herbes, fleurs ou branchages répandus sur le sol lors d’une cérémonie ; par analogie, grande quantité de choses éparses.",
   "exemple": "Une jonchée de pétales couvrait le parvis après la noce.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot désigne aussi un fromage frais de Charente-Maritime, au goût amer, égoutté dans une natte de joncs : d’où son nom.",
+  "source": "https://fr.wiktionary.org/wiki/jonchée"
  },
  {
   "mot": "jouailler",
@@ -4722,7 +5188,9 @@
   "nature": "n. m.",
   "definition": "Tribune transversale séparant le chœur de la nef dans certaines églises.",
   "exemple": "Le jubé sculpté de l’église est une merveille du gothique flamboyant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il tient son nom du premier mot de la formule latine « Jube, domine, benedicere » (« Daigne, Seigneur, me bénir »), que prononçait le lecteur avant les leçons des matines.",
+  "source": "https://fr.wikipedia.org/wiki/Jubé"
  },
  {
   "mot": "jusant",
@@ -4736,28 +5204,36 @@
   "nature": "n. f.",
   "definition": "Plante herbacée vénéneuse aux propriétés narcotiques.",
   "exemple": "Les sorcières, disait-on, mêlaient la jusquiame à leurs breuvages.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son nom, passé par le latin, vient du grec huoscúamos, qui signifie « fève de truie ».",
+  "source": "https://fr.wiktionary.org/wiki/jusquiame"
  },
  {
   "mot": "kakemono",
   "nature": "n. m.",
   "definition": "Peinture ou calligraphie japonaise sur soie ou papier, montée en rouleau vertical qu’on suspend au mur.",
   "exemple": "Un kakemono représentant une grue ornait le salon de thé.",
-  "academie": false
+  "academie": false,
+  "anecdote": "En japonais, le mot signifie littéralement « objet accroché ». Aujourd’hui, on appelle aussi kakémono l’affiche souple que l’on déroule dans les salons et les conférences.",
+  "source": "https://fr.wikipedia.org/wiki/Kakémono"
  },
  {
   "mot": "keepsake",
   "nature": "n. m.",
   "definition": "Album romantique richement illustré, offert en cadeau au XIXᵉ siècle.",
   "exemple": "Elle feuilletait un vieux keepsake aux gravures jaunies.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Dans Madame Bovary (1857), des pensionnaires apportent au couvent les keepsakes reçus en étrennes ; Balzac en évoquait déjà dans Une fille d’Ève (1839).",
+  "source": "https://fr.wiktionary.org/wiki/keepsake"
  },
  {
   "mot": "knout",
   "nature": "n. m.",
   "definition": "Fouet à lanières de cuir utilisé autrefois en Russie ; châtiment infligé avec ce fouet.",
   "exemple": "Le serf fut condamné au knout pour avoir fui le domaine.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Balzac l’emploie dans La Cousine Bette (1846), où l’on raille un Polonais « tellement fait au knout » que Bette lui rappelle cette douceur de sa patrie.",
+  "source": "https://fr.wiktionary.org/wiki/knout"
  },
  {
   "mot": "labile",
@@ -4778,28 +5254,36 @@
   "nature": "n. m.",
   "definition": "Petit vase antique que l’on croyait destiné à recueillir les larmes versées pour un défunt.",
   "exemple": "Le musée exposait un lacrymatoire de verre irisé trouvé dans une tombe romaine.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin lacrimatorius signifiait « qui combat le larmoiement » : c’est longtemps plus tard qu’on a cru ces petits vases destinés aux larmes des funérailles.",
+  "source": "https://fr.wiktionary.org/wiki/lacrymatoire"
  },
  {
   "mot": "ladre",
   "nature": "adj. et n.",
   "definition": "Avare jusqu’à la mesquinerie (sens vieilli : lépreux).",
   "exemple": "Ce vieux ladre refusait même de chauffer sa maison.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient de Lazare, le pauvre couvert d’ulcères de l’Évangile de Luc. Dans L’Avare de Molière, La Flèche range les avaricieux parmi « des vilains et des ladres ».",
+  "source": "https://fr.wiktionary.org/wiki/ladre"
  },
  {
   "mot": "lambrequin",
   "nature": "n. m.",
   "definition": "Bandeau d’étoffe ou de bois découpé qui orne le haut d’une fenêtre, d’un store ou d’une tente.",
   "exemple": "Des lambrequins de velours grenat surmontaient chaque fenêtre du salon.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Mot d’origine wallonne, cousin de lambeau, comme le trahit sa finale en -quin, celle de mannequin ou de ramequin.",
+  "source": "https://fr.wiktionary.org/wiki/lambrequin"
  },
  {
   "mot": "landier",
   "nature": "n. m.",
   "definition": "Gros chenet métallique, haut sur pieds, placé dans l’âtre ; ses crochets accueillaient souvent les broches à rôtir.",
   "exemple": "Les broches reposaient sur les landiers de fer devant l’âtre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il doit son nom au gaulois andero, « jeune taureau », motif qui ornait autrefois ces chenets ; son l initial est l’article soudé : l’andier.",
+  "source": "https://fr.wiktionary.org/wiki/landier"
  },
  {
   "mot": "languide",
@@ -4820,21 +5304,27 @@
   "nature": "v. intr.",
   "definition": "Débiter des propos futiles et importuns, parler pour ne rien dire.",
   "exemple": "Cessez de lantiponner et dites-moi enfin ce que vous voulez.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Molière l’emploie dans Le Médecin malgré lui (1666) : « Ne lantiponnez pas davantage, et confessez à la franquette que vous êtes médecin. »",
+  "source": "https://fr.wiktionary.org/wiki/lantiponner"
  },
  {
   "mot": "lanturlu",
   "nature": "n. m.",
   "definition": "Refrain d’autrefois ; par extension, refus moqueur ou réponse évasive.",
   "exemple": "À toutes ses réclamations, elle n’opposait qu’un lanturlu narquois.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce refrain servit à une chanson qui se moquait de Richelieu. Le mot a aussi désigné les vignerons du Dijonnais soulevés contre le pouvoir royal en 1630.",
+  "source": "https://fr.wiktionary.org/wiki/lanturlu"
  },
  {
   "mot": "lapalissade",
   "nature": "n. f.",
   "definition": "Affirmation d’une évidence si plate qu’elle prête à sourire.",
   "exemple": "« Quand il pleut, le sol est mouillé » : voilà une belle lapalissade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Les soldats de La Palice auraient chanté : « Un quart d’heure avant sa mort, il était encore en vie », pour dire qu’il se battit jusqu’au bout. Autre piste : une épitaphe « Il ferait encore envie » mal lue.",
+  "source": "https://fr.wiktionary.org/wiki/lapalissade"
  },
  {
   "mot": "latitudinaire",
@@ -4848,49 +5338,63 @@
   "nature": "n. f.",
   "definition": "Culte d’adoration qui n’est rendu qu’à Dieu seul, distinct de la vénération des saints.",
   "exemple": "Le théologien rappelait que le culte de latrie ne saurait s’adresser à une statue.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient du grec latreia, « service de mercenaire », puis « culte, adoration ». Un autre dérivé de cette racine, via le latin, a donné… larron.",
+  "source": "https://fr.wiktionary.org/wiki/latrie"
  },
  {
   "mot": "lavis",
   "nature": "n. m.",
   "definition": "Procédé de dessin à l’encre ou à la couleur délayées d’eau ; œuvre ainsi exécutée.",
   "exemple": "Le peintre exposa une série de lavis à l’encre de Chine.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot désigne aussi l’œuvre elle-même : on parle ainsi des lavis de Victor Hugo. L’encre naturelle de seiche, la sépia, donne les tons bruns typiques des lavis anciens.",
+  "source": "https://fr.wikipedia.org/wiki/Lavis"
  },
  {
   "mot": "lazaret",
   "nature": "n. m.",
   "definition": "Établissement où l’on isolait les voyageurs ou marchandises suspects de contagion.",
   "exemple": "Les passagers du navire durent passer dix jours au lazaret.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il doit son nom à Lazare, que la tradition fit lépreux. La quarantaine fut décrétée pour la première fois en 1377 par le Grand Conseil de Dubrovnik, sur les îles entourant la ville.",
+  "source": "https://fr.wiktionary.org/wiki/lazaret"
  },
  {
   "mot": "lazzi",
   "nature": "n. m.",
   "definition": "Au théâtre, jeu de scène bouffon ; par extension, plaisanterie moqueuse lancée contre quelqu’un.",
   "exemple": "L’orateur dut parler sous les lazzis d’un public hilare.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient de l’italien lazzo, « lien ». Dans la commedia dell’arte, il recouvrait plaisanteries, jeux de mots, grimaces et gestes grotesques.",
+  "source": "https://fr.wikipedia.org/wiki/Lazzi"
  },
  {
   "mot": "lendore",
   "nature": "n. m.",
   "definition": "Personne lente, engourdie, toujours à moitié endormie (vieilli).",
   "exemple": "Dépêche-toi donc, grand lendore, le car va partir !",
-  "academie": false
+  "academie": false,
+  "anecdote": "Balzac l’emploie dans Les Petits Bourgeois : « Je ne sais pas à quoi elle pense, cette lendore-là… »",
+  "source": "https://fr.wiktionary.org/wiki/lendore"
  },
  {
   "mot": "leste",
   "nature": "adj.",
   "definition": "Agile, prompt dans ses mouvements ; un peu trop libre, grivois.",
   "exemple": "Le chat, d’un bond leste, sauta sur l’armoire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot désigne aussi une libellule ! Le genre Lestes, nommé en 1815 par le zoologiste William Elford Leach, tire son nom du grec lêstês, « voleur, pirate », au sens de prédateur.",
+  "source": "https://fr.wiktionary.org/wiki/leste"
  },
  {
   "mot": "lémure",
   "nature": "n. m.",
   "definition": "Chez les Romains, ombre d’un mort qui revenait tourmenter les vivants.",
   "exemple": "La nuit, la vieille demeure semblait hantée par des lémures.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Victor Hugo l’emploie dans La Légende des siècles pour Éviradnus, grand chevalier d’Alsace : « C’est un vivant qui n’est ni stryge ni lémure ».",
+  "source": "https://fr.wiktionary.org/wiki/lémure"
  },
  {
   "mot": "lénifiant",
@@ -4904,7 +5408,9 @@
   "nature": "adj.",
   "definition": "Propre au lion ; se dit d’un partage ou d’un contrat qui avantage scandaleusement une partie.",
   "exemple": "Il a signé un contrat léonin qui le prive de tout bénéfice.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le partage léonin est une allusion à la part du lion des fables, comme La Génisse, la Chèvre et la Brebis, en société avec le Lion de La Fontaine.",
+  "source": "https://fr.wiktionary.org/wiki/léonin"
  },
  {
   "mot": "léthifère",
@@ -4918,14 +5424,18 @@
   "nature": "n. m.",
   "definition": "Ancienne petite monnaie de cuivre ; par extension, somme insignifiante.",
   "exemple": "Il n’avait plus un liard en poche.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté en 1430, il viendrait de l’ancien français liart, « gris ». Dans certains dialectes wallons, liard a même pris le sens d’« argent ».",
+  "source": "https://fr.wiktionary.org/wiki/liard"
  },
  {
   "mot": "libation",
   "nature": "n. f.",
   "definition": "Offrande d’un liquide répandu en l’honneur d’une divinité ; par plaisanterie, action de boire abondamment et gaiement.",
   "exemple": "Après de copieuses libations, les convives entonnèrent des chansons.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À ne pas confondre avec la lustration : la libation verse le liquide devant la divinité ou l’objet sacré, la lustration le verse dessus pour purifier. Vin, lait ou huile d’olive faisaient l’affaire.",
+  "source": "https://fr.wikipedia.org/wiki/Libation"
  },
  {
   "mot": "libelle",
@@ -4939,7 +5449,9 @@
   "nature": "n. f.",
   "definition": "Champ clos où se déroulaient tournois et joutes ; « entrer en lice » : s’engager dans une lutte.",
   "exemple": "Trois candidats sont entrés en lice pour la mairie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il remonte au francique līstia, « bord, bordure », parent du néerlandais lijst et de notre mot liste.",
+  "source": "https://fr.wiktionary.org/wiki/lice"
  },
  {
   "mot": "lige",
@@ -4953,14 +5465,18 @@
   "nature": "n. m. pl.",
   "definition": "Séjour des âmes des justes avant la venue du Christ ; au figuré, état incertain, mal défini.",
   "exemple": "Le projet est resté dans les limbes pendant dix ans.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin limbus, « bordure, frange » : les âmes des limbes étaient comme en bordure de l’enfer.",
+  "source": "https://fr.wiktionary.org/wiki/limbes"
  },
  {
   "mot": "liminaire",
   "nature": "adj.",
   "definition": "Placé en tête d’un ouvrage ou d’un discours ; préliminaire.",
   "exemple": "L’auteur s’en explique dans une note liminaire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du latin limen, « seuil » : un texte liminaire se tient littéralement sur le seuil du livre.",
+  "source": "https://fr.wiktionary.org/wiki/liminaire"
  },
  {
   "mot": "linéament",
@@ -4974,21 +5490,27 @@
   "nature": "n. f.",
   "definition": "Lèvre inférieure épaisse et proéminente ; « faire la lippe » : bouder.",
   "exemple": "L’enfant, vexé, fit la lippe toute la soirée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Emprunté au moyen néerlandais lippe, « lèvre », c’est le cousin de l’anglais lip et de l’allemand Lippe.",
+  "source": "https://fr.wiktionary.org/wiki/lippe"
  },
  {
   "mot": "logorrhée",
   "nature": "n. f.",
   "definition": "Flot de paroles intarissable et désordonné.",
   "exemple": "Personne ne pouvait endiguer la logorrhée du conférencier.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Formé sur le grec logos, « parole », et -rrhée, du verbe rheî, « couler ». Beckett en a fait un morceau de bravoure : la tirade de Lucky dans En attendant Godot.",
+  "source": "https://fr.wikipedia.org/wiki/Logorrhée"
  },
  {
   "mot": "longanimité",
   "nature": "n. f.",
   "definition": "Patience à supporter les offenses ou les maux ; indulgence de celui qui pourrait punir.",
   "exemple": "Il abusa longtemps de la longanimité de ses créanciers.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans Le Rouge et le Noir (1830), Stendhal fait redouter à son héros « l’adresse et la longanimité » des jeunes gens du grand monde.",
+  "source": "https://fr.wiktionary.org/wiki/longanimité"
  },
  {
   "mot": "loqueteux",
@@ -5002,14 +5524,18 @@
   "nature": "n. f.",
   "definition": "Facilité à parler, mais pour ne débiter que des banalités et des lieux communs.",
   "exemple": "Sa loquèle intarissable n’avait jamais produit une idée neuve.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot n’a pas toujours été péjoratif : au XVe siècle, Christine de Pisan vantait la mémoire et la « belle loquelle » du roi Charles V.",
+  "source": "https://fr.wiktionary.org/wiki/loquèle"
  },
  {
   "mot": "lorette",
   "nature": "n. f.",
   "definition": "Au XIXe siècle, jeune femme élégante et légère, vivant aux dépens de ses amants.",
   "exemple": "Le jeune clerc avait dilapidé son héritage pour une lorette aux toilettes tapageuses.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ces jeunes femmes doivent leur nom au quartier de Notre-Dame-de-Lorette, à Paris, où beaucoup d’entre elles se logèrent.",
+  "source": "https://fr.wiktionary.org/wiki/lorette"
  },
  {
   "mot": "lucifuge",
@@ -5030,63 +5556,81 @@
   "nature": "n. m.",
   "definition": "Petit objet creux qui monte et descend dans un bocal d’eau selon la pression exercée ; au figuré, personne légère et fantasque.",
   "exemple": "Les enfants s’amusaient à faire danser le ludion dans la bouteille.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le ludion était d’abord un danseur étrusque des ludi scaenici, jeux de scène rituels. Le nom a aussi été donné à un aéronef français d’essais à décollage vertical.",
+  "source": "https://fr.wikipedia.org/wiki/Ludion"
  },
  {
   "mot": "lumignon",
   "nature": "n. m.",
   "definition": "Bout de mèche d’une chandelle ou d’une bougie qui brûle ; petite lumière faible.",
   "exemple": "Un lumignon éclairait à peine la chambre du malade.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans Le Château de ma mère (1958), Pagnol décrit un tunnel tout en courbes, vaguement éclairé par des lumignons dans des niches.",
+  "source": "https://fr.wiktionary.org/wiki/lumignon"
  },
  {
   "mot": "lustral",
   "nature": "adj.",
   "definition": "Qui sert à purifier, dans les rites religieux.",
   "exemple": "Le prêtre aspergea la foule d’eau lustrale.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À Rome, le lustre était la cérémonie de purification qui précédait les recensements, tenus tous les cinq ans lors de l’élection des censeurs : d’où le « lustre » de cinq ans.",
+  "source": "https://fr.wikipedia.org/wiki/Lustre_(Rome_antique)"
  },
  {
   "mot": "lycanthrope",
   "nature": "n. m. et f.",
   "definition": "Être humain capable de se changer en loup ; loup-garou.",
   "exemple": "Le village entier croyait qu’un lycanthrope rôdait les nuits de pleine lune.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il existe une lycanthropie clinique, maladie où le patient se croit changé en loup. Côté littérature, le Lai de Bisclavret conte la trahison d’une femme envers son mari loup-garou.",
+  "source": "https://fr.wikipedia.org/wiki/Lycanthropie"
  },
  {
   "mot": "macaronique",
   "nature": "adj.",
   "definition": "Se dit d’une poésie burlesque mêlant des mots d’une langue vulgaire à des terminaisons latines.",
   "exemple": "Les étudiants s’amusaient à composer des vers macaroniques.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le poète mantouan Teofilo Folengo (1491-1544), alias Merlin Coccai, fut l’une des grandes figures de la poésie macaronique, et une source d’inspiration pour Rabelais.",
+  "source": "https://fr.wikipedia.org/wiki/Teofilo_Folengo"
  },
  {
   "mot": "madré",
   "nature": "adj. et n.",
   "definition": "Rusé sous des dehors simples, habile à tromper sans en avoir l’air.",
   "exemple": "Ce paysan madré savait toujours obtenir le meilleur prix au marché.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être rusé, le madré est tacheté, marbré : on le dit d’un bois veiné de petites taches brunes, ou de la robe d’un léopard.",
+  "source": "https://fr.wiktionary.org/wiki/madré"
  },
  {
   "mot": "mafflu",
   "nature": "adj.",
   "definition": "Qui a de grosses joues, un visage plein et rebondi.",
   "exemple": "Un angelot mafflu souriait au-dessus de l’autel.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La Fontaine l’emploie dans La Belette entrée dans un grenier (1668) : à force de lard, la voilà « grasse, mafflue, et rebondie ». Le mot vient de maffler, « bâfrer ».",
+  "source": "https://fr.wiktionary.org/wiki/mafflu"
  },
  {
   "mot": "magister",
   "nature": "n. m.",
   "definition": "Maître d’école de village ; par moquerie, pédant.",
   "exemple": "Le magister corrigeait les dictées à la lueur d’une chandelle.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans les jeux de rôle, le magister n’a rien d’un maître d’école : c’est un anglicisme né de la fusion de magic et master.",
+  "source": "https://fr.wiktionary.org/wiki/magister"
  },
  {
   "mot": "maïeutique",
   "nature": "n. f.",
   "definition": "Méthode socratique qui consiste à amener quelqu’un, par des questions, à découvrir lui-même ce qu’il sait.",
   "exemple": "Par une patiente maïeutique, le professeur conduisit l’élève à la solution.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le grec maieutikế désignait l’obstétrique, l’art d’accoucher. En français, le mot est relevé pour la première fois en 1867, dans une traduction de Prosper Mérimée.",
+  "source": "https://fr.wiktionary.org/wiki/maïeutique"
  },
  {
   "mot": "malandrin",
@@ -5100,14 +5644,18 @@
   "nature": "n. f.",
   "definition": "Mort funeste, violente ou cruelle.",
   "exemple": "Le conte promettait la malemort à quiconque franchirait le seuil maudit.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Mérimée l’emploie dans Colomba (1845), récit de vendetta corse : « Pourquoi n’es-tu pas mort de la malemort ? Nous t’aurions vengé ! »",
+  "source": "https://fr.wiktionary.org/wiki/malemort"
  },
  {
   "mot": "malepeste",
   "nature": "interj.",
   "definition": "Ancien juron marquant l’étonnement ou le dépit.",
   "exemple": "Malepeste ! La porte est encore fermée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Brassens le fait chanter dans « Le Blason » (1972) : « La malepeste soit de cette homonymie », pour déplorer le nom vulgaire d’une certaine partie de l’anatomie.",
+  "source": "https://fr.wiktionary.org/wiki/malepeste"
  },
  {
   "mot": "malgracieux",
@@ -5128,21 +5676,27 @@
   "nature": "n. m.",
   "definition": "Mauvaise disposition envers quelqu’un, rancune, ressentiment.",
   "exemple": "Il garda contre son frère un maltalent qui ne s’éteignit jamais.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot était déjà vieilli au XVIIIe siècle ; Verlaine le ressuscite pourtant un siècle plus tard, dans un sens qui n’est pas celui d’origine.",
+  "source": "https://fr.wiktionary.org/wiki/maltalent"
  },
  {
   "mot": "maltôte",
   "nature": "n. f.",
   "definition": "Impôt extraordinaire levé autrefois en France ; par extension, perception abusive d’un droit.",
   "exemple": "Les villageois se révoltèrent contre une nouvelle maltôte sur le sel.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En ancien français maletoute : mal, « mauvais », et tolte, « vol, rapine, saisie ». L’impôt extraordinaire était donc, par son nom même, une mauvaise prise.",
+  "source": "https://fr.wiktionary.org/wiki/maltôte"
  },
  {
   "mot": "mamamouchi",
   "nature": "n. m.",
   "definition": "Titre burlesque inventé par Molière ; par plaisanterie, personnage qui se donne des airs importants.",
   "exemple": "Depuis sa promotion, il se pavane en vrai mamamouchi du service.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Molière l’invente pour Le Bourgeois gentilhomme. Ce titre pseudo-turc déformerait bābā mušīr, « père pacha », formule flatteuse composée de baba (« père ») et müşir (« maréchal »).",
+  "source": "https://fr.wiktionary.org/wiki/mamamouchi"
  },
  {
   "mot": "manant",
@@ -5156,28 +5710,36 @@
   "nature": "n. f.",
   "definition": "Bonté d’âme qui incline à l’indulgence et au pardon.",
   "exemple": "Le juge fit preuve de mansuétude envers ce voleur de pommes affamé.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin mansuetus, « apprivoisé », réunit manus, « main », et suescere, « s’habituer » : la mansuétude, c’est la douceur de qui est habitué à la main.",
+  "source": "https://fr.wiktionary.org/wiki/mansuétude"
  },
  {
   "mot": "maquignon",
   "nature": "n. m.",
   "definition": "Marchand de chevaux ; par extension, intermédiaire peu scrupuleux en affaires.",
   "exemple": "Ce maquignon nous a vendu un cheval qui boitait dès la sortie de l’écurie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans La Ficelle (1883), Maupassant fait dîner « l’aristocratie de la charrue » chez maît’ Jourdain, « aubergiste et maquignon, un malin qui avait des écus ».",
+  "source": "https://fr.wiktionary.org/wiki/maquignon"
  },
  {
   "mot": "marauder",
   "nature": "v. intr.",
   "definition": "Commettre de petits larcins, notamment voler des fruits ou des légumes dans les champs.",
   "exemple": "Les gamins allaient marauder dans les vergers du voisin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans Histoire d’un conscrit de 1813 d’Erckmann-Chatrian, les camarades du narrateur ont « la mauvaise habitude de marauder le soir » au bivouac.",
+  "source": "https://fr.wiktionary.org/wiki/marauder"
  },
  {
   "mot": "margouillis",
   "nature": "n. m.",
   "definition": "Lieu plein de boue et d’ordures ; par extension, mélange confus de choses diverses.",
   "exemple": "Après l’orage, la cour de la ferme n’était plus qu’un margouillis.",
-  "academie": true
+  "academie": true,
+  "anecdote": "D’Alembert l’emploie dans une lettre à Voltaire, craignant que « la pauvre philosophie » ne se retrouve une seconde fois dans le margouillis.",
+  "source": "https://fr.wiktionary.org/wiki/margouillis"
  },
  {
   "mot": "margoulin",
@@ -5191,14 +5753,18 @@
   "nature": "n. m.",
   "definition": "Badinage galant et raffiné, à la manière des personnages de Marivaux.",
   "exemple": "Leur marivaudage amusait toute la tablée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot naît du vivant même de Marivaux (1688-1763) : sa première occurrence connue date de 1739.",
+  "source": "https://fr.wiktionary.org/wiki/marivaudage"
  },
  {
   "mot": "marjolet",
   "nature": "n. m.",
   "definition": "Petit homme qui fait l’empressé et le galant auprès des femmes.",
   "exemple": "Ce marjolet tournait autour de toutes les invitées du bal.",
-  "academie": false
+  "academie": false,
+  "anecdote": "La Fontaine l’emploie dans ses Contes (« Les Lunettes ») : « le sort, ami du marjolet ». L’Académie le notait comme un terme de mépris.",
+  "source": "https://fr.wiktionary.org/wiki/marjolet"
  },
  {
   "mot": "marmiteux",
@@ -5219,56 +5785,72 @@
   "nature": "n. m.",
   "definition": "Petite figure grotesque sculptée ; par plaisanterie, petit garçon ou petit homme mal bâti.",
   "exemple": "Des marmousets grimaçants ornaient les accoudoirs des stalles.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On appela aussi marmousets les conseillers choisis en 1388 par Charles VI : ni princes ni fonctionnaires, ils jurèrent de rester solidaires et accédèrent aux plus hautes fonctions de l’État.",
+  "source": "https://fr.wikipedia.org/wiki/Marmouset_(conseiller_du_roi)"
  },
  {
   "mot": "maroufle",
   "nature": "n. m.",
   "definition": "Vieilli : rustre, homme grossier et sans scrupules.",
   "exemple": "Ce maroufle de cocher nous avait déposés en pleine campagne, sous l’averse.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Variante de maraud, le mot désigne aussi depuis 1688 une colle de peintre, peut-être par une assimilation plaisante due aux peintres en bâtiment.",
+  "source": "https://fr.wiktionary.org/wiki/maroufle"
  },
  {
   "mot": "marri",
   "nature": "adj.",
   "definition": "Fâché, contrarié ou attristé (vieilli).",
   "exemple": "Il se montra fort marri de n’avoir pas été invité.",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est l’œil de Perrette : dans La Laitière et le Pot au lait (1678), La Fontaine montre la dame de ces biens « quittant d’un œil marri » sa fortune renversée.",
+  "source": "https://fr.wiktionary.org/wiki/marri"
  },
  {
   "mot": "mascaret",
   "nature": "n. m.",
   "definition": "Longue vague déferlante qui remonte un fleuve à son embouchure lors des grandes marées.",
   "exemple": "Les curieux se pressaient sur la rive pour voir passer le mascaret.",
-  "academie": true
+  "academie": true,
+  "anecdote": "De l’occitan mascaret, « tacheté ». Certains y voient un « bœuf tacheté », la vague évoquant un troupeau en marche. Sur la Seine, on parlait plutôt de la barre.",
+  "source": "https://fr.wiktionary.org/wiki/mascaret"
  },
  {
   "mot": "matamore",
   "nature": "n. m.",
   "definition": "Vantard dont la bravoure tient plus du discours que des actes ; faux héros.",
   "exemple": "Ce matamore promettait de tout casser, puis s’enfuit au premier aboiement.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Matamoros, en espagnol, c’est le « tueur de Maures » : le nom d’un faux brave de comédie qui se vantait sans cesse de ses exploits contre eux.",
+  "source": "https://fr.wiktionary.org/wiki/matamore"
  },
  {
   "mot": "matassin",
   "nature": "n. m.",
   "definition": "Danseur bouffon d’autrefois, costumé et armé, qui exécutait des danses grotesques.",
   "exemple": "Une troupe de matassins vint égayer la fin du banquet.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Selon une hypothèse, il vient de l’italien mattaccino, diminutif péjoratif de matto, « toqué, fou ».",
+  "source": "https://fr.wiktionary.org/wiki/matassin"
  },
  {
   "mot": "matois",
   "nature": "adj. et n.",
   "definition": "Rusé, qui sait habilement tirer son épingle du jeu.",
   "exemple": "Le vieux notaire, matois, ne dévoilait jamais ses intentions.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le matois est d’abord « celui qui vient de la matte » : dans l’argot des voleurs du XVe siècle, la matte désignait leur lieu de rendez-vous.",
+  "source": "https://fr.wiktionary.org/wiki/matois"
  },
  {
   "mot": "matutinal",
   "nature": "adj.",
   "definition": "Littéraire : qui appartient au matin, matinal.",
   "exemple": "Une brume matutinale enveloppait encore les vignes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Du bas latin matutinalis, de matutinum, « matin ». Chez les Romains, l’aube avait sa déesse : Mater Matuta.",
+  "source": "https://fr.wiktionary.org/wiki/matutinal"
  },
  {
   "mot": "maupiteux",
@@ -5282,21 +5864,27 @@
   "nature": "n. f.",
   "definition": "Pamphlet satirique ou burlesque publié contre Mazarin pendant la Fronde.",
   "exemple": "On vendait sous le manteau des mazarinades plus cruelles les unes que les autres.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le corpus tient son nom de La Mazarinade, texte de Scarron raillant le cardinal Mazarin, ministre de la régente Anne d’Autriche pendant la Fronde.",
+  "source": "https://fr.wikipedia.org/wiki/Mazarinade"
  },
  {
   "mot": "mazette",
   "nature": "interj.",
   "definition": "Exclamation familière marquant l’étonnement ou l’admiration.",
   "exemple": "Mazette ! Quelle belle voiture tu t’es offerte !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être une exclamation, la mazette fut un mauvais petit cheval, puis une personne sans force ou maladroite au jeu. Le mot viendrait du dialectal mesette, « mésange ».",
+  "source": "https://fr.wiktionary.org/wiki/mazette"
  },
  {
   "mot": "mâchicoulis",
   "nature": "n. m.",
   "definition": "Galerie en saillie au sommet d’une muraille, percée d’ouvertures pour jeter des projectiles sur les assaillants.",
   "exemple": "Du haut des mâchicoulis, les défenseurs versaient de la poix brûlante.",
-  "academie": true
+  "academie": true,
+  "anecdote": "De l’ancien français machecolie, de mascher, « meurtrir », et col, « cou » : le tir plongeant devait écraser le cou des assaillants.",
+  "source": "https://fr.wiktionary.org/wiki/mâchicoulis"
  },
  {
   "mot": "mânes",
@@ -5317,21 +5905,27 @@
   "nature": "adj.",
   "definition": "Qui a la douceur du miel ; au figuré, d’une douceur fade et affectée, doucereux.",
   "exemple": "Il nous servit un discours melliflue pour faire passer la hausse.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Scarron l’emploie dans son Virgile travesti (1648-1653) pour une « cohorte melliflue » venue par l’air en guise de nuée.",
+  "source": "https://fr.wiktionary.org/wiki/melliflue"
  },
  {
   "mot": "mercuriale",
   "nature": "n. f.",
   "definition": "Réprimande sévère adressée à quelqu’un.",
   "exemple": "Le directeur infligea une mercuriale aux retardataires.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot rend hommage à Mercure : au XVIe siècle, il désigne une réunion tenue le mercredi, « jour de Mercure », et en 1793 le relevé des prix du marché, Mercure étant le dieu du commerce… et des voleurs.",
+  "source": "https://fr.wiktionary.org/wiki/mercuriale"
  },
  {
   "mot": "méchef",
   "nature": "n. m.",
   "definition": "Accident fâcheux, malheur (vieilli).",
   "exemple": "Un méchef l’empêcha de se rendre au rendez-vous.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce vieux mot a franchi la Manche : l’ancien français meschief est aussi l’ancêtre de l’anglais mischief.",
+  "source": "https://fr.wiktionary.org/wiki/méchef"
  },
  {
   "mot": "médianoche",
@@ -5345,28 +5939,36 @@
   "nature": "n. f.",
   "definition": "Chant monotone et mélancolique.",
   "exemple": "Une mélopée s’élevait du campement des bergers.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin melopoeia, « composition musicale », vient du grec mélos, « chant », et poiéô, « faire » : la mélopée, c’est du chant fabriqué.",
+  "source": "https://fr.wiktionary.org/wiki/mélopée"
  },
  {
   "mot": "ménechme",
   "nature": "n. m.",
   "definition": "Personne qui ressemble parfaitement à une autre ; sosie.",
   "exemple": "Son ménechme a été arrêté à sa place par erreur.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot sort d’une comédie de Plaute, Les Ménechmes : deux jumeaux séparés dans l’enfance et portant le même nom y enchaînent les quiproquos avant de se retrouver à Épidamme.",
+  "source": "https://fr.wikipedia.org/wiki/Les_Ménechmes"
  },
  {
   "mot": "méphistophélique",
   "nature": "adj.",
   "definition": "Qui évoque Méphistophélès, par sa malice diabolique ou son ironie inquiétante.",
   "exemple": "Il esquissa un sourire méphistophélique avant d’abattre ses cartes.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Son modèle, Méphistophélès, est un démon du folklore allemand apparu au XVIe siècle dans la légende de Faust, avant de devenir une figure courante des œuvres populaires.",
+  "source": "https://fr.wikipedia.org/wiki/Méphistophélès"
  },
  {
   "mot": "méphitique",
   "nature": "adj.",
   "definition": "Se dit d’une exhalaison nauséabonde et nocive ; au figuré, d’une atmosphère malsaine.",
   "exemple": "Une odeur méphitique montait du marais en plein mois d’août.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Les Romains avaient une déesse des mauvaises odeurs, Méphitis ; le latin mephitis désignait une puanteur sulfureuse, sous la graphie mefitis en Italie du Sud.",
+  "source": "https://fr.wiktionary.org/wiki/méphitique"
  },
  {
   "mot": "mésaise",
@@ -5408,21 +6010,27 @@
   "nature": "adj.",
   "definition": "Plaisant ou ironique : merveilleux, d’une perfection trop belle pour être vraie.",
   "exemple": "Le vendeur nous promettait des rendements mirifiques.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin mirificus, formé de mirus, « merveilleux », et facere, « faire », qualifiait littéralement ce qui fait s’émerveiller.",
+  "source": "https://fr.wiktionary.org/wiki/mirifique"
  },
  {
   "mot": "mirliflore",
   "nature": "n. m.",
   "definition": "Jeune élégant prétentieux et content de lui.",
   "exemple": "Un mirliflore pommadé faisait la roue devant les demoiselles.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le philologue Francisque Michel y voyait une altération de « mille-fleurs », d’après les bouquets dont se paraient jadis les élégants ; au XVIIe siècle, le mille-fleurs était aussi un parfum à la mode.",
+  "source": "https://fr.wiktionary.org/wiki/mirliflore"
  },
  {
   "mot": "mirliton",
   "nature": "n. m.",
   "definition": "Petit instrument formé d’un tube garni d’une membrane qui vibre quand on chante dedans ; « vers de mirliton » : vers médiocres.",
   "exemple": "Il nous a récité des vers de mirliton pour son anniversaire.",
-  "academie": true
+  "academie": true,
+  "anecdote": "D’origine inconnue, le mot a eu plusieurs vies : il désigne une monnaie dès 1738, une flûte en 1745, puis une pâtisserie en 1845.",
+  "source": "https://fr.wiktionary.org/wiki/mirliton"
  },
  {
   "mot": "misonéisme",
@@ -5436,21 +6044,27 @@
   "nature": "n. m.",
   "definition": "Milieu, centre (vieilli ou régional).",
   "exemple": "Ils plantèrent un tilleul au mitan de la cour.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En argot, le mitan désigne aussi la pègre, le « milieu » : ce sens venu de l’occitan aurait été répandu par les anciens du bagne de Toulon.",
+  "source": "https://fr.wiktionary.org/wiki/mitan"
  },
  {
   "mot": "mithridatiser",
   "nature": "v. tr.",
   "definition": "Immuniser contre un poison par l’absorption progressive de doses croissantes ; au figuré, endurcir par l’habitude.",
   "exemple": "Des années d’open space l’ont mithridatisé contre le bruit.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le verbe vient de Mithridate VI, roi du Pont : selon Appien, cerné par les Romains, il voulut s’empoisonner et échoua, peut-être parce que des années de petites doses l’avaient immunisé.",
+  "source": "https://fr.wikipedia.org/wiki/Mithridate_VI"
  },
  {
   "mot": "momerie",
   "nature": "n. f.",
   "definition": "Affectation ridicule d’un sentiment que l’on n’éprouve pas ; cérémonie bizarre ou ridicule.",
   "exemple": "Assez de ces momeries, dis-nous franchement ce que tu penses.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son origine est discutée : on y voit l’ancien français mommerie, « mascarade », mais aussi mahomerie, « mosquée, pratique superstitieuse », dérivé du nom de Mahomet ; les deux ont pu se confondre.",
+  "source": "https://fr.wiktionary.org/wiki/momerie"
  },
  {
   "mot": "monomachie",
@@ -5464,42 +6078,54 @@
   "nature": "n. f.",
   "definition": "En peinture, souplesse délicate dans le rendu des chairs ; grâce alanguie et un peu maladive.",
   "exemple": "Le peintre rendait avec morbidesse le teint pâle de son modèle.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot italien morbidezza aurait été inventé par le philosophe florentin Marsile Ficin lors du dévoilement du Printemps de Botticelli.",
+  "source": "https://fr.wikipedia.org/wiki/Morbidezza_(peinture)"
  },
  {
   "mot": "morbleu",
   "nature": "interj.",
   "definition": "Juron ancien marquant la colère ou la surprise.",
   "exemple": "Morbleu ! Qui a osé toucher à mon épée ?",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est une version censurée de « mort de Dieu » (mordieu) : le « bleu » remplace « Dieu » pour éviter le blasphème.",
+  "source": "https://fr.wiktionary.org/wiki/morbleu"
  },
  {
   "mot": "mordoré",
   "nature": "adj.",
   "definition": "Brun nuancé d’or.",
   "exemple": "Les feuilles mordorées de l’automne tapissaient l’allée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot soude « more doré », c’est-à-dire « doré noir » ; un règlement de 1669 sur la teinture de la soie, du fil et de la laine l’emploie déjà.",
+  "source": "https://fr.wiktionary.org/wiki/mordoré"
  },
  {
   "mot": "morgue",
   "nature": "n. f.",
   "definition": "Attitude hautaine et méprisante, arrogance.",
   "exemple": "Il toisa les nouveaux venus avec une morgue insupportable.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’autre morgue, celle des cadavres, vient de celle-ci : en 1532, c’était le guichet d’une prison où les geôliers dévisageaient les prisonniers avant de les écrouer.",
+  "source": "https://fr.wiktionary.org/wiki/morgue"
  },
  {
   "mot": "morigéner",
   "nature": "v. tr.",
   "definition": "Réprimander avec insistance et un brin de pédantisme, faire la leçon à quelqu’un.",
   "exemple": "La concierge morigénait les enfants qui couraient dans l’escalier.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ironie de l’histoire : son ancêtre latin morigerari signifiait « être complaisant, docile ».",
+  "source": "https://fr.wiktionary.org/wiki/morigéner"
  },
  {
   "mot": "moult",
   "nature": "adv.",
   "definition": "Beaucoup, en grand nombre (souvent employé par plaisanterie).",
   "exemple": "Après moult hésitations, elle accepta l’invitation.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Devenu trop court et homophone de « mou », moult disparaît au XVIe siècle au profit de « beaucoup » ; il revient plus tard avec un « l » et un « t » prononcés, sous l’influence de son orthographe.",
+  "source": "https://fr.wiktionary.org/wiki/moult"
  },
  {
   "mot": "moutonner",
@@ -5527,35 +6153,45 @@
   "nature": "n. m.",
   "definition": "Sous la Révolution, jeune contre-révolutionnaire à l’élégance recherchée ; par extension, homme d’une élégance affectée.",
   "exemple": "Le muscadin paradait, la cravate haute et la canne à la main.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Tiré d’une pastille au musc, le mot servait vers 1750 aux canuts lyonnais à railler les commis de la Fabrique ; en 1793, les Jacobins l’appliquent aux défenseurs de Lyon assiégée par la Convention.",
+  "source": "https://fr.wiktionary.org/wiki/muscadin"
  },
  {
   "mot": "muser",
   "nature": "v. intr.",
   "definition": "Traîner, s’attarder à des bagatelles.",
   "exemple": "Il aimait muser le long des quais, sans but précis.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son origine reste incertaine : Huet le rattachait aux Muses, d’autres au museau béant ; Littré jugeait plus probable l’allemand Musse, « loisir ».",
+  "source": "https://fr.wiktionary.org/wiki/muser"
  },
  {
   "mot": "mutatis mutandis",
   "nature": "loc. adv.",
   "definition": "En faisant les changements nécessaires pour adapter le propos à un autre cas.",
   "exemple": "Cette règle s’applique, mutatis mutandis, aux associations.",
-  "academie": false
+  "academie": false,
+  "anecdote": "C’est un ablatif absolu latin qui signifie littéralement « ayant été changé ce qui doit être changé ».",
+  "source": "https://fr.wiktionary.org/wiki/mutatis_mutandis"
  },
  {
   "mot": "myrmidon",
   "nature": "n. m.",
   "definition": "Homme de petite taille et sans valeur, qui se donne des airs importants.",
   "exemple": "Ce myrmidon prétendait nous donner des ordres.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant d’être des freluquets, les Myrmidons étaient un peuple grec : dans l’Iliade d’Homère, ils combattent à Troie sous les ordres d’Achille.",
+  "source": "https://fr.wikipedia.org/wiki/Myrmidons"
  },
  {
   "mot": "mystagogue",
   "nature": "n. m. et f.",
   "definition": "Dans l’Antiquité grecque, prêtre ou prêtresse chargé d’initier aux mystères religieux.",
   "exemple": "Le mystagogue conduisait les initiés vers le sanctuaire d’Éleusis.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot a survécu dans l’Église : le mystagogue y est le catéchiste qui conduit le néophyte, après le catéchuménat, au cœur des mystères de la foi.",
+  "source": "https://fr.wikipedia.org/wiki/Mystagogie"
  },
  {
   "mot": "nacarat",
@@ -5569,42 +6205,54 @@
   "nature": "adv.",
   "definition": "Il y a peu de temps ; dans l’usage moderne, souvent employé pour « autrefois ».",
   "exemple": "Ce quartier, naguère paisible, est devenu le plus animé de la ville.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot soude en un bloc la tournure « il n’y a guère » (sous-entendu : de temps) ; le wallon possède un équivalent, « nawaire ».",
+  "source": "https://fr.wiktionary.org/wiki/naguère"
  },
  {
   "mot": "naïade",
   "nature": "n. f.",
   "definition": "Nymphe des rivières et des fontaines, dans la mythologie grecque.",
   "exemple": "La fontaine du parc est ornée d’une naïade de marbre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Leur nom viendrait du grec náein, « couler ». Divinités champêtres, elles recevaient du lait, des fruits et des fleurs, mais leur culte ne s’étendait pas aux villes.",
+  "source": "https://fr.wikipedia.org/wiki/Naïades"
  },
  {
   "mot": "nantir",
   "nature": "v. tr.",
   "definition": "Pourvoir, munir quelqu’un de quelque chose.",
   "exemple": "Ses parents l’avaient nanti d’une solide éducation.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il remonte à l’ancien français nant, « gage », lui-même emprunté au vieux norrois nám, « prise de possession » : un héritage viking.",
+  "source": "https://fr.wiktionary.org/wiki/nantir"
  },
  {
   "mot": "nasarde",
   "nature": "n. f.",
   "definition": "Chiquenaude donnée sur le nez ; au figuré, affront moqueur.",
   "exemple": "Le clown reçut une nasarde qui fit rire les enfants.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On la trouve déjà chez Rabelais au XVIe siècle, sous la graphie nazarde.",
+  "source": "https://fr.wiktionary.org/wiki/nasarde"
  },
  {
   "mot": "naufrageur",
   "nature": "n. m.",
   "definition": "Personne qui provoquait des naufrages, au moyen de faux signaux, pour piller les épaves.",
   "exemple": "La légende des naufrageurs hante encore cette côte bretonne.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Les naufrageurs tiennent sans doute du mythe : aucun document historique n’atteste ces naufrages provoqués, légende probablement née des pillages bien réels de navires déjà échoués.",
+  "source": "https://fr.wikipedia.org/wiki/Naufrageur"
  },
  {
   "mot": "naumachie",
   "nature": "n. f.",
   "definition": "Dans l’Antiquité, spectacle de combat naval donné dans un bassin aménagé.",
   "exemple": "L’empereur fit inonder l’arène pour offrir une naumachie au peuple.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Spectacle hors norme, réservé aux puissants : les premières naumachies romaines, celles de Jules César, d’Auguste et de Claude, ne furent que trois en un siècle.",
+  "source": "https://fr.wikipedia.org/wiki/Naumachie"
  },
  {
   "mot": "nautonier",
@@ -5625,21 +6273,27 @@
   "nature": "n. m.",
   "definition": "Grand chasseur, passionné de chasse.",
   "exemple": "Ce nemrod ne revenait jamais du bois sans un lièvre.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Dans la Bible, Nemrod est le premier héros d’après le Déluge : un chasseur réputé, qui aurait aussi fondé le premier royaume et plusieurs villes de Mésopotamie.",
+  "source": "https://fr.wikipedia.org/wiki/Nimrod"
  },
  {
   "mot": "nenni",
   "nature": "interj.",
   "definition": "Non (vieilli ou plaisant).",
   "exemple": "Tu crois que j’ai cédé ? Nenni !",
-  "academie": true
+  "academie": true,
+  "anecdote": "Il vient du latin non illud, « ce n’est pas cela », pendant de hoc illud, « c’est cela », qui a donné oïl… d’où la « langue d’oïl ».",
+  "source": "https://fr.wiktionary.org/wiki/nenni"
  },
  {
   "mot": "nervi",
   "nature": "n. m.",
   "definition": "Sbire employé par autrui pour les coups de force et les sales besognes.",
   "exemple": "Le caïd envoya ses nervis intimider le témoin.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot vient de l’occitan nèrvi, « nerf », puis « vigueur » ; dans l’argot marseillais du XIXe siècle, il désignait d’abord un portefaix.",
+  "source": "https://fr.wiktionary.org/wiki/nervi"
  },
  {
   "mot": "nescience",
@@ -5653,7 +6307,9 @@
   "nature": "n. f.",
   "definition": "Art prétendu d’évoquer les morts pour connaître l’avenir.",
   "exemple": "Le sorcier pratiquait la nécromancie dans les catacombes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À l’origine pure divination par l’interrogation des morts, elle s’est enrichie dans la culture populaire : le nécromancien y passe pour capable d’animer un cadavre.",
+  "source": "https://fr.wikipedia.org/wiki/Nécromancie"
  },
  {
   "mot": "nénie",
@@ -5674,7 +6330,9 @@
   "nature": "n. m.",
   "definition": "Homme niais, simple d’esprit.",
   "exemple": "Ce nicodème a cru toutes les fables qu’on lui contait.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il doit son nom à Nicodème, un pharisien qui, selon la Bible, posait des questions naïves à Jésus.",
+  "source": "https://fr.wiktionary.org/wiki/nicodème"
  },
  {
   "mot": "nidoreux",
@@ -5709,14 +6367,18 @@
   "nature": "n. m.",
   "definition": "Celui qui conduit une barque, batelier (littéraire).",
   "exemple": "Charon, le nocher des Enfers, réclamait son obole.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Venu de l’italien nocchiero, il remonte au grec naúklêros, « patron du bateau », et a pour cousins le catalan nauxer et l’espagnol naucher.",
+  "source": "https://fr.wiktionary.org/wiki/nocher"
  },
  {
   "mot": "noise",
   "nature": "n. f.",
   "definition": "Querelle (surtout dans « chercher noise à quelqu’un »).",
   "exemple": "Il cherche noise à tout le monde depuis ce matin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Chercher noise, c’est presque donner la nausée : le mot vient du latin nausea, « mal de mer », devenu « bruit, querelle » en ancien français. L’anglais noise en descend aussi.",
+  "source": "https://fr.wiktionary.org/wiki/noise"
  },
  {
   "mot": "noliser",
@@ -5758,35 +6420,45 @@
   "nature": "adv.",
   "definition": "Pendant la nuit, à la faveur de l’obscurité.",
   "exemple": "Les cambrioleurs s’introduisirent nuitamment dans la bijouterie.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’adjectif « nuitant » n’a jamais existé : le mot vient de l’ancien adverbe nuitantre (latin noctanter), assimilé à tort à un adjectif en -ant, d’où la finale en -amment.",
+  "source": "https://fr.wiktionary.org/wiki/nuitamment"
  },
  {
   "mot": "numineux",
   "nature": "adj.",
   "definition": "Qui se rapporte au divin et inspire un sentiment mêlé de mystère, de crainte et de fascination.",
   "exemple": "Sous la voûte de la cathédrale, il ressentit une présence numineuse.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le mot est calqué sur l’allemand numinos, forgé par le théologien Rudolf Otto dans son livre Le Sacré (1917), à partir du latin numen, « volonté divine ».",
+  "source": "https://fr.wiktionary.org/wiki/numineux"
  },
  {
   "mot": "nyctalope",
   "nature": "adj.",
   "definition": "Qui voit dans l’obscurité.",
   "exemple": "Le chat, nyctalope, traversa sans peine le grenier plongé dans le noir.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En grec, nuktálōps voulait dire aussi bien « qui voit bien la nuit » que « qui voit mal la nuit » ; le français a hésité entre les deux sens jusqu’au début du XIXe siècle.",
+  "source": "https://fr.wiktionary.org/wiki/nyctalope"
  },
  {
   "mot": "nymphée",
   "nature": "n. m.",
   "definition": "Construction monumentale destinée à recevoir des eaux, ornée de statues et de vasques, à l’origine vouée aux nymphes.",
   "exemple": "Au fond du parc, un nymphée de rocaille abritait une source.",
-  "academie": true
+  "academie": true,
+  "anecdote": "À l’origine, c’était un bassin recueillant une source jugée sacrée ; à Rome, il devient une fontaine monumentale, distincte de la simple « fontaine à bouche » sans décor.",
+  "source": "https://fr.wikipedia.org/wiki/Nymphée"
  },
  {
   "mot": "oaristys",
   "nature": "n. f.",
   "definition": "Littéraire et rare : entretien tendre entre amoureux ; par extension, idylle.",
   "exemple": "Le banc du parc abrita leur première oaristys.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le grec oaristus, « entretien tendre », semble dérivé de oar, « femme, épouse » ; le français l’adopte en 1794, après une première forme, oariste, apparue en 1721.",
+  "source": "https://fr.wiktionary.org/wiki/oaristys"
  },
  {
   "mot": "obédience",
@@ -5828,14 +6500,18 @@
   "nature": "adj.",
   "definition": "Relatif au siège d’une ville.",
   "exemple": "Pendant le siège, on frappa une monnaie obsidionale.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On le croise surtout en numismatique : une monnaie obsidionale est frappée pendant un siège pour payer les habitants ; les premières connues datent du siège de Pavie, en 1524.",
+  "source": "https://fr.wikipedia.org/wiki/Monnaie_de_siège"
  },
  {
   "mot": "obvie",
   "nature": "adj.",
   "definition": "Didactique : se dit du sens qui se présente naturellement à l’esprit, sans recherche ; évident.",
   "exemple": "Le sens obvie de la phrase suffit, inutile d’y chercher un message caché.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le sens obvie est celui qu’on trouve en chemin : le latin obvius, « qui se trouve sur le passage », réunit ob-, « devant », et via, « chemin ».",
+  "source": "https://fr.wiktionary.org/wiki/obvie"
  },
  {
   "mot": "obvier",
@@ -5849,35 +6525,45 @@
   "nature": "v. tr.",
   "definition": "Tuer (vieilli ou plaisant).",
   "exemple": "Le chevalier jura d’occire le dragon.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le verbe est daté de 881 : il remonte au latin populaire aucidere, altération du latin classique occidere.",
+  "source": "https://fr.wiktionary.org/wiki/occire"
  },
  {
   "mot": "ochlocratie",
   "nature": "n. f.",
   "definition": "Gouvernement exercé par la foule, la populace.",
   "exemple": "Le philosophe craignait que la démocratie ne dégénère en ochlocratie.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Souvent attribué à Polybe, le terme entre en français pendant les guerres de Religion, puis ressurgit entre la chute de Robespierre et les débuts de la IIIe République.",
+  "source": "https://fr.wikipedia.org/wiki/Ochlocratie"
  },
  {
   "mot": "odalisque",
   "nature": "n. f.",
   "definition": "Autrefois, esclave ou servante au service des femmes d’un harem ; en peinture, femme de harem.",
   "exemple": "Ingres a peint une célèbre odalisque allongée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "D’abord simple femme de chambre du sérail ottoman, l’odalisque alanguie des tableaux est un fantasme : les artistes qui l’ont popularisée n’avaient pas le droit d’entrer dans un harem.",
+  "source": "https://fr.wikipedia.org/wiki/Odalisque"
  },
  {
   "mot": "officine",
   "nature": "n. f.",
   "definition": "Pharmacie, lieu où l’on prépare les médicaments ; péjorativement, lieu où se trame quelque chose de louche.",
   "exemple": "Ces rumeurs sortaient d’une officine de propagande.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Avant les pharmacies, le mot désignait aussi une subdivision d’un atelier monétaire romain.",
+  "source": "https://fr.wikipedia.org/wiki/Officine"
  },
  {
   "mot": "oiseux",
   "nature": "adj.",
   "definition": "Inutile, vain, qui n’apporte rien à la pensée ni à l’action.",
   "exemple": "Laissons là ces discussions oiseuses et passons au vote.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Il vient du latin otiosus, et sa forme du XIIe siècle, oiseus, signifiait simplement « oisif ».",
+  "source": "https://fr.wiktionary.org/wiki/oiseux"
  },
  {
   "mot": "oison",
@@ -5891,14 +6577,18 @@
   "nature": "n. m.",
   "definition": "Familier : individu bizarre ou ridicule qui se donne des airs importants.",
   "exemple": "Quel est cet olibrius qui dirige la circulation en cape ?",
-  "academie": true
+  "academie": true,
+  "anecdote": "Attesté en 1568 chez Bonaventure Des Périers, il évoquerait un Olybrius : peut-être l’empereur porté au pouvoir à sa grande surprise en 472, qui ne régna que trois mois.",
+  "source": "https://fr.wiktionary.org/wiki/olibrius"
  },
  {
   "mot": "oliphant",
   "nature": "n. m.",
   "definition": "Cor d’ivoire des chevaliers du Moyen Âge.",
   "exemple": "Roland sonna de l’oliphant à Roncevaux.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Ce cor taillé dans l’ivoire porte le nom de la bête qui l’a fourni : oliphant est une déformation phonétique d’« éléphant ».",
+  "source": "https://fr.wiktionary.org/wiki/oliphant"
  },
  {
   "mot": "onction",
@@ -5912,7 +6602,9 @@
   "nature": "adv.",
   "definition": "Jamais (vieilli).",
   "exemple": "On ne vit onques chevalier plus vaillant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Paradoxe : ce « jamais » vient du latin umquam, qui signifiait « un jour, quelquefois » ; il est attesté en français dès 1160.",
+  "source": "https://fr.wiktionary.org/wiki/onques"
  },
  {
   "mot": "opime",
@@ -5926,7 +6618,9 @@
   "nature": "adj.",
   "definition": "Tenace et obstiné dans ses idées ou ses efforts.",
   "exemple": "Un travail opiniâtre lui a permis de réussir le concours.",
-  "academie": true
+  "academie": true,
+  "anecdote": "L’entêtement est une affaire d’opinion : le mot est formé dès 1431 sur « opinion » et le suffixe -âtre.",
+  "source": "https://fr.wiktionary.org/wiki/opiniâtre"
  },
  {
   "mot": "opuscule",
@@ -5954,14 +6648,18 @@
   "nature": "n. f.",
   "definition": "Au Moyen Âge, épreuve physique imposée à un accusé pour établir, par jugement de Dieu, son innocence ou sa culpabilité.",
   "exemple": "L’accusé dut subir l’ordalie du fer rouge.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En ancien français, on disait urtil, un mot germanique cousin de l’allemand Urteil, « jugement » ; ordalie a été refait sur le latin médiéval ordalium, lié à l’anglais ordeal.",
+  "source": "https://fr.wiktionary.org/wiki/ordalie"
  },
  {
   "mot": "oréade",
   "nature": "n. f.",
   "definition": "Nymphe des montagnes, dans la mythologie grecque.",
   "exemple": "Les poètes peuplaient ces sommets d’oréades insaisissables.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ces nymphes, qu’on appelait aussi Orestiades ou Orodemniades, régnaient sur les grottes autant que sur les montagnes.",
+  "source": "https://fr.wikipedia.org/wiki/Oréades"
  },
  {
   "mot": "orémus",
@@ -5975,7 +6673,9 @@
   "nature": "n. f.",
   "definition": "Grand rapace ; « pousser des cris d’orfraie » : pousser des cris perçants.",
   "exemple": "Elle poussa des cris d’orfraie en voyant la souris.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ce rapace porte un nom terrifiant : il vient du latin ossifraga, « qui brise les os ».",
+  "source": "https://fr.wiktionary.org/wiki/orfraie"
  },
  {
   "mot": "orfroi",
@@ -5996,35 +6696,45 @@
   "nature": "n. m.",
   "definition": "Dans l’Antiquité, métal ou alliage mystérieux et précieux, dont la nature exacte reste discutée.",
   "exemple": "Platon décrit des remparts de l’Atlantide recouverts d’orichalque.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Littéralement « cuivre des montagnes » ; à Rome, le mot désignait surtout le laiton, et le métal a ressurgi chez les alchimistes… puis dans les jeux vidéo.",
+  "source": "https://fr.wikipedia.org/wiki/Orichalque"
  },
  {
   "mot": "oriflamme",
   "nature": "n. f.",
   "definition": "Bannière d’apparat, longue et effilée ; autrefois, étendard des rois de France.",
   "exemple": "Des oriflammes flottaient au-dessus des tribunes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Dans la Chanson de Roland, l’oriflamme est l’étendard de Charlemagne ; levée plus tard par les rois de France, elle signifiait qu’on ne ferait pas de quartier, d’où son surnom d’« oriflamme de la mort ».",
+  "source": "https://fr.wikipedia.org/wiki/Oriflamme"
  },
  {
   "mot": "oripeau",
   "nature": "n. m.",
   "definition": "Surtout au pluriel : vêtements voyants mais usés, ou faux éclat qui ne cache rien de solide.",
   "exemple": "Le vieux comédien paradait dans les oripeaux de ses gloires passées.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Sous les oripeaux, de l’or : l’ancien français oripel vient du latin aurea pellis, « peau d’or ».",
+  "source": "https://fr.wiktionary.org/wiki/oripeau"
  },
  {
   "mot": "orphéon",
   "nature": "n. m.",
   "definition": "Fanfare ou chorale populaire.",
   "exemple": "L’orphéon municipal ouvrait le défilé du 14 Juillet.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le musicien Wilhem tire le nom d’Orphée pour le chœur des écoliers parisiens qu’il réunit chaque mois à partir de 1833 ; en 1852, Charles Gounod lui succède à la tête de l’Orphéon.",
+  "source": "https://fr.wikipedia.org/wiki/Orphéon"
  },
  {
   "mot": "orviétan",
   "nature": "n. m.",
   "definition": "Drogue prétendue miraculeuse vendue par les charlatans ; « marchand d’orviétan » : charlatan.",
   "exemple": "Ce politicien n’est qu’un marchand d’orviétan.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le remède tire son nom d’Orvieto, en Italie : il aurait été inventé et fabriqué par un habitant de la ville, Girolamo Ferrante.",
+  "source": "https://fr.wiktionary.org/wiki/orviétan"
  },
  {
   "mot": "oscitation",
@@ -6038,14 +6748,18 @@
   "nature": "n. m.",
   "definition": "Armée, au Moyen Âge ; service militaire dû au seigneur.",
   "exemple": "Le roi convoqua l’ost pour la campagne d’été.",
-  "academie": false
+  "academie": false,
+  "anecdote": "On le prononçait « o » en ancien français ; le « st » sonore actuel vient de l’orthographe. Dans certains parlers de l’Ouest et du Nord, le mot survit encore au sens de « horde », prononcé « o ».",
+  "source": "https://fr.wiktionary.org/wiki/ost"
  },
  {
   "mot": "ouailles",
   "nature": "n. f. pl.",
   "definition": "Fidèles d’une paroisse par rapport à leur curé (souvent plaisant).",
   "exemple": "Le curé connaissait chacune de ses ouailles.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Le curé garde bien un troupeau : ouaille vient de l’ancien français oeille, « brebis », issu du latin ovicula, « petite brebis ».",
+  "source": "https://fr.wiktionary.org/wiki/ouaille"
  },
  {
   "mot": "ouïr",
@@ -6059,14 +6773,18 @@
   "nature": "n. m.",
   "definition": "Édit du tsar ; par extension, ordre impératif et arbitraire.",
   "exemple": "La direction a lancé un oukase interdisant le télétravail.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Hérité des tsars, le mot a survécu au régime soviétique et désigne encore un acte exécutif du président de la Fédération de Russie.",
+  "source": "https://fr.wiktionary.org/wiki/ukase"
  },
  {
   "mot": "ourdir",
   "nature": "v. tr.",
   "definition": "Préparer en secret une machination ; au sens propre, disposer les fils d’une chaîne de tissage.",
   "exemple": "Les conjurés ourdissaient un complot contre le roi.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin ordiri voulait dire « faire une trame », comme l’araignée tisse sa toile, d’où le sens figuré de « commencer, entreprendre ».",
+  "source": "https://fr.wiktionary.org/wiki/ourdir"
  },
  {
   "mot": "outrecuidance",
@@ -6101,7 +6819,9 @@
   "nature": "n. m.",
   "definition": "Au Moyen Âge, cheval de marche ou de parade, par opposition au destrier de combat.",
   "exemple": "La châtelaine traversa le bourg sur son palefroi blanc.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Son ancêtre latin paraveredus, « cheval de poste », marie le grec pará, « à côté de », à un mot gaulois comparable au gallois gorwydd, « coursier ».",
+  "source": "https://fr.wiktionary.org/wiki/palefroi"
  },
  {
   "mot": "palimpseste",
@@ -6115,7 +6835,9 @@
   "nature": "n. f.",
   "definition": "Revirement complet d’opinion ; fait de désavouer ce que l’on avait soutenu auparavant.",
   "exemple": "Après tant de promesses, ses palinodies successives ont fini par lasser ses électeurs.",
-  "academie": true
+  "academie": true,
+  "anecdote": "C’est littéralement un « chant à rebours » : le grec palin signifie « en arrière » et ôdê « chant ». En littérature, c’est le passage où l’auteur révoque tout ce qu’il vient de démontrer.",
+  "source": "https://fr.wikipedia.org/wiki/Palinodie"
  },
  {
   "mot": "palsambleu",
@@ -6129,42 +6851,54 @@
   "nature": "n. m.",
   "definition": "Familier. Homme grossier et mal élevé ; aujourd’hui, jeune homme prétentieux et plein de lui-même.",
   "exemple": "Ce paltoquet s’est permis de couper la parole au doyen de l’assemblée.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le paltoquet doit son nom à un vêtement : il dérive de paltoke, forme ancienne de « paletot ».",
+  "source": "https://fr.wiktionary.org/wiki/paltoquet"
  },
  {
   "mot": "pandémonium",
   "nature": "n. m.",
   "definition": "Réunion tumultueuse de gens qui complotent et font le mal ; par ext., lieu de désordre, d’agitation et de vacarme.",
   "exemple": "À l’heure de la sortie, la cour de l’école devient un véritable pandémonium.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot a été inventé au XVIIe siècle par le poète anglais John Milton pour nommer la capitale de l’Enfer, où Satan réunit le conseil des démons.",
+  "source": "https://fr.wikipedia.org/wiki/Pandémonium"
  },
  {
   "mot": "pandiculation",
   "nature": "n. f.",
   "definition": "Mouvement réflexe par lequel on s’étire en tendant les bras et en cambrant le corps, souvent accompagné de bâillements.",
   "exemple": "Au réveil, le chat se livra à une longue pandiculation sur le rebord de la fenêtre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Marin Cureau de La Chambre l’emploie en 1663 dans Les Caractères des Passions, pour décrire l’extension des membres qui suit le bâillement.",
+  "source": "https://fr.wiktionary.org/wiki/pandiculation"
  },
  {
   "mot": "pandour",
   "nature": "n. m.",
   "definition": "Soldat d’une milice irrégulière d’Europe centrale, réputé brutal et pillard ; par extension, homme aux manières rudes.",
   "exemple": "Les pandours ravagèrent la contrée avant de disparaître.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient de Pandur, un village de Hongrie au sud de Kalocsa, où fut levé au XVIIe siècle le premier contingent de ces troupes.",
+  "source": "https://fr.wiktionary.org/wiki/pandour"
  },
  {
   "mot": "panégyrique",
   "nature": "n. m.",
   "definition": "Discours ou écrit qui fait l’éloge appuyé, souvent sans nuance, d’une personne ou d’une chose.",
   "exemple": "Son allocution d’adieu tourna au panégyrique du directeur sortant.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le grec panêgurikós désignait l’éloge public prononcé lors d’une fête nationale ; dans l’Occident chrétien, le panégyrique fut aussi le sermon célébrant un saint.",
+  "source": "https://fr.wikipedia.org/wiki/Panégyrique"
  },
  {
   "mot": "pantagruélique",
   "nature": "adj.",
   "definition": "Se dit d’un repas d’une abondance démesurée, ou d’un appétit à sa mesure.",
   "exemple": "Le mariage s’acheva par un festin pantagruélique qui dura jusqu’à l’aube.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Pantagruel, le géant qui lui prête son nom, est le héros du premier roman de Rabelais (1532), publié sous le pseudonyme anagrammatique d’Alcofribas Nasier.",
+  "source": "https://fr.wikipedia.org/wiki/Pantagruel"
  },
  {
   "mot": "pantelant",
@@ -6178,21 +6912,27 @@
   "nature": "adj. et n.",
   "definition": "Vieilli. Faussement dévot, d’une douceur hypocrite.",
   "exemple": "Sous ses airs papelards, le régisseur volait son maître sans vergogne.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On le trouve dès 1190 dans le Roman de Renart ; au XIIIe siècle, Gautier de Coinci joue sur le mot : le papelard fait le dévot devant, mais « par derrière pape lard », il mange le lard.",
+  "source": "https://fr.wiktionary.org/wiki/papelard"
  },
  {
   "mot": "paraguante",
   "nature": "n. f.",
   "definition": "Présent fait en remerciement d’un service rendu.",
   "exemple": "Le valet attendait sa paraguante sur le seuil.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient de l’espagnol dar para guantes, « donner pour s’acheter des gants », c’est-à-dire donner un pourboire.",
+  "source": "https://fr.wiktionary.org/wiki/paraguante"
  },
  {
   "mot": "parangon",
   "nature": "n. m.",
   "definition": "Modèle accompli, exemple parfait d’une qualité ou d’un défaut.",
   "exemple": "Dans tout le quartier, on la citait comme le parangon de la patience.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le modèle est d’abord un point de comparaison : le mot est emprunté en 1504 à l’espagnol parangón, « comparaison ».",
+  "source": "https://fr.wiktionary.org/wiki/parangon"
  },
  {
   "mot": "paranymphe",
@@ -6213,35 +6953,45 @@
   "nature": "n. f.",
   "definition": "Pour les chrétiens, venue du Christ en gloire, attendue au terme de l’histoire.",
   "exemple": "Certains prédicateurs annonçaient la parousie pour l’an mille.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Les premiers chrétiens l’attendaient de leur vivant : vers 55, Paul espère encore y assister et conclut sa Première épître aux Corinthiens par « maranatha », « Viens, Seigneur ! ».",
+  "source": "https://fr.wikipedia.org/wiki/Parousie"
  },
  {
   "mot": "pasquinade",
   "nature": "n. f.",
   "definition": "Raillerie satirique et bouffonne.",
   "exemple": "Les murs de la ville se couvrirent de pasquinades contre le gouverneur.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot vient de Pasquino, une statue romaine sur laquelle les habitants de Rome collaient des pamphlets impertinents contre le pape régnant.",
+  "source": "https://fr.wikipedia.org/wiki/Pasquin"
  },
  {
   "mot": "pastourelle",
   "nature": "n. f.",
   "definition": "Poème médiéval où un chevalier courtise une bergère.",
   "exemple": "La pastourelle met en scène une bergère qui éconduit le chevalier.",
-  "academie": false
+  "academie": false,
+  "anecdote": "La bergère n’y cède pas toujours : il arrive qu’elle appelle à l’aide le paysan qu’elle aime, qui met le chevalier en fuite. Charnelle et bucolique, la pastourelle prend le contrepied de l’amour courtois.",
+  "source": "https://fr.wikipedia.org/wiki/Pastourelle"
  },
  {
   "mot": "pataquès",
   "nature": "n. m.",
   "definition": "Faute de liaison grossière, comme « il va-t-à Paris » ; par extension, faute de langage, bévue.",
   "exemple": "Son discours était truffé de pataquès qui firent sourire l’auditoire.",
-  "academie": false
+  "academie": false,
+  "anecdote": "Selon une anecdote de 1805 reprise par Littré, un plaisant tend un éventail à deux dames : « Il n’est point-z-à moi », « Il n’est pas-t-à moi »… « Je ne sais pas-t-à qu’est-ce ! »",
+  "source": "https://fr.wiktionary.org/wiki/pataquès"
  },
  {
   "mot": "patelin",
   "nature": "adj.",
   "definition": "Doucereux et flatteur, qui use d’une douceur hypocrite pour parvenir à ses fins.",
   "exemple": "D’un ton patelin, le vendeur nous assura que c’était une affaire unique.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le sens de doucereux et rusé est une allusion au héros de La Farce de Maître Pathelin, qui dupe les gens par de belles paroles.",
+  "source": "https://fr.wiktionary.org/wiki/patelin"
  },
  {
   "mot": "patenôtre",
@@ -6255,7 +7005,9 @@
   "nature": "adj.",
   "definition": "Qui évoque le gibet ; se dit surtout d’une mine inquiétante, digne d’un malfaiteur.",
   "exemple": "Deux individus à la mine patibulaire faisaient le guet devant la banque.",
-  "academie": true
+  "academie": true,
+  "anecdote": "La mine patibulaire sent la corde : le mot est bâti sur le latin patibulum, « croix », « potence ».",
+  "source": "https://fr.wiktionary.org/wiki/patibulaire"
  },
  {
   "mot": "pâtiras",
@@ -6283,7 +7035,9 @@
   "nature": "n. m.",
   "definition": "Punition écrite infligée à un élève ; par extension, travail long et ennuyeux.",
   "exemple": "Rédiger ce rapport annuel est un véritable pensum.",
-  "academie": true
+  "academie": true,
+  "anecdote": "En latin, le pensum était le poids de laine qu’un esclave devait filer dans la journée ; l’argot scolaire en a fait une punition.",
+  "source": "https://fr.wiktionary.org/wiki/pensum"
  },
  {
   "mot": "perclus",
@@ -6297,14 +7051,18 @@
   "nature": "n. m.",
   "definition": "S’emploie dans « poudre de perlimpinpin » : prétendu remède miracle, en réalité sans aucune efficacité.",
   "exemple": "Ce prétendu élixir de jouvence n’est que de la poudre de perlimpinpin.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le mot, daté de 1690, viendrait de « pour le pinpin », un pinpin étant un homme crédule.",
+  "source": "https://fr.wiktionary.org/wiki/perlimpinpin"
  },
  {
   "mot": "persifler",
   "nature": "v. tr.",
   "definition": "Railler quelqu’un avec ironie, souvent en feignant de le louer.",
   "exemple": "Elle persiflait ses collègues avec une politesse exquise.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Si l’on y voit d’ordinaire « siffler » renforcé par per-, certains, comme Élisabeth Bourguinat, le font venir de Persiflès, une pièce de Nicolas Racot de Grandval.",
+  "source": "https://fr.wiktionary.org/wiki/persifler"
  },
  {
   "mot": "pertinacité",
@@ -6325,28 +7083,36 @@
   "nature": "n. m. pl.",
   "definition": "Dieux protecteurs du foyer chez les Romains ; par plaisanterie, la demeure, le chez-soi.",
   "exemple": "Après six mois d’expédition, il regagna enfin ses pénates.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Ces dieux du foyer veillaient en particulier sur le garde-manger et le feu de la cuisine ; à partir du IIIe siècle av. J.-C., leur culte passe de la sphère privée au culte public.",
+  "source": "https://fr.wikipedia.org/wiki/Pénates"
  },
  {
   "mot": "pérégrination",
   "nature": "n. f.",
   "definition": "Voyage long et compliqué, fait d’étapes et de détours nombreux (s’emploie surtout au pluriel).",
   "exemple": "Il racontait ses pérégrinations à travers les Andes avec un plaisir communicatif.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin peregrinatio, « voyage lointain », est aussi l’ancêtre du mot « pèlerinage ».",
+  "source": "https://fr.wiktionary.org/wiki/pérégrination"
  },
  {
   "mot": "pérorer",
   "nature": "v. intr.",
   "definition": "Tenir de longs discours d’un ton pompeux et satisfait.",
   "exemple": "À chaque dîner de famille, l’oncle Gaston pérorait sur la politique étrangère.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Le latin perorare signifiait « parler jusqu’au bout » : celui qui pérore ne lâche pas la parole.",
+  "source": "https://fr.wiktionary.org/wiki/pérorer"
  },
  {
   "mot": "pétaudière",
   "nature": "n. f.",
   "definition": "Lieu ou assemblée où règne la confusion, où chacun fait ce qu’il veut faute d’autorité.",
   "exemple": "Sans président de séance, la réunion tourna vite à la pétaudière.",
-  "academie": true
+  "academie": true,
+  "anecdote": "On la rattache au « roy Petault », qui apparaît en 1546 dans le Tiers Livre de Rabelais ; la « cour du roi Pétaud, où chacun est maître » devient proverbiale avec la Satyre Ménippée.",
+  "source": "https://fr.wiktionary.org/wiki/pétaudière"
  },
  {
   "mot": "pétrarquiser",
@@ -6367,14 +7133,18 @@
   "nature": "n. m.",
   "definition": "Ancien nom du tabac.",
   "exemple": "Le marin bourrait sa pipe d’un pétun noir et âcre.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Venu du guarani du Brésil par le portugais petum, le mot a été employé jusqu’au Danemark ; attesté en français en 1558, il ne survit plus que dans des patois de l’Ouest et au Canada.",
+  "source": "https://fr.wiktionary.org/wiki/pétun"
  },
  {
   "mot": "phalanstère",
   "nature": "n. m.",
   "definition": "Communauté de vie et de travail imaginée par Charles Fourier ; par extension, habitation d’une communauté nombreuse.",
   "exemple": "Les fondateurs de la coopérative rêvaient d’un phalanstère au milieu des vignes.",
-  "academie": true
+  "academie": true,
+  "anecdote": "Charles Fourier forge ce mot-valise en 1822 en croisant « phalange » et « monastère ».",
+  "source": "https://fr.wiktionary.org/wiki/phalanstère"
  },
  {
   "mot": "phébus",
