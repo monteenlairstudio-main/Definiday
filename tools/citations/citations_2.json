@@ -256,12 +256,12 @@
     "theme": "temps"
   },
   {
-    "texte": "La nuit passait ; le jour venait ; le travail recommençait, mais il ne parvenait pas à étouffer en lui cette panique intérieure, ce désir de tendresse, ce besoin désespéré d'amour.",
+    "texte": "C'était un temps où certains hommes se laissaient aller au désespoir, certaines femmes à la débauche, mais Thérèse et bien d'autres soignaient les blessés et faisaient des rêves d'avenir avec confiance.",
     "auteur": "Irène Némirovsky",
-    "oeuvre": "La Proie",
-    "annee": "1938",
+    "oeuvre": "Les Feux de l'automne",
+    "annee": "2007",
     "source": "https://fr.wikiquote.org/wiki/Irène_Némirovsky",
-    "theme": "amour"
+    "theme": "guerre"
   },
   {
     "texte": "A toute propriété, il y a des bornes. A toute puissance, il y a des lois. Or, le chemineau possède toute la vaste terre dont les limites sont l'horizon irréel, et son empire est intangible, car il le gouverne et en jouit en esprit.",
@@ -288,28 +288,12 @@
     "theme": "lenteur"
   },
   {
-    "texte": "Son désir ancien de la vieille maîtresse tyrannique, ivre de soleil, le reprenait. De nouveau, il était à elle, de toutes les fibres de son être. Une dernière fois, en se levant, il jeta un long regard à la route : il s'était promis à elle.",
-    "auteur": "Isabelle Eberhardt",
-    "oeuvre": "Ecrits sur le sable",
-    "annee": "1990",
-    "source": "https://fr.wikiquote.org/wiki/Isabelle_Eberhardt",
-    "theme": "nature"
-  },
-  {
     "texte": "Les Oulhamr fuyaient dans la nuit épouvantable. Fous de souffrance et de fatigue, tout leur semblait vain devant la calamité suprême : le Feu était mort.",
     "auteur": "J.-H. Rosny aîné",
     "oeuvre": "La Guerre du feu",
     "annee": "1920",
     "source": "https://fr.wikiquote.org/wiki/J.-H._Rosny_aîné",
     "theme": "nature"
-  },
-  {
-    "texte": "Naoh a fait alliance avec le mammouth ! murmura Nam. Naoh est le plus puissant des hommes.",
-    "auteur": "J.-H. Rosny aîné",
-    "oeuvre": "La Guerre du feu",
-    "annee": "1920",
-    "source": "https://fr.wikiquote.org/wiki/J.-H._Rosny_aîné",
-    "theme": "humour"
   },
   {
     "texte": "Il n'y a rien à faire. Vous pouvez compter sur moi. Je m'en charge.",
@@ -342,6 +326,14 @@
     "annee": "1751",
     "source": "https://fr.wikiquote.org/wiki/Jean_Le_Rond_d'Alembert",
     "theme": "liberté"
+  },
+  {
+    "texte": "Rien n’est plus incontestable que l’existence de nos sensations [...]",
+    "auteur": "D'Alembert",
+    "oeuvre": "Encyclopédie",
+    "annee": "1751",
+    "source": "https://fr.wikiquote.org/wiki/Jean_Le_Rond_d'Alembert",
+    "theme": "sagesse"
   },
   {
     "texte": "La religion est une vraie pépinière de fanatiques : c'est véritablement le théâtre où ils jouent le mieux leurs personnages",
@@ -430,14 +422,6 @@
     "annee": "1854",
     "source": "https://fr.wikiquote.org/wiki/Jean-Louis_Guez_de_Balzac",
     "theme": "société"
-  },
-  {
-    "texte": "Le venin guerit en quelque rencontre, &, en ce cas-là, le venin n'est pas mauvais",
-    "auteur": "Guez de Balzac",
-    "oeuvre": "Aristippe, ou De la cour",
-    "annee": "1665",
-    "source": "https://fr.wikiquote.org/wiki/Jean-Louis_Guez_de_Balzac",
-    "theme": "sagesse"
   },
   {
     "texte": "(…) Mon enfant, dans ce monde, Lorsqu'on n'est pas aigle ou requin, Il faut doucement suivre un petit chemin, En nageant près de l'air et volant près de l'onde.",
@@ -576,6 +560,14 @@
     "theme": "voyage"
   },
   {
+    "texte": "Bonaparte ! […] Jamais nom de mortel n'eut des destins si beaux.",
+    "auteur": "Joseph Méry",
+    "oeuvre": "Les Nuits italiennes",
+    "annee": "1998",
+    "source": "https://fr.wikiquote.org/wiki/Joseph_Méry",
+    "theme": "histoire"
+  },
+  {
     "texte": "On ne saurait trop le répéter, ce ne sont point les hommes qui mènent la révolution, c'est la révolution qui emploie les hommes.",
     "auteur": "Joseph de Maistre",
     "oeuvre": "Considérations sur la France",
@@ -638,6 +630,14 @@
     "annee": "2003",
     "source": "https://fr.wikiquote.org/wiki/Jules_Barbey_d'Aurevilly",
     "theme": "société"
+  },
+  {
+    "texte": "Mahomet est une des trois ou quatre figures qui dominent l'humanité et son histoire.",
+    "auteur": "Barbey d'Aurevilly",
+    "oeuvre": "Les Œuvres et les hommes",
+    "annee": "1968",
+    "source": "https://fr.wikiquote.org/wiki/Jules_Barbey_d'Aurevilly",
+    "theme": "histoire"
   },
   {
     "texte": "Mon cœur est un lexique où cent littératures Se lardent sans répit de divines ratures.",
@@ -976,6 +976,14 @@
     "theme": "société"
   },
   {
+    "texte": "Le suffrage universel est stupide. Il n'a ni yeux, ni oreilles, ni odorat, ni même toucher. Il n'a qu'un ventre, que des appétits, que des besoins immédiats et sommaires.",
+    "auteur": "Léon Daudet",
+    "oeuvre": "Souvenirs politiques",
+    "annee": "1974",
+    "source": "https://fr.wikiquote.org/wiki/Léon_Daudet",
+    "theme": "humour"
+  },
+  {
     "texte": "À votre âge on va au bal et non au pôle. — L’un n’empêche pas l’autre ; si je reviens, j’aurai tout le temps d’aller au bal. — Et si vous ne revenez pas ? — Vous aurez le plaisir de dire : Je le lui ai bien prédit.",
     "auteur": "Léonie d'Aunet",
     "oeuvre": "Voyage d’une femme au Spitzberg",
@@ -1134,14 +1142,6 @@
     "annee": "1642",
     "source": "https://fr.wikiquote.org/wiki/Marc-Antoine_Girard_de_Saint-Amant",
     "theme": "humour"
-  },
-  {
-    "texte": "Mon cher Boisrobert, que je prise Plus que ma houppelande grise, Quand l'hiver avec ses glaçons Sans fièvre donne des frissons, Je viens d'arriver tout à l'heure De la ville où Philis demeure.",
-    "auteur": "Saint-Amant",
-    "oeuvre": "Les œuvres du sieur de Saint-Amant",
-    "annee": "1642",
-    "source": "https://fr.wikiquote.org/wiki/Marc-Antoine_Girard_de_Saint-Amant",
-    "theme": "amitié"
   },
   {
     "texte": "Ah je m'aperçois bien que malgré ma raison Qui voulait que mes vers gardassent la maison, Sans se prostituer aux yeux du populaire, Il faudra qu'à la fin je me force à lui plaire.",
