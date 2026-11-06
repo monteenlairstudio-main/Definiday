@@ -190,4 +190,38 @@ class UiTest {
         assertEquals(listOf(R.drawable.saison_flocon, R.drawable.saison_flocon, R.drawable.saison_fleur, R.drawable.saison_feuille, 0),
             listOf(12, 2, 4, 11, 7).map(MainActivity::season))
     }
+
+    /** Couleurs et polices: a tap removes or keeps a tile at once, the last one stays kept, Toutes = null, the pool survives recreation. */
+    @Test fun stylesTilesToggleThePool() {
+        val p = Prefs(ctx).apply { palettes = null; polices = null }
+        val settings = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        settings.findViewById<Button>(R.id.styles_open).performClick()
+        assertEquals(StylesActivity::class.java.name, shadowOf(settings).nextStartedActivity.component!!.className)
+        val cat = Styles.load(ctx)
+        val ctrl = Robolectric.buildActivity(StylesActivity::class.java).setup()
+        fun tile(nom: String) = views(ctrl.get()).filterIsInstance<android.widget.CheckBox>().first { it.contentDescription.startsWith("$nom,") }
+        assertEquals(cat.palettes.size + cat.polices.size, views(ctrl.get()).count { it is android.widget.CheckBox })
+        assertEquals("Braise, palette sombre", tile("Braise").contentDescription)
+        tile("Braise").performClick()
+        assertEquals(cat.palettes.map { it.id }.toSet() - "braise", p.palettes)
+        assertTrue(!tile("Braise").isChecked)
+        tile("Braise").performClick()
+        assertEquals(null, p.palettes) // all kept again: stored as null
+        ctrl.get().findViewById<Button>(R.id.palettes_none).performClick()
+        val own = (Words.today(ctx).filterIsInstance<Word>().firstOrNull() ?: Words.load(ctx).first()).palette
+            .takeIf { id -> cat.palettes.any { it.id == id } } ?: cat.palettes.first().id
+        assertEquals(setOf(own), p.palettes) // « Aucune » keeps the word's own palette
+        val last = cat.palettes.first { it.id == own }.nom
+        tile(last).performClick()
+        assertEquals(setOf(own), p.palettes) // the last one cannot be removed
+        assertTrue(tile(last).isChecked)
+        assertEquals(ctx.getString(R.string.pool_min, last), org.robolectric.shadows.ShadowToast.getTextOfLatestToast())
+        tile("Cinzel").performClick()
+        ctrl.recreate() // rotation: read back from Prefs
+        assertTrue(!tile("Cinzel").isChecked && tile(last).isChecked && tile("Braise").isChecked == (own == "braise"))
+        assertEquals(ctx.resources.getQuantityString(R.plurals.pool_count, 1, 1, cat.palettes.size), ctrl.get().findViewById<TextView>(R.id.palettes_count).text)
+        ctrl.get().findViewById<Button>(R.id.polices_all).performClick()
+        assertEquals(null, p.polices)
+        p.palettes = null
+    }
 }

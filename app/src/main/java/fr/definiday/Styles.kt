@@ -3,20 +3,22 @@ package fr.definiday
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import org.json.JSONObject
 
 data class Palette(
     val id: String, val nom: String,
-    val haut: Int, val bas: Int, val mot: Int, val nature: Int, val texte: Int, val exemple: Int,
+    val haut: Int, val bas: Int, val mot: Int, val nature: Int, val texte: Int, val exemple: Int, val sombre: Boolean = false,
 )
 
 data class Police(val id: String, val nom: String, val fichier: String)
 
-data class Style(val palette: Palette, val typeface: Typeface)
+/** [police]: the font picked, null = serif fallback (only decorative faces kept for a long word or a quote). */
+data class Style(val palette: Palette, val typeface: Typeface, val police: Police? = null)
 
 /** Catalog in assets/styles.json; each word suggests a palette and a font, used only if the user kept them in the pool. */
 object Styles {
-    private val DISPLAY_ONLY = setOf("unifraktur_maguntia", "uncial_antiqua", "dancing_script", "parisienne", "cinzel", "abril_fatface")
+    val DISPLAY_ONLY = setOf("unifraktur_maguntia", "uncial_antiqua", "dancing_script", "parisienne", "cinzel", "abril_fatface")
 
     class Catalog(val palettes: List<Palette>, val polices: List<Police>)
 
@@ -26,7 +28,7 @@ object Styles {
         val f = o.getJSONArray("polices")
         fun c(j: JSONObject, k: String) = Color.parseColor(j.getString(k))
         return Catalog(
-            List(p.length()) { p.getJSONObject(it).run { Palette(getString("id"), getString("nom"), c(this, "fond_haut"), c(this, "fond_bas"), c(this, "mot"), c(this, "nature"), c(this, "texte"), c(this, "exemple")) } },
+            List(p.length()) { p.getJSONObject(it).run { Palette(getString("id"), getString("nom"), c(this, "fond_haut"), c(this, "fond_bas"), c(this, "mot"), c(this, "nature"), c(this, "texte"), c(this, "exemple"), optBoolean("sombre")) } },
             List(f.length()) { f.getJSONObject(it).run { Police(getString("id"), getString("nom"), getString("fichier")) } },
         )
     }
@@ -42,6 +44,9 @@ object Styles {
 
     fun load(ctx: Context): Catalog = parse(ctx.assets.open("styles.json").bufferedReader().use { it.readText() })
 
+    /** The catalog entries in the user's pool (null = all; none left, e.g. restored junk ids = all). */
+    fun <T> kept(all: List<T>, ids: Set<String>?, id: (T) -> String) = all.filter { ids?.contains(id(it)) ?: true }.ifEmpty { all }
+
     /** The word's own choice if it is in the pool, else a stable pick from the pool (same word, same fallback). */
     fun <T> pick(suggested: String, pool: List<T>, id: (T) -> String, mot: String): T =
         pool.firstOrNull { id(it) == suggested } ?: pool[Math.floorMod(mot.hashCode(), pool.size)]
@@ -51,12 +56,20 @@ object Styles {
         val (pal, pol) = if (item is Word) item.palette to item.police else "" to ""
         val cat = load(ctx)
         val p = Prefs(ctx)
-        val palettes = cat.palettes.filter { p.palettes?.contains(it.id) ?: true }.ifEmpty { cat.palettes }
-        val polices = cat.polices.filter { p.polices?.contains(it.id) ?: true }.ifEmpty { cat.polices }
+        val palettes = kept(cat.palettes, p.palettes, Palette::id)
+        val polices = kept(cat.polices, p.polices, Police::id)
             // a whole sentence or a long word in fraktur or script is unreadable: those only take text faces
             .let { if (item is Quote || item is Word && item.mot.length > 8) it.filter { f -> f.id !in DISPLAY_ONLY } else it }
-        val font = polices.takeIf { it.isNotEmpty() }?.let { pick(pol, it, Police::id, item.key) }
-            ?.let { ctx.resources.getIdentifier(it.fichier, "font", ctx.packageName) } ?: 0
-        return Style(pick(pal, palettes, Palette::id, item.key), if (font == 0) Typeface.SERIF else ctx.resources.getFont(font))
+        val police = polices.takeIf { it.isNotEmpty() }?.let { pick(pol, it, Police::id, item.key) }
+        return Style(pick(pal, palettes, Palette::id, item.key), police?.let { face(ctx, it) } ?: Typeface.SERIF, police)
+    }
+
+    fun face(ctx: Context, p: Police): Typeface? = ctx.resources.getIdentifier(p.fichier, "font", ctx.packageName).takeIf { it != 0 }?.let(ctx.resources::getFont)
+
+    /** A card in the palette's gradient, rounded [radiusDp]; a 1 dp edge when it melts into the page (needsEdge). */
+    fun card(ctx: Context, p: Palette, radiusDp: Float) = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(p.haut, p.bas)).apply {
+        val d = ctx.resources.displayMetrics.density
+        cornerRadius = radiusDp * d
+        if (needsEdge(p, ctx.getColor(R.color.bg))) setStroke(d.toInt().coerceAtLeast(1), ctx.getColor(R.color.card_edge))
     }
 }

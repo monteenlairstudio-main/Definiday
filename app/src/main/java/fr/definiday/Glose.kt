@@ -7,6 +7,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.view.ContextThemeWrapper
 import android.widget.ImageView
 import fr.definiday.Unlocks.Kind
@@ -18,12 +19,18 @@ object Glose {
     /** Worn on the head or beside it: cropped from the head icons. */
     private val WORN = setOf(Kind.TETE, Kind.COU, Kind.OBJET)
 
-    /** [res] themed with style Glose then each overlay of [styles] (pelage, pelote, accessoire). */
+    /** [res] themed with style Glose then each overlay of [styles] (pelage, pelote, accessoire). A layered pose (GloseLayers) is a
+     *  LayerDrawable of its body parts and of the accessory pieces whose gate one of [styles] opens, in drawing order. */
     fun drawable(ctx: Context, res: Int, styles: List<Int> = emptyList()): Drawable {
         val t = ContextThemeWrapper(ctx, R.style.Glose)
         styles.forEach { t.theme.applyStyle(it, true) }
-        return t.getDrawable(res)!!
+        val layers = GloseLayers.layers[res] ?: return t.getDrawable(res)!!
+        val open = GloseLayers.gates.filter { it.first in styles }.map { it.second }
+        return LayerDrawable(layers.filter { it.first.isEmpty() || it.first in open }.map { t.getDrawable(it.second)!! }.toTypedArray())
     }
+
+    /** The animated layers of [d] (itself when it is one AVD). */
+    private fun avds(d: Drawable?) = (if (d is LayerDrawable) (0 until d.numberOfLayers).map(d::getDrawable) else listOf(d)).filterIsInstance<AnimatedVectorDrawable>()
 
     /** The user's choice (pose, pelage, pelote, one item or "" per accessory slot), each falling back to the default unless unlocked and of that slot.
      *  Prefs.gloseAcc holds the worn accessories, comma-separated (a single id before the slots existed). */
@@ -67,36 +74,75 @@ object Glose {
      *  stays the still image when animations are off (settings, battery saver): no reset() then, it would rewind the thread to before it
      *  writes and the "le fil écrit…" poses would lose their word. The pending stop lives in the view's tag. */
     fun play(v: ImageView) {
-        val d = v.drawable as? AnimatedVectorDrawable ?: return
+        val d = avds(v.drawable).ifEmpty { return }
         if (!ValueAnimator.areAnimatorsEnabled()) return
-        d.reset()
-        d.start()
+        d.forEach { it.reset(); it.start() } // all layers in the same frame: they share their timeline
         v.removeCallbacks(v.tag as? Runnable)
-        v.tag = Runnable { d.stop() }.also { v.postDelayed(it, IDLE_MS) }
+        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, IDLE_MS) }
     }
 
     /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once]. */
     fun stop(v: ImageView) {
         v.removeCallbacks(v.tag as? Runnable)
-        (v.drawable as? AnimatedVectorDrawable)?.run { clearAnimationCallbacks(); stop() }
+        avds(v.drawable).forEach { it.clearAnimationCallbacks(); it.stop() }
     }
 
     /** Plays the one-shot [res] (R.drawable.glose_icone_hoche: nods; glose_icone_penche: tilts the head, curious) on [v],
      *  then shows [idle] (e.g. R.drawable.glose_icone_vd) and [play]s it. Nothing when animations are off: the still stays.
-     *  [accessory] false for the head icons. A second call replaces the first; [stop] (onPause) cancels the return. */
-    fun once(v: ImageView, res: Int, idle: Int, accessory: Boolean = true) {
+     *  [accessory] false for the head icons; [dress] builds both drawables. A second call replaces the first; [stop] (onPause) cancels the return. */
+    fun once(v: ImageView, res: Int, idle: Int, accessory: Boolean = true, dress: (Int) -> Drawable = { mine(v.context, it, accessory) }) {
         if (!ValueAnimator.areAnimatorsEnabled()) return
         stop(v)
-        val d = mine(v.context, res, accessory) as AnimatedVectorDrawable
-        d.registerAnimationCallback(object : Animatable2.AnimationCallback() {
+        val d = dress(res)
+        val layers = avds(d)
+        var left = layers.size // back to idle once every animated layer has ended
+        layers.forEach { a -> a.registerAnimationCallback(object : Animatable2.AnimationCallback() {
             override fun onAnimationEnd(x: Drawable) {
-                d.clearAnimationCallbacks()
-                v.setImageDrawable(mine(v.context, idle, accessory))
+                a.clearAnimationCallbacks()
+                if (--left > 0) return
+                v.setImageDrawable(dress(idle))
                 play(v)
             }
-        })
+        }) }
         v.setImageDrawable(d)
-        d.start()
+        layers.forEach { it.start() }
+    }
+
+    /** Taps on Glose ([next], clock injected for tests): a tap within [QUIET_MS] of the last reaction, or [SPECIAL_QUIET_MS] of a special, is ignored
+     *  (no restart mid-gesture) and neither counts nor breaks the streak; [STREAK] accepted taps, each within [STREAK_MS] of the previous, make a special. */
+    class Taps(private val now: () -> Long = android.os.SystemClock::uptimeMillis) {
+        private var quiet = Long.MIN_VALUE
+        private var last = Long.MIN_VALUE / 2
+        private var streak = 0
+
+        /** Suffix of the reaction drawable to play ("_tap", "_special"), or null when ignored. */
+        fun next(): String? {
+            val t = now()
+            if (t < quiet) return null
+            streak = if (t - last <= STREAK_MS) streak + 1 else 1
+            last = t
+            if (streak < STREAK) { quiet = t + QUIET_MS; return "_tap" }
+            streak = 0; quiet = t + SPECIAL_QUIET_MS
+            return "_special"
+        }
+
+        companion object {
+            const val STREAK = 4
+            const val STREAK_MS = 1500L
+            const val QUIET_MS = 700L // glose_*_tap lasts 600 ms (design/mascotte/android/reactions.js)
+            const val SPECIAL_QUIET_MS = 3000L // glose_*_special lasts 1800 ms, then a calm
+        }
+    }
+
+    /** A tap on [v] showing [pose] (dressed by [dress]): light haptic, the pose's reaction glose_<pose>_tap / _special, then its idle life.
+     *  Haptic only when animations are off ([once] leaves the still). Nothing is announced: TalkBack focus stays where it is. */
+    fun tap(v: ImageView, taps: Taps, pose: Int, dress: (Int) -> Drawable = { mine(v.context, it) }) {
+        val suffix = taps.next() ?: return
+        v.performHapticFeedback(android.view.HapticFeedbackConstants.CONTEXT_CLICK)
+        Sounds.play(v.context, if (suffix == "_special") Sounds.PURR else Sounds.MRR) // silent unless « Sons » is on
+        val r = v.resources // by name: needs the resources kept (no shrinkResources); GloseTest checks that every pose has both
+        val res = r.getIdentifier(r.getResourceEntryName(pose) + suffix, "drawable", v.context.packageName)
+        if (res != 0) once(v, res, pose, dress = dress) else play(v)
     }
 
     /** Still image (notifications, tests): the drawable fitted and centred in a w x h bitmap. */

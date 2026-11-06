@@ -22,7 +22,8 @@ import java.io.File
 @Config(qualifiers = "fr-w411dp-h891dp-xxhdpi")
 class GloseTest {
     private val ctx = RuntimeEnvironment.getApplication()
-    private val all = R.drawable::class.java.fields.filter { it.name.startsWith("glose_") }.associate { it.name to it.getInt(null) }
+    private val parts = GloseLayers.layers.values.flatten().map { it.second }.toSet() - GloseLayers.layers.keys // layers alone are not drawings
+    private val all = R.drawable::class.java.fields.filter { it.name.startsWith("glose_") }.associate { it.name to it.getInt(null) }.filterValues { it !in parts }
     private val overlays = R.style::class.java.fields.filter { it.name.startsWith("Glose_") }.associate { it.name to it.getInt(null) }
 
     private fun render(res: Int, styles: List<Int> = emptyList(), size: Int = 256) = Glose.bitmap(Glose.drawable(ctx, res, styles), size, size)
@@ -192,14 +193,40 @@ class GloseTest {
         }
     }
 
+    /** Every pose has its tap and streak reactions (design/mascotte/android/reactions.js). On the home screen a tap plays the short one,
+     *  taps meanwhile are ignored, the 4th in a row plays the special, each then back to the idle life; animations off: the still stays. */
+    @Test fun tapsMakeGloseReact() {
+        (Unlocks.items.filter { it.kind.slot == Unlocks.Kind.POSE }.map { it.res } + R.drawable.glose_soir).forEach { pose ->
+            listOf("_tap", "_special").forEach { assertTrue(ctx.resources.getResourceEntryName(pose) + it in all) }
+        }
+        val v = Robolectric.buildActivity(MainActivity::class.java).setup().get().findViewById<ImageView>(R.id.glose)
+        val idle = { ms: Long -> org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(ms)) }
+        fun tap(): android.graphics.drawable.Drawable { v.performClick(); v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888))); return v.drawable }
+        val first = tap()
+        assertTrue(tap() === first) // ignored: no restart mid-reaction
+        idle(Glose.Taps.QUIET_MS)
+        assertFalse(v.drawable === first) // the 600 ms reaction is over: idle life again
+        repeat(2) { tap(); idle(Glose.Taps.QUIET_MS) }
+        val special = tap() // the 4th (Robolectric runs it to its end at the next idle, so its length is not checked here)
+        assertTrue(special is android.graphics.drawable.LayerDrawable && tap() === special) // a layered pose
+        idle(Glose.Taps.SPECIAL_QUIET_MS)
+        assertFalse(v.drawable === special)
+        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+        try {
+            scale.invoke(null, 0f)
+            val still = v.drawable
+            assertTrue(tap() === still)
+        } finally { scale.invoke(null, 1f) }
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)
-        val d = v.drawable as AnimatedVectorDrawable
+        val d = (v.drawable as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>()
         v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888))) // the AVD's animator really starts at its first draw
-        assertTrue(d.isRunning)
+        assertTrue(d.isNotEmpty() && d.all { it.isRunning })
         c.pause()
-        assertFalse(d.isRunning)
+        assertFalse(d.any { it.isRunning })
     }
 
     /** Not a check: control PNGs (every pose, every overlay on the seated pose) in app/build/demo/glose. */

@@ -108,7 +108,7 @@ function draw(paper) {
   const ground = fill(ell([540, 964], [440, 22]), INK, 0.14);
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, B2.group, bookSh, tree, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, scarfG, gHead, gCandle, zG, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, B2.group, bookSh, tree, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, gCandle, scarfG, gHead, zG, glint.group].filter(Boolean));
   return { anims, viewBox: [60, 110, 920, 920], title: awake ? 'Monsieur Glose réveillé dans sa tasse, le thé du matin' : 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
 }
 

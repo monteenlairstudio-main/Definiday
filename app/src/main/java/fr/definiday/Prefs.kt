@@ -68,6 +68,10 @@ class Prefs(val ctx: Context) {
     var moreQuotes: Boolean
         get() = bool("moreQuotes", false)
         set(v) = sp.edit().putBoolean("moreQuotes", v).apply()
+    /** Little sounds (Sounds), off by default: the app is often used in public. */
+    var sounds: Boolean
+        get() = bool("sounds", false)
+        set(v) = sp.edit().putBoolean("sounds", v).apply()
     var quizEnabled: Boolean
         get() = bool("quizEnabled", true)
         set(v) = sp.edit().putBoolean("quizEnabled", v).apply()

@@ -251,12 +251,18 @@ class DefinidayTest {
         renderInterface(File(out, "ui").apply { mkdirs() })
     }
 
-    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, quiz steps, Collection. */
+    /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, Couleurs et polices, quiz steps, Collection. */
     private fun renderInterface(ui: File) {
         val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
         fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
             android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
         fun quiz() = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
+        // Couleurs et polices with a few palettes and fonts removed, so both tile states show
+        fun styles(): android.app.Activity {
+            val cat = Styles.load(ctx)
+            p.palettes = cat.palettes.map { it.id }.filterIndexed { i, _ -> i % 3 != 1 }.toSet(); p.polices = cat.polices.map { it.id }.drop(2).toSet()
+            return Robolectric.buildActivity(StylesActivity::class.java).setup().get().also { p.palettes = null; p.polices = null }
+        }
         fun views(a: android.app.Activity) = generateSequence(listOf<View>(a.window.decorView)) { l -> l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null } }.flatten()
         fun answer(a: android.app.Activity, right: Boolean) {
             val defs = Words.load(ctx).associateBy { it.definition }
@@ -277,6 +283,7 @@ class DefinidayTest {
         RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
         capture(main(long), File(ui, "home_w360_font200_long.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_w360_font200.png"))
+        capture(styles(), File(ui, "styles_w360_font200.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
         RuntimeEnvironment.setFontScale(1.3f)
         capture(main(long), File(ui, "home_w360_font130_long.png"))
@@ -287,6 +294,7 @@ class DefinidayTest {
         capture(main(), File(ui, "home_notifications_off.png"))
         org.robolectric.Shadows.shadowOf(ctx.getSystemService(NotificationManager::class.java)).setNotificationsEnabled(true)
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_light.png"))
+        capture(styles(), File(ui, "styles_light.png"))
         capture(quiz(), File(ui, "quiz_question.png"))
         capture(quiz().also { answer(it, right = true) }, File(ui, "quiz_juste.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_faux.png"))
@@ -295,6 +303,7 @@ class DefinidayTest {
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_dark.png"))
+        capture(styles(), File(ui, "styles_dark.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_dark_faux.png"))
         p.lastQuizDay = Long.MIN_VALUE
         capture(quizEnd(right = 3), File(ui, "quiz_dark_fin.png"))
