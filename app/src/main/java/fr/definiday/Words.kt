@@ -11,9 +11,9 @@ data class Word(
 )
 
 object Words {
-    /** Days before a shown word (daily or random) may come back as a daily word (~9 months)... */
+    /** A daily word was not shown (daily or random) in the previous 9 months... */
     const val DAILY_COOLDOWN_DAYS = 270L
-    /** ...or as a random pick (~4 months). */
+    /** ...a random pick, in the previous 4 months when possible. */
     const val RANDOM_COOLDOWN_DAYS = 120L
 
     fun parse(json: String): List<Word> {
@@ -24,24 +24,21 @@ object Words {
         }
     }
 
-    /** history: mot -> epoch day it was last shown. */
-    private fun cooledDown(w: Word, history: Map<String, Long>, today: Long, days: Long) =
-        history[w.mot]?.let { today - it >= days } ?: true
+    /**
+     * Daily queue: never-shown words first (fixed shuffled order), then by oldest last-shown day (history: mot -> epoch day).
+     * Random picks never touch the first wordsPerDay x 270 entries, so each of them needs 270 days of daily
+     * consumption to reach the head: a daily word is always unseen for 9 months, however often "random" is used.
+     */
+    private fun queue(words: List<Word>, history: Map<String, Long>) =
+        words.shuffled(Random(SEED)).sortedBy { history[it.mot] ?: Long.MIN_VALUE }
 
-    private fun oldest(words: List<Word>, history: Map<String, Long>) = words.minBy { history[it.mot] ?: Long.MIN_VALUE }
+    fun nextDaily(words: List<Word>, history: Map<String, Long>): Word = queue(words, history).first()
 
-    /** Next daily word: never-shown words first (fixed shuffled order), then the longest-ago shown among those unseen for 9 months. */
-    fun nextDaily(words: List<Word>, history: Map<String, Long>, today: Long): Word {
-        val order = words.shuffled(Random(SEED))
-        return order.firstOrNull { it.mot !in history }
-            // ponytail: if random picks eat the pool (> ~1 random/day with 3 daily words), falls back to the oldest-shown word
-            ?: order.filter { cooledDown(it, history, today, DAILY_COOLDOWN_DAYS) }.takeIf { it.isNotEmpty() }?.let { oldest(it, history) }
-            ?: oldest(order, history)
+    /** Random word outside the daily reserve, unseen for 4 months; else the oldest-shown outside the reserve. */
+    fun nextRandom(words: List<Word>, history: Map<String, Long>, today: Long, wordsPerDay: Int, rnd: Random = Random.Default): Word {
+        val pool = queue(words, history).drop((wordsPerDay * DAILY_COOLDOWN_DAYS).toInt()).ifEmpty { words }
+        return pool.filter { w -> history[w.mot]?.let { today - it >= RANDOM_COOLDOWN_DAYS } ?: true }.randomOrNull(rnd) ?: pool.first()
     }
-
-    /** Random word among never-shown and cooled-down words. */
-    fun nextRandom(words: List<Word>, history: Map<String, Long>, today: Long, rnd: Random = Random.Default): Word =
-        words.filter { cooledDown(it, history, today, RANDOM_COOLDOWN_DAYS) }.randomOrNull(rnd) ?: oldest(words, history)
 
     /** Today's 1–3 words, picked once per day and remembered (stable across app, notifications and wallpaper). */
     fun today(ctx: Context): List<Word> {
@@ -51,7 +48,7 @@ object Words {
         val all = load(ctx)
         val byMot = all.associateBy { it.mot }
         val picked = (if (p.dailyDay == day) p.dailyMots.mapNotNull(byMot::get) else emptyList()).toMutableList()
-        while (picked.size < p.wordsPerDay) picked += nextDaily(all, h.all(), day).also { h.mark(it.mot, day) }
+        while (picked.size < p.wordsPerDay) picked += nextDaily(all, h.all()).also { h.mark(it.mot, day) }
         p.dailyDay = day
         p.dailyMots = picked.map { it.mot }
         return picked.take(p.wordsPerDay)
@@ -60,7 +57,7 @@ object Words {
     fun random(ctx: Context): Word {
         val day = LocalDate.now().toEpochDay()
         val h = History(ctx)
-        return nextRandom(load(ctx), h.all(), day).also { h.mark(it.mot, day) }
+        return nextRandom(load(ctx), h.all(), day, Prefs(ctx).wordsPerDay).also { h.mark(it.mot, day) }
     }
 
     /** Every word shown today (daily ones first, then random picks). */

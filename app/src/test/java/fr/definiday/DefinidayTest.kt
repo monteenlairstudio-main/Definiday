@@ -33,23 +33,29 @@ class DefinidayTest {
         }
     }
 
-    /** 3 years of 3 daily words + 1 random a day: a daily word is never seen in the previous 9 months, a random one in the previous 4. */
-    @Test fun historyKeepsWordsAwayForFourMonths() {
+    /** Simulates 3 years of daily + random picks and asserts the cooldowns. */
+    private fun simulate(perDay: Int, randomPerDay: Int, checkRandom: Boolean) {
         val words = Words.load(ctx)
         val history = mutableMapOf<String, Long>()
         val rnd = kotlin.random.Random(1)
         for (day in 0L until 3 * 365) {
-            repeat(3) { Words.nextDaily(words, history, day).let { w ->
+            repeat(perDay) { Words.nextDaily(words, history).let { w ->
                 history[w.mot]?.let { assertTrue("daily ${w.mot} back after ${day - it} days", day - it >= Words.DAILY_COOLDOWN_DAYS) }
                 if (history.size < words.size) assertTrue("${w.mot} repeated while unseen words remain", w.mot !in history)
                 history[w.mot] = day
             } }
-            repeat(1) { Words.nextRandom(words, history, day, rnd).let { w ->
-                history[w.mot]?.let { assertTrue("random ${w.mot} back after ${day - it} days", day - it >= Words.RANDOM_COOLDOWN_DAYS) }
+            repeat(randomPerDay) { Words.nextRandom(words, history, day, perDay, rnd).let { w ->
+                if (checkRandom) history[w.mot]?.let { assertTrue("random ${w.mot} back after ${day - it} days", day - it >= Words.RANDOM_COOLDOWN_DAYS) }
                 history[w.mot] = day
             } }
         }
     }
+
+    /** 9 months for daily words holds even with 3 daily words and heavy random use. */
+    @Test fun dailyWordsStayAwayNineMonths() = simulate(perDay = 3, randomPerDay = 3, checkRandom = false)
+
+    /** With 1 daily word, random picks also keep their 4 months (with 3 daily words that is best effort only). */
+    @Test fun randomWordsStayAwayFourMonths() = simulate(perDay = 1, randomPerDay = 2, checkRandom = true)
 
     @Test fun dailyWordsAreStableAndMarkedSeen() {
         val p = Prefs(ctx).apply { wordsPerDay = 2 }
