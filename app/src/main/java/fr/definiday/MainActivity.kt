@@ -54,9 +54,15 @@ class MainActivity : Activity() {
         spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
             if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this); showSeen() }
         }
-        findViewById<Switch>(R.id.wallpaper).apply {
-            isChecked = p.wallpaper
-            setOnCheckedChangeListener { _, on -> p.wallpaper = on }
+        val unlocks = listOf(R.id.unlocks_label, R.id.unlocks).map { findViewById<View>(it) }
+        fun showUnlocks() = unlocks.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
+        // order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK
+        spinner(R.id.mode, listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), p.mode) {
+            p.mode = it; showUnlocks()
+        }
+        showUnlocks()
+        spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
+            p.unlocks = it
         }
         findViewById<Button>(R.id.test).setOnClickListener {
             DailyReceiver.show(this)

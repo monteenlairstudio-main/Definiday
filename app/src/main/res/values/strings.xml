@@ -9,8 +9,11 @@
     <string name="enabled">Afficher un mot chaque jour</string>
     <string name="time">Heure d’affichage : %1$02d:%2$02d</string>
     <string name="duration">Durée d’affichage sur l’écran de verrouillage</string>
-    <string name="wallpaper">Aussi en fond d’écran de verrouillage</string>
-    <string name="wallpaper_hint">Le mot remplace le fond de l’écran de verrouillage pendant la durée choisie. Ensuite, l’écran de verrouillage reprend le fond d’écran d’accueil.</string>
+    <string name="mode">Affichage</string>
+    <string name="unlocks">Fin sur l’écran de verrouillage</string>
+    <string name="wallpaper_hint">« Écran de verrouillage » : le premier mot du jour remplace le fond de l’écran de verrouillage. À la fin, l’écran de verrouillage reprend le fond d’écran d’accueil. Le retrait au déverrouillage affiche une notification discrète de suivi, et la durée choisie reste un maximum.</string>
+    <string name="watch_channel">Suivi des déverrouillages</string>
+    <string name="watch_text">Le mot quittera l’écran de verrouillage au déverrouillage n° %1$d.</string>
     <string name="test">Afficher maintenant</string>
     <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
     <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>

@@ -89,7 +89,7 @@ class DefinidayTest {
     }
 
     @Test fun wallpaperIsRemovedOnlyWhenDueAndStillOurs() {
-        val p = Prefs(ctx).apply { wallpaper = true; durationMinutes = 15 }
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_BOTH; durationMinutes = 15 }
         DailyReceiver.show(ctx)
         assertTrue(p.wallpaperEndAt > System.currentTimeMillis())
         val end = android.content.Intent(ctx, DailyReceiver::class.java).setAction(DailyReceiver.ACTION_END)
@@ -98,6 +98,24 @@ class DefinidayTest {
         p.wallpaperEndAt = 1 // now due
         DailyReceiver().onReceive(ctx, end)
         assertEquals(0L, p.wallpaperEndAt)
+    }
+
+    @Test fun lockOnlyModePostsNoNotificationAndLeavesAtSecondUnlock() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_LOCK; unlocks = 2; durationMinutes = 60 }
+        DailyReceiver.show(ctx)
+        assertEquals(0, ctx.getSystemService(NotificationManager::class.java).activeNotifications.size)
+        assertTrue(p.wallpaperEndAt != 0L)
+        assertEquals(false, UnlockService.countUnlock(ctx)) // 1st unlock: still there
+        assertTrue(p.wallpaperEndAt != 0L)
+        assertEquals(true, UnlockService.countUnlock(ctx)) // 2nd unlock: removed before the hour is up
+        assertEquals(0L, p.wallpaperEndAt)
+    }
+
+    @Test fun notifOnlyModeLeavesTheWallpaperAlone() {
+        val p = Prefs(ctx).apply { mode = Prefs.MODE_NOTIF }
+        DailyReceiver.show(ctx)
+        assertEquals(0L, p.wallpaperEndAt)
+        assertEquals(1, ctx.getSystemService(NotificationManager::class.java).activeNotifications.size)
     }
 
     /** Not a check: writes the demo PNGs (lock-screen card + main screen) to app/build/demo. */

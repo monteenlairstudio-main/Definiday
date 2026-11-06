@@ -159,10 +159,26 @@
             android:layout_width="match_parent"
             android:layout_height="48dp" />
 
-        <Switch
-            android:id="@+id/wallpaper"
+        <TextView
             style="@style/Row"
-            android:text="@string/wallpaper" />
+            android:layout_marginBottom="0dp"
+            android:text="@string/mode" />
+
+        <Spinner
+            android:id="@+id/mode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/unlocks_label"
+            style="@style/Row"
+            android:layout_marginBottom="0dp"
+            android:text="@string/unlocks" />
+
+        <Spinner
+            android:id="@+id/unlocks"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
 
         <TextView
             android:layout_width="match_parent"

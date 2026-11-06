@@ -21,7 +21,10 @@ class DailyReceiver : BroadcastReceiver() {
             else -> { // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED: re-anchor alarms
                 scheduleNext(ctx)
                 val end = Prefs(ctx).wallpaperEndAt
-                if (end != 0L) { if (end <= System.currentTimeMillis()) clearWallpaper(ctx) else scheduleEnd(ctx, end) }
+                if (end != 0L) {
+                    if (end <= System.currentTimeMillis()) clearWallpaper(ctx)
+                    else { scheduleEnd(ctx, end); if (Prefs(ctx).unlocks > 0) UnlockService.start(ctx) }
+                }
             }
         }
     }
@@ -63,29 +66,33 @@ class DailyReceiver : BroadcastReceiver() {
             val p = Prefs(ctx)
             val words = Words.today(ctx)
             val durationMs = p.durationMinutes * 60_000L
-            words.forEachIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }
+            if (p.mode != Prefs.MODE_LOCK) words.forEachIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }
             val w = words.first() // ponytail: wallpaper shows only the first daily word; stack them if 2-3 words should fit
-            if (p.wallpaper) {
+            if (p.mode != Prefs.MODE_NOTIF) {
                 val m = ctx.resources.displayMetrics // portrait size whatever the current orientation
                 val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
                 runCatching {
                     p.wallpaperId = WallpaperManager.getInstance(ctx).setBitmap(
                         WordCard.render(w, width, height), null, true, WallpaperManager.FLAG_LOCK,
                     )
-                    p.wallpaperEndAt = System.currentTimeMillis() + durationMs
+                    p.wallpaperEndAt = System.currentTimeMillis() + durationMs // duration stays the upper bound
+                    p.unlocksSeen = 0
                     scheduleEnd(ctx, p.wallpaperEndAt)
+                    if (p.unlocks > 0) UnlockService.start(ctx)
                 }
             }
         }
 
-        private fun clearWallpaper(ctx: Context) {
+        /** force = Nth unlock reached (before the duration ran out). */
+        fun clearWallpaper(ctx: Context, force: Boolean = false) {
             val p = Prefs(ctx)
-            if (p.wallpaperEndAt == 0L || p.wallpaperEndAt > System.currentTimeMillis()) return // stale END after a newer SHOW
+            if (p.wallpaperEndAt == 0L || (!force && p.wallpaperEndAt > System.currentTimeMillis())) return // stale END after a newer SHOW
             val wm = WallpaperManager.getInstance(ctx)
             // Only remove it if it is still ours (user may have picked a new one, or prefs were restored on another phone).
             // Lock screen then falls back to the home wallpaper (the previous lock image can't be read without storage permission).
             if (wm.getWallpaperId(WallpaperManager.FLAG_LOCK) == p.wallpaperId) runCatching { wm.clear(WallpaperManager.FLAG_LOCK) }
             p.wallpaperEndAt = 0
+            ctx.stopService(Intent(ctx, UnlockService::class.java))
         }
 
         private fun notify(ctx: Context, w: Word, durationMs: Long, id: Int) {
