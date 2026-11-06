@@ -28,6 +28,9 @@ class DefinidayTest {
         assertTrue("need 3 years without repeat, got ${words.size}", words.size >= 3 * 365)
         assertEquals(words.size, words.map { it.mot.lowercase() }.toSet().size)
         words.forEach { assertTrue(it.mot, it.nature.isNotBlank() && it.nature != "n." && it.definition.length in 1..200 && it.exemple.length <= 120) }
+        words.filter { it.anecdote.isNotEmpty() }.forEach {
+            assertTrue(it.mot, it.anecdote.length <= 280 && Regex("https://fr\\.(wiktionary|wikipedia)\\.org/.+").matches(it.source))
+        }
         assertEquals(words.toSet(), (0L until words.size).map { Words.forDay(words, 20_000 + it) }.toSet())
     }
 

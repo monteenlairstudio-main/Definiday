@@ -4797,7 +4797,7 @@
  {
   "mot": "landier",
   "nature": "n. m.",
-  "definition": "Grand chenet de fer dont on se servait autrefois dans les cuisines.",
+  "definition": "Haut chenet de fer des cheminées de cuisine, souvent garni de crochets pour soutenir les broches.",
   "exemple": "Les broches reposaient sur les landiers de fer devant l’âtre.",
   "academie": true
  },
@@ -5008,7 +5008,7 @@
   "mot": "lorette",
   "nature": "n. f.",
   "definition": "Au XIXe siècle, jeune femme élégante et légère, vivant aux dépens de ses amants.",
-  "exemple": "Le jeune clerc avait dilapidé son héritage pour une lorette du quartier Notre-Dame.",
+  "exemple": "Le jeune clerc avait dilapidé son héritage pour une lorette aux toilettes tapageuses.",
   "academie": false
  },
  {
@@ -5559,8 +5559,8 @@
  },
  {
   "mot": "nacarat",
-  "nature": "n. m.",
-  "definition": "Couleur d’un rouge clair, entre cerise et rose, aux reflets nacrés.",
+  "nature": "n. m. et adj. inv.",
+  "definition": "Rouge clair et vif tirant sur le rose, à l’éclat légèrement nacré ; s’emploie aussi comme adjectif invariable.",
   "exemple": "Le nacarat de sa robe tranchait sur le gris du salon.",
   "academie": false
  },
@@ -6546,7 +6546,7 @@
  },
  {
   "mot": "pouacre",
-  "nature": "adj. et n.",
+  "nature": "adj. et n. m.",
   "definition": "Sale, malpropre et repoussant ; se dit aussi d’une personne ainsi faite.",
   "exemple": "Ce pouacre n’avait pas changé de chemise depuis la Saint-Jean.",
   "academie": true
@@ -7022,8 +7022,8 @@
  },
  {
   "mot": "rencogner",
-  "nature": "v. pron.",
-  "definition": "Se retirer dans un coin pour s’y blottir ; s’enfermer chez soi.",
+  "nature": "v. tr. et pron.",
+  "definition": "Pousser, acculer quelqu’un dans un coin ; se rencogner : se blottir dans un coin, ou se tenir reclus chez soi.",
   "exemple": "Timide, il se rencognait près du poêle dès que les invités arrivaient.",
   "academie": true
  },
@@ -7114,7 +7114,7 @@
  {
   "mot": "ribleur",
   "nature": "n. m.",
-  "definition": "Vieilli. Filou qui court les rues la nuit.",
+  "definition": "Vieilli. Rôdeur nocturne qui vivait de larcins et de mauvais coups dans les rues.",
   "exemple": "Les ribleurs guettaient les bourgeois attardés au sortir des tavernes.",
   "academie": false
  },
@@ -7478,7 +7478,7 @@
  {
   "mot": "soliveau",
   "nature": "n. m.",
-  "definition": "Au figuré, personne sans énergie ni autorité, par allusion à une fable de La Fontaine.",
+  "definition": "Au figuré, chef inerte et dépourvu d’autorité, comme le roi de bois que reçoivent les grenouilles dans une fable de La Fontaine.",
   "exemple": "Le conseil voulait un soliveau à sa tête, pour gouverner à sa place.",
   "academie": true
  },
@@ -7583,7 +7583,7 @@
  {
   "mot": "stillicide",
   "nature": "n. m.",
-  "definition": "Eau qui tombe goutte à goutte.",
+  "definition": "Écoulement d’une eau qui tombe goutte après goutte, d’un toit, d’une voûte ou d’une paroi rocheuse.",
   "exemple": "Dans la grotte, seul le stillicide troublait le silence.",
   "academie": false
  },
@@ -7631,8 +7631,8 @@
  },
  {
   "mot": "suivez-moi-jeune-homme",
-  "nature": "n. m.",
-  "definition": "Désuet. Ruban qui pendait à l’arrière d’un chapeau ou d’une robe de femme.",
+  "nature": "n. m. inv.",
+  "definition": "Désuet et plaisant. Ruban flottant à l’arrière d’un chapeau ou d’une robe de femme, qui semblait inviter à la suivre.",
   "exemple": "Les suivez-moi-jeune-homme de son chapeau flottaient au vent.",
   "academie": false
  },
@@ -7730,7 +7730,7 @@
  {
   "mot": "tapabor",
   "nature": "n. m.",
-  "definition": "Désuet. Bonnet aux bords rabattables pour se protéger de la pluie et du vent.",
+  "definition": "Désuet. Bonnet à rebords qu’on abaissait sur la nuque et les oreilles pour se garder de la pluie et du vent.",
   "exemple": "Le vieux marin enfonça son tapabor jusqu’aux oreilles.",
   "academie": false
  },
@@ -7891,7 +7891,7 @@
  {
   "mot": "tracassin",
   "nature": "n. m.",
-  "definition": "Humeur inquiète et chagrine.",
+  "definition": "Familier. Disposition d’esprit inquiète et morose, qui pousse à se tourmenter sans cesse.",
   "exemple": "Un tracassin sourd l’empêchait de trouver le sommeil.",
   "academie": false
  },
@@ -7961,7 +7961,7 @@
  {
   "mot": "trousse-galant",
   "nature": "n. m.",
-  "definition": "Vieilli. Maladie foudroyante qui emporte en peu de temps, nom parfois donné au choléra.",
+  "definition": "Vieilli. Mal foudroyant qui emporte sa victime en très peu de temps ; surnom populaire donné notamment au choléra.",
   "exemple": "En une nuit, le trousse-galant avait emporté le meunier.",
   "academie": false
  },
@@ -8248,7 +8248,7 @@
  {
   "mot": "vespétro",
   "nature": "n. m.",
-  "definition": "Ancienne liqueur stomachique à base d’eau-de-vie, de sucre, d’angélique et de coriandre.",
+  "definition": "Ancienne liqueur digestive d’eau-de-vie sucrée, aromatisée surtout à l’angélique et à la coriandre.",
   "exemple": "Après le repas, l’oncle servit un petit verre de vespétro.",
   "academie": false
  },
@@ -8500,7 +8500,7 @@
  {
   "mot": "zythum",
   "nature": "n. m.",
-  "definition": "Boisson d’orge fermentée, proche de la bière, de l’Égypte antique.",
+  "definition": "Dans l’Égypte antique, sorte de bière obtenue en faisant fermenter de l’orge.",
   "exemple": "Les bâtisseurs des pyramides recevaient leur ration de zythum.",
   "academie": false
  }

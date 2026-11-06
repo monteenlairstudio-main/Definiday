@@ -5,14 +5,17 @@ import org.json.JSONArray
 import java.time.LocalDate
 import kotlin.random.Random
 
-data class Word(val mot: String, val nature: String, val definition: String, val exemple: String)
+data class Word(
+    val mot: String, val nature: String, val definition: String, val exemple: String,
+    val anecdote: String = "", val source: String = "",
+)
 
 object Words {
     fun parse(json: String): List<Word> {
         val a = JSONArray(json)
         return List(a.length()) {
             val o = a.getJSONObject(it)
-            Word(o.getString("mot"), o.getString("nature"), o.getString("definition"), o.optString("exemple"))
+            Word(o.getString("mot"), o.getString("nature"), o.getString("definition"), o.optString("exemple"), o.optString("anecdote"), o.optString("source"))
         }
     }
 

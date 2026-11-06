@@ -35,6 +35,11 @@ class MainActivity : Activity() {
         text(R.id.nature, w.nature)
         text(R.id.definition, w.definition)
         text(R.id.exemple, if (w.exemple.isEmpty()) "" else "«\u00a0${w.exemple}\u00a0»")
+        if (w.anecdote.isNotEmpty()) {
+            text(R.id.anecdote, w.anecdote)
+            findViewById<View>(R.id.anecdote_box).visibility = View.VISIBLE
+            findViewById<Button>(R.id.source).setOnClickListener { open(w.source) }
+        }
         findViewById<Button>(R.id.academie).setOnClickListener { openAcademie(w.mot) }
         findViewById<Button>(R.id.cnrtl).setOnClickListener { open(cnrtl(w.mot)) }
 

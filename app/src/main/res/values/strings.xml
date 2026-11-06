@@ -13,6 +13,8 @@
     <string name="wallpaper_hint">Le mot remplace le fond de l’écran de verrouillage pendant la durée choisie. Ensuite, l’écran de verrouillage reprend le fond d’écran d’accueil.</string>
     <string name="test">Afficher maintenant</string>
     <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
-    <string name="credits">Définitions rédigées pour Definiday et vérifiées avec le Wiktionnaire. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
+    <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
+    <string name="anecdote">LE SAVIEZ-VOUS ?</string>
+    <string name="source">Source</string>
 </resources>

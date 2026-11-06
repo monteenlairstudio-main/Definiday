@@ -96,7 +96,8 @@ class DailyReceiver : BroadcastReceiver() {
             val open = PendingIntent.getActivity(
                 ctx, 0, Intent(ctx, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE,
             )
-            val body = "${w.nature} · ${w.definition}" + if (w.exemple.isNotEmpty()) "\n«\u00a0${w.exemple}\u00a0»" else ""
+            val body = "${w.nature} · ${w.definition}" + (if (w.exemple.isNotEmpty()) "\n«\u00a0${w.exemple}\u00a0»" else "") +
+                (if (w.anecdote.isNotEmpty()) "\n\n${w.anecdote}" else "")
             val n = Notification.Builder(ctx, CHANNEL)
                 .setSmallIcon(R.drawable.ic_stat)
                 .setContentTitle(w.mot)
