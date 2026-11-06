@@ -44,8 +44,8 @@ object Styles {
         val p = Prefs(ctx)
         val palettes = cat.palettes.filter { p.palettes?.contains(it.id) ?: true }.ifEmpty { cat.palettes }
         val polices = cat.polices.filter { p.polices?.contains(it.id) ?: true }.ifEmpty { cat.polices }
-            // a whole sentence in fraktur or script is unreadable: quotes only take text faces
-            .let { if (item is Quote) it.filter { f -> f.id !in DISPLAY_ONLY } else it }
+            // a whole sentence or a long word in fraktur or script is unreadable: those only take text faces
+            .let { if (item is Quote || item is Word && item.mot.length > 8) it.filter { f -> f.id !in DISPLAY_ONLY } else it }
         val font = polices.takeIf { it.isNotEmpty() }?.let { pick(pol, it, Police::id, item.key) }
             ?.let { ctx.resources.getIdentifier(it.fichier, "font", ctx.packageName) } ?: 0
         return Style(pick(pal, palettes, Palette::id, item.key), if (font == 0) Typeface.SERIF else ctx.resources.getFont(font))
