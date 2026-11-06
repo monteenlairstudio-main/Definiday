@@ -54,6 +54,7 @@ class MainActivity : Activity() {
         }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
         findViewById<Button>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
+        findViewById<Button>(R.id.mots_open).setOnClickListener { startActivity(Intent(this, MotsActivity::class.java)) }
         findViewById<Button>(R.id.settings_open).setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         findViewById<View>(R.id.notif_banner).setOnClickListener {
             runCatching { startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, packageName)) }
@@ -153,6 +154,11 @@ class MainActivity : Activity() {
                 cnrtl.text = getText(R.string.cnrtl)
                 cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
             }
+        }
+        findViewById<android.widget.CheckBox>(R.id.favori).apply { // words only; set before listening: showing is not a tap
+            visibility = if (item is Word) View.VISIBLE else View.GONE
+            setOnCheckedChangeListener(null); isChecked = item.key in Memory(context).favourites
+            setOnCheckedChangeListener { _, on -> Memory(context).favourite(item.key, on) }
         }
         fit(findViewById(R.id.mot), if (item is Quote) 24f else 40f)
         showSeen()

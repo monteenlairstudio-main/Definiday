@@ -17,9 +17,11 @@ import android.widget.TextView
 import java.time.LocalDate
 import kotlin.random.Random
 
-/** Evening quiz: for each word seen today, its definition and 4 candidate words. */
+/** Evening quiz: for each word seen today, then up to 2 past words due for review, its definition (or its example with a blank) and 4 candidate words.
+ *  Review questions count in the score like the others: « passed » stays 2/3 of all the questions, and so do the counters the unlocks read. */
 class QuizActivity : Activity() {
     private lateinit var box: LinearLayout
+    private lateinit var shown: Map<String, Long> // History, words only
     /** Frozen when the quiz opens: finished after midnight it still counts for that day; the reminder opens its own day (the eve, after midnight). */
     private var day = 0L
     private var seed = 0
@@ -38,8 +40,14 @@ class QuizActivity : Activity() {
         seed = s?.getInt("seed") ?: Random.nextInt()
         val all = Words.load(this)
         val byMot = all.associateBy { it.mot }
-        val seen = s?.getStringArrayList("mots")?.mapNotNull(byMot::get) ?: Words.seenToday(this, day)
-        questions = Quiz.build(seen, all, Random(seed)) // same seed and words after a rotation: same options
+        shown = History(this).all().filterKeys(byMot::containsKey)
+        val saved = s?.getStringArrayList("mots")?.mapNotNull(byMot::get)
+        val reviews = s?.getInt("reviews") ?: 0
+        val seen = saved?.dropLast(reviews) ?: Words.seenToday(this, day)
+        // reviews join an evening that has words of its own (review is in the quiz only: the daily display keeps its 9 months)
+        val review = saved?.takeLast(reviews)
+            ?: if (seen.isEmpty()) emptyList() else Quiz.due(Memory(this).entries(), shown, day, seen.map { it.mot }.toSet()).mapNotNull(byMot::get)
+        questions = Quiz.build(seen, all, Random(seed), shown.keys, review) // same seed and words after a rotation: same options
         index = s?.getInt("index") ?: 0
         score = s?.getInt("score") ?: 0
         picked = s?.getInt("picked") ?: -1
@@ -58,7 +66,7 @@ class QuizActivity : Activity() {
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked); out.putBoolean("done", done)
-        out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot }))
+        out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot })); out.putInt("reviews", questions.count { it.review })
     }
 
     private fun text(s: String, size: Float, bold: Boolean = false) = TextView(this, null, 0, R.style.Body).apply {
@@ -87,8 +95,9 @@ class QuizActivity : Activity() {
         val q = questions[index]
         val counter = progress()
         box.addView(counter)
-        box.addView(text(getString(R.string.quiz_prompt), 15f))
-        box.addView(text(q.answer.definition, 20f))
+        if (q.review) box.addView(text(getString(R.string.quiz_review), 13f))
+        box.addView(text(getString(if (q.cloze != null) R.string.quiz_prompt_cloze else R.string.quiz_prompt), 15f))
+        box.addView(text(q.cloze ?: q.answer.definition, 20f).apply { q.cloze?.let { contentDescription = it.replace(Quiz.BLANK, getString(R.string.quiz_blank)) } })
         val buttons = q.options.map { button(it.mot) }
         // said on screen and read by TalkBack when it appears (announceForAccessibility is deprecated)
         val result = text("", 16f).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE; visibility = View.GONE; setPadding(0, paddingBottom, 0, paddingBottom) }
@@ -112,6 +121,8 @@ class QuizActivity : Activity() {
                 picked = i
                 val right = q.options[i] == q.answer
                 if (right) score++
+                // counted even in a quiz redone the same day: memory is not a reward
+                Memory(this).answered(q.answer.mot, right, day, shown[q.answer.mot] ?: day, q.review)
                 reveal()
                 react(b, right)
             }
@@ -226,14 +237,51 @@ class QuizActivity : Activity() {
 }
 
 object Quiz {
-    class Question(val answer: Word, val options: List<Word>)
+    /** [cloze]: the word's example with the word blanked, asked instead of its definition; [review]: a past word due on the ladder. */
+    class Question(val answer: Word, val options: List<Word>, val cloze: String? = null, val review: Boolean = false)
 
-    /** 3 distractors per word, same part of speech when possible, never one with the answer's definition (aruspice/haruspice). */
-    fun build(seen: List<Word>, all: List<Word>, rnd: Random = Random.Default): List<Question> = seen.map { w ->
-        val others = all.filter { it.mot != w.mot && it.definition != w.definition }
-        val same = others.filter { it.nature == w.nature }.shuffled(rnd)
-        val distractors = (same + others.shuffled(rnd)).distinct().take(3)
-        Question(w, (distractors + w).shuffled(rnd))
+    /** Review ladder: days after the start (first shown, or last miss) at which a word comes back in the quiz. */
+    val LADDER = longArrayOf(2, 7, 30, 90)
+    const val MAX_REVIEWS = 2
+    const val BLANK = "_____"
+
+    /**
+     * Tonight's [words], then the [review] ones. 3 distractors each: same part of speech first, and within it words already [seen]
+     * (but not tonight's answers, or every question would offer the same few words); never one with the answer's definition (aruspice/haruspice).
+     * One question in 3 asks for the blank of the word's example instead of its definition, when the example holds the word.
+     */
+    fun build(words: List<Word>, all: List<Word>, rnd: Random = Random.Default, seen: Set<String> = emptySet(), review: List<Word> = emptyList()): List<Question> {
+        val known = seen - (words + review).map { it.mot }.toSet()
+        return (words + review).mapIndexed { i, w ->
+            val (old, fresh) = all.filter { it.mot != w.mot && it.definition != w.definition }.shuffled(rnd).partition { it.mot in known }
+            val distractors = (old + fresh).sortedBy { it.nature != w.nature }.take(3) // stable: seen before unseen within each group
+            Question(w, (distractors + w).shuffled(rnd), cloze(w)?.takeIf { rnd.nextInt(3) == 0 }, review = i >= words.size)
+        }
+    }
+
+    /** [w]'s example with the word blanked, as written (« abaques », « s’acagnardait »): the headword, else its first letters
+     *  (all but the last 2: verbs in -er/-ir/-re, -eux/-euse); null when the example does not hold it (« bayer », « ouïr »). */
+    fun cloze(w: Word): String? {
+        val starts = listOfNotNull(w.mot, w.mot.dropLast(2).takeIf { w.mot.length >= 6 })
+        val m = starts.firstNotNullOfOrNull { Regex("(?<!\\p{L})" + Regex.escape(it) + "\\p{L}*", RegexOption.IGNORE_CASE).find(w.exemple) } ?: return null
+        return w.exemple.replaceRange(m.range, BLANK)
+    }
+
+    /** Day [e] is next due, null once learnt. */
+    fun dueDay(e: Memory.Entry) = LADDER.getOrNull(e.step)?.let { e.start + it }
+
+    /** Up to [max] words of [history] (mot -> day shown) due on [day], most overdue first, outside [exclude] (tonight's own words).
+     *  A word never answered yet starts on its History day: words seen before this version join the ladder too. */
+    fun due(entries: Map<String, Memory.Entry>, history: Map<String, Long>, day: Long, exclude: Set<String>, max: Int = MAX_REVIEWS): List<String> =
+        history.mapNotNull { (mot, shown) -> dueDay(entries[mot] ?: Memory.Entry(shown))?.takeIf { it <= day && mot !in exclude }?.let { mot to it } }
+            .sortedWith(compareBy({ it.second }, { it.first })).take(max).map { it.first }
+
+    /** After an answer on [day]: missed, the ladder starts again from [day] (J+2); right while due, it climbs to the first rung still ahead
+     *  (a long-overdue word does not come back every evening); right before it is due (tonight's word), nothing moves. */
+    fun after(e: Memory.Entry, right: Boolean, day: Long): Memory.Entry = when {
+        !right -> Memory.Entry(day, 0, e.misses + 1)
+        (dueDay(e) ?: Long.MAX_VALUE) > day -> e
+        else -> e.copy(step = LADDER.indexOfFirst { e.start + it > day }.takeIf { it >= 0 } ?: LADDER.size)
     }
 
     /** Unboxing: at most 3 stamps, the last (rarest, the one Glose wears) ones; the rest is only counted (« + N dans la collection »). */

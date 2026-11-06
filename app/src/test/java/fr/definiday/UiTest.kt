@@ -61,15 +61,14 @@ class UiTest {
     @Test fun quizMarksAnswersInText() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
-        val answer = views(a).filterIsInstance<TextView>().firstNotNullOf { defs[it.text.toString()] }
-        val wrong = buttons(a).first { b -> b.text != answer.mot }
+        val answer = quizAnswer(a)
+        val wrong = buttons(a).first { b -> b.text != answer }
         val wrongMot = wrong.text.toString()
         wrong.performClick()
         assertEquals("✗ $wrongMot", wrong.text.toString())
-        assertTrue(buttons(a).any { it.text == "✓ ${answer.mot}" })
+        assertTrue(buttons(a).any { it.text == "✓ $answer" })
         assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
-            it.text == ctx.getString(R.string.quiz_wrong, answer.mot) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
+            it.text == ctx.getString(R.string.quiz_wrong, answer) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
     }
 
@@ -172,10 +171,9 @@ class UiTest {
         // first quiz, all right: 4 items at once (3 poses and the bow tie) -> 3 stamps and "+ 1 dans la collection"
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        val defs = Words.load(ctx).associateBy { it.definition }
         repeat(Words.seenToday(ctx).size) {
-            val w = views(a).filterIsInstance<TextView>().firstNotNullOf { defs[it.text.toString()] }
-            buttons(a).first { it.text == w.mot }.performClick()
+            val mot = quizAnswer(a)
+            buttons(a).first { it.text == mot }.performClick()
             buttons(a).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
         }
         val texts = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()

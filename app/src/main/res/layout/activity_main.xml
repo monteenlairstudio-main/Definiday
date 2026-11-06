@@ -124,6 +124,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/cnrtl" />
+
+            <!-- favourite star (words only), see Memory.favourites -->
+            <CheckBox
+                android:id="@+id/favori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@drawable/favori"
+                android:contentDescription="@string/favori" />
         </LinearLayout>
 
         <LinearLayout
@@ -173,6 +182,11 @@
             android:id="@+id/collection_open"
             style="@style/Row"
             android:text="@string/collection_open" />
+
+        <Button
+            android:id="@+id/mots_open"
+            style="@style/Row"
+            android:text="@string/mots_open" />
 
         <TextView
             style="@style/Label"

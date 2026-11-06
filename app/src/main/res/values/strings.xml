@@ -113,4 +113,46 @@
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
+    <!-- Quiz du soir : révisions et phrases à trous -->
+    <string name="quiz_review">Un mot déjà croisé, pour la mémoire</string>
+    <string name="quiz_prompt_cloze">Quel mot complète cette phrase ?</string>
+    <string name="quiz_blank">(mot manquant)</string>
+    <!-- Mes mots (MotsActivity) -->
+    <string name="mots_open">Mes mots</string>
+    <string name="mots_title">Mes mots</string>
+    <string name="mots_search">Chercher un mot ou un sens</string>
+    <string name="mots_favourites">Favoris seulement</string>
+    <string name="favori">Favori</string>
+    <string name="mots_none">Vos mots viendront se ranger ici, au fil des jours.</string>
+    <string name="mots_none_found">Aucun mot ne correspond à cette recherche.</string>
+    <string name="mots_none_favourites">Pas encore de favori : touchez l’étoile d’un mot pour le retrouver ici.</string>
+    <string name="stat_tile">%1$s %2$s</string>
+    <plurals name="stat_seen">
+        <item quantity="one">mot découvert</item>
+        <item quantity="many">mots découverts</item>
+        <item quantity="other">mots découverts</item>
+    </plurals>
+    <plurals name="stat_favourites">
+        <item quantity="one">favori</item>
+        <item quantity="many">favoris</item>
+        <item quantity="other">favoris</item>
+    </plurals>
+    <plurals name="stat_quizzes">
+        <item quantity="one">quiz fait</item>
+        <item quantity="many">quiz faits</item>
+        <item quantity="other">quiz faits</item>
+    </plurals>
+    <string name="stat_rate">%1$d %%</string>
+    <string name="stat_rate_label">de révisions réussies</string>
+    <string name="stat_rate_none">révisions, dès le 3ᵉ soir</string>
+    <plurals name="stat_streak">
+        <item quantity="one">soir de quiz d’affilée</item>
+        <item quantity="many">soirs de quiz d’affilée</item>
+        <item quantity="other">soirs de quiz d’affilée</item>
+    </plurals>
+    <plurals name="stat_fragile">
+        <item quantity="one">mot fragile</item>
+        <item quantity="many">mots fragiles</item>
+        <item quantity="other">mots fragiles</item>
+    </plurals>
 </resources>

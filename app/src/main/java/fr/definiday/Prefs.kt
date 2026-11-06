@@ -141,3 +141,39 @@ class History(ctx: Context) {
     fun all(): Map<String, Long> = sp.all.mapNotNull { (k, v) -> (v as? Long)?.let { k to it } }.toMap() // restored junk ignored
     fun mark(mot: String, day: Long) = sp.edit().putLong(mot, day).apply()
 }
+
+/**
+ * What the quiz remembers of each word, backed up like History. Its own file, so word keys never meet the settings:
+ * "m:<mot>" -> "start/step/misses" (see [Entry]), "favoris" -> starred words, "reviews" / "reviewsRight" -> review answers.
+ * Restored junk (wrong type, unparsable numbers) is ignored or clamped, as in Prefs.
+ */
+class Memory(ctx: Context) {
+    /** Review ladder anchored on [start] (day first shown, or day of the last miss): due at start + Quiz.LADDER[step];
+     *  [step] = LADDER.size: learnt, never due again. [misses]: wrong answers ever (2+ = « fragile »). */
+    data class Entry(val start: Long, val step: Int = 0, val misses: Int = 0)
+
+    private val sp = ctx.getSharedPreferences("memoire", Context.MODE_PRIVATE)
+
+    fun entries(): Map<String, Entry> = sp.all.mapNotNull { (k, v) ->
+        val f = (v as? String)?.split('/')?.mapNotNull(String::toLongOrNull)
+        if (!k.startsWith("m:") || f?.size != 3) null
+        else k.drop(2) to Entry(f[0], f[1].coerceIn(0, Quiz.LADDER.size.toLong()).toInt(), f[2].coerceIn(0, 999).toInt())
+    }.toMap()
+
+    /** A quiz answer on [day]; [shown]: History's day, the start of a word never answered before. */
+    fun answered(mot: String, right: Boolean, day: Long, shown: Long, review: Boolean) {
+        val e = Quiz.after(entries()[mot] ?: Entry(shown), right, day)
+        val edit = sp.edit().putString("m:$mot", "${e.start}/${e.step}/${e.misses}")
+        if (review) edit.putInt("reviews", reviews + 1).putInt("reviewsRight", reviewsRight + if (right) 1 else 0)
+        edit.apply()
+    }
+
+    val reviews get() = runCatching { sp.getInt("reviews", 0) }.getOrDefault(0).coerceAtLeast(0)
+    val reviewsRight get() = runCatching { sp.getInt("reviewsRight", 0) }.getOrDefault(0).coerceIn(0, reviews)
+
+    var favourites: Set<String>
+        get() = runCatching { sp.getStringSet("favoris", null)?.toSet() }.getOrNull().orEmpty()
+        set(v) = sp.edit().putStringSet("favoris", v).apply()
+
+    fun favourite(mot: String, on: Boolean) { favourites = if (on) favourites + mot else favourites - mot }
+}
