@@ -27,7 +27,7 @@ import java.net.URL
 import java.net.URLEncoder
 
 class MainActivity : Activity() {
-    companion object { const val EXTRA_MOT = "mot" }
+    companion object { const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item" }
 
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
 
@@ -37,8 +37,8 @@ class MainActivity : Activity() {
         if (Build.VERSION.SDK_INT >= 33) requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
 
         val p = Prefs(this)
-        val daily = Words.today(this)
-        show(daily.firstOrNull { it.key == intent.getStringExtra(EXTRA_MOT) } ?: daily.first())
+        // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's)
+        show(find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first())
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             show(w)
@@ -104,6 +104,21 @@ class MainActivity : Activity() {
         DailyReceiver.scheduleQuiz(this)
         findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.play(it as ImageView) } // a tap replays it
     }
+
+    /** singleTop: a notification tapped while the app is open shows its item here instead of stacking a new screen. */
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        find(intent.getStringExtra(EXTRA_MOT))?.let(::show)
+    }
+
+    override fun onSaveInstanceState(out: Bundle) {
+        super.onSaveInstanceState(out)
+        current?.let { out.putString(STATE_ITEM, it.key) }
+    }
+
+    /** Any word or quote by key (history keys: mot, or "q:" + text). */
+    private fun find(key: String?): Item? = key?.let { k -> (Words.load(this) + Quotes.load(this)).firstOrNull { it.key == k } }
 
     override fun onResume() {
         super.onResume()

@@ -18,7 +18,7 @@ covers:
   - app/src/main/res/values/glose_attrs.xml
   - app/src/main/res/values/glose_styles.xml
   - app/src/main/res/interpolator/
-last_commit: 0ce50ba
+last_commit: c311c83
 edges:
   - to: build-ci type: related_to reason: generated XML is versioned because CI does not run Node
 ---
@@ -31,3 +31,4 @@ edges:
 - CollectionActivity (programmatic layout, no AndroidX): 200 dp animated preview of the trial choice, 'Choisir' saves via Glose.save into Prefs.glosePose/glosePelage/glosePelote/gloseAcc (one accessory or none; second tap on the worn accessory removes it). Grid of 96 dp still thumbnails (AVD never started); locked = ColorFilter SRC_IN #B8AFA0 silhouette + Unlocks.hint. Glose.choice(p) falls back to defaults for ids not in Prefs.unlocked. Entry: main-screen button and 'Voir la collection' after an announcement. Demo capture app/build/demo/collection.png. Opening it inflates ~21 VDs (each theme is a separate drawable cache entry): watch first-open time on low-end phones. <!-- id:c303 -->
 - Step 6: Glose.mine(ctx, res, accessory, extra) = the user's saved choice applied wherever Glose shows (main screen pose+overlays, quiz head icon without accessory, bravo/encore reaction, unlock preview = choice with the new item substituted). Demo capture app/build/demo/app_choice.png (livres + nuit + sauge + bonnet). <!-- id:ab7f -->
 - Step 7: quiz notification pictures (see lockscreen-display). Test quizNotificationShowsSleepingGlose writes app/build/demo/notif_quiz.png. <!-- id:430a -->
+- Glose.play with animators disabled (developer option or battery saver) now returns WITHOUT reset(): AVD.reset() applies the animators' start values (trimPathEnd 0), which erased the word of the 'le fil écrit…' poses; the untouched AVD draws its VD still with the word fully written. Test GloseTest.writtenPoseKeepsItsWordWithoutAnimations (duration scale 0 via reflective ValueAnimator.setDurationScale; fails with reset: 2245 px differ). Also Glose.choice/pose ignore ids of the wrong Kind (tampered prefs). <!-- id:cebe -->

@@ -52,11 +52,13 @@ object Glose {
         return drawable(ctx, res, styles(if (accessory) c else c - Unlocks.Kind.ACC) + extra)
     }
 
-    /** (Re)starts the view's animation from the beginning; stays a still image when animations are off (settings, battery saver). */
+    /** (Re)starts the view's animation from the beginning; stays the still image when animations are off (settings, battery saver):
+     *  no reset() then, it would rewind the thread to before it writes and the "le fil écrit…" poses would lose their word. */
     fun play(v: ImageView) {
         val d = v.drawable as? AnimatedVectorDrawable ?: return
+        if (!ValueAnimator.areAnimatorsEnabled()) return
         d.reset()
-        if (ValueAnimator.areAnimatorsEnabled()) d.start()
+        d.start()
     }
 
     fun stop(v: ImageView) = (v.drawable as? AnimatedVectorDrawable)?.stop()

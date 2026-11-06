@@ -119,4 +119,17 @@ class GloseTest {
         grid(listOf(R.drawable.glose_livres_vd, R.drawable.glose_soir_vd, R.drawable.glose_ecrit_bravo_vd, R.drawable.glose_icone_vd)
             .flatMap { res -> combos.map { render(res, it, 384) } }, "combos")
     }
+
+    /** Animations off: play() leaves the still, so a written pose keeps its word (reset() used to rewind it to a blank thread). */
+    @Test fun writtenPoseKeepsItsWordWithoutAnimations() {
+        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+        try {
+            scale.invoke(null, 0f)
+            listOf(R.drawable.glose_ecrit_mot to R.drawable.glose_ecrit_mot_vd, R.drawable.glose_ecrit_bravo_fin to R.drawable.glose_ecrit_bravo_vd).forEach { (avd, vd) ->
+                val v = ImageView(ctx).apply { setImageDrawable(Glose.drawable(ctx, avd)) }
+                Glose.play(v)
+                assertEquals(0, diff(render(vd), Glose.bitmap(v.drawable, 256, 256)))
+            }
+        } finally { scale.invoke(null, 1f) }
+    }
 }

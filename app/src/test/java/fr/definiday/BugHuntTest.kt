@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
@@ -88,7 +87,7 @@ class BugHuntTest {
     }
 
     /** BUG 5: tapping the notification of a random pick opens the app on the daily word, not on the word tapped. */
-    @Ignore("fixed in a later commit") @Test fun randomPickNotificationOpensThatWord() {
+    @Test fun randomPickNotificationOpensThatWord() {
         Words.today(ctx)
         val r = Words.random(ctx)
         DailyReceiver.show(ctx, listOf(r))
@@ -133,7 +132,7 @@ class BugHuntTest {
     }
 
     /** BUG 6b: the random word shown in the card is lost on rotation (daily word comes back). */
-    @Ignore("fixed in a later commit") @Test fun mainCardSurvivesRotation() {
+    @Test fun mainCardSurvivesRotation() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         c.get().findViewById<Button>(R.id.new_word).performClick()
         val shown = c.get().findViewById<TextView>(R.id.mot).text.toString()
@@ -268,5 +267,40 @@ class BugHuntTest {
         assertEquals(listOf("q:Oui | non", "abaque"), p.dailyMots)
         ctx.getSharedPreferences("definiday", 0).edit().putString("dailyMots", "abaque|q:x").commit()
         assertEquals(listOf("abaque", "q:x"), p.dailyMots)
+    }
+
+    /** A notification tapped while the app is open (singleTop): onNewIntent shows that item, here an earlier day's quote. */
+    @Test fun notificationTappedWhileOpenShowsItsItem() {
+        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+        val q = Quotes.load(ctx).last()
+        c.newIntent(Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, q.key))
+        assertEquals("«\u00a0${q.texte}\u00a0»", c.get().findViewById<TextView>(R.id.mot).text.toString())
+    }
+
+    /** MainActivity.show, quote branch: quote text and signature, Wikiquote link, no Académie button. */
+    @Test fun mainScreenShowsADailyQuote() {
+        val q = Quotes.load(ctx).first()
+        Prefs(ctx).apply { dailyDay = LocalDate.now().toEpochDay(); dailyMots = listOf(q.key) }
+        val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
+        assertEquals("«\u00a0${q.texte}\u00a0»", a.findViewById<TextView>(R.id.mot).text.toString())
+        assertEquals(q.signature, a.findViewById<TextView>(R.id.nature).text.toString())
+        assertEquals(ctx.getString(R.string.quote_label), a.findViewById<TextView>(R.id.label).text.toString())
+        assertEquals(View.GONE, a.findViewById<View>(R.id.academie).visibility)
+        assertEquals(View.GONE, a.findViewById<View>(R.id.anecdote_box).visibility)
+        assertEquals(ctx.getString(R.string.wikiquote), a.findViewById<Button>(R.id.cnrtl).text.toString())
+        assertTrue(History(ctx).all()[q.key] == LocalDate.now().toEpochDay()) // shown on the card
+    }
+
+    /** warnIfHurried: past 3 random picks a day, one "take your time" dialog, once. */
+    @Test fun fourthRandomPickWarnsOnce() {
+        val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
+        val random = a.findViewById<Button>(R.id.new_word)
+        repeat(3) { random.performClick() }
+        assertEquals(0, org.robolectric.shadows.ShadowDialog.getShownDialogs().size)
+        random.performClick()
+        assertEquals(1, org.robolectric.shadows.ShadowDialog.getShownDialogs().size)
+        assertEquals(ctx.getString(R.string.slow_title), shadowOf(org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog()).title.toString())
+        repeat(2) { random.performClick() }
+        assertEquals(1, org.robolectric.shadows.ShadowDialog.getShownDialogs().size)
     }
 }
