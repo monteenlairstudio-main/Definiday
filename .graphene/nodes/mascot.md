@@ -18,7 +18,7 @@ covers:
   - app/src/main/res/values/glose_attrs.xml
   - app/src/main/res/values/glose_styles.xml
   - app/src/main/res/interpolator/
-last_commit: c311c83
+last_commit: 6fc6deb
 edges:
   - to: build-ci type: related_to reason: generated XML is versioned because CI does not run Node
 ---
@@ -32,3 +32,4 @@ edges:
 - Step 6: Glose.mine(ctx, res, accessory, extra) = the user's saved choice applied wherever Glose shows (main screen pose+overlays, quiz head icon without accessory, bravo/encore reaction, unlock preview = choice with the new item substituted). Demo capture app/build/demo/app_choice.png (livres + nuit + sauge + bonnet). <!-- id:ab7f -->
 - Step 7: quiz notification pictures (see lockscreen-display). Test quizNotificationShowsSleepingGlose writes app/build/demo/notif_quiz.png. <!-- id:430a -->
 - Glose.play with animators disabled (developer option or battery saver) now returns WITHOUT reset(): AVD.reset() applies the animators' start values (trimPathEnd 0), which erased the word of the 'le fil écrit…' poses; the untouched AVD draws its VD still with the word fully written. Test GloseTest.writtenPoseKeepsItsWordWithoutAnimations (duration scale 0 via reflective ValueAnimator.setDurationScale; fails with reset: 2245 px differ). Also Glose.choice/pose ignore ids of the wrong Kind (tampered prefs). <!-- id:cebe -->
+- P8 fixed (6fc6deb): Unlocks.hint(item, p, today) uses p.streak only if Quiz.unbroken(p, today) (last quiz today, the eve, or before quote-only days within 7), else 0; p.streak itself still restarts only at the next quiz. Collection: labels via style Label (no .uppercase()), hint text 12 sp ink2 without alpha (was 2.6:1), worn cells isSelected for TalkBack. GloseTest.unlocksAreKeptAndAnnouncedOnce now sets lastQuizDay = today for its restarted streak and checks the broken-streak hint. <!-- id:4008 -->

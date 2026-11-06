@@ -1,0 +1,19 @@
+---
+type: subsystem
+summary: Settings screen (SettingsActivity, Activity without AndroidX) in 4 groups: Mot du jour, Écran de verrouillage, Quiz du soir, Apparence
+entry_points:
+  - app/src/main/java/fr/definiday/SettingsActivity.kt
+  - app/src/main/res/layout/activity_settings.xml
+covers:
+  - app/src/main/java/fr/definiday/SettingsActivity.kt
+  - app/src/main/res/layout/activity_settings.xml
+  - app/src/main/res/layout/spinner_item.xml
+  - app/src/test/java/fr/definiday/UiTest.kt
+last_commit: 6fc6deb
+edges:
+  - to: lockscreen-display type: depends_on reason: mode, duration, unlocks (UnlockService.sync), DailyReceiver.show/scheduleNext, Alarms.requestIntent
+  - to: styles type: depends_on reason: palette/font pools
+---
+
+- Owner decision (post-audit): separate Settings Activity. Groups: Mot du jour (enabled, time, exact-alarm state + 'Autoriser les alarmes exactes' button shown only while Alarms.requestIntent != null, refreshed in onResume; words a day; Plus de citations; 'Afficher le mot maintenant' with a toast per mode), Écran de verrouillage (Affichage mode; wallpaper hint, Fin and Position hidden in notification mode; 'Durée d’affichage' with help text per mode so it is not misleading in notification mode), Quiz du soir (enabled, time), Apparence (palettes/polices dialogs with a title, 'X sur Y'), À propos (credits). Time buttons disabled when their switch is off. Every Spinner has a labelFor label and uses res/layout/spinner_item.xml (wraps, minHeight 48dp) instead of simple_spinner_dropdown_item (single line, ellipsized at large font). <!-- 6fc6deb --> <!-- id:feaa -->
+- Side effects kept from the old main screen: unlocks spinner -> UnlockService.sync(ctx); words a day raised while today's display time has passed and the daily word is enabled -> DailyReceiver.show(ctx) (all today's items again, wallpaper/duration restart). Spinner onItemSelected also fires once at first layout with the current value: listeners are written to be idempotent. Tests in UiTest call the listener directly (spinner.onItemSelectedListener.onItemSelected) instead of relying on Robolectric layout. <!-- 6fc6deb --> <!-- id:e94c -->
