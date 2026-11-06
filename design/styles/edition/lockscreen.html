@@ -1,0 +1,45 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Definiday · écran verrouillé</title>
+<style>
+@font-face{font-family:Garamond;src:url('../../../app/src/main/res/font/eb_garamond.ttf')}
+@font-face{font-family:Garamond;font-style:italic;src:url('fonts/eb_garamond_italic.woff2')}
+@font-face{font-family:Didone;src:url('../../../app/src/main/res/font/playfair_display.ttf');font-weight:400 900}
+@font-face{font-family:Tenor;src:url('../../../app/src/main/res/font/tenor_sans.ttf')}
+:root{--papier:#F5EFE2;--feuille:#FBF8F1;--fond2:#EDE3CF;--encre:#211A14;--encre2:#5B5144;--violet:#5B3B8C;--surViolet:#F5EFE2;--violetPale:#E9E1F1;--filet:rgba(33,26,20,.18);--sauge:#B9D1AB;--terre:#EBC0AE;--surEtat:#211A14;--grain:rgba(70,50,25,.022);--halo:#EDE3CF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:360px;height:800px;overflow:hidden}
+body{background:var(--papier);color:var(--encre);font:17px/1.4 Garamond,serif;font-feature-settings:"onum","liga","kern";
+ position:relative;-webkit-font-smoothing:antialiased}
+.verge{position:absolute;inset:0;pointer-events:none;background:
+ repeating-linear-gradient(0deg,var(--grain) 0 1px,transparent 1px 3px),
+ repeating-linear-gradient(90deg,var(--grain) 0 1px,transparent 1px 27px)}
+.sc{font-variant:small-caps;font-feature-settings:"smcp","c2sc","lnum";letter-spacing:.09em}
+.lsc{font-variant:small-caps;font-feature-settings:"smcp","lnum";letter-spacing:.06em}
+.it{font-style:italic}
+.filet{display:flex;align-items:center;gap:6px;margin:0 auto}
+.filet i{flex:1;height:4px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+.ic{display:block}
+.btn{width:44px;height:44px;display:grid;place-items:center;color:var(--encre)}
+.primary{display:flex;align-items:center;justify-content:center;gap:10px;height:52px;border-radius:4px;background:var(--violet);
+ color:var(--surViolet);font-size:19px}
+.ghost{display:flex;align-items:center;justify-content:center;height:52px;border-radius:4px;border:1px solid var(--violet);
+ color:var(--violet);font-size:18px;outline:1px solid var(--violet);outline-offset:-5px}
+</style></head><body>
+<div style="position:absolute;inset:0;background:linear-gradient(#3A1A10,#1A0A06)"></div>
+<div class="verge" style="--grain:rgba(255,220,190,.018)"></div>
+<div style="position:relative;height:800px;color:#F2DACB">
+ <div style="display:flex;justify-content:space-between;padding:8px 16px 0;font:13px Tenor,sans-serif;opacity:.85"><span>10:24</span><span>▾ ▴ 82 %</span></div>
+ <div style="text-align:center;margin-top:62px;font:300 84px/1 Tenor,sans-serif;letter-spacing:-.02em;opacity:.95">10:24</div>
+ <div style="text-align:center;margin-top:10px;font:15px Tenor,sans-serif;opacity:.85">ven. 6 novembre</div>
+ <div style="position:absolute;left:32px;right:32px;top:404px">
+  <div class="sc" style="text-align:center;font-size:13px;color:#E08A5E">Definiday · N° 0412</div>
+  <div style="margin:8px auto 0;width:150px"><div class="filet" style="width:100%;color:#E08A5E"><i></i><svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4.4" fill="#E08A5E"/><path d="M1.6 3.6c2.4.2 5 2.4 5.8 5M3.2 1.4c2.2 1 4.6 4 5 7" stroke="var(--papier)" stroke-width=".7" fill="none" opacity=".75"/></svg><i></i></div></div>
+  <div style="font-family:Didone;font-weight:500;font-size:46px;line-height:1.1;text-align:center;color:#FFB36B;margin-top:12px">estramaçon</div>
+  <div class="it" style="text-align:center;font-size:18px;color:#E08A5E">n.⁠ ⁠m.</div>
+  <p style="margin-top:12px;text-align:center;font-size:18.5px;line-height:1.36">
+   <span class="lsc" style="color:#E08A5E">Vieilli.</span> Tran&shy;chant d’une épée, ou coup por&shy;té avec ce tran&shy;chant⁠ ⁠; aus&shy;si, lourde épée de guerre.</p>
+  <p class="it" style="margin-top:10px;text-align:center;font-size:16px;line-height:1.35;color:#D9A88F">«⁠ ⁠D’un estramaçon, le reître fendit le chapeau de son adversaire.⁠ ⁠»</p>
+  <div class="sc" style="text-align:center;margin-top:16px;font-size:11.5px;color:#D9A88F;letter-spacing:.12em">achevé d’imprimer le 6 novembre</div>
+ </div>
+ <div style="position:absolute;bottom:26px;left:28px;right:28px;display:flex;justify-content:space-between;opacity:.5">
+  <span style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12)"></span><span style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12)"></span></div>
+</div></body></html>
