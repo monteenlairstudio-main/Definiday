@@ -1,6 +1,6 @@
 // node make_planche.js -> planche.html (autonome : SVG animés en data-URI, aucune ressource externe) + planche.png
 const fs = require('fs'), path = require('path');
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require(process.env.PLAYWRIGHT || 'playwright'); // PLAYWRIGHT=/opt/node-tools/node_modules/playwright si installé ailleurs
 const D = __dirname;
 const img = (f, alt, cls = '') => `<img class="${cls}" alt="${alt}" src="data:image/svg+xml;base64,${fs.readFileSync(path.join(D, f)).toString('base64')}">`;
 const card = (f, title, sub, txt, opt = {}) => `<figure class="card${opt.small ? ' small' : ''}">${img(f, title)}<figcaption><b>${title}</b>${opt.rare ? ' <span class="rare">rare</span>' : ''}<i>${sub}</i>${txt ? `<span>${txt}</span>` : ''}</figcaption></figure>`;

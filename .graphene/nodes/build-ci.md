@@ -17,6 +17,7 @@ covers:
 last_commit: a2935fa
 edges:
   - to: release-signing type: depends_on reason: CI writes DEFINIDAY_KEYSTORE to GITHUB_ENV and passes the password secrets to the Gradle step
+  - to: mascot type: related_to reason: generated XML is versioned because CI does not run Node
 ---
 
 - Robolectric 4.17 on JDK 21 needs jvmArgs --add-opens=java.base/java.io=ALL-UNNAMED and --add-exports=java.base/jdk.internal.access=ALL-UNNAMED. Maven Central returned 429 in the cloud container: settings.gradle.kts lists the Google mirror maven-central.storage-download.googleapis.com first; android-all-instrumented jar was fetched from that mirror into ~/.m2 (sha1 checked). <!-- id:258f -->

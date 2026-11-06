@@ -1,6 +1,6 @@
 // node make_all.js [filtre]  -> régénère tous les livrables (SVG animés + PNG 1024/128) dans un seul Chromium.
 const { buildOne } = require('./build.js');
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require(process.env.PLAYWRIGHT || 'playwright'); // PLAYWRIGHT=/opt/node-tools/node_modules/playwright si installé ailleurs
 const WORDS = ['mot', 'bravo', 'rare', 'dodo', 'encore'];
 const T = { assis: 1, livres: 1, ecrit: 4.5, soir: 1, icone: 1 };
 const jobs = [];

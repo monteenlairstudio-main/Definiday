@@ -4,10 +4,10 @@
 // glose_lib.js + pose_<pose>.js s'exécutent dans Chromium (Paper.js), export SVG, injection SMIL
 // (animateTransform translate/rotate/scale autour d'un pivot, animate d'attribut : opacity, stroke-dashoffset),
 // puis rendus PNG 1024 et 128 de l'image figée à t secondes.
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require(process.env.PLAYWRIGHT || 'playwright'); // PLAYWRIGHT=/opt/node-tools/node_modules/playwright si installé ailleurs
 const fs = require('fs'), path = require('path');
 const D = __dirname;
-const PAPER = path.join(D, 'kit/node_modules/paper/dist/paper-full.min.js');
+const PAPER = require.resolve('paper/dist/paper-full.min.js'); // npm install paper@0.12.18 dans ce dossier
 
 async function buildOne(b, job) {
   const lib = fs.readFileSync(path.join(D, 'glose_lib.js'), 'utf8');

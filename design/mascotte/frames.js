@@ -1,5 +1,5 @@
 // node frames.js in.svg out.png t1,t2,...  -> planche de vignettes 256 px aux instants donnés (vérif. des animations)
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require(process.env.PLAYWRIGHT || 'playwright'); // PLAYWRIGHT=/opt/node-tools/node_modules/playwright si installé ailleurs
 const fs = require('fs');
 (async () => {
   const [, , inp, out, ts] = process.argv, svg = fs.readFileSync(inp, 'utf8'), T = ts.split(',').map(Number);

@@ -2,12 +2,12 @@
 // sur le nez ; soucoupe sur deux livres, bougie à gauche, « z » qui naissent contre sa tête, vapeur et sachet à droite.
 function draw(paper) {
   const C = makeC(VARIANT), anims = [];
-  const cupC = C.cup || C.night, cupIn = C.cup ? '#4A1E26' : '#18203A', cupLit = C.cup ? '#B0606A' : '#4A5E92';
+  const cupC = C.S ? C.S.cup : C.cup || C.night, cupIn = C.cup ? '#4A1E26' : '#18203A', cupLit = C.cup ? '#B0606A' : '#4A5E92';
 
   // ---------- livres et soucoupe ----------
   const B1 = book({ name: 'livre_bas', x: 120, y: 884, w: 790, h: 78, d: [40, -30], cover: C.sepia, coverD: C.sepiaD, pages: C.parch, gold: C.gold, label: true, labelC: C.parch, bands: [0.06, 0.16, 0.84, 0.94] });
   const B2 = book({ name: 'livre_haut', x: 150, y: 800, w: 730, h: 76, d: [40, -30], cover: C.bord, coverD: C.bordD, pages: C.parch, gold: C.gold, bands: [0.06, 0.16, 0.84, 0.94] });
-  const rib = C.has('marque') ? bookmark(C, [[888, 836], [894, 872], [898, 900]]) : ribbon([[892, 838], [902, 880], [916, 920], [946, 940]], 18, C.rose);
+  const rib = ribbonOrMark(C, [[888, 836], [894, 872], [898, 900]], [[892, 838], [902, 880], [916, 920], [946, 940]], 18);
   const bookSh = fill(X(moved(B2.sil, 10, 12), S(B1.top, B2.sil)), INK, 0.22);
   const SC = P([540, 784]);
   const saucer = U(ell(SC, [272, 28]), ell(SC.add([0, 9]), [258, 24]));

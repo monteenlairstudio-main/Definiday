@@ -3,10 +3,10 @@
 function draw(paper) {
   const C = makeC(VARIANT), anims = [];
   const D = [44, -34];
-  const B1 = book({ name: 'livre_bas', x: 322, y: 818, w: 506, h: 96, d: D, cover: C.bookCover ? C.night : C.sepia, coverD: C.bookCover ? C.nightD : C.sepiaD, pages: C.parch, gold: C.gold, label: true, labelC: C.parch });
+  const B1 = book({ name: 'livre_bas', x: 322, y: 818, w: 506, h: 96, d: D, cover: C.S ? C.S.low : C.bookCover ? C.night : C.sepia, coverD: C.S ? C.S.lowD : C.bookCover ? C.nightD : C.sepiaD, pages: C.parch, gold: C.gold, label: true, labelC: C.parch });
   const B2 = book({ name: 'livre_milieu', x: 352, y: 724, w: 452, h: 84, d: D, cover: C.bord, coverD: C.bordD, pages: C.parch, gold: C.gold, bands: [0.12, 0.27, 0.73, 0.88] });
-  const B3 = book({ name: 'livre_haut', x: 378, y: 636, w: 400, h: 78, d: D, cover: C.bookCover ? C.sepia : C.night, coverD: C.bookCover ? C.sepiaD : C.nightD, pages: C.parch, gold: C.gold, label: true, labelC: C.gold, bands: [0.1, 0.24, 0.76, 0.9] });
-  const rib = C.has('marque') ? bookmark(C, [[836, 846], [840, 870], [842, 888]]) : ribbon([[854, 858], [866, 888], [884, 910], [916, 916]], 20, C.rose);
+  const B3 = book({ name: 'livre_haut', x: 378, y: 636, w: 400, h: 78, d: D, cover: C.S ? C.S.top : C.bookCover ? C.sepia : C.night, coverD: C.S ? C.S.topD : C.bookCover ? C.sepiaD : C.nightD, pages: C.parch, gold: C.gold, label: true, labelC: C.gold, bands: [0.1, 0.24, 0.76, 0.9] });
+  const rib = ribbonOrMark(C, [[836, 846], [840, 870], [842, 888]], [[854, 858], [866, 888], [884, 910], [916, 916]], 20);
   const shadowOn = (upper, lower, dx, dy) => fill(X(moved(upper.sil, dx, dy), S(lower.top, upper.sil)), INK, 0.22);
   const bookShadows = G(null, [shadowOn(B2, B1, 10, 12), shadowOn(B3, B2, 10, 12)]);
 

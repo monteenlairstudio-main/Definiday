@@ -84,6 +84,9 @@ function makeC(v) {
   v = Object.assign({ skin: 'tigre', yarn: 'bordeaux', acc: [] }, v || {});
   const C = Object.assign({}, BASE, SKINS[v.skin] || SKINS.tigre, YARNS[v.yarn] || YARNS.bordeaux);
   C.v = v; C.has = a => v.acc.includes(a);
+  // v.all (export Android) : tous les accessoires et détails rares dessinés, couleurs de socle/tasse en sentinelles ;
+  // svg2avd.js les rend visibles ou non par attributs de thème (voir GATES et TOKENS dans android/svg2avd.js)
+  if (v.all) { C.has = () => true; C.S = { book: '#2C3A01', bookD: '#1F2901', top: '#2C3A02', topD: '#1F2902', low: '#9C6B03', lowD: '#7C5203', cup: '#2C3A04' }; }
   return C;
 }
 
@@ -212,13 +215,14 @@ function sparkle(c, r, color, o = 1) {
   return fill(s, color, o);
 }
 function skinExtra(C, shape, where, pts) {
+  if (C.v.all) return [G('paillettes_' + where, skinExtra({ extra: 'gilt', v: {} }, shape, where, pts)), G('etoiles_' + where, skinExtra({ extra: 'stars', v: {} }, shape, where, pts))];
   if (C.extra === 'gilt') return [clipIn(shape, pts.map((p, i) => sparkle(p, i % 2 ? 9 : 13, '#FFF7D8', 0.95)))];
   if (C.extra === 'stars') return [clipIn(shape, pts.map((p, i) => sparkle(p, i % 2 ? 7 : 10, '#F4E7B8', 0.9)))];
   return [];
 }
 function rareGlints(C, pts, prefix) { // scintillement animé autour du personnage (pelages rares uniquement)
-  if (!C.extra) return { group: null, anims: [] };
-  const col = C.extra === 'gilt' ? '#FFE9A8' : '#F4E7B8', anims = [], items = [];
+  if (!C.extra && !C.v.all) return { group: null, anims: [] };
+  const col = C.extra === 'stars' ? '#F4E7B8' : '#FFE9A8', anims = [], items = [];
   pts.forEach(([x, y, r], i) => {
     const id = `${prefix}eclat${i}`, s = G(id, [sparkle([x, y], r, col, 1), outline(circ([x, y], 0.1), 0.1)]);
     items.push(s);
@@ -281,7 +285,7 @@ function scarf(C, o) {
   const fringe = [-18, -6, 6, 18].map(d => line(curve([xy(last.add(n.multiply(d))), xy(last.add(n.multiply(d)).add(tg.multiply(26)))]), 6, C.gold));
   const tailG = vol(null, tailS, C.night, [fill(X(U(...stripesT), tailS), C.gold), shadowOf(tailS, 10, 10, 0.25), rimOf(tailS, 6, 6, 0.2)]);
   const bandG = vol(null, band, C.night, [clipIn(band, ribs), fill(X(U(...stripeB), band), C.gold, 0.95), shadowOf(band, 10, 14, 0.25), rimOf(band, 6, 8, 0.2)]);
-  return { back: G(null, o.tailFront ? [] : [...fringe, tailG]), band: G('echarpe', [bandG, ...(o.tailFront ? [...fringe, tailG] : [])]) };
+  return { back: G('echarpe_dos', o.tailFront ? [] : [...fringe, tailG]), band: G('echarpe', [bandG, ...(o.tailFront ? [...fringe, tailG] : [])]) };
 }
 // marque-page de cuir bordeaux à gland d'or, qui sort des pages
 function bookmark(C, pts) {
@@ -299,6 +303,9 @@ function ribbonShape(pts, w) {
   const cut = poly([end.subtract(tg.multiply(w * 0.7)), end.add(nrm.multiply(w)).add(tg.multiply(w)), end.subtract(nrm.multiply(w)).add(tg.multiply(w))]);
   const sq = poly([end.add(nrm.multiply(w)), end.add(nrm.multiply(w)).add(tg.multiply(w * 2)), end.subtract(nrm.multiply(w)).add(tg.multiply(w * 2)), end.subtract(nrm.multiply(w))]);
   return S(r, cut, sq);
+}
+function ribbonOrMark(C, markPts, ribPts, w) { // le marque-page remplace le ruban (les deux en export Android)
+  return G(null, [C.v.all || !C.has('marque') ? G('ruban', [ribbon(ribPts, w, C.rose)]) : null, C.has('marque') ? bookmark(C, markPts) : null]);
 }
 function ribbon(pts, w, color) {
   const sh = ribbonShape(pts, w);
@@ -404,9 +411,9 @@ function placeWord(word, o, k, slant = -0.2) {
 // o.arms : 'hug' (serre la pelote, une patte dessous, l'autre posée dessus) | 'write' (bras lointain levé tient le fil)
 function seatedGlose(C, o = {}) {
   const anims = [], L = {};
-  const B = book({ name: 'livre', x: 250, y: 700, w: 470, h: 150, d: [60, -46], cover: C.bookCover || C.night, coverD: C.bookCoverD || C.nightD, pages: C.parch, gold: C.gold, label: true, labelC: C.gold, bands: [0.1, 0.24, 0.76, 0.9] });
+  const B = book({ name: 'livre', x: 250, y: 700, w: 470, h: 150, d: [60, -46], cover: C.S ? C.S.book : C.bookCover || C.night, coverD: C.S ? C.S.bookD : C.bookCoverD || C.nightD, pages: C.parch, gold: C.gold, label: true, labelC: C.gold, bands: [0.1, 0.24, 0.76, 0.9] });
   L.book = B.group;
-  L.ribbon = C.has('marque') ? bookmark(C, [[754, 722], [758, 760], [760, 790]]) : ribbon([[752, 724], [762, 780], [770, 830], [796, 852], [836, 856]], 22, C.rose);
+  L.ribbon = ribbonOrMark(C, [[754, 722], [758, 760], [760, 790]], [[752, 724], [762, 780], [770, 830], [796, 852], [836, 856]], 22);
   L.shadow = G('ombre', [floorShadow([520, 852], [340, 24], 0.32)]);
   L.seat = fill(X(ell([510, 696], [200, 22]), B.top), INK, 0.25);
   // corps en poire, légèrement tourné vers la droite (plastron décalé, flanc gauche plus visible)
