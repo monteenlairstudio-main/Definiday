@@ -8,4 +8,8 @@
     <color name="ink">#EDE6D6</color>
     <color name="ink2">#B5AC9A</color>
     <color name="warn">#3D3014</color>
+    <!-- quiz answers, moss / brick, not glaring at night: quiz_on 7.2:1 on good, 7.5:1 on bad -->
+    <color name="quiz_good">#34503B</color>
+    <color name="quiz_bad">#6A3A33</color>
+    <color name="quiz_on">#EDE6D6</color>
 </resources>

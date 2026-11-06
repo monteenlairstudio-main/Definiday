@@ -27,11 +27,15 @@
     <string name="palettes">Palettes utilisées\u00A0: %1$d sur %2$d</string>
     <string name="polices">Polices utilisées\u00A0: %1$d sur %2$d</string>
     <string name="quiz_title">Quiz du soir</string>
-    <string name="quiz_notif">%1$d mot(s) vu(s) aujourd’hui : les reconnaîtrez-vous ?</string>
+    <plurals name="quiz_notif">
+        <item quantity="one">%1$d mot vu aujourd’hui\u202F: le reconnaîtrez-vous\u202F?</item>
+        <item quantity="many">%1$d mots vus aujourd’hui\u202F: les reconnaîtrez-vous\u202F?</item>
+        <item quantity="other">%1$d mots vus aujourd’hui\u202F: les reconnaîtrez-vous\u202F?</item>
+    </plurals>
     <string name="quiz_next">Suivant</string>
     <string name="quiz_close">Fermer</string>
-    <string name="quiz_eve">Les mots d’hier</string>
-    <string name="quiz_empty">Aucun mot vu aujourd’hui pour l’instant.</string>
+    <string name="quiz_eve">Le quiz d’hier soir</string>
+    <string name="quiz_empty">Aucun mot vu aujourd’hui pour l’instant. Lisez le mot du jour, Monsieur Glose vous attend ce soir.</string>
     <string name="quiz_score">%1$d / %2$d</string>
     <string name="quiz_open">Quiz du soir</string>
     <string name="quiz_enabled">Proposer le quiz du soir</string>
@@ -43,10 +47,10 @@
     <string name="wikiquote"><u>Source (Wikiquote)</u></string>
     <string name="more_quotes">Plus de citations (2 sur 5 au lieu de 1 sur 5)</string>
     <string name="glose">Monsieur Glose, chat bibliothécaire</string>
-    <string name="glose_bravo">Monsieur Glose écrit « bravo » avec le fil de sa pelote</string>
-    <string name="glose_encore">Monsieur Glose écrit « encore » avec le fil de sa pelote</string>
+    <string name="glose_bravo">Monsieur Glose écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
+    <string name="glose_encore">Monsieur Glose écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u00A0?</string>
-    <string name="unlock_new">Nouveau\u00A0: %1$s</string>
+    <string name="unlock_new">Monsieur Glose a gagné\u202F:</string>
     <string name="collection_open">Collection de Monsieur Glose</string>
     <string name="collection_see">Voir la collection</string>
     <string name="collection_title">Collection de Monsieur Glose</string>
@@ -71,7 +75,10 @@
     <string name="new_word_hint">Il remplace aussi le mot affiché sur l’écran de verrouillage.</string>
     <string name="quote_chip">Citation</string>
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
-    <string name="quiz_right">Juste</string>
-    <string name="quiz_wrong">Faux, c’était %1$s</string>
-    <string name="quiz_not_counted">Quiz déjà fait aujourd’hui : ce score ne compte pas pour la collection.</string>
+    <string name="quiz_right">Bien vu\u202F!</string>
+    <string name="quiz_wrong">Pas tout à fait\u202F: c’était «\u202F%1$s\u202F».</string>
+    <string name="quiz_not_counted">Quiz déjà fait aujourd’hui\u202F: ce score ne compte pas pour la collection.</string>
+    <string name="quiz_prompt">Quel mot correspond à cette définition\u202F?</string>
+    <string name="quiz_progress">Question %1$d sur %2$d</string>
+    <string name="quiz_score_desc">Score\u202F: %1$d sur %2$d</string>
 </resources>

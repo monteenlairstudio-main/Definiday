@@ -83,7 +83,7 @@ class DailyReceiver : BroadcastReceiver() {
                 .setLargeIcon(Icon.createWithBitmap(Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_dort_vd, accessory = false), 192, 192)))
                 .setStyle(Notification.BigPictureStyle().bigPicture(Glose.bitmap(Glose.mine(ctx, pose), 512, 256)))
                 .setContentTitle(ctx.getString(R.string.quiz_title))
-                .setContentText(ctx.getString(R.string.quiz_notif, Words.seenToday(ctx).size))
+                .setContentText(Words.seenToday(ctx).size.let { ctx.resources.getQuantityString(R.plurals.quiz_notif, it, it) })
                 .setContentIntent(open)
                 .setAutoCancel(true)
                 .build()

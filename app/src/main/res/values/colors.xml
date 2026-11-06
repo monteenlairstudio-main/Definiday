@@ -9,4 +9,8 @@
     <color name="ink">#1F1A14</color>
     <color name="ink2">#5C5446</color>
     <color name="warn">#F6E3B4</color>
+    <!-- quiz answers, sage / terracotta: quiz_on 10.3:1 on good, 9.8:1 on bad -->
+    <color name="quiz_good">#B5CFA9</color>
+    <color name="quiz_bad">#E8B9A8</color>
+    <color name="quiz_on">#1F1A14</color>
 </resources>

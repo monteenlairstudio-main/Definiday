@@ -66,6 +66,8 @@ class UiTest {
         wrong.performClick()
         assertEquals("✗ $wrongMot", wrong.text.toString())
         assertTrue(buttons(a).any { it.text == "✓ ${answer.mot}" })
+        assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
+            it.text == ctx.getString(R.string.quiz_wrong, answer.mot) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
     }
 
