@@ -8,4 +8,5 @@ covers:
   - app/src/main/java/fr/definiday/Quotes.kt
   - tools/citations/
   - app/src/main/assets/citations.json
+last_commit: 1a7535d
 ---

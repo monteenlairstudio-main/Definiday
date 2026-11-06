@@ -10,7 +10,7 @@ covers:
   - app/src/main/java/fr/definiday/UnlockService.kt
   - app/src/main/java/fr/definiday/WordCard.kt
   - app/src/main/AndroidManifest.xml
-last_commit: 457e808
+last_commit: 1a7535d
 edges:
   - to: word-selection type: depends_on reason: shows Words.today()
   - to: styles type: depends_on reason: WordCard renders with Styles.of()

@@ -5,6 +5,7 @@ entry_points:
   - app/src/main/java/fr/definiday/QuizActivity.kt
 covers:
   - app/src/main/java/fr/definiday/QuizActivity.kt
+last_commit: 1a7535d
 edges:
   - to: word-selection type: depends_on reason: questions = Words.seenToday()
 ---
