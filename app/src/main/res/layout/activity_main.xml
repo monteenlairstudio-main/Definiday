@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            style="@style/Label"
+            android:text="@string/today" />
+
+        <TextView
+            android:id="@+id/mot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/definition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="serif"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/exemple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="serif"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="16sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/academie"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/academie" />
+
+            <Button
+                android:id="@+id/cnrtl"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cnrtl" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Label"
+            android:layout_marginTop="32dp"
+            android:text="@string/settings" />
+
+        <Switch
+            android:id="@+id/enabled"
+            style="@style/Row"
+            android:text="@string/enabled" />
+
+        <Button
+            android:id="@+id/time"
+            style="@style/Row" />
+
+        <TextView
+            style="@style/Row"
+            android:layout_marginBottom="0dp"
+            android:text="@string/duration" />
+
+        <Spinner
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <Switch
+            android:id="@+id/wallpaper"
+            style="@style/Row"
+            android:text="@string/wallpaper" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wallpaper_hint"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/test"
+            style="@style/Row"
+            android:layout_marginTop="24dp"
+            android:text="@string/test" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/credits"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>
