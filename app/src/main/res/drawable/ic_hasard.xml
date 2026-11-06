@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Random word: a die. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
+    <group android:translateX="12" android:translateY="12">
+        <path android:pathData="M7,4.5H17A2.5,2.5 0 0,1 19.5,7V17A2.5,2.5 0 0,1 17,19.5H7A2.5,2.5 0 0,1 4.5,17V7A2.5,2.5 0 0,1 7,4.5Z" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
+        <path android:pathData="M7.9,8.9a1.1,1.1 0 1,0 2.2,0a1.1,1.1 0 1,0 -2.2,0M10.9,12a1.1,1.1 0 1,0 2.2,0a1.1,1.1 0 1,0 -2.2,0M13.9,15.1a1.1,1.1 0 1,0 2.2,0a1.1,1.1 0 1,0 -2.2,0" android:fillColor="@color/ink" />
+    </group>
+</vector>

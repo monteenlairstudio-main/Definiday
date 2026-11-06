@@ -73,6 +73,15 @@
             style="@style/Help"
             android:text="@string/more_quotes_hint" />
 
+        <Switch
+            android:id="@+id/guess"
+            style="@style/Toggle"
+            android:text="@string/guess" />
+
+        <TextView
+            style="@style/Help"
+            android:text="@string/guess_hint" />
+
         <Button
             android:id="@+id/test"
             style="@style/Row"

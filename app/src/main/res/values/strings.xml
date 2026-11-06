@@ -3,8 +3,6 @@
     <string name="app_name">Definiday</string>
     <string name="channel_name">Mot du jour et quiz</string>
     <string name="today">Mot du jour</string>
-    <string name="academie"><u>Académie française</u></string>
-    <string name="cnrtl"><u>TLFi (CNRTL)</u></string>
     <string name="settings">Réglages</string>
     <string name="enabled">Afficher un mot chaque jour</string>
     <string name="time">Heure d’affichage\u202F: %1$02d:%2$02d</string>
@@ -18,10 +16,9 @@
     <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
     <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
-    <string name="anecdote">Le saviez-vous\u00A0?</string>
+    <string name="anecdote">Anecdote</string>
     <string name="source"><u>Source de l’anecdote</u></string>
     <string name="random">Mot au hasard</string>
-    <string name="new_word">Nouveau mot au hasard</string>
     <string name="seen_today">Aujourd’hui</string>
     <string name="per_day">Nombre de mots par jour</string>
     <string name="styles_row">Couleurs et polices</string>
@@ -44,7 +41,6 @@
     <string name="slow_title">Prenez le temps</string>
     <string name="slow_default">Un mot savouré vaut mieux que dix effleurés : relisez sa définition, essayez-le dans une phrase.</string>
     <string name="quote_label">Citation du jour</string>
-    <string name="wikiquote"><u>Source (Wikiquote)</u></string>
     <string name="more_quotes">Plus de citations</string>
     <string name="glose">Monsieur Glose, chat bibliothécaire</string>
     <string name="glose_bravo">Monsieur Glose écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
@@ -53,7 +49,6 @@
     <string name="quiz_passed">Joli travail\u202F: ces mots sont un peu plus à vous ce soir.</string>
     <string name="unlock_new">Monsieur Glose a gagné\u202F:</string>
     <string name="unlock_more">+\u00A0%1$d dans la collection</string>
-    <string name="collection_open">Collection de Monsieur Glose</string>
     <string name="collection_see">Voir la collection</string>
     <string name="collection_title">Collection de Monsieur Glose</string>
     <string name="collection_choose">Choisir</string>
@@ -100,7 +95,6 @@
     <string name="exact_no">Le mot peut arriver jusqu’à 1\u00A0h en retard, et la fin au déverrouillage peut échouer. Autorisez «\u202FAlarmes et rappels\u202F» pour l’éviter.</string>
     <string name="exact_ask">Autoriser «\u202FAlarmes et rappels\u202F»</string>
     <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Touchez ici pour les réactiver.</string>
-    <string name="new_word_hint">Il remplace aussi le mot affiché sur l’écran de verrouillage.</string>
     <string name="quote_chip">Citation</string>
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
     <string name="quiz_right">Bien vu\u202F!</string>
@@ -112,5 +106,28 @@
     <string name="sounds">Sons</string>
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
-    <string name="settings_link"><u>Réglages</u></string>
+    <!-- home: round actions (label under the icon; the description, read by TalkBack, starts with it) -->
+    <string name="action_academie">Académie</string>
+    <string name="action_academie_desc">Académie française, article du dictionnaire</string>
+    <string name="action_tlfi">TLFi</string>
+    <string name="action_tlfi_desc">TLFi, article du CNRTL</string>
+    <string name="action_source">Source</string>
+    <string name="action_source_desc">Source de la citation, Wikiquote</string>
+    <string name="action_share">Partager</string>
+    <string name="action_share_desc">Partager ce mot</string>
+    <string name="action_random">Au hasard</string>
+    <string name="action_random_desc">Au hasard, un nouveau mot</string>
+    <string name="random_hint">Ce mot remplace aussi celui de l’écran de verrouillage.</string>
+    <string name="collection_count">%1$d/%2$d</string>
+    <string name="collection_desc">Collection de Monsieur Glose, %1$d objets sur %2$d</string>
+    <string name="exemple">Exemple</string>
+    <string name="reveal">Touchez pour révéler</string>
+    <string name="reveal_desc">Touchez pour révéler la définition</string>
+    <string name="share_title">Partager le mot</string>
+    <string name="share_via">via Definiday</string>
+    <string name="guess">Deviner avant de voir</string>
+    <string name="guess_hint">Sur l’accueil, la définition reste cachée jusqu’à ce que vous la touchiez. Le temps d’y réfléchir…</string>
+    <string name="rate_text">Definiday vous plaît\u202F? Un mot sur le Play Store aide beaucoup.</string>
+    <string name="rate_later">Plus tard</string>
+    <string name="rate_go">Noter</string>
 </resources>

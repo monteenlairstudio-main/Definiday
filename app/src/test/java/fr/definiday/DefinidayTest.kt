@@ -234,6 +234,12 @@ class DefinidayTest {
         Quotes.load(ctx).filter { it.auteur.contains("Joubert") || it.auteur.contains("Monselet") }.take(2).forEachIndexed { i, q ->
             save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
+        val head = Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_vd, accessory = false), 128, 128)
+        (listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }) + Quotes.load(ctx).first { it.texte.length > 120 })
+            .forEachIndexed { i, w -> save(WordCard.share(w, Styles.of(ctx, w), head), File(out, "share_$i.png")) }
+        listOf(R.drawable.ic_launcher_fg to "icon_fg.png", R.drawable.ic_launcher_mono to "icon_mono.png").forEach { (r, f) ->
+            save(Glose.bitmap(android.graphics.drawable.LayerDrawable(arrayOf(android.graphics.drawable.ColorDrawable(ctx.getColor(R.color.icon_bg)), ctx.getDrawable(r)!!)), 432, 432), File(out, f))
+        }
         capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app.png"))
         Prefs(ctx).apply { unlocked = setOf("livres", "nuit", "sauge", "bonnet"); glosePose = "livres"; glosePelage = "nuit"; glosePelote = "sauge"; gloseAcc = "bonnet" }
         capture(Robolectric.buildActivity(MainActivity::class.java).setup().get(), File(out, "app_choice.png"))
@@ -300,6 +306,11 @@ class DefinidayTest {
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_faux.png"))
         capture(quizEnd(right = 2), File(ui, "quiz_fin.png"))
         capture(quizEnd(right = 3), File(ui, "quiz_fin_refait.png")) // same day: score not counted
+        p.apply { lastQuizDay = Long.MIN_VALUE; passedQuizzes = 4 }
+        capture(quizEnd(right = 3), File(ui, "quiz_fin_noter.png")) // 5th passed quiz: the rate card, once
+        p.guessFirst = true
+        capture(main(), File(ui, "home_deviner.png"))
+        p.guessFirst = false
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
         capture(Robolectric.buildActivity(SettingsActivity::class.java).setup().get(), File(ui, "settings_dark.png"))

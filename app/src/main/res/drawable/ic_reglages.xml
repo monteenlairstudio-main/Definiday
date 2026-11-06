@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Settings: three sliders. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
+    <group android:translateX="12" android:translateY="12">
+        <path android:pathData="M4.5,7H19.5M4.5,12H19.5M4.5,17H19.5" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" />
+        <path android:pathData="M7.2,7a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0M13,12a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0M8.2,17a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0" android:fillColor="@color/surface" android:strokeColor="@color/ink" android:strokeWidth="1.7" />
+    </group>
+</vector>

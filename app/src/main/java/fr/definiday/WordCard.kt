@@ -34,12 +34,29 @@ object WordCard {
     fun render(item: Item, width: Int, height: Int, style: Style, bottom: Boolean = true) =
         render(lines(item, style), style.palette, width, height, bottom)
 
+    /** Shared picture (4:5, fits social feeds): the card centred, [badge] (Glose's head) and « Definiday » signed at the foot. */
+    fun share(item: Item, style: Style, badge: Bitmap?, width: Int = 1080): Bitmap {
+        val height = width * 5 / 4
+        val b = render(lines(item, style), style.palette, width, height, bottom = false, centre = true)
+        val c = Canvas(b)
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+            textSize = width * 0.036f; typeface = Typeface.create(Typeface.SERIF, Typeface.ITALIC); color = style.palette.nature
+        }
+        val size = width * 0.08f
+        val text = "Definiday"
+        var x = (width - paint.measureText(text) - (if (badge != null) size * 1.15f else 0f)) / 2
+        val base = height * 0.93f
+        badge?.let { c.drawBitmap(it, null, android.graphics.RectF(x, base - size * 0.78f, x + size, base + size * 0.22f), null); x += size * 1.15f }
+        c.drawText(text, x, base, paint)
+        return b
+    }
+
     /**
      * Full-screen lock wallpaper. bottom = text block ends above the shortcut row, because the system clock
      * grows to fill the upper half when no notification is shown; otherwise it starts at 42 % (old layout).
-     * The block shrinks until it fits in the lower half.
+     * The block shrinks until it fits in the lower half ([centre]: centred, in up to 70 % of the height).
      */
-    fun render(lines: List<Line>, pal: Palette, width: Int, height: Int, bottom: Boolean): Bitmap {
+    fun render(lines: List<Line>, pal: Palette, width: Int, height: Int, bottom: Boolean, centre: Boolean = false): Bitmap {
         val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
         c.drawPaint(Paint().apply {
@@ -55,8 +72,9 @@ object WordCard {
         var scale = 1f
         var blocks = layouts(scale)
         fun total() = blocks.sumOf { it.height } + gap * (blocks.size - 1)
-        while (total() > height * 0.4f && scale > 0.6f) { scale -= 0.05f; blocks = layouts(scale) }
-        var y = if (bottom) height * 0.84f - total() else height * 0.42f
+        val room = if (centre) 0.7f else 0.4f
+        while (total() > height * room && scale > 0.6f) { scale -= 0.05f; blocks = layouts(scale) }
+        var y = when { centre -> (height * 0.95f - total()) / 2; bottom -> height * 0.84f - total(); else -> height * 0.42f }
         for (l in blocks) {
             c.save(); c.translate(margin, y); l.draw(c); c.restore()
             y += l.height + gap
