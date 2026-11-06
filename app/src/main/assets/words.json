@@ -961,7 +961,7 @@
  {
   "mot": "avunculaire",
   "nature": "adj.",
-  "definition": "Qui se rapporte à un oncle ou à une tante.",
+  "definition": "Propre à l’oncle ou à la tante, ou qui les concerne.",
   "exemple": "Orphelin, il grandit sous l’autorité avunculaire de son oncle maternel.",
   "academie": true
  },
@@ -2207,7 +2207,7 @@
  {
   "mot": "derechef",
   "nature": "adv.",
-  "definition": "Une seconde fois, de nouveau. Littéraire.",
+  "definition": "Littéraire. À nouveau, encore une fois.",
   "exemple": "Le chat, chassé de la table, y sauta derechef.",
   "academie": true
  },
@@ -3362,7 +3362,7 @@
  {
   "mot": "félon",
   "nature": "adj. et n.",
-  "definition": "Qui trahit la foi due à son seigneur ; déloyal, traître.",
+  "definition": "Vassal parjure envers son seigneur ; par extension, qui manque à sa parole, perfide.",
   "exemple": "Le vassal félon livra le château à l’ennemi.",
   "academie": true
  },
@@ -4489,7 +4489,7 @@
  {
   "mot": "infatuation",
   "nature": "n. f.",
-  "definition": "Satisfaction excessive et ridicule de soi-même ; vanité.",
+  "definition": "Contentement de soi poussé jusqu’au ridicule ; vanité aveugle.",
   "exemple": "Son infatuation le rendait sourd à toute critique.",
   "academie": true
  },
@@ -5119,7 +5119,7 @@
  {
   "mot": "malitorne",
   "nature": "adj. et n.",
-  "definition": "Grossier, maladroit et gauche dans ses manières.",
+  "definition": "Se dit d’une personne lourde, sans adresse ni manières.",
   "exemple": "Ce garçon malitorne renversait tout ce qu’il touchait.",
   "academie": true
  },
@@ -6169,7 +6169,7 @@
  {
   "mot": "pantelant",
   "nature": "adj.",
-  "definition": "Qui respire avec peine, par saccades ; haletant.",
+  "definition": "Hors d’haleine, le souffle court et saccadé ; au figuré, bouleversé.",
   "exemple": "Il arriva pantelant au sommet de la côte, incapable de dire un mot.",
   "academie": true
  },
@@ -6197,7 +6197,7 @@
  {
   "mot": "paranymphe",
   "nature": "n. m.",
-  "definition": "Chez les Anciens, jeune homme ou jeune fille qui conduisait les mariés à la maison nuptiale.",
+  "definition": "Dans l’Antiquité, ami ou amie chargés d’accompagner les nouveaux époux jusqu’à leur demeure.",
   "exemple": "Le paranymphe ouvrait le cortège nuptial, flambeau à la main.",
   "academie": true
  },
@@ -6211,7 +6211,7 @@
  {
   "mot": "parousie",
   "nature": "n. f.",
-  "definition": "Dans la théologie chrétienne, retour glorieux du Christ à la fin des temps.",
+  "definition": "Pour les chrétiens, venue du Christ en gloire, attendue au terme de l’histoire.",
   "exemple": "Certains prédicateurs annonçaient la parousie pour l’an mille.",
   "academie": false
  },
@@ -6337,7 +6337,7 @@
  {
   "mot": "pérorer",
   "nature": "v. intr.",
-  "definition": "Discourir longuement et avec emphase.",
+  "definition": "Tenir de longs discours d’un ton pompeux et satisfait.",
   "exemple": "À chaque dîner de famille, l’oncle Gaston pérorait sur la politique étrangère.",
   "academie": true
  },
@@ -6379,7 +6379,7 @@
  {
   "mot": "phébus",
   "nature": "n. m.",
-  "definition": "Style obscur et ampoulé.",
+  "definition": "Langage prétentieux et alambiqué, qui sacrifie la clarté à l’effet.",
   "exemple": "Son discours, tout en phébus, ne fut compris de personne.",
   "academie": true
  },
@@ -6393,7 +6393,7 @@
  {
   "mot": "philippique",
   "nature": "n. f.",
-  "definition": "Discours violent, souvent satirique, dirigé contre quelqu’un, à l’image des harangues de Démosthène contre Philippe de Macédoine.",
+  "definition": "Harangue virulente et souvent satirique contre une personne ; le nom vient des discours de Démosthène contre le roi Philippe.",
   "exemple": "Le député lança une philippique contre le ministre sous les applaudissements de ses amis.",
   "academie": true
  },
@@ -6687,7 +6687,7 @@
  {
   "mot": "puîné",
   "nature": "adj. et n.",
-  "definition": "Né après un frère ou une sœur ; cadet.",
+  "definition": "Venu au monde après un aîné ; cadet.",
   "exemple": "Le domaine revint à l’aîné, et le puîné partit chercher fortune.",
   "academie": true
  },
@@ -7576,7 +7576,7 @@
  {
   "mot": "sternutatoire",
   "nature": "adj.",
-  "definition": "Qui provoque l’éternuement.",
+  "definition": "Qui fait éternuer.",
   "exemple": "La poudre sternutatoire du farceur mit toute la salle en émoi.",
   "academie": true
  },
@@ -7968,7 +7968,7 @@
  {
   "mot": "trouvère",
   "nature": "n. m.",
-  "definition": "Poète lyrique du Moyen Âge qui composait et chantait en langue d’oïl.",
+  "definition": "Au Moyen Âge, poète et musicien de langue d’oïl, pendant septentrional du troubadour.",
   "exemple": "Les trouvères chantaient l’amour courtois dans les cours du Nord.",
   "academie": true
  },
