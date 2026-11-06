@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.drawable.Animatable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
@@ -14,6 +15,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Spinner
@@ -100,6 +102,17 @@ class MainActivity : Activity() {
         }
         DailyReceiver.scheduleNext(this)
         DailyReceiver.scheduleQuiz(this)
+        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.play(it as ImageView) } // a tap replays it
+    }
+
+    override fun onResume() {
+        super.onResume()
+        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.drawable(context, R.drawable.glose_assis)); Glose.play(this) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (findViewById<ImageView>(R.id.glose).drawable as? Animatable)?.stop()
     }
 
     /** Past 3 random picks in a day, once: invite to slow down. */

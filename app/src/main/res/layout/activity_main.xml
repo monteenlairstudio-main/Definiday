@@ -11,6 +11,13 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <ImageView
+            android:id="@+id/glose"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/glose" />
+
         <LinearLayout
             android:id="@+id/card"
             android:layout_width="match_parent"

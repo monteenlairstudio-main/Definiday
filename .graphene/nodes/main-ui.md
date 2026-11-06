@@ -18,3 +18,4 @@ edges:
 
 - Académie link: no deterministic article URL; on tap, one POST to dictionnaire-academie.fr/search with X-Requested-With and Accept: application/json (without Accept the server answers 302 then 404), URL accepted only if it starts with https://www.dictionnaire-academie.fr/, CNRTL fallback. ACTION_VIEW wrapped in try/catch ActivityNotFoundException. <!-- id:ea96 -->
 - Past 3 random picks in a day, a 'Prenez le temps' dialog shows once (Prefs.warnedDay) with a quote of theme 'lenteur' (fallback string if citations.json missing). <!-- id:bf9e -->
+- Monsieur Glose (ImageView R.id.glose, 160 dp) sits above the word card: drawable refreshed in onResume (pose/overlays may have changed in Collection), Glose.play() = AVD.reset()+start() only if ValueAnimator.areAnimatorsEnabled(), stopped in onPause, tap replays. <!-- id:d9cd -->

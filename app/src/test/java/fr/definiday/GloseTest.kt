@@ -3,9 +3,13 @@ package fr.definiday
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.widget.ImageView
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -38,6 +42,16 @@ class GloseTest {
         val base = render(R.drawable.glose_assis_vd)
         assertTrue(diff(base, render(R.drawable.glose_assis_vd)) == 0)
         overlays.forEach { (name, style) -> assertTrue(name, diff(base, render(R.drawable.glose_assis_vd, listOf(style))) > 50) }
+    }
+
+    @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
+        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+        val v = c.get().findViewById<ImageView>(R.id.glose)
+        val d = v.drawable as AnimatedVectorDrawable
+        v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888))) // the AVD's animator really starts at its first draw
+        assertTrue(d.isRunning)
+        c.pause()
+        assertFalse(d.isRunning)
     }
 
     /** Not a check: control PNGs (every pose, every overlay on the seated pose) in app/build/demo/glose. */
