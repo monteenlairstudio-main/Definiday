@@ -8,7 +8,8 @@ covers:
   - app/src/main/java/fr/definiday/Quotes.kt
   - tools/citations/
   - app/src/main/assets/citations.json
-last_commit: 1638e6e
+last_commit: 7b46493
 ---
 
 - The "annee" field of tools/citations/citations_*.json held edition years (Voltaire, Micromégas (1991)), not first-publication dates: it was emptied for all 450 quotes (texts untouched) and citations.json regenerated with python3 tools/merge_quotes.py. Quote.signature omits the parentheses when annee is empty. Only re-add a year from a reliable source for the work's first publication. <!-- id:d53f -->
+- 7b46493: tools/merge_quotes.py applies typo() (copied, 3 lines: merge_words.py runs its merge at import time and would overwrite words.json) to texte/auteur/oeuvre, never source (URLs). citations.json regenerated, wording unchanged. Test quoteSlotsFollowTheRatio asserts no straight apostrophe nor plain space before ;:!? in texte. 8 quotes with NO space before ;:!? are not fixed by typo(). <!-- id:f217 -->
