@@ -1,8 +1,8 @@
 package fr.definiday
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -83,9 +83,7 @@ class SettingsActivity : Activity() {
         }
 
         // Apparence
-        val cat = Styles.load(this)
-        pool(R.id.palettes, R.string.palettes, R.string.palettes_title, cat.palettes.map { it.id to it.nom }, { p.palettes }) { p.palettes = it }
-        pool(R.id.polices, R.string.polices, R.string.polices_title, cat.polices.map { it.id to it.nom }, { p.polices }) { p.polices = it }
+        findViewById<Button>(R.id.styles_open).setOnClickListener { startActivity(Intent(this, StylesActivity::class.java)) }
         findViewById<Switch>(R.id.sounds).apply {
             isChecked = p.sounds
             setOnCheckedChangeListener { _, on -> p.sounds = on; if (on) Sounds.play(context, Sounds.PAGE) } // a sample, so the choice is heard
@@ -96,26 +94,10 @@ class SettingsActivity : Activity() {
         super.onResume()
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
-    }
-
-    /** Button opening a multi-choice list of the catalog; an empty choice means "all". */
-    private fun pool(id: Int, label: Int, title: Int, items: List<Pair<String, String>>, get: () -> Set<String>?, set: (Set<String>?) -> Unit) {
-        val b = findViewById<Button>(id)
-        fun refresh() { b.text = getString(label, get()?.size ?: items.size, items.size) }
-        refresh()
-        b.setOnClickListener {
-            val checked = BooleanArray(items.size) { get()?.contains(items[it].first) ?: true }
-            AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMultiChoiceItems(items.map { it.second }.toTypedArray(), checked) { _, i, on -> checked[i] = on }
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val kept = items.filterIndexed { i, _ -> checked[i] }.map { it.first }.toSet()
-                    set(if (kept.isEmpty() || kept.size == items.size) null else kept)
-                    refresh()
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .show()
-        }
+        // back from Couleurs et polices
+        val cat = Styles.load(this)
+        findViewById<TextView>(R.id.styles_hint).text = getString(R.string.styles_row_hint,
+            Styles.kept(cat.palettes, p.palettes, Palette::id).size, cat.palettes.size, Styles.kept(cat.polices, p.polices, Police::id).size, cat.polices.size)
     }
 
     private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
