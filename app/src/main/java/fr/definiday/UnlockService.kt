@@ -35,6 +35,8 @@ class UnlockService : Service() {
             .setContentText(getString(R.string.watch_text, Prefs(this).unlocks))
             .build()
         if (Build.VERSION.SDK_INT >= 34) startForeground(ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE) else startForeground(ID, n)
+        // restarted (START_STICKY) after the word was removed or the setting went back to the duration: nothing to watch
+        if (Prefs(this).let { it.wallpaperEndAt == 0L || it.unlocks == 0 }) stopSelf()
         return START_STICKY
     }
 

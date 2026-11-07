@@ -368,4 +368,24 @@ class BugHuntTest {
             assertTrue(Sounds.ALL.none { shadowOf(Sounds.pool).wasResourcePlayed(it) })
         } finally { Sounds.release() }
     }
+
+    /** N10 (audit FON 1): restarted by the system (START_STICKY) with no word on the lock screen, the watch kept its notification up. */
+    @Test fun unlockServiceRestartedWithoutAWordStops() {
+        Prefs(ctx).unlocks = 2 // wallpaperEndAt = 0: no word shown
+        val c = Robolectric.buildService(UnlockService::class.java).create().startCommand(0, 1)
+        assertTrue(shadowOf(c.get()).isStoppedBySelf)
+    }
+
+    /** N6 (audit FON 1): show() / the reminder ran before rescheduling, so one that threw ended the daily alarms for good. */
+    @Test fun throwingShowKeepsTheAlarmChain() {
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx) // the quiz reminder has something to say
+        val broken = object : android.content.ContextWrapper(ctx) {
+            override fun getSystemService(name: String): Any? = if (name == android.content.Context.NOTIFICATION_SERVICE) error("boom") else super.getSystemService(name)
+        }
+        val am = shadowOf(ctx.getSystemService(android.app.AlarmManager::class.java))
+        for (action in listOf(DailyReceiver.ACTION_SHOW, DailyReceiver.ACTION_QUIZ)) {
+            assertTrue(runCatching { DailyReceiver().onReceive(broken, Intent(ctx, DailyReceiver::class.java).setAction(action)) }.isFailure)
+            assertTrue(action, am.scheduledAlarms.any { shadowOf(it.operation).savedIntent.action == action })
+        }
+    }
 }

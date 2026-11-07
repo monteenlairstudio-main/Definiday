@@ -23,8 +23,9 @@ import java.time.ZonedDateTime
 class DailyReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         when (intent.action) {
-            ACTION_SHOW -> { if (Prefs(ctx).enabled) show(ctx) else Widget.update(ctx); scheduleNext(ctx) }
-            ACTION_QUIZ -> { quizReminder(ctx); scheduleQuiz(ctx) }
+            // tomorrow's alarm first: a show() that throws cannot end the daily chain
+            ACTION_SHOW -> { scheduleNext(ctx); if (Prefs(ctx).enabled) show(ctx) else Widget.update(ctx) }
+            ACTION_QUIZ -> { scheduleQuiz(ctx); quizReminder(ctx) }
             ACTION_END -> clearWallpaper(ctx)
             // BOOT_COMPLETED, MY_PACKAGE_REPLACED, TIME_SET, TIMEZONE_CHANGED, exact-alarm access granted: re-anchor alarms
             else -> {
