@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The one interface serif (AppTheme fontFamily): Libre Baskerville, a variable file (wght 400-700) named twice so that
+     textStyle bold takes the real 700 instead of a synthetic one. No italic cut: avoid textStyle italic (it would be slanted). -->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:font="@font/libre_baskerville" android:fontStyle="normal" android:fontWeight="400" android:fontVariationSettings="'wght' 400" />
+    <font android:font="@font/libre_baskerville" android:fontStyle="normal" android:fontWeight="700" android:fontVariationSettings="'wght' 700" />
+</font-family>

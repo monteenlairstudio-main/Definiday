@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.RectF
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -103,9 +102,12 @@ class Widget : AppWidgetProvider() {
             val b = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888)
             val c = Canvas(b)
             val s = px.toFloat()
-            val (initial, face) = Postal.initial(ctx, item, style)
-            Postal.drawStamp(c, RectF(s * 0.36f, s * 0.04f, s * 0.98f, s * 0.78f), style.palette.mot, style.palette.haut, initial, face)
-            Postal.drawPostmark(c, ctx, s * 0.3f, s * 0.68f, s * 0.28f, style.palette.nature, date, s * 0.62f, arcs = false)
+            Postal.Stamp(ctx, style.palette.mot, style.palette.haut, Postal.initial(item), Styles.initialFace(ctx, item, style), caption = null)
+                .apply { setBounds((s * 0.42f).toInt(), (s * 0.02f).toInt(), (s * 0.98f).toInt(), (s * 0.7f).toInt()) }.draw(c)
+            // ring radius 0.23 s centred at (0.24 s, 0.74 s), its date clear of the stamp (the drawable puts the ring r + 1 dp from its left edge)
+            val (r, d) = s * 0.23f to Postal.dp(ctx)
+            Postal.Postmark(ctx, style.palette.nature, date, arcs = false)
+                .apply { setBounds((s * 0.24f - r - d).toInt(), (s * 0.74f - r - d).toInt(), (s * 0.66f).toInt(), (s * 0.74f + r + d).toInt()) }.draw(c)
             return b
         }
 

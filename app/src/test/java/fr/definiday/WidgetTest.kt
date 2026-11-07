@@ -109,7 +109,7 @@ class WidgetTest {
         render(words.maxBy { it.definition.length }, 340, 110, "4x1.5_long_def")
         render(Quotes.load(ctx).maxBy { it.texte.length }, 340, 160, "4x2_quote")
         render(null, 340, 160, "preview", scale = 1 / 1.5f) // -> res/drawable-nodpi/widget_preview.png (picker before Android 12)
-        val sample = word("sérendipité") // -> res/drawable-nodpi/widget_stamp_preview.png (the layout's preview stamp), 120 px
+        val sample = word("sérendipité") // -> res/drawable-nodpi/widget_stamp_preview.webp (the layout's preview stamp), 120 px
         Widget.stamp(ctx, sample, Styles.of(ctx, sample), 120, LocalDate.of(2026, 11, 6))
             .let { b -> File(out, "stamp_preview.png").outputStream().use { b.compress(Bitmap.CompressFormat.PNG, 100, it) } }
     }

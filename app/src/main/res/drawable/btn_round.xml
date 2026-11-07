@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Round actions and top-bar buttons (the disc is in the ic_*.xml icon): no outline at rest, 3 dp accent outline when focused, ripple when pressed. -->
+<!-- Borderless target (Action, icon buttons on a paper): nothing at rest, 3 dp accent outline when focused, ripple when pressed.
+     On the postcard, MainActivity rebuilds it in the palette's texte colour (Postal.ring). -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/ripple">
     <item android:id="@android:id/mask">
-        <shape><corners android:radius="16dp" /><solid android:color="#FFFFFFFF" /></shape>
+        <shape><corners android:radius="@dimen/radius_paper" /><solid android:color="#FFFFFFFF" /></shape>
     </item>
     <item>
         <selector>
             <item android:state_focused="true">
-                <shape><corners android:radius="16dp" /><stroke android:width="3dp" android:color="@color/accent" /></shape>
+                <shape><corners android:radius="@dimen/radius_paper" /><stroke android:width="3dp" android:color="@color/accent" /></shape>
             </item>
             <item><color android:color="@android:color/transparent" /></item>
         </selector>

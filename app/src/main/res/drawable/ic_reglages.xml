@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Settings: three sliders. -->
+<!-- Réglages: three sliders. Interface icons (ic_*.xml, Correspondance § 6): 24 dp grid, 1.75 stroke, rounded ends and joins, in ink;
+     no disc (the button draws it: btn_disc), tinted in code on the postcard (compoundDrawableTintList = palette texte). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
-    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
-    <group android:translateX="12" android:translateY="12">
-        <path android:pathData="M4.5,7H19.5M4.5,12H19.5M4.5,17H19.5" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" />
-        <path android:pathData="M7.2,7a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0M13,12a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0M8.2,17a1.9,1.9 0 1,0 3.8,0a1.9,1.9 0 1,0 -3.8,0" android:fillColor="@color/surface" android:strokeColor="@color/ink" android:strokeWidth="1.7" />
-    </group>
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M4.5,7H8M12,7H19.5M4.5,12H13M17,12H19.5M4.5,17H5M9,17H19.5" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M8,7a2,2 0 1,0 4,0a2,2 0 1,0 -4,0M13,12a2,2 0 1,0 4,0a2,2 0 1,0 -4,0M5,17a2,2 0 1,0 4,0a2,2 0 1,0 -4,0" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
 </vector>

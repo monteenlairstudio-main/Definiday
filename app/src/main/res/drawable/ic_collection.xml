@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Glose's collection: his yarn ball and a loose thread. -->
+<!-- Glose's album: a perforated stamp and its vignette. Interface icons (ic_*.xml, Correspondance § 6): 24 dp grid, 1.75 stroke, rounded ends and joins, in ink;
+     no disc (the button draws it: btn_disc), tinted in code on the postcard (compoundDrawableTintList = palette texte). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
-    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
-    <group android:translateX="12" android:translateY="12">
-        <path android:pathData="M4,11.5a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0M5.6,7.4C9.3,8.1 13.6,10.9 16.6,16.2M4.3,11.4C7.8,12 11.3,14.5 13.4,18.8M8.6,4.6C12.3,5.4 16,8.4 18.6,12.4M17.4,16.6C18.8,18.6 20.6,19.6 22,19.2" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
-    </group>
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M5,3.5L5.55,3.5A0.85,0.85 0 0,0 7.25,3.5L8.35,3.5A0.85,0.85 0 0,0 10.05,3.5L11.15,3.5A0.85,0.85 0 0,0 12.85,3.5L13.95,3.5A0.85,0.85 0 0,0 15.65,3.5L16.75,3.5A0.85,0.85 0 0,0 18.45,3.5L19,3.5L19,4.07A0.85,0.85 0 0,0 19,5.77L19,6.9A0.85,0.85 0 0,0 19,8.6L19,9.73A0.85,0.85 0 0,0 19,11.43L19,12.57A0.85,0.85 0 0,0 19,14.27L19,15.4A0.85,0.85 0 0,0 19,17.1L19,18.23A0.85,0.85 0 0,0 19,19.93L19,20.5L18.45,20.5A0.85,0.85 0 0,0 16.75,20.5L15.65,20.5A0.85,0.85 0 0,0 13.95,20.5L12.85,20.5A0.85,0.85 0 0,0 11.15,20.5L10.05,20.5A0.85,0.85 0 0,0 8.35,20.5L7.25,20.5A0.85,0.85 0 0,0 5.55,20.5L5,20.5L5,19.93A0.85,0.85 0 0,0 5,18.23L5,17.1A0.85,0.85 0 0,0 5,15.4L5,14.27A0.85,0.85 0 0,0 5,12.57L5,11.43A0.85,0.85 0 0,0 5,9.73L5,8.6A0.85,0.85 0 0,0 5,6.9L5,5.77A0.85,0.85 0 0,0 5,4.07Z" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M8.2,7H15.8V14.6H8.2Z" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M8.2,13Q10.5,10.4 12.2,12.2Q13.8,10.6 15.8,12.6" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
 </vector>

@@ -63,7 +63,7 @@ object WordCard {
         c.drawColor(Postal.KRAFT)
         val m = width * 0.05f
         val card = RectF(m, m, width - m, height - m)
-        c.drawRoundRect(card, m * 0.6f, m * 0.6f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Postal.FEUILLET; setShadowLayer(m * 0.3f, 0f, m * 0.1f, 0x29000000) })
+        c.drawRoundRect(card, m * 0.6f, m * 0.6f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Postal.SHEET; setShadowLayer(m * 0.3f, 0f, m * 0.1f, 0x29000000) })
         val face = RectF(card).apply { inset(width * 0.014f, width * 0.014f) }
         c.drawRoundRect(face, m * 0.4f, m * 0.4f, gradient(style.palette, face.top, face.bottom))
         block(ctx, c, item, style, face, face.height() * 0.74f, badge, date) { face.top + (face.height() * 0.92f - it) / 2 }
@@ -103,11 +103,15 @@ object WordCard {
 
         val label = ctx.getString(if (item is Quote) R.string.card_quote else R.string.card_letter, Postal.day(date)).uppercase(Locale.FRENCH)
         c.drawText(label, left, y + stampH * 0.42f, Postal.mention(ctx, u * 0.03f, pal.nature))
-        val stamp = RectF(face.right - pad - stampW, y, face.right - pad, y + stampH)
-        val (initial, initialFace) = Postal.initial(ctx, item, style)
-        Postal.drawStamp(c, stamp, pal.mot, pal.haut, initial.takeIf { vignette == null }, initialFace, vignette)
+        fun Postal.Paper.drawIn(l: Float, t: Float, r: Float, b: Float) { setBounds(l.toInt(), t.toInt(), r.toInt(), b.toInt()); draw(c) }
+        val stampLeft = face.right - pad - stampW
+        Postal.Stamp(ctx, pal.mot, pal.haut, Postal.initial(item), Styles.initialFace(ctx, item, style), caption = null, vignette = vignette)
+            .drawIn(stampLeft, y, face.right - pad, y + stampH)
+        // ring of radius r centred 1.45 r left of the stamp (the drawable puts it r + 1 dp from its left edge), waves onto the stamp
         val r = u * 0.058f
-        Postal.drawPostmark(c, ctx, stamp.left - r * 1.45f, stamp.centerY(), r, pal.nature, date, stamp.left + stampW * 0.3f)
+        val d = Postal.dp(ctx)
+        val cx = stampLeft - r * 1.45f
+        Postal.Postmark(ctx, pal.nature, date).drawIn(cx - r - d, y + stampH / 2 - r - d, stampLeft + stampW * 0.3f, y + stampH / 2 + r + d)
         y += stampH + gap * 0.5f
 
         blocks.forEachIndexed { i, l ->
@@ -115,7 +119,7 @@ object WordCard {
             if (i == 0) {
                 val last = l.lineCount - 1
                 val end = (left + l.getLineRight(last) + u * 0.012f).coerceAtMost(face.right - pad - u * 0.04f)
-                Postal.drawThread(c, face.left, end, y + l.getLineBaseline(last) + l.paint.descent(), u / 411, pal) // just under the descenders
+                Postal.drawYarn(c, face.left, end, y + l.getLineBaseline(last) + l.paint.descent(), u / 411, pal) // just under the descenders
                 y += threadRoom
             }
             y += l.height + gap

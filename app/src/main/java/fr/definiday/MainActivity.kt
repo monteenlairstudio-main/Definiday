@@ -8,6 +8,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.net.Uri
@@ -55,6 +56,9 @@ class MainActivity : Activity() {
         revealed = savedInstanceState?.getString(STATE_REVEALED)
         dejaVu = savedInstanceState?.getBoolean(STATE_DEJA_VU) ?: intent.getBooleanExtra(EXTRA_DEJA_VU, false)
         if (resources.configuration.fontScale > 1.5f) findViewById<GridLayout>(R.id.actions).columnCount = 2 // labels at full size, never cut
+        // the notebook: a sheet ruled from the example's own baselines; Glose's yarn behind the papers, from him to the quiz's seal (x of the seal)
+        findViewById<View>(R.id.exemple_box).background = LayerDrawable(arrayOf(getDrawable(R.drawable.card_soft)!!, Postal.Seyes(this, findViewById(R.id.exemple))))
+        findViewById<LinearLayout>(R.id.page).let { it.background = Postal.Yarn(this, it, findViewById(R.id.glose), findViewById(R.id.quiz_open), 36 * Postal.dp(this)) }
         findViewById<Button>(R.id.new_word).setOnClickListener {
             val w = Words.random(this)
             pick(w)
@@ -102,12 +106,20 @@ class MainActivity : Activity() {
         current?.let { show(it, top = false) }
         findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); Glose.play(this) }
         findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
-        val done = p.lastQuizDay == java.time.LocalDate.now().toEpochDay()
-        findViewById<Button>(R.id.quiz_open).setText(if (done) R.string.quiz_done else R.string.quiz_open)
+        val today = java.time.LocalDate.now()
+        findViewById<TextView>(R.id.date).text = today.format(java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM", Locale.FRENCH))
+        val done = p.lastQuizDay == today.toEpochDay()
+        findViewById<Button>(R.id.quiz_open).apply { // done: back to a plain Row, the fill and the seal are for what is still to do (audit 011 n° 19)
+            setText(if (done) R.string.quiz_done else R.string.quiz_open)
+            background = getDrawable(if (done) R.drawable.btn else R.drawable.btn_primary)
+            if (done) setTextColor(getColorStateList(R.color.btn_text)) else setTextColor(getColor(R.color.bg))
+        }
+        findViewById<View>(R.id.seal).visibility = if (done) View.GONE else View.VISIBLE
         val got = (p.unlocked + Unlocks.of(emptyMap())).count(Unlocks.byId::containsKey) // the default look counts from the start
         findViewById<Button>(R.id.collection_open).apply {
             text = getString(R.string.collection_count, got, Unlocks.items.size)
             contentDescription = getString(R.string.collection_desc, got, Unlocks.items.size)
+            tooltipText = contentDescription
         }
         findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
     }
@@ -141,16 +153,25 @@ class MainActivity : Activity() {
         current = item
         Words.shown(this, listOf(item)) // the card shows it: seen today (history, quiz)
         val st = Styles.of(this, item)
-        findViewById<View>(R.id.card).background = Styles.card(this, st.palette, 20f)
-        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(st.palette.mot) }
-        findViewById<android.widget.CheckBox>(R.id.favori).buttonTintList = android.content.res.ColorStateList.valueOf(st.palette.mot) // readable on the card like the word
-        listOf(R.id.label to st.palette.nature, R.id.nature to st.palette.nature, R.id.definition to st.palette.texte)
+        val pal = st.palette
+        findViewById<View>(R.id.card).background = Postal.postcard(this, pal)
+        findViewById<TextView>(R.id.mot).apply { typeface = st.typeface; setTextColor(pal.mot) }
+        findViewById<android.widget.CheckBox>(R.id.favori).buttonTintList = ColorStateList.valueOf(pal.mot) // readable on the card like the word
+        listOf(R.id.label to pal.nature, R.id.nature to pal.nature, R.id.definition to pal.texte)
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
+        // stamp in the word's colours (its initial in its suggested font), today's postmark in the nature colour, a rule over the actions
+        val initial = (if (item is Word) item.mot else (item as Quote).auteur).take(1).uppercase(Locale.FRENCH)
+        findViewById<ImageView>(R.id.stamp).setImageDrawable(Postal.Stamp(this, pal.mot, pal.haut, initial, Styles.initialFace(this, item, st)))
+        findViewById<ImageView>(R.id.postmark).setImageDrawable(Postal.Postmark(this, pal.nature))
+        findViewById<View>(R.id.card_rule).setBackgroundColor(pal.nature and 0xFFFFFF or 0x59000000) // 35 %, decoration
+        listOf(R.id.academie, R.id.cnrtl, R.id.share, R.id.new_word).forEach { id -> findViewById<Button>(id).apply {
+            setTextColor(pal.texte); background = Postal.ring(context, pal.texte)
+        } }
         findViewById<Button>(R.id.reveal).apply { // a veil in the card's own ink, dashed edge; focused: solid 3 dp edge
             setTextColor(st.palette.texte)
             val dp = resources.displayMetrics.density
             fun veil(edge: Float, dash: Float) = GradientDrawable().apply {
-                cornerRadius = 14 * dp; setColor(st.palette.texte and 0xFFFFFF or 0x1A000000); setStroke((edge * dp).toInt(), st.palette.texte, dash * dp, 4 * dp)
+                cornerRadius = resources.getDimension(R.dimen.radius_paper); setColor(st.palette.texte and 0xFFFFFF or 0x1A000000); setStroke((edge * dp).toInt(), st.palette.texte, dash * dp, 4 * dp)
             }
             background = RippleDrawable(ColorStateList.valueOf(st.palette.texte and 0xFFFFFF or 0x33000000),
                 StateListDrawable().apply { addState(intArrayOf(android.R.attr.state_focused), veil(3f, 0f)); addState(intArrayOf(), veil(1f, 6f)) }, null)
@@ -169,6 +190,7 @@ class MainActivity : Activity() {
                 text(R.id.anecdote, "")
                 academie.visibility = View.GONE
                 cnrtl.setText(R.string.action_source)
+                cnrtl.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_source, 0, 0) // a quill, not the TLFi's book (audit 011 n° 20)
                 cnrtl.contentDescription = getString(R.string.action_source_desc)
                 cnrtl.setOnClickListener { open(item.source) }
             }
@@ -183,10 +205,12 @@ class MainActivity : Activity() {
                 academie.visibility = View.VISIBLE
                 academie.setOnClickListener { openAcademie(item.mot) }
                 cnrtl.setText(R.string.action_tlfi)
+                cnrtl.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_tlfi, 0, 0)
                 cnrtl.contentDescription = getString(R.string.action_tlfi_desc)
                 cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
             }
         }
+        listOf(R.id.academie, R.id.cnrtl, R.id.share, R.id.new_word).forEach { findViewById<Button>(it).compoundDrawableTintList = ColorStateList.valueOf(pal.texte) }
         hide(Prefs(this).guessFirst && item is Word && item.key != revealed)
         findViewById<android.widget.CheckBox>(R.id.favori).apply { // words only; set before listening: showing is not a tap
             visibility = if (item is Word) View.VISIBLE else View.GONE
@@ -235,7 +259,8 @@ class MainActivity : Activity() {
     /** Largest size up to [max] sp at which each piece (between spaces, or after a hyphen) holds on one line,
      *  but never below 1.3 x the definition: there the word breaks between syllables instead (never anywhere). */
     private fun fit(v: TextView, max: Float) {
-        val width = (resources.configuration.screenWidthDp - 2 * 16 - 2 * 20) * resources.displayMetrics.density // page and card padding (activity_main.xml)
+        val card = findViewById<View>(R.id.card)
+        val width = (resources.configuration.screenWidthDp - 2 * 16) * resources.displayMetrics.density - card.paddingStart - card.paddingEnd // page and card padding
         val pieces = v.text.split(Regex("[ \u00a0]|(?<=-)"))
         var sp = max
         v.textSize = sp
@@ -246,25 +271,33 @@ class MainActivity : Activity() {
         v.hyphenationFrequency = if (pieces.any { v.paint.measureText(it) > width }) Layout.HYPHENATION_FREQUENCY_FULL else Layout.HYPHENATION_FREQUENCY_NONE
     }
 
-    /** One chip per item of the day (word or quote, shown or not yet, e.g. 2nd-3rd in lock-only mode) and per random pick seen today. */
+    /** One envelope per item of the day (word or quote, shown or not yet, e.g. 2nd-3rd in lock-only mode) and per random pick seen today;
+     *  none when the only one is the card (audit 011 n° 18). Three to a row when the words are short; a word never cut (n° 2). */
     private fun showSeen() {
         val box = findViewById<LinearLayout>(R.id.seen)
         box.removeAllViews()
+        val items = (Words.today(this) + Words.seenToday(this)).distinctBy { it.key }
+        val alone = items.size <= 1 && items.firstOrNull()?.key == current?.key
+        listOf<View>(box, findViewById(R.id.seen_label)).forEach { it.visibility = if (alone) View.GONE else View.VISIBLE }
+        if (alone) return
         val gap = (8 * resources.displayMetrics.density).toInt()
-        val width = (resources.configuration.screenWidthDp - 2 * 16) * resources.displayMetrics.density // page padding
+        val width = ((resources.configuration.screenWidthDp - 2 * 16) * resources.displayMetrics.density).toInt() // page padding
         var row: LinearLayout? = null
         var used = 0
-        (Words.today(this) + Words.seenToday(this)).distinctBy { it.key }.forEach { w ->
-            val chip = Button(this, null, 0, R.style.Chip).apply {
+        items.forEach { w ->
+            val env = Button(this, null, 0, R.style.Envelope).apply {
                 text = if (w is Word) w.mot else getString(R.string.quote_chip)
+                minWidth = (width - 2 * gap) / 3; minimumWidth = minWidth
                 setOnClickListener { pick(w) }
                 isSelected = w.key == current?.key // the one in the card: outlined, and said by TalkBack
                 measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             }
-            if (row == null || used + chip.measuredWidth > width) { row = LinearLayout(this).also(box::addView); used = 0 }
-            row!!.addView(chip, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                .apply { marginEnd = gap; topMargin = gap })
-            used += chip.measuredWidth + gap
+            val fits = env.measuredWidth <= width
+            if (!fits) env.apply { isSingleLine = false; textLocale = Locale.FRENCH; hyphenationFrequency = Layout.HYPHENATION_FREQUENCY_FULL } // alone on its row, broken between syllables
+            if (row == null || used + gap + env.measuredWidth > width) { row = LinearLayout(this).also(box::addView); used = -gap } // the gap goes between envelopes only
+            row!!.addView(env, LinearLayout.LayoutParams(if (fits) LinearLayout.LayoutParams.WRAP_CONTENT else LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT).apply { if (used >= 0) marginStart = gap; topMargin = gap })
+            used += gap + env.measuredWidth
         }
     }
 

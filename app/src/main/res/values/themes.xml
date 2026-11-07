@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- « Correspondance + rigueur Édition » kit (design/styles/correspondance/implementation.md):
+     one serif for the whole interface (Libre Baskerville, theme fontFamily), Courier Prime only for postal mentions (style Postal),
+     Dancing Script only for Glose's short notes (style Note), labels in small-caps style (Label), radii from dimens.xml. -->
 <resources>
     <style name="Base" parent="android:Theme.Material.Light.NoActionBar" />
-    <!-- every Button (layouts and code) takes Btn: rounded, accent outline, normal case -->
+    <!-- every TextView, Button, Switch, Spinner and dialog takes the interface serif; every Button takes Btn -->
     <style name="AppTheme" parent="Base">
         <item name="android:colorAccent">@color/accent</item>
         <item name="android:colorPrimary">#1B2440</item>
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:textColorPrimary">@color/ink</item>
         <item name="android:textColorSecondary">@color/ink2</item>
+        <item name="android:textColorLink">@color/accent</item>
+        <item name="android:fontFamily">@font/ui_serif</item>
         <item name="android:buttonStyle">@style/Btn</item>
     </style>
+    <!-- a rubric (« Exemple », « Autres lettres du jour »): small capitals of the serif, lightly spaced, a heading for TalkBack -->
     <style name="Label">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:letterSpacing">0.15</item>
+        <item name="android:letterSpacing">0.1</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:accessibilityHeading">true</item>
-        <item name="android:textColor">@color/accent</item>
+        <item name="android:textColor">@color/ink2</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
+    <!-- a postal mention (date line, « N° », « Question 2 sur 3 », stamp captions): Courier Prime capitals in plume, four words at most -->
+    <style name="Postal" parent="Label">
+        <item name="android:fontFamily">@font/courier_prime</item>
+        <item name="android:letterSpacing">0.13</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:accessibilityHeading">false</item>
+    </style>
+    <!-- screen title (all destination screens, audit 011 n° 7) -->
     <style name="Title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:accessibilityHeading">true</item>
-        <item name="android:fontFamily">serif</item>
         <item name="android:textColor">@color/ink</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingMultiplier">1.05</item>
     </style>
-    <!-- serif body text, as on the card -->
+    <!-- body text -->
     <style name="Body">
         <!-- a long word in running text breaks between syllables (with a hyphen), never anywhere -->
         <item name="android:hyphenationFrequency">normal</item>
-        <item name="android:fontFamily">serif</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:textColor">@color/ink</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    <!-- a quotation copied out in plume ink (the colour marks the quote: no italic cut in the serif) -->
+    <style name="Example" parent="Body">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+    </style>
+    <!-- Glose's handwritten note: 2 to 6 words, one per screen, never the only carrier of information; 16 sp at least -->
+    <style name="Note">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/note</item>
+        <item name="android:textColor">@color/yarn_note</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="Help">
         <item name="android:layout_width">match_parent</item>
@@ -45,24 +71,43 @@
         <item name="android:textColor">@color/ink2</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <!-- a clean rule between blocks: 1 dp card_edge (decoration). On the postcard, MainActivity tints it with the palette. -->
+    <style name="Rule">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/card_edge</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
     <style name="Btn" parent="android:Widget.Material.Button">
         <item name="android:background">@drawable/btn</item>
         <item name="android:stateListAnimator">@animator/press</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/btn_text</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">serif</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
-    <!-- home chips of the day: pill-shaped -->
-    <style name="Chip" parent="Btn">
-        <item name="android:background">@drawable/btn_chip</item>
+    <!-- a letter to pick (home « Autres lettres du jour »): a kraft envelope, the word under its flap; selected = the one on the card -->
+    <style name="Envelope" parent="Btn">
+        <item name="android:background">@drawable/btn_envelope</item>
+        <item name="android:paddingTop">22dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:singleLine">true</item>
     </style>
-    <!-- home: round icon (its disc is in the drawable) over a short sans-serif label; the whole cell is the 48 dp target.
+    <!-- top bar: a kraft disc (a pill with text), 48 dp; give it a tooltipText as well as its contentDescription -->
+    <style name="Disc">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/btn_disc</item>
+        <item name="android:stateListAnimator">@animator/press</item>
+    </style>
+    <!-- an icon over a short label, borderless (home: the postcard's actions); the whole cell is the 48 dp target.
          Labels keep the font size; the row becomes 2 x 2 at large font sizes (MainActivity.onCreate). -->
     <style name="Action" parent="android:Widget.Material.Button.Borderless">
         <item name="android:layout_width">0dp</item>
@@ -71,16 +116,15 @@
         <item name="android:gravity">top|center_horizontal</item>
         <item name="android:background">@drawable/btn_round</item>
         <item name="android:stateListAnimator">@animator/press</item>
-        <item name="android:drawablePadding">6dp</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:drawablePadding">4dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/btn_text</item>
         <item name="android:textSize">13sp</item>
         <item name="android:minWidth">48dp</item>
-        <item name="android:minHeight">48dp</item>
+        <item name="android:minHeight">56dp</item>
         <item name="android:paddingStart">2dp</item>
         <item name="android:paddingEnd">2dp</item>
-        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">6dp</item>
     </style>
     <!-- full-width row of the home actions and settings -->
@@ -117,19 +161,21 @@
         <item name="android:trackTint">@color/switch_track</item>
         <item name="android:trackTintMode">src_over</item>
     </style>
-    <!-- the one main action of a screen: accent fill, text bg (4.72:1 light, 8.19:1 dark) -->
+    <!-- the one main action of a screen: plume fill on its ink-pad edge, text bg (7.4:1 light, 8.95:1 dark).
+         Once done (« Quiz du soir (fait ✓) »), the button goes back to Row: the fill is for what is still to do. -->
     <style name="Primary" parent="Row">
         <item name="android:background">@drawable/btn_primary</item>
         <item name="android:textColor">@color/bg</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:paddingBottom">13dp</item>
     </style>
-    <!-- a setting's value (time, palettes): drawn like the menus (arrow, no outline, sans-serif), not like an action -->
+    <!-- a setting's value (time, palettes): drawn like the menus (arrow, no outline), not like an action -->
     <style name="Setting" parent="android:Widget.Material.Spinner">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:gravity">start|center_vertical</item>
-        <item name="android:fontFamily">sans-serif</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">48dp</item>

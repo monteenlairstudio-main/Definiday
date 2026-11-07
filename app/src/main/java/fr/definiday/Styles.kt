@@ -64,6 +64,11 @@ object Styles {
         return Style(pick(pal, palettes, Palette::id, item.key), police?.let { face(ctx, it) } ?: Typeface.SERIF, police)
     }
 
+    /** A stamp's single letter: the word's own font when kept in the pool, even a display face (one letter stays readable, style.md § 4). */
+    fun initialFace(ctx: Context, item: Item, st: Style): Typeface = (item as? Word)?.let { w ->
+        kept(load(ctx).polices, Prefs(ctx).polices, Police::id).firstOrNull { it.id == w.police }?.let { face(ctx, it) }
+    } ?: st.typeface
+
     fun face(ctx: Context, p: Police): Typeface? = ctx.resources.getIdentifier(p.fichier, "font", ctx.packageName).takeIf { it != 0 }?.let(ctx.resources::getFont)
 
     /** A card in the palette's gradient, rounded [radiusDp]; a 1 dp edge when it melts into the page (needsEdge). */

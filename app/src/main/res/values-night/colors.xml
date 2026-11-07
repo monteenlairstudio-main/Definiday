@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- « Correspondance à la bougie »: same token names as values/colors.xml. -->
 <resources>
-    <!-- WCAG on bg: accent 8.2:1, ink2 8.1:1; on surface: ink 12.9:1, ink2 7.1:1; ink on warn 10.4:1 -->
-    <color name="accent">#C9A96E</color>
-    <color name="bg">#0F1424</color>
-    <color name="surface">#1A2135</color>
-    <color name="surface_off">#141A2B</color>
-    <color name="ink">#EDE6D6</color>
-    <color name="ink2">#B5AC9A</color>
-    <color name="warn">#3D3014</color>
+    <!-- papier: ink 14.5:1, ink2 8.6:1, accent 9.0:1, wax 4.1:1 (graphics) -->
+    <color name="bg">#141829</color>
+    <!-- feuillet: 1.10:1 on bg, always with a card_edge rule. accent 8.1:1, yarn_note 8.0:1 -->
+    <color name="sheet">#1B2136</color>
+    <!-- kraft (tobacco): ink 12.1:1, ink2 7.2:1, accent 7.5:1, wax 3.5:1 (graphics) -->
+    <color name="surface">#2E2719</color>
+    <!-- disabled Btn: ink2 7.7:1 -->
+    <color name="surface_off">#1F2233</color>
+    <color name="kraft_dark">#6B5A3C</color>
+    <!-- bord: 1.86:1 on bg -->
+    <color name="card_edge">#3A4566</color>
+    <color name="ink">#F0E8D8</color>
+    <color name="ink2">#BEB4A3</color>
+    <!-- accent_dark: the Primary button's ink-pad edge (decoration) -->
+    <color name="accent_dark">#6C80B8</color>
+    <!-- plume: bg on it 8.95:1 (Primary); on the strong Seyès line 5.1:1 -->
+    <color name="accent">#A3B8F0</color>
+    <color name="wax">#C8574C</color>
+    <color name="wax_dark">#8E3A33</color>
+    <!-- fil 3.85:1 on bg; notes 8.0:1 on sheet, 5.0:1 on the strong Seyès line -->
+    <color name="yarn">#B4596C</color>
+    <color name="yarn_light">#EBA5B2</color>
+    <color name="yarn_note">#EBA5B2</color>
+    <!-- Seyès on sheet: thin 1.13:1, baseline 1.60:1; ink2 on the baseline 4.9:1 -->
+    <color name="seyes">#232A43</color>
+    <color name="seyes_strong">#34416A</color>
+    <!-- note paper: ink 11.0:1, ink2 6.55:1, accent 6.8:1 -->
+    <color name="warn">#3A2D14</color>
     <!-- quiz answers, moss / brick, not glaring at night: quiz_on 7.2:1 on good, 7.5:1 on bad -->
     <color name="quiz_good">#34503B</color>
     <color name="quiz_bad">#6A3A33</color>
     <color name="quiz_on">#EDE6D6</color>
-    <!-- Switch off: thumb ink2 8.14:1 on bg; track 3.40:1 on bg, thumb on it 2.39:1. On: thumb accent 8.19:1; track = accent 40 % over bg (2.31:1). -->
+    <!-- Switch off: thumb ink2 8.6:1 on bg; track 3.27:1 on bg. On: thumb accent 9.0:1 on bg; track = accent 40 % over bg (2.6:1), thumb on it 3.4:1. -->
     <color name="switch_track_off">#6E6A62</color>
-    <color name="switch_track_on">#595042</color>
-    <color name="ripple">#40C9A96E</color>
-    <!-- 2.38:1 on bg: edge of the dark palettes' cards -->
-    <color name="card_edge">#4A5368</color>
-    <!-- 1.83:1 on bg (was #B8AFA0, 8.45:1: brighter than the unlocked items) -->
+    <color name="switch_track_on">#4D5879</color>
+    <color name="ripple">#40A3B8F0</color>
+    <!-- 1.76:1 on bg -->
     <color name="silhouette">#3A4256</color>
 </resources>

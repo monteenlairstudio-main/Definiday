@@ -4,15 +4,16 @@ Surfaces peintes par le code, indépendantes du thème de l’appli. Captures : 
 
 ## Aides `Postal` (`app/src/main/java/fr/definiday/Postal.kt`)
 
-Fonctions `Canvas` réutilisables par l’appli (carte de l’accueil, album, quiz). Tailles en px ; `dp` = px d’un dp à l’échelle du dessin. Tout est décoratif (`contentDescription` nul) : la date et le mot sont toujours écrits en clair ailleurs.
+Une seule implémentation, partagée avec l’appli (`implementation.md` décrit `Seyes`, `Yarn`, `postcard`, `ring`). Les surfaces dessinées posent les drawables sur leur `Canvas` par `setBounds` + `draw` ; tout est décoratif (`contentDescription` nul), la date et le mot sont toujours écrits en clair ailleurs.
 
-| Fonction | Dessine | Notes |
+| Pièce | Usage ici | Ajouté pour ces surfaces |
 |---|---|---|
-| `drawStamp(c, rect, paper, ink, initial?, face?, vignette?)` | timbre perforé : feuille `paper` moins des trous ronds (`Path.op(DIFFERENCE)`, rayon = largeur / 22, pas ≈ 3,2 rayons), filet intérieur `ink`, puis l’initiale centrée sur son encre (`getTextBounds`) ou une vignette bitmap sur fond `ink` | carte : `paper` = `mot`, `ink` = `fond_haut` |
-| `drawPostmark(c, ctx, cx, cy, r, color, date, wavesTo, arcs = true)` | cachet : double anneau, « DEFINIDAY » sur l’arc haut, le jour de la semaine sur l’arc bas (`drawTextOnPath`), « 6 NOV » et l’année au centre, trois ondes d’oblitération jusqu’à `wavesTo` ; couleur à 75 % | `arcs = false` sous ~16 dp de rayon (widget) : la date seule, plus grande |
-| `drawThread(c, x0, x1, y, dp, palette)` | fil de laine ondulé terminé par une boucle : brin plein 2,6 dp + brin torsadé 1,1 dp en tirets 1,6 / 2,8 dp | `strands(palette)` : `fil_clair` plein sur les palettes sombres, `fil` sur les claires |
-| `mention(ctx, size, color)` | `TextPaint` Courier Prime capitales, interlettrage 0,13 em (gras synthétique : pas de coupe grasse) | « LETTRE DU 6 NOVEMBRE », « VIA DEFINIDAY » |
-| `day(date)`, `initial(ctx, item, style)` | « 6 novembre » / « 1er mai » ; initiale du timbre dans la police **suggérée** du mot (même décorative), celle de l’auteur pour une citation | |
+| `Stamp(ctx, bg, fg, initial, face, caption, vignette)` | `mot` / `fond_haut`, `caption = null` ; police `Styles.initialFace` (la police suggérée du mot si elle est gardée) | `vignette` : une image sur `fg` à la place de l’initiale (tête de Glose du partage) |
+| `Postmark(ctx, color, date, arcs)` | anneau de rayon r posé à r + 1 dp du bord gauche des bornes, ondes jusqu’au bord droit (sur le timbre) | `arcs = false` sous ~16 dp de rayon (widget) : la date seule, 1,25 fois plus grande |
+| `drawYarn(c, x0, x1, y, dp, palette)` | fil libre ondulé terminé par une boucle, brin plein 2,6 dp + brin en tirets 1,1 dp (1,6 / 2,8 dp) | nouveau ; `strands(palette)` : `YARN_LIGHT` plein sur les palettes sombres, `YARN` sur les claires |
+| `mention(ctx, size, color)` | `TextPaint` Courier Prime capitales, interlettrage 0,13 em, gras synthétique (pas de coupe grasse) | « LETTRE DU 6 NOVEMBRE », « VIA DEFINIDAY » |
+| `day(date)`, `initial(item)` | « 6 novembre » / « 1er mai » ; l’initiale du mot ou de l’auteur | |
+| `YARN`, `YARN_LIGHT`, `KRAFT`, `SHEET` | jetons de jour en dur : ces surfaces ignorent le thème nuit de l’appli | |
 
 ## Écran verrouillé (`WordCard.render`)
 
@@ -34,4 +35,4 @@ Carte postale sur kraft (`#EBDDC2`) : liseré `feuillet` (`#FFFCF5`) à ombre do
 
 ## Widget (`Widget.kt`, `res/layout/widget.xml`)
 
-Liseré `feuillet` de 4 dp (`widget_frame`), dégradé de la palette dedans (`widget_bg` + `widget_fade`, rayon `widget_radius_inner`, `system_app_widget_inner_radius` en 12+), marges intérieures 12 dp (16 dp au total, comme avant : le calcul de taille du mot reste juste). Le coin de 40 dp est un bitmap (`Widget.stamp`, ~120 px) : timbre à l’initiale dans la police suggérée et cachet daté sans arcs. RemoteViews ne peut ni tracer ni changer de police : le texte reste en `serif` système. L’aperçu du sélecteur (`previewLayout`) montre `drawable-nodpi/widget_stamp_preview.png`, produit par `WidgetTest.renderWidgets` (`stamp_preview.png`).
+Liseré `feuillet` de 4 dp (`widget_frame`), dégradé de la palette dedans (`widget_bg` + `widget_fade`, rayon `widget_radius_inner`, `system_app_widget_inner_radius` en 12+), marges intérieures 12 dp (16 dp au total, comme avant : le calcul de taille du mot reste juste). Le coin de 40 dp est un bitmap (`Widget.stamp`, ~120 px) : `Stamp` à l’initiale dans la police suggérée et `Postmark` sans arcs en bas à gauche, sa date hors du timbre. RemoteViews ne peut ni tracer ni changer de police : le texte reste en `serif` système. L’aperçu du sélecteur (`previewLayout`) montre `drawable-nodpi/widget_stamp_preview.webp`, produit par `WidgetTest.renderWidgets` (`stamp_preview.png`, converti en WebP sans perte).
