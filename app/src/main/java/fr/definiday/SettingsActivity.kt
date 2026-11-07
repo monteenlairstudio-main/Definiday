@@ -122,16 +122,25 @@ class SettingsActivity : Activity() {
     override fun onActivityResult(req: Int, res: Int, data: Intent?) {
         val uri = data?.data?.takeIf { res == RESULT_OK } ?: return
         fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
-        when (req) {
-            REQ_EXPORT -> toast(if (Profile.export(this, uri)) R.string.profile_saved else R.string.profile_save_failed)
-            REQ_IMPORT -> {
-                val profile = Profile.read(this, uri) ?: return toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
-                AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
-                    .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
-                    .setNegativeButton(R.string.cancel, null)
-                    .show()
+        val buttons = listOf(R.id.profile_export, R.id.profile_import).map { findViewById<Button>(it) }
+        buttons.forEach { it.isEnabled = false }
+        // Off the UI thread: the document may live on Drive or OneDrive (network), up to 4 MiB.
+        Thread {
+            val saved = req == REQ_EXPORT && Profile.export(this, uri)
+            val profile = if (req == REQ_IMPORT) Profile.read(this, uri) else null
+            runOnUiThread {
+                buttons.forEach { it.isEnabled = true }
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                when {
+                    req == REQ_EXPORT -> toast(if (saved) R.string.profile_saved else R.string.profile_save_failed)
+                    profile == null -> toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
+                    else -> AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
+                        .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
+                        .setNegativeButton(R.string.cancel, null)
+                        .show()
+                }
             }
-        }
+        }.start()
     }
 
     override fun onResume() {

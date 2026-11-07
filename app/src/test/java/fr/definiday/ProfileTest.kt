@@ -147,6 +147,13 @@ class ProfileTest {
         assertEquals(2, am.scheduledAlarms.size) // daily word + evening quiz
     }
 
+    /** Profile I/O runs on a worker thread: wait (bounded) until its result is posted back to the UI thread. */
+    private fun settle(done: () -> Boolean) {
+        val end = System.currentTimeMillis() + 5_000
+        while (!done() && System.currentTimeMillis() < end) { Thread.sleep(5); ShadowLooper.idleMainLooper() }
+        assertTrue("profile I/O did not finish", done())
+    }
+
     @Test fun settingsExportThenRestoreAfterConfirmation() {
         fill()
         val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
@@ -155,6 +162,9 @@ class ProfileTest {
         assertEquals(Intent.ACTION_CREATE_DOCUMENT, create.intent.action)
         assertTrue(create.intent.getStringExtra(Intent.EXTRA_TITLE)!!.matches(Regex("definiday-profil-\\d{4}-\\d{2}-\\d{2}\\.json")))
         shadowOf(a).receiveResult(create.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        assertFalse(a.findViewById<Button>(R.id.profile_import).isEnabled) // no second operation meanwhile
+        settle { ShadowToast.getTextOfLatestToast() != null }
+        assertTrue(a.findViewById<Button>(R.id.profile_import).isEnabled)
         assertEquals(ctx.getString(R.string.profile_saved), ShadowToast.getTextOfLatestToast())
         val before = profile()
         sp("definiday").edit().putInt("hour", 3).commit()
@@ -163,8 +173,9 @@ class ProfileTest {
         val open = shadowOf(a).nextStartedActivityForResult
         assertEquals(Intent.ACTION_OPEN_DOCUMENT, open.intent.action)
         shadowOf(a).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(Uri.fromFile(File(ctx.cacheDir, "absent.json"))))
-        assertEquals(ctx.getString(R.string.profile_bad), ShadowToast.getTextOfLatestToast())
+        settle { ShadowToast.getTextOfLatestToast() == ctx.getString(R.string.profile_bad) }
         shadowOf(a).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        settle { ShadowDialog.getLatestDialog()?.isShowing == true }
         assertEquals(3, Prefs(ctx).hour) // not before the confirmation
         (ShadowDialog.getLatestDialog() as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick()
         ShadowLooper.idleMainLooper()
