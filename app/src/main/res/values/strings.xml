@@ -12,7 +12,10 @@
     <string name="duration">Durée d’affichage</string>
     <string name="mode">Où afficher le mot</string>
     <string name="unlocks">Retirer le mot de l’écran de verrouillage</string>
-    <string name="wallpaper_hint">Le premier mot du jour devient le fond de l’écran de verrouillage. Ensuite, c’est votre fond d’accueil qui s’y affiche\u202F: votre ancien fond de verrouillage n’est pas rétabli.</string>
+    <!-- true only because Wall lets the card go over a lock screen that shares the home wallpaper (else lock_own replaces it) -->
+    <string name="wallpaper_hint">Le premier mot du jour devient le fond de l’écran de verrouillage, puis s’efface\u202F: vous retrouvez votre fond habituel.</string>
+    <string name="lock_own">Votre écran de verrouillage a son propre fond\u202F: Definiday n’y touchera pas, et le mot arrivera par notification. Pour le voir sur l’écran de verrouillage, mettez le même fond sur l’accueil et sur le verrouillage.</string>
+    <string name="lock_own_samsung">Sur un Galaxy, l’écran de verrouillage dynamique et les fonds liés aux Modes et routines comptent aussi comme un fond à part.</string>
     <string name="watch_channel">Suivi des déverrouillages</string>
     <string name="watch_text">Le mot quittera l’écran de verrouillage au déverrouillage n° %1$d.</string>
     <string name="test">Afficher le mot maintenant</string>

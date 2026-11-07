@@ -57,14 +57,15 @@ class SettingsActivity : Activity() {
         }
         findViewById<Button>(R.id.test).setOnClickListener {
             DailyReceiver.show(this)
-            Toast.makeText(this, if (p.mode == Prefs.MODE_NOTIF) R.string.test_done_notif else R.string.test_done, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, if (p.mode == Prefs.MODE_NOTIF || p.lockBlocked) R.string.test_done_notif else R.string.test_done, Toast.LENGTH_LONG).show()
         }
         findViewById<Button>(R.id.widget_add).setOnClickListener { Widget.pin(this) }
 
         // Écran de verrouillage
-        val lockOnly = listOf(R.id.wallpaper_hint, R.id.unlocks_label, R.id.unlocks, R.id.unlocks_hint, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
+        val lockOnly = listOf(R.id.unlocks_label, R.id.unlocks, R.id.unlocks_hint, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
         fun showMode() {
             lockOnly.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
+            explainLock()
             findViewById<TextView>(R.id.duration_hint).setText(when (p.mode) {
                 Prefs.MODE_NOTIF -> R.string.duration_notif; Prefs.MODE_LOCK -> R.string.duration_lock; else -> R.string.duration_both
             })
@@ -104,6 +105,7 @@ class SettingsActivity : Activity() {
         super.onResume()
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
+        explainLock() // back from changing the wallpaper
         // back from Couleurs et polices: the navigation row's second line, smaller, in ink2
         val cat = Styles.load(this)
         val counts = getString(R.string.styles_row_hint,
@@ -115,6 +117,8 @@ class SettingsActivity : Activity() {
             setSpan(ForegroundColorSpan(getColor(R.color.ink2)), start, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
+
+    private fun explainLock() = Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own))
 
     private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
         findViewById<Spinner>(id).apply {

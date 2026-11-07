@@ -57,7 +57,7 @@ class MainActivity : Activity() {
             pick(w)
             Sounds.play(this, Sounds.PAGE)
             DailyReceiver.show(this, listOf(w)) // the random pick replaces the word on the lock screen: said under the actions
-            if (Prefs(this).mode != Prefs.MODE_NOTIF) findViewById<View>(R.id.random_hint).visibility = View.VISIBLE
+            if (Prefs(this).mode != Prefs.MODE_NOTIF && !Prefs(this).lockBlocked) findViewById<View>(R.id.random_hint).visibility = View.VISIBLE
             warnIfHurried()
         }
         findViewById<View>(R.id.share).setOnClickListener { current?.let { share(it) } }

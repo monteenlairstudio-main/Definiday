@@ -155,3 +155,14 @@ Masquer « Écran de verrouillage » et « Les deux » quand `MANUFACTURER == sa
 - Le verrouillage d'origine était-il une photo distincte de l'accueil, un diaporama, une vidéo, l'écran de verrouillage dynamique, ou un fond lié à un mode ?
 - L'écran d'accueil a-t-il changé lui aussi (couleurs du thème comprises) ?
 - Accepte-t-on de demander une photo à l'utilisateur pour le mode verrouillage, ou préfère-t-on la notification seule sur Galaxy ?
+
+## 7. Correctif appliqué (option 1, « Garde-fou seulement »)
+
+Décision du propriétaire : garde-fou seul, pas de sélecteur de photo (option 2 non retenue pour l’instant).
+
+- `Wall.lockFree` (DailyReceiver.kt) : la carte n’est posée que si `getWallpaperId(FLAG_LOCK) < 0` (verrouillage partagé avec l’accueil, donc `clear(FLAG_LOCK)` rend exactement l’état d’origine) ou s’il vaut `Prefs.wallpaperId` (notre carte, cas du mot au hasard). Sur API 34+, refus aussi si `getWallpaperInfo(FLAG_LOCK) != null` (fond animé ; `<queries>` sur `WallpaperService` ajouté au manifeste). Une lecture qui lève une exception vaut refus.
+- Tous les chemins passent par `DailyReceiver.show()` (mot du jour, « Afficher le mot maintenant », mot au hasard, mots ajoutés en cours de journée). Refus : on ne touche pas au fond, le mot part en notification même en mode « Écran de verrouillage seulement », et `Prefs.lockBlocked` (fichier local `wallpaper_state`) passe à vrai ; le toast de test et l’aide du mot au hasard en tiennent compte.
+- `FLAG_SYSTEM` n’est jamais passé ; `clearWallpaper()` garde la vérification d’id (lecture désormais dans `runCatching`).
+- Réglages et étape 2 de l’onboarding : si un mode avec verrouillage est choisi et que le garde-fou refuserait, une note de Glose (`NoteBox`, papier à note) remplace `wallpaper_hint` et explique que le mot arrivera par notification ; une ligne de plus sur Samsung (écran de verrouillage dynamique, Modes et routines). `wallpaper_hint` dit maintenant que le fond habituel revient.
+- Tests : `WallTest` (verrouillage partagé, distinct, notre carte, fond animé ou illisible, mot au hasard, notes Réglages et onboarding). Robolectric ne garde qu’un id de verrouillage : `Wall.lockId` et `Wall.lockLive` sont des variables, remplacées dans `TestApp`.
+- Limite : si One UI garde toujours une entrée lock (2.2, variante 1), le mode verrouillage ne pose plus jamais la carte sur ces Galaxy ; le mot arrive par notification et la note l’explique. À trancher avec `dumpsys wallpaper` (section 3).

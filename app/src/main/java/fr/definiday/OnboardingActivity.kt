@@ -167,6 +167,7 @@ class OnboardingActivity : Activity() {
         val lock = p.mode != Prefs.MODE_NOTIF
         findViewById<View>(R.id.lock_box).visibility = if (lock) View.VISIBLE else View.GONE
         if (!lock) return
+        Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own)) // own lock wallpaper: the word will notify
         val w = Words.nextDaily(Words.load(this), History(this).all())
         val st = Styles.of(this, w)
         val m = resources.displayMetrics

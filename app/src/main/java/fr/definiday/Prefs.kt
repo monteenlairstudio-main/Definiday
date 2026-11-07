@@ -51,6 +51,10 @@ class Prefs(val ctx: Context) {
     var wallpaperId: Int
         get() = local.getInt("wallpaperId", -1)
         set(v) = local.edit().putInt("wallpaperId", v).apply()
+    /** The last lock-screen word went by notification instead: the lock screen has its own wallpaper (Wall.lockFree). */
+    var lockBlocked: Boolean
+        get() = local.getBoolean("lockBlocked", false)
+        set(v) = local.edit().putBoolean("lockBlocked", v).apply()
     var wordsPerDay: Int
         get() = int("wordsPerDay", 1, 1..3)
         set(v) = sp.edit().putInt("wordsPerDay", v).apply()

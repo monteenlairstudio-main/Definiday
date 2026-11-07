@@ -123,6 +123,13 @@
                 style="@style/Help"
                 android:text="@string/wallpaper_hint" />
 
+            <!-- the lock screen has its own wallpaper (Wall.ownNote): Glose's note, instead of wallpaper_hint -->
+            <TextView
+                android:id="@+id/lock_own"
+                style="@style/NoteBox"
+                android:textAppearance="@style/Body"
+                android:textSize="15sp" />
+
             <TextView
                 style="@style/Field"
                 android:labelFor="@+id/duration"

@@ -130,9 +130,18 @@
 
                     <!-- true and needed, but not a warning on the screen that should please (audit 011 n° 9): help text under the preview -->
                     <TextView
+                        android:id="@+id/wallpaper_hint"
                         style="@style/Help"
                         android:layout_marginTop="12dp"
                         android:text="@string/wallpaper_hint" />
+
+                    <!-- the lock screen has its own wallpaper (Wall.ownNote): Glose's note, instead of wallpaper_hint -->
+                    <TextView
+                        android:id="@+id/lock_own"
+                        style="@style/NoteBox"
+                        android:layout_marginTop="12dp"
+                        android:textAppearance="@style/Body"
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         style="@style/Sheet"
