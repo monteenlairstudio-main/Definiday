@@ -37,6 +37,8 @@ class QuizActivity : Activity() {
     private var icon: ImageView? = null // small Glose at the top of each question: nods or tilts its head on answers
     private var done = false // that day's quiz was already counted when this one opened: its score won't count
     private var missed = ArrayList<String>() // words answered wrong, listed « À revoir » at the end
+    private var won: List<Unlocks.Item>? = null // the score screen's unlocks, null until it was played once: a rotation redraws it, silently
+    private var rated = false // the rate card is on the score screen (until folded)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +60,8 @@ class QuizActivity : Activity() {
         score = s?.getInt("score") ?: 0
         picked = s?.getInt("picked") ?: -1
         missed = s?.getStringArrayList("missed") ?: missed
+        won = s?.getStringArrayList("won")?.mapNotNull(Unlocks.byId::get)
+        rated = s?.getBoolean("rated") ?: false
         done = s?.getBoolean("done") ?: Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
         val pad = (16 * resources.displayMetrics.density).toInt()
         page = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, pad * 3 / 2) }
@@ -73,7 +77,8 @@ class QuizActivity : Activity() {
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked); out.putBoolean("done", done)
-        out.putStringArrayList("missed", missed)
+        out.putStringArrayList("missed", missed); out.putBoolean("rated", rated)
+        won?.let { w -> out.putStringArrayList("won", ArrayList(w.map { it.id })) }
         out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot })); out.putInt("reviews", questions.count { it.review })
     }
 
@@ -221,11 +226,16 @@ class QuizActivity : Activity() {
             box.addView(text(getString(R.string.quiz_empty), 18f).also(::focus))
         } else {
             val p = Prefs(this)
-            Quiz.record(p, score, questions.size, day)
             val passed = Quiz.passed(score, questions.size)
-            val fresh = Unlocks.update(p) // announced once each
-            p.announced = p.announced + fresh.map { it.id }
-            Sounds.play(this, if (fresh.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
+            val fresh = won ?: run { // the first time only: recorded, announced (once each) and heard once
+                Quiz.record(p, score, questions.size, day)
+                val got = Unlocks.update(p)
+                p.announced = p.announced + got.map { it.id }
+                won = got
+                rated = Quiz.askRate(p, passed, counted = !done)
+                Sounds.play(this, if (got.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
+                got
+            }
             // something unlocked: one Glose, wearing the last (rarest) one; else the thread writes the word once and holds it, never mocking when failed
             box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
             else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
@@ -240,7 +250,7 @@ class QuizActivity : Activity() {
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
             else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
-            if (Quiz.askRate(p, passed, counted = !done)) rate()
+            if (rated) rate()
             if (fresh.isNotEmpty()) {
                 box.addView(text(getString(if (passed) R.string.unlock_new else R.string.unlock_new_anyway, p.gloseName), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
                 stamps(fresh, Glose.choice(p))
@@ -257,11 +267,11 @@ class QuizActivity : Activity() {
         val card = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundResource(R.drawable.note_paper); setPadding(pad * 3 / 2, pad, pad, pad / 2) }
         card.addView(text(getString(R.string.rate_text), 16f))
         val row = LinearLayout(this).apply { gravity = Gravity.END or Gravity.CENTER_VERTICAL }.also(card::addView)
-        row.addView(Button(this, null, 0, R.style.Link).apply { setText(R.string.rate_later); setOnClickListener { card.visibility = View.GONE } })
+        row.addView(Button(this, null, 0, R.style.Link).apply { setText(R.string.rate_later); setOnClickListener { card.visibility = View.GONE; rated = false } })
         row.addView(Button(this).apply {
             setText(R.string.rate_go)
             setOnClickListener {
-                card.visibility = View.GONE
+                card.visibility = View.GONE; rated = false
                 runCatching { startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=$packageName"))) }
                     .recoverCatching { startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=$packageName"))) }
             }

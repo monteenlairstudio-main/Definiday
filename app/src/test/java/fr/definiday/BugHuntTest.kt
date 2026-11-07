@@ -350,4 +350,22 @@ class BugHuntTest {
         val a = Robolectric.buildActivity(MainActivity::class.java, open(seen.key).putExtra(MainActivity.EXTRA_DEJA_VU, true)).setup().get()
         assertEquals(seen.mot to ctx.getString(R.string.deja_vu), card(a))
     }
+
+    /** N2 (audit FON 1): rotating the score screen lost the unlocks (« a gagné », stamps) and the rate card for good, and played the chime. */
+    @Test fun scoreScreenSurvivesRotation() {
+        val p = Prefs(ctx).apply { sounds = true; passedQuizzes = 4 } // this quiz is the 5th passed one: the rate card shows
+        ctx.getSystemService(android.media.AudioManager::class.java).ringerMode = android.media.AudioManager.RINGER_MODE_NORMAL
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
+        val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
+        try {
+            repeat(Words.seenToday(ctx).size) { answerOne(c.get()) }
+            val end = listOf(ctx.getString(R.string.unlock_new, p.gloseName), Unlocks.items.last { it.id in p.announced }.nom, ctx.getString(R.string.rate_text))
+            assertTrue(texts(c.get()).containsAll(end))
+            shadowOf(Sounds.pool).clearPlayed()
+            c.recreate()
+            assertTrue("after rotation: ${texts(c.get())}", texts(c.get()).containsAll(end))
+            runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(Sounds.CHIME, true) } // a chime asked again would play now (throws: never loaded)
+            assertTrue(Sounds.ALL.none { shadowOf(Sounds.pool).wasResourcePlayed(it) })
+        } finally { Sounds.pool?.release(); Sounds.pool = null }
+    }
 }
