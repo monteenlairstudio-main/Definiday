@@ -19,10 +19,13 @@ object Sounds {
     val PAGE = R.raw.son_page
     val ALL = listOf(MRR, PURR, RIGHT, WRONG, CHIME, STAMP, PAGE)
 
-    internal var pool: SoundPool? = null // created on the first sound, released after IDLE ms without one
-    private val ids = mutableMapOf<Int, Int>() // raw res -> SoundPool id
+    internal var pool: SoundPool? = null // created on the first sound (or a quiz opening), released after IDLE ms without one
+    private val ids = mutableMapOf<Int, Int>() // raw res -> SoundPool id, loading or loaded
+    private val ready = mutableSetOf<Int>() // ids loaded
+    private val waiting = mutableSetOf<Int>() // ids to play once loaded
+    private var held = false // a quiz is open: the pool stays
     private val main = Handler(Looper.getMainLooper())
-    private val release = Runnable { pool?.release(); pool = null; ids.clear() }
+    private val drop = Runnable(::release)
     private const val IDLE = 30_000L
 
     fun on(ctx: Context) = Prefs(ctx).sounds && ctx.getSystemService(AudioManager::class.java).ringerMode == AudioManager.RINGER_MODE_NORMAL
@@ -30,11 +33,38 @@ object Sounds {
     /** Plays [res] (one of the constants; 0 = nothing) if sounds are on; a first play waits for its file to load. */
     fun play(ctx: Context, res: Int) {
         if (res == 0 || !on(ctx)) return
+        val id = load(ctx, res)
+        if (id in ready) pool!!.play(id, 1f, 1f, 0, 0, 1f) else waiting += id
+        idle()
+    }
+
+    /** A quiz opens (sounds on): its sounds load now, so the first tic is not late, and the pool stays until [letGo]. */
+    fun hold(ctx: Context) {
+        if (!on(ctx)) return
+        listOf(RIGHT, WRONG, CHIME, STAMP).forEach { load(ctx, it) }
+        held = true
+        main.removeCallbacks(drop)
+    }
+
+    fun letGo() { held = false; idle() }
+
+    private fun idle() {
+        main.removeCallbacks(drop)
+        if (!held) main.postDelayed(drop, IDLE)
+    }
+
+    private fun load(ctx: Context, res: Int): Int {
         val p = pool ?: SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
             AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()
-        ).build().apply { setOnLoadCompleteListener { sp, id, status -> if (status == 0) sp.play(id, 1f, 1f, 0, 0, 1f) } }.also { pool = it }
-        ids[res]?.let { p.play(it, 1f, 1f, 0, 0, 1f) } ?: run { ids[res] = p.load(ctx.applicationContext, res, 1) }
-        main.removeCallbacks(release)
-        main.postDelayed(release, IDLE)
+        ).build().apply {
+            setOnLoadCompleteListener { sp, id, status ->
+                if (sp !== pool) return@setOnLoadCompleteListener // released meanwhile
+                if (status == 0) { ready += id; if (waiting.remove(id)) sp.play(id, 1f, 1f, 0, 0, 1f) }
+                else { ids.values.remove(id); waiting.remove(id) } // a failed load is tried again next time, not muted until the release
+            }
+        }.also { pool = it }
+        return ids.getOrPut(res) { p.load(ctx.applicationContext, res, 1) }
     }
+
+    internal fun release() { pool?.release(); pool = null; ids.clear(); ready.clear(); waiting.clear(); held = false }
 }

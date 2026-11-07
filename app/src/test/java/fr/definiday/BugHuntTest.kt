@@ -366,6 +366,6 @@ class BugHuntTest {
             assertTrue("after rotation: ${texts(c.get())}", texts(c.get()).containsAll(end))
             runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(Sounds.CHIME, true) } // a chime asked again would play now (throws: never loaded)
             assertTrue(Sounds.ALL.none { shadowOf(Sounds.pool).wasResourcePlayed(it) })
-        } finally { Sounds.pool?.release(); Sounds.pool = null }
+        } finally { Sounds.release() }
     }
 }

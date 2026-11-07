@@ -32,7 +32,7 @@ Pour les réactions de Glose (`Glose.kt`), l’appel tient en une ligne, sur le 
 
 - Les sons passent par `SoundPool` avec `AudioAttributes.USAGE_ASSISTANCE_SONIFICATION` : Android les range avec les sons du système (volume « Sons système » ou sonnerie selon l’appareil), pas avec la musique.
 - **Aucun son si le téléphone n’est pas en mode sonnerie normal** (`AudioManager.ringerMode` différent de `RINGER_MODE_NORMAL`, donc ni en silencieux ni en vibreur).
-- `SoundPool` n’est créé qu’au premier son et libéré après 30 s sans son : rien ne reste chargé pour rien.
+- `SoundPool` n’est créé qu’au premier son et libéré après 30 s sans son : rien ne reste chargé pour rien. Exception : le quiz (sons activés) charge le tic, le hmm, le carillon et le tampon dès son ouverture et les garde tant qu’il est ouvert, pour que le premier tic ne soit pas en retard. Un chargement raté est oublié (retenté au son suivant).
 
 ## Volume et durée
 

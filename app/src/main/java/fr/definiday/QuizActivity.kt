@@ -69,9 +69,15 @@ class QuizActivity : Activity() {
         next()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Sounds.hold(this) // sounds on: loaded before the first answer, kept while the quiz is open
+    }
+
     override fun onPause() {
         super.onPause()
         icon?.let(Glose::stop) // a pending reaction never returns to idle on a hidden screen
+        Sounds.letGo()
     }
 
     override fun onSaveInstanceState(out: Bundle) {
