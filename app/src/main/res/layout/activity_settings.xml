@@ -209,6 +209,29 @@
                 android:text="@string/sounds_hint" />
         </LinearLayout>
 
+        <!-- Mon profil: the profile as a file, through the system file picker (Profile) -->
+        <TextView
+            style="@style/Rubric"
+            android:text="@string/group_profile" />
+
+        <LinearLayout style="@style/Sheet">
+
+            <Button
+                android:id="@+id/profile_export"
+                style="@style/Row"
+                android:text="@string/profile_export" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/profile_hint" />
+
+            <Button
+                android:id="@+id/profile_import"
+                style="@style/Row"
+                android:layout_marginTop="16dp"
+                android:text="@string/profile_import" />
+        </LinearLayout>
+
         <TextView
             style="@style/Rubric"
             android:text="@string/credits_title" />
