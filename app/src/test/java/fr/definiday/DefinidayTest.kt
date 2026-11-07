@@ -287,11 +287,15 @@ class DefinidayTest {
             val mot = quizAnswer(a)
             views(a).filterIsInstance<android.widget.Button>().first { (it.text == mot) == right }.performClick()
         }
-        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 shows both requests
+        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 asks for notifications,
+        // then (4b, back from that prompt) for exact alarms
         fun onboarding(suffix: String) {
             p.unlocks = 1; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(false)
             (0..3).forEach { n -> capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
                 .also { a -> repeat(n) { a.findViewById<View>(R.id.next).performClick() } }, File(ui, "onboarding_${n + 1}$suffix.png")) }
+            capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
+                .also { a -> repeat(3) { a.findViewById<View>(R.id.next).performClick() }; a.onRequestPermissionsResult(0, arrayOf(), intArrayOf()) },
+                File(ui, "onboarding_4b$suffix.png"))
             p.unlocks = 0; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(true)
         }
         val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key

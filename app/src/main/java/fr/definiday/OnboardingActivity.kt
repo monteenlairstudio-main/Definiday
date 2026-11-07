@@ -50,6 +50,10 @@ class OnboardingActivity : Activity() {
         val glose = findViewById<ImageView>(R.id.glose)
         val taps = Glose.Taps()
         glose.setOnClickListener { Glose.tap(glose, taps, Glose.mainPose(p)) }
+        findViewById<ImageView>(R.id.postmark).apply { // step 3: the post comes daily; decoration gives way to the title at large font sizes
+            setImageDrawable(Postal.Postmark(context, getColor(R.color.accent)))
+            if (resources.configuration.fontScale > 1.5f) visibility = View.GONE
+        }
 
         findViewById<RadioGroup>(R.id.mode).apply {
             check(modes[p.mode])
@@ -137,7 +141,8 @@ class OnboardingActivity : Activity() {
         findViewById<View>(R.id.notif_why).visibility = if (notif) View.VISIBLE else View.GONE
         findViewById<TextView>(R.id.notif_why).text = getString(R.string.onb_notif_why, getString(when {
             p.mode == Prefs.MODE_LOCK -> R.string.onb_notif_quiz; p.quizEnabled -> R.string.onb_notif_both; else -> R.string.onb_notif_word }))
-        findViewById<View>(R.id.exact_box).visibility = if (needExact()) View.VISIBLE else View.GONE
+        // one request at a time (audit 011 n° 8): notifications first, Glose's note on exact alarms once back from that prompt
+        findViewById<View>(R.id.exact_box).visibility = if (needExact() && !notif) View.VISIBLE else View.GONE
         findViewById<Button>(R.id.next).setText(when {
             step == 0 -> R.string.onb_start; step == ASK && notif -> R.string.onb_allow; step == last() -> R.string.onb_done; else -> R.string.onb_next })
         findViewById<Button>(R.id.skip).apply {

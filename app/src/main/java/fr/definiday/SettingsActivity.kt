@@ -4,6 +4,10 @@ import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,7 +18,8 @@ import android.widget.TextView
 import android.widget.Toast
 import java.time.LocalTime
 
-/** Settings in 4 groups: Mot du jour, Écran de verrouillage, Quiz du soir, Apparence. Back to the home screen, which re-reads them. */
+/** Settings in sheets: Mot du jour, Ailleurs sur votre téléphone (widget, test), Écran de verrouillage, Quiz du soir, Apparence.
+ *  Back to the home screen, which re-reads them. */
 class SettingsActivity : Activity() {
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
     private lateinit var p: Prefs
@@ -99,10 +104,16 @@ class SettingsActivity : Activity() {
         super.onResume()
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
-        // back from Couleurs et polices
+        // back from Couleurs et polices: the navigation row's second line, smaller, in ink2
         val cat = Styles.load(this)
-        findViewById<TextView>(R.id.styles_hint).text = getString(R.string.styles_row_hint,
+        val counts = getString(R.string.styles_row_hint,
             Styles.kept(cat.palettes, p.palettes, Palette::id).size, cat.palettes.size, Styles.kept(cat.polices, p.polices, Police::id).size, cat.polices.size)
+        findViewById<TextView>(R.id.styles_open).text = SpannableStringBuilder(getString(R.string.styles_row)).append('\n').apply {
+            val start = length
+            append(counts)
+            setSpan(RelativeSizeSpan(0.875f), start, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan(getColor(R.color.ink2)), start, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
     }
 
     private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =

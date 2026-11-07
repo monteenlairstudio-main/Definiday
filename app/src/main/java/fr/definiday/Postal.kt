@@ -241,10 +241,10 @@ object Postal {
         c.drawPath(path, p)
     }
 
-    /** The postcard: the word's palette gradient inside a sheet rim and its card_edge rule (no Styles.needsEdge case left). */
-    fun postcard(ctx: Context, p: Palette): Drawable {
+    /** The postcard: the word's palette gradient inside a sheet rim and its card_edge rule (no Styles.needsEdge case left).
+     *  [outer]: radius_card for the word's card, radius_small for a palette tile (Couleurs et polices). */
+    fun postcard(ctx: Context, p: Palette, outer: Float = ctx.resources.getDimension(R.dimen.radius_card)): Drawable {
         val res = ctx.resources
-        val outer = res.getDimension(R.dimen.radius_card)
         val rim = res.getDimension(R.dimen.card_rim)
         val sheet = GradientDrawable().apply { cornerRadius = outer; setColor(ctx.getColor(R.color.sheet)); setStroke(maxOf(1, dp(ctx).toInt()), ctx.getColor(R.color.card_edge)) }
         val face = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(p.haut, p.bas)).apply { cornerRadius = outer - rim }

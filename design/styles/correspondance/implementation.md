@@ -62,6 +62,10 @@ Les noms existants sont gardés (le code les utilise) ; ratios WCAG en commentai
 | `Disc` | bouton de barre du haut : disque kraft 48 dp (pilule s’il a du texte) ; donner `tooltipText` en plus de `contentDescription` |
 | `Action` | icône sur libellé, sans fond (actions de la carte) |
 | `Link`, `Field`, `Toggle`, `Setting` | inchangés sur le fond, serif par le thème |
+| `Rubric` + `Sheet` | (phase 2b) rubrique `Label` au-dessus d’une feuille `card_soft` qui groupe des réglages (Réglages, onboarding) |
+| `NoteBox` | (phase 2b) encadré d’avertissement sur `note_paper`, texte dégagé de la marge cire (alarmes exactes) |
+| `Choice` | (phase 2b) `Spinner` sous son libellé `Field` |
+| `Nav` | (phase 2b) ligne qui ouvre un autre écran : sans fond, chevron `ic_chevron` au bout (Réglages > Couleurs et polices) |
 
 ## 4. Drawables
 

@@ -170,6 +170,60 @@
         <item name="android:minHeight">52dp</item>
         <item name="android:paddingBottom">13dp</item>
     </style>
+    <!-- a group's rubric above its Sheet (Réglages, onboarding) -->
+    <style name="Rubric" parent="Label">
+        <item name="android:layout_marginTop">28dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+    </style>
+    <!-- a calm sheet grouping rows (Réglages, onboarding): card_soft, rows inside keep their own styles -->
+    <style name="Sheet">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/card_soft</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+    <!-- a warning as Glose's note (exact alarms): note_paper, text clear of its wax margin rule -->
+    <style name="NoteBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/note_paper</item>
+        <item name="android:paddingStart">26dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+    <!-- a menu of values (Spinner) under its Field label -->
+    <style name="Choice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    <!-- a row that opens another screen: borderless, text at the start, chevron at the end (audit 011 n° 14) -->
+    <style name="Nav" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/btn_round</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:drawableEnd">@drawable/ic_chevron</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
     <!-- a setting's value (time, palettes): drawn like the menus (arrow, no outline), not like an action -->
     <style name="Setting" parent="android:Widget.Material.Spinner">
         <item name="android:layout_width">match_parent</item>

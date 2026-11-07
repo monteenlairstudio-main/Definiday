@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A text field (Mes mots search) as a sheet of paper instead of the platform underline: card_edge rule, plume outline while typing. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape><corners android:radius="@dimen/radius_paper" /><solid android:color="@color/sheet" /><stroke android:width="2dp" android:color="@color/accent" /></shape>
+    </item>
+    <item android:drawable="@drawable/card_soft" />
+</selector>
