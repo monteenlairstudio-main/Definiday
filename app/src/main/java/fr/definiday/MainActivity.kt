@@ -170,7 +170,7 @@ class MainActivity : Activity() {
             .forEach { (id, c) -> findViewById<TextView>(id).setTextColor(c) }
         // stamp in the word's colours (its initial in its suggested font), today's postmark in the nature colour, a rule over the actions
         val initial = (if (item is Word) item.mot else (item as Quote).auteur).take(1).uppercase(Locale.FRENCH)
-        findViewById<ImageView>(R.id.stamp).setImageDrawable(Postal.Stamp(this, pal.mot, pal.haut, initial, Styles.initialFace(this, item, st)))
+        findViewById<ImageView>(R.id.stamp).setImageDrawable(Postal.Stamp(this, pal.mot, pal.haut, initial, Styles.initialFace(this, item, st), caption = "1 MOT".takeIf { item is Word }))
         findViewById<ImageView>(R.id.postmark).setImageDrawable(Postal.Postmark(this, pal.nature))
         findViewById<View>(R.id.card_rule).setBackgroundColor(pal.nature and 0xFFFFFF or 0x59000000) // 35 %, decoration
         listOf(R.id.academie, R.id.cnrtl, R.id.share, R.id.new_word).forEach { id -> findViewById<Button>(id).apply {
