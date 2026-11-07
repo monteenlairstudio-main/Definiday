@@ -54,7 +54,8 @@ class Widget : AppWidgetProvider() {
                 options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110).toFloat())
         }
 
-        /** The widget [wDp] x [hDp]: the word as large as fits beside Glose, else Glose steps aside for it (then 2 lines at 16 sp if it must);
+        /** The widget [wDp] x [hDp]: the word as large as fits beside Glose, else Glose steps aside for it (then 2 lines at 16 sp if it must,
+         *  smaller if a piece between spaces and hyphens still would not hold on a line);
          *  the text block gets the lines that fit at its smallest autosize, then an ellipsis. */
         fun views(ctx: Context, item: Item, wDp: Float, hDp: Float): RemoteViews {
             val style = Styles.of(ctx, item)
@@ -67,7 +68,8 @@ class Widget : AppWidgetProvider() {
             }
             when (item) {
                 is Word -> {
-                    text(R.id.widget_mot, item.mot, pal.mot); text(R.id.widget_nature, item.nature, pal.nature)
+                    // after each hyphen, a zero-width space: the only place the line breaker may cut (it cuts « jeun/e » otherwise)
+                    text(R.id.widget_mot, item.mot.replace("-", "-\u200B"), pal.mot); text(R.id.widget_nature, item.nature, pal.nature)
                     text(R.id.widget_texte, item.definition, pal.texte); text(R.id.widget_auteur, "", pal.nature)
                 }
                 is Quote -> {
@@ -78,10 +80,11 @@ class Widget : AppWidgetProvider() {
             // ponytail: sizes estimated from widget.xml (padding 2 x 16 + 6 dp, Glose 40 + 8 dp, lines ~1.2 em); measure the layout if they drift
             val fs = ctx.resources.configuration.fontScale
             val serif = TextPaint().apply { typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD); textSize = 28 * fs } // in dp
-            fun fit(w: Float) = if (item is Word) 28 * w / serif.measureText(item.mot) else 28f
+            fun fit(w: Float, s: String = (item as? Word)?.mot.orEmpty()) = if (item is Word) 28 * w / serif.measureText(s) else 28f
+            val pieces = (item as? Word)?.mot.orEmpty().split(Regex("(?<=[ \u00a0-])")) // lines may break only there
             val glose = fit(wDp - 80) >= 18 // beside Glose (40 dp + 8 dp margin)
             val full = fit(wDp - 32)
-            val (motSp, motLines) = if (glose) minOf(fit(wDp - 80), 28f) to 1 else if (full >= 16) minOf(full, 28f) to 1 else 16f to 2
+            val (motSp, motLines) = if (glose) minOf(fit(wDp - 80), 28f) to 1 else if (full >= 16) minOf(full, 28f) to 1 else minOf(16f, pieces.minOf { fit(wDp - 32, it) }) to 2
             v.setTextViewTextSize(R.id.widget_mot, TypedValue.COMPLEX_UNIT_SP, motSp)
             v.setInt(R.id.widget_mot, "setMaxLines", motLines)
             val used = 38 + maxOf(if (glose) 40f else 0f, (if (item is Word) motLines * motSp * 1.2f + 16 else 16f) * fs) + if (item is Quote) (if (item.signature.length * 7 > wDp - 32) 32 else 16) * fs else 0f

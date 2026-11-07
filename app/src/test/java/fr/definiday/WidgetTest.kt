@@ -73,6 +73,18 @@ class WidgetTest {
         }
     }
 
+    /** 2x2: a long hyphenated word breaks after a hyphen, never inside a piece (« suivez-moi-jeun / e-homme »). */
+    @Test fun longWordBreaksAtHyphens() {
+        val parent = FrameLayout(ctx)
+        parent.addView(Widget.views(ctx, word("suivez-moi-jeune-homme"), 160f, 160f).apply(ctx, parent))
+        val px = (160 * ctx.resources.displayMetrics.density).toInt()
+        parent.measure(View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.EXACTLY))
+        parent.layout(0, 0, px, px)
+        val t = parent.findViewById<TextView>(R.id.widget_mot)
+        assertEquals(2, t.layout.lineCount)
+        assertEquals("suivez-moi-", t.text.substring(0, t.layout.getLineEnd(0)).filter { it != '\u200B' })
+    }
+
     /** Daily word off: the alarm still runs while a widget is on the home screen, to change it. */
     @Test fun alarmKeptForTheWidget() {
         Prefs(ctx).enabled = false

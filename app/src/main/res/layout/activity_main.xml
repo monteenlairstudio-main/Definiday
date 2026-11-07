@@ -111,8 +111,7 @@
                 <TextView
                     android:id="@+id/title"
                     style="@style/Title"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/letter_title" />
+                    android:layout_marginTop="2dp" />
             </LinearLayout>
         </FrameLayout>
 

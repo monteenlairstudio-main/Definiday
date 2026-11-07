@@ -57,10 +57,10 @@
 
                     <TextView
                         style="@style/Body"
+                        android:id="@+id/welcome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/onb_welcome" />
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,7 +145,7 @@
 
                         <TextView
                             style="@style/Help"
-                            android:text="@string/unlocks_hint" />
+                            android:text="@string/onb_unlocks_hint" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
