@@ -53,6 +53,16 @@ class MainActivity : Activity() {
         revealed = savedInstanceState?.getString(STATE_REVEALED)
         dejaVu = savedInstanceState?.getBoolean(STATE_DEJA_VU) ?: intent.getBooleanExtra(EXTRA_DEJA_VU, false)
         if (resources.configuration.fontScale > 1.5f) findViewById<GridLayout>(R.id.actions).columnCount = 2 // labels at full size, never cut
+        if (resources.configuration.fontScale >= 1.6f) { // compact header (style.md § 15): Glose 96 dp, the date beside him under the bar, the title full width below
+            val dp = Postal.dp(this)
+            findViewById<View>(R.id.glose).layoutParams.apply { width = (96 * dp).toInt(); height = width }
+            val title = findViewById<View>(R.id.title)
+            val column = title.parent as LinearLayout
+            (column.layoutParams as android.view.ViewGroup.MarginLayoutParams).apply { marginStart = (104 * dp).toInt(); topMargin = (48 * dp).toInt() }
+            val page = findViewById<LinearLayout>(R.id.page)
+            column.removeView(title) // below the header, clear of the yarn (Postal.Yarn at x 36 dp)
+            page.addView(title, page.indexOfChild(column.parent as View) + 1, LinearLayout.LayoutParams(title.layoutParams.width, title.layoutParams.height).apply { marginStart = (28 * dp).toInt() })
+        }
         // the notebook: a sheet ruled from the example's own baselines; Glose's yarn behind the papers, from him to the quiz's seal (x of the seal)
         findViewById<View>(R.id.exemple_box).background = LayerDrawable(arrayOf(getDrawable(R.drawable.card_soft)!!, Postal.Seyes(this, findViewById(R.id.exemple))))
         findViewById<LinearLayout>(R.id.page).let { it.background = Postal.Yarn(this, it, findViewById(R.id.glose), findViewById(R.id.quiz_open), 36 * Postal.dp(this)) }
