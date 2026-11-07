@@ -13,3 +13,9 @@
 - 01h30 : crap-1 intégré (ca54ffd, 8 tests de l'updater, 4 mutations détectées). fon-A intégré (45927b7, minuit, bandeau, extra `mot` limité), suite complète 136/136.
 - GLOSE itération 1 : benchmark et audit (`night/glose_1.md`). Le plus gros défaut est la nuit : le contour brun disparaît sur #141829, d'où le prototype de liseré crème. Autre défaut : la même expression partout, d'où les humeurs « fier » et « curieux ». Itération 2 lancée : liseré de nuit dans Android et humeurs.
 - fon-B (rotation du score, sons préchauffés, N6, N10) et fon-C (renommage de Glose) lancés.
+- 02h00 : ux-A intégré (15183f7, 7640dd5).
+  - Détail au style de la carte d'accueil, focus de l'étoile, bandes de l'album, timbre de citation sans « 1 MOT ».
+  - Le maître a factorisé `fitWord` (2e55360).
+- fon-B intégré (9e70f64, a523b87, 77f9302) : rotation du score, sons du quiz préchauffés, chaîne d'alarmes robuste, service sans mot arrêté.
+- fon-C intégré (c1dbecf) : renommage de Glose dans Réglages › Apparence, signature des cartes, titre de la Collection. Suite complète 145/145.
+- Note : un `git stash` nommé `fonB-n2-src`, laissé par l'équipe fon-B, est encore dans le dépôt. Son contenu est déjà dans 9e70f64, je ne l'ai pas supprimé.
