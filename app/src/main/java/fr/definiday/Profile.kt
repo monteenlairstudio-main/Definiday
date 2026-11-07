@@ -25,7 +25,7 @@ object Profile {
     private const val MAX_TEXT = 10_000
 
     /** Prefs keys (Prefs) and their type; "wallpaper": the former switch, still read as the mode's default. */
-    private val SETTINGS = mapOf(
+    internal val SETTINGS = mapOf(
         "onboarded" to "boolean", "enabled" to "boolean", "hour" to "int", "minute" to "int", "duration" to "int", "mode" to "int",
         "wallpaper" to "boolean", "unlocks" to "int", "wordsPerDay" to "int", "dailyDay" to "long", "dailyMots" to "string",
         "textBottom" to "boolean", "moreQuotes" to "boolean", "sounds" to "boolean", "guessFirst" to "boolean", "rateAsked" to "boolean",

@@ -1,0 +1,212 @@
+{
+ "format": "definiday-profil",
+ "version": 1,
+ "app": "0.14.0",
+ "date": "2026-11-08",
+ "files": {
+  "definiday": {
+   "onboarded": {
+    "t": "boolean",
+    "v": true
+   },
+   "enabled": {
+    "t": "boolean",
+    "v": true
+   },
+   "hour": {
+    "t": "int",
+    "v": 8
+   },
+   "minute": {
+    "t": "int",
+    "v": 30
+   },
+   "duration": {
+    "t": "int",
+    "v": 2
+   },
+   "mode": {
+    "t": "int",
+    "v": 0
+   },
+   "wallpaper": {
+    "t": "boolean",
+    "v": true
+   },
+   "unlocks": {
+    "t": "int",
+    "v": 3
+   },
+   "wordsPerDay": {
+    "t": "int",
+    "v": 2
+   },
+   "dailyDay": {
+    "t": "long",
+    "v": 20764
+   },
+   "dailyMots": {
+    "t": "string",
+    "v": "abaque,zinzolin"
+   },
+   "textBottom": {
+    "t": "boolean",
+    "v": false
+   },
+   "moreQuotes": {
+    "t": "boolean",
+    "v": true
+   },
+   "sounds": {
+    "t": "boolean",
+    "v": true
+   },
+   "guessFirst": {
+    "t": "boolean",
+    "v": false
+   },
+   "rateAsked": {
+    "t": "boolean",
+    "v": true
+   },
+   "quizEnabled": {
+    "t": "boolean",
+    "v": true
+   },
+   "quizHour": {
+    "t": "int",
+    "v": 20
+   },
+   "quizMinute": {
+    "t": "int",
+    "v": 15
+   },
+   "lastQuizDay": {
+    "t": "long",
+    "v": 20763
+   },
+   "streak": {
+    "t": "int",
+    "v": 5
+   },
+   "quizzes": {
+    "t": "int",
+    "v": 12
+   },
+   "perfectQuizzes": {
+    "t": "int",
+    "v": 4
+   },
+   "passedQuizzes": {
+    "t": "int",
+    "v": 9
+   },
+   "correctAnswers": {
+    "t": "int",
+    "v": 30
+   },
+   "unlocked": {
+    "t": "set",
+    "v": [
+     "livres",
+     "nuit",
+     "echarpe"
+    ]
+   },
+   "announced": {
+    "t": "set",
+    "v": [
+     "livres",
+     "nuit"
+    ]
+   },
+   "glosePose": {
+    "t": "string",
+    "v": "livres"
+   },
+   "glosePelage": {
+    "t": "string",
+    "v": "nuit"
+   },
+   "glosePelote": {
+    "t": "string",
+    "v": "sauge"
+   },
+   "gloseAcc": {
+    "t": "string",
+    "v": "echarpe"
+   },
+   "gloseName": {
+    "t": "string",
+    "v": "Monsieur Glose"
+   },
+   "warnedDay": {
+    "t": "long",
+    "v": 20760
+   },
+   "palettes": {
+    "t": "set",
+    "v": [
+     "encre",
+     "nature"
+    ]
+   },
+   "polices": {
+    "t": "set",
+    "v": []
+   },
+   "updateAuto": {
+    "t": "boolean",
+    "v": false
+   },
+   "futureKey": {
+    "t": "string",
+    "v": "une clé d'une version future"
+   }
+  },
+  "history": {
+   "abaque": {
+    "t": "long",
+    "v": 20764
+   },
+   "zinzolin": {
+    "t": "long",
+    "v": 20764
+   },
+   "q:Voltaire 1": {
+    "t": "long",
+    "v": 20700
+   }
+  },
+  "memoire": {
+   "m:abaque": {
+    "t": "string",
+    "v": "20764/2/1"
+   },
+   "favoris": {
+    "t": "set",
+    "v": [
+     "abaque"
+    ]
+   },
+   "reviews": {
+    "t": "int",
+    "v": 7
+   },
+   "reviewsRight": {
+    "t": "int",
+    "v": 5
+   },
+   "autreFutur": {
+    "t": "int",
+    "v": 1
+   }
+  },
+  "futur": {
+   "x": {
+    "t": "int",
+    "v": 1
+   }
+  }
+ }
+}

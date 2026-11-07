@@ -54,6 +54,35 @@ class ProfileTest {
         assertEquals(setOf("abaque"), Memory(ctx).favourites)
     }
 
+    /** Golden file: a profile as exported by 0.14.0 (the first in-app update) must import into HEAD unchanged; keys and files from a later version are ignored. */
+    @Test fun profileFrom0140ImportsUnchanged() {
+        val text = javaClass.classLoader!!.getResource("profil-0.14.0.json")!!.readText()
+        assertTrue(Profile.import(ctx, uri(text)))
+        val files = JSONObject(text).getJSONObject("files")
+        Profile.FILES.forEach { f ->
+            val o = files.getJSONObject(f)
+            val expected = o.keys().asSequence().filter { it != "futureKey" && it != "autreFutur" }.associateWith { k ->
+                val e = o.getJSONObject(k)
+                when (e.getString("t")) {
+                    "int" -> e.getInt("v"); "long" -> e.getLong("v"); "boolean" -> e.getBoolean("v")
+                    "set" -> e.getJSONArray("v").let { a -> List(a.length()) { a.getString(it) }.toSet() }
+                    else -> e.getString("v")
+                }
+            }
+            assertEquals(f, expected, sp(f).all.toMap())
+        }
+        assertEquals("Monsieur Glose", Prefs(ctx).gloseName)
+        assertEquals(setOf("abaque"), Memory(ctx).favourites)
+    }
+
+    /** Every key Prefs keeps in the backed-up "definiday" file must be in Profile.SETTINGS, or export/import silently drops it. */
+    @Test fun everyPrefsKeyIsInTheProfile() {
+        val src = File("src/main/java/fr/definiday/Prefs.kt").readText().substringBefore("\nclass History")
+        val keys = Regex("""(?:\bsp\.(?:edit\(\)\.)?\w+|\b(?:int|long|bool|str|strings))\("(\w+)"""").findAll(src).map { it.groupValues[1] }.toSet()
+        assertTrue(keys.size > 30)
+        assertEquals(emptySet<String>(), keys - Profile.SETTINGS.keys)
+    }
+
     @Test fun junkIsRejectedAndChangesNothing() {
         fill()
         val before = profile()
