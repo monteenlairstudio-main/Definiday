@@ -20,7 +20,7 @@
     <string name="source"><u>Source de l’anecdote</u></string>
     <string name="random">Mot au hasard</string>
     <string name="deja_vu">Déjà vu</string>
-    <string name="seen_today">Aujourd’hui</string>
+    <string name="seen_today">Autres lettres du jour</string>
     <string name="per_day">Nombre de mots par jour</string>
     <string name="styles_row">Couleurs et polices</string>
     <string name="styles_row_hint">Palettes\u202F: %1$d\u00A0sur\u00A0%2$d · polices\u202F: %3$d\u00A0sur\u00A0%4$d</string>
@@ -95,7 +95,7 @@
     <string name="test_done_notif">Mot affiché dans les notifications.</string>
     <string name="exact_no">Le mot peut arriver jusqu’à 1\u00A0h en retard, et la fin au déverrouillage peut échouer. Autorisez «\u202FAlarmes et rappels\u202F» pour l’éviter.</string>
     <string name="exact_ask">Autoriser «\u202FAlarmes et rappels\u202F»</string>
-    <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Touchez ici pour les réactiver.</string>
+    <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Les réactiver ›</string>
     <string name="quote_chip">Citation</string>
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
     <string name="quiz_right">Bien vu\u202F!</string>
@@ -146,14 +146,17 @@
     <string name="action_tlfi_desc">TLFi, article du CNRTL</string>
     <string name="action_source">Source</string>
     <string name="action_source_desc">Source de la citation, Wikiquote</string>
-    <string name="action_share">Partager</string>
-    <string name="action_share_desc">Partager ce mot</string>
+    <string name="action_share">Envoyer</string>
+    <string name="action_share_desc">Envoyer ce mot à quelqu’un</string>
     <string name="action_random">Au hasard</string>
     <string name="action_random_desc">Au hasard, un nouveau mot</string>
     <string name="random_hint">Ce mot remplace aussi celui de l’écran de verrouillage.</string>
     <string name="collection_count">%1$d/%2$d</string>
     <string name="collection_desc">Collection de Monsieur Glose, %1$d objets sur %2$d</string>
     <string name="exemple">Exemple</string>
+    <!-- home header: the day's letter; Glose's handwritten note on the example (accessory, never the only information) -->
+    <string name="letter_title">Une lettre de Glose</string>
+    <string name="exemple_note">à glisser au dîner !</string>
     <string name="reveal">Touchez pour révéler</string>
     <string name="reveal_desc">Touchez pour révéler la définition</string>
     <string name="share_title">Partager le mot</string>
