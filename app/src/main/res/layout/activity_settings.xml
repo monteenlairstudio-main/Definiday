@@ -209,6 +209,29 @@
                 android:text="@string/sounds_hint" />
         </LinearLayout>
 
+        <!-- Mon profil: the profile as a file, through the system file picker (Profile) -->
+        <TextView
+            style="@style/Rubric"
+            android:text="@string/group_profile" />
+
+        <LinearLayout style="@style/Sheet">
+
+            <Button
+                android:id="@+id/profile_export"
+                style="@style/Row"
+                android:text="@string/profile_export" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/profile_hint" />
+
+            <Button
+                android:id="@+id/profile_import"
+                style="@style/Row"
+                android:layout_marginTop="16dp"
+                android:text="@string/profile_import" />
+        </LinearLayout>
+
         <!-- Mises à jour (Update.kt): hidden when BuildConfig.SELF_UPDATE is false -->
         <TextView
             android:id="@+id/update_rubric"
@@ -242,6 +265,15 @@
                 android:id="@+id/update_install"
                 style="@style/Row"
                 android:text="@string/update_install"
+                android:visibility="gone" />
+
+            <!-- optional safety step before installing: the same export as « Mon profil » -->
+            <Button
+                android:id="@+id/update_backup"
+                style="@style/Link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_backup"
                 android:visibility="gone" />
 
             <TextView

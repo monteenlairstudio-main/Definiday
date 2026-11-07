@@ -1,6 +1,7 @@
 package fr.definiday
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import java.time.LocalTime
 
-/** Settings in sheets: Mot du jour, Ailleurs sur votre téléphone (widget, test), Écran de verrouillage, Quiz du soir, Apparence.
+/** Settings in sheets: Mot du jour, Ailleurs sur votre téléphone (widget, test), Écran de verrouillage, Quiz du soir, Apparence, Mon profil.
  *  Back to the home screen, which re-reads them. */
 class SettingsActivity : Activity() {
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
@@ -100,8 +101,36 @@ class SettingsActivity : Activity() {
             setOnCheckedChangeListener { _, on -> p.sounds = on; if (on) Sounds.play(context, Sounds.PAGE) } // a sample, so the choice is heard
         }
 
+        // Mon profil: the system file picker, no permission (Profile)
+        findViewById<Button>(R.id.profile_export).setOnClickListener {
+            pick(Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("application/json")
+                .putExtra(Intent.EXTRA_TITLE, Profile.fileName()), REQ_EXPORT)
+        }
+        findViewById<Button>(R.id.profile_import).setOnClickListener {
+            // file managers label .json as any of these
+            pick(Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*")
+                .putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/json", "text/plain", "application/octet-stream")), REQ_IMPORT)
+        }
+
         // Mises à jour
         if (BuildConfig.SELF_UPDATE) updates() else listOf(R.id.update_rubric, R.id.update_sheet).forEach { findViewById<View>(it).visibility = View.GONE }
+    }
+
+    private fun pick(i: Intent, req: Int) = runCatching { startActivityForResult(i, req) } // no picker (rare): nothing happens
+
+    override fun onActivityResult(req: Int, res: Int, data: Intent?) {
+        val uri = data?.data?.takeIf { res == RESULT_OK } ?: return
+        fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+        when (req) {
+            REQ_EXPORT -> toast(if (Profile.export(this, uri)) R.string.profile_saved else R.string.profile_save_failed)
+            REQ_IMPORT -> {
+                val profile = Profile.read(this, uri) ?: return toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
+                AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
+                    .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
+                    .setNegativeButton(R.string.cancel, null)
+                    .show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -126,10 +155,12 @@ class SettingsActivity : Activity() {
         val status = findViewById<TextView>(R.id.update_status)
         val check = findViewById<Button>(R.id.update_check)
         val install = findViewById<Button>(R.id.update_install)
+        val backup = findViewById<Button>(R.id.update_backup).apply { setOnClickListener { findViewById<Button>(R.id.profile_export).performClick() } }
         fun say(text: String) { status.text = text; status.visibility = View.VISIBLE }
         fun offer(i: Update.Info) {
             say(getString(R.string.update_new, i.name) + i.notes.let { if (it.isEmpty()) "" else "\n\n$it" })
             install.visibility = View.VISIBLE
+            backup.visibility = View.VISIBLE
             install.setOnClickListener { install.isEnabled = false; Update.install(this, i) { text, last -> if (text.isNotEmpty()) say(text); install.isEnabled = last } }
         }
         findViewById<TextView>(R.id.update_version).text = getString(R.string.update_version, BuildConfig.VERSION_NAME)
@@ -137,6 +168,7 @@ class SettingsActivity : Activity() {
         check.setOnClickListener {
             check.isEnabled = false
             install.visibility = View.GONE
+            backup.visibility = View.GONE
             say(getString(R.string.update_checking))
             Thread {
                 val i = runCatching { Update.check() }.getOrNull()
@@ -166,4 +198,6 @@ class SettingsActivity : Activity() {
         }
 
     private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
+
+    private companion object { const val REQ_EXPORT = 1; const val REQ_IMPORT = 2 }
 }

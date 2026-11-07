@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Debug-signed builds only (app/build.gradle.kts): told apart from the real app on the launcher, by name and by a wax red icon (wax_dark) -->
+<resources>
+    <string name="app_name">Definiday (test)</string>
+    <color name="icon_bg">#7A2924</color>
+</resources>
