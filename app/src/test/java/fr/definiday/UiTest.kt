@@ -64,16 +64,31 @@ class UiTest {
         assertEquals(View.VISIBLE, Robolectric.buildActivity(MainActivity::class.java).setup().get().findViewById<View>(R.id.notif_banner).visibility)
     }
 
-    /** B3: right and wrong are written (✓ / ✗), and the tint keeps the button's rounded shape. */
+    /** B3: right and wrong are marked by a check / cross icon in the box's place (the word does not move) and said to TalkBack,
+     *  the other boxes go ink2 (no plume box on a disabled option), and the tint keeps the button's rounded shape. */
     @Test fun quizMarksAnswersInText() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
         val answer = quizAnswer(a)
+        val wordX = buttons(a).map { it.compoundPaddingStart }.distinct().single()
         val wrong = buttons(a).first { b -> b.text != answer }
         val wrongMot = wrong.text.toString()
         wrong.performClick()
-        assertEquals("✗ $wrongMot", wrong.text.toString())
-        assertTrue(buttons(a).any { it.text == "✓ $answer" })
+        val options = buttons(a).filter { it.text != ctx.getString(R.string.quiz_next) }
+        assertEquals(4, options.size)
+        assertEquals(listOf(wordX), options.map { it.compoundPaddingStart }.distinct()) // every word starts at the same x
+        assertEquals(wrongMot, wrong.text.toString())
+        assertEquals(ctx.getString(R.string.quiz_answer_picked, wrongMot), wrong.contentDescription)
+        val right = options.single { it.text == answer }
+        assertEquals(ctx.getString(R.string.quiz_answer_right, answer), right.contentDescription)
+        assertEquals(R.drawable.ic_check, shadowOf(right.compoundDrawablesRelative[0]).createdFromResId)
+        assertEquals(R.drawable.ic_cross, shadowOf(wrong.compoundDrawablesRelative[0]).createdFromResId)
+        (options - right - wrong).forEach { // their box stays, disabled: ink2 (quiz_box_edge, drawn in DefinidayTest)
+            assertEquals(null, it.contentDescription)
+            assertEquals(R.drawable.quiz_box, shadowOf(it.compoundDrawablesRelative[0]).createdFromResId)
+            assertTrue(!it.isEnabled)
+        }
+        assertTrue(java.io.File("src/main/java/fr/definiday/QuizActivity.kt").readText().none { it == '✓' || it == '✗' })
         assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
             it.text == ctx.getString(R.string.quiz_wrong, answer) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
@@ -255,14 +270,18 @@ class UiTest {
         assertTrue(Quiz.askRate(p, passed = true, counted = true))
         assertTrue(!Quiz.askRate(Prefs(ctx).apply { passedQuizzes = 9 }, passed = true, counted = true)) // only once
         // on the score screen: shown after the 5th passed quiz, « Plus tard » folds it
-        p.apply { rateAsked = false; passedQuizzes = 4; lastQuizDay = Long.MIN_VALUE }
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
-        val q = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        repeat(Words.seenToday(ctx).size) { // a question may be the definition or a blanked example: quizAnswer() reads both
-            val answer = quizAnswer(q)
-            buttons(q).first { it.text == answer }.performClick()
-            buttons(q).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
-        }
+        fun fifth() = Robolectric.buildActivity(QuizActivity::class.java).also { p.apply { rateAsked = false; passedQuizzes = 4; lastQuizDay = Long.MIN_VALUE } }
+            .setup().get().also { q -> repeat(Words.seenToday(ctx).size) { // a question may be the definition or a blanked example: quizAnswer() reads both
+                val answer = quizAnswer(q)
+                buttons(q).first { it.text == answer }.performClick()
+                buttons(q).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+            } }
+        // Q4: installed from the GitHub releases (no installer, or another one), « Noter » would open a missing listing: no card, not spent
+        assertTrue(views(fifth()).none { (it as? TextView)?.text == ctx.getString(R.string.rate_text) })
+        assertTrue(!p.rateAsked)
+        shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending")
+        val q = fifth()
         val rate = views(q).filterIsInstance<TextView>().single { it.text == ctx.getString(R.string.rate_text) }
         buttons(q).first { it.text == ctx.getString(R.string.rate_later) }.performClick()
         assertTrue(!rate.isShown)

@@ -34,6 +34,23 @@ class DefinidayTest {
         }
     }
 
+    /** Q3: a disabled Btn keeps a 1 dp card_edge rule around its flat fill (at night surface_off is 1.01:1 on the letter's sheet),
+     *  and a disabled quiz option's box is ink2, not plume. */
+    @Test fun disabledQuizOptionsStayReadable() {
+        listOf("+notnight", "+night").forEach { night ->
+            RuntimeEnvironment.setQualifiers(night)
+            val c = RuntimeEnvironment.getApplication()
+            val b = Bitmap.createBitmap(300, 150, Bitmap.Config.ARGB_8888)
+            c.getDrawable(R.drawable.btn)!!.apply { state = intArrayOf(); setBounds(0, 0, 300, 150); draw(Canvas(b)) } // no state_enabled
+            assertEquals(night, c.getColor(R.color.card_edge), b.getPixel(150, 1))
+            assertEquals(night, c.getColor(R.color.surface_off), b.getPixel(150, 75))
+            val box = Bitmap.createBitmap(54, 54, Bitmap.Config.ARGB_8888)
+            c.getDrawable(R.drawable.quiz_box)!!.apply { state = intArrayOf(); setBounds(0, 0, 54, 54); draw(Canvas(box)) }
+            assertEquals(night, c.getColor(R.color.ink2), box.getPixel(27, 2))
+            assertEquals(night, 0, box.getPixel(27, 27)) // still an empty box
+        }
+    }
+
     /** Simulates 3 years of daily + random picks and asserts the cooldowns. */
     private fun simulate(perDay: Int, randomPerDay: Int, checkRandom: Boolean) {
         val words = Words.load(ctx)
@@ -336,6 +353,7 @@ class DefinidayTest {
         capture(quizEnd(right = 2), File(ui, "quiz_fin.png"))
         capture(quizEnd(right = 3), File(ui, "quiz_fin_refait.png")) // same day: score not counted
         p.apply { lastQuizDay = Long.MIN_VALUE; passedQuizzes = 4 }
+        org.robolectric.Shadows.shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending") // the card needs Play
         capture(quizEnd(right = 3), File(ui, "quiz_fin_noter.png")) // 5th passed quiz: the rate card, once
         p.guessFirst = true
         capture(main(), File(ui, "home_deviner.png"))

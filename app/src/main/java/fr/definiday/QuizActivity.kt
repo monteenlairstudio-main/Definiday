@@ -155,17 +155,19 @@ class QuizActivity : Activity() {
             buttons.forEachIndexed { j, o ->
                 o.isEnabled = false
                 val good = q.options[j] == q.answer
-                if (good || j == picked) { // said in the text, not by the colour alone; the chosen one keeps the selection outline
-                    o.text = (if (good) "✓ " else "✗ ") + q.options[j].mot
+                // right and wrong are said by an icon in the box's place (the word stays where it was) and to TalkBack, not by the colour alone;
+                // the other boxes go ink2 with the disabled state (quiz_box_edge)
+                if (good || j == picked) { // the chosen one keeps the selection outline
+                    val box = o.compoundDrawablesRelative[0]!!.bounds
+                    o.setCompoundDrawablesRelative(getDrawable(if (good) R.drawable.ic_check else R.drawable.ic_cross)!!.apply { bounds = box }, null, null, null)
+                    o.compoundDrawableTintList = android.content.res.ColorStateList.valueOf(getColor(R.color.quiz_on))
+                    o.contentDescription = getString(if (good) R.string.quiz_answer_right else R.string.quiz_answer_picked, q.options[j].mot)
                     o.background = GradientDrawable().apply {
                         cornerRadius = resources.getDimension(R.dimen.radius_paper)
                         setColor(getColor(if (good) R.color.quiz_good else R.color.quiz_bad))
                         if (j == picked) setStroke((2 * d).toInt(), getColor(R.color.accent))
                     }
                     o.isSelected = j == picked
-                    // the ✓ / ✗ takes the box's place, the word stays where it was
-                    o.setCompoundDrawablesRelative(null, null, null, null)
-                    o.setPaddingRelative(o.paddingStart + ((18 + 14) * d - o.paint.measureText("✓ ")).toInt().coerceAtLeast(0), o.paddingTop, o.paddingEnd, o.paddingBottom)
                     o.setTextColor(getColor(R.color.quiz_on))
                 }
             }
@@ -238,7 +240,7 @@ class QuizActivity : Activity() {
                 val got = Unlocks.update(p)
                 p.announced = p.announced + got.map { it.id }
                 won = got
-                rated = Quiz.askRate(p, passed, counted = !done)
+                rated = Quiz.fromPlay(this) && Quiz.askRate(p, passed, counted = !done)
                 Sounds.play(this, if (got.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
                 got
             }
@@ -373,12 +375,15 @@ object Quiz {
     /** Unboxing: at most 3 stamps, the last (rarest, the one Glose wears) ones; the rest is only counted (« + N dans la collection »). */
     fun <T> stamps(fresh: List<T>) = fresh.takeLast(3) to maxOf(0, fresh.size - 3)
 
-    /** Rate card on: harmless before the Play Store listing (the store answers « not found », the web fallback too). */
-    const val RATE_PROMPT = true
+    /** Installed by the Play Store: the rate card has a listing to open (the GitHub releases' APK has no installer, or another one). */
+    fun fromPlay(c: android.content.Context) = runCatching {
+        if (Build.VERSION.SDK_INT >= 30) c.packageManager.getInstallSourceInfo(c.packageName).installingPackageName
+        else @Suppress("DEPRECATION") c.packageManager.getInstallerPackageName(c.packageName)
+    }.getOrNull() == "com.android.vending"
 
     /** The rate card, once: on the score screen of a passed quiz that counted, from the 5th passed one; never after a failed quiz. */
     fun askRate(p: Prefs, passed: Boolean, counted: Boolean): Boolean {
-        if (!RATE_PROMPT || !passed || !counted || p.passedQuizzes < 5 || p.rateAsked) return false
+        if (!passed || !counted || p.passedQuizzes < 5 || p.rateAsked) return false
         p.rateAsked = true
         return true
     }

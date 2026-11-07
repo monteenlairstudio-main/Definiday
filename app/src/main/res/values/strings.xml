@@ -130,6 +130,8 @@
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
     <string name="quiz_right">Bien vu\u202F!</string>
     <string name="quiz_wrong">Pas tout à fait\u202F: c’était «\u202F%1$s\u202F».</string>
+    <string name="quiz_answer_right">%1$s, bonne réponse</string>
+    <string name="quiz_answer_picked">%1$s, votre réponse</string>
     <string name="quiz_not_counted">Quiz déjà fait aujourd’hui\u202F: ce score ne compte pas pour la collection.</string>
     <string name="quiz_prompt">Quel mot correspond à cette définition\u202F?</string>
     <string name="quiz_progress">Question %1$d sur %2$d</string>
