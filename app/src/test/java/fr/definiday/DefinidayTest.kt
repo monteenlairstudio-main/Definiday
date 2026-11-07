@@ -363,9 +363,13 @@ class DefinidayTest {
         }
         p.apply { lastQuizDay = today - 1; streak = 8 }
         fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
+        fun detail() = Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot)).setup().get()
+        // keyboard focus on the star (WCAG 2.4.7): its outline must show
+        fun starFocused(a: android.app.Activity) = a.also { views(a).filterIsInstance<android.widget.CheckBox>().first { it.isShown }.run { isFocusableInTouchMode = true; requestFocus() } }
         capture(mots(), File(ui, "mots_light.png"))
-        capture(Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot))
-            .setup().get(), File(ui, "mots_detail.png"))
+        capture(detail(), File(ui, "mots_detail.png"))
+        capture(starFocused(detail()), File(ui, "mots_detail_focus_star.png"))
+        capture(starFocused(main()), File(ui, "home_focus_star.png"))
         capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
             File(ui, "quiz_revision.png"))
         val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }
@@ -373,10 +377,12 @@ class DefinidayTest {
         RuntimeEnvironment.setFontScale(2f)
         RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
         capture(mots(), File(ui, "mots_w360_font200.png"))
+        capture(detail(), File(ui, "mots_detail_w360_font200.png"))
         RuntimeEnvironment.setFontScale(1f)
         RuntimeEnvironment.setQualifiers("+w411dp-h891dp")
         RuntimeEnvironment.setQualifiers("+night")
         capture(mots(), File(ui, "mots_dark.png"))
+        capture(detail(), File(ui, "mots_detail_dark.png"))
         RuntimeEnvironment.setQualifiers("+notnight")
     }
 

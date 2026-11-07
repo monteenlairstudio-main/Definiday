@@ -211,6 +211,13 @@ class MemoryTest {
         assertEquals(emptySet<String>(), Memory(ctx).favourites)
         val star = views(a).filterIsInstance<CheckBox>().last()
         assertEquals(ctx.getString(R.string.favori_add, "abâtardir"), star.contentDescription)
+        // keyboard focus is visible on the star (WCAG 2.4.7): its background shows an outline (a stroked shape) once focused, nothing at rest
+        fun outlined() = (star.background as android.graphics.drawable.LayerDrawable).let { bg -> (0 until bg.numberOfLayers).map(bg::getDrawable) }
+            .filterIsInstance<android.graphics.drawable.StateListDrawable>().single().current is android.graphics.drawable.GradientDrawable
+        assertTrue(!outlined())
+        star.isFocusableInTouchMode = true
+        assertTrue(star.requestFocus() && outlined())
+        star.clearFocus()
         star.performClick()
         assertEquals(setOf("abâtardir"), Memory(ctx).favourites)
         views(a).filterIsInstance<Switch>().single().performClick() // « Favoris seulement »

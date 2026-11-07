@@ -121,6 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="22dp"
             android:paddingTop="20dp"
@@ -186,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="-12dp"
-                    android:background="@null"
+                    android:background="@drawable/btn_round"
                     android:button="@drawable/favori"
                     android:contentDescription="@string/favori" />
             </LinearLayout>

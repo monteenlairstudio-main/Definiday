@@ -82,6 +82,7 @@ class MotsActivity : Activity() {
         empty = TextView(this, null, 0, R.style.Body).apply { setTextColor(getColor(R.color.ink2)); setPadding(0, (16 * dp).toInt(), 0, 0) }
         val list = ListView(this).apply {
             divider = null; setPadding(pad, 0, pad, pad); clipToPadding = false
+            itemsCanFocus = true // the keyboard reaches each row's star, not only the row
             addHeaderView(ledger, null, false); addFooterView(empty, null, false)
             adapter = this@MotsActivity.adapter
         }
@@ -152,7 +153,7 @@ class MotsActivity : Activity() {
                     addView(TextView(context, null, 0, R.style.Body).apply { textSize = 18f; setTypeface(typeface, android.graphics.Typeface.BOLD) })
                     addView(TextView(context, null, 0, R.style.Body).apply { textSize = 14f; setTextColor(getColor(R.color.ink2)); maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
                 }, LinearLayout.LayoutParams(0, -2, 1f))
-                addView(CheckBox(context).apply { setButtonDrawable(R.drawable.favori); background = null })
+                addView(CheckBox(context).apply { setButtonDrawable(R.drawable.favori) }) // its focus ring: star()
             }
             val w = rows[i]
             val texts = row.getChildAt(0) as LinearLayout
