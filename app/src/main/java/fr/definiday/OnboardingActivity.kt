@@ -165,7 +165,7 @@ class OnboardingActivity : Activity() {
         val m = resources.displayMetrics
         val width = (180 * m.density).toInt()
         val height = width * maxOf(m.widthPixels, m.heightPixels) / minOf(m.widthPixels, m.heightPixels) // portrait screen ratio
-        val bmp = WordCard.render(w, width, height, st, p.textBottom)
+        val bmp = WordCard.render(this, w, width, height, st, p.textBottom)
         // the clock the lock screen draws above the word, at the chosen time
         Canvas(bmp).drawText("%02d:%02d".format(p.hour, p.minute), width / 2f, height * 0.22f, Paint(Paint.ANTI_ALIAS_FLAG).apply {
             textSize = width * 0.22f; color = st.palette.mot; textAlign = Paint.Align.CENTER; typeface = Typeface.create("sans-serif-light", Typeface.NORMAL)

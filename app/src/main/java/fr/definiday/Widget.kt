@@ -6,6 +6,9 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.RectF
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -15,11 +18,12 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.Toast
+import java.time.LocalDate
 
 /**
- * Free home-screen widget: today's first item in its palette, the user's Glose in a corner, a tap opens it in the app.
+ * Free home-screen widget: today's first item as a postcard in its palette, a stamp and today's postmark in a corner, a tap opens it.
  * Plain TextViews (crisp, read by TalkBack, autosized by the layout); the gradient is two tinted shapes, so the only bitmap is
- * the small Glose head. No updatePeriodMillis: [update] runs from the daily alarm (DailyReceiver), which keeps firing while a widget
+ * the small stamp ([stamp]). No updatePeriodMillis: [update] runs from the daily alarm (DailyReceiver), which keeps firing while a widget
  * exists even with the daily word off; the system calls onUpdate itself after a boot or an app update.
  */
 class Widget : AppWidgetProvider() {
@@ -54,7 +58,8 @@ class Widget : AppWidgetProvider() {
         /** The widget [wDp] x [hDp]: the word as large as fits beside Glose, else Glose steps aside for it (then 2 lines at 16 sp if it must);
          *  the text block gets the lines that fit at its smallest autosize, then an ellipsis. */
         fun views(ctx: Context, item: Item, wDp: Float, hDp: Float): RemoteViews {
-            val pal = Styles.of(ctx, item).palette
+            val style = Styles.of(ctx, item)
+            val pal = style.palette
             val v = RemoteViews(ctx.packageName, R.layout.widget)
             v.setInt(R.id.widget_top, "setColorFilter", pal.haut)
             v.setInt(R.id.widget_bottom, "setColorFilter", pal.bas)
@@ -83,13 +88,25 @@ class Widget : AppWidgetProvider() {
             val used = 38 + maxOf(if (glose) 40f else 0f, (if (item is Word) motLines * motSp * 1.2f + 16 else 16f) * fs) + if (item is Quote) (if (item.signature.length * 7 > wDp - 32) 32 else 16) * fs else 0f
             v.setInt(R.id.widget_texte, "setMaxLines", ((hDp - used) / (14.5f * fs)).toInt().coerceAtLeast(1))
             val px = (40 * ctx.resources.displayMetrics.density).toInt() // ~120 px square: far below the RemoteViews bitmap budget
-            v.setViewVisibility(R.id.widget_glose, if (glose) View.VISIBLE else View.GONE)
-            v.setImageViewBitmap(R.id.widget_glose, Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_vd, accessory = false), px, px))
+            v.setViewVisibility(R.id.widget_stamp, if (glose) View.VISIBLE else View.GONE)
+            v.setImageViewBitmap(R.id.widget_stamp, stamp(ctx, item, style, px))
             // request code 100: apart from the notifications' 1-3 and the quiz's 50 (same component, extras do not count)
             v.setOnClickPendingIntent(android.R.id.background, PendingIntent.getActivity(ctx, 100,
                 Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, item.key),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT))
             return v
+        }
+
+        /** The postcard's corner, [px] square: a stamp with the item's initial in its colors, today's postmark over its left edge.
+         *  A bitmap because RemoteViews cannot draw paths nor set the word's font. */
+        fun stamp(ctx: Context, item: Item, style: Style, px: Int, date: LocalDate = LocalDate.now()): Bitmap {
+            val b = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888)
+            val c = Canvas(b)
+            val s = px.toFloat()
+            val (initial, face) = Postal.initial(ctx, item, style)
+            Postal.drawStamp(c, RectF(s * 0.36f, s * 0.04f, s * 0.98f, s * 0.78f), style.palette.mot, style.palette.haut, initial, face)
+            Postal.drawPostmark(c, ctx, s * 0.3f, s * 0.68f, s * 0.28f, style.palette.nature, date, s * 0.62f, arcs = false)
+            return b
         }
 
         /** « Ajouter le widget »: the launcher's pin dialog, or how to add it by hand when the launcher has none. */
