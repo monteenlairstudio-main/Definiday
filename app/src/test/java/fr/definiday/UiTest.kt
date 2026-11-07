@@ -125,6 +125,15 @@ class UiTest {
         assertEquals(View.VISIBLE, a.findViewById<View>(R.id.unlocks).visibility)
     }
 
+    /** N4: a duration outside the list (restored profile) is kept and shown, not replaced by the first choice. */
+    @Test fun settingsKeepADurationOutsideTheList() {
+        Prefs(ctx).durationMinutes = 90
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        org.robolectric.shadows.ShadowLooper.idleMainLooper()
+        assertEquals(90, Prefs(ctx).durationMinutes)
+        assertEquals("1 h 30", a.findViewById<android.widget.Spinner>(R.id.duration).selectedItem)
+    }
+
     /** I8 / A14: the longest word, small screen, font x2: the headword shrinks down to 1.3 x the definition at most;
      *  if it still does not hold on one line, it breaks between syllables (never anywhere). */
     @Test @Config(qualifiers = "fr-w360dp-h740dp-xxhdpi") fun longWordFitsAtLargeFont() {

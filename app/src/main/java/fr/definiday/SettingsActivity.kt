@@ -76,7 +76,8 @@ class SettingsActivity : Activity() {
             p.mode = it; showMode()
         }
         showMode()
-        spinner(R.id.duration, durations.map(::label), durations.indexOf(p.durationMinutes)) { p.durationMinutes = durations[it] }
+        val ds = (durations + p.durationMinutes).distinct().sorted() // a restored value outside the list stays as is
+        spinner(R.id.duration, ds.map(::label), ds.indexOf(p.durationMinutes)) { p.durationMinutes = ds[it] }
         spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
             p.unlocks = it; UnlockService.sync(this) // applies to the word already on the lock screen
         }
@@ -197,7 +198,7 @@ class SettingsActivity : Activity() {
             }
         }
 
-    private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
+    private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h" + if (min % 60 > 0) " ${"%02d".format(min % 60)}" else ""
 
     private companion object { const val REQ_EXPORT = 1; const val REQ_IMPORT = 2 }
 }
