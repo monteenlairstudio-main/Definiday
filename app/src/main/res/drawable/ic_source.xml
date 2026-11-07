@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Source of a quote: a quill (not the TLFi's book, audit 011 n° 20). Interface icons (ic_*.xml, Correspondance § 6): 24 dp grid, 1.75 stroke, rounded ends and joins, in ink;
+     no disc (the button draws it: btn_disc), tinted in code on the postcard (compoundDrawableTintList = palette texte). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M20.2,3.8C13.6,4.2 8.2,9.4 6.6,17.4" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M20.2,3.8C19.6,10.6 14.6,15.6 7.6,16" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M11.2,12.4L15,8.6" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M6.6,17.4L4,20.2" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+</vector>

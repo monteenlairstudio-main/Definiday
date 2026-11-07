@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Btn as a pill (home chips of the day), the radius clamped to half the height: no outline at rest,
-     1.5 dp accent outline on the item shown in the card (selected), 3 dp when focused. -->
+<!-- Top-bar buttons (style Disc): a kraft disc, a pill when it holds text (« 8/39 »); 3 dp accent outline when focused. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/ripple">
     <item>
         <selector>
             <item android:state_focused="true">
                 <shape><corners android:radius="100dp" /><solid android:color="@color/surface" /><stroke android:width="3dp" android:color="@color/accent" /></shape>
-            </item>
-            <item android:state_selected="true">
-                <shape><corners android:radius="100dp" /><solid android:color="@color/surface" /><stroke android:width="1.5dp" android:color="@color/accent" /></shape>
             </item>
             <item>
                 <shape><corners android:radius="100dp" /><solid android:color="@color/surface" /></shape>

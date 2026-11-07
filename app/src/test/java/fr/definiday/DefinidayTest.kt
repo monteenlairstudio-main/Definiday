@@ -154,6 +154,19 @@ class DefinidayTest {
         p.polices = null
     }
 
+    /** Lock card (WordCard + Postal), against both gradient ends of every palette: label and signature (nature) 4.5:1, stamp sheet (mot)
+     *  3:1 and its initial (haut on mot) 4.5:1, the more visible thread strand 3:1. The postmark is decor: its date is the label's. */
+    @Test fun lockCardKeepsContrastOnEveryPalette() {
+        Styles.load(ctx).palettes.forEach { p ->
+            fun min(color: Int) = minOf(Styles.contrast(color, p.haut), Styles.contrast(color, p.bas))
+            val (solid, twist) = Postal.strands(p)
+            assertTrue("${p.id} label", min(p.nature) >= 4.5)
+            assertTrue("${p.id} stamp", min(p.mot) >= 3.0)
+            assertTrue("${p.id} initial", Styles.contrast(p.haut, p.mot) >= 4.5)
+            assertTrue("${p.id} thread", min(solid) >= 3.0 && min(solid) >= min(twist))
+        }
+    }
+
     @Test fun rebootPurgesExpiredWallpaper() {
         val p = Prefs(ctx).apply { mode = Prefs.MODE_BOTH }
         DailyReceiver.show(ctx)
@@ -226,17 +239,17 @@ class DefinidayTest {
         val out = File("build/demo").apply { mkdirs() }
         val words = Words.load(ctx)
         listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }).forEachIndexed { i, w ->
-            save(WordCard.render(w, 1080, 2340, Styles.of(ctx, w)), File(out, "lockscreen_$i.png"))
+            save(WordCard.render(ctx, w, 1080, 2340, Styles.of(ctx, w)), File(out, "lockscreen_$i.png"))
         }
         words.filter { it.mot in setOf("zinzolin", "patibulaire", "bergamasque", "potron-minet", "incunable", "marivaudage") }.forEach { w ->
-            save(WordCard.render(w, 540, 1170, Styles.of(ctx, w)), File(out, "style_${w.mot}.png"))
+            save(WordCard.render(ctx, w, 540, 1170, Styles.of(ctx, w)), File(out, "style_${w.mot}.png"))
         }
         Quotes.load(ctx).filter { it.auteur.contains("Joubert") || it.auteur.contains("Monselet") }.take(2).forEachIndexed { i, q ->
-            save(WordCard.render(q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
+            save(WordCard.render(ctx, q, 540, 1170, Styles.of(ctx, q)), File(out, "quote_$i.png"))
         }
         val head = Glose.bitmap(Glose.mine(ctx, R.drawable.glose_icone_vd, accessory = false), 128, 128)
         (listOf(Words.today(ctx).first(), words.maxBy { it.definition.length + it.exemple.length }) + Quotes.load(ctx).first { it.texte.length > 120 })
-            .forEachIndexed { i, w -> save(WordCard.share(w, Styles.of(ctx, w), head), File(out, "share_$i.png")) }
+            .forEachIndexed { i, w -> save(WordCard.share(ctx, w, Styles.of(ctx, w), head), File(out, "share_$i.png")) }
         listOf(R.drawable.ic_launcher_fg to "icon_fg.png", R.drawable.ic_launcher_mono to "icon_mono.png").forEach { (r, f) ->
             save(Glose.bitmap(android.graphics.drawable.LayerDrawable(arrayOf(android.graphics.drawable.ColorDrawable(ctx.getColor(R.color.icon_bg)), ctx.getDrawable(r)!!)), 432, 432), File(out, f))
         }
@@ -274,11 +287,15 @@ class DefinidayTest {
             val mot = quizAnswer(a)
             views(a).filterIsInstance<android.widget.Button>().first { (it.text == mot) == right }.performClick()
         }
-        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 shows both requests
+        // onboarding steps: lock screen and quiz chosen, removal at the 1st unlock without exact alarms, so step 4 asks for notifications,
+        // then (4b, back from that prompt) for exact alarms
         fun onboarding(suffix: String) {
             p.unlocks = 1; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(false)
             (0..3).forEach { n -> capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
                 .also { a -> repeat(n) { a.findViewById<View>(R.id.next).performClick() } }, File(ui, "onboarding_${n + 1}$suffix.png")) }
+            capture(Robolectric.buildActivity(OnboardingActivity::class.java).setup().get()
+                .also { a -> repeat(3) { a.findViewById<View>(R.id.next).performClick() }; a.onRequestPermissionsResult(0, arrayOf(), intArrayOf()) },
+                File(ui, "onboarding_4b$suffix.png"))
             p.unlocks = 0; org.robolectric.shadows.ShadowAlarmManager.setCanScheduleExactAlarms(true)
         }
         val long = Words.load(ctx).filter { ' ' !in it.mot && '-' !in it.mot }.maxBy { it.mot.length }.key
@@ -298,6 +315,7 @@ class DefinidayTest {
         onboarding("_w360_font200")
         capture(styles(), File(ui, "styles_w360_font200.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
+        capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_w360_font200.png"))
         RuntimeEnvironment.setFontScale(1.3f)
         capture(main(long), File(ui, "home_w360_font130_long.png"))
         RuntimeEnvironment.setFontScale(1f)
@@ -343,6 +361,8 @@ class DefinidayTest {
         p.apply { lastQuizDay = today - 1; streak = 8 }
         fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
         capture(mots(), File(ui, "mots_light.png"))
+        capture(Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot))
+            .setup().get(), File(ui, "mots_detail.png"))
         capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
             File(ui, "quiz_revision.png"))
         val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }

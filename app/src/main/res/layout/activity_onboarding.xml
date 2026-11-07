@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- First launch (OnboardingActivity): 4 steps swapped in place in one scroll, actions pinned below -->
+<!-- First launch (OnboardingActivity): Glose's first letter, 4 steps swapped in place in one scroll, actions pinned below.
+     One decorative element per step: Glose, the lock-screen preview, the postmark, Glose's note (exact alarms). -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,10 +23,9 @@
 
             <TextView
                 android:id="@+id/progress"
-                style="@style/Label"
-                android:accessibilityHeading="false" />
+                style="@style/Postal" />
 
-            <!-- 1. Bienvenue -->
+            <!-- 1. Bienvenue: the letter, « Enchanté. » as its opening in Glose's hand -->
             <LinearLayout
                 android:id="@+id/step_welcome"
                 android:layout_width="match_parent"
@@ -34,27 +34,37 @@
 
                 <ImageView
                     android:id="@+id/glose"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:contentDescription="@string/glose" />
 
-                <TextView
-                    android:id="@+id/title_welcome"
-                    style="@style/Title"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/onb_welcome_title" />
-
-                <TextView
-                    style="@style/Body"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/onb_welcome" />
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/card_soft"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/title_welcome"
+                        style="@style/Note"
+                        android:accessibilityHeading="true"
+                        android:text="@string/onb_welcome_title"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        style="@style/Body"
+                        android:id="@+id/welcome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- 2. Où: mode, live lock-screen preview, wallpaper warning, removal at the 1st unlock -->
+            <!-- 2. Où: mode, live lock-screen preview, wallpaper note, removal at the 1st unlock -->
             <LinearLayout
                 android:id="@+id/step_where"
                 android:layout_width="match_parent"
@@ -64,15 +74,16 @@
                 <TextView
                     android:id="@+id/title_where"
                     style="@style/Title"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/onb_where_title" />
 
                 <!-- order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK -->
                 <RadioGroup
                     android:id="@+id/mode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    style="@style/Sheet"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
 
                     <RadioButton
                         android:id="@+id/mode_both"
@@ -114,27 +125,37 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="20dp"
                         android:adjustViewBounds="true" />
 
+                    <!-- true and needed, but not a warning on the screen that should please (audit 011 n° 9): help text under the preview -->
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:background="@color/warn"
-                        android:padding="12dp"
-                        android:text="@string/wallpaper_hint"
-                        android:textColor="@color/ink"
+                        android:id="@+id/wallpaper_hint"
+                        style="@style/Help"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/wallpaper_hint" />
+
+                    <!-- the lock screen has its own wallpaper (Wall.ownNote): Glose's note, instead of wallpaper_hint -->
+                    <TextView
+                        android:id="@+id/lock_own"
+                        style="@style/NoteBox"
+                        android:layout_marginTop="12dp"
+                        android:textAppearance="@style/Body"
                         android:textSize="15sp" />
 
-                    <Switch
-                        android:id="@+id/unlock_once"
-                        style="@style/Toggle"
-                        android:text="@string/onb_unlock_once" />
+                    <LinearLayout
+                        style="@style/Sheet"
+                        android:layout_marginTop="16dp">
 
-                    <TextView
-                        style="@style/Help"
-                        android:text="@string/unlocks_hint" />
+                        <Switch
+                            android:id="@+id/unlock_once"
+                            style="@style/Toggle"
+                            android:text="@string/onb_unlock_once" />
+
+                        <TextView
+                            style="@style/Help"
+                            android:text="@string/onb_unlocks_hint" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,40 +166,63 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/title_when"
-                    style="@style/Title"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/onb_when_title" />
-
-                <Button
-                    android:id="@+id/time"
-                    style="@style/Setting" />
-
-                <TextView
-                    style="@style/Field"
-                    android:labelFor="@+id/per_day"
-                    android:text="@string/per_day" />
-
-                <Spinner
-                    android:id="@+id/per_day"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="48dp" />
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical">
 
-                <Switch
-                    android:id="@+id/quiz_enabled"
-                    style="@style/Toggle"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/quiz_enabled" />
+                    <TextView
+                        android:id="@+id/title_when"
+                        style="@style/Title"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/onb_when_title" />
 
-                <TextView
-                    style="@style/Help"
-                    android:text="@string/onb_quiz_hint" />
+                    <!-- today's postmark (OnboardingActivity.onCreate), decorative -->
+                    <ImageView
+                        android:id="@+id/postmark"
+                        android:layout_width="100dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:importantForAccessibility="no" />
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/quiz_time"
-                    style="@style/Setting" />
+                <LinearLayout
+                    style="@style/Sheet"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/time"
+                        style="@style/Setting" />
+
+                    <TextView
+                        style="@style/Field"
+                        android:labelFor="@+id/per_day"
+                        android:text="@string/per_day" />
+
+                    <Spinner
+                        android:id="@+id/per_day"
+                        style="@style/Choice" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Sheet"
+                    android:layout_marginTop="16dp">
+
+                    <Switch
+                        android:id="@+id/quiz_enabled"
+                        style="@style/Toggle"
+                        android:text="@string/quiz_enabled" />
+
+                    <TextView
+                        style="@style/Help"
+                        android:text="@string/onb_quiz_hint" />
+
+                    <Button
+                        android:id="@+id/quiz_time"
+                        style="@style/Setting" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- 4. Permissions in context, each block only when needed -->
@@ -191,7 +235,7 @@
                 <TextView
                     android:id="@+id/title_ask"
                     style="@style/Title"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/onb_ask_title" />
 
                 <TextView
@@ -202,20 +246,17 @@
                     android:layout_marginTop="12dp"
                     android:text="@string/onb_notif_why" />
 
+                <!-- Glose's note, as in Réglages -->
                 <LinearLayout
                     android:id="@+id/exact_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/warn"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    style="@style/NoteBox"
+                    android:layout_marginTop="16dp">
 
                     <TextView
+                        style="@style/Body"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/exact_no"
-                        android:textColor="@color/ink"
                         android:textSize="15sp" />
 
                     <Button

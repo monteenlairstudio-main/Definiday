@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Académie française: a small temple. Round 48 dp action icons (ic_*.xml): tinted disc, line drawing in ink with Glose's rounded strokes. -->
+<!-- Académie française: a colonnade under its pediment. Interface icons (ic_*.xml, Correspondance § 6): 24 dp grid, 1.75 stroke, rounded ends and joins, in ink;
+     no disc (the button draws it: btn_disc), tinted in code on the postcard (compoundDrawableTintList = palette texte). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
-    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
-    <group android:translateX="12" android:translateY="12">
-        <path android:pathData="M4,9.5L12,4.5L20,9.5ZM6.5,12V17M10,12V17M14,12V17M17.5,12V17M4,19.5H20" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
-    </group>
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M3.5,9.2Q8,6.6 12,4.2Q16,6.6 20.5,9.2Z" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M6.2,11.6V17.6M10,11.6V17.6M14,11.6V17.6M17.8,11.6V17.6" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M3.5,20.2Q12,19.6 20.5,20.2" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
 </vector>

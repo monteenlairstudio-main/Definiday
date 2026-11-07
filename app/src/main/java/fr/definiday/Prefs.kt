@@ -51,6 +51,10 @@ class Prefs(val ctx: Context) {
     var wallpaperId: Int
         get() = local.getInt("wallpaperId", -1)
         set(v) = local.edit().putInt("wallpaperId", v).apply()
+    /** The last lock-screen word went by notification instead: the lock screen has its own wallpaper (Wall.lockFree). */
+    var lockBlocked: Boolean
+        get() = local.getBoolean("lockBlocked", false)
+        set(v) = local.edit().putBoolean("lockBlocked", v).apply()
     var wordsPerDay: Int
         get() = int("wordsPerDay", 1, 1..3)
         set(v) = sp.edit().putInt("wordsPerDay", v).apply()
@@ -133,6 +137,11 @@ class Prefs(val ctx: Context) {
     var gloseAcc: String
         get() = str("gloseAcc", "")
         set(v) = sp.edit().putString("gloseAcc", v).apply()
+    /** Glose's name, fed to every string that names him (%1$s, docs/voix.md). No UI to rename him yet.
+     *  Restored or tampered value: trimmed, 1 to 24 characters without control characters, else the default. */
+    var gloseName: String
+        get() = str("gloseName", "").trim().takeIf { it.length in 1..24 && it.none(Char::isISOControl) } ?: ctx.getString(R.string.glose_name)
+        set(v) = sp.edit().putString("gloseName", v.trim()).apply()
     /** Random picks warned about today (warning shown once a day, past 3 picks). */
     var warnedDay: Long
         get() = long("warnedDay", Long.MIN_VALUE)
@@ -145,6 +154,13 @@ class Prefs(val ctx: Context) {
     var polices: Set<String>?
         get() = strings("polices")
         set(v) = sp.edit().putStringSet("polices", v).apply()
+}
+
+/** « de [nom] » with French elision: « d’Anatole », « d’Émile », « de Monsieur Glose ». Never before an h (aspirated or not,
+ *  « de » is tolerated before a first name), a Y, an initial (« de A. ») or a one-letter name. Prefer copy without « de %1$s ». */
+fun de(nom: String): String {
+    val first = java.text.Normalizer.normalize(nom.take(1), java.text.Normalizer.Form.NFD).firstOrNull()?.lowercaseChar()
+    return if (first != null && first in "aeiouœæ" && nom.length > 1 && nom[1] != '.') "d’$nom" else "de $nom"
 }
 
 /** mot -> epoch day it was last shown (daily or random). */

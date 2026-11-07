@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Share: three linked dots. -->
+<!-- Envoyer (share): an envelope and its arrow. Interface icons (ic_*.xml, Correspondance § 6): 24 dp grid, 1.75 stroke, rounded ends and joins, in ink;
+     no disc (the button draws it: btn_disc), tinted in code on the postcard (compoundDrawableTintList = palette texte). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="48dp" android:height="48dp" android:viewportWidth="48" android:viewportHeight="48">
-    <path android:pathData="M0,24a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" android:fillColor="@color/surface" />
-    <group android:translateX="12" android:translateY="12">
-        <path android:pathData="M8.8,11L15.2,7.2M8.8,13L15.2,16.8M15,6a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0M4.6,12a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0M15,18a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0" android:strokeColor="@color/ink" android:strokeWidth="1.7" android:strokeLineCap="round" android:strokeLineJoin="round" />
-    </group>
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M3.2,9.2H15.6V19.4H3.2Z" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M3.2,9.4L9.4,14.2L15.6,9.4" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M13.6,5.4Q17,5.6 20.8,5.4" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M18.2,2.8L20.8,5.4L18.2,8" android:strokeColor="@color/ink" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
 </vector>

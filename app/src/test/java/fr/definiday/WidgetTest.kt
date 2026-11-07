@@ -73,6 +73,18 @@ class WidgetTest {
         }
     }
 
+    /** 2x2: a long hyphenated word breaks after a hyphen, never inside a piece (« suivez-moi-jeun / e-homme »). */
+    @Test fun longWordBreaksAtHyphens() {
+        val parent = FrameLayout(ctx)
+        parent.addView(Widget.views(ctx, word("suivez-moi-jeune-homme"), 160f, 160f).apply(ctx, parent))
+        val px = (160 * ctx.resources.displayMetrics.density).toInt()
+        parent.measure(View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(px, View.MeasureSpec.EXACTLY))
+        parent.layout(0, 0, px, px)
+        val t = parent.findViewById<TextView>(R.id.widget_mot)
+        assertEquals(2, t.layout.lineCount)
+        assertEquals("suivez-moi-", t.text.substring(0, t.layout.getLineEnd(0)).filter { it != '\u200B' })
+    }
+
     /** Daily word off: the alarm still runs while a widget is on the home screen, to change it. */
     @Test fun alarmKeptForTheWidget() {
         Prefs(ctx).enabled = false
@@ -109,5 +121,8 @@ class WidgetTest {
         render(words.maxBy { it.definition.length }, 340, 110, "4x1.5_long_def")
         render(Quotes.load(ctx).maxBy { it.texte.length }, 340, 160, "4x2_quote")
         render(null, 340, 160, "preview", scale = 1 / 1.5f) // -> res/drawable-nodpi/widget_preview.png (picker before Android 12)
+        val sample = word("sérendipité") // -> res/drawable-nodpi/widget_stamp_preview.webp (the layout's preview stamp), 120 px
+        Widget.stamp(ctx, sample, Styles.of(ctx, sample), 120, LocalDate.of(2026, 11, 6))
+            .let { b -> File(out, "stamp_preview.png").outputStream().use { b.compress(Bitmap.CompressFormat.PNG, 100, it) } }
     }
 }

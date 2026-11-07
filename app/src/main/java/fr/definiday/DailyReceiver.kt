@@ -13,6 +13,8 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.view.View
+import android.widget.TextView
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZonedDateTime
@@ -110,15 +112,18 @@ class DailyReceiver : BroadcastReceiver() {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             (1..3).forEach { nm.cancel(it) }
             val durationMs = p.durationMinutes * 60_000L
+            // never over the user's own lock wallpaper (Wall): the word then comes by notification, even in lock-only mode
+            val lock = p.mode != Prefs.MODE_NOTIF && Wall.lockFree(ctx)
+            if (p.mode != Prefs.MODE_NOTIF) p.lockBlocked = !lock
             // only what is really shown counts as seen (history, quiz): lock-only mode with 2-3 words shows the first one
-            val shown = if (p.mode == Prefs.MODE_LOCK) mutableListOf() else words.filterIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }.toMutableList()
+            val shown = if (p.mode == Prefs.MODE_LOCK && lock) mutableListOf() else words.filterIndexed { i, w -> notify(ctx, w, durationMs, id = i + 1) }.toMutableList()
             val w = words.first() // ponytail: wallpaper shows only the first daily word; stack them if 2-3 words should fit
-            if (p.mode != Prefs.MODE_NOTIF) {
+            if (lock) {
                 val m = ctx.resources.displayMetrics // portrait size whatever the current orientation
                 val (width, height) = minOf(m.widthPixels, m.heightPixels) to maxOf(m.widthPixels, m.heightPixels)
                 runCatching {
                     p.wallpaperId = WallpaperManager.getInstance(ctx).setBitmap(
-                        WordCard.render(w, width, height, Styles.of(ctx, w), p.textBottom), null, true, WallpaperManager.FLAG_LOCK,
+                        WordCard.render(ctx, w, width, height, Styles.of(ctx, w), p.textBottom), null, true, WallpaperManager.FLAG_LOCK,
                     )
                     p.wallpaperEndAt = System.currentTimeMillis() + durationMs // duration stays the upper bound
                     p.unlocksSeen = 0
@@ -137,8 +142,8 @@ class DailyReceiver : BroadcastReceiver() {
             if (p.wallpaperEndAt == 0L || (!force && p.wallpaperEndAt > System.currentTimeMillis())) return // stale END after a newer SHOW
             val wm = WallpaperManager.getInstance(ctx)
             // Only remove it if it is still ours (user may have picked a new one, or prefs were restored on another phone).
-            // Lock screen then falls back to the home wallpaper (the previous lock image can't be read without storage permission).
-            if (wm.getWallpaperId(WallpaperManager.FLAG_LOCK) == p.wallpaperId) runCatching { wm.clear(WallpaperManager.FLAG_LOCK) }
+            // Lock screen then falls back to the home wallpaper: what it showed before, as Wall only lets us write over a shared one.
+            runCatching { if (Wall.lockId(ctx) == p.wallpaperId) wm.clear(WallpaperManager.FLAG_LOCK) }
             p.wallpaperEndAt = 0
             ctx.stopService(Intent(ctx, UnlockService::class.java))
         }
@@ -178,6 +183,31 @@ class DailyReceiver : BroadcastReceiver() {
             // SecurityException if POST_NOTIFICATIONS denied: wallpaper mode still works
             return runCatching { nm.notify(id, n) }.isSuccess && nm.areNotificationsEnabled()
         }
+    }
+}
+
+/**
+ * Lock-screen wallpaper guard (docs/bug_samsung_fond.md). Our card only goes over a lock screen that shows the home wallpaper
+ * (no lock entry: clear(FLAG_LOCK) later gives back exactly that) or our own card. A separate lock wallpaper can't be read
+ * back on Android 13+, so writing over it would lose it. The reads are vars: a seam for tests (Robolectric keeps one lock id).
+ */
+object Wall {
+    var lockId: (Context) -> Int = { WallpaperManager.getInstance(it).getWallpaperId(WallpaperManager.FLAG_LOCK) }
+    /** Live (animated, video, service) lock wallpaper; null info for an image. Needs the WallpaperService <queries>. */
+    var lockLive: (Context) -> Boolean = { Build.VERSION.SDK_INT >= 34 && WallpaperManager.getInstance(it).getWallpaperInfo(WallpaperManager.FLAG_LOCK) != null }
+
+    /** False also when a read throws (some OEMs): never guess over the user's wallpaper. */
+    fun lockFree(ctx: Context) = runCatching { lockId(ctx).let { it < 0 || it == Prefs(ctx).wallpaperId } && !lockLive(ctx) }.getOrDefault(false)
+
+    /** Settings and onboarding, lock modes: [hint] (wallpaper_hint), or Glose's [note] on why the word will come by notification. */
+    fun explain(hint: View, note: TextView) {
+        val ctx = note.context
+        val lock = Prefs(ctx).mode != Prefs.MODE_NOTIF
+        val own = lock && !lockFree(ctx)
+        if (own) note.text = ctx.getString(R.string.lock_own) +
+            if (Build.MANUFACTURER.equals("samsung", ignoreCase = true)) "\n\n" + ctx.getString(R.string.lock_own_samsung) else ""
+        note.visibility = if (own) View.VISIBLE else View.GONE
+        hint.visibility = if (lock && !own) View.VISIBLE else View.GONE
     }
 }
 

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- End-of-quiz unboxing: a stamp with a perforated (dashed) accent edge around a newly unlocked item. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="4dp" />
-    <solid android:color="@color/surface" />
-    <stroke android:width="2dp" android:color="@color/accent" android:dashWidth="4dp" android:dashGap="3dp" />
-</shape>

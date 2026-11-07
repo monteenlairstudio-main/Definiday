@@ -136,8 +136,10 @@ class MemoryTest {
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         val star = a.findViewById<CheckBox>(R.id.favori)
         assertTrue(!star.isChecked && star.visibility == View.VISIBLE)
+        assertEquals(ctx.getString(R.string.favori_add, w.mot), star.contentDescription) // TalkBack: the word and what a tap does
         star.performClick()
         assertEquals(setOf("abaque", w.mot), Memory(ctx).favourites)
+        assertEquals(ctx.getString(R.string.favori_remove, w.mot), star.contentDescription)
         val again = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         assertTrue(again.findViewById<CheckBox>(R.id.favori).isChecked)
         val quote = Quotes.load(ctx).first().key
@@ -161,7 +163,21 @@ class MemoryTest {
         assertEquals("coeur", MotsActivity.fold("Cœur"))
     }
 
-    @Test fun mesMotsOpensACardFiltersFavouritesAndStars() {
+    /** The score screen lists the words answered wrong, also after a rotation. */
+    @Test fun quizEndListsTheMissedWords() {
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
+        val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
+        val missed = Words.seenToday(ctx).map {
+            val right = quizAnswer(c.get())
+            views(c.get()).filterIsInstance<Button>().first { it.text != right }.performClick()
+            c.recreate()
+            views(c.get()).filterIsInstance<Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+            right
+        }
+        assertTrue(views(c.get()).any { (it as? TextView)?.text == ctx.getString(R.string.quiz_missed, missed.joinToString(", ")) })
+    }
+
+    @Test fun mesMotsOpensADetailFiltersFavouritesAndStars() {
         val today = LocalDate.now().toEpochDay()
         History(ctx).run { mark("abjurer", today); mark("abâtardir", today - 1); mark("q:Le style est l’homme même.", today) }
         val main = Robolectric.buildActivity(MainActivity::class.java).setup().get()
@@ -177,12 +193,22 @@ class MemoryTest {
         assertEquals("abâtardir", rows().last())
         views(a).filterIsInstance<View>().first { (it as? TextView)?.text == "abâtardir" }.let { (it.parent.parent as View).performClick() }
         val open = shadowOf(a).nextStartedActivity
+        assertEquals(DetailActivity::class.java.name, open.component!!.className) // not a second home screen
         assertEquals("abâtardir", open.getStringExtra(MainActivity.EXTRA_MOT))
-        assertTrue(open.getBooleanExtra(MainActivity.EXTRA_DEJA_VU, false))
-        // the card it opens says « Déjà vu », not « Mot au hasard »
-        val card = Robolectric.buildActivity(MainActivity::class.java, open).setup().get()
-        assertEquals(ctx.getString(R.string.deja_vu), card.findViewById<TextView>(R.id.label).text.toString())
+        // the detail says « Déjà vu », shows the card's text, and is a review: not seen today, not in tonight's quiz
+        val d = Robolectric.buildActivity(DetailActivity::class.java, open).setup().get()
+        val shown = views(d).filterIsInstance<TextView>().map { it.text.toString() }.toList()
+        val w = word("abâtardir")
+        assertTrue(shown.toString(), listOf(ctx.getString(R.string.deja_vu), w.mot, w.nature, w.definition, "«\u00a0${w.exemple}\u00a0»", w.anecdote).all { it in shown })
+        assertEquals(today - 1, History(ctx).all()["abâtardir"])
+        assertTrue(Words.seenToday(ctx).none { it.mot == "abâtardir" })
+        val dStar = views(d).filterIsInstance<CheckBox>().single()
+        dStar.performClick()
+        assertEquals(setOf("abâtardir") to ctx.getString(R.string.favori_remove, "abâtardir"), Memory(ctx).favourites to dStar.contentDescription)
+        dStar.performClick() // and back
+        assertEquals(emptySet<String>(), Memory(ctx).favourites)
         val star = views(a).filterIsInstance<CheckBox>().last()
+        assertEquals(ctx.getString(R.string.favori_add, "abâtardir"), star.contentDescription)
         star.performClick()
         assertEquals(setOf("abâtardir"), Memory(ctx).favourites)
         views(a).filterIsInstance<Switch>().single().performClick() // « Favoris seulement »

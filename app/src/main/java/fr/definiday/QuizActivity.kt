@@ -3,6 +3,8 @@ package fr.definiday
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -17,10 +19,13 @@ import android.widget.TextView
 import java.time.LocalDate
 import kotlin.random.Random
 
-/** Evening quiz: for each word seen today, then up to 2 past words due for review, its definition (or its example with a blank) and 4 candidate words.
+/** Evening quiz, a letter from Glose (« Correspondance »): header (Glose's head, « Question 2 sur 4 », title, stamps for the progress),
+ *  then a Seyès sheet opening on « Bonsoir, » with the question and its answers as notebook check-box rows; the score screen closes the letter.
+ *  For each word seen today, then up to 2 past words due for review, its definition (or its example with a blank) and 4 candidate words.
  *  Review questions count in the score like the others: « passed » stays 2/3 of all the questions, and so do the counters the unlocks read. */
 class QuizActivity : Activity() {
-    private lateinit var box: LinearLayout
+    private lateinit var page: LinearLayout // the screen, under the ScrollView
+    private lateinit var box: LinearLayout // the letter being written: button() adds to it
     private lateinit var shown: Map<String, Long> // History, words only
     /** Frozen when the quiz opens: finished after midnight it still counts for that day; the reminder opens its own day (the eve, after midnight). */
     private var day = 0L
@@ -31,6 +36,7 @@ class QuizActivity : Activity() {
     private var picked = -1 // option chosen for the current question, -1 = not answered yet
     private var icon: ImageView? = null // small Glose at the top of each question: nods or tilts its head on answers
     private var done = false // that day's quiz was already counted when this one opened: its score won't count
+    private var missed = ArrayList<String>() // words answered wrong, listed « À revoir » at the end
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +57,11 @@ class QuizActivity : Activity() {
         index = s?.getInt("index") ?: 0
         score = s?.getInt("score") ?: 0
         picked = s?.getInt("picked") ?: -1
+        missed = s?.getStringArrayList("missed") ?: missed
         done = s?.getBoolean("done") ?: Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
-        val pad = (24 * resources.displayMetrics.density).toInt()
-        box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
-        setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
+        val pad = (16 * resources.displayMetrics.density).toInt()
+        page = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, pad * 3 / 2) }
+        setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(page) })
         next()
     }
 
@@ -66,6 +73,7 @@ class QuizActivity : Activity() {
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked); out.putBoolean("done", done)
+        out.putStringArrayList("missed", missed)
         out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot })); out.putInt("reviews", questions.count { it.review })
     }
 
@@ -74,12 +82,20 @@ class QuizActivity : Activity() {
         setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
     }
 
-    private fun title() = TextView(this, null, 0, R.style.Label).apply {
-        text = getString(R.string.quiz_title); setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
+    private fun title() = TextView(this, null, 0, R.style.Title).apply { text = getString(R.string.quiz_title) }
+
+    /** Starts the letter: a sheet (card_soft) added to the page, where text and buttons go from now on. */
+    private fun letter() = LinearLayout(this).apply {
+        orientation = LinearLayout.VERTICAL
+        val d = resources.displayMetrics.density
+        setBackgroundResource(R.drawable.card_soft)
+        setPadding((20 * d).toInt(), (16 * d).toInt(), (20 * d).toInt(), (16 * d).toInt())
+        page.addView(this, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = (12 * d).toInt() })
+        box = this
     }
 
-    /** Full-width button, 8 dp apart. */
-    private fun button(s: String) = Button(this).apply {
+    /** Full-width button, 8 dp apart, in the letter; [style] 0 = Btn. */
+    private fun button(s: String, style: Int = 0) = (if (style == 0) Button(this) else Button(this, null, 0, style)).apply {
         text = s
         layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             .apply { topMargin = (8 * resources.displayMetrics.density).toInt() }
@@ -87,40 +103,70 @@ class QuizActivity : Activity() {
     }
 
     private fun next() {
-        box.removeAllViews()
+        page.removeAllViews()
         if (index == questions.size) return finishQuiz()
-        box.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 56).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO; icon = this })
-        box.addView(title())
-        if (day < LocalDate.now().toEpochDay()) box.addView(text(getString(R.string.quiz_eve), 13f))
+        val d = resources.displayMetrics.density
         val q = questions[index]
-        val counter = progress()
-        box.addView(counter)
-        if (q.review) box.addView(text(getString(R.string.quiz_review), 13f))
-        box.addView(text(getString(if (q.cloze != null) R.string.quiz_prompt_cloze else R.string.quiz_prompt), 15f))
-        box.addView(text(q.cloze ?: q.answer.definition, 20f).apply { q.cloze?.let { contentDescription = it.replace(Quiz.BLANK, getString(R.string.quiz_blank)) } })
-        val buttons = q.options.map { button(it.mot) }
+        // header: Glose's head (it nods or tilts on answers), the postal « Question 2 sur 4 » over the title, the stamps under it
+        val head = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL }.also(page::addView)
+        head.addView(glose(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 72).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO; icon = this })
+        val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding((12 * d).toInt(), 0, 0, 0) }
+        head.addView(col, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        val counter = TextView(this, null, 0, R.style.Postal).apply {
+            contentDescription = getString(R.string.quiz_progress, index + 1, questions.size)
+            text = contentDescription.toString().replace(" sur ", " sur ") // « 1 sur 4 » never broken at large font sizes
+        }
+        col.addView(counter)
+        col.addView(title())
+        col.addView(progress())
+        letter()
+        box.addView(TextView(this, null, 0, R.style.Note).apply { setText(R.string.quiz_hello) })
+        if (day < LocalDate.now().toEpochDay()) box.addView(TextView(this, null, 0, R.style.Postal).apply { setText(R.string.quiz_eve); setPadding(0, (4 * d).toInt(), 0, 0) })
+        if (q.review) box.addView(TextView(this, null, 0, R.style.Label).apply { setText(R.string.quiz_review); setPadding(0, (4 * d).toInt(), 0, 0) })
+        box.addView(text(getString(if (q.cloze != null) R.string.quiz_prompt_cloze else R.string.quiz_prompt), 15f).apply {
+            setTextColor(getColor(R.color.ink2)); setPadding(0, (8 * d).toInt(), 0, (8 * d).toInt())
+        })
+        // the definition in ink; a blanked example in plume (a quotation: the colour marks it, no italic)
+        val asked = TextView(this, null, 0, if (q.cloze != null) R.style.Example else R.style.Body).apply {
+            text = q.cloze ?: q.answer.definition; textSize = 19f; setPadding(0, 0, 0, (12 * d).toInt())
+            q.cloze?.let { contentDescription = it.replace(Quiz.BLANK, getString(R.string.quiz_blank)) }
+        }
+        box.addView(asked)
+        box.background = LayerDrawable(arrayOf(getDrawable(R.drawable.card_soft)!!, Postal.Seyes(this, asked)))
+        val buttons = q.options.map { o -> button(o.mot).apply {
+            gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.quiz_box, 0, 0, 0); compoundDrawablePadding = (14 * d).toInt()
+        } }
         // said on screen and read by TalkBack when it appears (announceForAccessibility is deprecated)
-        val result = text("", 16f).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE; visibility = View.GONE; setPadding(0, paddingBottom, 0, paddingBottom) }
+        val result = text("", 16f).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE; visibility = View.GONE; setPadding(0, paddingBottom, 0, 0) }
         box.addView(result)
         fun reveal() {
             buttons.forEachIndexed { j, o ->
                 o.isEnabled = false
                 val good = q.options[j] == q.answer
-                if (good || j == picked) { // said in the text, not by the color alone; tint keeps the button's shape
+                if (good || j == picked) { // said in the text, not by the colour alone; the chosen one keeps the selection outline
                     o.text = (if (good) "✓ " else "✗ ") + q.options[j].mot
-                    o.background.mutate().setTint(getColor(if (good) R.color.quiz_good else R.color.quiz_bad))
+                    o.background = GradientDrawable().apply {
+                        cornerRadius = resources.getDimension(R.dimen.radius_paper)
+                        setColor(getColor(if (good) R.color.quiz_good else R.color.quiz_bad))
+                        if (j == picked) setStroke((2 * d).toInt(), getColor(R.color.accent))
+                    }
+                    o.isSelected = j == picked
+                    // the ✓ / ✗ takes the box's place, the word stays where it was
+                    o.setCompoundDrawablesRelative(null, null, null, null)
+                    o.setPaddingRelative(o.paddingStart + ((18 + 14) * d - o.paint.measureText("✓ ")).toInt().coerceAtLeast(0), o.paddingTop, o.paddingEnd, o.paddingBottom)
                     o.setTextColor(getColor(R.color.quiz_on))
                 }
             }
             result.text = if (q.options[picked] == q.answer) getString(R.string.quiz_right) else getString(R.string.quiz_wrong, q.answer.mot)
             result.visibility = View.VISIBLE
-            button(getString(R.string.quiz_next)).setOnClickListener { index++; picked = -1; next() }
+            button(getString(R.string.quiz_next), R.style.Primary).setOnClickListener { index++; picked = -1; next() }
         }
         buttons.forEachIndexed { i, b ->
             b.setOnClickListener {
                 picked = i
                 val right = q.options[i] == q.answer
-                if (right) score++
+                if (right) score++ else missed += q.answer.mot
                 // counted even in a quiz redone the same day: memory is not a reward
                 Memory(this).answered(q.answer.mot, right, day, shown[q.answer.mot] ?: day, q.review)
                 reveal()
@@ -131,18 +177,21 @@ class QuizActivity : Activity() {
         focus(counter)
     }
 
-    /** « 2 / 4 » as yarn balls, one per question, filled up to the current one; TalkBack reads « Question 2 sur 4 ». */
+    /** The progress as small stamps (24 x 30 dp, no caption), decorative: answered ones in plume, the current one open, the next ones kraft.
+     *  The written « Question 2 sur 4 » above says it. */
     private fun progress() = LinearLayout(this).apply {
-        contentDescription = getString(R.string.quiz_progress, index + 1, questions.size)
-        if (Build.VERSION.SDK_INT >= 28) isScreenReaderFocusable = true
-        val px = (18 * resources.displayMetrics.density).toInt()
+        importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        val d = resources.displayMetrics.density
         repeat(questions.size) { i ->
-            addView(ImageView(context).apply {
-                setImageDrawable(if (i <= index) Glose.mine(context, R.drawable.pelote) else getDrawable(R.drawable.pelote_vide))
-                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-            }, LinearLayout.LayoutParams(px, px).apply { marginEnd = px / 3 })
+            val (bg, fg) = when {
+                i < index -> R.color.accent to R.color.bg
+                i == index -> R.color.sheet to R.color.accent
+                else -> R.color.surface to R.color.kraft_dark
+            }
+            addView(ImageView(context).apply { setImageDrawable(Postal.Stamp(context, getColor(bg), getColor(fg), "", android.graphics.Typeface.SERIF, caption = null)) },
+                LinearLayout.LayoutParams((24 * d).toInt(), (30 * d).toInt()).apply { marginEnd = (6 * d).toInt() })
         }
-        setPadding(0, 0, 0, (12 * resources.displayMetrics.density).toInt())
+        setPadding(0, (8 * d).toInt(), 0, 0)
     }
 
     /** One short pulse on the chosen button: right, it pops (1 → 1.04 → 1); wrong, it shakes gently (±6 dp), never the screen.
@@ -164,8 +213,10 @@ class QuizActivity : Activity() {
     /** removeAllViews() drops TalkBack's focus: put it back on the new screen's first useful line. */
     private fun focus(v: View) = v.post { v.performAccessibilityAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) }
 
+    /** The end of the letter: Glose signs it by writing with his yarn (or wears what he won), the score, the stamps won. */
     private fun finishQuiz() {
-        box.addView(title())
+        page.addView(title())
+        letter()
         if (questions.isEmpty()) {
             box.addView(text(getString(R.string.quiz_empty), 18f).also(::focus))
         } else {
@@ -179,29 +230,31 @@ class QuizActivity : Activity() {
             box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
             else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
                 extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
-                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
+                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore, p.gloseName)
                 Glose.play(this)
             })
-            box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply {
+            box.addView(text(getString(R.string.quiz_score, score, questions.size), 28f, bold = true).apply {
                 gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
             })
+            if (missed.isNotEmpty()) box.addView(text(getString(R.string.quiz_missed, missed.joinToString(", ")), 16f).apply { gravity = Gravity.CENTER })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
             else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
             if (Quiz.askRate(p, passed, counted = !done)) rate()
             if (fresh.isNotEmpty()) {
-                box.addView(text(getString(R.string.unlock_new), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
+                box.addView(text(getString(if (passed) R.string.unlock_new else R.string.unlock_new_anyway, p.gloseName), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
                 stamps(fresh, Glose.choice(p))
                 button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
             }
         }
-        button(getString(R.string.quiz_close)).setOnClickListener { finish() }
+        button(getString(R.string.quiz_close), R.style.Primary).setOnClickListener { finish() }
     }
 
     /** Gentle rate card, never blocking: « Plus tard » folds it, « Noter » opens the store page (the web page without the Play Store). */
     private fun rate() {
         val pad = (16 * resources.displayMetrics.density).toInt()
-        val card = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundResource(R.drawable.card_soft); setPadding(pad, pad, pad, pad / 2) }
+        // Glose's note paper inside the letter; « Plus tard » in plume serif: 6.55:1 on warn (audit 011 A1 was 4.22:1)
+        val card = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundResource(R.drawable.note_paper); setPadding(pad * 3 / 2, pad, pad, pad / 2) }
         card.addView(text(getString(R.string.rate_text), 16f))
         val row = LinearLayout(this).apply { gravity = Gravity.END or Gravity.CENTER_VERTICAL }.also(card::addView)
         row.addView(Button(this, null, 0, R.style.Link).apply { setText(R.string.rate_later); setOnClickListener { card.visibility = View.GONE } })
@@ -216,7 +269,8 @@ class QuizActivity : Activity() {
         box.addView(card, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = pad })
     }
 
-    /** Unboxing: up to 3 stamps (Glose wearing the item, its name), cascading in, then « + N dans la collection ». */
+    /** Unboxing: up to 3 album stamps (Glose wearing the item) with their names, cascading in, then « + N dans la collection ».
+     *  No cancel: a new stamp is not worn yet. */
     private fun stamps(fresh: List<Unlocks.Item>, c: Map<Unlocks.Kind, String>) {
         val (shown, more) = Quiz.stamps(fresh)
         val d = resources.displayMetrics.density
@@ -226,13 +280,10 @@ class QuizActivity : Activity() {
             val stamp = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER_HORIZONTAL
-                setBackgroundResource(R.drawable.stamp)
-                val pad = (8 * d).toInt()
-                setPadding(pad, pad, pad, pad)
-                addView(glose(Glose.preview(context, item, c), 72).apply { importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
-                addView(text(item.nom, 14f).apply { gravity = Gravity.CENTER; setPadding(0, pad / 2, 0, 0) })
+                addView(CollectionActivity.stamp(context, Glose.preview(context, item, c), R.color.surface)) // kraft: a sheet stamp vanishes on the letter
+                addView(text(item.nom, 14f).apply { gravity = Gravity.CENTER; setPadding(0, (6 * d).toInt(), 0, 0) })
             }
-            row.addView(stamp, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = (4 * d).toInt(); marginEnd = (4 * d).toInt() })
+            row.addView(stamp, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = (2 * d).toInt(); marginEnd = (2 * d).toInt() })
             if (move) {
                 stamp.alpha = 0f; stamp.translationY = 16 * d
                 stamp.animate().alpha(1f).translationY(0f).setStartDelay(150L + 80L * i).setDuration(250).setInterpolator(OvershootInterpolator())
@@ -244,7 +295,7 @@ class QuizActivity : Activity() {
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
         setImageDrawable(d)
-        contentDescription = getString(R.string.glose)
+        contentDescription = getString(R.string.glose, Prefs(context).gloseName)
         val px = (dp * resources.displayMetrics.density).toInt()
         layoutParams = LinearLayout.LayoutParams(px, px).apply { gravity = Gravity.CENTER_HORIZONTAL }
     }

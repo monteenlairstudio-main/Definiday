@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Definiday</string>
+    <!-- Glose's default name (Prefs.gloseName): the only string that spells it; the others take it as %1$s (docs/voix.md) -->
+    <string name="glose_name">Monsieur Glose</string>
+    <string name="ok">D’accord</string>
     <string name="channel_name">Mot du jour et quiz</string>
     <string name="today">Mot du jour</string>
     <string name="settings">Réglages</string>
@@ -9,18 +12,21 @@
     <string name="duration">Durée d’affichage</string>
     <string name="mode">Où afficher le mot</string>
     <string name="unlocks">Retirer le mot de l’écran de verrouillage</string>
-    <string name="wallpaper_hint">Le premier mot du jour devient le fond de l’écran de verrouillage. Ensuite, c’est votre fond d’accueil qui s’y affiche\u202F: votre ancien fond de verrouillage n’est pas rétabli.</string>
+    <!-- true only because Wall lets the card go over a lock screen that shares the home wallpaper (else lock_own replaces it) -->
+    <string name="wallpaper_hint">Le premier mot du jour devient le fond de l’écran de verrouillage, puis s’efface\u202F: vous retrouvez votre fond habituel.</string>
+    <string name="lock_own">Votre écran de verrouillage a son propre fond\u202F: Definiday n’y touchera pas, et le mot arrivera par notification. Pour le voir sur l’écran de verrouillage, mettez le même fond sur l’accueil et sur le verrouillage.</string>
+    <string name="lock_own_samsung">Sur un Galaxy, l’écran de verrouillage dynamique et les fonds liés aux Modes et routines comptent aussi comme un fond à part.</string>
     <string name="watch_channel">Suivi des déverrouillages</string>
     <string name="watch_text">Le mot quittera l’écran de verrouillage au déverrouillage n° %1$d.</string>
     <string name="test">Afficher le mot maintenant</string>
-    <string name="test_done">Mot affiché : verrouillez l’écran pour le voir.</string>
-    <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
+    <string name="test_done">Mot affiché\u202F: verrouillez l’écran pour le voir.</string>
+    <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Les boutons Académie et TLFi ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
     <string name="anecdote">Anecdote</string>
     <string name="source"><u>Source de l’anecdote</u></string>
     <string name="random">Mot au hasard</string>
     <string name="deja_vu">Déjà vu</string>
-    <string name="seen_today">Aujourd’hui</string>
+    <string name="seen_today">Autres lettres du jour</string>
     <string name="per_day">Nombre de mots par jour</string>
     <string name="styles_row">Couleurs et polices</string>
     <string name="styles_row_hint">Palettes\u202F: %1$d\u00A0sur\u00A0%2$d · polices\u202F: %3$d\u00A0sur\u00A0%4$d</string>
@@ -33,31 +39,38 @@
     <string name="quiz_next">Suivant</string>
     <string name="quiz_close">Fermer</string>
     <string name="quiz_eve">Le quiz d’hier soir</string>
-    <string name="quiz_empty">Aucun mot vu aujourd’hui pour l’instant. Lisez le mot du jour, Monsieur Glose vous attend ce soir.</string>
-    <string name="quiz_score">%1$d / %2$d</string>
+    <string name="quiz_empty">Aucun mot vu aujourd’hui pour l’instant. Lisez le mot du jour\u202F: je vous attends ce soir.</string>
+    <string name="quiz_score">%1$d\u202F/\u202F%2$d</string>
     <string name="quiz_open">Quiz du soir</string>
     <string name="quiz_enabled">Proposer le quiz du soir</string>
     <string name="quiz_time">Heure du quiz\u202F: %1$02d:%2$02d</string>
     <string name="text_pos">Position du texte</string>
     <string name="slow_title">Prenez le temps</string>
-    <string name="slow_default">Un mot savouré vaut mieux que dix effleurés : relisez sa définition, essayez-le dans une phrase.</string>
+    <string name="slow_default">Un mot savouré vaut mieux que dix effleurés\u202F: relisez sa définition, essayez-le dans une phrase.</string>
     <string name="quote_label">Citation du jour</string>
+    <!-- Postal mentions of the lock card and shared picture, in capitals (WordCard): %s = « 6 novembre » -->
+    <string name="card_letter">Lettre du %s</string>
+    <string name="card_quote">Citation du %s</string>
     <string name="more_quotes">Plus de citations</string>
-    <string name="glose">Monsieur Glose, chat bibliothécaire</string>
-    <string name="glose_bravo">Monsieur Glose écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
-    <string name="glose_encore">Monsieur Glose écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
+    <string name="glose">%1$s, chat bibliothécaire</string>
+    <string name="glose_bravo">%1$s écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
+    <string name="glose_encore">%1$s écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u00A0?</string>
     <string name="quiz_passed">Joli travail\u202F: ces mots sont un peu plus à vous ce soir.</string>
-    <string name="unlock_new">Monsieur Glose a gagné\u202F:</string>
+    <string name="unlock_new">%1$s a gagné\u202F:</string>
+    <!-- after « Demain, on retente ? »: a failed quiz may still unlock something -->
+    <string name="unlock_new_anyway">En attendant, %1$s a gagné\u202F:</string>
+    <string name="quiz_missed">À revoir\u202F: %1$s</string>
     <string name="unlock_more">+\u00A0%1$d dans la collection</string>
     <string name="collection_see">Voir la collection</string>
-    <string name="collection_title">Collection de Monsieur Glose</string>
-    <string name="collection_choose">Choisir</string>
+    <!-- %1$s: de(name), « de Monsieur Glose » or « d’Anatole » -->
+    <string name="collection_title">Collection %1$s</string>
+    <string name="collection_choose">Garder cette tenue</string>
     <string name="collection_locked">à débloquer</string>
     <!-- Couleurs et polices (StylesActivity) -->
     <string name="styles_title">Couleurs et polices</string>
     <string name="styles_rule">Chaque mot a sa palette et sa police préférées. Si vous les avez retirées, il en prend d’autres parmi celles que vous gardez, toujours les mêmes pour ce mot.</string>
-    <string name="preview_wears">Il porte la palette %1$s et la police %2$s.</string>
+    <string name="preview_wears">Ce mot porte la palette %1$s et la police %2$s.</string>
     <string name="police_default">par défaut</string>
     <string name="preview_prefers">Il préférerait %1$s, que vous avez retirée.</string>
     <string name="palettes_group">Palettes</string>
@@ -87,7 +100,8 @@
     <string name="group_word">Mot du jour</string>
     <string name="group_lock">Écran de verrouillage</string>
     <string name="group_quiz">Quiz du soir</string>
-    <string name="group_look">Apparence</string>
+    <string name="group_look">Apparence et sons</string>
+    <string name="group_elsewhere">Ailleurs sur votre téléphone</string>
     <string name="unlocks_hint">Pour compter les déverrouillages, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.</string>
     <string name="duration_notif">La notification se retire seule après cette durée.</string>
     <string name="duration_lock">Le mot quitte l’écran de verrouillage après cette durée au plus tard.</string>
@@ -95,7 +109,7 @@
     <string name="test_done_notif">Mot affiché dans les notifications.</string>
     <string name="exact_no">Le mot peut arriver jusqu’à 1\u00A0h en retard, et la fin au déverrouillage peut échouer. Autorisez «\u202FAlarmes et rappels\u202F» pour l’éviter.</string>
     <string name="exact_ask">Autoriser «\u202FAlarmes et rappels\u202F»</string>
-    <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Touchez ici pour les réactiver.</string>
+    <string name="notif_off">Notifications désactivées\u202F: ni le mot du jour ni le rappel du quiz n’arrivent plus dans vos notifications. Les réactiver ›</string>
     <string name="quote_chip">Citation</string>
     <string name="quiz_done">Quiz du soir (fait ✓)</string>
     <string name="quiz_right">Bien vu\u202F!</string>
@@ -105,13 +119,13 @@
     <string name="quiz_progress">Question %1$d sur %2$d</string>
     <string name="quiz_score_desc">Score\u202F: %1$d sur %2$d</string>
     <string name="sounds">Sons</string>
-    <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron de Monsieur Glose. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
+    <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron du chat. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>
     <string name="settings_link"><u>Réglages</u></string>
-    <!-- Onboarding (OnboardingActivity): Monsieur Glose speaks -->
+    <!-- Onboarding (OnboardingActivity): Glose speaks in the first person (docs/voix.md) -->
     <string name="onb_progress">Étape %1$d sur %2$d</string>
     <string name="onb_welcome_title">Enchanté.</string>
-    <string name="onb_welcome">Je suis Monsieur Glose, chat bibliothécaire. Chaque jour, je vous apporte un mot rare, sa définition et son histoire, jusque sur votre écran de verrouillage.\n\nTrois petites questions, et je vous laisse lire.</string>
+    <string name="onb_welcome">Je suis %1$s, chat bibliothécaire. Chaque jour, je vous apporte un mot rare, sa définition et son histoire, jusque sur votre écran de verrouillage.\n\nDeux ou trois réglages, et je vous laisse lire.</string>
     <string name="onb_start">Commencer</string>
     <string name="onb_skip">Passer</string>
     <string name="onb_next">Suivant</string>
@@ -123,6 +137,8 @@
     <string name="mode_lock">Écran de verrouillage seulement</string>
     <string name="onb_preview">Aperçu de l’écran de verrouillage avec le mot %1$s</string>
     <string name="onb_unlock_once">Retirer le mot au premier déverrouillage</string>
+    <!-- the duration is not offered in the onboarding: its default (Prefs.durationMinutes) -->
+    <string name="onb_unlocks_hint">Pour compter les déverrouillages, je laisse une petite notification. Sinon, le mot part de lui-même au bout de 2\u00A0h.</string>
     <string name="onb_when_title">À quelle heure passerai-je\u202F?</string>
     <string name="onb_quiz_hint">Le soir, je vous demande si vous reconnaissez les mots de la journée\u202F: c’est ainsi qu’ils restent.</string>
     <string name="onb_ask_title">Avec votre permission</string>
@@ -134,7 +150,7 @@
     <!-- home-screen widget -->
     <string name="widget_description">Le mot du jour sur l’écran d’accueil, dans ses couleurs. Gratuit, comme tout Definiday.</string>
     <string name="widget_add">Ajouter le widget</string>
-    <string name="widget_add_hint">Le mot du jour sur l’écran d’accueil, gratuit. Touchez-le pour ouvrir sa fiche.</string>
+    <string name="widget_add_hint">Le mot du jour sur l’écran d’accueil, gratuit. Touchez-le pour retrouver le mot dans l’appli.</string>
     <string name="widget_manual">Appuyez longuement sur l’écran d’accueil, puis choisissez Widgets et Definiday.</string>
     <string name="widget_sample_mot">sérendipité</string>
     <string name="widget_sample_nature">n. f.</string>
@@ -146,21 +162,24 @@
     <string name="action_tlfi_desc">TLFi, article du CNRTL</string>
     <string name="action_source">Source</string>
     <string name="action_source_desc">Source de la citation, Wikiquote</string>
-    <string name="action_share">Partager</string>
-    <string name="action_share_desc">Partager ce mot</string>
+    <string name="action_share">Envoyer</string>
+    <string name="action_share_desc">Envoyer ce mot à quelqu’un</string>
     <string name="action_random">Au hasard</string>
     <string name="action_random_desc">Au hasard, un nouveau mot</string>
     <string name="random_hint">Ce mot remplace aussi celui de l’écran de verrouillage.</string>
     <string name="collection_count">%1$d/%2$d</string>
-    <string name="collection_desc">Collection de Monsieur Glose, %1$d objets sur %2$d</string>
+    <string name="collection_desc">Collection %3$s\u202F: %1$d trouvailles sur %2$d</string>
     <string name="exemple">Exemple</string>
+    <!-- home header: the day's letter; Glose's handwritten note on the example (accessory, never the only information) -->
+    <string name="letter_title">Une lettre %1$s</string>
+    <string name="exemple_note">à glisser au dîner !</string>
     <string name="reveal">Touchez pour révéler</string>
     <string name="reveal_desc">Touchez pour révéler la définition</string>
     <string name="share_title">Partager le mot</string>
     <string name="share_via">via Definiday</string>
     <string name="guess">Deviner avant de voir</string>
     <string name="guess_hint">Sur l’accueil, la définition reste cachée jusqu’à ce que vous la touchiez. Le temps d’y réfléchir…</string>
-    <string name="rate_text">Definiday vous plaît\u202F? Un mot sur le Play Store aide beaucoup.</string>
+    <string name="rate_text">Nos mots vous plaisent\u202F? Un mot sur le Play Store m’aiderait beaucoup.</string>
     <string name="rate_later">Plus tard</string>
     <string name="rate_go">Noter</string>
     <!-- Quiz du soir : révisions et phrases à trous -->
@@ -173,6 +192,9 @@
     <string name="mots_search">Chercher un mot ou un sens</string>
     <string name="mots_favourites">Favoris seulement</string>
     <string name="favori">Favori</string>
+    <!-- the star's TalkBack label says what a tap does, with the word -->
+    <string name="favori_add">Ajouter %1$s aux favoris</string>
+    <string name="favori_remove">Retirer %1$s des favoris</string>
     <string name="mots_none">Vos mots viendront se ranger ici, au fil des jours.</string>
     <string name="mots_none_found">Aucun mot ne correspond à cette recherche.</string>
     <string name="mots_none_favourites">Pas encore de favori : touchez l’étoile d’un mot pour le retrouver ici.</string>
@@ -201,8 +223,16 @@
         <item quantity="other">soirs de quiz d’affilée</item>
     </plurals>
     <plurals name="stat_fragile">
-        <item quantity="one">mot fragile</item>
-        <item quantity="many">mots fragiles</item>
-        <item quantity="other">mots fragiles</item>
+        <item quantity="one">mot à revoir</item>
+        <item quantity="many">mots à revoir</item>
+        <item quantity="other">mots à revoir</item>
     </plurals>
+    <!-- Correspondance, phase 2a: the quiz as a letter, the collection as a stamp album -->
+    <string name="quiz_hello">Bonsoir,</string>
+    <string name="collection_stamps">%1$d timbres sur %2$d</string>
+    <string name="collection_section">%1$d sur %2$d</string>
+    <!-- TalkBack, an item of the kept outfit (no agreement: item names are masculine and feminine) -->
+    <string name="collection_worn">dans la tenue</string>
+    <!-- the cancel stamped on the album's worn items: a fixed postal mark -->
+    <string name="collection_cancel">PORTÉ</string>
 </resources>

@@ -10,6 +10,13 @@
     <!-- exact daily alarm: on time, and allowed to start the unlock watch from the background (Alarms.requestIntent on 14+) -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
+    <!-- Wall.lockLive: getWallpaperInfo(FLAG_LOCK) is null for a live wallpaper whose package this app can't see -->
+    <queries>
+        <intent>
+            <action android:name="android.service.wallpaper.WallpaperService" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -29,11 +36,13 @@
         </activity>
 
         <activity android:name=".OnboardingActivity" android:exported="false" />
-        <activity android:name=".QuizActivity" android:exported="false" />
-        <activity android:name=".CollectionActivity" android:exported="false" />
-        <activity android:name=".SettingsActivity" android:exported="false" />
-        <activity android:name=".StylesActivity" android:exported="false" />
-        <activity android:name=".MotsActivity" android:exported="false" />
+        <!-- labels: screen titles for TalkBack and Recents (audit 011 A6) -->
+        <activity android:name=".QuizActivity" android:exported="false" android:label="@string/quiz_title" />
+        <activity android:name=".CollectionActivity" android:exported="false" android:label="@string/collection_title" />
+        <activity android:name=".SettingsActivity" android:exported="false" android:label="@string/settings" />
+        <activity android:name=".StylesActivity" android:exported="false" android:label="@string/styles_title" />
+        <activity android:name=".MotsActivity" android:exported="false" android:label="@string/mots_title" />
+        <activity android:name=".DetailActivity" android:exported="false" android:label="@string/mots_title" />
 
         <!-- the shared card picture, read through the share intent's grant only -->
         <provider

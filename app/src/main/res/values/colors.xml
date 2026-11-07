@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- « Correspondance » tokens (design/styles/correspondance/style.md § 3; how to use them: implementation.md in the same folder).
+     Old names kept where code uses them: bg = papier, surface = kraft, accent = plume, ink = encre, ink2 = encre 2, card_edge = bord.
+     WCAG ratios (design/styles/correspondance/wcag.py). Text 4.5:1, large text and useful graphics 3:1. -->
 <resources>
-    <!-- WCAG on bg: accent 4.7:1, ink 16:1, ink2 7.0:1; on surface: ink 14:1, ink2 6.2:1 -->
-    <color name="accent">#886A34</color>
+    <!-- papier: window background. ink 14.2:1, ink2 7.7:1, accent 7.4:1, wax 5.95:1 -->
+    <color name="bg">#F8F3E9</color>
+    <!-- feuillet: notebook, letter, postcard rim. 1.08:1 on bg, always with a card_edge rule. ink 15.3:1, accent 8.0:1, yarn_note 7.8:1 -->
+    <color name="sheet">#FFFCF5</color>
+    <!-- kraft: envelopes, buttons, top-bar discs. ink 11.7:1, ink2 6.35:1, accent 6.1:1, wax 4.9:1 -->
+    <color name="surface">#EBDDC2</color>
+    <!-- disabled Btn: ink 13.0:1, ink2 7.05:1 -->
+    <color name="surface_off">#F1E9D8</color>
+    <!-- kraft foncé: envelope flap, secondary outline; decoration (1.79:1 on kraft) -->
+    <color name="kraft_dark">#C4A274</color>
+    <!-- bord: 1 dp rule around every paper, 1.50:1 on bg (decoration: papers are told by their content) -->
+    <color name="card_edge">#D9C7A4</color>
+    <!-- encre (blue-black) and encre 2 -->
+    <color name="ink">#1E2236</color>
+    <color name="ink2">#4E4A5E</color>
+    <!-- accent_dark: the Primary button's ink-pad edge (decoration) -->
+    <color name="accent_dark">#1B2F66</color>
+    <!-- plume: the one accent (was gold #886A34). bg on it 7.4:1 (Primary); on kraft 6.1:1; on the strong Seyès line 5.3:1 -->
+    <color name="accent">#2C4A9A</color>
+    <!-- cire: wax seal, selected envelope dot. 5.95:1 on bg, 4.9:1 on kraft -->
+    <color name="wax">#A23A33</color>
+    <color name="wax_dark">#7A2924</color>
+    <!-- fil: Glose's yarn, two strands (fil 5.8:1 on bg; fil_clair decoration).
+         yarn_note: Glose's handwritten notes, 7.8:1 on sheet, 5.1:1 on the strong Seyès line -->
+    <color name="yarn">#9A4250</color>
+    <color name="yarn_light">#D88A97</color>
+    <color name="yarn_note">#86364A</color>
+    <!-- Seyès ruling on sheet: thin 1.21:1, baseline 1.52:1 (under 1.6:1 so it never competes with the text) -->
+    <color name="seyes">#DFE7F5</color>
+    <color name="seyes_strong">#BFD0EC</color>
+    <!-- Glose's note paper (banner, warnings): ink 12.5:1, ink2 6.8:1, accent 6.55:1; 1.14:1 on bg, always with a card_edge rule -->
+    <color name="warn">#F4E4C1</color>
     <color name="icon_bg">#1B2440</color>
-    <color name="bg">#FAF7F0</color>
-    <color name="surface">#F1EADB</color>
-    <color name="surface_off">#F5F1E8</color>
-    <color name="ink">#1F1A14</color>
-    <color name="ink2">#5C5446</color>
-    <color name="warn">#F6E3B4</color>
     <!-- quiz answers, sage / terracotta: quiz_on 10.3:1 on good, 9.8:1 on bad -->
     <color name="quiz_good">#B5CFA9</color>
     <color name="quiz_bad">#E8B9A8</color>
     <color name="quiz_on">#1F1A14</color>
-    <!-- Switch (Toggle, trackTintMode src_over = opaque track). Off: thumb ink2 6.98:1 on bg; track 3.36:1 on bg, thumb on it 2.08:1.
-         On: thumb accent 4.72:1 on bg; track = accent 40 % over bg (1.70:1), the state is carried by the accent thumb. -->
+    <!-- Switch (Toggle, trackTintMode src_over = opaque track). Off: thumb ink2 7.7:1 on bg; track 3.25:1 on bg.
+         On: thumb accent 7.4:1 on bg; track = accent 40 % over bg (#A6AFC9), the state is carried by the accent thumb. -->
     <color name="switch_track_off">#8F8676</color>
-    <color name="switch_track_on">#CCBFA5</color>
+    <color name="switch_track_on">#A6AFC9</color>
     <!-- pressed veil of Btn; focus is the 3 dp outline (btn.xml) -->
-    <color name="ripple">#33886A34</color>
-    <!-- 1 dp edge of a word card that melts into bg (< 1.5:1, Styles.needsEdge): 1.76:1 on bg -->
-    <color name="card_edge">#C9BC9F</color>
-    <!-- locked Collection items, 2.03:1 on bg: dimmer than the unlocked ones (the state is also written) -->
+    <color name="ripple">#332C4A9A</color>
+    <!-- locked Collection items, 1.96:1 on bg: dimmer than the unlocked ones (the state is also written) -->
     <color name="silhouette">#B8AFA0</color>
 </resources>

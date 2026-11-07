@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Home, « Correspondance »: Glose's letter of the day. Header (Glose, date, title, top bar), the postcard (palette, stamp + postmark,
+     actions), the example in a Seyès notebook with Glose's note, the evening quiz sealed with wax, the other letters of the day.
+     Glose's yarn (Postal.Yarn, background of @id/page) runs behind the papers from Glose to the seal. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
@@ -6,6 +9,7 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:id="@+id/page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -13,151 +17,193 @@
         android:paddingTop="8dp"
         android:paddingBottom="24dp">
 
-        <!-- shown when the chosen mode needs notifications and they are off -->
-        <TextView
+        <!-- shown when the chosen mode needs notifications and they are off: Glose's note, a button (A8) -->
+        <Button
             android:id="@+id/notif_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@color/warn"
-            android:minHeight="48dp"
-            android:padding="12dp"
+            style="@style/Row"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/note_paper"
+            android:gravity="start|center_vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:text="@string/notif_off"
-            android:textColor="@color/ink"
             android:textSize="15sp"
             android:visibility="gone" />
 
-        <!-- Glose, with the top bar over the empty corners of his box -->
+        <!-- header: Glose in the corner, the top bar and the letter's date and title beside him -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/glose"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:contentDescription="@string/glose" />
 
                 <!-- seasonal prop by date (MainActivity.season): still, small, decorative -->
                 <ImageView
                     android:id="@+id/season"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="10dp"
                     android:importantForAccessibility="no"
                     android:visibility="gone" />
             </FrameLayout>
 
-            <!-- top bar: round buttons; room for one more next to Réglages (e.g. « Mes mots ») -->
+            <!-- top bar: kraft discs; labels by tooltip (long press) and TalkBack -->
             <LinearLayout
                 android:id="@+id/top_bar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end|top"
                 android:gravity="center_vertical">
 
-                <!-- unlocked items « x/N » beside the yarn ball; TalkBack reads collection_desc -->
+                <!-- album « x/N » beside a stamp; TalkBack and the tooltip read collection_desc -->
                 <Button
                     android:id="@+id/collection_open"
+                    style="@style/Disc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_round"
                     android:drawableStart="@drawable/ic_collection"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="sans-serif"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="0dp"
-                    android:paddingEnd="8dp"
-                    android:stateListAnimator="@animator/press"
-                    android:textColor="@color/accent"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/courier_prime"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/ink"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
                 <ImageButton
                     android:id="@+id/mots_open"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/btn_round"
+                    style="@style/Disc"
+                    android:layout_marginStart="8dp"
                     android:contentDescription="@string/mots_open"
                     android:src="@drawable/ic_mots"
-                    android:stateListAnimator="@animator/press" />
+                    android:tooltipText="@string/mots_open" />
 
                 <ImageButton
                     android:id="@+id/settings_open"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/btn_round"
+                    style="@style/Disc"
+                    android:layout_marginStart="8dp"
                     android:contentDescription="@string/settings"
                     android:src="@drawable/ic_reglages"
-                    android:stateListAnimator="@animator/press" />
+                    android:tooltipText="@string/settings" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="136dp"
+                android:layout_marginTop="58dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/Postal" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Title"
+                    android:layout_marginTop="2dp" />
             </LinearLayout>
         </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <!-- one TalkBack stop reading label, word, nature and definition (API 28+) -->
+        <!-- the postcard; one TalkBack stop reading label, word, nature and definition (API 28+); star and actions are their own stops -->
         <LinearLayout
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:paddingHorizontal="22dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
             android:screenReaderFocusable="true">
 
-            <TextView
-                android:id="@+id/label"
-                style="@style/Label"
-                android:text="@string/today" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label"
+                    style="@style/Label"
+                    android:layout_width="0dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:text="@string/today" />
+
+                <!-- stamp in the word's colours with the postmark over it: decoration (the date is written in the header) -->
+                <FrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="64dp"
+                    android:importantForAccessibility="noHideDescendants">
+
+                    <ImageView
+                        android:id="@+id/stamp"
+                        android:layout_width="56dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="end" />
+
+                    <ImageView
+                        android:id="@+id/postmark"
+                        android:layout_width="100dp"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical" />
+                </FrameLayout>
+            </LinearLayout>
 
             <!-- size fitted in code so the longest piece of the word holds on one line -->
             <TextView
                 android:id="@+id/mot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:breakStrategy="simple"
-                android:fontFamily="serif"
                 android:hyphenationFrequency="none"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/nature"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="serif"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/nature"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp" />
+
+                <!-- favourite star (words only, Memory.favourites): its own TalkBack stop, tinted with the card's word colour -->
+                <CheckBox
+                    android:id="@+id/favori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="-12dp"
+                    android:background="@null"
+                    android:button="@drawable/favori"
+                    android:contentDescription="@string/favori" />
+            </LinearLayout>
 
             <!-- « Deviner avant de voir » (Prefs.guessFirst): the definition keeps its room, invisible under « Touchez pour révéler » -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:id="@+id/definition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif"
                     android:hyphenationFrequency="normal"
-                    android:lineSpacingMultiplier="1.2"
-                    android:textSize="19sp" />
+                    android:lineSpacingMultiplier="1.25"
+                    android:textSize="17sp" />
 
                 <Button
                     android:id="@+id/reveal"
@@ -166,55 +212,49 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/reveal_desc"
                     android:text="@string/reveal"
-                    android:textStyle="italic"
                     android:visibility="gone" />
             </FrameLayout>
-        </LinearLayout>
-            <!-- favourite star (words only, Memory.favourites): its own TalkBack stop, tinted with the card's word colour -->
-            <CheckBox
-                android:id="@+id/favori"
-                android:layout_width="wrap_content"
+
+            <!-- a clean rule in the palette's nature colour (MainActivity.show), then the actions; Académie is gone for a quote, TLFi becomes its source -->
+            <View
+                android:id="@+id/card_rule"
+                style="@style/Rule"
+                android:layout_marginTop="18dp" />
+
+            <GridLayout
+                android:id="@+id/actions"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:background="@null"
-                android:button="@drawable/favori"
-                android:contentDescription="@string/favori" />
-        </FrameLayout>
+                android:layout_marginTop="6dp"
+                android:columnCount="4">
 
-        <!-- round actions; Académie is gone for a quote, TLFi becomes its source -->
-        <GridLayout
-            android:id="@+id/actions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:columnCount="4">
+                <Button
+                    android:id="@+id/academie"
+                    style="@style/Action"
+                    android:contentDescription="@string/action_academie_desc"
+                    android:drawableTop="@drawable/ic_academie"
+                    android:text="@string/action_academie" />
 
-            <Button
-                android:id="@+id/academie"
-                style="@style/Action"
-                android:contentDescription="@string/action_academie_desc"
-                android:drawableTop="@drawable/ic_academie"
-                android:text="@string/action_academie" />
+                <Button
+                    android:id="@+id/cnrtl"
+                    style="@style/Action"
+                    android:drawableTop="@drawable/ic_tlfi" />
 
-            <Button
-                android:id="@+id/cnrtl"
-                style="@style/Action"
-                android:drawableTop="@drawable/ic_tlfi" />
+                <Button
+                    android:id="@+id/share"
+                    style="@style/Action"
+                    android:contentDescription="@string/action_share_desc"
+                    android:drawableTop="@drawable/ic_partager"
+                    android:text="@string/action_share" />
 
-            <Button
-                android:id="@+id/share"
-                style="@style/Action"
-                android:contentDescription="@string/action_share_desc"
-                android:drawableTop="@drawable/ic_partager"
-                android:text="@string/action_share" />
-
-            <Button
-                android:id="@+id/new_word"
-                style="@style/Action"
-                android:contentDescription="@string/action_random_desc"
-                android:drawableTop="@drawable/ic_hasard"
-                android:text="@string/action_random" />
-        </GridLayout>
+                <Button
+                    android:id="@+id/new_word"
+                    style="@style/Action"
+                    android:contentDescription="@string/action_random_desc"
+                    android:drawableTop="@drawable/ic_hasard"
+                    android:text="@string/action_random" />
+            </GridLayout>
+        </LinearLayout>
 
         <!-- after a random pick, when the lock screen shows words -->
         <TextView
@@ -224,26 +264,44 @@
             android:text="@string/random_hint"
             android:visibility="gone" />
 
+        <!-- the example copied out in a Seyès notebook (card_soft + Postal.Seyes, set in code), with Glose's note -->
         <LinearLayout
             android:id="@+id/exemple_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/card_soft"
+            android:layout_marginTop="14dp"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingStart="22dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="14dp">
 
-            <TextView
-                style="@style/Label"
-                android:text="@string/exemple" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom">
+
+                <TextView
+                    style="@style/Label"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/exemple"
+                    android:textColor="@color/accent" />
+
+                <TextView
+                    style="@style/Note"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:gravity="end"
+                    android:text="@string/exemple_note" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/exemple"
-                style="@style/Body"
+                style="@style/Example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textStyle="italic" />
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -253,9 +311,9 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/card_soft"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="8dp"
+            android:paddingHorizontal="22dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="6dp"
             android:visibility="gone">
 
             <TextView
@@ -267,7 +325,7 @@
                 style="@style/Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="6dp" />
 
             <Button
                 android:id="@+id/source"
@@ -278,18 +336,34 @@
                 android:text="@string/source" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/quiz_open"
-            style="@style/Primary"
-            android:layout_marginTop="24dp"
-            android:text="@string/quiz_open" />
+        <!-- the evening quiz, its wax seal straddling the top edge where Glose's yarn is tied (gone once the quiz is done) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/quiz_open"
+                style="@style/Primary"
+                android:layout_marginTop="12dp"
+                android:text="@string/quiz_open" />
+
+            <ImageView
+                android:id="@+id/seal"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/wax_seal" />
+        </FrameLayout>
 
         <TextView
+            android:id="@+id/seen_label"
             style="@style/Label"
             android:layout_marginTop="24dp"
             android:text="@string/seen_today" />
 
-        <!-- rows of chips, filled in code (wraps at large font sizes instead of scrolling sideways) -->
+        <!-- rows of envelopes, filled in code (wraps at large font sizes instead of scrolling sideways) -->
         <LinearLayout
             android:id="@+id/seen"
             android:layout_width="match_parent"
