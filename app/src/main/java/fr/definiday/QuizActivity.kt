@@ -31,6 +31,7 @@ class QuizActivity : Activity() {
     private var picked = -1 // option chosen for the current question, -1 = not answered yet
     private var icon: ImageView? = null // small Glose at the top of each question: nods or tilts its head on answers
     private var done = false // that day's quiz was already counted when this one opened: its score won't count
+    private var missed = ArrayList<String>() // words answered wrong, listed « À revoir » at the end
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,7 @@ class QuizActivity : Activity() {
         index = s?.getInt("index") ?: 0
         score = s?.getInt("score") ?: 0
         picked = s?.getInt("picked") ?: -1
+        missed = s?.getStringArrayList("missed") ?: missed
         done = s?.getBoolean("done") ?: Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
         val pad = (24 * resources.displayMetrics.density).toInt()
         box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, pad) }
@@ -66,6 +68,7 @@ class QuizActivity : Activity() {
     override fun onSaveInstanceState(out: Bundle) {
         super.onSaveInstanceState(out)
         out.putLong("day", day); out.putInt("seed", seed); out.putInt("index", index); out.putInt("score", score); out.putInt("picked", picked); out.putBoolean("done", done)
+        out.putStringArrayList("missed", missed)
         out.putStringArrayList("mots", ArrayList(questions.map { it.answer.mot })); out.putInt("reviews", questions.count { it.review })
     }
 
@@ -120,7 +123,7 @@ class QuizActivity : Activity() {
             b.setOnClickListener {
                 picked = i
                 val right = q.options[i] == q.answer
-                if (right) score++
+                if (right) score++ else missed += q.answer.mot
                 // counted even in a quiz redone the same day: memory is not a reward
                 Memory(this).answered(q.answer.mot, right, day, shown[q.answer.mot] ?: day, q.review)
                 reveal()
@@ -179,18 +182,19 @@ class QuizActivity : Activity() {
             box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
             else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
                 extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
-                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore)
+                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore, p.gloseName)
                 Glose.play(this)
             })
             box.addView(text(getString(R.string.quiz_score, score, questions.size), 24f, bold = true).apply {
                 gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
             })
+            if (missed.isNotEmpty()) box.addView(text(getString(R.string.quiz_missed, missed.joinToString(", ")), 16f).apply { gravity = Gravity.CENTER })
             if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
             else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
             if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
             if (Quiz.askRate(p, passed, counted = !done)) rate()
             if (fresh.isNotEmpty()) {
-                box.addView(text(getString(R.string.unlock_new), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
+                box.addView(text(getString(if (passed) R.string.unlock_new else R.string.unlock_new_anyway, p.gloseName), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
                 stamps(fresh, Glose.choice(p))
                 button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
             }
@@ -244,7 +248,7 @@ class QuizActivity : Activity() {
 
     private fun glose(d: android.graphics.drawable.Drawable, dp: Int) = ImageView(this).apply {
         setImageDrawable(d)
-        contentDescription = getString(R.string.glose)
+        contentDescription = getString(R.string.glose, Prefs(context).gloseName)
         val px = (dp * resources.displayMetrics.density).toInt()
         layoutParams = LinearLayout.LayoutParams(px, px).apply { gravity = Gravity.CENTER_HORIZONTAL }
     }

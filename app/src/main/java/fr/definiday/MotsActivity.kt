@@ -26,7 +26,7 @@ import java.time.LocalDate
 import java.util.Locale
 
 /** « Mes mots »: light stats, then every word seen (newest first) with a search, a « Favoris » filter and a star each.
- *  A tap opens the word's card in MainActivity, as a notification does. Search and filter stay fixed above the scrolling list. */
+ *  A tap opens the word in DetailActivity (a review: not shown again as today's). Search and filter stay fixed above the scrolling list. */
 class MotsActivity : Activity() {
     private lateinit var memory: Memory
     private lateinit var search: EditText
@@ -74,7 +74,7 @@ class MotsActivity : Activity() {
         setContentView(root)
     }
 
-    /** Also on the way back from a word's card: it was shown again (first in the list) and may have been starred there. */
+    /** Also on the way back from a word's detail: it may have been starred there. */
     override fun onResume() {
         super.onResume()
         refresh()
@@ -135,18 +135,14 @@ class MotsActivity : Activity() {
                     addView(TextView(context, null, 0, R.style.Body).apply { textSize = 18f; setTypeface(typeface, android.graphics.Typeface.BOLD) })
                     addView(TextView(context, null, 0, R.style.Body).apply { textSize = 14f; setTextColor(getColor(R.color.ink2)); maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
                 }, LinearLayout.LayoutParams(0, -2, 1f))
-                addView(CheckBox(context).apply { setButtonDrawable(R.drawable.favori); background = null; contentDescription = getString(R.string.favori) })
+                addView(CheckBox(context).apply { setButtonDrawable(R.drawable.favori); background = null })
             }
             val w = rows[i]
             val texts = row.getChildAt(0) as LinearLayout
             (texts.getChildAt(0) as TextView).text = w.mot
             (texts.getChildAt(1) as TextView).text = w.definition
-            row.setOnClickListener { startActivity(Intent(this@MotsActivity, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot).putExtra(MainActivity.EXTRA_DEJA_VU, true)) }
-            (row.getChildAt(1) as CheckBox).apply {
-                setOnCheckedChangeListener(null) // a recycled row: not a tap
-                isChecked = w.mot in memory.favourites
-                setOnCheckedChangeListener { _, on -> memory.favourite(w.mot, on); refresh() }
-            }
+            row.setOnClickListener { startActivity(Intent(this@MotsActivity, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)) }
+            star(row.getChildAt(1) as CheckBox, w.mot) { refresh() }
             return row
         }
     }

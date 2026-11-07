@@ -37,8 +37,7 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="@string/glose" />
+                    android:layout_marginTop="16dp" />
 
                 <TextView
                     android:id="@+id/title_welcome"
@@ -47,11 +46,11 @@
                     android:text="@string/onb_welcome_title" />
 
                 <TextView
+                    android:id="@+id/welcome"
                     style="@style/Body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/onb_welcome" />
+                    android:layout_marginTop="12dp" />
             </LinearLayout>
 
             <!-- 2. Où: mode, live lock-screen preview, wallpaper warning, removal at the 1st unlock -->
@@ -134,7 +133,7 @@
 
                     <TextView
                         style="@style/Help"
-                        android:text="@string/unlocks_hint" />
+                        android:text="@string/onb_unlocks_hint" />
                 </LinearLayout>
             </LinearLayout>
 

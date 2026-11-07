@@ -343,6 +343,8 @@ class DefinidayTest {
         p.apply { lastQuizDay = today - 1; streak = 8 }
         fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
         capture(mots(), File(ui, "mots_light.png"))
+        capture(Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot))
+            .setup().get(), File(ui, "mots_detail.png"))
         capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
             File(ui, "quiz_revision.png"))
         val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }

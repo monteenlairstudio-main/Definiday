@@ -48,6 +48,8 @@ class OnboardingActivity : Activity() {
         asked = savedInstanceState?.getBoolean(STATE_ASKED) ?: false
 
         val glose = findViewById<ImageView>(R.id.glose)
+        glose.contentDescription = getString(R.string.glose, p.gloseName)
+        findViewById<TextView>(R.id.welcome).text = getString(R.string.onb_welcome, p.gloseName)
         val taps = Glose.Taps()
         glose.setOnClickListener { Glose.tap(glose, taps, Glose.mainPose(p)) }
 

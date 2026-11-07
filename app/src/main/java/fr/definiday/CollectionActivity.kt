@@ -33,9 +33,9 @@ class CollectionActivity : Activity() {
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true } // the insets replace its padding
         val head = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, 0) }.also(root::addView)
         val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, 0, pad, pad) }
-        head.addView(label(getString(R.string.collection_title)))
+        head.addView(label(getString(R.string.collection_title, de(p.gloseName))))
         preview = ImageView(this).apply {
-            contentDescription = getString(R.string.glose)
+            contentDescription = getString(R.string.glose, p.gloseName)
             layoutParams = LinearLayout.LayoutParams((160 * dp).toInt(), (160 * dp).toInt()).apply { gravity = Gravity.CENTER_HORIZONTAL }
             val taps = Glose.Taps()
             setOnClickListener { Glose.tap(this, taps, Glose.pose(trial)) { Glose.drawable(context, it, Glose.styles(trial)) } }

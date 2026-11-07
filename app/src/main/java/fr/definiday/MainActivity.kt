@@ -4,13 +4,11 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.NotificationManager
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Layout
@@ -23,11 +21,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
-import org.json.JSONObject
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
 import java.util.Locale
 
 class MainActivity : Activity() {
@@ -63,7 +56,7 @@ class MainActivity : Activity() {
             if (Prefs(this).mode != Prefs.MODE_NOTIF) findViewById<View>(R.id.random_hint).visibility = View.VISIBLE
             warnIfHurried()
         }
-        findViewById<View>(R.id.share).setOnClickListener { current?.let(::share) }
+        findViewById<View>(R.id.share).setOnClickListener { current?.let { share(it) } }
         findViewById<View>(R.id.reveal).setOnClickListener { reveal() }
         findViewById<Button>(R.id.quiz_open).setOnClickListener { startActivity(Intent(this, QuizActivity::class.java)) }
         findViewById<View>(R.id.collection_open).setOnClickListener { startActivity(Intent(this, CollectionActivity::class.java)) }
@@ -100,14 +93,14 @@ class MainActivity : Activity() {
         super.onResume()
         val p = Prefs(this)
         current?.let { show(it, top = false) }
-        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); Glose.play(this) }
+        findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); contentDescription = getString(R.string.glose, p.gloseName); Glose.play(this) }
         findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
         val done = p.lastQuizDay == java.time.LocalDate.now().toEpochDay()
         findViewById<Button>(R.id.quiz_open).setText(if (done) R.string.quiz_done else R.string.quiz_open)
         val got = (p.unlocked + Unlocks.of(emptyMap())).count(Unlocks.byId::containsKey) // the default look counts from the start
         findViewById<Button>(R.id.collection_open).apply {
             text = getString(R.string.collection_count, got, Unlocks.items.size)
-            contentDescription = getString(R.string.collection_desc, got, Unlocks.items.size)
+            contentDescription = getString(R.string.collection_desc, got, Unlocks.items.size, de(p.gloseName))
         }
         findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
     }
@@ -132,7 +125,7 @@ class MainActivity : Activity() {
         AlertDialog.Builder(this)
             .setTitle(R.string.slow_title)
             .setMessage(Quotes.slow(this) ?: getString(R.string.slow_default))
-            .setPositiveButton(android.R.string.ok, null)
+            .setPositiveButton(R.string.ok, null)
             .show()
     }
 
@@ -181,7 +174,7 @@ class MainActivity : Activity() {
                 text(R.id.anecdote, item.anecdote)
                 findViewById<Button>(R.id.source).setOnClickListener { open(item.source) }
                 academie.visibility = View.VISIBLE
-                academie.setOnClickListener { openAcademie(item.mot) }
+                academie.setOnClickListener { openAcademie(item.mot, academie) }
                 cnrtl.setText(R.string.action_tlfi)
                 cnrtl.contentDescription = getString(R.string.action_tlfi_desc)
                 cnrtl.setOnClickListener { open(cnrtl(item.mot)) }
@@ -190,8 +183,7 @@ class MainActivity : Activity() {
         hide(Prefs(this).guessFirst && item is Word && item.key != revealed)
         findViewById<android.widget.CheckBox>(R.id.favori).apply { // words only; set before listening: showing is not a tap
             visibility = if (item is Word) View.VISIBLE else View.GONE
-            setOnCheckedChangeListener(null); isChecked = item.key in Memory(context).favourites
-            setOnCheckedChangeListener { _, on -> Memory(context).favourite(item.key, on) }
+            star(this, item.key)
         }
         fit(findViewById(R.id.mot), if (item is Quote) 24f else 40f)
         showSeen()
@@ -213,14 +205,6 @@ class MainActivity : Activity() {
         hide(false)
         if (ValueAnimator.areAnimatorsEnabled()) findViewById<View>(R.id.definition).run { alpha = 0f; animate().alpha(1f).setDuration(300) }
         focusCard() // the button is gone: TalkBack reads the card, definition included
-    }
-
-    /** Text and picture of the card (its palette and font), signed with Glose's head. */
-    private fun share(item: Item) {
-        val head = Glose.bitmap(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 128, 128)
-        // ponytail: drawn and compressed on the UI thread (~0.2 s on a tap), move to a thread if it stutters
-        val picture = runCatching { WordCard.share(item, Styles.of(this, item), head) }.getOrNull()
-        runCatching { startActivity(ShareProvider.intent(this, item, picture)) }
     }
 
     private fun focusCard() = findViewById<View>(R.id.card).run { post { performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null) } }
@@ -269,37 +253,4 @@ class MainActivity : Activity() {
     }
 
     private fun text(id: Int, s: String) = findViewById<TextView>(id).run { text = s; visibility = if (s.isEmpty()) View.GONE else View.VISIBLE }
-
-    /** Opens https links only (data-provided URLs), in a browser. */
-    private fun open(url: String) {
-        val uri = Uri.parse(url)
-        if (uri.scheme != "https") return
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE))
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, R.string.no_browser, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    /** One lookup on the Académie's own search, triggered by the user's tap, to reach the article page. Falls back to CNRTL. */
-    private fun openAcademie(mot: String) {
-        val b = findViewById<Button>(R.id.academie).apply { isEnabled = false } // one lookup at a time
-        Thread {
-            val started = System.currentTimeMillis()
-            val url = runCatching {
-                val c = URL("https://www.dictionnaire-academie.fr/search").openConnection() as HttpURLConnection
-                c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 5000; c.readTimeout = 5000
-                c.setRequestProperty("X-Requested-With", "XMLHttpRequest")
-                c.setRequestProperty("Accept", "application/json") // without it the server answers with a redirect
-                c.outputStream.use { it.write("term=${URLEncoder.encode(mot, "UTF-8")}&options=1".toByteArray()) }
-                JSONObject(c.inputStream.bufferedReader().use { r -> // at most 64 KiB: a truncated answer fails to parse and falls back to the CNRTL
-                    buildString { generateSequence { r.read().takeIf { it >= 0 } }.take(64 * 1024).forEach { append(it.toChar()) } } }).getJSONArray("result").getJSONObject(0).getString("url")
-                    .also { require(it.startsWith("https://www.dictionnaire-academie.fr/")) }
-            }.getOrDefault(cnrtl(mot))
-            // DNS isn't bounded by the socket timeouts: give up if the lookup took too long or the screen is gone
-            runOnUiThread { b.isEnabled = true; if (!isDestroyed && System.currentTimeMillis() - started < 12_000) open(url) }
-        }.start()
-    }
-
-    private fun cnrtl(mot: String) = "https://www.cnrtl.fr/definition/" + Uri.encode(mot)
 }

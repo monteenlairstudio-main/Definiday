@@ -34,6 +34,7 @@
         <activity android:name=".SettingsActivity" android:exported="false" />
         <activity android:name=".StylesActivity" android:exported="false" />
         <activity android:name=".MotsActivity" android:exported="false" />
+        <activity android:name=".DetailActivity" android:exported="false" />
 
         <!-- the shared card picture, read through the share intent's grant only -->
         <provider
