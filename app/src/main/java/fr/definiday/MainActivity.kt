@@ -71,6 +71,7 @@ class MainActivity : Activity() {
         }
         DailyReceiver.scheduleNext(this)
         DailyReceiver.scheduleQuiz(this)
+        Update.autoCheck(this) // nothing unless « Vérifier chaque semaine » is on and a week has passed
         val taps = Glose.Taps()
         findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.tap(it as ImageView, taps, Glose.mainPose(Prefs(this))) } // reacts, then its idle life
     }

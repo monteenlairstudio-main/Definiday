@@ -99,6 +99,9 @@ class SettingsActivity : Activity() {
             isChecked = p.sounds
             setOnCheckedChangeListener { _, on -> p.sounds = on; if (on) Sounds.play(context, Sounds.PAGE) } // a sample, so the choice is heard
         }
+
+        // Mises à jour
+        if (BuildConfig.SELF_UPDATE) updates() else listOf(R.id.update_rubric, R.id.update_sheet).forEach { findViewById<View>(it).visibility = View.GONE }
     }
 
     override fun onResume() {
@@ -116,6 +119,38 @@ class SettingsActivity : Activity() {
             setSpan(RelativeSizeSpan(0.875f), start, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             setSpan(ForegroundColorSpan(getColor(R.color.ink2)), start, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
+    }
+
+    /** « Mises à jour »: a check on the button's tap only; an offer from the home screen arrives as Update.EXTRA. */
+    private fun updates() {
+        val status = findViewById<TextView>(R.id.update_status)
+        val check = findViewById<Button>(R.id.update_check)
+        val install = findViewById<Button>(R.id.update_install)
+        fun say(text: String) { status.text = text; status.visibility = View.VISIBLE }
+        fun offer(i: Update.Info) {
+            say(getString(R.string.update_new, i.name) + i.notes.let { if (it.isEmpty()) "" else "\n\n$it" })
+            install.visibility = View.VISIBLE
+            install.setOnClickListener { install.isEnabled = false; Update.install(this, i) { text, last -> if (text.isNotEmpty()) say(text); install.isEnabled = last } }
+        }
+        findViewById<TextView>(R.id.update_version).text = getString(R.string.update_version, BuildConfig.VERSION_NAME)
+        intent.getStringExtra(Update.EXTRA)?.let { j -> runCatching { Update.parse(j) }.getOrNull()?.takeIf { Update.newer(it) }?.let(::offer) }
+        check.setOnClickListener {
+            check.isEnabled = false
+            install.visibility = View.GONE
+            say(getString(R.string.update_checking))
+            Thread {
+                val i = runCatching { Update.check() }.getOrNull()
+                runOnUiThread {
+                    check.isEnabled = true
+                    when { i == null -> say(getString(R.string.update_unreachable)); Update.newer(i) -> offer(i); else -> say(getString(R.string.update_none)) }
+                }
+            }.start()
+        }
+        findViewById<Switch>(R.id.update_auto).apply {
+            isChecked = p.updateAuto
+            setOnCheckedChangeListener { _, on -> p.updateAuto = on }
+        }
+        findViewById<Button>(R.id.update_releases).setOnClickListener { open(Update.REPO) }
     }
 
     private fun explainLock() = Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own))

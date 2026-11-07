@@ -23,6 +23,8 @@ android {
         targetSdk = 36
         versionCode = 12
         versionName = "0.12.0"
+        // in-app update from the GitHub releases (Update.kt); a Google Play build must set it false (docs/mise_a_jour.md)
+        buildConfigField("boolean", "SELF_UPDATE", "true")
     }
     signingConfigs {
         if (releaseKeystore != null) create("release") {
@@ -39,6 +41,7 @@ android {
             signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
+    buildFeatures.buildConfig = true
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
