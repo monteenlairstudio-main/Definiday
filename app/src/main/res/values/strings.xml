@@ -208,4 +208,12 @@
         <item quantity="many">mots fragiles</item>
         <item quantity="other">mots fragiles</item>
     </plurals>
+    <!-- Correspondance, phase 2a: the quiz as a letter, the collection as a stamp album -->
+    <string name="quiz_hello">Bonsoir,</string>
+    <string name="collection_stamps">%1$d timbres sur %2$d</string>
+    <string name="collection_section">%1$d sur %2$d</string>
+    <!-- TalkBack, an item of the kept outfit (no agreement: item names are masculine and feminine) -->
+    <string name="collection_worn">dans la tenue</string>
+    <!-- the cancel stamped on the album's worn items: a fixed postal mark -->
+    <string name="collection_cancel">PORTÉ</string>
 </resources>

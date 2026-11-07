@@ -29,7 +29,7 @@ class BugHuntTest {
         l.flatMap { v -> (v as? android.view.ViewGroup)?.let { g -> (0 until g.childCount).map(g::getChildAt) } ?: emptyList() }.ifEmpty { null }
     }.flatten()
     private fun texts(a: android.app.Activity) = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()
-    /** The quiz progress is drawn (yarn balls): its TalkBack text is read instead. */
+    /** The quiz progress (« Question 2 sur 4 », with drawn stamps): its TalkBack text is read. */
     private fun progress(a: android.app.Activity) = views(a).mapNotNull { it.contentDescription?.toString() }.toList()
     /** Answers the current question (first option) and goes to the next one. */
     private fun answerOne(a: android.app.Activity) {

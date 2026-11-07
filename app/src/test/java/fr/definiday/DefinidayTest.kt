@@ -298,6 +298,7 @@ class DefinidayTest {
         onboarding("_w360_font200")
         capture(styles(), File(ui, "styles_w360_font200.png"))
         capture(quiz().also { answer(it, right = false) }, File(ui, "quiz_w360_font200_faux.png"))
+        capture(Robolectric.buildActivity(CollectionActivity::class.java).setup().get(), File(ui, "collection_w360_font200.png"))
         RuntimeEnvironment.setFontScale(1.3f)
         capture(main(long), File(ui, "home_w360_font130_long.png"))
         RuntimeEnvironment.setFontScale(1f)
