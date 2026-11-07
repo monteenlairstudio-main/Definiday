@@ -36,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="serif"
                 android:hyphenationFrequency="full"
                 android:textSize="36sp"
                 android:textStyle="bold" />
@@ -46,16 +45,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="serif"
-                android:textSize="16sp"
-                android:textStyle="italic" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/preview_definition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:fontFamily="serif"
                 android:hyphenationFrequency="normal"
                 android:lineSpacingMultiplier="1.2"
                 android:textSize="17sp" />
@@ -77,30 +73,38 @@
             android:layout_marginTop="32dp"
             android:text="@string/palettes_group" />
 
-        <TextView
-            android:id="@+id/palettes_count"
-            style="@style/Field"
-            android:layout_marginTop="8dp"
-            android:accessibilityLiveRegion="polite" />
-
+        <!-- the count as a postal mention; Toutes / Aucune as quiet links beside it -->
         <LinearLayout
+            android:id="@+id/palettes_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/palettes_all"
-                style="@style/Row"
-                android:layout_width="0dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:text="@string/all_f" />
-
-            <Button
-                android:id="@+id/palettes_none"
-                style="@style/Row"
+            <TextView
+                android:id="@+id/palettes_count"
+                style="@style/Postal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/none_f" />
+                android:accessibilityLiveRegion="polite" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/palettes_all"
+                    style="@style/Link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_f" />
+
+                <Button
+                    android:id="@+id/palettes_none"
+                    style="@style/Link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/none_f" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -130,30 +134,38 @@
             android:layout_marginTop="32dp"
             android:text="@string/polices_group" />
 
-        <TextView
-            android:id="@+id/polices_count"
-            style="@style/Field"
-            android:layout_marginTop="8dp"
-            android:accessibilityLiveRegion="polite" />
-
+        <!-- the count as a postal mention; Toutes / Aucune as quiet links beside it -->
         <LinearLayout
+            android:id="@+id/polices_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/polices_all"
-                style="@style/Row"
-                android:layout_width="0dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:text="@string/all_f" />
-
-            <Button
-                android:id="@+id/polices_none"
-                style="@style/Row"
+            <TextView
+                android:id="@+id/polices_count"
+                style="@style/Postal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/none_f" />
+                android:accessibilityLiveRegion="polite" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/polices_all"
+                    style="@style/Link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_f" />
+
+                <Button
+                    android:id="@+id/polices_none"
+                    style="@style/Link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/none_f" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView

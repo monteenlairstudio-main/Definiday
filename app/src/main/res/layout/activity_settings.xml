@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Réglages: calm sheets (card_soft, style Sheet) under serif Label rubrics; actions apart from settings (« Ailleurs sur votre téléphone ») -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,195 +18,192 @@
 
         <!-- Mot du jour -->
         <TextView
-            style="@style/Label"
-            android:layout_marginTop="24dp"
+            style="@style/Rubric"
             android:text="@string/group_word" />
 
-        <Switch
-            android:id="@+id/enabled"
-            style="@style/Toggle"
-            android:text="@string/enabled" />
+        <LinearLayout style="@style/Sheet">
 
-        <Button
-            android:id="@+id/time"
-            style="@style/Setting" />
-
-        <!-- exact alarms refused (default on Android 14+): banner as on the home screen -->
-        <LinearLayout
-            android:id="@+id/exact_box"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/warn"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/exact_no"
-                android:textColor="@color/ink"
-                android:textSize="15sp" />
+            <Switch
+                android:id="@+id/enabled"
+                style="@style/Toggle"
+                android:text="@string/enabled" />
 
             <Button
-                android:id="@+id/exact_ask"
-                style="@style/Row"
-                android:text="@string/exact_ask" />
+                android:id="@+id/time"
+                style="@style/Setting" />
+
+            <!-- exact alarms refused (default on Android 14+): Glose's note, as the home banner -->
+            <LinearLayout
+                android:id="@+id/exact_box"
+                style="@style/NoteBox">
+
+                <TextView
+                    style="@style/Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exact_no"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/exact_ask"
+                    style="@style/Row"
+                    android:text="@string/exact_ask" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Field"
+                android:labelFor="@+id/per_day"
+                android:text="@string/per_day" />
+
+            <Spinner
+                android:id="@+id/per_day"
+                style="@style/Choice" />
+
+            <Switch
+                android:id="@+id/more_quotes"
+                style="@style/Toggle"
+                android:text="@string/more_quotes" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/more_quotes_hint" />
+
+            <Switch
+                android:id="@+id/guess"
+                style="@style/Toggle"
+                android:text="@string/guess" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/guess_hint" />
         </LinearLayout>
 
+        <!-- actions, not settings (audit 011 n° 5): the free widget first, it has no other entry point -->
         <TextView
-            style="@style/Field"
-            android:labelFor="@+id/per_day"
-            android:text="@string/per_day" />
+            style="@style/Rubric"
+            android:text="@string/group_elsewhere" />
 
-        <Spinner
-            android:id="@+id/per_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+        <LinearLayout style="@style/Sheet">
 
-        <Switch
-            android:id="@+id/more_quotes"
-            style="@style/Toggle"
-            android:text="@string/more_quotes" />
+            <!-- the launcher's pin dialog (Widget.pin) -->
+            <Button
+                android:id="@+id/widget_add"
+                style="@style/Row"
+                android:text="@string/widget_add" />
 
-        <TextView
-            style="@style/Help"
-            android:text="@string/more_quotes_hint" />
+            <TextView
+                style="@style/Help"
+                android:text="@string/widget_add_hint" />
 
-        <Switch
-            android:id="@+id/guess"
-            style="@style/Toggle"
-            android:text="@string/guess" />
-
-        <TextView
-            style="@style/Help"
-            android:text="@string/guess_hint" />
-
-        <Button
-            android:id="@+id/test"
-            style="@style/Row"
-            android:text="@string/test" />
-
-        <!-- free home-screen widget: the launcher's pin dialog (Widget.pin) -->
-        <Button
-            android:id="@+id/widget_add"
-            style="@style/Row"
-            android:text="@string/widget_add" />
-
-        <TextView
-            style="@style/Help"
-            android:text="@string/widget_add_hint" />
+            <Button
+                android:id="@+id/test"
+                style="@style/Row"
+                android:layout_marginTop="16dp"
+                android:text="@string/test" />
+        </LinearLayout>
 
         <!-- Écran de verrouillage -->
         <TextView
-            style="@style/Label"
-            android:layout_marginTop="32dp"
+            style="@style/Rubric"
             android:text="@string/group_lock" />
 
-        <TextView
-            style="@style/Field"
-            android:labelFor="@+id/mode"
-            android:text="@string/mode" />
+        <LinearLayout style="@style/Sheet">
 
-        <Spinner
-            android:id="@+id/mode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            <TextView
+                style="@style/Field"
+                android:labelFor="@+id/mode"
+                android:text="@string/mode" />
 
-        <TextView
-            android:id="@+id/wallpaper_hint"
-            style="@style/Help"
-            android:text="@string/wallpaper_hint" />
+            <Spinner
+                android:id="@+id/mode"
+                style="@style/Choice" />
 
-        <TextView
-            style="@style/Field"
-            android:labelFor="@+id/duration"
-            android:text="@string/duration" />
+            <TextView
+                android:id="@+id/wallpaper_hint"
+                style="@style/Help"
+                android:text="@string/wallpaper_hint" />
 
-        <Spinner
-            android:id="@+id/duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            <TextView
+                style="@style/Field"
+                android:labelFor="@+id/duration"
+                android:text="@string/duration" />
 
-        <TextView
-            android:id="@+id/duration_hint"
-            style="@style/Help" />
+            <Spinner
+                android:id="@+id/duration"
+                style="@style/Choice" />
 
-        <TextView
-            android:id="@+id/unlocks_label"
-            style="@style/Field"
-            android:labelFor="@+id/unlocks"
-            android:text="@string/unlocks" />
+            <TextView
+                android:id="@+id/duration_hint"
+                style="@style/Help" />
 
-        <Spinner
-            android:id="@+id/unlocks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            <TextView
+                android:id="@+id/unlocks_label"
+                style="@style/Field"
+                android:labelFor="@+id/unlocks"
+                android:text="@string/unlocks" />
 
-        <TextView
-            android:id="@+id/unlocks_hint"
-            style="@style/Help"
-            android:text="@string/unlocks_hint" />
+            <Spinner
+                android:id="@+id/unlocks"
+                style="@style/Choice" />
 
-        <TextView
-            android:id="@+id/text_pos_label"
-            style="@style/Field"
-            android:labelFor="@+id/text_pos"
-            android:text="@string/text_pos" />
+            <TextView
+                android:id="@+id/unlocks_hint"
+                style="@style/Help"
+                android:text="@string/unlocks_hint" />
 
-        <Spinner
-            android:id="@+id/text_pos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            <TextView
+                android:id="@+id/text_pos_label"
+                style="@style/Field"
+                android:labelFor="@+id/text_pos"
+                android:text="@string/text_pos" />
+
+            <Spinner
+                android:id="@+id/text_pos"
+                style="@style/Choice" />
+        </LinearLayout>
 
         <!-- Quiz du soir -->
         <TextView
-            style="@style/Label"
-            android:layout_marginTop="32dp"
+            style="@style/Rubric"
             android:text="@string/group_quiz" />
 
-        <Switch
-            android:id="@+id/quiz_enabled"
-            style="@style/Toggle"
-            android:text="@string/quiz_enabled" />
+        <LinearLayout style="@style/Sheet">
 
-        <Button
-            android:id="@+id/quiz_time"
-            style="@style/Setting" />
+            <Switch
+                android:id="@+id/quiz_enabled"
+                style="@style/Toggle"
+                android:text="@string/quiz_enabled" />
+
+            <Button
+                android:id="@+id/quiz_time"
+                style="@style/Setting" />
+        </LinearLayout>
 
         <!-- Apparence -->
         <TextView
-            style="@style/Label"
-            android:layout_marginTop="32dp"
+            style="@style/Rubric"
             android:text="@string/group_look" />
 
-        <!-- opens StylesActivity: tiles drawn in each palette and font, live card -->
-        <Button
-            android:id="@+id/styles_open"
-            style="@style/Setting"
-            android:text="@string/styles_row" />
+        <LinearLayout style="@style/Sheet">
+
+            <!-- opens StylesActivity: a navigation row (chevron), its counts on a second line (SettingsActivity.onResume) -->
+            <Button
+                android:id="@+id/styles_open"
+                style="@style/Nav"
+                android:text="@string/styles_row" />
+
+            <Switch
+                android:id="@+id/sounds"
+                style="@style/Toggle"
+                android:text="@string/sounds" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/sounds_hint" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/styles_hint"
-            style="@style/Help" />
-
-        <Switch
-            android:id="@+id/sounds"
-            style="@style/Toggle"
-            android:text="@string/sounds" />
-
-        <TextView
-            style="@style/Help"
-            android:text="@string/sounds_hint" />
-
-        <TextView
-            style="@style/Label"
-            android:layout_marginTop="32dp"
+            style="@style/Rubric"
             android:text="@string/credits_title" />
 
         <TextView

@@ -88,6 +88,7 @@
     <string name="group_lock">Écran de verrouillage</string>
     <string name="group_quiz">Quiz du soir</string>
     <string name="group_look">Apparence</string>
+    <string name="group_elsewhere">Ailleurs sur votre téléphone</string>
     <string name="unlocks_hint">Pour compter les déverrouillages, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.</string>
     <string name="duration_notif">La notification se retire seule après cette durée.</string>
     <string name="duration_lock">Le mot quitte l’écran de verrouillage après cette durée au plus tard.</string>

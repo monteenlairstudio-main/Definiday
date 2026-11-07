@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A row that opens another screen (Réglages > Couleurs et polices): chevron, same stroke as the ic_* icons, in ink2. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24" android:autoMirrored="true">
+    <path android:pathData="M9.5,6L15.5,12L9.5,18" android:strokeColor="@color/ink2" android:strokeWidth="1.75" android:strokeLineCap="round" android:strokeLineJoin="round" />
+</vector>

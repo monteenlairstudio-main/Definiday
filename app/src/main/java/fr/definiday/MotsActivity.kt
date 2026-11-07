@@ -2,13 +2,23 @@ package fr.definiday
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.InsetDrawable
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
+import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.TypedValue
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +26,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -42,12 +53,14 @@ class MotsActivity : Activity() {
         super.onCreate(savedInstanceState)
         memory = Memory(this)
         all = Words.load(this)
-        val pad = (24 * dp).toInt()
+        val pad = (16 * dp).toInt()
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true }
-        val head = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad, pad, 0) }.also(root::addView)
-        head.addView(TextView(this, null, 0, R.style.Label).apply { text = getString(R.string.mots_title) })
-        search = EditText(this).apply {
+        val head = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, (24 * dp).toInt(), pad, 0) }.also(root::addView)
+        head.addView(TextView(this, null, 0, R.style.Title).apply { text = getString(R.string.mots_title) })
+        search = EditText(this).apply { // a sheet of paper, not the platform underline (audit 011, « Mes mots »)
             hint = getString(R.string.mots_search); textSize = 16f; minHeight = (48 * dp).toInt()
+            background = getDrawable(R.drawable.field); setPadding(pad, pad / 2, pad, pad / 2)
+            setTextColor(getColor(R.color.ink)); setHintTextColor(getColor(R.color.ink2))
             inputType = InputType.TYPE_CLASS_TEXT; imeOptions = EditorInfo.IME_ACTION_SEARCH // one line to type (Enter searches)...
             setHorizontallyScrolling(false); maxLines = 3 // ...but the hint wraps at large font sizes instead of being cut
             addTextChangedListener(object : TextWatcher {
@@ -56,18 +69,20 @@ class MotsActivity : Activity() {
                 override fun afterTextChanged(s: Editable?) = refresh()
             })
         }
-        head.addView(search, LinearLayout.LayoutParams(-1, -2).apply { topMargin = (8 * dp).toInt() })
+        head.addView(search, LinearLayout.LayoutParams(-1, -2).apply { topMargin = (16 * dp).toInt() })
         favOnly = Switch(this).apply { // R.style.Toggle by hand: as a defStyleRes it would drop the platform switch style
             text = getString(R.string.mots_favourites); textSize = 16f; setTextColor(getColor(R.color.ink)); minHeight = (48 * dp).toInt()
             thumbTintList = getColorStateList(R.color.switch_thumb); trackTintList = getColorStateList(R.color.switch_track); trackTintMode = android.graphics.PorterDuff.Mode.SRC_OVER
             setOnCheckedChangeListener { _, _ -> refresh() }
         }
         head.addView(favOnly, LinearLayout.LayoutParams(-1, -2))
-        stats = GridLayout(this).apply { setPadding(0, (8 * dp).toInt(), 0, (8 * dp).toInt()) }
+        // the ledger: an index card (card_soft) of ruled lines, not dashboard tiles (audit 011 n° 11)
+        stats = GridLayout(this).apply { background = getDrawable(R.drawable.card_soft); setPadding(pad, (4 * dp).toInt(), pad, (4 * dp).toInt()) }
+        val ledger = FrameLayout(this).apply { setPadding(0, (8 * dp).toInt(), 0, (8 * dp).toInt()); addView(stats) } // a list header takes no margins
         empty = TextView(this, null, 0, R.style.Body).apply { setTextColor(getColor(R.color.ink2)); setPadding(0, (16 * dp).toInt(), 0, 0) }
         val list = ListView(this).apply {
             divider = null; setPadding(pad, 0, pad, pad); clipToPadding = false
-            addHeaderView(stats, null, false); addFooterView(empty, null, false)
+            addHeaderView(ledger, null, false); addFooterView(empty, null, false)
             adapter = this@MotsActivity.adapter
         }
         root.addView(list, LinearLayout.LayoutParams(-1, 0, 1f))
@@ -91,7 +106,7 @@ class MotsActivity : Activity() {
         showStats(seen.size, favs.count { it in history })
     }
 
-    /** Six tiles: words seen, favourites, quizzes, review success, current streak (quote-only days don't break it), fragile words (missed 2+ times). */
+    /** Six ledger lines: words seen, favourites, quizzes, review success, current streak (quote-only days don't break it), fragile words (missed 2+ times). */
     private fun showStats(seen: Int, favs: Int) {
         val p = Prefs(this)
         val rate = memory.reviews.takeIf { it > 0 }?.let { memory.reviewsRight * 100 / it }
@@ -104,22 +119,24 @@ class MotsActivity : Activity() {
             q(R.plurals.stat_streak, streak), q(R.plurals.stat_fragile, fragile),
         )
         stats.removeAllViews()
-        stats.columnCount = (resources.configuration.screenWidthDp / (130 * resources.configuration.fontScale)).toInt().coerceIn(1, 3) // « découverts » holds on a line
-        tiles.forEach { (value, label) ->
-            stats.addView(LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                background = GradientDrawable().apply { cornerRadius = 12 * dp; setColor(getColor(R.color.surface)) }
-                val pad = (12 * dp).toInt()
-                setPadding(pad, pad, pad, pad)
-                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
-                contentDescription = getString(R.string.stat_tile, if (value == "–") "" else value, label).trim() // one stop, « – » not spelt out
-                addView(TextView(context, null, 0, R.style.Title).apply { text = value; textSize = 24f; importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
-                addView(TextView(context).apply { text = label; textSize = 14f; setTextColor(getColor(R.color.ink2)); importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
-            }, GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL), GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)).apply {
-                width = 0; val m = (4 * dp).toInt(); setMargins(m, m, m, m)
-            })
+        val cols = (resources.configuration.screenWidthDp / (180 * resources.configuration.fontScale)).toInt().coerceIn(1, 2)
+        stats.columnCount = cols
+        tiles.forEachIndexed { i, (value, label) ->
+            // one ruled line of the ledger: the figure in bold ink, its words in ink2; no rule under the last line
+            stats.addView(TextView(this, null, 0, R.style.Body).apply {
+                text = SpannableStringBuilder(value).apply { setSpan(StyleSpan(Typeface.BOLD), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) }.append(' ').append(label,
+                    ForegroundColorSpan(getColor(R.color.ink2)), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                textSize = 15f
+                if (i / cols < (tiles.size - 1) / cols) background = line() // before the padding: a background resets it
+                setPadding(0, (10 * dp).toInt(), (8 * dp).toInt(), (10 * dp).toInt())
+                contentDescription = getString(R.string.stat_tile, if (value == "–") "" else value, label).trim() // « – » not spelt out
+            }, GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL), GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)).apply { width = 0 })
         }
     }
+
+    /** A ledger rule: 1 dp card_edge along the bottom only (the stroke's other sides pushed out of the bounds). */
+    private fun line(): Drawable = InsetDrawable(GradientDrawable().apply { setStroke(dp.toInt().coerceAtLeast(1), getColor(R.color.card_edge)) },
+        -(2 * dp).toInt(), -(2 * dp).toInt(), -(2 * dp).toInt(), 0)
 
     /** One row per word: the word, its definition on 2 lines at most, its star. */
     private inner class Rows : BaseAdapter() {
@@ -128,8 +145,8 @@ class MotsActivity : Activity() {
         override fun getItemId(i: Int) = i.toLong()
         override fun getView(i: Int, convert: View?, parent: ViewGroup): View {
             val row = convert as? LinearLayout ?: LinearLayout(this@MotsActivity).apply {
-                gravity = Gravity.CENTER_VERTICAL; minimumHeight = (48 * dp).toInt(); setPadding(0, (8 * dp).toInt(), 0, (8 * dp).toInt())
-                background = getDrawable(TypedValue().also { theme.resolveAttribute(android.R.attr.selectableItemBackground, it, true) }.resourceId)
+                background = RippleDrawable(ColorStateList.valueOf(getColor(R.color.ripple)), line(), ColorDrawable(Color.WHITE)) // ruled like the ledger
+                gravity = Gravity.CENTER_VERTICAL; minimumHeight = (48 * dp).toInt(); setPadding(0, (12 * dp).toInt(), 0, (12 * dp).toInt())
                 addView(LinearLayout(context).apply {
                     orientation = LinearLayout.VERTICAL
                     addView(TextView(context, null, 0, R.style.Body).apply { textSize = 18f; setTypeface(typeface, android.graphics.Typeface.BOLD) })
