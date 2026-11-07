@@ -354,6 +354,7 @@ class BugHuntTest {
     /** N2 (audit FON 1): rotating the score screen lost the unlocks (« a gagné », stamps) and the rate card for good, and played the chime. */
     @Test fun scoreScreenSurvivesRotation() {
         val p = Prefs(ctx).apply { sounds = true; passedQuizzes = 4 } // this quiz is the 5th passed one: the rate card shows
+        org.robolectric.Shadows.shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending") // the card needs Play
         ctx.getSystemService(android.media.AudioManager::class.java).ringerMode = android.media.AudioManager.RINGER_MODE_NORMAL
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
