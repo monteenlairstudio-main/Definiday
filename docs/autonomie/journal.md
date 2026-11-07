@@ -10,3 +10,6 @@
   - UX : Détail hors style, U+202F absent des polices, focus de l'étoile absent.
 - Lots du maître : `sec:` export `"wt"` et BOM (c8ab3ed), `fon:` durée hors liste (442c8d1), `fon:` citations à double guillemet et crédit Wikiquote (900742b), `sec:` import/export hors du thread UI (112326c).
 - Équipes lancées : crap-1 (tests de l'updater), fon-A (minuit, bandeau, extra `mot`), ux-A (Détail, focus, album), gla-1 (Glose).
+- 01h30 : crap-1 intégré (ca54ffd, 8 tests de l'updater, 4 mutations détectées). fon-A intégré (45927b7, minuit, bandeau, extra `mot` limité), suite complète 136/136.
+- GLOSE itération 1 : benchmark et audit (`night/glose_1.md`). Le plus gros défaut est la nuit : le contour brun disparaît sur #141829, d'où le prototype de liseré crème. Autre défaut : la même expression partout, d'où les humeurs « fier » et « curieux ». Itération 2 lancée : liseré de nuit dans Android et humeurs.
+- fon-B (rotation du score, sons préchauffés, N6, N10) et fon-C (renommage de Glose) lancés.
