@@ -12,7 +12,7 @@ const fs = require('fs'), path = require('path');
 const TOKENS = { '#a4acbc': 'gloseFur', '#788196': 'gloseFurD', '#f8eedd': 'gloseCream', '#9a4250': 'gloseBall', '#5a2230': 'gloseBallD',
   '#e98c8c': 'gloseNose', '#f0a6a2': 'gloseRose', '#18203a': 'gloseCupIn', '#4a5e92': 'gloseCupLit', '#2c3a04': 'gloseCup',
   '#2c3a01': 'gloseBook', '#1f2901': 'gloseBookD', '#2c3a02': 'gloseBookTop', '#1f2902': 'gloseBookTopD', '#9c6b03': 'gloseBookLow', '#7c5203': 'gloseBookLowD',
-  '#d9a401': 'gloseSpecs', '#788101': 'gloseStripe' }; // monture des lunettes et rayures : sentinelles du mode {all:true}
+  '#d9a401': 'gloseSpecs', '#788101': 'gloseStripe', '#f0e801': 'gloseHalo' }; // monture, rayures, liseré de nuit : sentinelles du mode {all:true}
 const GATES = [[/^noeud$/, 'Noeud'], [/^echarpe(_dos)?$/, 'Echarpe'], [/bonnet$/, 'Bonnet'], [/^plume$/, 'Plume'], [/^marque_page$/, 'Marque'],
   [/^ruban$/, 'Ruban'], [/^paillettes_/, 'Gilt'], [/^etoiles_/, 'Stars'], [/eclats$/, 'Glint'], [/^grelot(_ruban)?$/, 'Grelot'], [/beret$/, 'Beret'],
   [/couronne$/, 'Couronne'], [/^sapin$/, 'Sapin']];
@@ -217,7 +217,8 @@ return gates;
 // One layer per layer of the drawable, animated where its targets are, so that worn accessories follow the head.
 function animated(name, vdName, targets, resDir) {
   const layers = PARTS[vdName].map(l => {
-    const t = Object.keys(targets).filter(n => l.names.has(n)).map(n => ({ name: n, xml: targets[n] }));
+    const t = Object.keys(targets).flatMap(n => [n, n + '_halo']).filter(n => l.names.has(n)) // the night outline of a group follows it
+      .map(n => ({ name: n, xml: targets[n.replace(/_halo$/, '')] || targets[n] }));
     const avd = t.length || !l.key ? put(resDir, name + l.key, avdXml(l.vd, t), !l.key) : null; // the key is always written
     return [l.gate, t.length ? avd : l.vd];
   });

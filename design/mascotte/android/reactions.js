@@ -41,7 +41,7 @@ const SPECIAL = {
       scaleY: [[0, 1], [0.2, 1], [0.24, 0.88], [0.3, 1], [0.54, 1], [0.57, 0.92], [0.62, 1]],
       rotation: [[0, 0], [0.24, 0], [0.74, 360], [1, 360]] },
     tete: { rotation: [[0, 0], [0.2, -4], [0.45, -8], [0.7, 0], [1, 0]], translateY: [[0, 0], [0.2, -10], [0.6, -10], [0.85, 0]] },
-    [inner(vd, 'queue')]: { rotation: [[0, 0], [0.5, 0], [0.6, 8], [0.7, -6], [0.8, 4], [0.9, 0]] },
+    ...Object.fromEntries(['queue', 'queue_halo'].map(q => [inner(vd, q), { rotation: [[0, 0], [0.5, 0], [0.6, 8], [0.7, -6], [0.8, 4], [0.9, 0]] }])), // et son liseré de nuit
     ...wink(vd, 0.84, 0.92),
   }),
   // il s'étire hors de la tasse, soupire, se rendort ; un gros « z » s'envole

@@ -529,6 +529,68 @@ function arm(C, pts, w0, w1, paw, o = {}) {
   return { group: vol(o.name || null, a, C.fur, det), shape: a };
 }
 
+// ---------- liseré « autocollant » (mode sombre) ----------
+// Derrière tout le dessin, un liseré de couleur `color` qui déborde de `h` autour de chaque contour d'encre : l'union des contours
+// fermés (un seul chemin par groupe animé) + une copie élargie de chaque trait ouvert qui sort de la silhouette (moustaches, brins, mot).
+// Les parties animées (tête, queue, fil qui s'écrit…) ont leur liseré dans un groupe `<id>_halo` qui rejoue les mêmes animations.
+// ponytail: les pièces à porte (accessoires, ruban, détails rares) n'ont pas de liseré : il dessinerait aussi les pièces non portées
+// (export Android {all:true}) ; liseré par calque d'accessoire si le manque se voit.
+const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|eclats)$/;
+// groupes que les réactions au toucher animent (android/reactions.js, REACTIONS de make_android.js) sans animation au repos :
+// leur liseré doit être un groupe à part pour les suivre (svg2avd.animated() anime aussi « <nom>_halo »)
+const REACTED = ['tete', 'dormeur', 'pelote', 'patte', 'queue', 'zzz'];
+function halo(root, anims, color, h = 12) {
+  const moving = new Set(anims.filter(a => a.attr !== 'stroke-dashoffset').map(a => a.id).concat(REACTED)), dash = new Set(anims.filter(a => a.attr === 'stroke-dashoffset').map(a => a.id));
+  const ink = new Color(INK), buckets = new Map();
+  const walk = (it, chain) => {
+    if (!it.visible || it.clipMask || it.opacity < 0.5 || GATED.test(it.name || '')) return;
+    if (it.name && moving.has(it.name)) chain = chain.concat(it.name);
+    if (it.children && !(it instanceof paper.CompoundPath)) { if (!it.clipped) it.children.forEach(c => walk(c, chain)); return; }
+    if (!it.strokeColor || !it.strokeColor.equals(ink) || it.strokeWidth < 4) return;
+    const k = chain.join('/'); if (!buckets.has(k)) buckets.set(k, { chain, shut: [], open: [] });
+    const shut = it instanceof paper.CompoundPath || it.closed;
+    if (shut && it.strokeWidth < OUT * SW) return; // détail intérieur (nez, verres, filets du livre)
+    buckets.get(k)[shut ? 'shut' : 'open'].push(it);
+  };
+  walk(root, []);
+  const all = U(...[...buckets.values()].flatMap(b => b.shut.map(p => { const c = p.clone(NI); c.fillColor = 'black'; return c; })));
+  const groups = new Map(), extra = [];
+  // un mouvement plus petit que le liseré (respiration, petits roulis) ne le découvre pas : pas d'animateur en double (poids des AVD)
+  const amp = a => Math.max(...a.values.map(v => Math.max(...[].concat(v).map(x => Math.abs(a.type === 'scale' ? x - 1 : x)))));
+  const visible = a => a.attr === 'opacity' || (a.type === 'scale' ? amp(a) >= 0.05 : a.type === 'rotate' ? amp(a) >= 2 : amp(a) >= 8);
+  const groupOf = chain => { // groupes « <id>_halo » emboîtés comme les groupes animés d'origine, même pivot (data : réactions Android)
+    let parent = null, key = '';
+    for (const id of chain) {
+      key += '/' + id;
+      if (!groups.has(key)) { const g = G(id + '_halo', []); g.data = Object.assign({}, (root.getItem({ name: id }) || {}).data); groups.set(key, g); (parent || root).insertChild(parent ? parent.children.length : 0, g); extra.push(...anims.filter(a => a.id === id && a.attr !== 'stroke-dashoffset' && visible(a)).map(a => Object.assign({}, a, { id: id + '_halo' }))); }
+      parent = groups.get(key);
+    }
+    return parent;
+  };
+  const back = G('lisere', []); root.insertChild(0, back);
+  for (const b of buckets.values()) {
+    const out = [];
+    if (b.shut.length) { const s = U(...b.shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round'; s.opacity = 1; out.push(s); }
+    for (const p of b.open) {
+      const n = 12, pts = [...Array(n + 1).keys()].map(i => p.getPointAt(p.length * i / n));
+      if (all && pts.filter(q => !all.contains(q)).length < 2) continue; // trait intérieur : liseré caché, inutile
+      const c = p.clone(NI); c.strokeColor = color; c.strokeWidth = p.strokeWidth + 2 * h; c.opacity = 1;
+      // le fil qui écrit : liseré juste derrière lui, découpé hors de la silhouette ; il reste ainsi dans le calque Android du mot
+      // et la partie commune à tous les mots (glose_ecrit_mot_vd) ne change pas d'un mot à l'autre
+      if (p.name && dash.has(p.name)) {
+        c.name = p.name + '_halo'; extra.push(...anims.filter(a => a.id === p.name).map(a => Object.assign({}, a, { id: c.name })));
+        const e = c.strokeWidth / 2 + 2, box = rect(p.bounds.x - e, p.bounds.y - e, p.bounds.width + 2 * e, p.bounds.height + 2 * e);
+        clipIn(X(notIn(all), box), [c]).insertBelow(p); continue; // découpe réduite au cadre du fil : quelques segments seulement
+      }
+      out.push(c);
+    }
+    if (!out.length) continue;
+    const g = b.chain.length ? groupOf(b.chain) : back;
+    g.addChildren(out);
+  }
+  anims.push(...extra);
+  return root;
+}
 // ---------- contours partiels ----------
 // edgeLine : ne trace que la partie du contour de `shape` située dans `area` (chemin ouvert + intersect sans trace)
 function openOf(p) { return (p.children ? p.children : [p]).map(c => { const o = new Path({ segments: c.segments.map(s => s.clone()), closed: false, insert: false }); o.add(c.firstSegment.clone()); return o; }); }

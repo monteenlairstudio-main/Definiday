@@ -6,6 +6,7 @@ const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
 const RES = path.join(__dirname, '../../../app/src/main/res'), OUT = path.join(__dirname, '../rendus'), poses = process.argv.slice(2);
 fs.mkdirSync(OUT, { recursive: true });
 const DRAW = path.join(RES, 'drawable');
+let GID = 0; // ids de clip/dégradé uniques dans la page (les calques d'une image y sont des <svg> empilés)
 const theme = {}; /<style name="Glose">(.*?)<\/style>/.exec(fs.readFileSync(path.join(RES, 'values/glose_styles.xml'), 'utf8'))[1]
   .replace(/<item name="([^"]+)">([^<]+)<\/item>/g, (_, k, v) => { theme[k] = v; });
 const res = v => { while (v && v.startsWith('?attr/')) v = theme[v.slice(6)]; return v; };
@@ -36,7 +37,7 @@ function frame(vd, ts, ms) {
   return vd2svg(vd);
 }
 function vd2svg(src) { // from design/mascotte/android/vd2svg.js, + rotation, trimPathEnd, theme from glose_styles.xml
-  let o = '', clips = [0], gid = 0, defs = '', pendingGrad = null, curPath = null;
+  let o = '', clips = [0], gid = (GID += 1000), defs = '', pendingGrad = null, curPath = null;
   const re = /<(\/?)([a-zA-Z:-]+)((?:\s+[^\s=]+="[^"]*")*)\s*(\/?)>/g; let m;
   const A = s => { const o = {}; s.replace(/([^\s=]+)="([^"]*)"/g, (_, k, v) => { o[k.replace('android:', '')] = v; }); return o; };
   const css = c => c && c.length === 9 ? '#' + c.slice(3) + c.slice(1, 3) : c;

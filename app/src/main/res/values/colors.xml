@@ -36,6 +36,8 @@
     <!-- Glose's note paper (banner, warnings): ink 12.5:1, ink2 6.8:1, accent 6.55:1; 1.14:1 on bg, always with a card_edge rule -->
     <color name="warn">#F4E4C1</color>
     <color name="icon_bg">#1B2440</color>
+    <!-- Glose's night outline (gloseHalo, drawn behind him): none by day -->
+    <color name="glose_halo">#00F0E8D8</color>
     <!-- quiz answers, sage / terracotta: quiz_on 10.3:1 on good, 9.8:1 on bad -->
     <color name="quiz_good">#B5CFA9</color>
     <color name="quiz_bad">#E8B9A8</color>

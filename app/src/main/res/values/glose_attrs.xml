@@ -19,6 +19,7 @@
     <attr name="gloseBookLowD" format="color"/>
     <attr name="gloseSpecs" format="color"/>
     <attr name="gloseStripe" format="color"/>
+    <attr name="gloseHalo" format="color"/>
     <attr name="gloseBeret_343c55" format="color"/>
     <attr name="gloseBeret_3b2a20" format="color"/>
     <attr name="gloseBeret_4a5470" format="color"/>

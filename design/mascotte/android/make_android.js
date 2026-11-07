@@ -13,7 +13,7 @@ const KT_ECRIT = '0;0.08;0.55;0.86;1', WRITTEN = 0.55; // pose_ecrit.js : caché
 const DEFAULT = { gloseFur: '#A4ACBC', gloseFurD: '#788196', gloseCream: '#F8EEDD', gloseBall: '#9A4250', gloseBallD: '#5A2230',
   gloseNose: '#E98C8C', gloseRose: '#F0A6A2', gloseCupIn: '#18203A', gloseCupLit: '#4A5E92', gloseCup: '#2C3A5E',
   gloseBook: '#2C3A5E', gloseBookD: '#1F2944', gloseBookTop: '#2C3A5E', gloseBookTopD: '#1F2944', gloseBookLow: '#9C6B4A', gloseBookLowD: '#7C5236',
-  gloseSpecs: '#D9A441', gloseStripe: '#788196' };
+  gloseSpecs: '#D9A441', gloseStripe: '#788196', gloseHalo: '@color/glose_halo' }; // liseré : transparent le jour, crème la nuit (values-night)
 // socle et tasse bordeaux des pelages sombres (le chat ne se fond pas dans le bleu nuit)
 const DARK_BASE = { gloseBook: '#8E3A44', gloseBookD: '#6E2A33', gloseCup: '#8E3A44', gloseCupIn: '#4A1E26', gloseCupLit: '#B0606A',
   gloseBookTop: '#9C6B4A', gloseBookTopD: '#7C5236', gloseBookLow: '#2C3A5E', gloseBookLowD: '#1F2944' };
@@ -55,7 +55,7 @@ const REACTIONS = {
   try {
     for (const [pose, name, v] of jobs) {
       const out = `${TMP}/${name}.svg`;
-      await buildOne(b, { pose, out, variant: Object.assign({ all: true }, v) });
+      await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, v) }); // liseré de nuit (jeton gloseHalo)
       const svg = fs.readFileSync(path.join(__dirname, '..', out), 'utf8');
       Object.assign(gates, convert(svg, name, RES, { noSlots: pose === 'icone' })); // head icons never wear accessories (Glose.WORN)
       if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, WRITTEN], vd: `${name}_vd` });

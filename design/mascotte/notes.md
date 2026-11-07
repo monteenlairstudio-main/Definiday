@@ -199,3 +199,11 @@ cibles, donc les accessoires portés (copies du groupe `tete` ou `dormeur`) suiv
    « le fil écrit » : bras levé qui sautillait et décollait la patte du fil → retiré.
 Restants : pas de cœur ni de fioriture (il faudrait un nouveau tracé) ; la pelote assise se décolle du brin qui pend pendant qu'elle roule ;
 Robolectric ne dessine pas les valeurs animées d'une AVD (aperçu Chromium à la place).
+
+## Liseré de nuit (`halo()` dans glose_lib.js, jeton `gloseHalo`)
+Sur le papier de nuit (#141829), l'encre brune et le livre bleu nuit disparaissaient. Derrière le dessin : l'union des contours d'encre
+élargie de 12 (≈ 2 dp à 128 dp), un chemin par groupe animé ou touché par une réaction (`<id>_halo`, mêmes animateurs s'ils bougent
+de plus que le liseré, même pivot ; `svg2avd.animated()` anime aussi `<id>_halo`) ; les traits ouverts qui sortent de la silhouette
+(moustaches, brins, « z ») sont élargis ; le fil qui écrit a son liseré juste derrière lui, découpé hors de la silhouette, dans le calque du mot.
+Couleur `@color/glose_halo` : transparente le jour (rendu Robolectric identique au pixel, 421 images), #F0E8D8 la nuit (encre du thème nuit).
+Restants : pas de liseré sur les accessoires ni le ruban (calques à porte) ; APK release +56 Ko.

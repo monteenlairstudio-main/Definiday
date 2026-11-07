@@ -29,6 +29,8 @@
     <color name="seyes_strong">#34416A</color>
     <!-- note paper: ink 11.0:1, ink2 6.55:1, accent 6.8:1 -->
     <color name="warn">#3A2D14</color>
+    <!-- Glose's outline at night, the night ink: brown ink and navy book stand out from bg -->
+    <color name="glose_halo">#F0E8D8</color>
     <!-- quiz answers, moss / brick, not glaring at night: quiz_on 7.2:1 on good, 7.5:1 on bad -->
     <color name="quiz_good">#34503B</color>
     <color name="quiz_bad">#6A3A33</color>
