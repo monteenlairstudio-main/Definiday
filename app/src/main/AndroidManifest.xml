@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- in-app update from the GitHub releases (Update.kt); to drop from a Google Play build (docs/mise_a_jour.md) -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <!-- exact daily alarm: on time, and allowed to start the unlock watch from the background (Alarms.requestIntent on 14+) -->
@@ -47,7 +49,7 @@
         <!-- the shared card picture, read through the share intent's grant only -->
         <provider
             android:name=".ShareProvider"
-            android:authorities="fr.definiday.share"
+            android:authorities="${applicationId}.share"
             android:exported="false"
             android:grantUriPermissions="true" />
 
@@ -62,6 +64,8 @@
                 <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
             </intent-filter>
         </receiver>
+        <!-- PackageInstaller's status for Update.install, through an explicit PendingIntent -->
+        <receiver android:name=".UpdateReceiver" android:exported="false" />
         <receiver
             android:name=".Widget"
             android:exported="false"

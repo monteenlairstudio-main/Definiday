@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
-  # Every branch and PR: no secret at all, the release APK falls back to the debug key.
+  # Every branch and PR: no secret at all, the release APK falls back to the debug key, as « Definiday (test) » (fr.definiday.dev).
   test:
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +15,7 @@ jobs:
       - run: ./gradlew --no-daemon :app:testDebugUnitTest :app:assembleRelease
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: definiday-debug-signed
+          name: definiday-test
           path: |
             app/build/outputs/apk/release/app-release.apk
             app/build/demo/
@@ -26,6 +26,9 @@ jobs:
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     environment: release
+    permissions:
+      contents: write # the GitHub Release below (main only); everything else stays read
+    concurrency: { group: release, cancel-in-progress: false } # two pushes to main never race on the same tag
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with: { persist-credentials: false }
@@ -50,3 +53,31 @@ jobs:
         with:
           name: definiday-release
           path: app/build/outputs/apk/release/app-release.apk
+      # The in-app updater reads releases/latest/download/update.json (docs/mise_a_jour.md). A published release is never replaced:
+      # same versionName and versionCode -> nothing to do; same versionName, other versionCode -> error, bump versionName.
+      - name: Publish the GitHub release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          name=$(sed -n 's/^ *versionName = "\([0-9A-Za-z.-]*\)".*/\1/p' app/build.gradle.kts)
+          code=$(sed -n 's/^ *versionCode = \([0-9]*\).*/\1/p' app/build.gradle.kts)
+          minsdk=$(sed -n 's/^ *minSdk = \([0-9]*\).*/\1/p' app/build.gradle.kts)
+          [ -n "$name" ] && [ -n "$code" ] && [ -n "$minsdk" ] || { echo "::error::versionName, versionCode or minSdk not found in app/build.gradle.kts"; exit 1; }
+          tag="v$name"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            published=$(gh release download "$tag" -p update.json -O - | jq -r .versionCode)
+            [ "$published" = "$code" ] || { echo "::error::$tag is already published with versionCode $published: bump versionName"; exit 1; }
+            echo "$tag already published, nothing to do"; exit 0
+          fi
+          apk="definiday-$name.apk"
+          cp app/build/outputs/apk/release/app-release.apk "$apk"
+          # notes: the head commit's message (squash or merge), without its attribution lines
+          notes=$(git log -1 --format=%B | { grep -vE '^(Co-Authored-By|Claude-Session|Signed-off-by):' || true; } | cat -s | sed -n 1,12p) # sed, not head: no SIGPIPE under pipefail
+          jq -n --argjson versionCode "$code" --arg versionName "$name" --argjson minSdk "$minsdk" --arg notes "$notes" \
+            --arg apk "https://github.com/$GH_REPO/releases/download/$tag/$apk" --arg sha256 "$(sha256sum "$apk" | cut -d' ' -f1)" \
+            '{versionCode: $versionCode, versionName: $versionName, apk: $apk, sha256: $sha256, minSdk: $minSdk, notes: $notes}' > update.json
+          cat update.json
+          gh release create "$tag" "$apk" update.json --target "$GITHUB_SHA" --title "Definiday $name" --notes "$notes" --latest

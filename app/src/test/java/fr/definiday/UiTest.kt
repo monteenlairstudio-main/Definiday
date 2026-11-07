@@ -198,10 +198,10 @@ class UiTest {
         listOf(w.mot, w.nature, w.definition, w.exemple, "via Definiday").forEach { assertTrue(it, it in text) }
         @Suppress("DEPRECATION") val uri = send.getParcelableExtra<android.net.Uri>(Intent.EXTRA_STREAM)!!
         assertEquals("image/png", send.type)
-        assertEquals(ShareProvider.AUTHORITY, uri.authority)
+        assertEquals("fr.definiday.dev.share", uri.authority) // ${applicationId}.share: the test build never shares the real app's
         assertTrue(send.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0)
         assertEquals(uri, send.clipData!!.getItemAt(0).uri)
-        val provider = Robolectric.setupContentProvider(ShareProvider::class.java, ShareProvider.AUTHORITY)
+        val provider = Robolectric.setupContentProvider(ShareProvider::class.java, ShareProvider.authority(ctx))
         val png = android.os.ParcelFileDescriptor.AutoCloseInputStream(provider.openFile(uri, "r")).use { android.graphics.BitmapFactory.decodeStream(it) }
         assertEquals(1080 to 1350, png.width to png.height)
         val q = Quotes.load(ctx).first { it.oeuvre.isNotEmpty() }

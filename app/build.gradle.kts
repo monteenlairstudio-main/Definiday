@@ -21,8 +21,10 @@ android {
         applicationId = "fr.definiday"
         minSdk = 26
         targetSdk = 36
-        versionCode = 12
-        versionName = "0.12.0"
+        versionCode = 13
+        versionName = "0.13.0"
+        // in-app update from the GitHub releases (Update.kt); a Google Play build must set it false (docs/mise_a_jour.md)
+        buildConfigField("boolean", "SELF_UPDATE", "true")
     }
     signingConfigs {
         if (releaseKeystore != null) create("release") {
@@ -32,13 +34,20 @@ android {
             keyPassword = signingValue("DEFINIDAY_KEY_PASSWORD") ?: releaseKeystorePassword // PKCS12: key password = store password
         }
     }
+    // Debug-signed builds (debug, and release without the keystore: CI branches and PRs) are « Definiday (test) », fr.definiday.dev:
+    // they install beside the real app, never over it. Over it, Android would demand an uninstall, which wipes the profile (docs/profil.md).
+    sourceSets["debug"].res.srcDir("src/dev/res")
+    if (releaseKeystore == null) sourceSets["release"].res.srcDir("src/dev/res")
     buildTypes {
+        debug { applicationIdSuffix = ".dev" }
         release {
+            if (releaseKeystore == null) applicationIdSuffix = ".dev"
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
             signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
+    buildFeatures.buildConfig = true
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

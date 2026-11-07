@@ -209,6 +209,95 @@
                 android:text="@string/sounds_hint" />
         </LinearLayout>
 
+        <!-- Mon profil: the profile as a file, through the system file picker (Profile) -->
+        <TextView
+            style="@style/Rubric"
+            android:text="@string/group_profile" />
+
+        <LinearLayout style="@style/Sheet">
+
+            <Button
+                android:id="@+id/profile_export"
+                style="@style/Row"
+                android:text="@string/profile_export" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/profile_hint" />
+
+            <Button
+                android:id="@+id/profile_import"
+                style="@style/Row"
+                android:layout_marginTop="16dp"
+                android:text="@string/profile_import" />
+        </LinearLayout>
+
+        <!-- Mises à jour (Update.kt): hidden when BuildConfig.SELF_UPDATE is false -->
+        <TextView
+            android:id="@+id/update_rubric"
+            style="@style/Rubric"
+            android:text="@string/group_update" />
+
+        <LinearLayout
+            android:id="@+id/update_sheet"
+            style="@style/Sheet">
+
+            <TextView
+                android:id="@+id/update_version"
+                style="@style/Field" />
+
+            <Button
+                android:id="@+id/update_check"
+                style="@style/Row"
+                android:text="@string/update_check" />
+
+            <!-- the check's answer, the new version's notes, the download progress -->
+            <TextView
+                android:id="@+id/update_status"
+                style="@style/Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:accessibilityLiveRegion="polite"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/update_install"
+                style="@style/Row"
+                android:text="@string/update_install"
+                android:visibility="gone" />
+
+            <!-- optional safety step before installing: the same export as « Mon profil » -->
+            <Button
+                android:id="@+id/update_backup"
+                style="@style/Link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_backup"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/update_kept" />
+
+            <Switch
+                android:id="@+id/update_auto"
+                style="@style/Toggle"
+                android:text="@string/update_auto" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/update_auto_hint" />
+
+            <Button
+                android:id="@+id/update_releases"
+                style="@style/Link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/update_releases" />
+        </LinearLayout>
+
         <TextView
             style="@style/Rubric"
             android:text="@string/credits_title" />

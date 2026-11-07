@@ -55,6 +55,10 @@ class Prefs(val ctx: Context) {
     var lockBlocked: Boolean
         get() = local.getBoolean("lockBlocked", false)
         set(v) = local.edit().putBoolean("lockBlocked", v).apply()
+    /** Last automatic update check (Update.due); device-local, a restored date would delay this phone's check. */
+    var updateCheckedAt: Long
+        get() = local.getLong("updateCheckedAt", 0)
+        set(v) = local.edit().putLong("updateCheckedAt", v).apply()
     var wordsPerDay: Int
         get() = int("wordsPerDay", 1, 1..3)
         set(v) = sp.edit().putInt("wordsPerDay", v).apply()
@@ -84,6 +88,10 @@ class Prefs(val ctx: Context) {
     var guessFirst: Boolean
         get() = bool("guessFirst", false)
         set(v) = sp.edit().putBoolean("guessFirst", v).apply()
+    /** « Vérifier chaque semaine » (Update.autoCheck): off by default, the app makes no request the user didn't ask for. */
+    var updateAuto: Boolean
+        get() = bool("updateAuto", false)
+        set(v) = sp.edit().putBoolean("updateAuto", v).apply()
     /** The rate card was shown once (Quiz.askRate). */
     var rateAsked: Boolean
         get() = bool("rateAsked", false)

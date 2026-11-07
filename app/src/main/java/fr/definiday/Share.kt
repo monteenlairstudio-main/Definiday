@@ -26,9 +26,10 @@ class ShareProvider : ContentProvider() {
     override fun delete(uri: Uri, selection: String?, args: Array<String>?) = 0
 
     companion object {
-        const val AUTHORITY = "fr.definiday.share"
+        /** "${applicationId}.share" in the manifest: the test build (fr.definiday.dev) has its own, beside the real app. */
+        fun authority(ctx: Context) = ctx.packageName + ".share"
         private const val NAME = "definiday.png"
-        val URI: Uri = Uri.parse("content://$AUTHORITY/$NAME")
+        fun uri(ctx: Context): Uri = Uri.parse("content://${authority(ctx)}/$NAME")
         private fun file(ctx: Context) = File(ctx.cacheDir, NAME) // overwritten at each share: nothing piles up
 
         /** The word as text: what every app can take. */
@@ -41,8 +42,8 @@ class ShareProvider : ContentProvider() {
         fun intent(ctx: Context, item: Item, picture: Bitmap?): Intent {
             val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text(ctx, item))
             if (picture != null && runCatching { file(ctx).outputStream().use { picture.compress(Bitmap.CompressFormat.PNG, 100, it) } }.getOrDefault(false)) {
-                send.setType("image/png").putExtra(Intent.EXTRA_STREAM, URI).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                send.clipData = ClipData.newRawUri(null, URI) // the chooser passes the grant on and shows a preview
+                send.setType("image/png").putExtra(Intent.EXTRA_STREAM, uri(ctx)).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                send.clipData = ClipData.newRawUri(null, uri(ctx)) // the chooser passes the grant on and shows a preview
             }
             return Intent.createChooser(send, ctx.getString(R.string.share_title))
         }

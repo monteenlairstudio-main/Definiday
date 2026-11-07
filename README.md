@@ -74,7 +74,7 @@ Changement de clé : l’APK actuel, signé debug, ne se met pas à jour vers l�
 
 ### CI GitHub Actions
 Le workflow `.github/workflows/build.yml` a deux jobs :
-- `test`, sur toutes les branches et les PR, **sans aucun secret** : validation du wrapper Gradle, tests unitaires, APK release **signé debug** (artefact `definiday-debug-signed`, avec les captures de démo).
+- `test`, sur toutes les branches et les PR, **sans aucun secret** : validation du wrapper Gradle, tests unitaires, APK release **signé debug** (artefact `definiday-test`, avec les captures de démo) : « Definiday (test) », `fr.definiday.dev`, qui s’installe à côté de la vraie appli et jamais par-dessus (voir `docs/profil.md`).
 - `release`, seulement sur `main` et les tags, après `test` : décode le keystore dans `$RUNNER_TEMP` sans rien afficher, `assembleRelease` seul, supprime le `.jks` même en cas d’échec, artefact `definiday-release`. Il échoue si le secret du keystore manque (pas d’APK signé debug publié par erreur depuis `main`).
 
 Les actions sont épinglées par SHA de commit, Dependabot (`.github/dependabot.yml`) propose chaque semaine les mises à jour des actions et des dépendances Gradle.

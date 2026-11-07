@@ -102,6 +102,19 @@
     <string name="group_quiz">Quiz du soir</string>
     <string name="group_look">Apparence et sons</string>
     <string name="group_elsewhere">Ailleurs sur votre téléphone</string>
+    <!-- Mon profil (Profile, docs/profil.md) -->
+    <string name="group_profile">Mon profil</string>
+    <string name="profile_export">Exporter mon profil</string>
+    <string name="profile_import">Restaurer un profil</string>
+    <string name="profile_hint">Vos réglages, les mots déjà vus, vos révisions, vos favoris et votre collection, dans un fichier à garder. Exportez-le avant une mise à jour ou un changement de téléphone.</string>
+    <string name="profile_saved">Profil exporté.</string>
+    <string name="profile_save_failed">Le profil n’a pas pu être enregistré.</string>
+    <string name="profile_bad">Ce fichier n’est pas un profil Definiday valide : rien n’a été changé.</string>
+    <string name="profile_confirm_title">Remplacer le profil actuel ?</string>
+    <string name="profile_confirm">Les réglages, l’historique, les révisions, les favoris et la collection de cette appli seront remplacés par ceux du fichier.</string>
+    <string name="profile_replace">Remplacer</string>
+    <string name="profile_restored">Profil restauré.</string>
+    <string name="cancel">Annuler</string>
     <string name="unlocks_hint">Pour compter les déverrouillages, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.</string>
     <string name="duration_notif">La notification se retire seule après cette durée.</string>
     <string name="duration_lock">Le mot quitte l’écran de verrouillage après cette durée au plus tard.</string>
@@ -235,4 +248,31 @@
     <string name="collection_worn">dans la tenue</string>
     <!-- the cancel stamped on the album's worn items: a fixed postal mark -->
     <string name="collection_cancel">PORTÉ</string>
+    <!-- Mises à jour (Update.kt, docs/mise_a_jour.md) -->
+    <string name="group_update">Mises à jour</string>
+    <string name="update_version">Version installée\u202F: %1$s</string>
+    <string name="update_check">Vérifier les mises à jour</string>
+    <string name="update_checking">Recherche en cours…</string>
+    <string name="update_none">Vous avez la dernière version.</string>
+    <string name="update_unreachable">Impossible de joindre GitHub pour l’instant. Réessayez plus tard, ou ouvrez la page des versions.</string>
+    <string name="update_new">Nouvelle version %1$s</string>
+    <string name="update_install">Installer</string>
+    <string name="update_backup">Exporter mon profil d’abord (facultatif)</string>
+    <string name="update_see">Voir</string>
+    <string name="update_later">Plus tard</string>
+    <string name="update_kept">Vos mots, votre collection et vos réglages sont conservés\u202F: la nouvelle version remplace l’appli, pas vos données.</string>
+    <string name="update_auto">Vérifier chaque semaine</string>
+    <string name="update_auto_hint">Au plus une fois par semaine, à l’ouverture de l’appli, Definiday demande à GitHub s’il existe une nouvelle version. GitHub voit alors votre adresse IP\u202F; rien d’autre n’est envoyé. Sinon, l’appli ne se connecte que quand vous le demandez.</string>
+    <string name="update_releases">Ouvrir la page des versions</string>
+    <string name="update_downloading">Téléchargement… %1$d\u202F%%</string>
+    <string name="update_installing">Vérifiée. Confirmez l’installation quand Android vous la propose.</string>
+    <string name="update_bad_hash">Le fichier téléchargé ne correspond pas à celui annoncé\u202F: il n’a pas été installé. Réessayez plus tard.</string>
+    <string name="update_failed">L’installation n’a pas pu se faire. Réessayez plus tard, ou installez le fichier depuis la page des versions.</string>
+    <string name="update_aborted">Installation annulée. Rien n’a changé.</string>
+    <string name="update_storage">Pas assez de place sur le téléphone pour installer la mise à jour.</string>
+    <string name="update_other_key">Cette version n’est pas signée avec la même clé que l’appli installée\u202F: Android la refuse pour protéger vos données. Rien n’a changé.</string>
+    <string name="update_test_build">Cette version d’essai ne se met pas à jour d’elle-même. Installez l’appli publiée depuis la page des versions.</string>
+    <string name="update_allow_title">Une autorisation, une seule fois</string>
+    <string name="update_allow">Pour installer la mise à jour, Android doit autoriser Definiday à installer des applis. Activez «\u202FAutoriser cette source\u202F», puis revenez et touchez à nouveau «\u202FInstaller\u202F».</string>
+    <string name="update_allow_open">Ouvrir le réglage</string>
 </resources>
