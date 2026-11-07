@@ -197,7 +197,8 @@
     <string name="exemple">Exemple</string>
     <!-- home header: the day's letter; Glose's handwritten note on the example (accessory, never the only information) -->
     <string name="letter_title">Une lettre %1$s</string>
-    <string name="exemple_note">à glisser au dîner !</string>
+    <!-- style Note (Dancing Script, Reserved Font Name: no U+202F, tools/fonts_nnbsp.py): U+00A0, else « ! » falls back to a system font -->
+    <string name="exemple_note">à glisser au dîner\u00A0!</string>
     <string name="reveal">Touchez pour révéler</string>
     <string name="reveal_desc">Touchez pour révéler la définition</string>
     <string name="share_title">Partager le mot</string>
