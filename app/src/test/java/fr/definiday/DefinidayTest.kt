@@ -67,6 +67,7 @@ class DefinidayTest {
         assertTrue(q.size >= 300)
         q.forEach { assertTrue(it.texte, it.texte.length <= 260 && it.source.startsWith("https://fr.wikiquote.org/wiki/")) }
         q.forEach { assertTrue(it.texte, '\'' !in it.texte && !Regex(" [;:!?]").containsMatchIn(it.texte)) } // ’ and U+202F, as words.json
+        q.forEach { assertTrue(it.texte, !it.texte.startsWith("«")) } // the card adds its own guillemets: « « … » »
         assertTrue(q.count { it.theme == "lenteur" } >= 10)
         Prefs(ctx).polices = setOf("unifraktur_maguntia") // only a display face kept -> quote falls back to serif
         assertEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, q.first()).typeface)
