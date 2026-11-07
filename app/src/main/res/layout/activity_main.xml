@@ -44,8 +44,7 @@
                 <ImageView
                     android:id="@+id/glose"
                     android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:contentDescription="@string/glose" />
+                    android:layout_height="128dp" /> <!-- contentDescription: R.string.glose with the name, set in code -->
 
                 <!-- seasonal prop by date (MainActivity.season): still, small, decorative -->
                 <ImageView

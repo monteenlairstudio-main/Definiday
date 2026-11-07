@@ -42,7 +42,8 @@ class CollectionActivity : Activity() {
         // fixed header (Glose, title, count, "Choisir") above the scrolling album: what is tried stays in sight
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true } // the insets replace its padding
         // the title on its own line (it stays short at large font sizes), then Glose beside the count and « Choisir »
-        root.addView(TextView(this, null, 0, R.style.Title).apply { text = getString(R.string.collection_title, de(p.gloseName)); setPadding(pad, pad, pad, 0) })
+        title = getString(R.string.collection_title, de(p.gloseName)) // the window title (TalkBack, Recents): the manifest label has no name
+        root.addView(TextView(this, null, 0, R.style.Title).apply { text = title; setPadding(pad, pad, pad, 0) })
         val head = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(pad, 0, pad, pad / 2) }.also(root::addView)
         preview = ImageView(this).apply {
             contentDescription = getString(R.string.glose, p.gloseName)

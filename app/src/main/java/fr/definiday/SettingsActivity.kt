@@ -5,14 +5,18 @@ import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
@@ -24,6 +28,8 @@ import java.time.LocalTime
 class SettingsActivity : Activity() {
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
     private lateinit var p: Prefs
+    private lateinit var name: EditText
+    private var shownName = "" // the saved name the field started from
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +102,21 @@ class SettingsActivity : Activity() {
         }
 
         // Apparence
+        shownName = p.gloseName
+        name = findViewById<EditText>(R.id.glose_name).apply {
+            setText(shownName)
+            addTextChangedListener(object : TextWatcher { // refusal shown as typed (the platform error popup, read by TalkBack)
+                override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+                override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+                override fun afterTextChanged(s: Editable?) { error = nameError(s.toString()).takeIf { it != 0 }?.let(::getString) }
+            })
+            setOnEditorActionListener { _, action, _ -> action == EditorInfo.IME_ACTION_DONE && !saveName() } // refused: the keyboard stays
+            setOnFocusChangeListener { _, has -> if (!has) saveName() }
+        }
+        findViewById<Button>(R.id.name_reset).apply {
+            text = getString(R.string.name_reset, getString(R.string.glose_name))
+            setOnClickListener { p.gloseName = ""; shownName = p.gloseName; name.setText(shownName) }
+        }
         findViewById<Button>(R.id.styles_open).setOnClickListener { startActivity(Intent(this, StylesActivity::class.java)) }
         findViewById<Switch>(R.id.sounds).apply {
             isChecked = p.sounds
@@ -115,6 +136,22 @@ class SettingsActivity : Activity() {
 
         // Mises à jour
         if (BuildConfig.SELF_UPDATE) updates() else listOf(R.id.update_rubric, R.id.update_sheet).forEach { findViewById<View>(it).visibility = View.GONE }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveName() // leaving with Back while typing: no Done, no focus loss
+    }
+
+    /** Saves the typed name (trimmed), or shows why it is refused and keeps the saved one. A profile restored meanwhile wins. */
+    private fun saveName(): Boolean {
+        val err = nameError(name.text.toString())
+        name.error = if (err == 0) null else getString(err)
+        if (err != 0) return false
+        val typed = name.text.toString()
+        if (typed.trim() != shownName && p.gloseName == shownName) { p.gloseName = typed; shownName = p.gloseName } // untouched: no key written
+        if (typed != shownName) name.setText(shownName)
+        return true
     }
 
     private fun pick(i: Intent, req: Int) = runCatching { startActivityForResult(i, req) } // no picker (rare): nothing happens

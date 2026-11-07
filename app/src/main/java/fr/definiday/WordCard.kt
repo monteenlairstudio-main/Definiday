@@ -11,6 +11,7 @@ import android.graphics.Typeface
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
+import android.text.TextUtils
 import java.time.LocalDate
 import java.util.Locale
 
@@ -85,7 +86,6 @@ object WordCard {
         val gap = u * 0.035f
         val (stampW, stampH) = u * 0.12f to u * 0.14f
         val threadRoom = u * 0.02f
-        // ponytail: fixed name; read it from Prefs once Glose's name can be customized
         val sign = if (item is Word) TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             typeface = ctx.resources.getFont(R.font.dancing_script); textSize = u * 0.052f; color = pal.nature; textAlign = Paint.Align.RIGHT
         } else null
@@ -124,6 +124,9 @@ object WordCard {
             }
             y += l.height + gap
         }
-        sign?.let { c.drawText("Glose", face.right - pad, y - gap + it.textSize * 0.95f, it) }
+        sign?.let { // Glose's full name (Prefs.gloseName), cut with « … » if a wide 24-letter name overflows the card
+            val name = TextUtils.ellipsize(Prefs(ctx).gloseName, it, u - 2 * pad, TextUtils.TruncateAt.END).toString()
+            c.drawText(name, face.right - pad, y - gap + it.textSize * 0.95f, it)
+        }
     }
 }

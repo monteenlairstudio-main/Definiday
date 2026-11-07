@@ -65,6 +65,8 @@
     <string name="collection_see">Voir la collection</string>
     <!-- %1$s: de(name), « de Monsieur Glose » or « d’Anatole » -->
     <string name="collection_title">Collection %1$s</string>
+    <!-- the manifest label (Recents, before onCreate): no placeholder; CollectionActivity sets collection_title as its title -->
+    <string name="collection_label">Collection</string>
     <string name="collection_choose">Garder cette tenue</string>
     <string name="collection_locked">à débloquer</string>
     <!-- Couleurs et polices (StylesActivity) -->
@@ -131,6 +133,13 @@
     <string name="quiz_prompt">Quel mot correspond à cette définition\u202F?</string>
     <string name="quiz_progress">Question %1$d sur %2$d</string>
     <string name="quiz_score_desc">Score\u202F: %1$d sur %2$d</string>
+    <!-- Glose's name (Réglages › Apparence, Prefs.nameError) -->
+    <string name="name_label">Nom du chat</string>
+    <string name="name_hint">Il signe vos cartes et vos quiz.</string>
+    <string name="name_reset">Rétablir «\u202F%1$s\u202F»</string>
+    <string name="name_empty">Il lui faut un nom.</string>
+    <string name="name_long">24 caractères au plus.</string>
+    <string name="name_bad">Ce nom contient un caractère invisible ou de contrôle.</string>
     <string name="sounds">Sons</string>
     <string name="sounds_hint">De tout petits bruits doux\u202F: une page qui tourne, un tampon, le ronron du chat. Muets en mode silencieux ou vibreur, et jamais à l’ouverture de l’appli.</string>
     <string name="more_quotes_hint">Une citation remplace le mot 2\u00A0fois sur\u00A05, au lieu d’1\u00A0fois sur\u00A05.</string>

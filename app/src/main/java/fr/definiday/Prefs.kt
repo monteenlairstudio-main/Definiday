@@ -145,10 +145,10 @@ class Prefs(val ctx: Context) {
     var gloseAcc: String
         get() = str("gloseAcc", "")
         set(v) = sp.edit().putString("gloseAcc", v).apply()
-    /** Glose's name, fed to every string that names him (%1$s, docs/voix.md). No UI to rename him yet.
-     *  Restored or tampered value: trimmed, 1 to 24 characters without control characters, else the default. */
+    /** Glose's name, fed to every string that names him (%1$s, docs/voix.md), typed in Réglages › Apparence ("" = the default).
+     *  Restored or tampered value: the same rule as the field ([nameError]), else the default. */
     var gloseName: String
-        get() = str("gloseName", "").trim().takeIf { it.length in 1..24 && it.none(Char::isISOControl) } ?: ctx.getString(R.string.glose_name)
+        get() = str("gloseName", "").trim().takeIf { nameError(it) == 0 } ?: ctx.getString(R.string.glose_name)
         set(v) = sp.edit().putString("gloseName", v.trim()).apply()
     /** Random picks warned about today (warning shown once a day, past 3 picks). */
     var warnedDay: Long
@@ -162,6 +162,19 @@ class Prefs(val ctx: Context) {
     var polices: Set<String>?
         get() = strings("polices")
         set(v) = sp.edit().putStringSet("polices", v).apply()
+}
+
+/** Why [name] can't be Glose's name (a string id), 0 if it can once trimmed: 1 to 24 code points (an emoji counts 1), no control,
+ *  format (U+202E reverses the text, U+200B and U+200D are invisible), line/paragraph separator or lone surrogate. */
+fun nameError(name: String): Int {
+    val t = name.trim()
+    val bad = setOf(Character.CONTROL, Character.FORMAT, Character.LINE_SEPARATOR, Character.PARAGRAPH_SEPARATOR, Character.SURROGATE).map(Byte::toInt)
+    return when {
+        t.isEmpty() -> R.string.name_empty
+        t.codePointCount(0, t.length) > 24 -> R.string.name_long
+        t.codePoints().anyMatch { Character.getType(it) in bad } -> R.string.name_bad
+        else -> 0
+    }
 }
 
 /** « de [nom] » with French elision: « d’Anatole », « d’Émile », « de Monsieur Glose ». Never before an h (aspirated or not,

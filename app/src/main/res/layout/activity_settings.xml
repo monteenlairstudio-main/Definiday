@@ -193,6 +193,41 @@
 
         <LinearLayout style="@style/Sheet">
 
+            <!-- Glose's name: checked as typed (Prefs.nameError), saved on Done, focus loss or leaving; maxLength caps a paste,
+                 the 24 code points are checked in code. No autofill: textPersonName would offer the user's own name. Not saved
+                 in the instance state: after a profile import (recreate) the field shows the imported name, not the typed one. -->
+            <TextView
+                style="@style/Field"
+                android:labelFor="@+id/glose_name"
+                android:text="@string/name_label" />
+
+            <EditText
+                android:id="@+id/glose_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/field"
+                android:importantForAutofill="no"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLength="64"
+                android:minHeight="48dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:saveEnabled="false"
+                android:textColor="@color/ink"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/Help"
+                android:text="@string/name_hint" />
+
+            <Button
+                android:id="@+id/name_reset"
+                style="@style/Link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <!-- opens StylesActivity: a navigation row (chevron), its counts on a second line (SettingsActivity.onResume) -->
             <Button
                 android:id="@+id/styles_open"

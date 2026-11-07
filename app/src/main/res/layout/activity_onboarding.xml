@@ -37,8 +37,7 @@
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="@string/glose" />
+                    android:layout_marginTop="8dp" /> <!-- contentDescription: R.string.glose with the name, set in code -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,8 +242,7 @@
                     style="@style/Body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/onb_notif_why" />
+                    android:layout_marginTop="12dp" /> <!-- text: onb_notif_why, filled in code (show) -->
 
                 <!-- Glose's note, as in Réglages -->
                 <LinearLayout
