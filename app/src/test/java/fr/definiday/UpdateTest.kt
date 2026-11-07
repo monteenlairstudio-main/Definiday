@@ -1,5 +1,9 @@
 package fr.definiday
 
+import android.content.Intent
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -122,5 +126,47 @@ class UpdateTest {
         val d = org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog()
         assertTrue("the newer version is offered", d?.isShowing == true)
         p.updateAuto = false
+    }
+
+    /** Réglages, opened from the launcher or from the home screen's offer ([extra]: update.json's text). */
+    private fun settings(extra: String? = null) = Robolectric.buildActivity(SettingsActivity::class.java,
+        Intent(ctx, SettingsActivity::class.java).apply { extra?.let { putExtra(Update.EXTRA, it) } }).setup().get()
+    private fun SettingsActivity.status() = findViewById<TextView>(R.id.update_status).text.toString()
+    private fun SettingsActivity.offered() = listOf(R.id.update_install, R.id.update_backup).map { findViewById<View>(it).visibility == View.VISIBLE }
+        .distinct().single() // Installer and « Exporter mon profil d'abord » come and go together
+    private val offer get() = ctx.getString(R.string.update_new, "0.13.0") + "\n\nMise à jour sans perte."
+
+    /** Taps « Vérifier les mises à jour » and waits for the answer. */
+    private fun SettingsActivity.tapCheck(): String {
+        val check = findViewById<Button>(R.id.update_check).apply { performClick() }
+        assertFalse(check.isEnabled); assertEquals(ctx.getString(R.string.update_checking), status())
+        idleUntil { check.isEnabled }
+        return status()
+    }
+
+    @Test fun settingsCheckSaysWhatItFound() {
+        serve(json(code = 1))
+        settings().run { assertEquals(ctx.getString(R.string.update_none), tapCheck()); assertFalse(offered()) }
+        Update.open = { throw java.io.IOException("offline") }
+        settings().run { assertEquals(ctx.getString(R.string.update_unreachable), tapCheck()); assertFalse(offered()) }
+        serve(json(code = 999))
+        settings().run { assertEquals(offer, tapCheck()); assertTrue(offered()) }
+    }
+
+    @Test fun settingsShowsTheHomeScreenOfferThenInstalls() {
+        assertFalse("not newer", settings(json(code = 1)).offered())
+        assertFalse("not update.json", settings("pas du JSON").offered())
+        settings(json(code = 999)).run {
+            assertEquals(offer, status()); assertTrue(offered())
+            serve("abd") // the APK doesn't match its hash
+            org.robolectric.Shadows.shadowOf(packageManager).setCanRequestPackageInstalls(true)
+            val install = findViewById<Button>(R.id.update_install).apply { performClick() }
+            assertFalse("no second tap while installing", install.isEnabled)
+            idleUntil { install.isEnabled }
+            assertEquals(ctx.getString(R.string.update_bad_hash), status())
+            serve(json(code = 1))
+            assertEquals(ctx.getString(R.string.update_none), tapCheck())
+            assertFalse("a new check withdraws the old offer", offered())
+        }
     }
 }
