@@ -28,7 +28,7 @@ object WordCard {
         val pal = style.palette
         val serif = ctx.resources.getFont(R.font.libre_baskerville)
         if (item is Quote) return listOf(
-            Line("« ${item.texte} »", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
+            Line("«\u202F${Styles.fine(item.texte, style)}\u202F»", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
             Line(item.signature, 0.04f, serif, pal.nature),
         )
         val w = item as Word
@@ -36,7 +36,7 @@ object WordCard {
             Line(w.mot, if (w.mot.length > 12) 0.09f else 0.12f, style.typeface, pal.mot),
             Line(w.nature, 0.04f, serif, pal.nature),
             Line(w.definition, 0.046f, serif, pal.texte),
-            Line(if (w.exemple.isEmpty()) "" else "« ${w.exemple} »", 0.039f, serif, pal.exemple),
+            Line(if (w.exemple.isEmpty()) "" else "«\u202F${w.exemple}\u202F»", 0.039f, serif, pal.exemple),
         ).filter { it.text.isNotEmpty() }
     }
 

@@ -86,7 +86,7 @@ class DetailActivity : Activity() {
             head.addView(TextView(this, null, 0, R.style.Label).apply { setText(R.string.exemple); setTextColor(getColor(R.color.accent)); setPadding(0, 0, 0, px(4)) })
             head.addView(TextView(this, null, 0, R.style.Note).apply { setText(R.string.exemple_note); gravity = Gravity.END },
                 LinearLayout.LayoutParams(0, -2, 1f).apply { marginStart = px(12) })
-            val ex = text("«\u00a0${w.exemple}\u00a0»", notebook, getColor(R.color.accent), R.style.Example, top = 2)
+            val ex = text("«\u202F${w.exemple}\u202F»", notebook, getColor(R.color.accent), R.style.Example, top = 2)
             notebook.background = LayerDrawable(arrayOf(getDrawable(R.drawable.card_soft)!!, Postal.Seyes(this, ex)))
         }
         if (w.anecdote.isNotEmpty()) {

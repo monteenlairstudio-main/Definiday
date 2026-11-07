@@ -53,7 +53,7 @@ class WidgetTest {
         val q = Quotes.load(ctx).first()
         today(q)
         val v = widgets.getViewFor(widgets.createWidget(Widget::class.java, R.layout.widget))
-        assertEquals(listOf("", ctx.getString(R.string.quote_label), "«\u00a0${q.texte}\u00a0»", q.signature), texts(v))
+        assertEquals(listOf("", ctx.getString(R.string.quote_label), "«\u202F${q.texte}\u202F»", q.signature), texts(v))
     }
 
     /** N7: the app left open past midnight redraws the widget with the new day's item on resume, before the daily alarm. */
@@ -68,7 +68,7 @@ class WidgetTest {
             c.resume()
             val item = Words.today(ctx).first()
             assertTrue(item.key != "zinzolin")
-            assertTrue((if (item is Word) item.mot else "« ${(item as Quote).texte} »") in texts(widgets.getViewFor(id)))
+            assertTrue((if (item is Word) item.mot else "«\u202F${(item as Quote).texte}\u202F»") in texts(widgets.getViewFor(id)))
         } finally { java.util.TimeZone.setDefault(tz) }
     }
 

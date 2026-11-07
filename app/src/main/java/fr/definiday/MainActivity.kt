@@ -192,7 +192,7 @@ class MainActivity : Activity() {
         when (item) {
             is Quote -> {
                 text(R.id.label, getString(R.string.quote_label))
-                text(R.id.mot, "«\u00a0${item.texte}\u00a0»")
+                text(R.id.mot, "«\u202F${Styles.fine(item.texte, st)}\u202F»")
                 text(R.id.nature, item.signature)
                 text(R.id.definition, "")
                 text(R.id.exemple, "")
@@ -208,7 +208,7 @@ class MainActivity : Activity() {
                 text(R.id.mot, item.mot)
                 text(R.id.nature, item.nature)
                 text(R.id.definition, item.definition)
-                text(R.id.exemple, if (item.exemple.isEmpty()) "" else "«\u00a0${item.exemple}\u00a0»")
+                text(R.id.exemple, if (item.exemple.isEmpty()) "" else "«\u202F${item.exemple}\u202F»")
                 text(R.id.anecdote, item.anecdote)
                 findViewById<Button>(R.id.source).setOnClickListener { open(item.source) }
                 academie.visibility = View.VISIBLE

@@ -201,7 +201,7 @@ class MemoryTest {
         val d = Robolectric.buildActivity(DetailActivity::class.java, open).setup().get()
         val shown = views(d).filterIsInstance<TextView>().map { it.text.toString() }.toList()
         val w = word("abâtardir")
-        assertTrue(shown.toString(), listOf(ctx.getString(R.string.deja_vu), w.mot, w.nature, w.definition, "«\u00a0${w.exemple}\u00a0»", w.anecdote).all { it in shown })
+        assertTrue(shown.toString(), listOf(ctx.getString(R.string.deja_vu), w.mot, w.nature, w.definition, "«\u202F${w.exemple}\u202F»", w.anecdote).all { it in shown })
         assertEquals(today - 1, History(ctx).all()["abâtardir"])
         assertTrue(Words.seenToday(ctx).none { it.mot == "abâtardir" })
         val dStar = views(d).filterIsInstance<CheckBox>().single()

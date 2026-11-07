@@ -34,8 +34,8 @@ class ShareProvider : ContentProvider() {
 
         /** The word as text: what every app can take. */
         fun text(ctx: Context, item: Item) = when (item) {
-            is Word -> listOfNotNull("${item.mot}, ${item.nature}", item.definition, item.exemple.takeIf { it.isNotEmpty() }?.let { "« $it »" })
-            is Quote -> listOf("« ${item.texte} »", "— ${item.signature}")
+            is Word -> listOfNotNull("${item.mot}, ${item.nature}", item.definition, item.exemple.takeIf { it.isNotEmpty() }?.let { "«\u202F$it\u202F»" })
+            is Quote -> listOf("«\u202F${item.texte}\u202F»", "— ${item.signature}")
         }.joinToString("\n") + "\n\n" + ctx.getString(R.string.share_via)
 
         /** Share sheet with the text and, when [picture] could be written, the card as an image (apps take one or both). */

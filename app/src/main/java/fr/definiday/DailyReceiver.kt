@@ -157,9 +157,9 @@ class DailyReceiver : BroadcastReceiver() {
         /** Notification title and text of an item. */
         fun texts(item: Item): Pair<String, String> = when (item) {
             is Word -> item.mot to "${item.nature} · ${item.definition}" +
-                (if (item.exemple.isNotEmpty()) "\n«\u00a0${item.exemple}\u00a0»" else "") +
+                (if (item.exemple.isNotEmpty()) "\n«\u202F${item.exemple}\u202F»" else "") +
                 (if (item.anecdote.isNotEmpty()) "\n\n${item.anecdote}" else "")
-            is Quote -> item.signature to "«\u00a0${item.texte}\u00a0»"
+            is Quote -> item.signature to "«\u202F${item.texte}\u202F»"
         }
 
         /** True when posted (and notifications are on). */

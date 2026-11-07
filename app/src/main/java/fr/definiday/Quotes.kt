@@ -22,5 +22,5 @@ object Quotes {
 
     /** A quote about slowness / reading, formatted for the "take your time" dialog. */
     fun slow(ctx: Context): String? =
-        load(ctx).filter { it.theme == "lenteur" }.randomOrNull()?.let { "«\u00a0${it.texte}\u00a0»\n\n${it.signature}" }
+        load(ctx).filter { it.theme == "lenteur" }.randomOrNull()?.let { "«\u202F${it.texte}\u202F»\n\n${it.signature}" }
 }

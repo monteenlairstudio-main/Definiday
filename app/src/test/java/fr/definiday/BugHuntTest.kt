@@ -275,7 +275,7 @@ class BugHuntTest {
         val q = Quotes.load(ctx).last()
         History(ctx).mark(q.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         c.newIntent(Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, q.key))
-        assertEquals("«\u00a0${q.texte}\u00a0»", c.get().findViewById<TextView>(R.id.mot).text.toString())
+        assertEquals("«\u202F${Styles.fine(q.texte, Styles.of(ctx, q))}\u202F»", c.get().findViewById<TextView>(R.id.mot).text.toString())
     }
 
     /** MainActivity.show, quote branch: quote text and signature, Wikiquote link, no Académie button. */
@@ -283,7 +283,7 @@ class BugHuntTest {
         val q = Quotes.load(ctx).first()
         Prefs(ctx).apply { dailyDay = LocalDate.now().toEpochDay(); dailyMots = listOf(q.key) }
         val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
-        assertEquals("«\u00a0${q.texte}\u00a0»", a.findViewById<TextView>(R.id.mot).text.toString())
+        assertEquals("«\u202F${Styles.fine(q.texte, Styles.of(ctx, q))}\u202F»", a.findViewById<TextView>(R.id.mot).text.toString())
         assertEquals(q.signature, a.findViewById<TextView>(R.id.nature).text.toString())
         assertEquals(ctx.getString(R.string.quote_label), a.findViewById<TextView>(R.id.label).text.toString())
         assertEquals(View.GONE, a.findViewById<View>(R.id.academie).visibility)
@@ -306,7 +306,7 @@ class BugHuntTest {
     }
 
     private fun card(a: android.app.Activity) = a.findViewById<TextView>(R.id.mot).text.toString() to a.findViewById<TextView>(R.id.label).text.toString()
-    private fun card(i: Item) = if (i is Word) i.mot to ctx.getString(R.string.today) else "« ${(i as Quote).texte} »" to ctx.getString(R.string.quote_label)
+    private fun card(i: Item) = if (i is Word) i.mot to ctx.getString(R.string.today) else "«\u202F${Styles.fine((i as Quote).texte, Styles.of(ctx, i))}\u202F»" to ctx.getString(R.string.quote_label)
 
     /** N1: the app left open (or restored) past midnight: yesterday's word of the day gives way to today's and is not marked seen again;
      *  a random pick left on the card stays, not marked seen again either. */
