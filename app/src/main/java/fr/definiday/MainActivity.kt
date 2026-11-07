@@ -243,7 +243,7 @@ class MainActivity : Activity() {
     private fun share(item: Item) {
         val head = Glose.bitmap(Glose.mine(this, R.drawable.glose_icone_vd, accessory = false), 128, 128)
         // ponytail: drawn and compressed on the UI thread (~0.2 s on a tap), move to a thread if it stutters
-        val picture = runCatching { WordCard.share(item, Styles.of(this, item), head) }.getOrNull()
+        val picture = runCatching { WordCard.share(this, item, Styles.of(this, item), head) }.getOrNull()
         runCatching { startActivity(ShareProvider.intent(this, item, picture)) }
     }
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Home-screen widget (Widget.views). The XML values are the picker preview (previewLayout): sérendipité, palette Aube. -->
+<!-- Home-screen widget (Widget.views), a postcard: paper edge, the palette's gradient, a stamp with today's postmark.
+     The XML values are the picker preview (previewLayout): sérendipité, palette Aube. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_frame"
+    android:padding="4dp">
 
     <ImageView
         android:id="@+id/widget_top"
@@ -27,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,13 +68,12 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/widget_glose"
+                android:id="@+id/widget_stamp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/glose_icone_vd"
-                android:theme="@style/Glose" />
+                android:src="@drawable/widget_stamp_preview" />
         </LinearLayout>
 
         <TextView

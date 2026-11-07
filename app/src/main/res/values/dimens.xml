@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="widget_radius">16dp</dimen>
+    <dimen name="widget_radius_inner">12dp</dimen> <!-- inside the 4 dp paper edge (widget_frame) -->
     <!-- The three corner radii of the interface (audit 011 n° 3 found seven):
          small = envelopes, tiles, chips; paper = sheets, buttons, banners, soft cards; card = the postcard (its inner face: card - rim). -->
     <dimen name="radius_small">6dp</dimen>

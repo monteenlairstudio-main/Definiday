@@ -2,6 +2,7 @@ package fr.definiday
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.DashPathEffect
@@ -16,11 +17,13 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
+import android.text.TextPaint
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.Locale
 
 /** The « Correspondance » objects drawn in code (design/styles/correspondance/implementation.md): stamp, postmark, Seyès ruling,
@@ -36,9 +39,32 @@ object Postal {
     fun dp(ctx: Context) = ctx.resources.displayMetrics.density
     fun courier(ctx: Context): Typeface = ctx.resources.getFont(R.font.courier_prime)
 
-    /** A stamp in the word's colours: perforated edge (8 dp pitch, 2.5 dp holes), [bg] face, inner frame and [initial] in [fg], [caption] at the foot.
+    // Day tokens for the self-drawn surfaces (lock card, shared picture, widget), which ignore the app's night theme.
+    const val YARN = 0xFF9A4250.toInt()
+    const val YARN_LIGHT = 0xFFD88A97.toInt()
+    const val KRAFT = 0xFFEBDDC2.toInt()
+    const val SHEET = 0xFFFFFCF5.toInt()
+
+    /** (solid strand, dashed strand) over [pal]'s gradient: the one that clears 3:1 on it carries the shape (min 3.6:1, Sépia). */
+    fun strands(pal: Palette) = if (pal.sombre) YARN_LIGHT to YARN else YARN to YARN_LIGHT
+
+    /** Postal mention: Courier Prime capitals spaced 0.13 em (« LETTRE DU 6 NOVEMBRE », « VIA DEFINIDAY »), at most four words.
+     *  Fake bold: the file has no bold cut, and the thin regular fades on the gradients at label size. */
+    fun mention(ctx: Context, size: Float, color: Int) = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+        typeface = courier(ctx); textSize = size; letterSpacing = 0.13f; this.color = color; isFakeBoldText = true
+    }
+
+    /** « 6 novembre », « 1er mai ». */
+    fun day(d: LocalDate) = (if (d.dayOfMonth == 1) "1er" else "${d.dayOfMonth}") + " " + d.month.getDisplayName(TextStyle.FULL, Locale.FRENCH)
+
+    /** The stamp's letter: the word's initial, the author's for a quote (its face: Styles.initialFace). */
+    fun initial(item: Item) = (if (item is Word) item.mot else (item as Quote).auteur).take(1).uppercase(Locale.FRENCH)
+
+    /** A stamp in the word's colours: perforated edge (8 dp pitch, 2.5 dp holes), [bg] face, inner frame and [initial] in [fg], [caption] at the foot;
+     *  or a [vignette] picture on [fg] instead of the letter (shared picture: Glose's head).
      *  Bounds: 56 x 64 dp on the card (multiples of 8 dp elsewhere: 80 x 96 in the album, 24 x 30 in the quiz progress, without caption). */
-    class Stamp(ctx: Context, private val bg: Int, private val fg: Int, private val initial: String, private val face: Typeface, private val caption: String? = "1 MOT") : Paper() {
+    class Stamp(ctx: Context, private val bg: Int, private val fg: Int, private val initial: String, private val face: Typeface, private val caption: String? = "1 MOT",
+                private val vignette: Bitmap? = null) : Paper() {
         private val d = dp(ctx)
         private val courier = courier(ctx)
         private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -63,12 +89,17 @@ object Postal {
             c.drawPath(path, fill)
             val inset = hole * 2
             val frame = RectF(b.left + inset, b.top + inset, b.right - inset, b.bottom - inset)
+            if (vignette != null) {
+                fill.color = fg; c.drawRect(frame, fill)
+                val s = minOf(frame.width(), frame.height()) * 0.92f
+                c.drawBitmap(vignette, null, RectF(frame.centerX() - s / 2, frame.bottom - s, frame.centerX() + s / 2, frame.bottom), Paint(Paint.FILTER_BITMAP_FLAG))
+            }
             fill.style = Paint.Style.STROKE; fill.strokeWidth = maxOf(1f, d * 0.8f); fill.color = fg
             c.drawRect(frame, fill)
             val foot = if (caption != null) frame.height() * 0.22f else 0f
             text.color = fg; text.typeface = face; text.textSize = (frame.height() - foot) * 0.62f
             val fm = text.fontMetrics
-            c.drawText(initial, frame.centerX(), frame.top + (frame.height() - foot) / 2 - (fm.ascent + fm.descent) / 2, text)
+            if (vignette == null) c.drawText(initial, frame.centerX(), frame.top + (frame.height() - foot) / 2 - (fm.ascent + fm.descent) / 2, text)
             if (caption != null) {
                 text.typeface = courier; text.textSize = foot * 0.55f; text.isFakeBoldText = true
                 c.drawText(caption, frame.centerX(), frame.bottom - foot * 0.35f, text)
@@ -79,8 +110,9 @@ object Postal {
 
     /** A dated postmark: double ring with « DEFINIDAY » and the weekday on the arcs, « 6 NOV / 2026 » in the middle (Courier Prime),
      *  three cancel waves running right over the stamp. [color] = the palette's nature, drawn at 75 %. The date is also written in clear
-     *  elsewhere: this is decoration. Bounds: 100 x 56 dp, the ring in the left 56 dp (it overlaps a stamp placed at the right). */
-    class Postmark(ctx: Context, color: Int, date: LocalDate = LocalDate.now()) : Paper() {
+     *  elsewhere: this is decoration. Bounds: 100 x 56 dp, the ring in the left 56 dp (it overlaps a stamp placed at the right).
+     *  Without [arcs] (under ~16 dp of radius, e.g. the widget, where arc text is a smudge): only the date, larger. */
+    class Postmark(ctx: Context, color: Int, date: LocalDate = LocalDate.now(), private val arcs: Boolean = true) : Paper() {
         private val d = dp(ctx)
         private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { this.color = color; alpha = 191; typeface = courier(ctx); textAlign = Paint.Align.CENTER }
         private val day = date.format(DateTimeFormatter.ofPattern("d MMM", Locale.FRENCH)).uppercase(Locale.FRENCH).replace(".", "")
@@ -112,12 +144,14 @@ object Postal {
             paint.strokeWidth = 1.1f * d
             c.drawPath(waves, paint)
             paint.style = Paint.Style.FILL
-            paint.textSize = r * 0.3f
+            val k = if (arcs) 1f else 1.25f
+            paint.textSize = r * 0.3f * k
             paint.isFakeBoldText = true
-            c.drawText(day, cx, cy - r * 0.04f, paint)
-            paint.textSize = r * 0.26f
-            c.drawText(year, cx, cy + r * 0.3f, paint)
+            c.drawText(day, cx, cy - r * 0.04f * k, paint)
+            paint.textSize = r * 0.26f * k
+            c.drawText(year, cx, cy + r * 0.3f * k, paint)
             paint.isFakeBoldText = false
+            if (!arcs) return
             paint.textSize = r * 0.24f
             // between the rings, centred on the arcs; upright on top and at the bottom
             paint.textAlign = Paint.Align.LEFT
@@ -181,6 +215,30 @@ object Postal {
             c.drawPath(p, dark)
             c.drawPath(p, light)
         }
+    }
+
+    /**
+     * Glose's yarn as a free line (lock card, shared picture): from ([x0], [y]) to [x1], gently waving, ending in a curl. [pal]'s
+     * strands: the solid one clears 3:1 on its gradient, the other is twisted over it in short dashes. [dp] = px of one dp at the picture's scale.
+     */
+    fun drawYarn(c: Canvas, x0: Float, x1: Float, y: Float, dp: Float, pal: Palette) {
+        val path = Path().apply {
+            moveTo(x0, y)
+            var x = x0
+            var up = true
+            val step = 26 * dp
+            while (x + step < x1) { quadTo(x + step / 2, y + (if (up) -1.6f else 1.6f) * dp, x + step, y); x += step; up = !up }
+            lineTo(x1, y)
+            // the curl: up and back over itself, then a short loose end
+            cubicTo(x1 + 7 * dp, y, x1 + 10 * dp, y - 5 * dp, x1 + 8 * dp, y - 10 * dp)
+            cubicTo(x1 + 6 * dp, y - 15 * dp, x1, y - 13 * dp, x1 + 1.5f * dp, y - 8 * dp)
+            cubicTo(x1 + 3 * dp, y - 3 * dp, x1 + 9 * dp, y + 2.5f * dp, x1 + 15 * dp, y + 1.5f * dp)
+        }
+        val (solid, twist) = strands(pal)
+        val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeCap = Paint.Cap.ROUND; color = solid; strokeWidth = 2.6f * dp }
+        c.drawPath(path, p)
+        p.apply { color = twist; strokeWidth = 1.1f * dp; pathEffect = DashPathEffect(floatArrayOf(1.6f * dp, 2.8f * dp), 0f) }
+        c.drawPath(path, p)
     }
 
     /** The postcard: the word's palette gradient inside a sheet rim and its card_edge rule (no Styles.needsEdge case left). */
