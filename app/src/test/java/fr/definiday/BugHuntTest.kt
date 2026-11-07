@@ -273,6 +273,7 @@ class BugHuntTest {
     @Test fun notificationTappedWhileOpenShowsItsItem() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val q = Quotes.load(ctx).last()
+        History(ctx).mark(q.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         c.newIntent(Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, q.key))
         assertEquals("«\u00a0${q.texte}\u00a0»", c.get().findViewById<TextView>(R.id.mot).text.toString())
     }
@@ -302,5 +303,51 @@ class BugHuntTest {
         assertEquals(ctx.getString(R.string.slow_title), shadowOf(org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog()).title.toString())
         repeat(2) { random.performClick() }
         assertEquals(1, org.robolectric.shadows.ShadowDialog.getShownDialogs().size)
+    }
+
+    private fun card(a: android.app.Activity) = a.findViewById<TextView>(R.id.mot).text.toString() to a.findViewById<TextView>(R.id.label).text.toString()
+    private fun card(i: Item) = if (i is Word) i.mot to ctx.getString(R.string.today) else "« ${(i as Quote).texte} »" to ctx.getString(R.string.quote_label)
+
+    /** N1: the app left open (or restored) past midnight: yesterday's word of the day gives way to today's and is not marked seen again;
+     *  a random pick left on the card stays, not marked seen again either. */
+    @Test fun newDayWhileOpenShowsTodaysWordAndKeepsYesterdaysHistory() {
+        val tz = TimeZone.getDefault()
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT+12")) // UTC-12: day D
+            val d = LocalDate.now().toEpochDay()
+            val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+            val old = Words.today(ctx).first()
+            val saved = android.os.Bundle().also { c.saveInstanceState(it) }
+            val r = Robolectric.buildActivity(MainActivity::class.java).setup()
+            r.get().findViewById<Button>(R.id.new_word).performClick()
+            val random = card(r.get()).first
+            r.pause(); c.pause()
+            TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT-12")) // same instant seen 24 h later: D+1
+            c.resume(); r.resume()
+            val now = Words.today(ctx).first()
+            assertTrue(now.key != old.key)
+            assertEquals(card(now), card(c.get()))
+            assertEquals(card(now), card(Robolectric.buildActivity(MainActivity::class.java).setup(saved).get())) // process death, restored
+            assertEquals(d, History(ctx).all()[old.key]) // not back in tonight's quiz, cooldown not restarted
+            assertEquals(d + 1, History(ctx).all()[now.key])
+            assertEquals(random to ctx.getString(R.string.random), card(r.get()))
+            assertEquals(d, History(ctx).all()[random])
+        } finally { TimeZone.setDefault(tz) }
+    }
+
+    /** S4: MainActivity is exported: an extra naming a word neither of today's nor ever seen shows today's word, History untouched;
+     *  a word already seen (« Mes mots », an earlier notification) still opens, « Déjà vu ». */
+    @Test fun foreignExtraCannotMarkAWordSeen() {
+        fun open(key: String) = Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)
+        val today = Words.today(ctx).first()
+        val (stranger, seen) = Words.load(ctx).filter { it.key != today.key }.take(2)
+        History(ctx).mark(seen.key, LocalDate.now().toEpochDay() - 3)
+        val c = Robolectric.buildActivity(MainActivity::class.java, open(stranger.key)).setup()
+        assertEquals(card(today), card(c.get()))
+        c.newIntent(open(stranger.key))
+        assertEquals(card(today), card(c.get()))
+        assertEquals(null, History(ctx).all()[stranger.key])
+        val a = Robolectric.buildActivity(MainActivity::class.java, open(seen.key).putExtra(MainActivity.EXTRA_DEJA_VU, true)).setup().get()
+        assertEquals(seen.mot to ctx.getString(R.string.deja_vu), card(a))
     }
 }

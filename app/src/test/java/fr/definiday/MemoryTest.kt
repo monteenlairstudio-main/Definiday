@@ -133,6 +133,7 @@ class MemoryTest {
         Memory(ctx).favourite("abaque", true)
         assertEquals(setOf("abaque"), Memory(ctx).favourites)
         val w = all.first { it.mot != "abaque" }
+        History(ctx).mark(w.mot, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         val star = a.findViewById<CheckBox>(R.id.favori)
         assertTrue(!star.isChecked && star.visibility == View.VISIBLE)
@@ -143,6 +144,7 @@ class MemoryTest {
         val again = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         assertTrue(again.findViewById<CheckBox>(R.id.favori).isChecked)
         val quote = Quotes.load(ctx).first().key
+        History(ctx).mark(quote, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         assertEquals(View.GONE, Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, quote))
             .setup().get().findViewById<View>(R.id.favori).visibility)
         // restored junk: wrong types, bad numbers

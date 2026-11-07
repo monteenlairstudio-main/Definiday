@@ -57,6 +57,13 @@ class UiTest {
         assertEquals(View.GONE, banner().second.visibility)
     }
 
+    /** N3: lock-only mode over the user's own lock wallpaper sends the word by notification (lockBlocked): refused, the banner says so. */
+    @Test fun bannerWhenTheLockScreenIsBlockedAndNotificationsAreOff() {
+        Prefs(ctx).apply { mode = Prefs.MODE_LOCK; lockBlocked = true }
+        shadowOf(nm).setNotificationsEnabled(false)
+        assertEquals(View.VISIBLE, Robolectric.buildActivity(MainActivity::class.java).setup().get().findViewById<View>(R.id.notif_banner).visibility)
+    }
+
     /** B3: right and wrong are written (✓ / ✗), and the tint keeps the button's rounded shape. */
     @Test fun quizMarksAnswersInText() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
@@ -139,6 +146,7 @@ class UiTest {
     @Test @Config(qualifiers = "fr-w360dp-h740dp-xxhdpi") fun longWordFitsAtLargeFont() {
         RuntimeEnvironment.setFontScale(2f)
         val w = Words.load(ctx).maxBy { it.mot.length * (if (' ' in it.mot || '-' in it.mot) 0 else 1) }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
         val mot = a.findViewById<TextView>(R.id.mot)
         assertEquals(w.mot, mot.text.toString())
@@ -197,6 +205,7 @@ class UiTest {
      *  picture served read-only by our provider; a quote shares its author and work. */
     @Test fun shareSendsTextAndCardPicture() {
         val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
         a.findViewById<View>(R.id.share).performClick()
         val chooser = shadowOf(a).nextStartedActivity
@@ -248,6 +257,7 @@ class UiTest {
         s.findViewById<android.widget.Switch>(R.id.guess).performClick()
         assertTrue(Prefs(ctx).guessFirst)
         val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val c = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup()
         val a = c.get()
         val reveal = a.findViewById<Button>(R.id.reveal)

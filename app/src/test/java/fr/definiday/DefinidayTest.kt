@@ -274,8 +274,10 @@ class DefinidayTest {
     /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, onboarding steps, Couleurs et polices, quiz steps, Collection. */
     private fun renderInterface(ui: File) {
         val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
-        fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
-            android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
+        fun main(key: String? = null): MainActivity {
+            key?.let { History(ctx).mark(it, java.time.LocalDate.now().toEpochDay() - 1) } // seen on an earlier day: the extra opens only such items or today's (S4)
+            return Robolectric.buildActivity(MainActivity::class.java, android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
+        }
         fun quiz() = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
         // Couleurs et polices with a few palettes and fonts removed, so both tile states show
         fun styles(): android.app.Activity {

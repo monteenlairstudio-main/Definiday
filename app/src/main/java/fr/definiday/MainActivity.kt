@@ -28,7 +28,7 @@ class MainActivity : Activity() {
     companion object {
         const val EXTRA_MOT = "mot"; private const val STATE_ITEM = "item"; private const val STATE_REVEALED = "revealed"
         /** Opened from « Mes mots »: the card says « Déjà vu », not « Mot au hasard ». */
-        const val EXTRA_DEJA_VU = "dejaVu"; private const val STATE_DEJA_VU = "dejaVu"
+        const val EXTRA_DEJA_VU = "dejaVu"; private const val STATE_DEJA_VU = "dejaVu"; private const val STATE_DAILY_ON = "dailyOn"
 
         /** Small still prop beside Glose by month: snowflake in winter, leaf in autumn, flower in spring, none in summer. */
         fun season(month: Int) = when (month) { 12, 1, 2 -> R.drawable.saison_flocon; in 9..11 -> R.drawable.saison_feuille; in 3..5 -> R.drawable.saison_fleur; else -> 0 }
@@ -38,14 +38,19 @@ class MainActivity : Activity() {
     /** Key of the word whose definition was revealed (« Deviner avant de voir »): stays shown on the way back to the screen. */
     private var revealed: String? = null
     private var dejaVu = false // the card's word came from « Mes mots »
+    /** Epoch day on which the card's item was that day's own (« Mot du jour »), else null: past midnight it gives way to the new day's (N1). */
+    private var dailyOn: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // first launch: the onboarding asks for notifications in context (refused: banner, see onResume), then comes back here
         if (!Prefs(this).onboarded) { startActivity(Intent(this, OnboardingActivity::class.java)); finish(); return }
+        newDay()
         // after a rotation: the item on the card; else the notification's item (today's, a random pick's or an earlier day's). Shown in onResume.
         current = find(savedInstanceState?.getString(STATE_ITEM) ?: intent.getStringExtra(EXTRA_MOT)) ?: Words.today(this).first()
+        if (savedInstanceState == null) Words.shown(this, listOfNotNull(current)) // seen once, when it comes: never again on a later resume (N1)
+        dailyOn = savedInstanceState?.takeIf { it.containsKey(STATE_DAILY_ON) }?.getLong(STATE_DAILY_ON)
         revealed = savedInstanceState?.getString(STATE_REVEALED)
         dejaVu = savedInstanceState?.getBoolean(STATE_DEJA_VU) ?: intent.getBooleanExtra(EXTRA_DEJA_VU, false)
         if (resources.configuration.fontScale > 1.5f) findViewById<GridLayout>(R.id.actions).columnCount = 2 // labels at full size, never cut
@@ -88,16 +93,24 @@ class MainActivity : Activity() {
         current?.let { out.putString(STATE_ITEM, it.key) }
         out.putString(STATE_REVEALED, revealed)
         out.putBoolean(STATE_DEJA_VU, dejaVu)
+        dailyOn?.let { out.putLong(STATE_DAILY_ON, it) }
     }
 
-    /** Any word or quote by key (history keys: mot, or "q:" + text). */
-    private fun find(key: String?): Item? = key?.let { k -> (Words.load(this) + Quotes.load(this)).firstOrNull { it.key == k } }
+    /** A word or quote by key (history keys: mot, or "q:" + text), only one of today's or one already seen: the screen is exported,
+     *  so another app's extra must not mark any catalogue word seen (S4). Notifications, the widget and « Mes mots » carry no other. */
+    private fun find(key: String?): Item? = key?.let { k -> Words.today(this).firstOrNull { it.key == k }
+        ?: if (k in History(this).all()) (Words.load(this) + Quotes.load(this)).firstOrNull { it.key == k } else null }
+
+    /** Today's items not picked yet: the widget still shows yesterday's (N7). */
+    private fun newDay() { if (Prefs(this).dailyDay != java.time.LocalDate.now().toEpochDay()) Widget.update(this) }
 
     /** Also on the way back from Settings (palettes, fonts, words a day, mode), the quiz (done ✓) and the system notification page. */
     override fun onResume() {
         super.onResume()
         val p = Prefs(this)
-        current?.let { show(it, top = false) }
+        newDay()
+        // left open past midnight: yesterday's word of the day gives way to today's; any other item stays, not seen again (N1)
+        current?.let { if (dailyOn.let { d -> d != null && d != java.time.LocalDate.now().toEpochDay() }) show(Words.today(this).first(), top = false) else show(it, top = false, mark = false) }
         findViewById<TextView>(R.id.title).text = getString(R.string.letter_title, de(p.gloseName)) // « Une lettre de Monsieur Glose »
         findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); contentDescription = getString(R.string.glose, p.gloseName); Glose.play(this) }
         findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
@@ -116,7 +129,7 @@ class MainActivity : Activity() {
             contentDescription = getString(R.string.collection_desc, got, Unlocks.items.size, de(p.gloseName))
             tooltipText = contentDescription
         }
-        findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && p.mode != Prefs.MODE_LOCK && notificationsOff()) View.VISIBLE else View.GONE
+        findViewById<View>(R.id.notif_banner).visibility = if (p.enabled && (p.mode != Prefs.MODE_LOCK || p.lockBlocked) && notificationsOff()) View.VISIBLE else View.GONE
     }
 
     /** Refused at the Android 13+ prompt, turned off for the app, or the word's channel turned off. */
@@ -143,10 +156,11 @@ class MainActivity : Activity() {
             .show()
     }
 
-    /** Displays one word or quote in the card, in its palette and font; links follow it. [top]: scroll back to the card. */
-    private fun show(item: Item, top: Boolean = true) {
+    /** Displays one word or quote in the card, in its palette and font; links follow it. [top]: scroll back to the card.
+     *  [mark]: a new item on the card, seen today (history, quiz); false when the card is only redrawn. */
+    private fun show(item: Item, top: Boolean = true, mark: Boolean = true) {
         current = item
-        Words.shown(this, listOf(item)) // the card shows it: seen today (history, quiz)
+        if (mark) Words.shown(this, listOf(item))
         val st = Styles.of(this, item)
         val pal = st.palette
         findViewById<View>(R.id.card).background = Postal.postcard(this, pal)
@@ -171,7 +185,8 @@ class MainActivity : Activity() {
             background = RippleDrawable(ColorStateList.valueOf(st.palette.texte and 0xFFFFFF or 0x33000000),
                 StateListDrawable().apply { addState(intArrayOf(android.R.attr.state_focused), veil(3f, 0f)); addState(intArrayOf(), veil(1f, 6f)) }, null)
         }
-        val daily = item.key in Prefs(this).dailyMots
+        val daily = Words.today(this).any { it.key == item.key } // today's, not a stale day's list (N1)
+        dailyOn = if (daily) java.time.LocalDate.now().toEpochDay() else null
         val academie = findViewById<Button>(R.id.academie)
         val cnrtl = findViewById<Button>(R.id.cnrtl)
         findViewById<View>(R.id.random_hint).visibility = View.GONE // shown again by the random pick itself
