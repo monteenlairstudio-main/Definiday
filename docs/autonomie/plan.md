@@ -65,3 +65,17 @@ Suggestions retenues :
 - le relecteur reçoit les critères d'acceptation et les décisions Graphene, pas seulement le diff ;
 - GRA est confié à l'équipe UX ;
 - un correctif CRAP est un refactor sans changement de comportement, avec ses tests commités avant.
+
+## Ajout du propriétaire (00h30)
+
+« Audite et améliore bien les graphismes de Monsieur Glose, comparé à ce qui se fait de mieux, et itère. » Une équipe **GLOSE** est créée, avec une itération par cycle :
+1. benchmark des meilleures mascottes ;
+2. audit des rendus actuels ;
+3. retouches des sources Paper.js (`design/mascotte`) puis régénération par le pipeline ;
+4. planches avant/après.
+
+Le propriétaire a demandé explicitement l'amélioration, donc les retouches de dessin de Glose sont fusionnées, ce qui fait exception à l'amendement 7. Ces retouches gardent :
+- l'identité de Glose (chat bibliothécaire, lunettes rondes dorées, pelote, gros livre) ;
+- les poses, les calques par emplacement et les attributs de thème existants.
+
+Chaque itération fait l'objet d'un commit `gla:` séparé, réversible seul. Une refonte de l'identité serait une proposition seulement.
