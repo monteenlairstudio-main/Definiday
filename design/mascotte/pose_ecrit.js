@@ -2,7 +2,7 @@
 // guide le fil qui écrit un mot en cursive d'un seul trait puis se rembobine (stroke-dashoffset ⇄ trimPathEnd).
 function draw(paper) {
   const C = makeC(VARIANT), word = C.v.word || 'mot';
-  const { L, anims, H } = seatedGlose(C, { head: { turn: 0.24, tilt: 2, at: [508, 352] }, tree: [292, 686] });
+  const { L, anims, H } = seatedGlose(C, { head: { turn: 0.24, tilt: 2, at: [508, 352], mood: 'fier' }, tree: [292, 686] });
   const DUR = 7, KT = [0, 0.08, 0.55, 0.86, 1]; // caché → écriture → tenu → rembobinage
 
   // pelote serrée contre lui (patte proche dessous), tourne quand le fil se dévide / se rembobine

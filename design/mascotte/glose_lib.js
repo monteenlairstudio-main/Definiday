@@ -136,7 +136,7 @@ function mouthW(c, s = 1) {
     line(arc(c.add([0, 9 * s]), c.add([-12 * s, 21 * s]), c.add([-25 * s, 9 * s]))),
     line(arc(c.add([0, 9 * s]), c.add([12 * s, 21 * s]), c.add([25 * s, 9 * s])))]);
 }
-// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare }
+// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux') }
 function gloseHead(C, o = {}) {
   const pre = o.prefix || '', turn = o.turn || 0, W = headWarp(turn), We = headWarp(turn * 0.6);
   const wx = x => W.x(x), anims = [];
@@ -194,7 +194,14 @@ function gloseHead(C, o = {}) {
   // les cycles ne se recalent qu'après plusieurs minutes : le motif paraît irrégulier
   if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.8, 0.9, 1], dur: 11, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
   const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), 5, INK, 0.7), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), 5, INK, 0.7)]
+    : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), 5, INK, 0.8), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), 5, INK, 0.8)]
+    : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), 5, INK, 0.8), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), 5, INK, 0.8)]
     : [line(curve([[wx(396), 304], [wx(420), 294], [wx(446), 300]]), 5, INK, 0.8), line(curve([[wx(554), 300], [wx(580), 294], [wx(604), 304]]), 5, INK, 0.8)];
+  // humeur : bouche ouverte en « D » (fier), petit « o » (curieux), sinon le « w » de toujours
+  const mx = wx(500), mk = W.k(500);
+  const mouth = o.mood === 'fier' ? (() => { const m = blob([[mx - 26 * mk, 450], [mx + 26 * mk, 450], [mx + 18 * mk, 468], [mx, 476], [mx - 18 * mk, 468]], 0.45);
+      return vol(null, m, '#7A3A3E', [fill(X(ell([mx + 4, 476], [16 * mk, 10]), m), C.rose)], IN); })()
+    : o.mood === 'curieux' ? vol(null, ell([mx + 6, 464], [8 * mk, 10]), '#7A3A3E', [], IN) : mouthW([mx, 448]);
   const extra = skinExtra(C, head, 'head', [[wx(410), 250], [wx(600), 262], [wx(470), 300]]);
   // bâillement (une fois par cycle de 29 s) : bouche ouverte et paupières closes, cachées (échelle 0) le reste du temps
   const yawn = !sleep && o.yawn !== false, YK = [0, 0.5, 0.53, 0.6, 0.63, 1], YV = [[1, 0.001], [1, 0.001], [1, 1], [1, 1], [1, 0.001], [1, 0.001]];
@@ -203,7 +210,7 @@ function gloseHead(C, o = {}) {
     fill(X(mMark, head), C.stripe), shadowOf(head, 26, 30, 0.14), rimOf(head, 10, 12), fill(muzzle.clone(NI), C.cream), shadowOf(muzzle, 8, 12, 0.1),
     ...extra,
     fill(ell([wx(386), 452], [28 * W.k(386), 16]), C.rose, sleep ? 0.85 : 0.7), fill(ell([wx(614), 452], [28 * W.k(614), 16]), C.rose, sleep ? 0.85 : 0.7),
-    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouthW([wx(500), 448]), mouthO, lids,
+    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouth, mouthO, lids,
     ...(yawn ? [0, 1].map(i => G(pre + 'baille_' + 'gd'[i], [lids.children[i].children[0].clone(NI)])) : []), glasses, ...brows];
   const parts = [o.behind || null, C.has('plume') ? quill(C, turn) : null, vol(null, head, C.fur, headIn), ...whisk,
     C.has('bonnet') ? nightcap(C, earL, earR, innerL, innerR, turn, pre) : null, C.has('beret') ? beret(C, W, pre) : null, C.has('couronne') ? crown(C, W, pre) : null, ...(o.front || [])];

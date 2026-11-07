@@ -37,7 +37,7 @@ function draw(paper) {
   anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], values: [0, 4, -2, 0, 0], keyTimes: [0, 0.18, 0.36, 0.55, 1], dur: 2.6 });
 
   // tête : tournée vers la pelote (3/4 gauche), penchée
-  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16 });
+  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, mood: 'curieux' });
   anims.push(...H.anims);
   anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.6 });
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 1.5, 0], dur: 6 });

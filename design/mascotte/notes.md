@@ -207,3 +207,8 @@ de plus que le liseré, même pivot ; `svg2avd.animated()` anime aussi `<id>_hal
 (moustaches, brins, « z ») sont élargis ; le fil qui écrit a son liseré juste derrière lui, découpé hors de la silhouette, dans le calque du mot.
 Couleur `@color/glose_halo` : transparente le jour (rendu Robolectric identique au pixel, 421 images), #F0E8D8 la nuit (encre du thème nuit).
 Restants : pas de liseré sur les accessoires ni le ruban (calques à porte) ; APK release +56 Ko.
+
+## Humeurs (`gloseHead` : `o.mood`)
+`fier` (bouche ouverte en « D », sourcils arqués) pour « le fil écrit », tous les mots : la tête reste dans la partie commune à tous les
+mots (glose_ecrit_mot_vd_2). `curieux` (un sourcil levé, petite bouche « o ») pour la pile. Écartés : « yeux qui sourient » (croissant de
+joue sous l'œil, se lit triste à 96–128 dp) ; « doux » pour « encore » (une tête par mot casse le partage des calques : +10 Ko par mot).
