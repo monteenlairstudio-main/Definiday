@@ -13,7 +13,6 @@ import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Layout
-import android.util.TypedValue
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
@@ -262,14 +261,7 @@ class MainActivity : Activity() {
     private fun fit(v: TextView, max: Float) {
         val card = findViewById<View>(R.id.card)
         val width = (resources.configuration.screenWidthDp - 2 * 16) * resources.displayMetrics.density - card.paddingStart - card.paddingEnd // page and card padding
-        val pieces = v.text.split(Regex("[ \u00a0]|(?<=-)"))
-        var sp = max
-        v.textSize = sp
-        val floor = minOf(v.textSize, 1.3f * findViewById<TextView>(R.id.definition).textSize) // px: both follow the font scale
-        while (v.textSize > floor && pieces.any { v.paint.measureText(it) > width }) { sp -= 2; v.textSize = sp }
-        if (v.textSize < floor) v.setTextSize(TypedValue.COMPLEX_UNIT_PX, floor)
-        v.textLocale = Locale.FRENCH // French syllables
-        v.hyphenationFrequency = if (pieces.any { v.paint.measureText(it) > width }) Layout.HYPHENATION_FREQUENCY_FULL else Layout.HYPHENATION_FREQUENCY_NONE
+        fitWord(v, width, max, 1.3f * findViewById<TextView>(R.id.definition).textSize)
     }
 
     /** One envelope per item of the day (word or quote, shown or not yet, e.g. 2nd-3rd in lock-only mode) and per random pick seen today;
