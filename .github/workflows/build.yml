@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
-  # Every branch and PR: no secret at all, the release APK falls back to the debug key.
+  # Every branch and PR: no secret at all, the release APK falls back to the debug key, as « Definiday (test) » (fr.definiday.dev).
   test:
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +15,7 @@ jobs:
       - run: ./gradlew --no-daemon :app:testDebugUnitTest :app:assembleRelease
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: definiday-debug-signed
+          name: definiday-test
           path: |
             app/build/outputs/apk/release/app-release.apk
             app/build/demo/

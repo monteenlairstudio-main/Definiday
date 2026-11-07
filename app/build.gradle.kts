@@ -32,8 +32,14 @@ android {
             keyPassword = signingValue("DEFINIDAY_KEY_PASSWORD") ?: releaseKeystorePassword // PKCS12: key password = store password
         }
     }
+    // Debug-signed builds (debug, and release without the keystore: CI branches and PRs) are « Definiday (test) », fr.definiday.dev:
+    // they install beside the real app, never over it. Over it, Android would demand an uninstall, which wipes the profile (docs/profil.md).
+    sourceSets["debug"].res.srcDir("src/dev/res")
+    if (releaseKeystore == null) sourceSets["release"].res.srcDir("src/dev/res")
     buildTypes {
+        debug { applicationIdSuffix = ".dev" }
         release {
+            if (releaseKeystore == null) applicationIdSuffix = ".dev"
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
             signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")

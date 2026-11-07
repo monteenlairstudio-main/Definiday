@@ -47,7 +47,7 @@
         <!-- the shared card picture, read through the share intent's grant only -->
         <provider
             android:name=".ShareProvider"
-            android:authorities="fr.definiday.share"
+            android:authorities="${applicationId}.share"
             android:exported="false"
             android:grantUriPermissions="true" />
 
