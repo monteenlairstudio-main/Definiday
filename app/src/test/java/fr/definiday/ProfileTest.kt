@@ -108,6 +108,18 @@ class ProfileTest {
         assertFalse(Profile.import(ctx, Uri.fromFile(File(ctx.cacheDir, "absent.json"))))
     }
 
+    @Test fun exportOverALongerFileStaysReadableAndABomIsTolerated() {
+        fill()
+        val before = profile()
+        File(ctx.cacheDir, "profil.json").writeText(" ".repeat(10_000) + "x")
+        assertTrue(Profile.export(ctx, uri()))
+        assertTrue(Profile.read(ctx, uri()) != null)
+        val text = File(ctx.cacheDir, "profil.json").readText()
+        Profile.FILES.forEach { sp(it).edit().clear().commit() }
+        assertTrue(Profile.import(ctx, uri("\uFEFF" + text)))
+        assertEquals(before, profile())
+    }
+
     @Test fun unknownKeysAndFilesAreIgnored() {
         fill()
         val json = Profile.json(ctx).apply {

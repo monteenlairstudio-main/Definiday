@@ -66,7 +66,7 @@ object Profile {
 
     /** Writes the profile to [uri] (ACTION_CREATE_DOCUMENT); false if it could not be written. */
     fun export(ctx: Context, uri: Uri): Boolean = runCatching {
-        ctx.contentResolver.openOutputStream(uri, "w")!!.use { it.write(json(ctx).toString().toByteArray()) }
+        ctx.contentResolver.openOutputStream(uri, "wt")!!.use { it.write(json(ctx).toString().toByteArray()) }
     }.isSuccess
 
     /** The profile in [uri], validated: file -> key -> value; null if it is not a profile (then nothing may change). */
@@ -74,7 +74,7 @@ object Profile {
         val bytes = ctx.contentResolver.openInputStream(uri)!!.use { s -> // readNBytes is API 33
             java.io.ByteArrayOutputStream().also { o -> val b = ByteArray(8192); while (o.size() <= MAX_BYTES) { val n = s.read(b); if (n < 0) break; o.write(b, 0, n) } }.toByteArray()
         }
-        if (bytes.size > MAX_BYTES) null else parse(String(bytes))
+        if (bytes.size > MAX_BYTES) null else parse(String(bytes).removePrefix("\uFEFF")) // a BOM from a Windows editor
     }.getOrNull()
 
     /** Unknown files and keys are ignored; a known key of the wrong type, out of range or oversized rejects the whole file. */
