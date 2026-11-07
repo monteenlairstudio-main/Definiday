@@ -109,6 +109,24 @@ class UiTest {
         assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStartedService.component!!.className)
     }
 
+    /** P17: a quiz reminder set before the word's time never comes (no word seen yet): Settings says so under the quiz time. */
+    @Test fun quizBeforeTheWordIsExplained() {
+        Prefs(ctx).apply { enabled = true; hour = 8; minute = 0; quizEnabled = true; quizHour = 21; quizMinute = 0 }
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        val hint = a.findViewById<TextView>(R.id.quiz_early)
+        assertEquals(View.GONE, hint.visibility)
+        a.findViewById<Button>(R.id.quiz_time).performClick()
+        (org.robolectric.shadows.ShadowDialog.getLatestDialog() as android.app.TimePickerDialog).apply { updateTime(7, 0) }
+            .getButton(android.content.DialogInterface.BUTTON_POSITIVE).performClick()
+        assertEquals(7, Prefs(ctx).quizHour)
+        assertEquals(View.VISIBLE, hint.visibility)
+        assertEquals(ctx.getString(R.string.quiz_early), hint.text.toString())
+        a.findViewById<android.widget.Switch>(R.id.quiz_enabled).performClick() // no quiz reminder: nothing to warn about
+        assertEquals(View.GONE, hint.visibility)
+        Prefs(ctx).apply { quizEnabled = true; quizHour = 8 } // same minute as the word: the order of the two alarms is not guaranteed
+        assertEquals(View.VISIBLE, Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<View>(R.id.quiz_early).visibility)
+    }
+
     /** More words a day once today's time has passed: the new ones are shown at once. */
     @Test fun raisingWordsPerDayAfterTheTimeShowsThem() {
         Prefs(ctx).apply { mode = Prefs.MODE_NOTIF; wordsPerDay = 1; hour = 0; minute = 0 }

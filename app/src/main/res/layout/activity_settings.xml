@@ -184,6 +184,12 @@
             <Button
                 android:id="@+id/quiz_time"
                 style="@style/Setting" />
+
+            <TextView
+                android:id="@+id/quiz_early"
+                style="@style/Help"
+                android:visibility="gone"
+                android:text="@string/quiz_early" />
         </LinearLayout>
 
         <!-- Apparence -->

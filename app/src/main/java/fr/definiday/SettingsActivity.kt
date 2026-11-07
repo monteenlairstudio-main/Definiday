@@ -38,7 +38,7 @@ class SettingsActivity : Activity() {
 
         // Mot du jour
         val time = findViewById<Button>(R.id.time)
-        fun showTime() { time.text = getString(R.string.time, p.hour, p.minute); time.isEnabled = p.enabled }
+        fun showTime() { time.text = getString(R.string.time, p.hour, p.minute); time.isEnabled = p.enabled; quizEarly() }
         showTime()
         findViewById<Switch>(R.id.enabled).apply {
             isChecked = p.enabled
@@ -91,7 +91,7 @@ class SettingsActivity : Activity() {
 
         // Quiz du soir
         val quizTime = findViewById<Button>(R.id.quiz_time)
-        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute); quizTime.isEnabled = p.quizEnabled }
+        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute); quizTime.isEnabled = p.quizEnabled; quizEarly() }
         showQuizTime()
         findViewById<Switch>(R.id.quiz_enabled).apply {
             isChecked = p.quizEnabled
@@ -230,6 +230,13 @@ class SettingsActivity : Activity() {
             setOnCheckedChangeListener { _, on -> p.updateAuto = on }
         }
         findViewById<Button>(R.id.update_releases).setOnClickListener { open(Update.REPO) }
+    }
+
+    /** P17: the quiz reminder needs a word seen today, so set before the word's time it never comes (at the same minute, the two alarms
+     *  come in any order): said under the quiz time. */
+    private fun quizEarly() {
+        val early = p.enabled && p.quizEnabled && p.quizHour * 60 + p.quizMinute <= p.hour * 60 + p.minute
+        findViewById<View>(R.id.quiz_early).visibility = if (early) View.VISIBLE else View.GONE
     }
 
     private fun explainLock() = Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own))
