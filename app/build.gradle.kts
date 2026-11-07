@@ -21,8 +21,8 @@ android {
         applicationId = "fr.definiday"
         minSdk = 26
         targetSdk = 36
-        versionCode = 12
-        versionName = "0.12.0"
+        versionCode = 13
+        versionName = "0.13.0"
         // in-app update from the GitHub releases (Update.kt); a Google Play build must set it false (docs/mise_a_jour.md)
         buildConfigField("boolean", "SELF_UPDATE", "true")
     }
