@@ -42,31 +42,42 @@ class QuizActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val s = savedInstanceState
-        val today = LocalDate.now().toEpochDay()
-        day = s?.getLong("day") ?: intent.getLongExtra(EXTRA_DAY, today).takeIf { it in today - 1..today } ?: today
-        seed = s?.getInt("seed") ?: Random.nextInt()
         val all = Words.load(this)
         val byMot = all.associateBy { it.mot }
         shown = History(this).all().filterKeys(byMot::containsKey)
-        val saved = s?.getStringArrayList("mots")?.mapNotNull(byMot::get)
-        val reviews = s?.getInt("reviews") ?: 0
-        val seen = saved?.dropLast(reviews) ?: Words.seenToday(this, day)
-        // reviews join an evening that has words of its own (review is in the quiz only: the daily display keeps its 9 months)
-        val review = saved?.takeLast(reviews)
-            ?: if (seen.isEmpty()) emptyList() else Quiz.due(Memory(this).entries(), shown, day, seen.map { it.mot }.toSet()).mapNotNull(byMot::get)
-        questions = Quiz.build(seen, all, Random(seed), shown.keys, review) // same seed and words after a rotation: same options
-        index = s?.getInt("index") ?: 0
-        score = s?.getInt("score") ?: 0
-        picked = s?.getInt("picked") ?: -1
-        missed = s?.getStringArrayList("missed") ?: missed
-        won = s?.getStringArrayList("won")?.mapNotNull(Unlocks.byId::get)
-        rated = s?.getBoolean("rated") ?: false
-        done = s?.getBoolean("done") ?: Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
+        if (savedInstanceState == null) start(all, byMot) else restore(savedInstanceState, all, byMot)
         val pad = (16 * resources.displayMetrics.density).toInt()
         page = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, pad / 2, pad, pad * 3 / 2) }
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(page) })
         next()
+    }
+
+    /** A new quiz: the day asked (today or the eve, else today), its words, then the reviews due. */
+    private fun start(all: List<Word>, byMot: Map<String, Word>) {
+        val today = LocalDate.now().toEpochDay()
+        day = intent.getLongExtra(EXTRA_DAY, today).takeIf { it in today - 1..today } ?: today
+        seed = Random.nextInt()
+        val seen = Words.seenToday(this, day)
+        // reviews join an evening that has words of its own (review is in the quiz only: the daily display keeps its 9 months)
+        val review = if (seen.isEmpty()) emptyList() else Quiz.due(Memory(this).entries(), shown, day, seen.map { it.mot }.toSet()).mapNotNull(byMot::get)
+        questions = Quiz.build(seen, all, Random(seed), shown.keys, review)
+        done = Prefs(this).lastQuizDay.let { it == day || it == day + 1 }
+    }
+
+    /** After a rotation: the same day, words and seed (same options), where the quiz was, and the score screen as it was played. */
+    private fun restore(s: Bundle, all: List<Word>, byMot: Map<String, Word>) {
+        day = s.getLong("day")
+        seed = s.getInt("seed")
+        val saved = s.getStringArrayList("mots").orEmpty().mapNotNull(byMot::get)
+        val reviews = s.getInt("reviews")
+        questions = Quiz.build(saved.dropLast(reviews), all, Random(seed), shown.keys, saved.takeLast(reviews))
+        index = s.getInt("index")
+        score = s.getInt("score")
+        picked = s.getInt("picked")
+        missed = s.getStringArrayList("missed") ?: missed
+        won = s.getStringArrayList("won")?.mapNotNull(Unlocks.byId::get)
+        rated = s.getBoolean("rated")
+        done = s.getBoolean("done")
     }
 
     override fun onResume() {
@@ -230,43 +241,49 @@ class QuizActivity : Activity() {
     private fun finishQuiz() {
         page.addView(title())
         letter()
-        if (questions.isEmpty()) {
-            box.addView(text(getString(R.string.quiz_empty), 18f).also(::focus))
-        } else {
-            val p = Prefs(this)
-            val passed = Quiz.passed(score, questions.size)
-            val fresh = won ?: run { // the first time only: recorded, announced (once each) and heard once
-                Quiz.record(p, score, questions.size, day)
-                val got = Unlocks.update(p)
-                p.announced = p.announced + got.map { it.id }
-                won = got
-                rated = Quiz.fromPlay(this) && Quiz.askRate(p, passed, counted = !done)
-                Sounds.play(this, if (got.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
-                got
-            }
-            // something unlocked: one Glose, wearing the last (rarest) one; else the thread writes the word once and holds it, never mocking when failed
-            box.addView(if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
-            else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
-                extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
-                contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore, p.gloseName)
-                Glose.play(this)
-            })
-            box.addView(text(getString(R.string.quiz_score, score, questions.size), 28f, bold = true).apply {
-                gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
-            })
-            if (missed.isNotEmpty()) box.addView(text(getString(R.string.quiz_missed, missed.joinToString(", ")), 16f).apply { gravity = Gravity.CENTER })
-            if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
-            else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
-            if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
-            if (rated) rate()
-            if (fresh.isNotEmpty()) {
-                box.addView(text(getString(if (passed) R.string.unlock_new else R.string.unlock_new_anyway, p.gloseName), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
-                stamps(fresh, Glose.choice(p))
-                button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
-            }
-        }
+        if (questions.isEmpty()) box.addView(text(getString(R.string.quiz_empty), 18f).also(::focus))
+        else scoreScreen(Prefs(this))
         button(getString(R.string.quiz_close), R.style.Primary).setOnClickListener { finish() }
     }
+
+    private fun scoreScreen(p: Prefs) {
+        val passed = Quiz.passed(score, questions.size)
+        val fresh = won ?: record(p, passed)
+        box.addView(signature(p, fresh, passed))
+        box.addView(text(getString(R.string.quiz_score, score, questions.size), 28f, bold = true).apply {
+            gravity = Gravity.CENTER; contentDescription = getString(R.string.quiz_score_desc, score, questions.size); focus(this)
+        })
+        if (missed.isNotEmpty()) box.addView(text(getString(R.string.quiz_missed, missed.joinToString(", ")), 16f).apply { gravity = Gravity.CENTER })
+        if (!passed) box.addView(text(getString(R.string.quiz_retry), 16f).apply { gravity = Gravity.CENTER })
+        else if (fresh.isEmpty()) box.addView(text(getString(R.string.quiz_passed), 16f).apply { gravity = Gravity.CENTER }) // a bravo, no fanfare
+        if (done) box.addView(text(getString(R.string.quiz_not_counted), 16f).apply { gravity = Gravity.CENTER })
+        if (rated) rate()
+        if (fresh.isNotEmpty()) {
+            box.addView(text(getString(if (passed) R.string.unlock_new else R.string.unlock_new_anyway, p.gloseName), 16f, bold = true).apply { gravity = Gravity.CENTER; setPadding(0, paddingBottom, 0, 0) })
+            stamps(fresh, Glose.choice(p))
+            button(getString(R.string.collection_see)).setOnClickListener { startActivity(android.content.Intent(this, CollectionActivity::class.java)) }
+        }
+    }
+
+    /** The first time the score screen shows: recorded, announced (once each) and heard once; returns what was unlocked. */
+    private fun record(p: Prefs, passed: Boolean): List<Unlocks.Item> {
+        Quiz.record(p, score, questions.size, day)
+        val got = Unlocks.update(p)
+        p.announced = p.announced + got.map { it.id }
+        won = got
+        rated = Quiz.fromPlay(this) && Quiz.askRate(p, passed, counted = !done)
+        Sounds.play(this, if (got.isNotEmpty()) Sounds.STAMP else if (passed) Sounds.CHIME else 0) // failed: silence, never a mocking sound
+        return got
+    }
+
+    /** Something unlocked: one Glose, wearing the last (rarest) one; else the thread writes the word once and holds it, never mocking when failed. */
+    private fun signature(p: Prefs, fresh: List<Unlocks.Item>, passed: Boolean) =
+        if (fresh.isNotEmpty()) glose(Glose.preview(this, fresh.last(), Glose.choice(p)), 200).apply { Glose.play(this) }
+        else glose(Glose.mine(this, if (passed) R.drawable.glose_ecrit_bravo_fin else R.drawable.glose_ecrit_encore_fin,
+            extra = if (score == questions.size) listOf(R.style.Glose_Eclats) else emptyList()), 200).apply {
+            contentDescription = getString(if (passed) R.string.glose_bravo else R.string.glose_encore, p.gloseName)
+            Glose.play(this)
+        }
 
     /** Gentle rate card, never blocking: « Plus tard » folds it, « Noter » opens the store page (the web page without the Play Store). */
     private fun rate() {
