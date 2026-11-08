@@ -387,7 +387,7 @@ class DefinidayTest {
         capture(mots(), File(ui, "mots_light.png"))
         capture(detail(), File(ui, "mots_detail.png"))
         capture(starFocused(detail()), File(ui, "mots_detail_focus_star.png"))
-        capture(starFocused(main()), File(ui, "home_focus_star.png"))
+        capture(starFocused(main(past[3].mot)), File(ui, "home_focus_star.png")) // a word: some days start with a quote, which has no star
         capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
             File(ui, "quiz_revision.png"))
         val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }
