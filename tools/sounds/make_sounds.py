@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 """Synthesizes Definiday's sounds (docs/son.md) from scratch: no samples, so no third-party licence.
 
-    python3 tools/sounds/make_sounds.py   # needs numpy and ffmpeg (libvorbis)
+    python3 tools/sounds/make_sounds.py                 # needs numpy and ffmpeg (libvorbis)
+    python3 tools/sounds/make_sounds.py --phone-level   # level as heard on a phone speaker (docs/son/proposition_niveaux)
 
-Writes app/src/main/res/raw/son_*.ogg (mono 44.1 kHz Vorbis) and prints length, peak, loudness and size.
+Writes app/src/main/res/raw/son_*.ogg (mono 44.1 kHz Vorbis, or --out DIR) and prints length, peak, loudness and size.
 Every sound is level-matched (loudest 50 ms window at TARGET dBFS), peak <= -3 dBFS, 5 ms fades.
+By default the level is measured on the full band. With --phone-level it is measured after a 300 Hz high-pass
+(a phone speaker drops what lies below), and the stamp and purr get more of their body above 300 Hz,
+else matching them would push their peak past the ceiling.
 """
-import os, subprocess, tempfile, wave
+import argparse, os, subprocess, tempfile, wave
 import numpy as np
 
 SR = 44100
 TARGET = -20.0  # dBFS, RMS of the loudest 50 ms window
 PEAK = -3.0     # dBFS, hard ceiling
 OUT = os.path.join(os.path.dirname(__file__), "../../app/src/main/res/raw")
+HP = 300        # Hz, where a phone speaker stops (--phone-level)
+PHONE = False   # set by --phone-level
 rng = np.random.default_rng(7)  # same files on every run
 
 
@@ -65,8 +71,12 @@ def chime():  # quiz finished: two bars, a fifth apart, the second rings longer
 
 def stamp():  # unlock: rubber stamp « tchak », a low thump and a dull slap
     n = t(0.2)
-    thump = np.sin(glide(140, 55, 0.2)) * np.exp(-n / 0.03)
+    ph = glide(140, 55, 0.2)
+    thump = np.sin(ph) * np.exp(-n / 0.03)
     slap = env(band(noise(0.2), 300, 2500), 0.001, 0.012)
+    if PHONE:  # a phone loses the thump: half of it moves to harmonics (heard as the same low note), slap x3
+        thump = (0.5 * np.sin(ph) + sum(np.sin(k * ph) / k for k in range(2, 7))) * np.exp(-n / 0.03)
+        return thump + 1.5 * slap
     return thump + 0.5 * slap
 
 
@@ -95,7 +105,10 @@ def purr():  # Glose's special 4 taps: purr, two breaths of pulsed low noise ove
     n = t(sec)
     pulse = (0.5 + 0.5 * np.sin(2 * np.pi * 25 * n)) ** 3  # ~25 Hz, like a real purr
     breath = np.sin(np.pi * np.clip(n / 0.8, 0, 1)) + 0.8 * np.sin(np.pi * np.clip((n - 0.85) / 0.8, 0, 1))
-    body = band(noise(sec), 60, 450) + 0.6 * np.sin(2 * np.pi * 95 * n)
+    hiss = noise(sec)
+    body = band(hiss, 60, 450) + 0.6 * np.sin(2 * np.pi * 95 * n)
+    if PHONE:  # harmonics of the 95 Hz tone and a wider breath, so a phone speaker still purrs
+        body += sum(0.5 * np.sin(2 * np.pi * 95 * k * n) / (k - 2) for k in range(3, 9)) + band(hiss, 300, 900)
     return body * pulse * breath
 
 
@@ -118,19 +131,32 @@ def centroid(x):
     return s @ np.fft.rfftfreq(len(x), 1 / SR) / s.sum()
 
 
+def phone(x):
+    """A phone speaker, roughly: two 2nd-order Butterworth high-passes at HP (the audit's ffmpeg meter)."""
+    return band(band(x, HP), HP)
+
+
 def master(x):
     """Level-match, cap the peak, 5 ms fades in and out."""
-    x = x * 10 ** (TARGET / 20) / loud(x)
-    x *= min(1, 10 ** (PEAK / 20) / np.max(np.abs(x)))
     f = int(0.005 * SR)
-    x[:f] *= np.linspace(0, 1, f); x[-f:] *= np.linspace(1, 0, f)
-    return x
+    ramp = np.ones(len(x)); ramp[:f] = np.linspace(0, 1, f); ramp[-f:] = np.linspace(1, 0, f)
+    if PHONE:  # fade first, so level and peak are those of what is played (the stamp's attack is 1 ms)
+        x, ramp = x * ramp, 1
+    x = x * 10 ** (TARGET / 20) / loud(phone(x) if PHONE else x)
+    x *= min(1, 10 ** (PEAK / 20) / np.max(np.abs(x)))
+    return x * ramp
 
 
 def main():
-    os.makedirs(OUT, exist_ok=True)
+    global PHONE
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--phone-level", action="store_true", help=f"match levels after a {HP} Hz high-pass")
+    ap.add_argument("--out", default=OUT, help="output folder (default: app/src/main/res/raw)")
+    a = ap.parse_args()
+    PHONE, out = a.phone_level, a.out
+    os.makedirs(out, exist_ok=True)
     total = 0
-    print(f"{'son':14} {'durée':>6} {'crête':>8} {'RMS50ms':>8} {'taille':>7} {'centre':>8}")
+    print(f"{'son':14} {'durée':>6} {'crête':>8} {'RMS50ms':>8} {f'>{HP}Hz':>8} {'taille':>7} {'centre':>8}")
     for name, make in SOUNDS.items():
         x = master(make())
         pcm = np.round(x * 32767).astype("<i2")
@@ -138,13 +164,15 @@ def main():
         with tempfile.NamedTemporaryFile(suffix=".wav") as tmp:
             with wave.open(tmp.name, "wb") as wf:
                 wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR); wf.writeframes(pcm.tobytes())
-            ogg = os.path.join(OUT, name + ".ogg")
+            ogg = os.path.join(out, name + ".ogg")
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", tmp.name, "-c:a", "libvorbis", "-q:a", "3",
                             "-map_metadata", "-1", "-fflags", "+bitexact", ogg], check=True)
         size = os.path.getsize(ogg)
         total += size
-        print(f"{name:14} {len(x) / SR:5.2f}s {db(np.max(np.abs(x))):7.1f}dB {db(loud(x)):7.1f}dB {size / 1024:5.1f}Ko {centroid(x):6.0f}Hz")
+        hp = db(loud(phone(x)))
+        print(f"{name:14} {len(x) / SR:5.2f}s {db(np.max(np.abs(x))):7.1f}dB {db(loud(x)):7.1f}dB {hp:7.1f}dB {size / 1024:5.1f}Ko {centroid(x):6.0f}Hz")
         assert size < 20_000, name
+        assert not PHONE or abs(hp - TARGET) <= 1.5, name  # the peak ceiling must not have eaten the match
     print(f"total {total / 1024:.1f} Ko")
     assert total < 100_000
 

@@ -13,13 +13,13 @@ Réglages › Apparence › interrupteur **« Sons »** (`Prefs.sounds`, faux 
 | Bonne réponse au quiz | `son_tic` | « tic » de bois, sec comme du papier | 0,16 s | ✓, bouton qui gonfle, Glose hoche la tête |
 | Mauvaise réponse | `son_hmm` | « hmm » grave et doux, qui descend un peu ; jamais un buzzer | 0,38 s | ✗, bouton qui tremble, Glose penche la tête |
 | Quiz réussi, sans nouveauté | `son_carillon` | petit carillon de deux lames, à la quinte | 0,95 s | Glose écrit « Bravo » |
-| Quiz raté | (aucun) | silence, pour ne jamais se moquer | | Glose écrit « Encore » |
-| Nouveautés débloquées | `son_tampon` | « tchak » de tampon encreur | 0,20 s | tampons qui arrivent en cascade |
+| Quiz raté | (aucun) | silence, pour ne jamais se moquer ; sauf s’il débloque une nouveauté : tampon | | Glose écrit « Encore » |
+| Nouveautés débloquées (quiz réussi ou raté) | `son_tampon` | « tchak » de tampon encreur | 0,20 s | tampons qui arrivent en cascade |
 | Nouveau mot au hasard | `son_page` | page qui tourne | 0,45 s | la carte change |
-| Toucher Monsieur Glose | `son_mrr` | petit « mrr » qui monte | 0,32 s | réaction de Glose (à brancher) |
-| Toucher spécial (4 touchers) | `son_ronron` | ronron, deux respirations | 1,70 s | réaction spéciale (à brancher) |
+| Toucher Monsieur Glose | `son_mrr` | petit « mrr » qui monte | 0,32 s | réaction de Glose |
+| Toucher spécial (4 touchers) | `son_ronron` | ronron, deux respirations | 1,70 s | réaction spéciale |
 
-Pour les réactions de Glose (`Glose.kt`), l’appel tient en une ligne, sur le fil principal : `Sounds.play(context, Sounds.MRR)` au toucher, `Sounds.play(context, Sounds.PURR)` pour le toucher spécial. `Sounds` vérifie seul le réglage et le mode sonnerie.
+Déclencheurs : `QuizActivity` (tic / hmm à chaque réponse ; en fin de quiz, tampon s’il y a une nouveauté, même sur un quiz raté, sinon carillon si réussi, sinon rien), `MainActivity` (page, « Au hasard »), `SettingsActivity` (page, en échantillon à l’activation), `Glose.kt` (mrr au toucher, ronron au toucher spécial, sur l’accueil et l’aperçu de la Collection, avec les limites de `Taps`). `Sounds` vérifie seul le réglage et le mode sonnerie.
 
 ## Ce qui reste muet
 
@@ -41,6 +41,7 @@ Pour les réactions de Glose (`Glose.kt`), l’appel tient en une ligne, sur le 
 - Fondus de 5 ms au début et à la fin (pas de clic).
 - Timbres chauds : centre spectral entre 400 Hz et 3 kHz. Le « hmm » porte des harmoniques, car les haut-parleurs de téléphone coupent sous 300 Hz environ.
 - Fichiers OGG Vorbis mono 44,1 kHz, chacun sous 20 Ko, 49 Ko en tout.
+- **Limite connue** : ce niveau est mesuré sur la bande pleine. À travers un haut-parleur de téléphone (rien sous ≈ 300 Hz), le tampon est ≈ 18 dB sous le tic, le ronron ≈ 16 dB, le hmm et le mrr ≈ 5-7 dB. Une **proposition à écouter** (sons nivelés après passe-haut 300 Hz, mesures avant/après et guide d’écoute) est dans [`son/proposition_niveaux/`](son/proposition_niveaux/README.md). Pour l’appliquer, une commande : `python3 tools/sounds/make_sounds.py --phone-level`.
 
 ## Accessibilité
 
@@ -51,5 +52,6 @@ Aucune information n’est donnée par le son seul : chaque son double un sign
 Les sons sont **entièrement synthétisés** par `tools/sounds/make_sounds.py` (numpy, puis ffmpeg pour l’encodage) : bruit filtré pour la page et le tampon, lames amorties façon marimba pour le « tic » et le carillon, bruit grave pulsé à 25 Hz sur une note basse pour le ronron. Aucun échantillon extérieur : ils appartiennent au projet, sous la même licence que le code. Le script est déterministe (graine fixe) et affiche durée, crête, niveau, taille et centre spectral de chaque son :
 
 ```
-python3 tools/sounds/make_sounds.py
+python3 tools/sounds/make_sounds.py                 # les sons livrés
+python3 tools/sounds/make_sounds.py --phone-level   # nivelés pour haut-parleur de téléphone (proposition)
 ```
