@@ -48,3 +48,4 @@
   - I1 (liseré de nuit non découpé, qui peignait du crème sur le pelage autour du grelot et du nœud) : corrigé dans le générateur, 8 calques régénérés, avec un test (e67dd7b).
   - M2 et M3 corrigés (a28a2b3). M1 (compteur « à revoir ») passe en décision du propriétaire.
 - Suite complète 164/164 et `assembleRelease` OK.
+- 02h05 : GLOSE 5 intégré (a548b1a), planche de choix `glose_decisions.md`. Recommandations : A3 (icône, visage actuel et liseré), B2 (trait 11/6), C3 (pelage gris chaud #AAA6AC), D2 (reliure ardoise #6A7EA6). Rien n'est appliqué. QA visuelle de toute l'appli lancée. Conso hebdo 7 %.
