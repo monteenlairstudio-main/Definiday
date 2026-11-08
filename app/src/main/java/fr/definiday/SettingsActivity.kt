@@ -160,6 +160,7 @@ class SettingsActivity : Activity() {
 
     override fun onActivityResult(req: Int, res: Int, data: Intent?) {
         val uri = data?.data?.takeIf { res == RESULT_OK } ?: return
+        busy++
         profileButtons(false)
         // Off the UI thread: the document may live on Drive or OneDrive (network), up to 4 MiB.
         val app = applicationContext
@@ -175,7 +176,8 @@ class SettingsActivity : Activity() {
 
     private fun profileDone(req: Int, saved: Boolean, profile: Map<String, Map<String, Any>>?) {
         fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
-        profileButtons(true)
+        busy--
+        profileButtons(busy == 0)
         when {
             req == REQ_EXPORT -> toast(if (saved) R.string.profile_saved else R.string.profile_save_failed)
             profile == null -> toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
@@ -189,6 +191,7 @@ class SettingsActivity : Activity() {
     override fun onResume() {
         super.onResume()
         resumed = this
+        profileButtons(busy == 0) // rotated during a profile read: still busy
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
         explainLock() // back from changing the wallpaper
@@ -270,9 +273,11 @@ class SettingsActivity : Activity() {
     private fun label(min: Int) = when { min < 60 -> getString(R.string.duration_m, min); min % 60 == 0 -> getString(R.string.duration_h, min / 60)
         else -> getString(R.string.duration_hm, min / 60, min % 60) }
 
-    private companion object {
+    internal companion object {
         const val REQ_EXPORT = 1; const val REQ_IMPORT = 2
         /** The Settings screen in the foreground, if any: a profile read finishing after a rotation lands there. */
         @android.annotation.SuppressLint("StaticFieldLeak") var resumed: SettingsActivity? = null
+        /** Profile reads or writes running: the buttons stay off, on a recreated screen too (no second dialog stacked). */
+        var busy = 0
     }
 }

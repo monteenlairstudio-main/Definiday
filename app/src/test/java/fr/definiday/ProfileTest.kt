@@ -198,6 +198,15 @@ class ProfileTest {
         assertTrue(c === now)
     }
 
+    /** Review 2 M2: a screen recreated while a profile read runs keeps the buttons off (no second dialog stacked). */
+    @Test fun profileButtonsStayOffOnARecreatedScreenWhileBusy() {
+        SettingsActivity.busy = 1
+        try {
+            assertFalse(Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<Button>(R.id.profile_import).isEnabled)
+        } finally { SettingsActivity.busy = 0 }
+        assertTrue(Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<Button>(R.id.profile_import).isEnabled)
+    }
+
     /** debug-signed builds (this one, and release without the keystore) never replace the real app fr.definiday. */
     @Test fun testBuildInstallsBesideTheRealApp() {
         assertEquals("fr.definiday.dev", ctx.packageName)

@@ -51,10 +51,15 @@ class FontsTest {
         assertTrue(fonts.none { "libre" in it.name })
     }
 
+    private val idOf = org.json.JSONObject(File("src/main/assets/styles.json").readText()).getJSONArray("polices")
+        .let { a -> (0 until a.length()).associate { a.getJSONObject(it).getString("fichier") to a.getJSONObject(it).getString("id") } }
+
     @Test fun everyFontHasTheNarrowNoBreakSpaceUnlessItsNameIsReserved() {
         assertEquals(14, fonts.size)
         fonts.forEach { f ->
-            assertEquals(f.name, f.nameWithoutExtension !in Styles.NO_NNBSP, maps(f, 0x202F))
+            // Styles.fine decides on style ids, files may be renamed (libre_baskerville -> definiday_serif): map file -> id
+            val id = idOf[f.nameWithoutExtension] ?: f.nameWithoutExtension
+            assertEquals(f.name, id !in Styles.NO_NNBSP, maps(f, 0x202F))
             assertTrue(f.name, maps(f, 0xA0) && maps(f, '!'.code) && !maps(f, 0xE000)) // the text-level stand-in exists; the reader holds
         }
     }
