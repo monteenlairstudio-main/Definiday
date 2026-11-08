@@ -15,6 +15,7 @@ from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import Glyph
 
 RFN = re.compile(r"Reserved\s*Font\s*Names?", re.I)
+TRADEMARK = {"zilla_slab"}  # no RFN, but « Zilla » is a Mozilla trademark (name ID 7): a modified copy should not carry it
 RENAME = {"libre_baskerville": ("definiday_serif", "Libre Baskerville", "Definiday Serif")}  # file, reserved name, new name
 for path in sorted(glob.glob("app/src/main/res/font/*.ttf")):
     name = os.path.basename(path)[:-4]
@@ -32,6 +33,9 @@ for path in sorted(glob.glob("app/src/main/res/font/*.ttf")):
                 r.string = r.toUnicode().replace(old, new).replace(old.replace(" ", ""), new.replace(" ", ""))
         font["name"].setName(f"Modified version of {old} (U+202F added) for Definiday, renamed per the SIL OFL.", 10, 3, 1, 0x409)
         path = path.replace(name, new_file)
+    elif name in TRADEMARK:
+        print(f"{name}: trademarked name, left alone")
+        continue
     elif RFN.search(head(open(f"app/src/main/assets/licences/{name}_OFL.txt", encoding="utf-8").read())) \
             or any(RFN.search(head(r.toUnicode())) for r in font["name"].names if r.nameID in (0, 13)):
         print(f"{name}: Reserved Font Name, left alone")

@@ -27,3 +27,10 @@
 - Libre Baskerville (toute l'interface) a un nom réservé, donc la ponctuation après U+202F retombe en police de repli. Voie retenue : une copie modifiée et renommée, conforme à l'OFL.
 - 01h05 : consigne du propriétaire, s'arrêter à 10 % de la limite hebdomadaire. Mesure à 01h03 : 4 % sur 7 jours.
 - 01h15 : police intégrée (aeadfd9). L'interface passe en « Definiday Serif » (Libre Baskerville renommée, avec U+202F) : plus de repli sur « ; : ! ? ». Suite complète 150/150. Conso hebdo 5 %.
+- 01h20-01h40 : relecture indépendante (`night/review_1.md`) : aucun constat bloquant, 1 important, 5 mineurs.
+  - I1 (mes citations corrigées changeaient de clé d'historique, ce qui cassait le délai de 270 jours) : corrigé par un champ `cle` stable (f3e19b5).
+  - M1 à M4 corrigés (ee51487) : test des sons plus strict, résultat d'import après rotation, texte `quiz_early`, réponse fausse annoncée par TalkBack.
+  - M5 : Zilla Slab rendue d'origine (marque Mozilla), mise dans NO_NNBSP.
+- GLOSE 3 intégré : livre allégé (d34715b), liseré de nuit des accessoires (7834355). L'icône générée est annulée (359279c, visage moins rond) et passe en proposition.
+- fon-E intégré (18a6904, 8d411a2, 897cb26) : filtre « À revoir » et rotation, plus de choix vide dans Couleurs et polices, menus des Réglages en ressources.
+- Suite complète 154/154. Conso hebdo 5 %.
