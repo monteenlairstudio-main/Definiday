@@ -113,10 +113,17 @@ function keyframes(prop, vals, kts, type = 'floatType', linear = false) {
   return `<propertyValuesHolder android:propertyName="${prop}" android:valueType="${type}">` + vals.map((v, i) =>
     `<keyframe android:fraction="${kts[i]}" android:value="${+(+v).toFixed(3)}"${i && ease[i] ? ` android:interpolator="${ease[i]}"` : ''}/>`).join('') + '</propertyValuesHolder>';
 }
-// opts.once = [keyTimes, début] : les animateurs de ces keyTimes (le fil qui écrit) jouent une fois, de « début » (mot caché) à la fin (mot écrit)
+// opts.once = [keyTimes, from, ms]: the animators of these keyTimes (the thread writing) play once, from their key « from » (the still:
+// word written) to the end (written again), their first segment (the rewind) squeezed to ms. The quiz end then starts on the still frame
+// (no jump of the ball, the head or the word when it appears or replays), quickly rewinds and writes the word.
 const ONCE = an => opts.once && an.keyTimes === opts.once[0];
+function onceTimes(an) { // [kept key indices, their new fractions, duration ms]
+  const k = kts(an), full = parseFloat(an.dur) * 1000, [, c0, ms] = opts.once, i0 = k.indexOf(c0), c1 = k[i0 + 1], dur = ms + (1 - c1) * full;
+  if (i0 < 0) throw new Error(`${name}: once from ${c0} is not a key`);
+  return [k.map((_, i) => i).slice(i0), k.slice(i0).map(t => t === c0 ? 0 : +((ms + (t - c1) * full) / dur).toFixed(4)), Math.round(dur)];
+}
 function animator(an, holders) {
-  const dur = Math.round(parseFloat(an.dur) * 1000 * (ONCE(an) ? 1 - opts.once[1] : 1)), begin = parseFloat(an.begin || '0') * 1000;
+  const dur = ONCE(an) ? onceTimes(an)[2] : Math.round(parseFloat(an.dur) * 1000), begin = parseFloat(an.begin || '0') * 1000;
   const offset = begin < 0 ? Math.round(dur + begin) % dur : Math.round(begin); // phase négative ≈ départ retardé (approximation)
   // Whole loops only, as many as fit in the idle life: each part comes to rest on its own loop end (= its still frame) instead of
   // being cut mid-cycle by Glose.play()'s stop() (end() jumps to the last key). A loop longer than the idle life plays once.
@@ -127,7 +134,7 @@ function animator(an, holders) {
 function kts(an, n) { return an.keyTimes ? an.keyTimes.split(';').map(Number) : Array.from({ length: n }, (_, i) => i / (n - 1)); }
 function keyframesOf(an, prop, vals) { // keyframes, réduits et étirés pour une animation « une fois »
   let k = kts(an, vals.length);
-  if (ONCE(an)) { const c = opts.once[1]; vals = vals.filter((_, i) => k[i] >= c); k = k.filter(t => t >= c).map(t => +((t - c) / (1 - c)).toFixed(4)); }
+  if (ONCE(an)) { const [ix, t] = onceTimes(an); vals = ix.map(i => vals[i]); k = t; }
   return keyframes(prop, vals, k, 'floatType', an.calcMode === 'linear');
 }
 

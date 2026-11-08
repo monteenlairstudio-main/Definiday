@@ -13,7 +13,7 @@ const { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES } = require('./svg2a
 const RES = process.env.GLOSE_RES ? path.resolve(process.env.GLOSE_RES) : path.join(__dirname, '../../../app/src/main/res'), TMP = 'rendus/android', KT = path.join(RES, '../java/fr/definiday/GloseLayers.kt');
 const OPT = JSON.parse(process.env.GLOSE_VARIANT || '{}');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon'], ONCE = ['bravo', 'encore']; // réaction de fin de quiz : écrit une fois
-const KT_ECRIT = '0;0.31;0.45;0.53;1', HIDDEN = 0.45; // pose_ecrit.js : écrit (tenu), rembobinage, caché, écriture ; « une fois » = de caché à écrit
+const KT_ECRIT = '0;0.31;0.45;0.53;1', ONCE_FROM = 0.31, REWIND_MS = 200; // pose_ecrit.js : écrit (tenu), rembobinage, caché, écriture ; « une fois » = rembobinage éclair puis écriture
 
 // Couleurs des jetons : défaut (gris tigré, pelote bordeaux) et surcouches. Valeurs = palettes de glose_lib.js.
 const DEFAULT = { gloseFur: '#AAA6AC', gloseFurD: '#7E7980', gloseCream: '#F8EEDD', gloseBall: '#9A4250', gloseBallD: '#5A2230',
@@ -73,7 +73,7 @@ const REACTIONS = {
       await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, OPT, v) }); // liseré de nuit (jeton gloseHalo)
       const svg = fs.readFileSync(path.join(__dirname, '..', out), 'utf8');
       Object.assign(gates, convert(svg, name, RES, { noSlots: pose === 'icone' })); // head icons never wear accessories (Glose.WORN)
-      if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, HIDDEN], vd: `${name}_vd` });
+      if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, ONCE_FROM, REWIND_MS], vd: `${name}_vd` });
     }
     const icon = ICONS[process.env.GLOSE_ICON || 'a3']; // owner choice 2026-11-08: A3
     if (icon) {
