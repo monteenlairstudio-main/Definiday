@@ -8,6 +8,8 @@ import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Build
+import android.provider.Settings
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
@@ -84,8 +86,13 @@ object Glose {
         v.removeCallbacks(v.tag as? Runnable)
         // the generated loops end by themselves within IDLE_MS of animator time (make_android.js); this stop only catches the rest.
         // Scaled like the animators (developer option « Animator duration scale »), or it would cut them mid-cycle.
-        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, (IDLE_MS * ValueAnimator.getDurationScale()).toLong()) }
+        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, (IDLE_MS * durationScale(v.context)).toLong()) }
     }
+
+    /** The developer option « Animator duration scale », which the RenderThread applies to the AVDs.
+     *  ValueAnimator.getDurationScale() is public only from API 33: before, the same value read from the global setting. */
+    fun durationScale(ctx: Context) = if (Build.VERSION.SDK_INT >= 33) ValueAnimator.getDurationScale()
+        else Settings.Global.getFloat(ctx.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
 
     /** The idle life paused by the user ([pausable]), for every Glose until resumed or the app restarts: [play] leaves the still.
      *  Taps still make him react (the user asks for that motion), then he rests. WCAG 2.2.2. */

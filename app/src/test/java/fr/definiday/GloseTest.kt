@@ -188,6 +188,19 @@ class GloseTest {
         assertFalse(running)
     }
 
+    /** The idle stop is scaled like the animators: ValueAnimator's scale from API 33, the global setting before (getDurationScale is hidden there). */
+    @Test fun idleStopFollowsTheDurationScale() {
+        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+        try { scale.invoke(null, 2f); assertEquals(2f, Glose.durationScale(ctx)) } finally { scale.invoke(null, 1f) }
+        val sdk = android.os.Build.VERSION.SDK_INT
+        try {
+            org.robolectric.util.ReflectionHelpers.setStaticField(android.os.Build.VERSION::class.java, "SDK_INT", 28)
+            assertEquals(1f, Glose.durationScale(ctx)) // unset: 1
+            android.provider.Settings.Global.putFloat(ctx.contentResolver, android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 0.5f)
+            assertEquals(0.5f, Glose.durationScale(ctx))
+        } finally { org.robolectric.util.ReflectionHelpers.setStaticField(android.os.Build.VERSION::class.java, "SDK_INT", sdk) }
+    }
+
     /** A reaction plays once, then the idle drawable comes back; stop() (onPause) cancels that return. */
     @Test fun reactionsGoBackToIdle() {
         listOf(R.drawable.glose_icone_hoche, R.drawable.glose_icone_penche).forEach { res ->
