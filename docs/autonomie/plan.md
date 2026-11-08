@@ -79,3 +79,11 @@ Le propriétaire a demandé explicitement l'amélioration, donc les retouches de
 - les poses, les calques par emplacement et les attributs de thème existants.
 
 Chaque itération fait l'objet d'un commit `gla:` séparé, réversible seul. Une refonte de l'identité serait une proposition seulement.
+
+## Budget de tokens (propriétaire, 01h05)
+
+Vérifier régulièrement la consommation, au battement horaire et à chaque intégration (`unifiedWindows.seven_day.utilization` des `rate_limit_event` de la session).
+- À **0,09** : plus de nouveau lot.
+- À **0,10** de la limite **hebdomadaire** : on finit le travail en cours (agents lancés, intégration, rapport), puis on s'arrête.
+
+Lecture retenue : 10 % absolus de la limite hebdomadaire. C'est la plus prudente.

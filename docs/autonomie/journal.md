@@ -25,3 +25,4 @@
   - ux-B intégré (7a45d30, 1b81918, 49fe6be) : U+202F ajouté aux 4 polices OFL sans nom réservé, une seule règle pour les guillemets, en-tête compact en grande police.
   - Deux interactions entre lots, corrigées dans les tests (c6caca6, 12bd955). Suite complète 149/149.
 - Libre Baskerville (toute l'interface) a un nom réservé, donc la ponctuation après U+202F retombe en police de repli. Voie retenue : une copie modifiée et renommée, conforme à l'OFL.
+- 01h05 : consigne du propriétaire, s'arrêter à 10 % de la limite hebdomadaire. Mesure à 01h03 : 4 % sur 7 jours.
