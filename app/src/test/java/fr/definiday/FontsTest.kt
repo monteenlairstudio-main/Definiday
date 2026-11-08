@@ -32,6 +32,25 @@ class FontsTest {
         return glyph and 0xFFFF != 0
     }
 
+    /** The font's Windows (platform 3, UTF-16BE) name records with id [id]. */
+    private fun names(font: File, id: Int): List<String> {
+        val b = ByteBuffer.wrap(font.readBytes())
+        fun u16(at: Int) = b.getShort(at).toInt() and 0xFFFF
+        val name = (0 until u16(4)).map { 12 + 16 * it }.first { b.getInt(it) == 0x6E616D65 /* "name" */ }.let { b.getInt(it + 8) }
+        return (0 until u16(name + 2)).map { name + 6 + 12 * it }.filter { u16(it) == 3 && u16(it + 6) == id }
+            .map { r -> String(b.array(), name + u16(name + 4) + u16(r + 10), u16(r + 8), Charsets.UTF_16BE) }
+    }
+
+    /** OFL: the interface serif is a modified Libre Baskerville, so it must not carry the Reserved Font Name (tools/fonts_nnbsp.py RENAME). */
+    @Test fun theModifiedSerifIsRenamed() {
+        val f = File("src/main/res/font/definiday_serif.ttf")
+        assertEquals(listOf("Definiday Serif"), names(f, 1))
+        listOf(1, 3, 4, 6, 16, 17, 25).flatMap { names(f, it) }.forEach { assertFalse(it, "Libre" in it) }
+        assertTrue(names(f, 0).single().startsWith("Copyright 2012 The Libre Baskerville Project Authors")) // the notice stays
+        assertTrue("Modified Version of Libre Baskerville" in File("src/main/assets/licences/definiday_serif_OFL.txt").readText())
+        assertTrue(fonts.none { "libre" in it.name })
+    }
+
     @Test fun everyFontHasTheNarrowNoBreakSpaceUnlessItsNameIsReserved() {
         assertEquals(14, fonts.size)
         fonts.forEach { f ->

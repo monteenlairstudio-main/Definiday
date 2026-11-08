@@ -20,7 +20,7 @@
     <string name="watch_text">Le mot quittera l’écran de verrouillage au déverrouillage n° %1$d.</string>
     <string name="test">Afficher le mot maintenant</string>
     <string name="test_done">Mot affiché\u202F: verrouillez l’écran pour le voir.</string>
-    <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Citations tirées de Wikiquote, d’auteurs du domaine public. Les boutons Académie et TLFi ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL).</string>
+    <string name="credits">Définitions et anecdotes rédigées pour Definiday et vérifiées avec le Wiktionnaire et Wikipédia. Citations tirées de Wikiquote, d’auteurs du domaine public. Les boutons Académie et TLFi ouvrent les articles officiels du Dictionnaire de l’Académie française et du TLFi (CNRTL). Polices libres sous licence SIL OFL\u202F; celle de l’interface, Definiday Serif, est une version modifiée de Libre Baskerville (espace fine ajoutée), renommée comme l’exige la licence.</string>
     <string name="no_browser">Aucun navigateur pour ouvrir le lien.</string>
     <string name="anecdote">Anecdote</string>
     <string name="source"><u>Source de l’anecdote</u></string>
@@ -56,7 +56,7 @@
     <string name="glose">%1$s, chat bibliothécaire</string>
     <string name="glose_bravo">%1$s écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
     <string name="glose_encore">%1$s écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
-    <string name="quiz_retry">Demain, on retente\u00A0?</string>
+    <string name="quiz_retry">Demain, on retente\u202F?</string>
     <string name="quiz_passed">Joli travail\u202F: ces mots sont un peu plus à vous ce soir.</string>
     <string name="unlock_new">%1$s a gagné\u202F:</string>
     <!-- after « Demain, on retente ? »: a failed quiz may still unlock something -->

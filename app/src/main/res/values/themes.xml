@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- « Correspondance + rigueur Édition » kit (design/styles/correspondance/implementation.md):
-     one serif for the whole interface (Libre Baskerville, theme fontFamily), Courier Prime only for postal mentions (style Postal),
+     one serif for the whole interface (Definiday Serif = Libre Baskerville with U+202F, theme fontFamily), Courier Prime only for postal mentions (style Postal),
      Dancing Script only for Glose's short notes (style Note), labels in small-caps style (Label), radii from dimens.xml. -->
 <resources>
     <style name="Base" parent="android:Theme.Material.Light.NoActionBar" />

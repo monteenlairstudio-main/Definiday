@@ -21,7 +21,7 @@ object Styles {
     val DISPLAY_ONLY = setOf("unifraktur_maguntia", "uncial_antiqua", "dancing_script", "parisienne", "cinzel", "abril_fatface")
 
     /** Faces without U+202F: their Reserved Font Name forbids adding it unrenamed (tools/fonts_nnbsp.py; FontsTest checks the list). */
-    val NO_NNBSP = setOf("abril_fatface", "dancing_script", "im_fell_english", "libre_baskerville", "parisienne", "playfair_display",
+    val NO_NNBSP = setOf("abril_fatface", "dancing_script", "im_fell_english", "parisienne", "playfair_display",
         "tenor_sans", "uncial_antiqua", "unifraktur_maguntia")
 
     /** [text] for [st]'s face: in a face without U+202F, « ; : ! ? » would follow the space into the system fallback font, so U+00A0. */

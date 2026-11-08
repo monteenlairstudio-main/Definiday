@@ -23,10 +23,10 @@ object WordCard {
     /** One paragraph of the card: text, size as a fraction of the card width, face, color. */
     class Line(val text: String, val size: Float, val face: Typeface, val color: Int)
 
-    /** First line = the word (or the quote), underlined by the thread. One text serif (Libre Baskerville, no italic cut: color marks the example). */
+    /** First line = the word (or the quote), underlined by the thread. One text serif (Definiday Serif, no italic cut: color marks the example). */
     fun lines(ctx: Context, item: Item, style: Style): List<Line> {
         val pal = style.palette
-        val serif = ctx.resources.getFont(R.font.libre_baskerville)
+        val serif = ctx.resources.getFont(R.font.definiday_serif)
         if (item is Quote) return listOf(
             Line("«\u202F${Styles.fine(item.texte, style)}\u202F»", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
             Line(item.signature, 0.04f, serif, pal.nature),
