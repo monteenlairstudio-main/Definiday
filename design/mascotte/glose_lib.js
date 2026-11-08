@@ -566,9 +566,9 @@ function halo(root, anims, color, h = 12) {
   walk(root, []);
   const all = U(...[...buckets.values()].flatMap(b => b.shut.map(p => { const c = p.clone(NI); c.fillColor = 'black'; return c; })));
   const groups = new Map(), extra = [];
-  // un mouvement plus petit que le liseré (respiration, petits roulis) ne le découvre pas : pas d'animateur en double (poids des AVD)
-  const amp = a => Math.max(...a.values.map(v => Math.max(...[].concat(v).map(x => Math.abs(a.type === 'scale' ? x - 1 : x)))));
-  const visible = a => a.attr === 'opacity' || (a.type === 'scale' ? amp(a) >= 0.05 : a.type === 'rotate' ? amp(a) >= 2 : amp(a) >= 8);
+  // le liseré refait tous les mouvements de sa partie : sous le seuil d'avant (translation < 8, échelle < 5 %), la tête qui respire (−3)
+  // et bâille (−7) glissait jusqu'à 10 unités sur un liseré de 12 (il s'amincissait d'un côté)
+  const visible = () => true;
   const groupOf = chain => { // groupes « <id>_halo » emboîtés comme les groupes animés d'origine, même pivot (data : réactions Android)
     let parent = null, key = '';
     for (const id of chain) {

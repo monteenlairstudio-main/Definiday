@@ -3,12 +3,14 @@
 function draw(paper) {
   const C = makeC(VARIANT), word = C.v.word || 'mot';
   const { L, anims, H } = seatedGlose(C, { head: { turn: 0.24, tilt: 2, at: [508, 352], mood: 'fier' }, tree: [292, 686] });
-  const DUR = 7, KT = [0, 0.08, 0.55, 0.86, 1]; // caché → écriture → tenu → rembobinage
+  // la boucle commence et finit mot écrit (= le dessin fixe) : tenu → rembobinage → caché → écriture. Les réactions, le retour à la vie et
+  // l'arrêt de la vie au repos tombent ainsi sur le mot écrit, sans saut. Pelote et tête : écart à la pose « mot écrit ».
+  const DUR = 7, KT = [0, 0.31, 0.45, 0.53, 1];
 
   // pelote serrée contre lui (patte proche dessous), tourne quand le fil se dévide / se rembobine
   const ballC = [500, 616];
   const ballG = yarn('pelote', ballC, 68, C);
-  anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, values: [0, 0, 150, 150, 0], keyTimes: KT, dur: DUR });
+  anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, values: [0, 0, -150, -150, 0], keyTimes: KT, dur: DUR });
   const near = arm(C, [[430, 504], [404, 552], [414, 604], [442, 624]], 64, 54, { c: [452, 632], rx: 40, ry: 30, rot: -18 });
 
   // bras lointain levé, coude marqué (touffe), patte ouverte (coussinets) qui pince le fil
@@ -32,12 +34,12 @@ function draw(paper) {
   const mk = (name, wdt, col, op) => { const t = line(lead.clone(NI), wdt, col, op); t.name = name; t.dashArray = [LEN, LEN + 40]; t.dashOffset = 0; return t; };
   const strokes = [mk('fil_a', 20, INK), mk('fil_b', 11, C.ball), mk('fil_c', 3, '#FFFFFF', 0.3)];
   strokes[2].translate([-1.5, -2]);
-  for (const s of strokes) anims.push({ id: s.name, attr: 'stroke-dashoffset', values: [LEN, LEN, 0, 0, LEN], keyTimes: KT, dur: DUR });
+  for (const s of strokes) anims.push({ id: s.name, attr: 'stroke-dashoffset', values: [0, 0, LEN, LEN, 0], keyTimes: KT, dur: DUR });
   const fil = G('fil', strokes);
   // la patte se pose par-dessus le départ du fil : deux doigts le pincent
   const pinch = G(null, [fill(X(circ(PAW.add([-4, -24]), 16), raised.shape), C.cream), line(arc(PAW.add([-20, -22]), PAW.add([-4, -12]), PAW.add([12, -24])), IN)]);
   // la tête suit l'écriture (léger hochement vers le mot)
-  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, 3, 3, 0], keyTimes: KT, dur: DUR });
+  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, -3, -3, 0], keyTimes: KT, dur: DUR });
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');
   anims.push(...glint.anims);

@@ -6,7 +6,7 @@
 // Clé d'image : [fraction, valeur, accélération] ; accélération 'out' (décélère : lancer), 'in' (accélère : chute), sinon glose_ease.
 // Chaque geste a son anticipation (petit mouvement contraire avant), son squash & stretch (corps tassé au départ et à l'arrivée, étiré
 // dans l'élan ; pelote écrasée à chaque contact) et son dépassement (il va un peu au-delà, puis se pose).
-const { animated, PARTS } = require('./svg2avd.js');
+const { animated, eases, PARTS } = require('./svg2avd.js');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon']; // mêmes mots que make_android.js
 const EASE = { out: '@android:interpolator/decelerate_quad', in: '@android:interpolator/accelerate_quad' };
 const TAP_MS = 600, SPECIAL_MS = 1800; // Glose.Taps : silence de 700 ms après un toucher, 3 s après le spécial
@@ -129,13 +129,16 @@ const SPECIAL = {
   }, wink(vd, 0.8, 0.9), squash('ecrit', [[0, 1], [0.2, 0.96], [0.32, 1.03, 'out'], [0.44, 1], [0.76, 1], [0.82, 0.98], [0.9, 1], [1, 1]])),
 };
 
-const kf = ([t, v, e], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i ? ` android:interpolator="${EASE[e] || '@interpolator/glose_ease'}"` : ''}/>`;
+// a key without its own acceleration eases only where the motion rests (svg2avd.eases): no stop where it passes through
+const kfs = k => { const ease = eases(k.map(q => q[1]));
+  return k.map(([t, v, e], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i && (EASE[e] || ease[i]) ? ` android:interpolator="${EASE[e] || ease[i]}"` : ''}/>`).join(''); };
 // { target: objectAnimator xml } for svg2avd.animated()
 function animators(vd, ms, targets) {
   for (const [t, props] of Object.entries(targets)) for (const [p, k] of Object.entries(props)) // fin = début : pas de saut au retour à la vie au repos
     if ((k[k.length - 1][1] - k[0][1]) % (p === 'rotation' ? 360 : Infinity)) throw new Error(`${vd} ${t}.${p} ne revient pas à sa valeur de départ`);
-  return Object.fromEntries(Object.entries(targets).map(([t, props]) => [t, `<objectAnimator android:duration="${ms}">` +
-    Object.entries(props).map(([p, k]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">${k.map(kf).join('')}</propertyValuesHolder>`).join('') + '</objectAnimator>']));
+  // linear timeline: the fractions above are times (without it, AccelerateDecelerate moved the 0.1 key to 0.2)
+  return Object.fromEntries(Object.entries(targets).map(([t, props]) => [t, `<objectAnimator android:duration="${ms}" android:interpolator="@android:interpolator/linear">` +
+    Object.entries(props).map(([p, k]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">${kfs(k)}</propertyValuesHolder>`).join('') + '</objectAnimator>']));
 }
 const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['reveil', 'reveil'], ...WORDS.map(w => [`ecrit_${w}`, 'ecrit'])];
 module.exports = RES => {

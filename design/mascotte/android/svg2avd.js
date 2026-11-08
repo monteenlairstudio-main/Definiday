@@ -39,6 +39,17 @@ function shared(resDir, xml) {
     xml.replace(/^<(\w+)/, '<$1 xmlns:android="http://schemas.android.com/apk/res/android"') + '\n');
   return n;
 }
+const IDLE_MS = 26000; // Glose.IDLE_MS
+// Easing of each keyframe segment (index i = the segment ending at key i): glose_ease where the motion rests at both ends (extremum,
+// hold, first and last key); accelerate into / decelerate out of a key the motion passes through; linear between two such keys.
+// (glose_ease on every key stopped the motion at each pass: a swing halted at 0°.) A loop still rests at its seam: it starts from
+// and comes back to the still frame without a jump in speed.
+function eases(vals) {
+  const n = vals.length;
+  const passes = i => i > 0 && i < n - 1 && ((vals[i - 1] < vals[i] && vals[i] < vals[i + 1]) || (vals[i - 1] > vals[i] && vals[i] > vals[i + 1]));
+  return vals.map((_, i) => !i ? null : passes(i - 1) && passes(i) ? null : passes(i) ? '@android:interpolator/accelerate_quad'
+    : passes(i - 1) ? '@android:interpolator/decelerate_quad' : '@interpolator/glose_ease');
+}
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 function convert(src, name, resDir, opts = {}) {
@@ -96,23 +107,28 @@ function gradientXml(id, attr) {
 // ---------- animations ----------
 let targets = [], cur = ''; // { name, anims: [objectAnimator xml] } ; layer being emitted
 let uid = 0;
-const splineInterp = '@interpolator/glose_ease';
-function keyframes(prop, vals, kts, type = 'floatType') {
+// values at 3 decimals: at 1 decimal the breathing (scale 1.015) was written 1 -> 1 and the flame's 0.94 0.9
+function keyframes(prop, vals, kts, type = 'floatType', linear = false) {
+  const ease = linear ? vals.map(() => null) : eases(vals);
   return `<propertyValuesHolder android:propertyName="${prop}" android:valueType="${type}">` + vals.map((v, i) =>
-    `<keyframe android:fraction="${kts[i]}" android:value="${f(v)}"${i ? ` android:interpolator="${splineInterp}"` : ''}/>`).join('') + '</propertyValuesHolder>';
+    `<keyframe android:fraction="${kts[i]}" android:value="${+(+v).toFixed(3)}"${i && ease[i] ? ` android:interpolator="${ease[i]}"` : ''}/>`).join('') + '</propertyValuesHolder>';
 }
-// opts.once = [keyTimes, coupure] : les animateurs de ces keyTimes (le fil qui écrit) jouent une fois jusqu'à la coupure (mot écrit, sans rembobinage)
+// opts.once = [keyTimes, début] : les animateurs de ces keyTimes (le fil qui écrit) jouent une fois, de « début » (mot caché) à la fin (mot écrit)
 const ONCE = an => opts.once && an.keyTimes === opts.once[0];
 function animator(an, holders) {
-  const dur = Math.round(parseFloat(an.dur) * 1000 * (ONCE(an) ? opts.once[1] : 1)), begin = parseFloat(an.begin || '0') * 1000;
+  const dur = Math.round(parseFloat(an.dur) * 1000 * (ONCE(an) ? 1 - opts.once[1] : 1)), begin = parseFloat(an.begin || '0') * 1000;
   const offset = begin < 0 ? Math.round(dur + begin) % dur : Math.round(begin); // phase négative ≈ départ retardé (approximation)
-  return `<objectAnimator android:duration="${dur}" android:repeatCount="${ONCE(an) ? 0 : 'infinite'}" android:startOffset="${offset}">${holders}</objectAnimator>`;
+  // Whole loops only, as many as fit in the idle life: each part comes to rest on its own loop end (= its still frame) instead of
+  // being cut mid-cycle by Glose.play()'s stop() (end() jumps to the last key). A loop longer than the idle life plays once.
+  // linear: without it every objectAnimator gets AccelerateDecelerate over its whole timeline, on top of the keyframe easing.
+  const n = ONCE(an) ? 1 : Math.max(1, Math.floor((IDLE_MS - offset) / dur));
+  return `<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear" android:repeatCount="${n - 1}" android:startOffset="${offset}">${holders}</objectAnimator>`;
 }
 function kts(an, n) { return an.keyTimes ? an.keyTimes.split(';').map(Number) : Array.from({ length: n }, (_, i) => i / (n - 1)); }
-function keyframesOf(an, prop, vals) { // keyframes, tronqués et étirés pour une animation « une fois »
+function keyframesOf(an, prop, vals) { // keyframes, réduits et étirés pour une animation « une fois »
   let k = kts(an, vals.length);
-  if (ONCE(an)) { const c = opts.once[1]; vals = vals.filter((_, i) => k[i] <= c); k = k.filter(t => t <= c).map(t => +(t / c).toFixed(4)); }
-  return keyframes(prop, vals, k);
+  if (ONCE(an)) { const c = opts.once[1]; vals = vals.filter((_, i) => k[i] >= c); k = k.filter(t => t >= c).map(t => +((t - c) / (1 - c)).toFixed(4)); }
+  return keyframes(prop, vals, k, 'floatType', an.calcMode === 'linear');
 }
 
 // ---------- émission ----------
@@ -235,4 +251,11 @@ function animated(name, vdName, targets, resDir) {
   });
   if (layers.length > 1) LAYERS[name] = layers;
 }
-module.exports = { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES, PARTS };
+if (require.main === module) { // node android/svg2avd.js : self-check of eases() (a swing passes 0° at full speed, rests at its ends)
+  const E = '@interpolator/glose_ease', A = '@android:interpolator/accelerate_quad', D = '@android:interpolator/decelerate_quad';
+  require('assert').deepStrictEqual(eases([0, 6, 0, -6, 0]), [null, E, A, D, E]);
+  require('assert').deepStrictEqual(eases([0, 2, 4, 6]), [null, A, null, D]);
+  require('assert').deepStrictEqual(eases([0, 0, 150, 150, 0]), [null, E, E, E, E]);
+  console.log('eases ok');
+}
+module.exports = { convert, animated, eases, TOKENS, LAYERED, LAYERS, ALIASES, PARTS };

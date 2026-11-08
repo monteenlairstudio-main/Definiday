@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_soir_vd_beret">
-<target android:name="tete" android:animation="@animator/glose_k_3ac386bf"/>
-<target android:name="dormeur" android:animation="@animator/glose_k_5705ecbd"/>
+<target android:name="tete" android:animation="@animator/glose_k_1187afb2"/>
+<target android:name="dormeur" android:animation="@animator/glose_k_4f3cfdc6"/>
 </animated-vector>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_assis_vd_1">
-<target android:name="pelote" android:animation="@animator/glose_k_4dc96c14"/>
-<target android:name="corps" android:animation="@animator/glose_k_83d032bb"/>
-<target android:name="pattes" android:animation="@animator/glose_k_c9525063"/>
-<target android:name="brin" android:animation="@animator/glose_k_233df866"/>
+<target android:name="pelote" android:animation="@animator/glose_k_8adad7b1"/>
+<target android:name="corps" android:animation="@animator/glose_k_682a3867"/>
+<target android:name="pattes" android:animation="@animator/glose_k_95f972c0"/>
+<target android:name="brin" android:animation="@animator/glose_k_0a5f30e6"/>
 </animated-vector>

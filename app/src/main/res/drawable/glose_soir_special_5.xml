@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_soir_vd_5">
-<target android:name="zzz" android:animation="@animator/glose_k_e9eec525"/>
+<target android:name="zzz" android:animation="@animator/glose_k_0f74a5ba"/>
 </animated-vector>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_reveil_vd_2">
-<target android:name="vapeur" android:animation="@animator/glose_k_287b5adc"/>
-<target android:name="vap1_o" android:animation="@animator/glose_k_66cf0137"/>
-<target android:name="vap2_o" android:animation="@animator/glose_k_66cf0137"/>
+<target android:name="vapeur" android:animation="@animator/glose_k_e9481c1d"/>
+<target android:name="vap1_o" android:animation="@animator/glose_k_e9eadeac"/>
+<target android:name="vap2_o" android:animation="@animator/glose_k_e9eadeac"/>
 </animated-vector>

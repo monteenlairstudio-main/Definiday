@@ -13,7 +13,7 @@ const { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES } = require('./svg2a
 const RES = process.env.GLOSE_RES ? path.resolve(process.env.GLOSE_RES) : path.join(__dirname, '../../../app/src/main/res'), TMP = 'rendus/android', KT = path.join(RES, '../java/fr/definiday/GloseLayers.kt');
 const OPT = JSON.parse(process.env.GLOSE_VARIANT || '{}');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon'], ONCE = ['bravo', 'encore']; // réaction de fin de quiz : écrit une fois
-const KT_ECRIT = '0;0.08;0.55;0.86;1', WRITTEN = 0.55; // pose_ecrit.js : caché, écriture, tenu, rembobinage
+const KT_ECRIT = '0;0.31;0.45;0.53;1', HIDDEN = 0.45; // pose_ecrit.js : écrit (tenu), rembobinage, caché, écriture ; « une fois » = de caché à écrit
 
 // Couleurs des jetons : défaut (gris tigré, pelote bordeaux) et surcouches. Valeurs = palettes de glose_lib.js.
 const DEFAULT = { gloseFur: '#AAA6AC', gloseFurD: '#7E7980', gloseCream: '#F8EEDD', gloseBall: '#9A4250', gloseBallD: '#5A2230',
@@ -73,7 +73,7 @@ const REACTIONS = {
       await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, OPT, v) }); // liseré de nuit (jeton gloseHalo)
       const svg = fs.readFileSync(path.join(__dirname, '..', out), 'utf8');
       Object.assign(gates, convert(svg, name, RES, { noSlots: pose === 'icone' })); // head icons never wear accessories (Glose.WORN)
-      if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, WRITTEN], vd: `${name}_vd` });
+      if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, HIDDEN], vd: `${name}_vd` });
     }
     const icon = ICONS[process.env.GLOSE_ICON || 'a3']; // owner choice 2026-11-08: A3
     if (icon) {
@@ -90,7 +90,7 @@ const REACTIONS = {
   for (const [name, [dur, props]] of Object.entries(REACTIONS)) {
     const h = Object.entries(props).map(([p, kf]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">` +
       kf.map(([t, v], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i ? ' android:interpolator="@interpolator/glose_ease"' : ''}/>`).join('') + '</propertyValuesHolder>').join('');
-    animated(name, 'glose_icone_vd', { tete: `<objectAnimator android:duration="${dur}">${h}</objectAnimator>` }, RES);
+    animated(name, 'glose_icone_vd', { tete: `<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear">${h}</objectAnimator>` }, RES);
   }
   fs.mkdirSync(path.join(RES, 'interpolator'), { recursive: true });
   fs.writeFileSync(path.join(RES, 'interpolator', 'glose_ease.xml'), '<?xml version="1.0" encoding="utf-8"?>\n<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:controlX1="0.45" android:controlY1="0" android:controlX2="0.55" android:controlY2="1"/>\n');

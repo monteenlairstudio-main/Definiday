@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_ecrit_bravo_vd_3">
-<target android:name="fil_a" android:animation="@animator/glose_k_84f3c344"/>
-<target android:name="fil_a_halo" android:animation="@animator/glose_k_84f3c344"/>
-<target android:name="fil_b" android:animation="@animator/glose_k_84f3c344"/>
-<target android:name="fil_c" android:animation="@animator/glose_k_84f3c344"/>
+<target android:name="fil_a" android:animation="@animator/glose_k_6fde1803"/>
+<target android:name="fil_a_halo" android:animation="@animator/glose_k_6fde1803"/>
+<target android:name="fil_b" android:animation="@animator/glose_k_6fde1803"/>
+<target android:name="fil_c" android:animation="@animator/glose_k_6fde1803"/>
 </animated-vector>

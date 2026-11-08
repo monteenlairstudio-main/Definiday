@@ -82,7 +82,9 @@ object Glose {
         if (paused || !ValueAnimator.areAnimatorsEnabled()) return
         d.forEach { it.reset(); it.start() } // all layers in the same frame: they share their timeline
         v.removeCallbacks(v.tag as? Runnable)
-        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, IDLE_MS) }
+        // the generated loops end by themselves within IDLE_MS of animator time (make_android.js); this stop only catches the rest.
+        // Scaled like the animators (developer option « Animator duration scale »), or it would cut them mid-cycle.
+        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, (IDLE_MS * ValueAnimator.getDurationScale()).toLong()) }
     }
 
     /** The idle life paused by the user ([pausable]), for every Glose until resumed or the app restarts: [play] leaves the still.
