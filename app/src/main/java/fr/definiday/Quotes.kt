@@ -3,8 +3,9 @@ package fr.definiday
 import android.content.Context
 import org.json.JSONArray
 
-data class Quote(val texte: String, val auteur: String, val oeuvre: String, val annee: String, val source: String, val theme: String) : Item {
-    override val key get() = "q:$texte"
+/** [cle]: the text the quote was first published with, when its wording was corrected later: history keys must not change (cooldown, counters). */
+data class Quote(val texte: String, val auteur: String, val oeuvre: String, val annee: String, val source: String, val theme: String, val cle: String = "") : Item {
+    override val key get() = "q:" + cle.ifEmpty { texte }
     /** "Auteur, Œuvre (1850)" */
     val signature get() = auteur + (if (oeuvre.isEmpty()) "" else ", $oeuvre") + (if (annee.isEmpty()) "" else " ($annee)")
 }
@@ -13,7 +14,7 @@ object Quotes {
     fun parse(json: String): List<Quote> {
         val a = JSONArray(json)
         return List(a.length()) {
-            a.getJSONObject(it).run { Quote(getString("texte"), getString("auteur"), optString("oeuvre"), optString("annee"), getString("source"), optString("theme")) }
+            a.getJSONObject(it).run { Quote(getString("texte"), getString("auteur"), optString("oeuvre"), optString("annee"), getString("source"), optString("theme"), optString("cle")) }
         }
     }
 
