@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_assis_vd">
-<target android:name="tete_halo" android:animation="@animator/glose_k_30307cef"/>
-<target android:name="corps_halo" android:animation="@animator/glose_k_0747be84"/>
-<target android:name="pelote_halo" android:animation="@animator/glose_k_6fd2165f"/>
+<target android:name="tete_halo" android:animation="@animator/glose_k_cd0121a9"/>
+<target android:name="corps_halo" android:animation="@animator/glose_k_fc6a4336"/>
+<target android:name="pelote_halo" android:animation="@animator/glose_k_ba17b08c"/>
 </animated-vector>

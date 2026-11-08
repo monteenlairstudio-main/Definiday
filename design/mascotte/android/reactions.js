@@ -59,7 +59,7 @@ const TAP = {
   awake: (vd, family) => merge(wink(vd, 0.1, 0.55),
     { tete: { rotation: [[0, 0], [0.1, -2], [0.28, 7, 'out'], [0.4, 5], [0.6, 5], [0.82, -1.5], [1, 0]],
       translateY: [[0, 0], [0.1, 0], [0.28, -7, 'out'], [0.4, -5], [0.6, -5], [0.85, 0]] } },
-    squash(family, [[0, 1], [0.1, 0.93], [0.26, 1.05, 'out'], [0.38, 0.985], [0.48, 1], [0.66, 1], [0.78, 0.965], [0.9, 1.012], [1, 1]])),
+    squash(family, [[0, 1], [0.1, 0.93], [0.28, 1.05, 'out'], [0.4, 0.985], [0.48, 1], [0.66, 1], [0.78, 0.965], [0.85, 1.012], [1, 1]])), // keys on the head's
   soir: (vd, family) => merge(
     { tete: { rotation: [[0, 0], [0.12, 1.5], [0.35, -5], [0.65, 3], [0.85, -1], [1, 0]] },
       zzz: { ...at([255, 305]), translateY: [[0, 0], [0.14, 4], [0.42, -16, 'out'], [0.72, 2], [0.86, -1], [1, 0]],
@@ -93,7 +93,7 @@ const SPECIAL = {
     tete: { rotation: [[0, 0], [0.08, 2], [0.24, -10, 'out'], [0.45, -8], [0.7, 1], [0.8, 0], [1, 0]],
       translateY: [[0, 0], [0.08, 4], [0.24, -13, 'out'], [0.34, -10], [0.6, -10], [0.85, 1], [0.92, 0]] },
     ...Object.fromEntries(['queue', 'queue_halo'].map(q => [inner(vd, q), { rotation: [[0, 0], [0.5, 0], [0.6, 8], [0.7, -6], [0.8, 4], [0.9, 0]] }])), // et son liseré de nuit
-  }, wink(vd, 0.84, 0.92), squash('livres', [[0, 1], [0.08, 0.96], [0.24, 1.03, 'out'], [0.36, 1], [0.8, 1], [0.86, 0.98], [0.94, 1], [1, 1]])),
+  }, wink(vd, 0.84, 0.92), squash('livres', [[0, 1], [0.08, 0.96], [0.24, 1.03, 'out'], [0.36, 1], [0.8, 1], [0.85, 0.98], [0.94, 1], [1, 1]])),
   // il se tasse au fond de la tasse, s'étire au-dehors (au-delà, puis tenu), soupire, retombe en s'écrasant et se rendort ;
   // un gros « z » se tasse, se gonfle et s'envole
   soir: () => ({
@@ -134,8 +134,11 @@ const kfs = k => { const ease = eases(k.map(q => q[1]));
   return k.map(([t, v, e], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i && (EASE[e] || ease[i]) ? ` android:interpolator="${EASE[e] || ease[i]}"` : ''}/>`).join(''); };
 // { target: objectAnimator xml } for svg2avd.animated()
 function animators(vd, ms, targets) {
-  for (const [t, props] of Object.entries(targets)) for (const [p, k] of Object.entries(props)) // fin = début : pas de saut au retour à la vie au repos
+  for (const [t, props] of Object.entries(targets)) for (const [p, k] of Object.entries(props)) { // fin = début : pas de saut au retour à la vie au repos
     if ((k[k.length - 1][1] - k[0][1]) % (p === 'rotation' ? 360 : Infinity)) throw new Error(`${vd} ${t}.${p} ne revient pas à sa valeur de départ`);
+    // a key segment shorter than 2 frames at 60 Hz is a jump, not a motion (merge() crossing nearby keys of two curves made 12 ms ones)
+    k.slice(1).forEach(([t1, v1], i) => { if ((t1 - k[i][0]) * ms < 33 && v1 !== k[i][1]) throw new Error(`${vd} ${t}.${p}: ${k[i][0]} -> ${t1} lasts ${((t1 - k[i][0]) * ms).toFixed(0)} ms`); });
+  }
   // linear timeline: the fractions above are times (without it, AccelerateDecelerate moved the 0.1 key to 0.2)
   return Object.fromEntries(Object.entries(targets).map(([t, props]) => [t, `<objectAnimator android:duration="${ms}" android:interpolator="@android:interpolator/linear">` +
     Object.entries(props).map(([p, k]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">${kfs(k)}</propertyValuesHolder>`).join('') + '</objectAnimator>']));

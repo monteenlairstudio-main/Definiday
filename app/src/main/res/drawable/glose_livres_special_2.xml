@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_livres_vd_2">
-<target android:name="tete" android:animation="@animator/glose_k_c43f3ea1"/>
+<target android:name="tete" android:animation="@animator/glose_k_09f083a3"/>
 <target android:name="a18" android:animation="@animator/glose_k_23f939e9"/>
 </animated-vector>
