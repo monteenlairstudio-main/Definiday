@@ -19,7 +19,7 @@
 - fon-B intégré (9e70f64, a523b87, 77f9302) : rotation du score, sons du quiz préchauffés, chaîne d'alarmes robuste, service sans mot arrêté.
 - fon-C intégré (c1dbecf) : renommage de Glose dans Réglages › Apparence, signature des cartes, titre de la Collection. Suite complète 145/145.
 - Note : un `git stash` nommé `fonB-n2-src`, laissé par l'équipe fon-B, est encore dans le dépôt. Son contenu est déjà dans 9e70f64, je ne l'ai pas supprimé.
-- 01h10-01h45 :
+- 00h50-01h00 :
   - fon-D intégré (6985e65, cc1b11e) : ✓/✗ en icônes avec TalkBack, options désactivées lisibles de nuit, carte de notation seulement si l'appli vient du Play Store, avertissement quand le quiz passe avant le mot.
   - GLOSE 2 intégré (c71720e, 9666fcd) : liseré crème de nuit, qui suit toutes les animations ; humeurs « fier » et « curieux » ; APK +56 Ko ; rendus de jour identiques au pixel.
   - ux-B intégré (7a45d30, 1b81918, 49fe6be) : U+202F ajouté aux 4 polices OFL sans nom réservé, une seule règle pour les guillemets, en-tête compact en grande police.
