@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path');
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
 const { buildOne } = require('../build.js');
-const { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES } = require('./svg2avd.js');
+const { convert, animated, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES } = require('./svg2avd.js');
 // Essais pour les décisions du propriétaire (docs/autonomie/glose_decisions.md), sans effet quand ils sont absents :
 //   GLOSE_RES=<dossier>      écrit ailleurs que dans app/src/main/res (le Kotlin dans <dossier>/../java)
 //   GLOSE_VARIANT='{"trait":[11,6]}'   variante ajoutée à chaque pose (épaisseur du trait)
@@ -66,7 +66,7 @@ const REACTIONS = {
 (async () => {
   const b = await chromium.launch(), gates = {};
   for (const d of ['drawable', 'animator', 'values']) fs.mkdirSync(path.join(RES, d), { recursive: true }); fs.mkdirSync(path.dirname(KT), { recursive: true });
-  for (const d of ['drawable', 'animator']) for (const f of fs.readdirSync(path.join(RES, d))) if (/^glose_.*\.xml$/.test(f)) fs.unlinkSync(path.join(RES, d, f)); // layers come and go
+  for (const d of ['drawable', 'animator', 'interpolator']) if (fs.existsSync(path.join(RES, d))) for (const f of fs.readdirSync(path.join(RES, d))) if (/^glose_.*\.xml$/.test(f)) fs.unlinkSync(path.join(RES, d, f)); // layers come and go
   try {
     for (const [pose, name, v] of jobs) {
       const out = `${TMP}/${name}.svg`;
@@ -93,6 +93,8 @@ const REACTIONS = {
     animated(name, 'glose_icone_vd', { tete: `<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear">${h}</objectAnimator>` }, RES);
   }
   fs.mkdirSync(path.join(RES, 'interpolator'), { recursive: true });
+  for (const n of HERMITE) fs.writeFileSync(path.join(RES, 'interpolator', `${n}.xml`), hermiteXml(n)); // key easings (svg2avd.hermite)
+  console.log(`${HERMITE.size} interpolateurs de clé glose_h_*`);
   fs.writeFileSync(path.join(RES, 'interpolator', 'glose_ease.xml'), '<?xml version="1.0" encoding="utf-8"?>\n<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:controlX1="0.45" android:controlY1="0" android:controlX2="0.55" android:controlY2="1"/>\n');
   const names = Object.keys(gates).sort(), gate = a => /^glose([A-Z][a-z]+)_/.exec(a)[1];
   const item = (k, v) => `<item name="${k}">${v}</item>`;

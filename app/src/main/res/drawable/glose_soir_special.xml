@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_soir_vd">
-<target android:name="dormeur_halo" android:animation="@animator/glose_k_6761ae3b"/>
-<target android:name="tete_halo" android:animation="@animator/glose_k_c8d86910"/>
-<target android:name="zzz_halo" android:animation="@animator/glose_k_0f74a5ba"/>
-<target android:name="p1" android:animation="@animator/glose_k_82be5523"/>
-<target android:name="a0" android:animation="@animator/glose_k_7ecad428"/>
-<target android:name="p3" android:animation="@animator/glose_k_f5b981a8"/>
-<target android:name="a2" android:animation="@animator/glose_k_d024b621"/>
-<target android:name="p5" android:animation="@animator/glose_k_f5b981a8"/>
-<target android:name="a4" android:animation="@animator/glose_k_5459bcf6"/>
+<target android:name="dormeur_halo" android:animation="@animator/glose_k_efb52b71"/>
+<target android:name="tete_halo" android:animation="@animator/glose_k_7a56ae98"/>
+<target android:name="zzz_halo" android:animation="@animator/glose_k_b50255c0"/>
+<target android:name="p1" android:animation="@animator/glose_k_90947f6e"/>
+<target android:name="a0" android:animation="@animator/glose_k_146ccf67"/>
+<target android:name="p3" android:animation="@animator/glose_k_5d698a0f"/>
+<target android:name="a2" android:animation="@animator/glose_k_f5cb030a"/>
+<target android:name="p5" android:animation="@animator/glose_k_5d698a0f"/>
+<target android:name="a4" android:animation="@animator/glose_k_6fd28a2c"/>
 </animated-vector>

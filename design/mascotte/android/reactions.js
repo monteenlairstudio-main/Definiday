@@ -3,12 +3,11 @@
 // (4 touchers d'affilée, Glose.Taps). Les cibles sont relues dans le VD (groupe animé dans paupiere_d, pivot de la pelote,
 // traits du fil) : la numérotation a0, a1… du convertisseur peut changer sans casser ces réactions.
 // Written through svg2avd.animated(): one AVD per layer holding a target, so worn accessories (copies of tete / dormeur) follow.
-// Clé d'image : [fraction, valeur, accélération] ; accélération 'out' (décélère : lancer), 'in' (accélère : chute), sinon glose_ease.
+// Clé d'image : [fraction, valeur, accélération] ; 'out' : part vite d'un repos (lancer), 'in' : arrive vite sur un repos (chute, choc) ; sinon Hermite (svg2avd).
 // Chaque geste a son anticipation (petit mouvement contraire avant), son squash & stretch (corps tassé au départ et à l'arrivée, étiré
 // dans l'élan ; pelote écrasée à chaque contact) et son dépassement (il va un peu au-delà, puis se pose).
-const { animated, eases, PARTS, IDLE0 } = require('./svg2avd.js');
+const { animated, hermite, PARTS, IDLE0 } = require('./svg2avd.js');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon']; // mêmes mots que make_android.js
-const EASE = { out: '@android:interpolator/decelerate_quad', in: '@android:interpolator/accelerate_quad' };
 const TAP_MS = 600, SPECIAL_MS = 1800; // Glose.Taps : silence de 700 ms après un toucher, 3 s après le spécial
 
 // groupe animé (aN) juste sous le groupe nommé g, et son pivot
@@ -129,9 +128,9 @@ const SPECIAL = {
   }, wink(vd, 0.8, 0.9), squash('ecrit', [[0, 1], [0.2, 0.96], [0.32, 1.03, 'out'], [0.44, 1], [0.76, 1], [0.82, 0.98], [0.9, 1], [1, 1]])),
 };
 
-// a key without its own acceleration eases only where the motion rests (svg2avd.eases): no stop where it passes through
-const kfs = k => { const ease = eases(k.map(q => q[1]));
-  return k.map(([t, v, e], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i && (EASE[e] || ease[i]) ? ` android:interpolator="${EASE[e] || ease[i]}"` : ''}/>`).join(''); };
+// speed continuous through the keys the motion passes, zero where it rests ('out' / 'in': snap out of a rest, impact on one; svg2avd.hermite)
+const kfs = k => { const ease = hermite(k.map(q => q[1]), k.map(q => q[0]), false, k.map(q => q[2]));
+  return k.map(([t, v], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i && ease[i] ? ` android:interpolator="${ease[i]}"` : ''}/>`).join(''); };
 // A reaction ends on the first frame of the idle life (once() then plays it afresh), not on the still: for the « z » and the steam of the
 // evening poses, which the idle starts mid-cycle; they reach it in the reaction's last 150 ms. What the idle shows and hides (« z »,
 // steam: alpha down to 0) may be hidden at the tap: the reaction fades it in from 0 (it vanishes then, a sleeper's start, never pops in).

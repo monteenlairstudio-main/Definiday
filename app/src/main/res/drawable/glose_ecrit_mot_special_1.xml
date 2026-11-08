@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_ecrit_mot_vd_1">
-<target android:name="pelote" android:animation="@animator/glose_k_39fe8617"/>
-<target android:name="corps" android:animation="@animator/glose_k_73c3ad56"/>
-<target android:name="pattes" android:animation="@animator/glose_k_5c96f9cf"/>
-<target android:name="bras_leve" android:animation="@animator/glose_k_b495a929"/>
-<target android:name="fil_bas" android:animation="@animator/glose_k_afc1bcb6"/>
+<target android:name="pelote" android:animation="@animator/glose_k_d044945a"/>
+<target android:name="corps" android:animation="@animator/glose_k_0e315c45"/>
+<target android:name="pattes" android:animation="@animator/glose_k_e73d2518"/>
+<target android:name="bras_leve" android:animation="@animator/glose_k_711c59e0"/>
+<target android:name="fil_bas" android:animation="@animator/glose_k_4fde173a"/>
 </animated-vector>

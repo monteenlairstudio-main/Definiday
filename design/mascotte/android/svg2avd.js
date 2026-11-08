@@ -41,17 +41,45 @@ function shared(resDir, xml) {
   return n;
 }
 const IDLE_MS = 26000; // Glose.IDLE_MS
-// Easing of each keyframe segment (index i = the segment ending at key i): glose_ease where the motion rests at both ends (extremum,
-// hold, first and last key); accelerate into / decelerate out of a key the motion passes through; linear between two such keys.
-// (glose_ease on every key stopped the motion at each pass: a swing halted at 0°.) A loop still rests at its seam: it starts from
-// and comes back to the still frame without a jump in speed.
-// cyclic: the first (= last) key is where a loop rotated by its phase starts; it is a pass-through when the loop goes through it.
-function eases(vals, cyclic = false) {
-  const n = vals.length, nb = i => cyclic && (i === 0 || i === n - 1) ? [vals[n - 2], vals[1]] : [vals[i - 1], vals[i + 1]];
-  const passes = i => (cyclic || (i > 0 && i < n - 1)) && (([a, b]) => (a < vals[i] && vals[i] < b) || (a > vals[i] && vals[i] > b))(nb(i));
-  return vals.map((_, i) => !i ? null : passes(i - 1) && passes(i) ? null : passes(i) ? '@android:interpolator/accelerate_quad'
-    : passes(i - 1) ? '@android:interpolator/decelerate_quad' : '@interpolator/glose_ease');
+// Easing of each keyframe segment (index i = the segment ending at key i): monotone cubic Hermite (Fritsch–Carlson, as PCHIP). The speed
+// is continuous through every key the motion passes (equal on both sides), zero where it rests: extremum, hold, first and last key (a
+// loop starts from and comes back to its still without a jump in speed). cyclic: the loop is rotated by its phase, its first (= last)
+// key is a pass-through when the motion goes through it. A segment of end tangents a, b (in units of its mean slope) is exactly the
+// Bézier pathInterpolator (1/3, a/3, 2/3, 1 − b/3): a, b are quantized on Q, interpolator/glose_h_<a>_<b> (make_android.js writes
+// HERMITE). Rest to rest keeps glose_ease; (2, 0) and (0, 2) are decelerate_quad and accelerate_quad, (1, 1) linear.
+// force[i] ('out' | 'in', reactions): a snap out of the rest that starts segment i (a = 2), or an impact on the rest that ends it (b = 2);
+// ignored where the key is a pass-through. (glose_ease on every key stopped the motion at each pass: a swing halted at 0°.)
+const Q = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 1, 1.25, 1.5, 2, 2.5, 3], HERMITE = new Set();
+const EASE = '@interpolator/glose_ease', DECEL = '@android:interpolator/decelerate_quad', ACCEL = '@android:interpolator/accelerate_quad';
+function hermite(vals, kts, cyclic = false, force = []) {
+  const n = vals.length, h = [], d = [];
+  for (let i = 0; i < n - 1; i++) { h.push(kts[i + 1] - kts[i]); d.push((vals[i + 1] - vals[i]) / h[i]); }
+  const tan = (d0, d1, h0, h1) => d0 * d1 <= 0 ? 0 : 3 * (h0 + h1) / ((2 * h1 + h0) / d0 + (h1 + 2 * h0) / d1); // 0 at an extremum or hold
+  const m = vals.map((_, i) => i > 0 && i < n - 1 ? tan(d[i - 1], d[i], h[i - 1], h[i]) : cyclic ? tan(d[n - 2], d[0], h[n - 2], h[0]) : 0);
+  const q = x => Q.reduce((p, c) => Math.abs(c - x) < Math.abs(p - x) ? c : p);
+  const ab = vals.map((_, i) => {
+    if (!i || !d[i - 1]) return null; // a hold: nothing moves
+    let a = m[i - 1] / d[i - 1], b = m[i] / d[i - 1];
+    if (force[i] === 'out' && !m[i - 1]) a = 2;
+    if (force[i] === 'in' && !m[i]) b = 2;
+    return [q(Math.min(3, a)), q(Math.min(3, b))];
+  });
+  for (let i = 1; i < n - 1; i++) if (m[i] && ab[i] && ab[i + 1]) { // speed in / out at a pass-through key, after quantization
+    const r = (ab[i + 1][0] * d[i]) / (ab[i][1] * d[i - 1]);
+    if (!(r >= 0.5 && r <= 2)) throw new Error(`hermite: speed ratio ${r} at key ${i} of ${vals}`);
+  }
+  return ab.map(x => {
+    if (!x) return null;
+    const [a, b] = x;
+    if (!a && !b) return EASE;
+    if (a === 2 && !b) return DECEL;
+    if (!a && b === 2) return ACCEL;
+    if (a === 1 && b === 1) return null;
+    const nm = `glose_h_${a * 1000}_${b * 1000}`; HERMITE.add(nm); return `@interpolator/${nm}`;
+  });
 }
+const hermiteXml = nm => { const [a, b] = nm.split('_').slice(2).map(x => x / 1000);
+  return `<?xml version="1.0" encoding="utf-8"?>\n<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:controlX1="0.3333" android:controlY1="${+(a / 3).toFixed(4)}" android:controlX2="0.6667" android:controlY2="${+(1 - b / 3).toFixed(4)}"/>\n`; };
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 function convert(src, name, resDir, opts = {}) {
@@ -112,7 +140,7 @@ let uid = 0;
 // values at 3 decimals: at 1 decimal the breathing (scale 1.015) was written 1 -> 1 and the flame's 0.94 0.9
 let pend = []; // keys of the animator being written: [property, values, fractions]
 function keyframes(prop, vals, kts, type = 'floatType', linear = false, cyclic = false) {
-  const ease = linear ? vals.map(() => null) : eases(vals, cyclic);
+  const ease = linear ? vals.map(() => null) : hermite(vals, kts, cyclic);
   pend.push([prop, vals.map(v => +(+v).toFixed(3)), kts]);
   return `<propertyValuesHolder android:propertyName="${prop}" android:valueType="${type}">` + vals.map((v, i) =>
     `<keyframe android:fraction="${kts[i]}" android:value="${+(+v).toFixed(3)}"${i && ease[i] ? ` android:interpolator="${ease[i]}"` : ''}/>`).join('') + '</propertyValuesHolder>';
@@ -294,11 +322,13 @@ function animated(name, vdName, targets, resDir) {
   });
   if (layers.length > 1) LAYERS[name] = layers;
 }
-if (require.main === module) { // node android/svg2avd.js : self-check of eases() (a swing passes 0° at full speed, rests at its ends)
-  const E = '@interpolator/glose_ease', A = '@android:interpolator/accelerate_quad', D = '@android:interpolator/decelerate_quad';
-  require('assert').deepStrictEqual(eases([0, 6, 0, -6, 0]), [null, E, A, D, E]);
-  require('assert').deepStrictEqual(eases([0, 2, 4, 6]), [null, A, null, D]);
-  require('assert').deepStrictEqual(eases([0, 0, 150, 150, 0]), [null, E, E, E, E]);
-  console.log('eases ok');
+if (require.main === module) { // node android/svg2avd.js : self-check of hermite() (a swing passes 0° at full speed, rests at its ends)
+  const eq = require('assert').deepStrictEqual, H = (a, b) => `@interpolator/glose_h_${a * 1000}_${b * 1000}`;
+  eq(hermite([0, 6, 0, -6, 0], [0, 0.25, 0.5, 0.75, 1]), [null, EASE, H(0, 1), H(1, 0), EASE]);
+  eq(hermite([0, 2, 4, 6], [0, 1 / 3, 2 / 3, 1]), [null, H(0, 1), null, H(1, 0)]);
+  eq(hermite([0, 0, 150, 150, 0], [0, 0.2, 0.5, 0.7, 1]), [null, null, EASE, null, EASE]);
+  eq(hermite([0, -2, 7, 5], [0, 0.1, 0.28, 0.4], false, [, , 'out']), [null, EASE, DECEL, EASE]); // snap out of the anticipation
+  eq(hermite([2, -14, 10, 2], [0, 0.6667, 0.6677, 1], true)[1], H(1, 0)); // a « z » rotated by its phase passes its first key
+  console.log('hermite ok');
 }
-module.exports = { convert, animated, eases, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };
+module.exports = { convert, animated, hermite, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_reveil_vd_4">
-<target android:name="dormeur" android:animation="@animator/glose_k_1a8cec0c"/>
-<target android:name="tete" android:animation="@animator/glose_k_b90ee25c"/>
-<target android:name="a13" android:animation="@animator/glose_k_59f10566"/>
-<target android:name="a14" android:animation="@animator/glose_k_59f10566"/>
-<target android:name="a12" android:animation="@animator/glose_k_4d372cf3"/>
+<target android:name="dormeur" android:animation="@animator/glose_k_b6f65fef"/>
+<target android:name="tete" android:animation="@animator/glose_k_50ed5bb7"/>
+<target android:name="a13" android:animation="@animator/glose_k_4dc6db31"/>
+<target android:name="a14" android:animation="@animator/glose_k_4dc6db31"/>
+<target android:name="a12" android:animation="@animator/glose_k_844ef662"/>
 </animated-vector>
