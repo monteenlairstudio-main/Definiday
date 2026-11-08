@@ -2,7 +2,7 @@
 // Tout est créé avec insert:false et rangé dans des groupes nommés : ordre des calques = ordre des listes.
 // Repère : canevas 1024, lumière en haut à gauche, trait extérieur OUT, intérieur IN, encre INK.
 const { Path, Point, Group, Color, Matrix } = paper;
-const INK = '#3B2A20', [OUT, IN] = VARIANT.trait || [9, 5]; // variante {trait:[OUT, IN]} : essai d'épaisseur (décision du propriétaire)
+const INK = '#3B2A20', [OUT, IN] = VARIANT.trait || [11, 6]; // variante {trait:[OUT, IN]} : essai d'épaisseur (décision du propriétaire)
 let SW = 1; // multiplicateur d'épaisseur (version « icône » : 1.7)
 const P = a => (a instanceof Point ? a : new Point(a));
 const NI = { insert: false };

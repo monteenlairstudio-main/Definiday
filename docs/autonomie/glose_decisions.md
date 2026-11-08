@@ -1,6 +1,8 @@
 # Monsieur Glose : décisions de goût à prendre (nuit 5)
 
-Rien n'est appliqué dans l'appli. Chaque option se rend avec le générateur (`design/mascotte/android/make_android.js`, options
+**Décision du propriétaire (8 nov., matin) : A3, B2, C3, D2, appliqués** (`make_android.js` `DEFAULT`, icône `a3` par défaut, trait 11/6 dans `glose_lib.js`). Les SVG de conception (`glose_*.svg`) gardent les anciennes teintes : seul le thème Android change.
+
+Avant la décision : rien n'est appliqué dans l'appli. Chaque option se rend avec le générateur (`design/mascotte/android/make_android.js`, options
 `GLOSE_RES`, `GLOSE_ICON`, `GLOSE_VARIANT`, `GLOSE_TOKENS` ; sans elles, la sortie est identique à aujourd'hui).
 Rendus : **Android réels** (Robolectric, xxhdpi, jour et nuit), ressources candidates posées le temps du rendu puis retirées.
 Pour l'icône, l'avant-plan est rendu par Robolectric puis posé sur le fond `icon_bg` et le masque rond par script
