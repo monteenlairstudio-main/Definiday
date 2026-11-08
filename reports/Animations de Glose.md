@@ -97,13 +97,24 @@ La planche d'aperçus de ces 10 modèles t'a été envoyée dans la conversation
 
 ## Où on en est
 
-1. **Phase 2 (en cours)** :
-   - les 3 corrections bloquantes ;
-   - l'alignement des clés ;
-   - une vérification automatique dans le générateur : chaque boucle au repos à la coupure, chaque réaction qui finit sur l'image de repos ;
-   - les courbes de Hermite aux points de passage ;
-   - une nouvelle mesure de l'ensemble.
-2. **À mesurer sur ton téléphone** : base contre correctif, avec `dumpsys gfxinfo framestats` et une trace Perfetto (commandes exactes dans `revue_expert.md` §3.2). C'est ce qui dira si le découpage des calques (n° 9) est le vrai chantier.
-3. **Ensuite**, une vie au repos qui varie : périodes premières entre elles, clignements et gestes à intervalles irréguliers.
+1. **Phase 2 faite** (`phase2_correctifs.md`, planche `Animations de Glose/sauts_phase2.jpg`). Les 3 corrections bloquantes et le reste du plan de l'expert sont appliqués et intégrés à la branche (en local, pas poussés).
 
-Rien de tout cela n'est poussé. Le compte GitHub est suspendu ; le travail reste local et peut être fourni en paquet git.
+   | Contrôle | Base | Après |
+   |---|---|---|
+   | Arrêt à 26 s (aussi à ×0,5 et ×2) | jusqu'à 81 px, « z » qui disparaissent | **0 px** |
+   | Fin de réaction → repos | 3,1 px, « z » et vapeur qui s'éteignent | **0 px** |
+   | Liseré de nuit / sa partie | 3,3 à 3,9 px | **0** |
+   | Accessoires du cou / corps | — | **0** |
+   | Cassures de vitesse aux points de passage | 39 sur 39 | **0 sur 31** |
+   | APK release | 2 026 216 o | **1 925 050 o (−98,8 Ko)** |
+
+   - Défaut découvert en route : sur le RenderThread, une animation retardée n'écrit rien avant son départ. Les 2e et 3e « z » s'affichaient en plein puis s'éteignaient. C'est corrigé, et le générateur le refuse désormais.
+   - **Seul critère non tenu** : toucher Glose en plein mouvement. Les poses éveillées sautent encore de 3 à 8 px, et « écrit » de 81 px quand on touche pendant que le mot est caché. Il faut le fondu de 100 à 120 ms proposé par l'expert.
+   - Tests : 167 verts, rendus fixes de jour inchangés.
+2. **À mesurer sur ton téléphone** : coût de dessin (`dumpsys gfxinfo framestats`, Perfetto, commandes dans `revue_expert.md` §3.2), vidéo à 240 i/s, vitesse des animations ×0,5 et ×2 sur Android 8 à 12 et 13+.
+3. **Ensuite** :
+   - le fondu au toucher ;
+   - une vie au repos qui varie : périodes premières entre elles, clignements et gestes à intervalles irréguliers ;
+   - le découpage des calques fixes et mobiles, si la mesure sur téléphone le justifie.
+
+Rien de tout cela n'est poussé : le compte GitHub est suspendu. Le travail est dans la copie de secours `definiday.bundle`.
