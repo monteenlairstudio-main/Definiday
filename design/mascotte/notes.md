@@ -206,7 +206,8 @@ Sur le papier de nuit (#141829), l'encre brune et le livre bleu nuit disparaissa
 de plus que le liseré, même pivot ; `svg2avd.animated()` anime aussi `<id>_halo`) ; les traits ouverts qui sortent de la silhouette
 (moustaches, brins, « z ») sont élargis ; le fil qui écrit a son liseré juste derrière lui, découpé hors de la silhouette, dans le calque du mot.
 Couleur `@color/glose_halo` : transparente le jour (rendu Robolectric identique au pixel, 421 images), #F0E8D8 la nuit (encre du thème nuit).
-Restants : pas de liseré sur les accessoires ni le ruban (calques à porte) ; APK release +56 Ko.
+APK release +56 Ko. Accessoires et ruban : liseré dans leur propre groupe (même porte, même calque), découpé hors de la silhouette du corps
+(+12 Ko) ; pas de liseré sur les paillettes, étoiles et éclats (clairs, déjà visibles la nuit).
 
 ## Humeurs (`gloseHead` : `o.mood`)
 `fier` (bouche ouverte en « D », sourcils arqués) pour « le fil écrit », tous les mots : la tête reste dans la partie commune à tous les

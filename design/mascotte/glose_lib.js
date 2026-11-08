@@ -540,8 +540,10 @@ function arm(C, pts, w0, w1, paw, o = {}) {
 // Derrière tout le dessin, un liseré de couleur `color` qui déborde de `h` autour de chaque contour d'encre : l'union des contours
 // fermés (un seul chemin par groupe animé) + une copie élargie de chaque trait ouvert qui sort de la silhouette (moustaches, brins, mot).
 // Les parties animées (tête, queue, fil qui s'écrit…) ont leur liseré dans un groupe `<id>_halo` qui rejoue les mêmes animations.
-// ponytail: les pièces à porte (accessoires, ruban, détails rares) n'ont pas de liseré : il dessinerait aussi les pièces non portées
-// (export Android {all:true}) ; liseré par calque d'accessoire si le manque se voit.
+// Les pièces à porte (accessoires, ruban, détails rares) restent hors du liseré du corps : il dessinerait aussi les pièces non portées
+// (export Android {all:true}). Chaque accessoire et le ruban ont le leur, dans leur propre groupe (même porte, même calque Android),
+// découpé hors de la silhouette du corps ; les paillettes, étoiles et éclats n'en ont pas (clairs, ils se voient déjà la nuit).
+const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin)$|(bonnet|beret|couronne)$/;
 const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|eclats)$/;
 // groupes que les réactions au toucher animent (android/reactions.js, REACTIONS de make_android.js) sans animation au repos :
 // leur liseré doit être un groupe à part pour les suivre (svg2avd.animated() anime aussi « <nom>_halo »)
@@ -594,6 +596,13 @@ function halo(root, anims, color, h = 12) {
     if (!out.length) continue;
     const g = b.chain.length ? groupOf(b.chain) : back;
     g.addChildren(out);
+  }
+  for (const g of root.getItems({ match: it => it.name && PIECE.test(it.name) && it.children })) {
+    const shut = g.getItems({ match: it => !(it.parent && it.parent.clipped) && it.strokeColor && it.strokeColor.equals(ink) && it.strokeWidth >= 4 && (it instanceof paper.CompoundPath || it.closed) });
+    if (!shut.length) continue;
+    const s = U(...shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round';
+    const e = OUT * SW / 2 + h + 2, box = rect(s.bounds.x - e, s.bounds.y - e, s.bounds.width + 2 * e, s.bounds.height + 2 * e);
+    g.insertChild(0, clipIn(X(notIn(all), box), [s]));
   }
   anims.push(...extra);
   return root;
