@@ -52,6 +52,7 @@ class OnboardingActivity : Activity() {
         findViewById<TextView>(R.id.welcome).text = getString(R.string.onb_welcome, p.gloseName)
         val taps = Glose.Taps()
         glose.setOnClickListener { Glose.tap(glose, taps, Glose.mainPose(p)) }
+        Glose.pausable(glose)
         findViewById<ImageView>(R.id.postmark).apply { // step 3: the post comes daily; decoration gives way to the title at large font sizes
             setImageDrawable(Postal.Postmark(context, getColor(R.color.accent)))
             if (resources.configuration.fontScale > 1.5f) visibility = View.GONE

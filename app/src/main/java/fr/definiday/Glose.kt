@@ -9,6 +9,8 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.view.ContextThemeWrapper
+import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.ImageView
 import fr.definiday.Unlocks.Kind
 
@@ -75,10 +77,33 @@ object Glose {
      *  writes and the "le fil écrit…" poses would lose their word. The pending stop lives in the view's tag. */
     fun play(v: ImageView) {
         val d = avds(v.drawable).ifEmpty { return }
-        if (!ValueAnimator.areAnimatorsEnabled()) return
+        if (paused || !ValueAnimator.areAnimatorsEnabled()) return
         d.forEach { it.reset(); it.start() } // all layers in the same frame: they share their timeline
         v.removeCallbacks(v.tag as? Runnable)
         v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, IDLE_MS) }
+    }
+
+    /** The idle life paused by the user ([pausable]), for every Glose until resumed or the app restarts: [play] leaves the still.
+     *  Taps still make him react (the user asks for that motion), then he rests. WCAG 2.2.2. */
+    var paused = false
+
+    /** A long press on [v], or its TalkBack action « Mettre en pause » / « Reprendre » (the long-press action, relabelled),
+     *  pauses or resumes the idle life. No new visible control. When animations are off there is nothing to pause: no action. */
+    fun pausable(v: ImageView) {
+        v.setOnLongClickListener {
+            if (!ValueAnimator.areAnimatorsEnabled()) return@setOnLongClickListener false
+            paused = !paused
+            if (paused) stop(v) else play(v)
+            true
+        }
+        v.accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                val long = AccessibilityNodeInfo.AccessibilityAction.ACTION_LONG_CLICK
+                if (!ValueAnimator.areAnimatorsEnabled()) { info.removeAction(long); info.isLongClickable = false; return }
+                info.addAction(AccessibilityNodeInfo.AccessibilityAction(long.id, host.context.getString(if (paused) R.string.glose_resume else R.string.glose_pause)))
+            }
+        }
     }
 
     /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once]. */

@@ -54,6 +54,9 @@
     <string name="card_quote">Citation du %s</string>
     <string name="more_quotes">Plus de citations</string>
     <string name="glose">%1$s, chat bibliothécaire</string>
+    <!-- TalkBack action on Glose (his long press): pauses / resumes his idle life (Glose.pausable) -->
+    <string name="glose_pause">Mettre en pause</string>
+    <string name="glose_resume">Reprendre</string>
     <string name="glose_bravo">%1$s écrit «\u202Fbravo\u202F» avec le fil de sa pelote</string>
     <string name="glose_encore">%1$s écrit «\u202Fencore\u202F» avec le fil de sa pelote</string>
     <string name="quiz_retry">Demain, on retente\u202F?</string>

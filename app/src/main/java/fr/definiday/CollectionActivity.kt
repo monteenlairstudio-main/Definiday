@@ -53,6 +53,7 @@ class CollectionActivity : Activity() {
             contentDescription = getString(R.string.glose, p.gloseName)
             val taps = Glose.Taps()
             setOnClickListener { Glose.tap(this, taps, Glose.pose(trial)) { Glose.drawable(context, it, Glose.styles(trial)) } }
+            Glose.pausable(this)
         }
         head.addView(preview, LinearLayout.LayoutParams((112 * dp).toInt(), (112 * dp).toInt()))
         val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding((12 * dp).toInt(), 0, 0, 0) }

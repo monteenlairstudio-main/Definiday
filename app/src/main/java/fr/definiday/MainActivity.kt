@@ -87,7 +87,7 @@ class MainActivity : Activity() {
         DailyReceiver.scheduleQuiz(this)
         Update.autoCheck(this) // nothing unless « Vérifier chaque semaine » is on and a week has passed
         val taps = Glose.Taps()
-        findViewById<ImageView>(R.id.glose).setOnClickListener { Glose.tap(it as ImageView, taps, Glose.mainPose(Prefs(this))) } // reacts, then its idle life
+        findViewById<ImageView>(R.id.glose).apply { setOnClickListener { Glose.tap(this, taps, Glose.mainPose(Prefs(context))) }; Glose.pausable(this) } // reacts, then its idle life; long press: pause
     }
 
     /** singleTop: a notification tapped while the app is open shows its item here instead of stacking a new screen. */

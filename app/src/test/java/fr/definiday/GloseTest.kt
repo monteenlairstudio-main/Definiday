@@ -234,6 +234,34 @@ class GloseTest {
         } finally { scale.invoke(null, 1f) }
     }
 
+    /** WCAG 2.2.2: a long press (TalkBack: « Mettre en pause » / « Reprendre ») pauses and resumes the idle life, here and on return;
+     *  animations off: nothing to pause, no action. */
+    @Test fun longPressPausesTheIdleLife() {
+        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+        val v = c.get().findViewById<ImageView>(R.id.glose)
+        fun running(): Boolean { v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+            return (v.drawable as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>().any { it.isRunning } }
+        fun label() = android.view.accessibility.AccessibilityNodeInfo.obtain().also(v::onInitializeAccessibilityNodeInfo).actionList
+            .firstOrNull { it.id == android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK }?.label?.toString()
+        try {
+            assertTrue(running())
+            assertEquals("Mettre en pause", label())
+            assertTrue(v.performLongClick())
+            assertFalse(running())
+            assertEquals("Reprendre", label())
+            c.pause().resume()
+            assertFalse(running()) // still paused when the screen comes back
+            assertTrue(v.performLongClick())
+            assertTrue(running())
+            val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+            try {
+                scale.invoke(null, 0f)
+                assertEquals(null, label())
+                assertFalse(v.performLongClick())
+            } finally { scale.invoke(null, 1f) }
+        } finally { Glose.paused = false }
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)
