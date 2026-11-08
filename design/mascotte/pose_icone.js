@@ -3,7 +3,7 @@
 function draw(paper) {
   SW = 1.7;
   const C = makeC(VARIANT);
-  const H = gloseHead(C, { at: [500, 352], tilt: -5, turn: 0.12, glare: false, sleep: !!C.v.sleep });
+  const H = gloseHead(C, { at: [500, 352], tilt: -5, turn: 0.12, glare: false, sleep: !!C.v.sleep, whisk: C.v.whisk }); // whisk 0.85 : icône d'appli (masque adaptatif)
   paper.project.activeLayer.addChildren([H.group]);
   return { anims: H.anims, viewBox: [240, 92, 520, 520], title: 'Monsieur Glose (icône)' };
 }

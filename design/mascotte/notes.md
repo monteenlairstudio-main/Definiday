@@ -212,3 +212,8 @@ Restants : pas de liseré sur les accessoires ni le ruban (calques à porte) ; A
 `fier` (bouche ouverte en « D », sourcils arqués) pour « le fil écrit », tous les mots : la tête reste dans la partie commune à tous les
 mots (glose_ecrit_mot_vd_2). `curieux` (un sourcil levé, petite bouche « o ») pour la pile. Écartés : « yeux qui sourient » (croissant de
 joue sous l'œil, se lit triste à 96–128 dp) ; « doux » pour « encore » (une tête par mot casse le partage des calques : +10 Ko par mot).
+
+## Icône d'appli générée (`make_android.js` → `ic_launcher_fg.xml`)
+La tête de `glose_icone` aux couleurs par défaut, liseré crème fixe (#F0E8D8, h = 8) : elle se détache du fond `icon_bg` bleu nuit, sur
+lanceur clair comme sombre ; moustaches −15 % (`whisk: 0.85`) ; échelle 0,13 centrée (à 0,15 la pointe des oreilles sortait du cercle
+du masque). Couche monochrome inchangée (rendu identique). Avant : fichier fait à la main depuis une ancienne tête.

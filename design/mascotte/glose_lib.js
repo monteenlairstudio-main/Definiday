@@ -136,7 +136,7 @@ function mouthW(c, s = 1) {
     line(arc(c.add([0, 9 * s]), c.add([-12 * s, 21 * s]), c.add([-25 * s, 9 * s]))),
     line(arc(c.add([0, 9 * s]), c.add([12 * s, 21 * s]), c.add([25 * s, 9 * s])))]);
 }
-// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux') }
+// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux'), whisk }
 function gloseHead(C, o = {}) {
   const pre = o.prefix || '', turn = o.turn || 0, W = headWarp(turn), We = headWarp(turn * 0.6);
   const wx = x => W.x(x), anims = [];
@@ -160,6 +160,7 @@ function gloseHead(C, o = {}) {
   const eyeC = [[428, 384], [572, 384]].map(([x, y]) => ({ c: [wx(x), y], k: W.k(x) }));
   const shift = x => wx(x) - x;
   const whisk = [[[386, 442], [330, 430], [282, 434]], [[388, 456], [334, 460], [290, 476]], [[614, 442], [670, 430], [718, 434]], [[612, 456], [666, 460], [710, 476]]]
+    .map(w => w.map(([x, y]) => [w[0][0] + (x - w[0][0]) * (o.whisk || 1), w[0][1] + (y - w[0][1]) * (o.whisk || 1)])) // o.whisk : longueur relative
     .map(w => { const d = shift(w[0][0]); return line(curve(w.map(([x, y], i) => [x + d * (1 - i * 0.35), y])), 4.5, INK, 0.85); });
   // yeux
   let eyes = [], lids = null, eyeTops = [];
