@@ -5,7 +5,13 @@ const fs = require('fs'), path = require('path');
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
 const { buildOne } = require('../build.js');
 const { convert, animated, TOKENS, LAYERED, LAYERS, ALIASES } = require('./svg2avd.js');
-const RES = path.join(__dirname, '../../../app/src/main/res'), TMP = 'rendus/android', KT = path.join(RES, '../java/fr/definiday/GloseLayers.kt');
+// Essais pour les décisions du propriétaire (docs/autonomie/glose_decisions.md), sans effet quand ils sont absents :
+//   GLOSE_RES=<dossier>      écrit ailleurs que dans app/src/main/res (le Kotlin dans <dossier>/../java)
+//   GLOSE_VARIANT='{"trait":[11,6]}'   variante ajoutée à chaque pose (épaisseur du trait)
+//   GLOSE_TOKENS='{"gloseFur":"#A8A8B4"}'   couleurs par défaut remplacées (pelage, reliure...)
+//   GLOSE_ICON=a2|a3         écrit aussi drawable/ic_launcher_fg.xml depuis glose_icone (voir ICONS)
+const RES = process.env.GLOSE_RES ? path.resolve(process.env.GLOSE_RES) : path.join(__dirname, '../../../app/src/main/res'), TMP = 'rendus/android', KT = path.join(RES, '../java/fr/definiday/GloseLayers.kt');
+const OPT = JSON.parse(process.env.GLOSE_VARIANT || '{}');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon'], ONCE = ['bravo', 'encore']; // réaction de fin de quiz : écrit une fois
 const KT_ECRIT = '0;0.08;0.55;0.86;1', WRITTEN = 0.55; // pose_ecrit.js : caché, écriture, tenu, rembobinage
 
@@ -14,6 +20,7 @@ const DEFAULT = { gloseFur: '#A4ACBC', gloseFurD: '#788196', gloseCream: '#F8EED
   gloseNose: '#E98C8C', gloseRose: '#F0A6A2', gloseCupIn: '#18203A', gloseCupLit: '#4A5E92', gloseCup: '#2C3A5E',
   gloseBook: '#2C3A5E', gloseBookD: '#1F2944', gloseBookTop: '#2C3A5E', gloseBookTopD: '#1F2944', gloseBookLow: '#9C6B4A', gloseBookLowD: '#7C5236',
   gloseSpecs: '#D9A441', gloseStripe: '#788196', gloseHalo: '@color/glose_halo' }; // liseré : transparent le jour, crème la nuit (values-night)
+Object.assign(DEFAULT, JSON.parse(process.env.GLOSE_TOKENS || '{}'));
 // socle et tasse bordeaux des pelages sombres (le chat ne se fond pas dans le bleu nuit)
 const DARK_BASE = { gloseBook: '#8E3A44', gloseBookD: '#6E2A33', gloseCup: '#8E3A44', gloseCupIn: '#4A1E26', gloseCupLit: '#B0606A',
   gloseBookTop: '#9C6B4A', gloseBookTopD: '#7C5236', gloseBookLow: '#2C3A5E', gloseBookLowD: '#1F2944' };
@@ -44,6 +51,13 @@ const STYLES = {
 const jobs = [['assis', 'glose_assis'], ['livres', 'glose_livres'], ['soir', 'glose_soir'], ...WORDS.map(w => ['ecrit', `glose_ecrit_${w}`, { word: w }]),
   ['soir', 'glose_reveil', { awake: true }], ['icone', 'glose_icone'], ['icone', 'glose_icone_dort', { sleep: true }]];
 // réactions one-shot du quiz (animateurs seuls sur le groupe « tete » de l'icône, pivot au cou) : [fraction, valeur]
+// icône d'appli générée (non branchée : ic_launcher_fg.xml reste fait à la main) : tête aux couleurs par défaut, liseré crème fixe
+// (elle se détache du fond bleu nuit) ; [variante, échelle, translateX, translateY] dans le repère 108 dp.
+// a2 = fec50e1 (annulé : visage plus petit) ; a3 = le visage actuel (échelle 0,15, tête penchée) gardé, oreilles −20 % et moustaches −30 % pour tenir dans le cercle (rayon max 35,7 sur 36).
+const ICONS = {
+  a2: [{ whisk: 0.85 }, 0.13, 20.89, 25.18],
+  a3: [{ whisk: 0.7, ear: 0.8 }, 0.15, 16.8, 17.4],
+};
 const REACTIONS = {
   glose_icone_hoche: [900, { translateY: [[0, 0], [0.25, 10], [0.5, 0], [0.75, 8], [1, 0]], scaleY: [[0, 1], [0.25, 0.96], [0.5, 1], [0.75, 0.97], [1, 1]] }], // hoche la tête : oui
   glose_icone_penche: [1500, { rotation: [[0, 0], [0.22, -11], [0.72, -11], [1, 0]], translateX: [[0, 0], [0.22, -6], [0.72, -6], [1, 0]] }], // penche la tête, curieux
@@ -51,14 +65,25 @@ const REACTIONS = {
 
 (async () => {
   const b = await chromium.launch(), gates = {};
+  for (const d of ['drawable', 'animator', 'values']) fs.mkdirSync(path.join(RES, d), { recursive: true }); fs.mkdirSync(path.dirname(KT), { recursive: true });
   for (const d of ['drawable', 'animator']) for (const f of fs.readdirSync(path.join(RES, d))) if (/^glose_.*\.xml$/.test(f)) fs.unlinkSync(path.join(RES, d, f)); // layers come and go
   try {
     for (const [pose, name, v] of jobs) {
       const out = `${TMP}/${name}.svg`;
-      await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, v) }); // liseré de nuit (jeton gloseHalo)
+      await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, OPT, v) }); // liseré de nuit (jeton gloseHalo)
       const svg = fs.readFileSync(path.join(__dirname, '..', out), 'utf8');
       Object.assign(gates, convert(svg, name, RES, { noSlots: pose === 'icone' })); // head icons never wear accessories (Glose.WORN)
       if (ONCE.includes(v && v.word)) convert(svg, `${name}_fin`, RES, { once: [KT_ECRIT, WRITTEN], vd: `${name}_vd` });
+    }
+    const icon = ICONS[process.env.GLOSE_ICON];
+    if (icon) {
+      const [v, k, tx, ty] = icon, svg = await buildOne(b, { pose: 'icone', out: `${TMP}/ic_launcher.svg`, variant: Object.assign({ halo: '#F0E8D8', haloW: 8 }, v) });
+      const tmp = path.join(__dirname, '..', TMP, 'res'); convert(svg, 'ic_launcher_src', tmp, { noSlots: true });
+      const vd = fs.readFileSync(path.join(tmp, 'drawable', 'ic_launcher_src_vd.xml'), 'utf8').replace(/\?attr\/(\w+)/g, (_, a) => DEFAULT[a]);
+      const body = /<group android:name="cadre"[\s\S]*<\/group>/.exec(vd)[0];
+      fs.writeFileSync(path.join(RES, 'drawable', 'ic_launcher_fg.xml'), `<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by design/mascotte/android/make_android.js (GLOSE_ICON=${process.env.GLOSE_ICON}): Monsieur Glose's head, default colours, cream outline, inside the round mask. -->\n` +
+        `<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">\n` +
+        `<group android:scaleX="${k}" android:scaleY="${k}" android:translateX="${tx}" android:translateY="${ty}">${body}</group>\n</vector>\n`);
     }
   } finally { await b.close(); }
   require('./reactions.js')(RES); // réactions au toucher (glose_<pose>_tap / _special), un AVD par calque animé

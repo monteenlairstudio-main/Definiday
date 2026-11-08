@@ -2,7 +2,7 @@
 // Tout est créé avec insert:false et rangé dans des groupes nommés : ordre des calques = ordre des listes.
 // Repère : canevas 1024, lumière en haut à gauche, trait extérieur OUT, intérieur IN, encre INK.
 const { Path, Point, Group, Color, Matrix } = paper;
-const INK = '#3B2A20', OUT = 9, IN = 5;
+const INK = '#3B2A20', [OUT, IN] = VARIANT.trait || [9, 5]; // variante {trait:[OUT, IN]} : essai d'épaisseur (décision du propriétaire)
 let SW = 1; // multiplicateur d'épaisseur (version « icône » : 1.7)
 const P = a => (a instanceof Point ? a : new Point(a));
 const NI = { insert: false };
@@ -136,23 +136,25 @@ function mouthW(c, s = 1) {
     line(arc(c.add([0, 9 * s]), c.add([-12 * s, 21 * s]), c.add([-25 * s, 9 * s]))),
     line(arc(c.add([0, 9 * s]), c.add([12 * s, 21 * s]), c.add([25 * s, 9 * s])))]);
 }
-// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux') }
+// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux'),
+//       whisk (longueur relative des moustaches), ear (hauteur relative des oreilles, pointe ramenée vers la base) }
 function gloseHead(C, o = {}) {
   const pre = o.prefix || '', turn = o.turn || 0, W = headWarp(turn), We = headWarp(turn * 0.6);
   const wx = x => W.x(x), anims = [];
   const sleep = !!o.sleep;
   // silhouette : crâne + oreilles (projetées plus doucement) + touffes de joues (la lointaine un peu réduite)
   const skull = ell([500, 352], [176, 146]);
-  const earL = warp(rpoly([[334, 304], [346, 128], [454, 226]], [40, 32, 40]), We);
-  const earR = warp(rpoly([[546, 226], [654, 128], [666, 304]], [40, 32, 40]), We);
+  const ek = o.ear || 1, eT = ([x, y]) => x < 500 ? [394 + (x - 394) * ek, 265 + (y - 265) * ek] : [606 + (x - 606) * ek, 265 + (y - 265) * ek]; // pointe -> milieu de la base
+  const earL = warp(rpoly([[334, 304], eT([346, 128]), [454, 226]], [40, 32, 40]), We);
+  const earR = warp(rpoly([[546, 226], eT([654, 128]), [666, 304]], [40, 32, 40]), We);
   const tL = blob([[346, 366], [304, 402], [330, 414], [312, 446], [356, 458], [370, 410]], 0.5);
   const tR = blob([[654, 366], [696, 402], [670, 414], [688, 446], [644, 458], [630, 410]], 0.5);
   const kT = 1 - Math.max(0, turn) * 0.9, kTl = 1 - Math.max(0, -turn) * 0.9;
   tR.scale(kT, [650, 410]); tL.scale(kTl, [350, 410]);
   const head = U(skull, earL, earR, tL, tR);
-  const innerL = warp(rpoly([[360, 278], [362, 166], [434, 236]], [26, 18, 26]), We), innerR = warp(rpoly([[566, 236], [638, 166], [640, 278]], [26, 18, 26]), We);
+  const innerL = warp(rpoly([[360, 278], eT([362, 166]), [434, 236]], [26, 18, 26]), We), innerR = warp(rpoly([[566, 236], eT([638, 166]), [640, 278]], [26, 18, 26]), We);
   const earHair = [[[376, 284], [372, 256], [380, 234]], [[390, 282], [390, 262]], [[624, 284], [628, 256], [620, 234]], [[610, 282], [610, 262]]]
-    .map(pts => line(warp(curve(pts), We), 4, C.cream, 0.9));
+    .map(pts => line(warp(curve(pts.map(eT)), We), 4, C.cream, 0.9));
   const muzzle = X(warp(U(circ([478, 452], 36), circ([522, 452], 36), ell([500, 480], [52, 30])), W), head);
   const mMark = U(warp(U(blob([[486, 210], [514, 210], [506, 272], [494, 272]], 0.4), blob([[442, 222], [464, 214], [468, 262], [460, 264]], 0.4),
     blob([[536, 214], [558, 222], [540, 264], [532, 262]], 0.4)), W), taper([[322, 340], [362, 350]], 18, 6), taper([[678, 340], [638, 350]], 18, 6),
@@ -160,6 +162,7 @@ function gloseHead(C, o = {}) {
   const eyeC = [[428, 384], [572, 384]].map(([x, y]) => ({ c: [wx(x), y], k: W.k(x) }));
   const shift = x => wx(x) - x;
   const whisk = [[[386, 442], [330, 430], [282, 434]], [[388, 456], [334, 460], [290, 476]], [[614, 442], [670, 430], [718, 434]], [[612, 456], [666, 460], [710, 476]]]
+    .map(w => w.map(([x, y]) => [w[0][0] + (x - w[0][0]) * (o.whisk || 1), w[0][1] + (y - w[0][1]) * (o.whisk || 1)]))
     .map(w => { const d = shift(w[0][0]); return line(curve(w.map(([x, y], i) => [x + d * (1 - i * 0.35), y])), 4.5, INK, 0.85); });
   // yeux
   let eyes = [], lids = null, eyeTops = [];
