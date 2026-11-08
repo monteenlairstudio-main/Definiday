@@ -85,6 +85,7 @@ class DefinidayTest {
         q.forEach { assertTrue(it.texte, it.texte.length <= 260 && it.source.startsWith("https://fr.wikiquote.org/wiki/")) }
         q.forEach { assertTrue(it.texte, '\'' !in it.texte && !Regex(" [;:!?]").containsMatchIn(it.texte)) } // ’ and U+202F, as words.json
         q.forEach { assertTrue(it.texte, !it.texte.startsWith("«")) } // the card adds its own guillemets: « « … » »
+        q.forEach { assertTrue(it.signature, !Regex("[\\p{L}\\d \u00A0][;:!?]").containsMatchIn(it.signature)) } // QA F7: « Paris : vie », U+202F
         assertEquals(q.size, q.map { it.key }.toSet().size)
         assertTrue(q.any { it.key == "q:« Que tu meures absous ou damné, marmottait Scarbo cette nuit à mon oreille, tu auras pour linceul une toile d’araignée, et j’ensevelirai l’araignée avec toi\u202F! »" }) // corrected text, key unchanged: history kept
         assertTrue(q.count { it.theme == "lenteur" } >= 10)

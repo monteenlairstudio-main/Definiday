@@ -94,7 +94,8 @@ class DetailActivity : Activity() {
             box.addView(sheet, lp(12))
             text(getString(R.string.anecdote), sheet, getColor(R.color.ink2), R.style.Label)
             text(w.anecdote, sheet, getColor(R.color.ink), top = 6)
-            if (w.source.isNotEmpty()) sheet.addView(Button(this, null, 0, R.style.Link).apply { text = getText(R.string.source); setOnClickListener { open(w.source) } })
+            if (w.source.isNotEmpty()) sheet.addView(Button(this, null, 0, R.style.Link).apply { text = getText(R.string.source); setOnClickListener { open(w.source) } },
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { marginStart = -px(8) }) // at the start, as on the home card
         }
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(box) })
     }

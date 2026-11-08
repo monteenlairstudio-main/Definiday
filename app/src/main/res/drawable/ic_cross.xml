@@ -2,5 +2,5 @@
 <!-- The cross of a wrong quiz answer, ic_check's twin (same box, same stroke). Tinted in code. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="20dp" android:height="20dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:pathData="M7,7L17,17M17,7L7,17" android:strokeColor="@color/accent" android:strokeWidth="2.5" android:strokeLineCap="round" />
+    <path android:pathData="M6,6L18,18M18,6L6,18" android:strokeColor="@color/accent" android:strokeWidth="2.5" android:strokeLineCap="round" />
 </vector>

@@ -116,7 +116,8 @@ class SettingsActivity : Activity() {
         }
         findViewById<Button>(R.id.name_reset).apply {
             text = getString(R.string.name_reset, getString(R.string.glose_name))
-            setOnClickListener { p.gloseName = ""; shownName = p.gloseName; name.setText(shownName) }
+            visibility = if (p.gloseName == getString(R.string.glose_name)) View.GONE else View.VISIBLE // nothing to reset
+            setOnClickListener { p.gloseName = ""; shownName = p.gloseName; name.setText(shownName); visibility = View.GONE }
         }
         findViewById<Button>(R.id.styles_open).setOnClickListener { startActivity(Intent(this, StylesActivity::class.java)) }
         findViewById<Switch>(R.id.sounds).apply {
@@ -152,6 +153,7 @@ class SettingsActivity : Activity() {
         if (err != 0) return false
         val typed = name.text.toString()
         if (typed.trim() != shownName && p.gloseName == shownName) { p.gloseName = typed; shownName = p.gloseName } // untouched: no key written
+        findViewById<Button>(R.id.name_reset).visibility = if (shownName == getString(R.string.glose_name)) View.GONE else View.VISIBLE
         if (typed != shownName) name.setText(shownName)
         return true
     }

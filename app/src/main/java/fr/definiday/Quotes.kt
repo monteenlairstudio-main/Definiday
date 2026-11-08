@@ -7,7 +7,8 @@ import org.json.JSONArray
 data class Quote(val texte: String, val auteur: String, val oeuvre: String, val annee: String, val source: String, val theme: String, val cle: String = "") : Item {
     override val key get() = "q:" + cle.ifEmpty { texte }
     /** "Auteur, Œuvre (1850)" */
-    val signature get() = auteur + (if (oeuvre.isEmpty()) "" else ", $oeuvre") + (if (annee.isEmpty()) "" else " ($annee)")
+    val signature get() = (auteur + (if (oeuvre.isEmpty()) "" else ", $oeuvre") + (if (annee.isEmpty()) "" else " ($annee)"))
+        .replace(Regex("[ \u00A0\u202F]?([;:!?])"), "\u202F$1") // some titles came without French spacing (« Paris: vie »)
 }
 
 object Quotes {

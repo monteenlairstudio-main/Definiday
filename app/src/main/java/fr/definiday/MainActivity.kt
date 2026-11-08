@@ -124,7 +124,7 @@ class MainActivity : Activity() {
         findViewById<ImageView>(R.id.glose).apply { setImageDrawable(Glose.mine(context, Glose.mainPose(p))); contentDescription = getString(R.string.glose, p.gloseName); Glose.play(this) }
         findViewById<ImageView>(R.id.season).apply { val r = season(java.time.LocalDate.now().monthValue); setImageResource(r); visibility = if (r == 0) View.GONE else View.VISIBLE }
         val today = java.time.LocalDate.now()
-        findViewById<TextView>(R.id.date).text = today.format(java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM", Locale.FRENCH))
+        findViewById<TextView>(R.id.date).text = today.format(java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM", Locale.FRENCH)).replace(' ', '\u00A0').replaceFirst('\u00A0', ' ') // « 8 novembre » never split
         val done = p.lastQuizDay == today.toEpochDay()
         findViewById<Button>(R.id.quiz_open).apply { // done: back to a plain Row, the fill and the seal are for what is still to do (audit 011 n° 19)
             setText(if (done) R.string.quiz_done else R.string.quiz_open)
