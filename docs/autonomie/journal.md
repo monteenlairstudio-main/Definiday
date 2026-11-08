@@ -44,3 +44,7 @@
 - **Incident** : e4179a2 avait cassé `widget.xml` (balise non fermée), et la CI de la branche était rouge sur 3 pushs. Mon décompte relisait les résultats de tests de l'exécution précédente sans vérifier le code de sortie de Gradle.
   - Corrigé (widget.xml). Le script de suite complète supprime désormais les anciens résultats, vérifie le code de sortie et construit l'APK release.
   - Suite complète 162/162, `assembleRelease` OK.
+- 02h10 : relecture n° 2 (`night/review_2.md`) : 1 bloquant (widget.xml, déjà corrigé), 1 important, 3 mineurs.
+  - I1 (liseré de nuit non découpé, qui peignait du crème sur le pelage autour du grelot et du nœud) : corrigé dans le générateur, 8 calques régénérés, avec un test (e67dd7b).
+  - M2 et M3 corrigés (a28a2b3). M1 (compteur « à revoir ») passe en décision du propriétaire.
+- Suite complète 164/164 et `assembleRelease` OK.
