@@ -320,4 +320,15 @@ class GloseTest {
             }
         }
     }
+
+    /** QA F1: the night outline follows the mode even when Glose was drawn in the other mode first (drawable cache). */
+    @Test fun nightOutlineFollowsTheModeAfterASwitch() {
+        fun cream() = Glose.bitmap(Glose.mine(ctx, R.drawable.glose_assis_vd, accessory = false), 256, 256).let { b ->
+            (0 until b.width step 2).sumOf { x -> (0 until b.height step 2).count { y -> b.getPixel(x, y) == 0xFFF0E8D8.toInt() } } }
+        assertEquals(0, cream()) // by day: no outline
+        org.robolectric.RuntimeEnvironment.setQualifiers("+night")
+        assertTrue(cream() > 100) // then at night, same process: the outline shows
+        org.robolectric.RuntimeEnvironment.setQualifiers("+notnight")
+        assertEquals(0, cream()) // and goes again by day
+    }
 }

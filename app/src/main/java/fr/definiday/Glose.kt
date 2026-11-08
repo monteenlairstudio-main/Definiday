@@ -26,6 +26,8 @@ object Glose {
     fun drawable(ctx: Context, res: Int, styles: List<Int> = emptyList()): Drawable {
         val t = ContextThemeWrapper(ctx, R.style.Glose)
         styles.forEach { t.theme.applyStyle(it, true) }
+        val night = ctx.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
+        t.theme.applyStyle(if (night) R.style.GloseHalo_Nuit else R.style.GloseHalo_Jour, true) // outline by mode, and a theme key per mode (cache)
         val layers = GloseLayers.layers[res] ?: return t.getDrawable(res)!!
         val open = GloseLayers.gates.filter { it.first in styles }.map { it.second }
         return LayerDrawable(layers.filter { it.first.isEmpty() || it.first in open }.map { t.getDrawable(it.second)!! }.toTypedArray())
