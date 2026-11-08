@@ -37,3 +37,4 @@
 - 01h25 : lancés son (proposition de niveaux, sans remplacer les fichiers livrés), crap-2 (découpage de QuizActivity, tests de caractérisation d'abord), GLOSE 4 (anticipation et squash & stretch dans les réactions, pause de la vie au repos). Le maître corrige : la notification de suivi dit « au 2e déverrouillage », typo de `mots_none_favourites`, commentaire « fragile ».
 - 01h35 : son intégré (8fa55bb). C'est une proposition de niveaux à écouter, dans `docs/son/proposition_niveaux/` : après un passe-haut 300 Hz, l'écart entre les sons passe de 18,8 à 1,2 dB. Les fichiers livrés ne changent pas.
 - 01h40 : crap-2 intégré (4b25a40, 0048e13). QuizActivity est découpé : complexité max 26 → 11, avec 6 tests de caractérisation. Suite complète 161/161. Conso hebdo 6 %.
+- 01h45 : retouches du maître, widget en romain et lignes d'aide plus aérées (e4179a2). Relecture indépendante n° 2 lancée sur 6a3a199..e4179a2.
