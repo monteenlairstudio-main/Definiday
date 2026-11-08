@@ -362,11 +362,12 @@ class BugHuntTest {
             repeat(Words.seenToday(ctx).size) { answerOne(c.get()) }
             val end = listOf(ctx.getString(R.string.unlock_new, p.gloseName), Unlocks.items.last { it.id in p.announced }.nom, ctx.getString(R.string.rate_text))
             assertTrue(texts(c.get()).containsAll(end))
+            Sounds.ALL.forEach { runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(it, true) } } // sounds asked before the rotation play now
             shadowOf(Sounds.pool).clearPlayed()
             c.recreate()
             assertTrue("after rotation: ${texts(c.get())}", texts(c.get()).containsAll(end))
-            runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(Sounds.CHIME, true) } // a chime asked again would play now (throws: never loaded)
-            assertTrue(Sounds.ALL.none { shadowOf(Sounds.pool).wasResourcePlayed(it) })
+            Sounds.ALL.forEach { runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(it, true) } } // any sound asked again would play now (throws: never loaded)
+            assertEquals(emptyList<Int>(), Sounds.ALL.filter { shadowOf(Sounds.pool).wasResourcePlayed(it) }.map { ctx.resources.getResourceEntryName(it) })
         } finally { Sounds.release() }
     }
 

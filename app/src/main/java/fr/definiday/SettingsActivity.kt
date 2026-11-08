@@ -140,6 +140,7 @@ class SettingsActivity : Activity() {
 
     override fun onPause() {
         super.onPause()
+        if (resumed === this) resumed = null
         saveName() // leaving with Back while typing: no Done, no focus loss
     }
 
@@ -158,30 +159,35 @@ class SettingsActivity : Activity() {
 
     override fun onActivityResult(req: Int, res: Int, data: Intent?) {
         val uri = data?.data?.takeIf { res == RESULT_OK } ?: return
-        fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
-        val buttons = listOf(R.id.profile_export, R.id.profile_import).map { findViewById<Button>(it) }
-        buttons.forEach { it.isEnabled = false }
+        profileButtons(false)
         // Off the UI thread: the document may live on Drive or OneDrive (network), up to 4 MiB.
+        val app = applicationContext
         Thread {
-            val saved = req == REQ_EXPORT && Profile.export(this, uri)
-            val profile = if (req == REQ_IMPORT) Profile.read(this, uri) else null
-            runOnUiThread {
-                buttons.forEach { it.isEnabled = true }
-                if (isFinishing || isDestroyed) return@runOnUiThread
-                when {
-                    req == REQ_EXPORT -> toast(if (saved) R.string.profile_saved else R.string.profile_save_failed)
-                    profile == null -> toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
-                    else -> AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
-                        .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
-                        .setNegativeButton(R.string.cancel, null)
-                        .show()
-                }
-            }
+            val saved = req == REQ_EXPORT && Profile.export(app, uri)
+            val profile = if (req == REQ_IMPORT) Profile.read(app, uri) else null
+            // to the screen showing now: rotated meanwhile, this instance is gone and the result would be lost
+            runOnUiThread { (resumed ?: this.takeUnless { isFinishing || isDestroyed })?.profileDone(req, saved, profile) }
         }.start()
+    }
+
+    private fun profileButtons(on: Boolean) = listOf(R.id.profile_export, R.id.profile_import).forEach { findViewById<Button>(it).isEnabled = on }
+
+    private fun profileDone(req: Int, saved: Boolean, profile: Map<String, Map<String, Any>>?) {
+        fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+        profileButtons(true)
+        when {
+            req == REQ_EXPORT -> toast(if (saved) R.string.profile_saved else R.string.profile_save_failed)
+            profile == null -> toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
+            else -> AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
+                .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        resumed = this
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
         explainLock() // back from changing the wallpaper
@@ -253,5 +259,9 @@ class SettingsActivity : Activity() {
 
     private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h" + if (min % 60 > 0) " ${"%02d".format(min % 60)}" else ""
 
-    private companion object { const val REQ_EXPORT = 1; const val REQ_IMPORT = 2 }
+    private companion object {
+        const val REQ_EXPORT = 1; const val REQ_IMPORT = 2
+        /** The Settings screen in the foreground, if any: a profile read finishing after a rotation lands there. */
+        @android.annotation.SuppressLint("StaticFieldLeak") var resumed: SettingsActivity? = null
+    }
 }

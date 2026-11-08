@@ -182,6 +182,22 @@ class ProfileTest {
         assertEquals(before, profile())
     }
 
+    /** Review M2: rotated while the file was read, the result reaches the new screen instead of being dropped. */
+    @Test fun profileReadEndingAfterARotationReachesTheNewScreen() {
+        fill()
+        assertTrue(Profile.export(ctx, uri()))
+        val old = Robolectric.buildActivity(SettingsActivity::class.java).setup()
+        old.get().findViewById<Button>(R.id.profile_import).performClick()
+        val open = shadowOf(old.get()).nextStartedActivityForResult
+        old.pause()
+        val now = Robolectric.buildActivity(SettingsActivity::class.java).setup().get() // the recreated screen, in front
+        shadowOf(old.get()).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        settle { ShadowDialog.getLatestDialog()?.isShowing == true }
+        var c = ShadowDialog.getLatestDialog().context
+        while (c is android.content.ContextWrapper && c !is Activity) c = c.baseContext
+        assertTrue(c === now)
+    }
+
     /** debug-signed builds (this one, and release without the keystore) never replace the real app fr.definiday. */
     @Test fun testBuildInstallsBesideTheRealApp() {
         assertEquals("fr.definiday.dev", ctx.packageName)
