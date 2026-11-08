@@ -49,7 +49,7 @@
   - M2 et M3 corrigés (a28a2b3). M1 (compteur « à revoir ») passe en décision du propriétaire.
 - Suite complète 164/164 et `assembleRelease` OK.
 - 02h05 : GLOSE 5 intégré (a548b1a), planche de choix `glose_decisions.md`. Recommandations : A3 (icône, visage actuel et liseré), B2 (trait 11/6), C3 (pelage gris chaud #AAA6AC), D2 (reliure ardoise #6A7EA6). Rien n'est appliqué. QA visuelle de toute l'appli lancée. Conso hebdo 7 %.
-- 02h45 : contrôle visuel de toute l'appli (`rapports/qa_visuelle.md`), 1 constat important et 8 mineurs.
+- 02h20 : contrôle visuel de toute l'appli (`rapports/qa_visuelle.md`), 1 constat important et 8 mineurs.
   - F1 corrigé (f17ff3e) : le liseré de nuit dépendait du cache, il manquait la nuit après un affichage de jour. Test ajouté.
   - F2 à F7 corrigés (098c306).
   - F8 (pointe des enveloppes, déjà là avant) laissé.

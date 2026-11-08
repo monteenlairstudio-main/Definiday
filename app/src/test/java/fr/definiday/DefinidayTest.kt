@@ -359,7 +359,7 @@ class DefinidayTest {
         org.robolectric.Shadows.shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending") // the card needs Play
         capture(quizEnd(right = 3), File(ui, "quiz_fin_noter.png")) // 5th passed quiz: the rate card, once
         p.guessFirst = true
-        capture(main(), File(ui, "home_deviner.png"))
+        capture(main(Words.load(ctx)[42].mot), File(ui, "home_deviner.png")) // a word: some days start with a quote, which has no veil
         p.guessFirst = false
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
