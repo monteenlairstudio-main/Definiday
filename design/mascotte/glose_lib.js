@@ -601,7 +601,9 @@ function halo(root, anims, color, h = 12) {
     if (!shut.length) continue;
     const s = U(...shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round';
     const e = OUT * SW / 2 + h + 2, box = rect(s.bounds.x - e, s.bounds.y - e, s.bounds.width + 2 * e, s.bounds.height + 2 * e);
-    g.insertChild(0, clipIn(X(notIn(all), box), [s]));
+    const area = X(notIn(all), box);
+    if (area.isEmpty()) continue; // piece lying entirely on the body: no outline (unclipped, it would paint cream over the fur)
+    g.insertChild(0, clipIn(area, [s]));
   }
   anims.push(...extra);
   return root;

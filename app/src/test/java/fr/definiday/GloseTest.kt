@@ -301,4 +301,23 @@ class GloseTest {
             }
         } finally { scale.invoke(null, 1f) }
     }
+
+    /** Review 2 I1: an accessory's night outline is always clipped outside the body; unclipped it painted cream over the fur. */
+    @Test fun accessoryNightOutlinesAreClipped() {
+        val layers = File("src/main/res/drawable").listFiles { f -> f.name.matches(Regex("glose_\\w+_vd_[a-z_]+\\.xml")) }!!
+        assertTrue(layers.size > 20)
+        val f = javax.xml.parsers.DocumentBuilderFactory.newInstance().apply { isNamespaceAware = true }
+        for (file in layers) {
+            val paths = f.newDocumentBuilder().parse(file).getElementsByTagName("path")
+            for (i in 0 until paths.length) {
+                val p = paths.item(i) as org.w3c.dom.Element
+                val halo = (0 until p.attributes.length).any { p.attributes.item(it).nodeValue.matches(Regex("\\?attr/glose\\w*_f0e801")) }
+                if (!halo) continue
+                var g = p.parentNode
+                var clipped = false
+                while (g is org.w3c.dom.Element && !clipped) { clipped = g.getElementsByTagName("clip-path").length > 0 && g.tagName == "group"; g = g.parentNode }
+                assertTrue("${file.name}: night outline without clip", clipped)
+            }
+        }
+    }
 }

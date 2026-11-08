@@ -142,6 +142,7 @@ function emit(e, alpha, gate, out, inh = {}) {
     let clip = '';
     const cp = /url\(#([^)]+)\)/.exec(a['clip-path'] || '');
     if (cp && defs[cp[1]]) clip = defs[cp[1]].kids.map(shapeData).filter(Boolean).map(d => `<clip-path android:pathData="${d}"/>`).join('');
+    if (cp && !clip) return; // empty clip: nothing of this group may show (dropping the clip would show all of it)
     const kids = [];
     for (const k of e.kids) if (k.tag !== 'animateTransform' && k.tag !== 'animate' && k.tag !== 'title' && k.tag !== 'defs' && k.tag !== 'clipPath') emit(k, alpha * op, g ? g[1] : gate, kids, inhKids);
     if (!kids.length) return; // nothing of this layer inside
