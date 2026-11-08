@@ -41,7 +41,7 @@ Déclencheurs : `QuizActivity` (tic / hmm à chaque réponse ; en fin de qui
 - Fondus de 5 ms au début et à la fin (pas de clic).
 - Timbres chauds : centre spectral entre 400 Hz et 3 kHz. Le « hmm » porte des harmoniques, car les haut-parleurs de téléphone coupent sous 300 Hz environ.
 - Fichiers OGG Vorbis mono 44,1 kHz, chacun sous 20 Ko, 49 Ko en tout.
-- **Limite connue** : ce niveau est mesuré sur la bande pleine. À travers un haut-parleur de téléphone (rien sous ≈ 300 Hz), le tampon est ≈ 18 dB sous le tic, le ronron ≈ 16 dB, le hmm et le mrr ≈ 5-7 dB. Une **proposition à écouter** (sons nivelés après passe-haut 300 Hz, mesures avant/après et guide d’écoute) est dans [`son/proposition_niveaux/`](son/proposition_niveaux/README.md). Pour l’appliquer, une commande : `python3 tools/sounds/make_sounds.py --phone-level`.
+- **Limite connue** : ce niveau est mesuré sur la bande pleine. À travers un haut-parleur de téléphone (rien sous ≈ 300 Hz), le tampon est ≈ 18 dB sous le tic, le ronron ≈ 16 dB, le hmm et le mrr ≈ 5-7 dB. **Appliqué le 8 novembre 2026** : les sons livrés sont nivelés après passe-haut 300 Hz (`python3 tools/sounds/make_sounds.py --phone-level`) ; mesures avant/après dans [`son/proposition_niveaux/`](son/proposition_niveaux/README.md). Retour au réglage bande pleine : `python3 tools/sounds/make_sounds.py`.
 
 ## Accessibilité
 
@@ -53,5 +53,5 @@ Les sons sont **entièrement synthétisés** par `tools/sounds/make_sounds.py` (
 
 ```
 python3 tools/sounds/make_sounds.py                 # les sons livrés
-python3 tools/sounds/make_sounds.py --phone-level   # nivelés pour haut-parleur de téléphone (proposition)
+python3 tools/sounds/make_sounds.py --phone-level   # nivelés pour haut-parleur de téléphone (version livrée)
 ```

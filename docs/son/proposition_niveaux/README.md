@@ -1,6 +1,6 @@
 # Proposition : sons nivelés pour un haut-parleur de téléphone
 
-**Statut : à écouter.** Rien n’est appliqué : l’appli joue toujours les fichiers de `app/src/main/res/raw`. Ce dossier contient les 7 mêmes sons, mêmes noms, produits par :
+**Statut : appliqué le 8 novembre 2026** (choix du propriétaire après écoute). `app/src/main/res/raw` contient maintenant ces fichiers.
 
 ```
 python3 tools/sounds/make_sounds.py --phone-level --out docs/son/proposition_niveaux
