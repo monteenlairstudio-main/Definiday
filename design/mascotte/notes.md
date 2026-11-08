@@ -217,3 +217,8 @@ joue sous l'œil, se lit triste à 96–128 dp) ; « doux » pour « encore » (
 La tête de `glose_icone` aux couleurs par défaut, liseré crème fixe (#F0E8D8, h = 8) : elle se détache du fond `icon_bg` bleu nuit, sur
 lanceur clair comme sombre ; moustaches −15 % (`whisk: 0.85`) ; échelle 0,13 centrée (à 0,15 la pointe des oreilles sortait du cercle
 du masque). Couche monochrome inchangée (rendu identique). Avant : fichier fait à la main depuis une ancienne tête.
+
+## Livre allégé (`book()`)
+Plus de filets d'or aux deux bords (restent les 4 bandes), filets des bandes à 60 %, bandes sans cerne d'encre, étiquette plus petite
+(0,18 × 0,34 de la face au lieu de 0,24 × 0,44), ombre basse 0,2 → 0,12, reflet 0,13 → 0,18. Contraste RMS de la zone du livre −3 %
+(assis, écrit) ; la masse bleu nuit reste la plus sombre : un fond plus clair serait une autre couleur de reliure par défaut (jeton gloseBook).

@@ -410,17 +410,16 @@ function book(o) {
     fill(side.clone(NI), o.cover), fill(pages.clone(NI), o.pages)];
   for (let yy = y + ct + 7; yy < y + h - ct - 3; yy += 7) items.push(line(curve([[x + w + 3, yy], [x + w + dx - 8, yy + dy]]), 2, INK, 0.22));
   items.push(fill(X(poly([[x + w, y + h - ct - 12], [x + w + dx, y + h + dy - ct - 12], [x + w + dx, y + h + dy], [x + w, y + h]]), pages), INK, 0.1));
-  const sp = [fill(X(poly([[x, y + h * 0.1], [x + w, y + h * 0.1], [x + w, y + h * 0.26], [x, y + h * 0.26]]), front), '#FFFFFF', 0.13),
-    fill(X(poly([[x, y + h * 0.72], [x + w, y + h * 0.72], [x + w, y + h + 9], [x, y + h + 9]]), front), INK, 0.2)];
+  const sp = [fill(X(poly([[x, y + h * 0.1], [x + w, y + h * 0.1], [x + w, y + h * 0.26], [x, y + h * 0.26]]), front), '#FFFFFF', 0.18),
+    fill(X(poly([[x, y + h * 0.72], [x + w, y + h * 0.72], [x + w, y + h + 9], [x, y + h + 9]]), front), INK, 0.12)]; // ombre basse et reflet adoucis, bandes sans cerne : livre moins contrasté que le visage
   for (const f of o.bands || [0.14, 0.3, 0.7, 0.86]) {
     const bx = x + w * f, band = X(poly([[bx - 8, y], [bx + 8, y], [bx + 8, y + h], [bx - 8, y + h]]), front);
-    sp.push(fill(band.clone(NI), o.coverD), line(curve([[bx - 4, y + 7], [bx - 4, y + h - 7]]), 3, o.gold), line(band, 3));
+    sp.push(fill(band.clone(NI), o.coverD), line(curve([[bx - 4, y + 7], [bx - 4, y + h - 7]]), 3, o.gold, 0.6)); // filets d'or à 60 %
   }
-  for (const f of [0.045, 0.955]) { const bx = x + w * f; sp.push(line(curve([[bx, y + 9], [bx, y + h - 9]]), 3, o.gold)); }
   if (o.label) {
-    const lx = x + w * 0.5, lb = rpoly([[lx - w * 0.12, y + h * 0.28], [lx + w * 0.12, y + h * 0.28], [lx + w * 0.12, y + h * 0.72], [lx - w * 0.12, y + h * 0.72]], 5);
-    sp.push(fill(lb.clone(NI), o.labelC || o.gold), line(curve([[lx - w * 0.07, y + h * 0.45], [lx + w * 0.07, y + h * 0.45]]), 3, INK, 0.7),
-      line(curve([[lx - w * 0.045, y + h * 0.57], [lx + w * 0.045, y + h * 0.57]]), 3, INK, 0.5), line(lb, 3));
+    const lx = x + w * 0.5, lb = rpoly([[lx - w * 0.09, y + h * 0.33], [lx + w * 0.09, y + h * 0.33], [lx + w * 0.09, y + h * 0.67], [lx - w * 0.09, y + h * 0.67]], 5);
+    sp.push(fill(lb.clone(NI), o.labelC || o.gold), line(curve([[lx - w * 0.052, y + h * 0.46], [lx + w * 0.052, y + h * 0.46]]), 3, INK, 0.7),
+      line(curve([[lx - w * 0.034, y + h * 0.56], [lx + w * 0.034, y + h * 0.56]]), 3, INK, 0.5), line(lb, 3));
   }
   const corner = (a, b, c2) => { const t = X(poly([a, b, c2]), sil); return [fill(t.clone(NI), o.gold), line(t, 3)]; };
   const cs = 30, ux = dx / Math.hypot(dx, dy), uy = dy / Math.hypot(dx, dy);
