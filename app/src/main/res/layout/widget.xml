@@ -64,7 +64,6 @@
                     android:text="@string/widget_sample_nature"
                     android:textColor="#904352"
                     android:textSize="13sp"
-                    android:textStyle="italic" />
             </LinearLayout>
 
             <ImageView
@@ -99,7 +98,6 @@
             android:maxLines="2"
             android:textColor="#904352"
             android:textSize="13sp"
-            android:textStyle="italic"
             android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>
