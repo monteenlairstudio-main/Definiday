@@ -1,11 +1,11 @@
 # Rapport de nuit : 8 novembre 2026
 
-Travail autonome de 00h10 à __FIN__ (Paris), sur la branche `claude/android-daily-word-definitions-8ngyty`. Rien n'a été fusionné sur `main`, aucune release, aucune PR, versionCode inchangé (0.14.0).
+Travail autonome de 00h10 à 02h30 (Paris), sur la branche `claude/android-daily-word-definitions-8ngyty`. Rien n'a été fusionné sur `main`, aucune release, aucune PR, versionCode inchangé (0.14.0).
 
-- **Départ** : `08a954d`. **Arrivée** : `__HEAD__`.
-- **Tests** : 164 tests Robolectric, tous verts. `assembleRelease` passe et la CI de la branche est verte.
+- **Départ** : `08a954d`. **Arrivée** : `d7339d7` pour le code (les commits suivants ne touchent que `docs/` et `.graphene/`).
+- **Tests** : 165 tests Robolectric, tous verts. `assembleRelease` passe et la CI de la branche est verte.
 - **Plan** : `plan.md`, validé par un agent expert avec 11 amendements. Le journal minute par minute est dans `journal.md`.
-- **Consommation** : __CONSO__ % de la limite hebdomadaire. Le seuil d'arrêt était fixé à 10 %.
+- **Consommation** : 8 % de la limite hebdomadaire. Je me suis arrêté à 02h30, avant le seuil de 9 % où je ne lançais plus de nouveau lot. Ce qui restait demandait surtout tes décisions.
 
 ## En 5 minutes : ce qui a changé
 
@@ -24,6 +24,7 @@ Travail autonome de 00h10 à __FIN__ (Paris), sur la branche `claude/android-dai
 | En-tête compact en grande police | ux | 49fe6be | faible | Police système ×2. |
 | Mes mots « À revoir », rotation, Couleurs et polices sans vide, menus en ressources | fon/ux | 18a6904, 8d411a2, 897cb26 | faible | Mes mots › filtres ; Couleurs et polices › décocher jusqu'à la dernière. |
 | Divers : ordinal du déverrouillage, widget en romain, aide aérée | ux | d7da9e8, e4179a2, 31a1197 | faible | Widget. |
+| Contrôle visuel : liseré de nuit qui suit le mode, lien source, « Rétablir », croix du quiz, date, signatures de citations | gla/ux | f17ff3e, 098c306 | faible | Passer le téléphone en sombre **appli ouverte** : Glose garde son liseré. |
 | Tests de l'updater, découpage de QuizActivity | crap | ca54ffd, 4b25a40, 0048e13 | faible | (aucun : tests et refactor sans changement de comportement). |
 | Proposition de niveaux sonores (non appliquée) | son | 8fa55bb | aucun | Écouter `docs/son/proposition_niveaux/`. |
 
@@ -46,7 +47,10 @@ Travail autonome de 00h10 à __FIN__ (Paris), sur la branche `claude/android-dai
    - pause de la vie au repos par appui long, aussi avec TalkBack.
    - Les rendus de jour sont identiques au pixel, sauf là où le changement est voulu.
 3. **Planches** : `planches/glose_nuit_avant_apres.jpg`, `planches/glose_accessoires_nuit.jpg`, `planches/glose_reaction_tap.jpg`.
-4. **À choisir par toi** : `glose_decisions.md` (icône, épaisseur du trait, couleur du pelage, couleur de la reliure). __GLOSE5__
+4. **À choisir par toi** : `glose_decisions.md` (icône, épaisseur du trait, couleur du pelage, couleur de la reliure).
+   - Recommandations de l'équipe : **A3** (icône : visage actuel et liseré, tient dans le masque), **B2** (trait 11/6), **C3** (pelage gris chaud #AAA6AC), **D2** (reliure ardoise #6A7EA6, le visage devient la zone la plus contrastée).
+   - Chaque option s'applique avec une commande du générateur, indiquée dans la fiche.
+   - Planches : `planches/glose_A_icone.jpg`, `glose_B_trait.jpg`, `glose_C_pelage.jpg`, `glose_D_reliure.jpg`.
 
 ## Décisions en attente (par ordre d'importance)
 
@@ -93,7 +97,7 @@ Travail autonome de 00h10 à __FIN__ (Paris), sur la branche `claude/android-dai
 ## Incidents de la nuit
 
 - **CI rouge sur 3 pushs** (e4179a2 → 31a1197), réparée en 10 min. Une retouche du widget avait cassé `widget.xml`, et mon décompte relisait d'anciens résultats de tests. Le script de vérification efface maintenant les résultats et contrôle la compilation.
-- **Deux relectures indépendantes** (`rapports/review_1.md`, `review_2.md`) : 1 bloquant (celui ci-dessus), 2 importants et 8 mineurs. Tous sont corrigés, sauf ceux renvoyés en décision (M1 de la relecture 2, M5 de la relecture 1 sur la marque Zilla, réglé en rendant la police d'origine).
+- **Deux relectures indépendantes** (`rapports/review_1.md`, `review_2.md`) et un **contrôle visuel** de toute l'appli (`rapports/qa_visuelle.md`) : 1 bloquant (celui ci-dessus), 3 importants et 16 mineurs. Tous sont corrigés, sauf deux : le M1 de la relecture 2 (compteur « à revoir ») est renvoyé en décision, et la pointe des enveloppes qui dépasse de 1 à 2 px (F8 du contrôle visuel, déjà là avant) est laissée telle quelle. Le M5 de la relecture 1 (marque Zilla) est réglé en rendant la police d'origine.
 
 ## Ménage
 

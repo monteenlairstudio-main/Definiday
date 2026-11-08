@@ -54,3 +54,4 @@
   - F2 à F7 corrigés (098c306).
   - F8 (pointe des enveloppes, déjà là avant) laissé.
 - Suite complète 165/165 et `assembleRelease` OK.
+- 02h30 : fin du travail de nuit, avec 8 % de conso hebdo (seuil de 9 % proche, le reste relève de décisions du propriétaire). Rapport final dans `rapport_nuit.md`. Tâches planifiées supprimées.
