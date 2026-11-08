@@ -35,3 +35,4 @@
 - fon-E intégré (18a6904, 8d411a2, 897cb26) : filtre « À revoir » et rotation, plus de choix vide dans Couleurs et polices, menus des Réglages en ressources.
 - Suite complète 154/154. Conso hebdo 5 %.
 - 01h25 : lancés son (proposition de niveaux, sans remplacer les fichiers livrés), crap-2 (découpage de QuizActivity, tests de caractérisation d'abord), GLOSE 4 (anticipation et squash & stretch dans les réactions, pause de la vie au repos). Le maître corrige : la notification de suivi dit « au 2e déverrouillage », typo de `mots_none_favourites`, commentaire « fragile ».
+- 01h35 : son intégré (8fa55bb). C'est une proposition de niveaux à écouter, dans `docs/son/proposition_niveaux/` : après un passe-haut 300 Hz, l'écart entre les sons passe de 18,8 à 1,2 dB. Les fichiers livrés ne changent pas.
