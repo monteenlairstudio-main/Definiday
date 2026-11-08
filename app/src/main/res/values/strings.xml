@@ -84,8 +84,11 @@
         <item quantity="other">%1$d\u00A0gardées sur\u00A0%2$d</item>
     </plurals>
     <string name="all_f">Toutes</string>
-    <string name="none_f">Aucune</string>
+    <!-- keeps only the word's own (audit 011 n° 23: « Aucune » was refused afterwards) -->
+    <string name="own_f">Celle du mot</string>
+    <!-- under the bar once one is left: that tile cannot be removed (disabled, kept_last_f for TalkBack) -->
     <string name="pool_min">Il en faut au moins une\u202F: %1$s reste.</string>
+    <string name="kept_last_f">gardée, la dernière\u202F: il en faut au moins une</string>
     <string name="palettes_light">Claires</string>
     <string name="palettes_dark">Sombres</string>
     <string name="polices_text">Pour tous les mots</string>
