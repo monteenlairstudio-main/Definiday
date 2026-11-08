@@ -98,6 +98,23 @@ class VoixTest {
         assertNull(field.error)
     }
 
+    /** Owner 2026-11-08 « on sécurise l'entrée »: the name is normalized and a refused one is never stored, whatever the caller. */
+    @Test fun theNameIsNormalizedAndARefusedOneIsNeverStored() {
+        val p = Prefs(ctx)
+        p.gloseName = "  Ana \u00A0  tole  "
+        assertEquals("Ana tole", p.gloseName)
+        p.gloseName = "E\u0301mile" // accent typed apart
+        assertEquals("\u00C9mile", p.gloseName)
+        assertEquals("d’\u00C9mile", de(p.gloseName))
+        for (bad in listOf("\u202EAnatole", "Ana\ttole", "Ana\ntole", "Ana\uE000", "x".repeat(25))) {
+            p.gloseName = bad
+            assertEquals(bad, "", ctx.getSharedPreferences("definiday", android.content.Context.MODE_PRIVATE).getString("gloseName", null))
+            assertEquals(bad, "Monsieur Glose", p.gloseName)
+        }
+        ctx.getSharedPreferences("definiday", android.content.Context.MODE_PRIVATE).edit().putString("gloseName", "Ana\uE000").commit() // restored, tampered
+        assertEquals("Monsieur Glose", p.gloseName)
+    }
+
     @Test fun leavingSettingsWhileTypingKeepsTheNameButARestoredProfileWins() {
         val c = Robolectric.buildActivity(SettingsActivity::class.java).setup()
         c.get().findViewById<EditText>(R.id.glose_name).setText("Anatole") // no Done: Back
