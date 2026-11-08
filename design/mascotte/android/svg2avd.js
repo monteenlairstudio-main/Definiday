@@ -1,6 +1,6 @@
 // Conversion maison SVG animé (sortie de build.js, variante {all:true}) -> VectorDrawable + AnimatedVectorDrawable (framework, sans AndroidX).
 // Module utilisé par make_android.js : convert(svgText, nom, dossier_res, { once }) -> { attr: valeur par défaut } des portes.
-// Écrit res/drawable/<nom>_vd.xml (image fixe) et res/drawable/<nom>.xml (animated-vector, cibles inline aapt:attr ; réactions : animator/glose_k_*).
+// Écrit res/drawable/<nom>_vd.xml (image fixe) et res/drawable/<nom>.xml (animated-vector, chaque animateur dans animator/glose_k_*).
 // Pourquoi maison : Svg2Vector (sdk-common, testé) aplatit les groupes, perd les noms et ignore SMIL.
 // Couleurs : TOKENS -> ?attr/glose* (pelage, pelote, socle...). Groupes « portes » (accessoires, détails des pelages rares) :
 // chaque couleur -> ?attr/glose<Porte>_<hex>, transparente par défaut, posée par le style Glose.Acc.* / Glose.Pelage.*.
@@ -28,11 +28,11 @@ function put(resDir, n, xml, key) {
   if (old) { if (key && old !== n) ALIASES[n] = old; return old; }
   fs.writeFileSync(path.join(resDir, 'drawable', `${n}.xml`), xml); WRITTEN.set(xml, n); return n;
 }
-const avdXml = (vd, targets) => `<?xml version="1.0" encoding="utf-8"?>\n<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:drawable="@drawable/${vd}">\n` +
-  targets.map(t => t.res ? `<target android:name="${esc(t.name)}" android:animation="@animator/${t.res}"/>`
-    : `<target android:name="${esc(t.name)}"><aapt:attr name="android:animation">${t.xml}</aapt:attr></target>`).join('\n') + '\n</animated-vector>\n';
-// Reactions: each distinct animator is written once, res/animator/glose_k_<hash>.xml, and shared by every layer and pose that plays it
-// (the head and its night outline, the head copies under each hat, the ecrit words…): inline, each copy was a resource of its own.
+const avdXml = (vd, targets) => `<?xml version="1.0" encoding="utf-8"?>\n<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"\n    android:drawable="@drawable/${vd}">\n` +
+  targets.map(t => `<target android:name="${esc(t.name)}" android:animation="@animator/${t.res}"/>`).join('\n') + '\n</animated-vector>\n';
+// Each distinct animator (idle life and reactions) is written once, res/animator/glose_k_<hash>.xml, and shared by every layer and pose
+// that plays it (a part and its night outline, the head copies under each hat, the ecrit words…): inline (aapt:attr), each copy was a
+// resource file of its own in the APK (279 for 41 distinct idle animators).
 function shared(resDir, xml) {
   const n = 'glose_k_' + require('crypto').createHash('sha1').update(xml).digest('hex').slice(0, 8);
   fs.mkdirSync(path.join(resDir, 'animator'), { recursive: true });
@@ -287,7 +287,7 @@ for (const [gate, key] of order) {
   targets = []; cur = key;
   const body = []; emit(svg, 1, null, body);
   const vd = `<?xml version="1.0" encoding="utf-8"?>\n<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:width="${W}dp" android:height="${W}dp" android:viewportWidth="${vw}" android:viewportHeight="${vh}">\n<group android:name="cadre" android:translateX="${-vx}" android:translateY="${-vy}">${body.join('\n')}</group>\n</vector>\n`;
-  const vdName = put(resDir, base + key, vd, !key), avd = targets.length || !key ? put(resDir, name + key, avdXml(vdName, targets), !key) : null;
+  const vdName = put(resDir, base + key, vd, !key), avd = targets.length || !key ? put(resDir, name + key, avdXml(vdName, targets.map(t => ({ name: t.name, res: shared(resDir, t.xml) }))), !key) : null;
   layers.push({ gate, key, vd: vdName, xml: vd, res: targets.length ? avd : vdName, names: new Set([...vd.matchAll(/android:name="([^"]+)"/g)].map(m => m[1])) });
   for (const t of targets) for (const [prop, vals, k] of t.keys) { // self-check of the idle life, and its first frame for the reactions
     const still = stillValue(vd, t.name, prop), at = `${name}${key} ${t.name}.${prop}`, last = vals[vals.length - 1];
