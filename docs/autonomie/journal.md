@@ -38,13 +38,13 @@
 - 01h35 : son intégré (8fa55bb). C'est une proposition de niveaux à écouter, dans `docs/son/proposition_niveaux/` : après un passe-haut 300 Hz, l'écart entre les sons passe de 18,8 à 1,2 dB. Les fichiers livrés ne changent pas.
 - 01h40 : crap-2 intégré (4b25a40, 0048e13). QuizActivity est découpé : complexité max 26 → 11, avec 6 tests de caractérisation. Suite complète 161/161. Conso hebdo 6 %.
 - 01h45 : retouches du maître, widget en romain et lignes d'aide plus aérées (e4179a2). Relecture indépendante n° 2 lancée sur 6a3a199..e4179a2.
-- 01h55 : GLOSE 4 intégré (2640407, e968a4a).
+- 01h42 : GLOSE 4 intégré (2640407, e968a4a).
   - Réactions avec anticipation et squash & stretch, APK −32 Ko grâce aux animateurs partagés.
   - Un appui long met en pause ou relance sa vie au repos, avec une action TalkBack.
 - **Incident** : e4179a2 avait cassé `widget.xml` (balise non fermée), et la CI de la branche était rouge sur 3 pushs. Mon décompte relisait les résultats de tests de l'exécution précédente sans vérifier le code de sortie de Gradle.
   - Corrigé (widget.xml). Le script de suite complète supprime désormais les anciens résultats, vérifie le code de sortie et construit l'APK release.
   - Suite complète 162/162, `assembleRelease` OK.
-- 02h10 : relecture n° 2 (`night/review_2.md`) : 1 bloquant (widget.xml, déjà corrigé), 1 important, 3 mineurs.
+- 01h48 : relecture n° 2 (`night/review_2.md`) : 1 bloquant (widget.xml, déjà corrigé), 1 important, 3 mineurs.
   - I1 (liseré de nuit non découpé, qui peignait du crème sur le pelage autour du grelot et du nœud) : corrigé dans le générateur, 8 calques régénérés, avec un test (e67dd7b).
   - M2 et M3 corrigés (a28a2b3). M1 (compteur « à revoir ») passe en décision du propriétaire.
 - Suite complète 164/164 et `assembleRelease` OK.
