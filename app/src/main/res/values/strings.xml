@@ -217,6 +217,9 @@
     <string name="mots_title">Mes mots</string>
     <string name="mots_search">Chercher un mot ou un sens</string>
     <string name="mots_favourites">Favoris seulement</string>
+    <!-- words due on the review ladder today (Quiz.dueDay), as counted by the ledger's stat_due line -->
+    <string name="mots_due">À revoir seulement</string>
+    <string name="mots_none_due">Rien à revoir aujourd’hui\u202F: chaque mot revient de lui-même au quiz du soir.</string>
     <string name="favori">Favori</string>
     <!-- the star's TalkBack label says what a tap does, with the word -->
     <string name="favori_add">Ajouter %1$s aux favoris</string>
@@ -248,7 +251,7 @@
         <item quantity="many">soirs de quiz d’affilée</item>
         <item quantity="other">soirs de quiz d’affilée</item>
     </plurals>
-    <plurals name="stat_fragile">
+    <plurals name="stat_due">
         <item quantity="one">mot à revoir</item>
         <item quantity="many">mots à revoir</item>
         <item quantity="other">mots à revoir</item>

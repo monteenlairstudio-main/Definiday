@@ -220,7 +220,7 @@ class MemoryTest {
         star.clearFocus()
         star.performClick()
         assertEquals(setOf("abâtardir"), Memory(ctx).favourites)
-        views(a).filterIsInstance<Switch>().single().performClick() // « Favoris seulement »
+        views(a).filterIsInstance<Switch>().first { it.text == ctx.getString(R.string.mots_favourites) }.performClick()
         layout()
         assertEquals(listOf("abâtardir"), rows())
         views(a).filterIsInstance<EditText>().single().setText("jur")
@@ -228,5 +228,37 @@ class MemoryTest {
         assertTrue(rows().isEmpty())
         assertTrue(views(a).filterIsInstance<TextView>().any { it.text == ctx.getString(R.string.mots_none_found) && it.visibility == View.VISIBLE })
         assertTrue(views(a).any { it.contentDescription == "1 " + ctx.resources.getQuantityString(R.plurals.stat_favourites, 1) })
+    }
+
+    /** D2 (audit 011 n° 11): « À revoir seulement » lists the words due on the review ladder today, the ones the ledger counts;
+     *  N11: search and filters survive a rotation. */
+    @Test fun mesMotsFiltersWordsToReviewAndKeepsItsStateOnRotation() {
+        val today = LocalDate.now().toEpochDay()
+        History(ctx).run { mark("abjurer", today - 10); mark("abâtardir", today - 1); mark("ab irato", today - 3) }
+        Memory(ctx).answered("ab irato", true, today - 1, today - 3, review = true) // right when due: next at J+7, not due now
+        val c = Robolectric.buildActivity(MotsActivity::class.java).setup()
+        fun rows() = views(c.get()).filterIsInstance<TextView>().map { it.text.toString() }.filter { t -> all.any { it.mot == t } }.toList()
+        fun layout() = c.get().window.decorView.run { measure(View.MeasureSpec.makeMeasureSpec(1233, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(2600, View.MeasureSpec.EXACTLY)); layout(0, 0, 1233, 2600) }
+        fun switch(label: String) = views(c.get()).filterIsInstance<Switch>().single { it.text == label }
+        layout()
+        assertEquals(3, rows().size)
+        assertTrue(views(c.get()).any { it.contentDescription == "1 mot à revoir" }) // abjurer, never answered: due since J+2
+        switch("À revoir seulement").performClick()
+        layout()
+        assertEquals(listOf("abjurer"), rows())
+        switch("Favoris seulement").performClick() // both: favourites to review
+        layout()
+        assertTrue(rows().isEmpty())
+        switch("Favoris seulement").performClick()
+        views(c.get()).filterIsInstance<EditText>().single().setText("jur")
+        c.recreate() // rotation
+        layout()
+        assertEquals("jur", views(c.get()).filterIsInstance<EditText>().single().text.toString())
+        assertTrue(switch("À revoir seulement").isChecked && !switch("Favoris seulement").isChecked)
+        assertEquals(listOf("abjurer"), rows())
+        Memory(ctx).answered("abjurer", true, today, today - 10, review = true) // reviewed tonight: nothing left
+        c.recreate()
+        layout()
+        assertTrue(views(c.get()).filterIsInstance<TextView>().any { it.text == "Rien à revoir aujourd’hui\u202F: chaque mot revient de lui-même au quiz du soir." && it.visibility == View.VISIBLE })
     }
 }

@@ -139,6 +139,21 @@ class GloseTest {
         assertEquals(listOf(R.style.Glose_Pelote_Moutarde), Glose.styles(Glose.choice(p)))
     }
 
+    /** N11: a rotation keeps what is being tried (not yet chosen), and « Choisir » still keeps it. */
+    @Test fun collectionTrialSurvivesRotation() {
+        val p = Prefs(ctx).apply { quizzes = 5 }
+        val c = Robolectric.buildActivity(CollectionActivity::class.java).setup()
+        fun find(desc: String): android.view.View { val l = ArrayList<android.view.View>(); c.get().window.decorView.findViewsWithText(l, desc, android.view.View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION); return l.first() }
+        fun choose() = c.get().window.decorView.let { val l = ArrayList<android.view.View>(); it.findViewsWithText(l, ctx.getString(R.string.collection_choose), android.view.View.FIND_VIEWS_WITH_TEXT); l.first() }
+        find("Pelote moutarde").performClick()
+        c.recreate()
+        assertTrue(find("Pelote moutarde").isSelected)
+        assertEquals(android.view.View.VISIBLE, choose().visibility)
+        assertEquals("bordeaux", p.glosePelote) // still only tried
+        choose().performClick()
+        assertEquals("moutarde", p.glosePelote)
+    }
+
     @Test fun eveningPoseAfterNinePmOnceUnlocked() {
         val p = Prefs(ctx).apply { glosePose = "assis" }
         assertEquals(R.drawable.glose_assis, Glose.mainPose(p, hour = 22)) // not unlocked yet

@@ -38,6 +38,10 @@ class CollectionActivity : Activity() {
         p = Prefs(this)
         Unlocks.update(p)
         trial = Glose.choice(p).toMutableMap()
+        // a rotation keeps what was being tried (N11); only items that still fit their slot ("" = no accessory)
+        val ok = p.unlocked + Unlocks.of(emptyMap())
+        savedInstanceState?.let { b -> trial.keys.forEach { k -> b.getString(STATE_TRIAL + k.name)
+            ?.takeIf { if (it.isEmpty()) k in Unlocks.ACC else it in ok && Unlocks.byId[it]?.kind?.slot == k }?.let { trial[k] = it } } }
         val pad = (16 * dp).toInt()
         // fixed header (Glose, title, count, "Choisir") above the scrolling album: what is tried stays in sight
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true } // the insets replace its padding
@@ -84,6 +88,11 @@ class CollectionActivity : Activity() {
             })
         }
         refresh()
+    }
+
+    override fun onSaveInstanceState(out: Bundle) {
+        super.onSaveInstanceState(out)
+        trial.forEach { (k, id) -> out.putString(STATE_TRIAL + k.name, id) }
     }
 
     override fun onPause() {
@@ -184,6 +193,8 @@ class CollectionActivity : Activity() {
     }
 
     companion object {
+        private const val STATE_TRIAL = "trial:"
+
         /** A collection item as an album stamp, 80 x 96 dp: perforated paper ([bg]: sheet on the kraft page, kraft on a sheet),
          *  Glose [glose] at its foot as one still bitmap. Decorative. */
         fun stamp(ctx: Context, glose: Drawable, bg: Int = R.color.sheet) = ImageView(ctx).apply {
