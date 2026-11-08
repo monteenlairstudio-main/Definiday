@@ -198,7 +198,7 @@ class History(ctx: Context) {
  */
 class Memory(ctx: Context) {
     /** Review ladder anchored on [start] (day first shown, or day of the last miss): due at start + Quiz.LADDER[step];
-     *  [step] = LADDER.size: learnt, never due again. [misses]: wrong answers ever (2+ = « fragile »). */
+     *  [step] = LADDER.size: learnt, never due again. [misses]: wrong answers ever. */
     data class Entry(val start: Long, val step: Int = 0, val misses: Int = 0)
 
     private val sp = ctx.getSharedPreferences("memoire", Context.MODE_PRIVATE)

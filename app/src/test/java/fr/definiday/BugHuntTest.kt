@@ -371,6 +371,14 @@ class BugHuntTest {
         } finally { Sounds.release() }
     }
 
+    /** The watch notification names the unlock with an ordinal, as Réglages does (« au 2e déverrouillage »). */
+    @Test fun unlockWatchSaysWhichUnlock() {
+        Prefs(ctx).unlocks = 2
+        val c = Robolectric.buildService(UnlockService::class.java).create().startCommand(0, 1)
+        val text = shadowOf(c.get()).lastForegroundNotification.extras.getCharSequence(android.app.Notification.EXTRA_TEXT).toString()
+        assertTrue(text, "au 2e déverrouillage" in text)
+    }
+
     /** N10 (audit FON 1): restarted by the system (START_STICKY) with no word on the lock screen, the watch kept its notification up. */
     @Test fun unlockServiceRestartedWithoutAWordStops() {
         Prefs(ctx).unlocks = 2 // wallpaperEndAt = 0: no word shown
