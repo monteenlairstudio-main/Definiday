@@ -1,6 +1,6 @@
 // Conversion maison SVG animé (sortie de build.js, variante {all:true}) -> VectorDrawable + AnimatedVectorDrawable (framework, sans AndroidX).
 // Module utilisé par make_android.js : convert(svgText, nom, dossier_res, { once }) -> { attr: valeur par défaut } des portes.
-// Écrit res/drawable/<nom>_vd.xml (image fixe) et res/drawable/<nom>.xml (animated-vector, cibles inline aapt:attr).
+// Écrit res/drawable/<nom>_vd.xml (image fixe) et res/drawable/<nom>.xml (animated-vector, cibles inline aapt:attr ; réactions : animator/glose_k_*).
 // Pourquoi maison : Svg2Vector (sdk-common, testé) aplatit les groupes, perd les noms et ignore SMIL.
 // Couleurs : TOKENS -> ?attr/glose* (pelage, pelote, socle...). Groupes « portes » (accessoires, détails des pelages rares) :
 // chaque couleur -> ?attr/glose<Porte>_<hex>, transparente par défaut, posée par le style Glose.Acc.* / Glose.Pelage.*.
@@ -28,7 +28,17 @@ function put(resDir, n, xml, key) {
   fs.writeFileSync(path.join(resDir, 'drawable', `${n}.xml`), xml); WRITTEN.set(xml, n); return n;
 }
 const avdXml = (vd, targets) => `<?xml version="1.0" encoding="utf-8"?>\n<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:drawable="@drawable/${vd}">\n` +
-  targets.map(t => `<target android:name="${esc(t.name)}"><aapt:attr name="android:animation">${t.xml}</aapt:attr></target>`).join('\n') + '\n</animated-vector>\n';
+  targets.map(t => t.res ? `<target android:name="${esc(t.name)}" android:animation="@animator/${t.res}"/>`
+    : `<target android:name="${esc(t.name)}"><aapt:attr name="android:animation">${t.xml}</aapt:attr></target>`).join('\n') + '\n</animated-vector>\n';
+// Reactions: each distinct animator is written once, res/animator/glose_k_<hash>.xml, and shared by every layer and pose that plays it
+// (the head and its night outline, the head copies under each hat, the ecrit words…): inline, each copy was a resource of its own.
+function shared(resDir, xml) {
+  const n = 'glose_k_' + require('crypto').createHash('sha1').update(xml).digest('hex').slice(0, 8);
+  fs.mkdirSync(path.join(resDir, 'animator'), { recursive: true });
+  fs.writeFileSync(path.join(resDir, 'animator', `${n}.xml`), '<?xml version="1.0" encoding="utf-8"?>\n' +
+    xml.replace(/^<(\w+)/, '<$1 xmlns:android="http://schemas.android.com/apk/res/android"') + '\n');
+  return n;
+}
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 function convert(src, name, resDir, opts = {}) {
@@ -218,7 +228,7 @@ return gates;
 function animated(name, vdName, targets, resDir) {
   const layers = PARTS[vdName].map(l => {
     const t = Object.keys(targets).flatMap(n => [n, n + '_halo']).filter(n => l.names.has(n)) // the night outline of a group follows it
-      .map(n => ({ name: n, xml: targets[n.replace(/_halo$/, '')] || targets[n] }));
+      .map(n => ({ name: n, res: shared(resDir, targets[n.replace(/_halo$/, '')] || targets[n]) }));
     const avd = t.length || !l.key ? put(resDir, name + l.key, avdXml(l.vd, t), !l.key) : null; // the key is always written
     return [l.gate, t.length ? avd : l.vd];
   });

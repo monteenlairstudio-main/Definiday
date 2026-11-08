@@ -12,7 +12,9 @@ const theme = {}; /<style name="Glose">(.*?)<\/style>/.exec(fs.readFileSync(path
 const res = v => { while (v && v.startsWith('?attr/')) v = theme[v.slice(6)]; return v; };
 const bez = (x1, y1, x2, y2) => x => { let lo = 0, hi = 1; for (let i = 0; i < 40; i++) { const t = (lo + hi) / 2, bx = 3 * (1 - t) ** 2 * t * x1 + 3 * (1 - t) * t * t * x2 + t ** 3; if (bx < x) lo = t; else hi = t; } const t = (lo + hi) / 2; return 3 * (1 - t) ** 2 * t * y1 + 3 * (1 - t) * t * t * y2 + t ** 3; };
 const INTERP = { '@interpolator/glose_ease': bez(0.45, 0, 0.55, 1), '@android:interpolator/decelerate_quad': x => 1 - (1 - x) ** 2, '@android:interpolator/accelerate_quad': x => x * x };
-function targets(avd) {
+function targets(avd) { // animators shared in res/animator (reactions) are read back inline
+  avd = avd.replace(/<target android:name="([^"]+)" android:animation="@animator\/(\w+)"\/>/g, (_, n, r) =>
+    `<target android:name="${n}">${fs.readFileSync(path.join(RES, 'animator', `${r}.xml`), 'utf8').replace(/<\?xml[^>]*>\s*/, '')}</target>`);
   const out = []; const re = /<target android:name="([^"]+)">.*?android:duration="(\d+)"[^>]*>(.*?)<\/objectAnimator>/g; let m;
   while ((m = re.exec(avd))) {
     const holders = []; m[3].replace(/propertyName="(\w+)"[^>]*>(.*?)<\/propertyValuesHolder>/g, (_, p, ks) => {

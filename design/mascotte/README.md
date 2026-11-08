@@ -20,4 +20,5 @@ qui recopie ses groupes parents animés (la tête) avec les mêmes animateurs ; 
 `GloseLayers.kt` (généré) donne les calques de chaque dessin, de l'arrière vers l'avant ; `Glose.drawable` en fait un
 `LayerDrawable` avec les seules pièces portées. Les fichiers identiques (mots du fil, familles de poses) ne sont écrits qu'une
 fois (`values/glose_layers.xml` : alias des noms partagés). Une réaction « animateurs seuls » sur une pose passe par
-`animated(nom, dessin_vd, { groupe: objectAnimator })` de `svg2avd.js` : les accessoires suivent alors la tête.
+`animated(nom, dessin_vd, { groupe: objectAnimator })` de `svg2avd.js` : les accessoires suivent alors la tête, et chaque animateur
+n'est écrit qu'une fois (`res/animator/glose_k_<empreinte>.xml`, partagé par les calques, les poses et les mots).

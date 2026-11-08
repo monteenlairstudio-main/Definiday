@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_ecrit_mot_vd_1">
-<target android:name="pelote"><aapt:attr name="android:animation"><objectAnimator android:duration="1800"><propertyValuesHolder android:propertyName="pivotX" android:valueType="floatType"><keyframe android:fraction="0" android:value="500"/><keyframe android:fraction="1" android:value="500" android:interpolator="@interpolator/glose_ease"/></propertyValuesHolder><propertyValuesHolder android:propertyName="pivotY" android:valueType="floatType"><keyframe android:fraction="0" android:value="616"/><keyframe android:fraction="1" android:value="616" android:interpolator="@interpolator/glose_ease"/></propertyValuesHolder><propertyValuesHolder android:propertyName="rotation" android:valueType="floatType"><keyframe android:fraction="0" android:value="0"/><keyframe android:fraction="0.2" android:value="-150" android:interpolator="@android:interpolator/accelerate_quad"/><keyframe android:fraction="0.75" android:value="0" android:interpolator="@android:interpolator/decelerate_quad"/><keyframe android:fraction="1" android:value="0" android:interpolator="@interpolator/glose_ease"/></propertyValuesHolder></objectAnimator></aapt:attr></target>
+<target android:name="pelote" android:animation="@animator/glose_k_b2dd2b0e"/>
+<target android:name="corps" android:animation="@animator/glose_k_925caccd"/>
+<target android:name="pattes" android:animation="@animator/glose_k_8b7964d8"/>
+<target android:name="bras_leve" android:animation="@animator/glose_k_e6fb8365"/>
+<target android:name="fil_bas" android:animation="@animator/glose_k_e1e533c3"/>
 </animated-vector>

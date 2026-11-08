@@ -51,7 +51,7 @@ const REACTIONS = {
 
 (async () => {
   const b = await chromium.launch(), gates = {};
-  for (const f of fs.readdirSync(path.join(RES, 'drawable'))) if (/^glose_.*\.xml$/.test(f)) fs.unlinkSync(path.join(RES, 'drawable', f)); // layers come and go
+  for (const d of ['drawable', 'animator']) for (const f of fs.readdirSync(path.join(RES, d))) if (/^glose_.*\.xml$/.test(f)) fs.unlinkSync(path.join(RES, d, f)); // layers come and go
   try {
     for (const [pose, name, v] of jobs) {
       const out = `${TMP}/${name}.svg`;
