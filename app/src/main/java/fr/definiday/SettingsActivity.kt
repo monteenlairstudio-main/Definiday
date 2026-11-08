@@ -48,7 +48,7 @@ class SettingsActivity : Activity() {
             TimePickerDialog(this, { _, h, m -> p.hour = h; p.minute = m; showTime(); DailyReceiver.scheduleNext(this) }, p.hour, p.minute, true).show()
         }
         findViewById<Button>(R.id.exact_ask).setOnClickListener { Alarms.requestIntent(this)?.let { runCatching { startActivity(it) } } }
-        spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
+        spinner(R.id.per_day, choices(R.array.per_day_choices), p.wordsPerDay - 1) {
             val more = it + 1 > p.wordsPerDay
             if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this) }
             // today's time already passed: the new picks are shown now rather than only reachable from the home chips
@@ -69,25 +69,26 @@ class SettingsActivity : Activity() {
         findViewById<Button>(R.id.widget_add).setOnClickListener { Widget.pin(this) }
 
         // Écran de verrouillage
-        val lockOnly = listOf(R.id.unlocks_label, R.id.unlocks, R.id.unlocks_hint, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
+        val lockOnly = listOf(R.id.unlocks_label, R.id.unlocks, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
         fun showMode() {
             lockOnly.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
+            showUnlocks()
             explainLock()
             findViewById<TextView>(R.id.duration_hint).setText(when (p.mode) {
                 Prefs.MODE_NOTIF -> R.string.duration_notif; Prefs.MODE_LOCK -> R.string.duration_lock; else -> R.string.duration_both
             })
         }
         // order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK
-        spinner(R.id.mode, listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), p.mode) {
+        spinner(R.id.mode, choices(R.array.mode_choices), p.mode) {
             p.mode = it; showMode()
         }
         showMode()
         val ds = (durations + p.durationMinutes).distinct().sorted() // a restored value outside the list stays as is
         spinner(R.id.duration, ds.map(::label), ds.indexOf(p.durationMinutes)) { p.durationMinutes = ds[it] }
-        spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
-            p.unlocks = it; UnlockService.sync(this) // applies to the word already on the lock screen
+        spinner(R.id.unlocks, choices(R.array.unlocks_choices), p.unlocks) {
+            p.unlocks = it; UnlockService.sync(this); showUnlocks() // applies to the word already on the lock screen
         }
-        spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) { p.textBottom = it == 0 }
+        spinner(R.id.text_pos, choices(R.array.text_pos_choices), if (p.textBottom) 0 else 1) { p.textBottom = it == 0 }
 
         // Quiz du soir
         val quizTime = findViewById<Button>(R.id.quiz_time)
@@ -245,6 +246,13 @@ class SettingsActivity : Activity() {
         findViewById<View>(R.id.quiz_early).visibility = if (early) View.VISIBLE else View.GONE
     }
 
+    /** The unlock-counting notification is explained only when the word leaves at an unlock, with which one (« le 2e »). */
+    private fun showUnlocks() = findViewById<TextView>(R.id.unlocks_hint).run {
+        val n = p.unlocks
+        visibility = if (p.mode != Prefs.MODE_NOTIF && n > 0) View.VISIBLE else View.GONE
+        resources.getStringArray(R.array.unlocks_ordinals).getOrNull(n - 1)?.let { text = getString(R.string.unlocks_hint, it) }
+    }
+
     private fun explainLock() = Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own))
 
     private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
@@ -257,7 +265,10 @@ class SettingsActivity : Activity() {
             }
         }
 
-    private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h" + if (min % 60 > 0) " ${"%02d".format(min % 60)}" else ""
+    private fun choices(id: Int) = resources.getStringArray(id).toList()
+
+    private fun label(min: Int) = when { min < 60 -> getString(R.string.duration_m, min); min % 60 == 0 -> getString(R.string.duration_h, min / 60)
+        else -> getString(R.string.duration_hm, min / 60, min % 60) }
 
     private companion object {
         const val REQ_EXPORT = 1; const val REQ_IMPORT = 2

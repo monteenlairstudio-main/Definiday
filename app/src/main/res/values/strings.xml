@@ -121,7 +121,17 @@
     <string name="profile_replace">Remplacer</string>
     <string name="profile_restored">Profil restauré.</string>
     <string name="cancel">Annuler</string>
-    <string name="unlocks_hint">Pour compter les déverrouillages, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.</string>
+    <!-- shown only when the word leaves at an unlock; %1$s: an item of unlocks_ordinals -->
+    <string name="unlocks_hint">Pour guetter le %1$s déverrouillage, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.</string>
+    <string-array name="unlocks_ordinals"><item>1er</item><item>2e</item><item>3e</item></string-array>
+    <!-- Réglages menus (P19), in the order of the values: Prefs.wordsPerDay - 1, Prefs.MODE_BOTH/NOTIF/LOCK, Prefs.unlocks, textBottom first -->
+    <string-array name="per_day_choices"><item>1 mot</item><item>2 mots</item><item>3 mots</item></string-array>
+    <string-array name="mode_choices"><item>Notification et écran de verrouillage</item><item>Notification seulement</item><item>Écran de verrouillage seulement</item></string-array>
+    <string-array name="unlocks_choices"><item>Après la durée choisie</item><item>Au 1er déverrouillage</item><item>Au 2e déverrouillage</item><item>Au 3e déverrouillage</item></string-array>
+    <string-array name="text_pos_choices"><item>En bas (laisse la place à l’horloge)</item><item>Au milieu</item></string-array>
+    <string name="duration_m">%1$d min</string>
+    <string name="duration_h">%1$d h</string>
+    <string name="duration_hm">%1$d h %2$02d</string>
     <string name="duration_notif">La notification se retire seule après cette durée.</string>
     <string name="duration_lock">Le mot quitte l’écran de verrouillage après cette durée au plus tard.</string>
     <string name="duration_both">La notification et le mot de l’écran de verrouillage se retirent après cette durée au plus tard.</string>

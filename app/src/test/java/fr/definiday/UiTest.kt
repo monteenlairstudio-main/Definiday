@@ -124,6 +124,32 @@ class UiTest {
         assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStartedService.component!!.className)
     }
 
+    /** P19: the menus read their labels from string-array resources, unchanged; the unlocks help shows only when the word leaves at
+     *  an unlock, and says which one (« 2e »). */
+    @Test fun settingsMenusAndUnlocksHint() {
+        Prefs(ctx).apply { mode = Prefs.MODE_BOTH; unlocks = 0; durationMinutes = 90 }
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        fun labels(id: Int) = a.findViewById<Spinner>(id).adapter.let { ad -> (0 until ad.count).map { ad.getItem(it).toString() } }
+        assertEquals(listOf("1 mot", "2 mots", "3 mots"), labels(R.id.per_day))
+        assertEquals(listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), labels(R.id.mode))
+        assertEquals(listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), labels(R.id.unlocks))
+        assertEquals(listOf("En bas (laisse la place à l’horloge)", "Au milieu"), labels(R.id.text_pos))
+        assertEquals(listOf("15 min", "30 min", "1 h", "1 h 30", "2 h", "4 h", "8 h", "12 h", "24 h"), labels(R.id.duration))
+        val hint = a.findViewById<TextView>(R.id.unlocks_hint)
+        assertEquals(View.GONE, hint.visibility) // « Après la durée choisie »: no notification to explain
+        pick(a.findViewById(R.id.unlocks), 2)
+        assertEquals(View.VISIBLE, hint.visibility)
+        assertEquals("Pour guetter le 2e déverrouillage, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.", hint.text.toString())
+        pick(a.findViewById(R.id.unlocks), 1)
+        assertTrue(hint.text.startsWith("Pour guetter le 1er déverrouillage,"))
+        pick(a.findViewById(R.id.mode), Prefs.MODE_NOTIF)
+        assertEquals(View.GONE, hint.visibility)
+        pick(a.findViewById(R.id.mode), Prefs.MODE_LOCK)
+        assertEquals(View.VISIBLE, hint.visibility)
+        pick(a.findViewById(R.id.unlocks), 0)
+        assertEquals(View.GONE, hint.visibility)
+    }
+
     /** P17: a quiz reminder set before the word's time never comes (no word seen yet): Settings says so under the quiz time. */
     @Test fun quizBeforeTheWordIsExplained() {
         Prefs(ctx).apply { enabled = true; hour = 8; minute = 0; quizEnabled = true; quizHour = 21; quizMinute = 0 }

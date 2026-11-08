@@ -156,7 +156,7 @@
             <TextView
                 android:id="@+id/unlocks_hint"
                 style="@style/Help"
-                android:text="@string/unlocks_hint" />
+                android:visibility="gone" /> <!-- text and visibility: SettingsActivity.showUnlocks -->
 
             <TextView
                 android:id="@+id/text_pos_label"
