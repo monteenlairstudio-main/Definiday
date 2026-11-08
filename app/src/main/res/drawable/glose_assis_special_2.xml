@@ -2,5 +2,5 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_assis_vd_2">
 <target android:name="tete" android:animation="@animator/glose_k_97db6a5b"/>
-<target android:name="a14" android:animation="@animator/glose_k_5dd93bd5"/>
+<target android:name="a17" android:animation="@animator/glose_k_5dd93bd5"/>
 </animated-vector>

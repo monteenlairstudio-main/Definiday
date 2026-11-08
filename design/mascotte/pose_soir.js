@@ -65,6 +65,7 @@ function draw(paper) {
   const jg = C.has('grelot') ? jingle(C, [H.chin[0] + 14, H.chin[1] - 6], { w: 50, s: 0.85 }) : {};
   const tree = C.has('sapin') ? paperTree(C, [868, 788], 0.8) : null;
   const gHead = G('dormeur', [paws, jg.band, H.group, bow, jg.bell]);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), scarfG); // nœud et grelot sont dans « dormeur »
   anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], values: [[1, 1], [1.008, 1.02], [1, 1]], dur: 4.2 });
 
   // ---------- bougie ----------

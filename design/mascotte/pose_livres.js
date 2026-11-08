@@ -46,6 +46,7 @@ function draw(paper) {
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0], H.chin[1] + 2], -10);
   const jg = C.has('grelot') ? jingle(C, [H.chin[0], H.chin[1] - 4], { w: 56 }) : {};
   const tree = C.has('sapin') ? paperTree(C, [892, 904], 1.05) : null;
+  neckBreath(anims, anims.find(a => a.id === 'corps'), scarfF, jg.band, bow, jg.bell);
 
   const ballG0 = yarn('pelote', [240, 864], 64, C, [line(curve([[198, 836], [228, 822], [264, 828]]), 6, C.ballD)]);
   const loose = strand([[194, 906], [164, 920], [136, 910], [118, 920]], C, 8);
