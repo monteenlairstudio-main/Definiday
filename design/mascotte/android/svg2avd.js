@@ -20,6 +20,7 @@ const GATES = [[/^noeud$/, 'Noeud'], [/^echarpe(_dos)?$/, 'Echarpe'], [/bonnet$/
 // and the glints of the rare pelages (drawn last, so they do not cut the body).
 const LAYERED = ['Noeud', 'Echarpe', 'Bonnet', 'Plume', 'Marque', 'Grelot', 'Beret', 'Couronne', 'Sapin', 'Glint'];
 const WRITTEN = new Map(), ALIASES = {}, LAYERS = {}, PARTS = {}; // content -> file; key -> file of same content; drawable -> [gate, layer]; VD -> layers
+const IDLE0 = {}; // drawable -> target -> property -> { start: value on the first frame of its life (reactions end there), still: in the VD, low: min }
 // Writes one file per content: a drawable identical to one already written (ecrit words, families) reuses it.
 // A key (name used by the app) that would duplicate a file becomes a resource alias instead.
 function put(resDir, n, xml, key) {
@@ -44,9 +45,10 @@ const IDLE_MS = 26000; // Glose.IDLE_MS
 // hold, first and last key); accelerate into / decelerate out of a key the motion passes through; linear between two such keys.
 // (glose_ease on every key stopped the motion at each pass: a swing halted at 0°.) A loop still rests at its seam: it starts from
 // and comes back to the still frame without a jump in speed.
-function eases(vals) {
-  const n = vals.length;
-  const passes = i => i > 0 && i < n - 1 && ((vals[i - 1] < vals[i] && vals[i] < vals[i + 1]) || (vals[i - 1] > vals[i] && vals[i] > vals[i + 1]));
+// cyclic: the first (= last) key is where a loop rotated by its phase starts; it is a pass-through when the loop goes through it.
+function eases(vals, cyclic = false) {
+  const n = vals.length, nb = i => cyclic && (i === 0 || i === n - 1) ? [vals[n - 2], vals[1]] : [vals[i - 1], vals[i + 1]];
+  const passes = i => (cyclic || (i > 0 && i < n - 1)) && (([a, b]) => (a < vals[i] && vals[i] < b) || (a > vals[i] && vals[i] > b))(nb(i));
   return vals.map((_, i) => !i ? null : passes(i - 1) && passes(i) ? null : passes(i) ? '@android:interpolator/accelerate_quad'
     : passes(i - 1) ? '@android:interpolator/decelerate_quad' : '@interpolator/glose_ease');
 }
@@ -108,8 +110,10 @@ function gradientXml(id, attr) {
 let targets = [], cur = ''; // { name, anims: [objectAnimator xml] } ; layer being emitted
 let uid = 0;
 // values at 3 decimals: at 1 decimal the breathing (scale 1.015) was written 1 -> 1 and the flame's 0.94 0.9
-function keyframes(prop, vals, kts, type = 'floatType', linear = false) {
-  const ease = linear ? vals.map(() => null) : eases(vals);
+let pend = []; // keys of the animator being written: [property, values, fractions]
+function keyframes(prop, vals, kts, type = 'floatType', linear = false, cyclic = false) {
+  const ease = linear ? vals.map(() => null) : eases(vals, cyclic);
+  pend.push([prop, vals.map(v => +(+v).toFixed(3)), kts]);
   return `<propertyValuesHolder android:propertyName="${prop}" android:valueType="${type}">` + vals.map((v, i) =>
     `<keyframe android:fraction="${kts[i]}" android:value="${+(+v).toFixed(3)}"${i && ease[i] ? ` android:interpolator="${ease[i]}"` : ''}/>`).join('') + '</propertyValuesHolder>';
 }
@@ -124,18 +128,33 @@ function onceTimes(an) { // [kept key indices, their new fractions, duration ms]
 }
 function animator(an, holders) {
   const dur = ONCE(an) ? onceTimes(an)[2] : Math.round(parseFloat(an.dur) * 1000), begin = parseFloat(an.begin || '0') * 1000;
-  const offset = begin < 0 ? Math.round(dur + begin) % dur : Math.round(begin); // phase négative ≈ départ retardé (approximation)
+  const offset = begin < 0 ? 0 : Math.round(begin); // negative begin: keys rotated by the phase (keyframesOf)
   // Whole loops only, as many as fit in the idle life: each part comes to rest on its own loop end (= its still frame) instead of
   // being cut mid-cycle by Glose.play()'s stop() (end() jumps to the last key). A loop longer than the idle life plays once.
   // linear: without it every objectAnimator gets AccelerateDecelerate over its whole timeline, on top of the keyframe easing.
   const n = ONCE(an) ? 1 : Math.max(1, Math.floor((IDLE_MS - offset) / dur));
-  return `<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear" android:repeatCount="${n - 1}" android:startOffset="${offset}">${holders}</objectAnimator>`;
+  return [`<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear" android:repeatCount="${n - 1}" android:startOffset="${offset}">${holders}</objectAnimator>`, { dur, offset, n }];
+}
+function target(nm, an, holders, keys = pend) { const [xml, t] = animator(an, holders); targets.push({ name: nm, xml, keys, ...t }); pend = []; }
+// SMIL starts a loop of negative begin mid-cycle. On Android it was a delayed start, and a delayed RenderThread animator writes nothing
+// before its delay: the still values showed, then jumped (a « z » at full opacity vanished at 1.2 s). The keys are rotated instead, the
+// loop starts at that phase p. A value that jumps at the seam (a rising « z ») keeps its jump, 0.001 long, hidden there as in the loop.
+function phase(vals, k, p) {
+  const at = t => { const i = k.findIndex(x => x >= t); return k[i] === t ? vals[i] : vals[i - 1] + (vals[i] - vals[i - 1]) * (t - k[i - 1]) / (k[i] - k[i - 1]); };
+  const V = [at(p)], K = [0], n = vals.length;
+  k.forEach((t, i) => { if (t > p) { V.push(vals[i]); K.push(t - p); } });
+  if (vals[n - 1] !== vals[0]) { V.push(vals[0]); K.push(1 - p + 0.001); }
+  k.forEach((t, i) => { if (t > 0 && t < p) { V.push(vals[i]); K.push(t + 1 - p); } });
+  V.push(V[0]); K.push(1);
+  return [V, K.map(x => +x.toFixed(4))];
 }
 function kts(an, n) { return an.keyTimes ? an.keyTimes.split(';').map(Number) : Array.from({ length: n }, (_, i) => i / (n - 1)); }
 function keyframesOf(an, prop, vals) { // keyframes, réduits et étirés pour une animation « une fois »
   let k = kts(an, vals.length);
   if (ONCE(an)) { const [ix, t] = onceTimes(an); vals = ix.map(i => vals[i]); k = t; }
-  return keyframes(prop, vals, k, 'floatType', an.calcMode === 'linear');
+  const p = parseFloat(an.begin || '0') < 0 ? (-parseFloat(an.begin) / parseFloat(an.dur)) % 1 : 0;
+  if (p) [vals, k] = phase(vals, k, p);
+  return keyframes(prop, vals, k, 'floatType', an.calcMode === 'linear', p > 0);
 }
 
 // ---------- émission ----------
@@ -156,11 +175,13 @@ function emit(e, alpha, gate, out, inh = {}) {
     if (pv) attrs += ` android:pivotX="${f(pv[0])}" android:pivotY="${f(pv[1])}"`;
     const g = a.id && GATES.find(([re]) => re.test(a.id));
     const holders = [];
-    if (anim) {
+    let keys = []; // this group's keys (its kids, emitted next, write their own)
+    if (anim) { pend = [];
       const t2 = anim.attrs.type, vals = anim.attrs.values.split(';').map(v => v.trim().split(/[\s,]+/).map(Number)), kf = (p, v) => keyframesOf(anim.attrs, p, v);
       if (t2 === 'rotate') { attrs += ` android:pivotX="${vals[0][1]}" android:pivotY="${vals[0][2]}"`; holders.push(kf('rotation', vals.map(v => v[0]))); }
       if (t2 === 'translate') { holders.push(kf('translateX', vals.map(v => v[0])), kf('translateY', vals.map(v => v[1] || 0))); }
       if (t2 === 'scale') { holders.push(kf('scaleX', vals.map(v => v[0])), kf('scaleY', vals.map(v => v[1] != null ? v[1] : v[0]))); }
+      keys = pend; pend = [];
     }
     let clip = '';
     const cp = /url\(#([^)]+)\)/.exec(a['clip-path'] || '');
@@ -169,7 +190,7 @@ function emit(e, alpha, gate, out, inh = {}) {
     const kids = [];
     for (const k of e.kids) if (k.tag !== 'animateTransform' && k.tag !== 'animate' && k.tag !== 'title' && k.tag !== 'defs' && k.tag !== 'clipPath') emit(k, alpha * op, g ? g[1] : gate, kids, inhKids);
     if (!kids.length) return; // nothing of this layer inside
-    if (anim) targets.push({ name: nm, xml: animator(anim.attrs, holders.join('')) });
+    if (anim) target(nm, anim.attrs, holders.join(''), keys);
     // un groupe sans nom, sans transformation ni découpe est inutile en VectorDrawable : on l'aplatit
     if (!nm && !tr && !sc && !clip) { out.push(...kids); return; }
     out.push(`<group${attrs}>${clip}${kids.join('')}</group>`);
@@ -195,15 +216,15 @@ function emit(e, alpha, gate, out, inh = {}) {
   }
   if (a['fill-rule'] === 'evenodd') s += ' android:fillType="evenOdd"';
   const anims = e.kids.filter(k => k.tag === 'animate');
-  for (const an of anims) {
+  for (const an of anims) { pend = [];
     const vals = an.attrs.values.split(';').map(Number);
     const tname = nm;
     if (an.attrs.attributeName === 'stroke-dashoffset') { // fil qui s'écrit : dashoffset L..0 -> trimPathEnd 0..1
       const L = parseFloat((a['stroke-dasharray'] || '1').split(/[ ,]+/)[0]);
-      targets.push({ name: tname, xml: animator(an.attrs, keyframesOf(an.attrs, 'trimPathEnd', vals.map(v => 1 - v / L))) });
+      target(tname, an.attrs, keyframesOf(an.attrs, 'trimPathEnd', vals.map(v => 1 - v / L)));
     } else if (an.attrs.attributeName === 'opacity') {
       const prop = a.fill && a.fill !== 'none' ? 'fillAlpha' : 'strokeAlpha';
-      targets.push({ name: tname, xml: animator(an.attrs, keyframesOf(an.attrs, prop, vals.map(v => v * op))) });
+      target(tname, an.attrs, keyframesOf(an.attrs, prop, vals.map(v => v * op)));
     }
   }
   out.push(inner ? `${s}>${inner}</path>` : `${s}/>`);
@@ -240,12 +261,27 @@ for (const [gate, key] of order) {
   const vd = `<?xml version="1.0" encoding="utf-8"?>\n<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"\n    android:width="${W}dp" android:height="${W}dp" android:viewportWidth="${vw}" android:viewportHeight="${vh}">\n<group android:name="cadre" android:translateX="${-vx}" android:translateY="${-vy}">${body.join('\n')}</group>\n</vector>\n`;
   const vdName = put(resDir, base + key, vd, !key), avd = targets.length || !key ? put(resDir, name + key, avdXml(vdName, targets), !key) : null;
   layers.push({ gate, key, vd: vdName, xml: vd, res: targets.length ? avd : vdName, names: new Set([...vd.matchAll(/android:name="([^"]+)"/g)].map(m => m[1])) });
+  for (const t of targets) for (const [prop, vals, k] of t.keys) { // self-check of the idle life, and its first frame for the reactions
+    const still = stillValue(vd, t.name, prop), at = `${name}${key} ${t.name}.${prop}`, last = vals[vals.length - 1];
+    // a delayed animator writes nothing before its delay: its first key must be the still value, or the part jumps when it starts
+    if (t.offset && vals[0] !== still) throw new Error(`${at}: starts at ${vals[0]} after ${t.offset} ms, still value ${still}`);
+    // stop() (= end() on RenderThread) at IDLE_MS puts every animator on its last key: a loop must have played whole cycles by then,
+    // or (a loop longer than the idle life) rest on its last value from that moment
+    const cut = (IDLE_MS - t.offset) / t.dur - (t.n - 1);
+    if (cut < 1 && vals.some((v, i) => (k[i] >= cut || k[i + 1] > cut) && v !== last)) throw new Error(`${at}: still moving when the idle life stops (${IDLE_MS} ms, fraction ${cut.toFixed(3)}, ${t.n} x ${t.dur} ms from ${t.offset}): ${vals} at ${k}`);
+    ((IDLE0[name] = IDLE0[name] || {})[t.name] = IDLE0[name][t.name] || {})[prop] = { start: vals[0], still, low: Math.min(...vals) };
+  }
   size += vd.length;
 }
 if (layers.length > 1) { LAYERS[name] = layers.map(l => [l.gate, l.res]); if (!opts.vd) LAYERS[base] = layers.map(l => [l.gate, l.vd]); }
 if (!opts.vd) PARTS[base] = layers;
 console.log(name, `${layers.length} calques`, opts.vd ? '' : `VD ${(size / 1024).toFixed(0)} Ko`);
 return gates;
+}
+// value of property [prop] of the node named [nm] in VD xml (attribute, or the VectorDrawable default)
+function stillValue(vd, nm, prop) {
+  const m = new RegExp(`<(?:group|path) android:name="${nm}"([^>]*)>`).exec(vd), v = m && new RegExp(`android:${prop}="([-\\d.e]+)"`).exec(m[1]);
+  return v ? +v[1] : /^(scale|fillAlpha|strokeAlpha|trimPathEnd)/.test(prop) ? 1 : 0;
 }
 // Animators-only AVD [name] on the already converted drawable [vdName] (reactions): targets = { node name: objectAnimator xml }.
 // One layer per layer of the drawable, animated where its targets are, so that worn accessories follow the head.
@@ -265,4 +301,4 @@ if (require.main === module) { // node android/svg2avd.js : self-check of eases(
   require('assert').deepStrictEqual(eases([0, 0, 150, 150, 0]), [null, E, E, E, E]);
   console.log('eases ok');
 }
-module.exports = { convert, animated, eases, TOKENS, LAYERED, LAYERS, ALIASES, PARTS };
+module.exports = { convert, animated, eases, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };

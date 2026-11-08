@@ -6,7 +6,7 @@
 // Clé d'image : [fraction, valeur, accélération] ; accélération 'out' (décélère : lancer), 'in' (accélère : chute), sinon glose_ease.
 // Chaque geste a son anticipation (petit mouvement contraire avant), son squash & stretch (corps tassé au départ et à l'arrivée, étiré
 // dans l'élan ; pelote écrasée à chaque contact) et son dépassement (il va un peu au-delà, puis se pose).
-const { animated, eases, PARTS } = require('./svg2avd.js');
+const { animated, eases, PARTS, IDLE0 } = require('./svg2avd.js');
 const WORDS = ['mot', 'bravo', 'encore', 'rare', 'dodo', 'coucou', 'ronron', 'flocon']; // mêmes mots que make_android.js
 const EASE = { out: '@android:interpolator/decelerate_quad', in: '@android:interpolator/accelerate_quad' };
 const TAP_MS = 600, SPECIAL_MS = 1800; // Glose.Taps : silence de 700 ms après un toucher, 3 s après le spécial
@@ -118,7 +118,7 @@ const SPECIAL = {
       scaleX: [[0, 1], [0.5, 1], [0.88, 1.5, 'out'], [0.9, 1]], scaleY: [[0, 1], [0.5, 1], [0.88, 1.5, 'out'], [0.9, 1]] },
     // la bouffée s'efface en montant, puis la vapeur ordinaire revient
     ...Object.fromEntries(['vap1_o', 'vap2_o'].map(n => { const a = +new RegExp(`name="${n}"[^>]*?fillAlpha="([\\d.]+)"`).exec(vd)[1];
-      return [n, { fillAlpha: [[0, a], [0.5, a], [0.6, 2 * a], [0.88, 0], [0.9, 0], [1, a]] }]; })),
+      return [n, { fillAlpha: [[0, 0], [0.07, a], [0.5, a], [0.6, 2 * a], [0.88, 0], [0.9, 0], [1, a]] }]; })),
   }),
   // la pelote tourne d'abord dans l'autre sens, le fil rembobine le mot et le réécrit d'un trait, la pelote va un peu au-delà puis revient ;
   // il se tasse au rembobinage, s'étire au premier trait ; clin d'œil (même réaction pour tous les mots)
@@ -132,10 +132,26 @@ const SPECIAL = {
 // a key without its own acceleration eases only where the motion rests (svg2avd.eases): no stop where it passes through
 const kfs = k => { const ease = eases(k.map(q => q[1]));
   return k.map(([t, v, e], i) => `<keyframe android:fraction="${t}" android:value="${v}"${i && (EASE[e] || ease[i]) ? ` android:interpolator="${EASE[e] || ease[i]}"` : ''}/>`).join(''); };
+// A reaction ends on the first frame of the idle life (once() then plays it afresh), not on the still: for the « z » and the steam of the
+// evening poses, which the idle starts mid-cycle; they reach it in the reaction's last 150 ms. What the idle shows and hides (« z »,
+// steam: alpha down to 0) may be hidden at the tap: the reaction fades it in from 0 (it vanishes then, a sleeper's start, never pops in).
+// A reaction that animates such a property itself keeps its keys but these ends.
+function settle(targets, idle0, ms) {
+  const fade = +(120 / ms).toFixed(3), fin = +(1 - 150 / ms).toFixed(3);
+  for (const [t, props] of Object.entries(idle0)) for (const [p, { start, still, low }] of Object.entries(props)) {
+    const hides = /Alpha$/.test(p) && low === 0;
+    if (start === still && !hides) continue;
+    const k = (targets[t] = targets[t] || {})[p];
+    if (k) { k[k.length - 1][1] = start; if (hides) k[0][1] = 0; }
+    else targets[t][p] = hides ? [[0, 0], [fade, still], [fin, still], [1, start]] : [[0, still], [fin, still], [1, start]];
+  }
+  return targets;
+}
 // { target: objectAnimator xml } for svg2avd.animated()
-function animators(vd, ms, targets) {
-  for (const [t, props] of Object.entries(targets)) for (const [p, k] of Object.entries(props)) { // fin = début : pas de saut au retour à la vie au repos
-    if ((k[k.length - 1][1] - k[0][1]) % (p === 'rotation' ? 360 : Infinity)) throw new Error(`${vd} ${t}.${p} ne revient pas à sa valeur de départ`);
+function animators(vd, ms, targets, idle0) {
+  for (const [t, props] of Object.entries(targets)) for (const [p, k] of Object.entries(props)) { // fin = image 0 de la vie : pas de saut au retour
+    const end = idle0[t] && idle0[t][p] ? idle0[t][p].start : k[0][1]; // a property the idle does not animate: back to where it started (the still)
+    if (Math.abs((k[k.length - 1][1] - end) % (p === 'rotation' ? 360 : Infinity)) > 1e-6) throw new Error(`${vd} ${t}.${p} ne finit pas sur l'image 0 de la vie (${end})`);
     // a key segment shorter than 2 frames at 60 Hz is a jump, not a motion (merge() crossing nearby keys of two curves made 12 ms ones)
     k.slice(1).forEach(([t1, v1], i) => { if ((t1 - k[i][0]) * ms < 33 && v1 !== k[i][1]) throw new Error(`${vd} ${t}.${p}: ${k[i][0]} -> ${t1} lasts ${((t1 - k[i][0]) * ms).toFixed(0)} ms`); });
   }
@@ -147,7 +163,8 @@ const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['rev
 module.exports = RES => {
   for (const [pose, family] of poses) {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
+    const idle0 = IDLE0[`glose_${pose}`];
     for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]])
-      animated(`glose_${pose}_${kind}`, name, animators(name, ms, make(vd, family)), RES);
+      animated(`glose_${pose}_${kind}`, name, animators(name, ms, settle(make(vd, family), idle0, ms), idle0), RES);
   }
 };

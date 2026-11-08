@@ -2,4 +2,13 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/glose_soir_vd_5">
 <target android:name="zzz" android:animation="@animator/glose_k_0f74a5ba"/>
+<target android:name="p19" android:animation="@animator/glose_k_82be5523"/>
+<target android:name="p20" android:animation="@animator/glose_k_82be5523"/>
+<target android:name="a18" android:animation="@animator/glose_k_7ecad428"/>
+<target android:name="p22" android:animation="@animator/glose_k_f5b981a8"/>
+<target android:name="p23" android:animation="@animator/glose_k_f5b981a8"/>
+<target android:name="a21" android:animation="@animator/glose_k_d024b621"/>
+<target android:name="p25" android:animation="@animator/glose_k_f5b981a8"/>
+<target android:name="p26" android:animation="@animator/glose_k_f5b981a8"/>
+<target android:name="a24" android:animation="@animator/glose_k_5459bcf6"/>
 </animated-vector>

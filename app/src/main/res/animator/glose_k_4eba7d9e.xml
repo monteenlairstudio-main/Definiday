@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android" android:duration="1800" android:interpolator="@android:interpolator/linear"><propertyValuesHolder android:propertyName="translateY" android:valueType="floatType"><keyframe android:fraction="0" android:value="0"/><keyframe android:fraction="0.917" android:value="0" android:interpolator="@interpolator/glose_ease"/><keyframe android:fraction="1" android:value="-15" android:interpolator="@interpolator/glose_ease"/></propertyValuesHolder></objectAnimator>

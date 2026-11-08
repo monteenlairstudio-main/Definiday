@@ -4,4 +4,10 @@
 <target android:name="tete_halo" android:animation="@animator/glose_k_1187afb2"/>
 <target android:name="zzz_halo" android:animation="@animator/glose_k_1c9b0df0"/>
 <target android:name="dormeur_halo" android:animation="@animator/glose_k_4f3cfdc6"/>
+<target android:name="p1" android:animation="@animator/glose_k_119f7d2f"/>
+<target android:name="a0" android:animation="@animator/glose_k_8969ea87"/>
+<target android:name="p3" android:animation="@animator/glose_k_c6351c93"/>
+<target android:name="a2" android:animation="@animator/glose_k_07046289"/>
+<target android:name="p5" android:animation="@animator/glose_k_c6351c93"/>
+<target android:name="a4" android:animation="@animator/glose_k_eca2027e"/>
 </animated-vector>
