@@ -19,7 +19,7 @@ async function buildOne(b, job) {
   await p.addScriptTag({ path: PAPER });
   const svg = await p.evaluate((code) => {
     paper.setup(document.getElementById('c'));
-    const res = new Function('paper', code + '\n;return draw(paper);')(paper) || {};
+    const res = new Function('paper', code + '\n;const r = draw(paper) || {}; if (VARIANT.halo) halo(paper.project.activeLayer, r.anims = r.anims || [], VARIANT.halo, VARIANT.haloW); return r;')(paper);
     const root = paper.project.exportSVG({ precision: 1 });
     const NS = 'http://www.w3.org/2000/svg', mk = t => document.createElementNS(NS, t);
     const ease = '0.45 0 0.55 1';

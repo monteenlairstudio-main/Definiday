@@ -54,6 +54,35 @@ class ProfileTest {
         assertEquals(setOf("abaque"), Memory(ctx).favourites)
     }
 
+    /** Golden file: a profile as exported by 0.14.0 (the first in-app update) must import into HEAD unchanged; keys and files from a later version are ignored. */
+    @Test fun profileFrom0140ImportsUnchanged() {
+        val text = javaClass.classLoader!!.getResource("profil-0.14.0.json")!!.readText()
+        assertTrue(Profile.import(ctx, uri(text)))
+        val files = JSONObject(text).getJSONObject("files")
+        Profile.FILES.forEach { f ->
+            val o = files.getJSONObject(f)
+            val expected = o.keys().asSequence().filter { it != "futureKey" && it != "autreFutur" }.associateWith { k ->
+                val e = o.getJSONObject(k)
+                when (e.getString("t")) {
+                    "int" -> e.getInt("v"); "long" -> e.getLong("v"); "boolean" -> e.getBoolean("v")
+                    "set" -> e.getJSONArray("v").let { a -> List(a.length()) { a.getString(it) }.toSet() }
+                    else -> e.getString("v")
+                }
+            }
+            assertEquals(f, expected, sp(f).all.toMap())
+        }
+        assertEquals("Monsieur Glose", Prefs(ctx).gloseName)
+        assertEquals(setOf("abaque"), Memory(ctx).favourites)
+    }
+
+    /** Every key Prefs keeps in the backed-up "definiday" file must be in Profile.SETTINGS, or export/import silently drops it. */
+    @Test fun everyPrefsKeyIsInTheProfile() {
+        val src = File("src/main/java/fr/definiday/Prefs.kt").readText().substringBefore("\nclass History")
+        val keys = Regex("""(?:\bsp\.(?:edit\(\)\.)?\w+|\b(?:int|long|bool|str|strings))\("(\w+)"""").findAll(src).map { it.groupValues[1] }.toSet()
+        assertTrue(keys.size > 30)
+        assertEquals(emptySet<String>(), keys - Profile.SETTINGS.keys)
+    }
+
     @Test fun junkIsRejectedAndChangesNothing() {
         fill()
         val before = profile()
@@ -77,6 +106,18 @@ class ProfileTest {
             assertEquals(before, profile())
         }
         assertFalse(Profile.import(ctx, Uri.fromFile(File(ctx.cacheDir, "absent.json"))))
+    }
+
+    @Test fun exportOverALongerFileStaysReadableAndABomIsTolerated() {
+        fill()
+        val before = profile()
+        File(ctx.cacheDir, "profil.json").writeText(" ".repeat(10_000) + "x")
+        assertTrue(Profile.export(ctx, uri()))
+        assertTrue(Profile.read(ctx, uri()) != null)
+        val text = File(ctx.cacheDir, "profil.json").readText()
+        Profile.FILES.forEach { sp(it).edit().clear().commit() }
+        assertTrue(Profile.import(ctx, uri("\uFEFF" + text)))
+        assertEquals(before, profile())
     }
 
     @Test fun unknownKeysAndFilesAreIgnored() {
@@ -106,6 +147,13 @@ class ProfileTest {
         assertEquals(2, am.scheduledAlarms.size) // daily word + evening quiz
     }
 
+    /** Profile I/O runs on a worker thread: wait (bounded) until its result is posted back to the UI thread. */
+    private fun settle(done: () -> Boolean) {
+        val end = System.currentTimeMillis() + 5_000
+        while (!done() && System.currentTimeMillis() < end) { Thread.sleep(5); ShadowLooper.idleMainLooper() }
+        assertTrue("profile I/O did not finish", done())
+    }
+
     @Test fun settingsExportThenRestoreAfterConfirmation() {
         fill()
         val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
@@ -114,6 +162,9 @@ class ProfileTest {
         assertEquals(Intent.ACTION_CREATE_DOCUMENT, create.intent.action)
         assertTrue(create.intent.getStringExtra(Intent.EXTRA_TITLE)!!.matches(Regex("definiday-profil-\\d{4}-\\d{2}-\\d{2}\\.json")))
         shadowOf(a).receiveResult(create.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        assertFalse(a.findViewById<Button>(R.id.profile_import).isEnabled) // no second operation meanwhile
+        settle { ShadowToast.getTextOfLatestToast() != null }
+        assertTrue(a.findViewById<Button>(R.id.profile_import).isEnabled)
         assertEquals(ctx.getString(R.string.profile_saved), ShadowToast.getTextOfLatestToast())
         val before = profile()
         sp("definiday").edit().putInt("hour", 3).commit()
@@ -122,12 +173,38 @@ class ProfileTest {
         val open = shadowOf(a).nextStartedActivityForResult
         assertEquals(Intent.ACTION_OPEN_DOCUMENT, open.intent.action)
         shadowOf(a).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(Uri.fromFile(File(ctx.cacheDir, "absent.json"))))
-        assertEquals(ctx.getString(R.string.profile_bad), ShadowToast.getTextOfLatestToast())
+        settle { ShadowToast.getTextOfLatestToast() == ctx.getString(R.string.profile_bad) }
         shadowOf(a).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        settle { ShadowDialog.getLatestDialog()?.isShowing == true }
         assertEquals(3, Prefs(ctx).hour) // not before the confirmation
         (ShadowDialog.getLatestDialog() as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick()
         ShadowLooper.idleMainLooper()
         assertEquals(before, profile())
+    }
+
+    /** Review M2: rotated while the file was read, the result reaches the new screen instead of being dropped. */
+    @Test fun profileReadEndingAfterARotationReachesTheNewScreen() {
+        fill()
+        assertTrue(Profile.export(ctx, uri()))
+        val old = Robolectric.buildActivity(SettingsActivity::class.java).setup()
+        old.get().findViewById<Button>(R.id.profile_import).performClick()
+        val open = shadowOf(old.get()).nextStartedActivityForResult
+        old.pause()
+        val now = Robolectric.buildActivity(SettingsActivity::class.java).setup().get() // the recreated screen, in front
+        shadowOf(old.get()).receiveResult(open.intent, Activity.RESULT_OK, Intent().setData(uri()))
+        settle { ShadowDialog.getLatestDialog()?.isShowing == true }
+        var c = ShadowDialog.getLatestDialog().context
+        while (c is android.content.ContextWrapper && c !is Activity) c = c.baseContext
+        assertTrue(c === now)
+    }
+
+    /** Review 2 M2: a screen recreated while a profile read runs keeps the buttons off (no second dialog stacked). */
+    @Test fun profileButtonsStayOffOnARecreatedScreenWhileBusy() {
+        SettingsActivity.busy = 1
+        try {
+            assertFalse(Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<Button>(R.id.profile_import).isEnabled)
+        } finally { SettingsActivity.busy = 0 }
+        assertTrue(Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<Button>(R.id.profile_import).isEnabled)
     }
 
     /** debug-signed builds (this one, and release without the keystore) never replace the real app fr.definiday. */

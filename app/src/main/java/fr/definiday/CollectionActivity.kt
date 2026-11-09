@@ -38,16 +38,22 @@ class CollectionActivity : Activity() {
         p = Prefs(this)
         Unlocks.update(p)
         trial = Glose.choice(p).toMutableMap()
+        // a rotation keeps what was being tried (N11); only items that still fit their slot ("" = no accessory)
+        val ok = p.unlocked + Unlocks.of(emptyMap())
+        savedInstanceState?.let { b -> trial.keys.forEach { k -> b.getString(STATE_TRIAL + k.name)
+            ?.takeIf { if (it.isEmpty()) k in Unlocks.ACC else it in ok && Unlocks.byId[it]?.kind?.slot == k }?.let { trial[k] = it } } }
         val pad = (16 * dp).toInt()
         // fixed header (Glose, title, count, "Choisir") above the scrolling album: what is tried stays in sight
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; fitsSystemWindows = true } // the insets replace its padding
         // the title on its own line (it stays short at large font sizes), then Glose beside the count and « Choisir »
-        root.addView(TextView(this, null, 0, R.style.Title).apply { text = getString(R.string.collection_title, de(p.gloseName)); setPadding(pad, pad, pad, 0) })
+        title = getString(R.string.collection_title, de(p.gloseName)) // the window title (TalkBack, Recents): the manifest label has no name
+        root.addView(TextView(this, null, 0, R.style.Title).apply { text = title; setPadding(pad, pad, pad, 0) })
         val head = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(pad, 0, pad, pad / 2) }.also(root::addView)
         preview = ImageView(this).apply {
             contentDescription = getString(R.string.glose, p.gloseName)
             val taps = Glose.Taps()
             setOnClickListener { Glose.tap(this, taps, Glose.pose(trial)) { Glose.drawable(context, it, Glose.styles(trial)) } }
+            Glose.pausable(this)
         }
         head.addView(preview, LinearLayout.LayoutParams((112 * dp).toInt(), (112 * dp).toInt()))
         val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding((12 * dp).toInt(), 0, 0, 0) }
@@ -85,6 +91,11 @@ class CollectionActivity : Activity() {
         refresh()
     }
 
+    override fun onSaveInstanceState(out: Bundle) {
+        super.onSaveInstanceState(out)
+        trial.forEach { (k, id) -> out.putString(STATE_TRIAL + k.name, id) }
+    }
+
     override fun onPause() {
         super.onPause()
         Glose.stop(preview)
@@ -106,7 +117,7 @@ class CollectionActivity : Activity() {
             background = GradientDrawable().apply { setColor(getColor(R.color.kraft_dark) and 0xFFFFFF or 0x30000000); setStroke(maxOf(1, dp.toInt()), getColor(R.color.kraft_dark)) }
             layoutParams = LinearLayout.LayoutParams((80 * dp).toInt(), (96 * dp).toInt())
         })
-        cell.foreground = Strip(this, cell.getChildAt(0))
+        if (open) cell.foreground = Strip(this, stamp!!) // a locked slot stays one tone
         cell.addView(TextView(this, null, 0, R.style.Body).apply { text = item.nom; textSize = 14f; gravity = Gravity.CENTER; setLineSpacing(0f, 1f); setPadding((4 * dp).toInt(), (6 * dp).toInt(), (4 * dp).toInt(), 0) })
         if (!open) cell.addView(TextView(this, null, 0, R.style.Body).apply { text = Unlocks.hint(item, p); textSize = 13f; setLineSpacing(0f, 1f); gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink2)); setPadding((4 * dp).toInt(), 0, (4 * dp).toInt(), 0) })
         if (open) {
@@ -168,21 +179,23 @@ class CollectionActivity : Activity() {
         }
     }
 
-    /** The album's transparent holding strip across the lower part of the cell's [stamp] (cell foreground: the strips of a row meet). */
+    /** The album's transparent holding strip across the bottom quarter of the cell's [stamp], clear of Glose's face (cell foreground: the strips of a row meet). */
     private class Strip(ctx: Context, private val stamp: View) : Postal.Paper() {
         private val d = Postal.dp(ctx)
         private val night = ctx.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-        private val film = Paint().apply { color = if (night) 0x1AFFFFFF else 0x59FFFFFF }
+        private val film = Paint().apply { color = if (night) 0x1AFFFFFF else 0x33FFFFFF }
         private val edge = Paint().apply { color = ctx.getColor(R.color.card_edge); strokeWidth = maxOf(1f, d) }
 
         override fun draw(c: Canvas) {
-            val top = stamp.top + stamp.height * 0.5f
+            val top = stamp.top + stamp.height * 0.75f
             c.drawRect(bounds.left.toFloat(), top, bounds.right.toFloat(), stamp.bottom + 3 * d, film)
             c.drawLine(bounds.left.toFloat(), top, bounds.right.toFloat(), top, edge)
         }
     }
 
     companion object {
+        private const val STATE_TRIAL = "trial:"
+
         /** A collection item as an album stamp, 80 x 96 dp: perforated paper ([bg]: sheet on the kraft page, kraft on a sheet),
          *  Glose [glose] at its foot as one still bitmap. Decorative. */
         fun stamp(ctx: Context, glose: Drawable, bg: Int = R.color.sheet) = ImageView(ctx).apply {

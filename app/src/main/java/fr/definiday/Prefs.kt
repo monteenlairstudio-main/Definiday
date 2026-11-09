@@ -145,11 +145,11 @@ class Prefs(val ctx: Context) {
     var gloseAcc: String
         get() = str("gloseAcc", "")
         set(v) = sp.edit().putString("gloseAcc", v).apply()
-    /** Glose's name, fed to every string that names him (%1$s, docs/voix.md). No UI to rename him yet.
-     *  Restored or tampered value: trimmed, 1 to 24 characters without control characters, else the default. */
+    /** Glose's name, fed to every string that names him (%1$s, docs/voix.md), typed in Réglages › Apparence ("" = the default).
+     *  Restored or tampered value: the same rule as the field ([nameError]), else the default. */
     var gloseName: String
-        get() = str("gloseName", "").trim().takeIf { it.length in 1..24 && it.none(Char::isISOControl) } ?: ctx.getString(R.string.glose_name)
-        set(v) = sp.edit().putString("gloseName", v.trim()).apply()
+        get() = cleanName(str("gloseName", "")).takeIf { nameError(it) == 0 } ?: ctx.getString(R.string.glose_name)
+        set(v) = sp.edit().putString("gloseName", cleanName(v).takeIf { nameError(it) == 0 } ?: "").apply() // never stores a refused name
     /** Random picks warned about today (warning shown once a day, past 3 picks). */
     var warnedDay: Long
         get() = long("warnedDay", Long.MIN_VALUE)
@@ -163,6 +163,23 @@ class Prefs(val ctx: Context) {
         get() = strings("polices")
         set(v) = sp.edit().putStringSet("polices", v).apply()
 }
+
+/** Why [name] can't be Glose's name (a string id), 0 if it can once trimmed: 1 to 24 code points (an emoji counts 1), no control,
+ *  format (U+202E reverses the text, U+200B and U+200D are invisible), line/paragraph separator or lone surrogate. */
+fun nameError(name: String): Int {
+    val t = cleanName(name)
+    val bad = setOf(Character.CONTROL, Character.FORMAT, Character.LINE_SEPARATOR, Character.PARAGRAPH_SEPARATOR, Character.SURROGATE,
+        Character.PRIVATE_USE, Character.UNASSIGNED).map(Byte::toInt) // the last two: no glyph anywhere, a box on screen
+    return when {
+        t.isEmpty() -> R.string.name_empty
+        t.codePointCount(0, t.length) > 24 -> R.string.name_long
+        t.codePoints().anyMatch { Character.getType(it) in bad } -> R.string.name_bad
+        else -> 0
+    }
+}
+
+/** The name as kept: NFC (an accent typed apart joins its letter), trimmed, runs of spaces (incl. no-break) made one; tabs and line breaks stay, so they are refused. */
+fun cleanName(name: String) = java.text.Normalizer.normalize(name, java.text.Normalizer.Form.NFC).replace(Regex("[ \u00A0\u202F]+"), " ").trim() // tabs, newlines: refused, not hidden
 
 /** « de [nom] » with French elision: « d’Anatole », « d’Émile », « de Monsieur Glose ». Never before an h (aspirated or not,
  *  « de » is tolerated before a first name), a Y, an initial (« de A. ») or a one-letter name. Prefer copy without « de %1$s ». */
@@ -185,7 +202,7 @@ class History(ctx: Context) {
  */
 class Memory(ctx: Context) {
     /** Review ladder anchored on [start] (day first shown, or day of the last miss): due at start + Quiz.LADDER[step];
-     *  [step] = LADDER.size: learnt, never due again. [misses]: wrong answers ever (2+ = « fragile »). */
+     *  [step] = LADDER.size: learnt, never due again. [misses]: wrong answers ever. */
     data class Entry(val start: Long, val step: Int = 0, val misses: Int = 0)
 
     private val sp = ctx.getSharedPreferences("memoire", Context.MODE_PRIVATE)

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Btn: a kraft paper with a kraft_dark rule. The one selection language of the app: selected = 2 dp accent outline;
-     focused (keyboard, Switch Access) = 3 dp accent outline (6.1:1 on kraft light, 7.5:1 dark); pressed = ripple; disabled = flat surface_off.
+     focused (keyboard, Switch Access) = 3 dp accent outline (6.1:1 on kraft light, 7.5:1 dark); pressed = ripple; disabled = surface_off with a 1 dp card_edge rule (at night surface_off alone is 1.01:1 on the sheet).
      The quiz tints it (background.mutate().setTint) for right/wrong. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/ripple">
     <item>
         <selector>
             <item android:state_enabled="false">
-                <shape><corners android:radius="@dimen/radius_paper" /><solid android:color="@color/surface_off" /></shape>
+                <shape><corners android:radius="@dimen/radius_paper" /><solid android:color="@color/surface_off" /><stroke android:width="1dp" android:color="@color/card_edge" /></shape>
             </item>
             <item android:state_focused="true">
                 <shape><corners android:radius="@dimen/radius_paper" /><solid android:color="@color/surface" /><stroke android:width="3dp" android:color="@color/accent" /></shape>

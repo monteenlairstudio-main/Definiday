@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -52,7 +53,23 @@ class WidgetTest {
         val q = Quotes.load(ctx).first()
         today(q)
         val v = widgets.getViewFor(widgets.createWidget(Widget::class.java, R.layout.widget))
-        assertEquals(listOf("", ctx.getString(R.string.quote_label), "«\u00a0${q.texte}\u00a0»", q.signature), texts(v))
+        assertEquals(listOf("", ctx.getString(R.string.quote_label), "«\u202F${q.texte}\u202F»", q.signature), texts(v))
+    }
+
+    /** N7: the app left open past midnight redraws the widget with the new day's item on resume, before the daily alarm. */
+    @Test fun followsANewDayInTheApp() {
+        val tz = java.util.TimeZone.getDefault()
+        try {
+            java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("Etc/GMT+12")) // UTC-12: day D
+            today(word("zinzolin"))
+            val id = widgets.createWidget(Widget::class.java, R.layout.widget)
+            val c = org.robolectric.Robolectric.buildActivity(MainActivity::class.java).setup().pause()
+            java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("Etc/GMT-12")) // same instant seen 24 h later: D+1
+            c.resume()
+            val item = Words.today(ctx).first()
+            assertTrue(item.key != "zinzolin")
+            assertTrue((if (item is Word) item.mot else "«\u202F${(item as Quote).texte}\u202F»") in texts(widgets.getViewFor(id)))
+        } finally { java.util.TimeZone.setDefault(tz) }
     }
 
     /** The daily alarm's show() redraws it; a resize keeps the texts. */

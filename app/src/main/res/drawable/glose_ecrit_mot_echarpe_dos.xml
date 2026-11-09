@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_ecrit_mot_vd_echarpe_dos">
+<target android:name="a7" android:animation="@animator/glose_k_96207d83"/>
+</animated-vector>

@@ -199,3 +199,25 @@ cibles, donc les accessoires portés (copies du groupe `tete` ou `dormeur`) suiv
    « le fil écrit » : bras levé qui sautillait et décollait la patte du fil → retiré.
 Restants : pas de cœur ni de fioriture (il faudrait un nouveau tracé) ; la pelote assise se décolle du brin qui pend pendant qu'elle roule ;
 Robolectric ne dessine pas les valeurs animées d'une AVD (aperçu Chromium à la place).
+
+## Liseré de nuit (`halo()` dans glose_lib.js, jeton `gloseHalo`)
+Sur le papier de nuit (#141829), l'encre brune et le livre bleu nuit disparaissaient. Derrière le dessin : l'union des contours d'encre
+élargie de 12 (≈ 2 dp à 128 dp), un chemin par groupe animé ou touché par une réaction (`<id>_halo`, mêmes animateurs s'ils bougent
+de plus que le liseré, même pivot ; `svg2avd.animated()` anime aussi `<id>_halo`) ; les traits ouverts qui sortent de la silhouette
+(moustaches, brins, « z ») sont élargis ; le fil qui écrit a son liseré juste derrière lui, découpé hors de la silhouette, dans le calque du mot.
+Couleur `@color/glose_halo` : transparente le jour (rendu Robolectric identique au pixel, 421 images), #F0E8D8 la nuit (encre du thème nuit).
+APK release +56 Ko. Accessoires et ruban : liseré dans leur propre groupe (même porte, même calque), découpé hors de la silhouette du corps
+(+12 Ko) ; pas de liseré sur les paillettes, étoiles et éclats (clairs, déjà visibles la nuit).
+
+## Humeurs (`gloseHead` : `o.mood`)
+`fier` (bouche ouverte en « D », sourcils arqués) pour « le fil écrit », tous les mots : la tête reste dans la partie commune à tous les
+mots (glose_ecrit_mot_vd_2). `curieux` (un sourcil levé, petite bouche « o ») pour la pile. Écartés : « yeux qui sourient » (croissant de
+joue sous l'œil, se lit triste à 96–128 dp) ; « doux » pour « encore » (une tête par mot casse le partage des calques : +10 Ko par mot).
+
+## Icône d'appli générée : proposition, non appliquée
+Commit fec50e1 annulé : la tête générée tient dans le masque, mais elle se lit plus petite et moins ronde que l'icône actuelle. La décision revient au propriétaire (planche `glose_3/icone_appli_avant_apres.png` du rapport de nuit).
+
+## Livre allégé (`book()`)
+Plus de filets d'or aux deux bords (restent les 4 bandes), filets des bandes à 60 %, bandes sans cerne d'encre, étiquette plus petite
+(0,18 × 0,34 de la face au lieu de 0,24 × 0,44), ombre basse 0,2 → 0,12, reflet 0,13 → 0,18. Contraste RMS de la zone du livre −3 %
+(assis, écrit) ; la masse bleu nuit reste la plus sombre : un fond plus clair serait une autre couleur de reliure par défaut (jeton gloseBook).

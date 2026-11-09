@@ -11,6 +11,7 @@ import android.graphics.Typeface
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
+import android.text.TextUtils
 import java.time.LocalDate
 import java.util.Locale
 
@@ -22,12 +23,12 @@ object WordCard {
     /** One paragraph of the card: text, size as a fraction of the card width, face, color. */
     class Line(val text: String, val size: Float, val face: Typeface, val color: Int)
 
-    /** First line = the word (or the quote), underlined by the thread. One text serif (Libre Baskerville, no italic cut: color marks the example). */
+    /** First line = the word (or the quote), underlined by the thread. One text serif (Definiday Serif, no italic cut: color marks the example). */
     fun lines(ctx: Context, item: Item, style: Style): List<Line> {
         val pal = style.palette
-        val serif = ctx.resources.getFont(R.font.libre_baskerville)
+        val serif = ctx.resources.getFont(R.font.definiday_serif)
         if (item is Quote) return listOf(
-            Line("« ${item.texte} »", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
+            Line("«\u202F${Styles.fine(item.texte, style)}\u202F»", if (item.texte.length > 140) 0.055f else 0.065f, style.typeface, pal.mot),
             Line(item.signature, 0.04f, serif, pal.nature),
         )
         val w = item as Word
@@ -35,7 +36,7 @@ object WordCard {
             Line(w.mot, if (w.mot.length > 12) 0.09f else 0.12f, style.typeface, pal.mot),
             Line(w.nature, 0.04f, serif, pal.nature),
             Line(w.definition, 0.046f, serif, pal.texte),
-            Line(if (w.exemple.isEmpty()) "" else "« ${w.exemple} »", 0.039f, serif, pal.exemple),
+            Line(if (w.exemple.isEmpty()) "" else "«\u202F${w.exemple}\u202F»", 0.039f, serif, pal.exemple),
         ).filter { it.text.isNotEmpty() }
     }
 
@@ -85,7 +86,6 @@ object WordCard {
         val gap = u * 0.035f
         val (stampW, stampH) = u * 0.12f to u * 0.14f
         val threadRoom = u * 0.02f
-        // ponytail: fixed name; read it from Prefs once Glose's name can be customized
         val sign = if (item is Word) TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             typeface = ctx.resources.getFont(R.font.dancing_script); textSize = u * 0.052f; color = pal.nature; textAlign = Paint.Align.RIGHT
         } else null
@@ -124,6 +124,9 @@ object WordCard {
             }
             y += l.height + gap
         }
-        sign?.let { c.drawText("Glose", face.right - pad, y - gap + it.textSize * 0.95f, it) }
+        sign?.let { // Glose's full name (Prefs.gloseName), cut with « … » if a wide 24-letter name overflows the card
+            val name = TextUtils.ellipsize(Prefs(ctx).gloseName, it, u - 2 * pad, TextUtils.TruncateAt.END).toString()
+            c.drawText(name, face.right - pad, y - gap + it.textSize * 0.95f, it)
+        }
     }
 }

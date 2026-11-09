@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd">
-
+<target android:name="a2" android:animation="@animator/glose_k_b42d945c"/>
+<target android:name="a1" android:animation="@animator/glose_k_4331099f"/>
+<target android:name="a0" android:animation="@animator/glose_k_cd5fdb68"/>
+<target android:name="a3" android:animation="@animator/glose_k_cea7e1f1"/>
+<target android:name="a4" android:animation="@animator/glose_k_421abcf4"/>
+<target android:name="a5" android:animation="@animator/glose_k_347d6d9b"/>
+<target android:name="a6" android:animation="@animator/glose_k_e4ba4a88"/>
 </animated-vector>

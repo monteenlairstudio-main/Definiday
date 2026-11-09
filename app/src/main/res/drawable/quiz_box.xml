@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- An empty notebook check-box before each quiz answer (decoration: the answer is the button's text); square, like the stamps. -->
+<!-- An empty notebook check-box before each quiz answer (decoration: the answer is the button's text); square, like the stamps; ink2 once disabled. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <size android:width="18dp" android:height="18dp" />
-    <stroke android:width="2dp" android:color="@color/accent" />
+    <stroke android:width="2dp" android:color="@color/quiz_box_edge" />
 </shape>

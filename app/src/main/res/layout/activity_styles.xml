@@ -73,7 +73,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/palettes_group" />
 
-        <!-- the count as a postal mention; Toutes / Aucune as quiet links beside it -->
+        <!-- the count as a postal mention; Toutes / Celle du mot as quiet links beside it -->
         <LinearLayout
             android:id="@+id/palettes_bar"
             android:layout_width="match_parent"
@@ -103,9 +103,16 @@
                     style="@style/Link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/none_f" />
+                    android:text="@string/own_f" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- why the last kept tile cannot be removed (StylesActivity.Pool) -->
+        <TextView
+            android:id="@+id/palettes_min"
+            style="@style/Help"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone" />
 
         <TextView
             style="@style/Field"
@@ -134,7 +141,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/polices_group" />
 
-        <!-- the count as a postal mention; Toutes / Aucune as quiet links beside it -->
+        <!-- the count as a postal mention; Toutes / Celle du mot as quiet links beside it -->
         <LinearLayout
             android:id="@+id/polices_bar"
             android:layout_width="match_parent"
@@ -164,9 +171,16 @@
                     style="@style/Link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/none_f" />
+                    android:text="@string/own_f" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- why the last kept tile cannot be removed (StylesActivity.Pool) -->
+        <TextView
+            android:id="@+id/polices_min"
+            style="@style/Help"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone" />
 
         <TextView
             style="@style/Field"

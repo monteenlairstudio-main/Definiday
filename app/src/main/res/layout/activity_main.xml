@@ -44,8 +44,7 @@
                 <ImageView
                     android:id="@+id/glose"
                     android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:contentDescription="@string/glose" />
+                    android:layout_height="128dp" /> <!-- contentDescription: R.string.glose with the name, set in code -->
 
                 <!-- seasonal prop by date (MainActivity.season): still, small, decorative -->
                 <ImageView
@@ -121,6 +120,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="22dp"
             android:paddingTop="20dp"
@@ -186,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="-12dp"
-                    android:background="@null"
+                    android:background="@drawable/btn_round"
                     android:button="@drawable/favori"
                     android:contentDescription="@string/favori" />
             </LinearLayout>

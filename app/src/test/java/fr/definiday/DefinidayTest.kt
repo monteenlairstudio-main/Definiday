@@ -34,6 +34,23 @@ class DefinidayTest {
         }
     }
 
+    /** Q3: a disabled Btn keeps a 1 dp card_edge rule around its flat fill (at night surface_off is 1.01:1 on the letter's sheet),
+     *  and a disabled quiz option's box is ink2, not plume. */
+    @Test fun disabledQuizOptionsStayReadable() {
+        listOf("+notnight", "+night").forEach { night ->
+            RuntimeEnvironment.setQualifiers(night)
+            val c = RuntimeEnvironment.getApplication()
+            val b = Bitmap.createBitmap(300, 150, Bitmap.Config.ARGB_8888)
+            c.getDrawable(R.drawable.btn)!!.apply { state = intArrayOf(); setBounds(0, 0, 300, 150); draw(Canvas(b)) } // no state_enabled
+            assertEquals(night, c.getColor(R.color.card_edge), b.getPixel(150, 1))
+            assertEquals(night, c.getColor(R.color.surface_off), b.getPixel(150, 75))
+            val box = Bitmap.createBitmap(54, 54, Bitmap.Config.ARGB_8888)
+            c.getDrawable(R.drawable.quiz_box)!!.apply { state = intArrayOf(); setBounds(0, 0, 54, 54); draw(Canvas(box)) }
+            assertEquals(night, c.getColor(R.color.ink2), box.getPixel(27, 2))
+            assertEquals(night, 0, box.getPixel(27, 27)) // still an empty box
+        }
+    }
+
     /** Simulates 3 years of daily + random picks and asserts the cooldowns. */
     private fun simulate(perDay: Int, randomPerDay: Int, checkRandom: Boolean) {
         val words = Words.load(ctx)
@@ -67,6 +84,10 @@ class DefinidayTest {
         assertTrue(q.size >= 300)
         q.forEach { assertTrue(it.texte, it.texte.length <= 260 && it.source.startsWith("https://fr.wikiquote.org/wiki/")) }
         q.forEach { assertTrue(it.texte, '\'' !in it.texte && !Regex(" [;:!?]").containsMatchIn(it.texte)) } // ’ and U+202F, as words.json
+        q.forEach { assertTrue(it.texte, !it.texte.startsWith("«")) } // the card adds its own guillemets: « « … » »
+        q.forEach { assertTrue(it.signature, !Regex("[\\p{L}\\d \u00A0][;:!?]").containsMatchIn(it.signature)) } // QA F7: « Paris : vie », U+202F
+        assertEquals(q.size, q.map { it.key }.toSet().size)
+        assertTrue(q.any { it.key == "q:« Que tu meures absous ou damné, marmottait Scarbo cette nuit à mon oreille, tu auras pour linceul une toile d’araignée, et j’ensevelirai l’araignée avec toi\u202F! »" }) // corrected text, key unchanged: history kept
         assertTrue(q.count { it.theme == "lenteur" } >= 10)
         Prefs(ctx).polices = setOf("unifraktur_maguntia") // only a display face kept -> quote falls back to serif
         assertEquals(android.graphics.Typeface.SERIF, Styles.of(ctx, q.first()).typeface)
@@ -273,8 +294,10 @@ class DefinidayTest {
     /** Interface captures (app/build/demo/ui): home light/dark, font x1.3 and x2.0, w360dp, Settings, onboarding steps, Couleurs et polices, quiz steps, Collection. */
     private fun renderInterface(ui: File) {
         val p = Prefs(ctx).apply { lastQuizDay = Long.MIN_VALUE; mode = Prefs.MODE_BOTH }
-        fun main(key: String? = null) = Robolectric.buildActivity(MainActivity::class.java,
-            android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
+        fun main(key: String? = null): MainActivity {
+            key?.let { History(ctx).mark(it, java.time.LocalDate.now().toEpochDay() - 1) } // seen on an earlier day: the extra opens only such items or today's (S4)
+            return Robolectric.buildActivity(MainActivity::class.java, android.content.Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)).setup().get()
+        }
         fun quiz() = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
         // Couleurs et polices with a few palettes and fonts removed, so both tile states show
         fun styles(): android.app.Activity {
@@ -333,9 +356,10 @@ class DefinidayTest {
         capture(quizEnd(right = 2), File(ui, "quiz_fin.png"))
         capture(quizEnd(right = 3), File(ui, "quiz_fin_refait.png")) // same day: score not counted
         p.apply { lastQuizDay = Long.MIN_VALUE; passedQuizzes = 4 }
+        org.robolectric.Shadows.shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending") // the card needs Play
         capture(quizEnd(right = 3), File(ui, "quiz_fin_noter.png")) // 5th passed quiz: the rate card, once
         p.guessFirst = true
-        capture(main(), File(ui, "home_deviner.png"))
+        capture(main(Words.load(ctx)[42].mot), File(ui, "home_deviner.png")) // a word: some days start with a quote, which has no veil
         p.guessFirst = false
         RuntimeEnvironment.setQualifiers("+night")
         capture(main(), File(ui, "home_dark.png"))
@@ -360,9 +384,13 @@ class DefinidayTest {
         }
         p.apply { lastQuizDay = today - 1; streak = 8 }
         fun mots() = Robolectric.buildActivity(MotsActivity::class.java).setup().get()
+        fun detail() = Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot)).setup().get()
+        // keyboard focus on the star (WCAG 2.4.7): its outline must show
+        fun starFocused(a: android.app.Activity) = a.also { views(a).filterIsInstance<android.widget.CheckBox>().first { it.isShown }.run { isFocusableInTouchMode = true; requestFocus() } }
         capture(mots(), File(ui, "mots_light.png"))
-        capture(Robolectric.buildActivity(DetailActivity::class.java, android.content.Intent(ctx, DetailActivity::class.java).putExtra(MainActivity.EXTRA_MOT, past[3].mot))
-            .setup().get(), File(ui, "mots_detail.png"))
+        capture(detail(), File(ui, "mots_detail.png"))
+        capture(starFocused(detail()), File(ui, "mots_detail_focus_star.png"))
+        capture(starFocused(main(past[3].mot)), File(ui, "home_focus_star.png")) // a word: some days start with a quote, which has no star
         capture(quiz().also { q -> repeat(Words.seenToday(ctx).size) { answer(q, right = true); views(q).filterIsInstance<android.widget.Button>().first { it.text == ctx.getString(R.string.quiz_next) }.performClick() } },
             File(ui, "quiz_revision.png"))
         val cloze = generateSequence { quiz() }.take(60).first { q -> views(q).any { (it as? android.widget.TextView)?.text == ctx.getString(R.string.quiz_prompt_cloze) } }
@@ -370,10 +398,12 @@ class DefinidayTest {
         RuntimeEnvironment.setFontScale(2f)
         RuntimeEnvironment.setQualifiers("+w360dp-h740dp")
         capture(mots(), File(ui, "mots_w360_font200.png"))
+        capture(detail(), File(ui, "mots_detail_w360_font200.png"))
         RuntimeEnvironment.setFontScale(1f)
         RuntimeEnvironment.setQualifiers("+w411dp-h891dp")
         RuntimeEnvironment.setQualifiers("+night")
         capture(mots(), File(ui, "mots_dark.png"))
+        capture(detail(), File(ui, "mots_detail_dark.png"))
         RuntimeEnvironment.setQualifiers("+notnight")
     }
 

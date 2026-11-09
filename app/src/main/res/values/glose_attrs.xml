@@ -19,15 +19,18 @@
     <attr name="gloseBookLowD" format="color"/>
     <attr name="gloseSpecs" format="color"/>
     <attr name="gloseStripe" format="color"/>
+    <attr name="gloseHalo" format="color"/>
     <attr name="gloseBeret_343c55" format="color"/>
     <attr name="gloseBeret_3b2a20" format="color"/>
     <attr name="gloseBeret_4a5470" format="color"/>
+    <attr name="gloseBeret_f0e801" format="color"/>
     <attr name="gloseBeret_fff6e6" format="color"/>
     <attr name="gloseBeret_ffffff" format="color"/>
     <attr name="gloseBonnet_3b2a20" format="color"/>
     <attr name="gloseBonnet_a4acbc" format="color"/>
     <attr name="gloseBonnet_c75b54" format="color"/>
     <attr name="gloseBonnet_f0a6a2" format="color"/>
+    <attr name="gloseBonnet_f0e801" format="color"/>
     <attr name="gloseBonnet_f8eedd" format="color"/>
     <attr name="gloseBonnet_fff6e6" format="color"/>
     <attr name="gloseCouronne_3b2a20" format="color"/>
@@ -36,11 +39,13 @@
     <attr name="gloseCouronne_b98a2a" format="color"/>
     <attr name="gloseCouronne_c75b54" format="color"/>
     <attr name="gloseCouronne_e9be55" format="color"/>
+    <attr name="gloseCouronne_f0e801" format="color"/>
     <attr name="gloseCouronne_fff6e6" format="color"/>
     <attr name="gloseCouronne_ffffff" format="color"/>
     <attr name="gloseEcharpe_2c3a5e" format="color"/>
     <attr name="gloseEcharpe_3b2a20" format="color"/>
     <attr name="gloseEcharpe_d9a441" format="color"/>
+    <attr name="gloseEcharpe_f0e801" format="color"/>
     <attr name="gloseEcharpe_fff6e6" format="color"/>
     <attr name="gloseEcharpe_ffffff" format="color"/>
     <attr name="gloseGilt_fff7d8" format="color"/>
@@ -49,27 +54,33 @@
     <attr name="gloseGrelot_3b2a20" format="color"/>
     <attr name="gloseGrelot_c75b54" format="color"/>
     <attr name="gloseGrelot_d9a441" format="color"/>
+    <attr name="gloseGrelot_f0e801" format="color"/>
     <attr name="gloseGrelot_fff6e6" format="color"/>
     <attr name="gloseGrelot_ffffff" format="color"/>
     <attr name="gloseMarque_3b2a20" format="color"/>
     <attr name="gloseMarque_8e3a44" format="color"/>
     <attr name="gloseMarque_a87a26" format="color"/>
     <attr name="gloseMarque_d9a441" format="color"/>
+    <attr name="gloseMarque_f0e801" format="color"/>
     <attr name="gloseNoeud_2c3a5e" format="color"/>
     <attr name="gloseNoeud_3b2a20" format="color"/>
     <attr name="gloseNoeud_d9a441" format="color"/>
+    <attr name="gloseNoeud_f0e801" format="color"/>
     <attr name="gloseNoeud_ffffff" format="color"/>
     <attr name="glosePlume_3b2a20" format="color"/>
     <attr name="glosePlume_8c93a6" format="color"/>
     <attr name="glosePlume_a87a26" format="color"/>
+    <attr name="glosePlume_f0e801" format="color"/>
     <attr name="glosePlume_fbf6ec" format="color"/>
     <attr name="gloseRuban_3b2a20" format="color"/>
     <attr name="gloseRuban_f0a6a2" format="color"/>
+    <attr name="gloseRuban_f0e801" format="color"/>
     <attr name="gloseSapin_3b2a20" format="color"/>
     <attr name="gloseSapin_3f7350" format="color"/>
     <attr name="gloseSapin_5e9a6e" format="color"/>
     <attr name="gloseSapin_9c6b4a" format="color"/>
     <attr name="gloseSapin_d9a441" format="color"/>
+    <attr name="gloseSapin_f0e801" format="color"/>
     <attr name="gloseSapin_ffffff" format="color"/>
     <attr name="gloseStars_f4e7b8" format="color"/>
 </resources>

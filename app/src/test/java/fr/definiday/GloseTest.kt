@@ -139,6 +139,21 @@ class GloseTest {
         assertEquals(listOf(R.style.Glose_Pelote_Moutarde), Glose.styles(Glose.choice(p)))
     }
 
+    /** N11: a rotation keeps what is being tried (not yet chosen), and « Choisir » still keeps it. */
+    @Test fun collectionTrialSurvivesRotation() {
+        val p = Prefs(ctx).apply { quizzes = 5 }
+        val c = Robolectric.buildActivity(CollectionActivity::class.java).setup()
+        fun find(desc: String): android.view.View { val l = ArrayList<android.view.View>(); c.get().window.decorView.findViewsWithText(l, desc, android.view.View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION); return l.first() }
+        fun choose() = c.get().window.decorView.let { val l = ArrayList<android.view.View>(); it.findViewsWithText(l, ctx.getString(R.string.collection_choose), android.view.View.FIND_VIEWS_WITH_TEXT); l.first() }
+        find("Pelote moutarde").performClick()
+        c.recreate()
+        assertTrue(find("Pelote moutarde").isSelected)
+        assertEquals(android.view.View.VISIBLE, choose().visibility)
+        assertEquals("bordeaux", p.glosePelote) // still only tried
+        choose().performClick()
+        assertEquals("moutarde", p.glosePelote)
+    }
+
     @Test fun eveningPoseAfterNinePmOnceUnlocked() {
         val p = Prefs(ctx).apply { glosePose = "assis" }
         assertEquals(R.drawable.glose_assis, Glose.mainPose(p, hour = 22)) // not unlocked yet
@@ -171,6 +186,19 @@ class GloseTest {
         assertFalse(running) // rests on its still frame
         Glose.play(v); Glose.stop(v) // onPause
         assertFalse(running)
+    }
+
+    /** The idle stop is scaled like the animators: ValueAnimator's scale from API 33, the global setting before (getDurationScale is hidden there). */
+    @Test fun idleStopFollowsTheDurationScale() {
+        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+        try { scale.invoke(null, 2f); assertEquals(2f, Glose.durationScale(ctx)) } finally { scale.invoke(null, 1f) }
+        val sdk = android.os.Build.VERSION.SDK_INT
+        try {
+            org.robolectric.util.ReflectionHelpers.setStaticField(android.os.Build.VERSION::class.java, "SDK_INT", 28)
+            assertEquals(1f, Glose.durationScale(ctx)) // unset: 1
+            android.provider.Settings.Global.putFloat(ctx.contentResolver, android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 0.5f)
+            assertEquals(0.5f, Glose.durationScale(ctx))
+        } finally { org.robolectric.util.ReflectionHelpers.setStaticField(android.os.Build.VERSION::class.java, "SDK_INT", sdk) }
     }
 
     /** A reaction plays once, then the idle drawable comes back; stop() (onPause) cancels that return. */
@@ -219,6 +247,34 @@ class GloseTest {
         } finally { scale.invoke(null, 1f) }
     }
 
+    /** WCAG 2.2.2: a long press (TalkBack: « Mettre en pause » / « Reprendre ») pauses and resumes the idle life, here and on return;
+     *  animations off: nothing to pause, no action. */
+    @Test fun longPressPausesTheIdleLife() {
+        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+        val v = c.get().findViewById<ImageView>(R.id.glose)
+        fun running(): Boolean { v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+            return (v.drawable as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>().any { it.isRunning } }
+        fun label() = android.view.accessibility.AccessibilityNodeInfo.obtain().also(v::onInitializeAccessibilityNodeInfo).actionList
+            .firstOrNull { it.id == android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK }?.label?.toString()
+        try {
+            assertTrue(running())
+            assertEquals("Mettre en pause", label())
+            assertTrue(v.performLongClick())
+            assertFalse(running())
+            assertEquals("Reprendre", label())
+            c.pause().resume()
+            assertFalse(running()) // still paused when the screen comes back
+            assertTrue(v.performLongClick())
+            assertTrue(running())
+            val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+            try {
+                scale.invoke(null, 0f)
+                assertEquals(null, label())
+                assertFalse(v.performLongClick())
+            } finally { scale.invoke(null, 1f) }
+        } finally { Glose.paused = false }
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)
@@ -257,5 +313,35 @@ class GloseTest {
                 assertEquals(0, diff(render(vd), Glose.bitmap(v.drawable, 256, 256)))
             }
         } finally { scale.invoke(null, 1f) }
+    }
+
+    /** Review 2 I1: an accessory's night outline is always clipped outside the body; unclipped it painted cream over the fur. */
+    @Test fun accessoryNightOutlinesAreClipped() {
+        val layers = File("src/main/res/drawable").listFiles { f -> f.name.matches(Regex("glose_\\w+_vd_[a-z_]+\\.xml")) }!!
+        assertTrue(layers.size > 20)
+        val f = javax.xml.parsers.DocumentBuilderFactory.newInstance().apply { isNamespaceAware = true }
+        for (file in layers) {
+            val paths = f.newDocumentBuilder().parse(file).getElementsByTagName("path")
+            for (i in 0 until paths.length) {
+                val p = paths.item(i) as org.w3c.dom.Element
+                val halo = (0 until p.attributes.length).any { p.attributes.item(it).nodeValue.matches(Regex("\\?attr/glose\\w*_f0e801")) }
+                if (!halo) continue
+                var g = p.parentNode
+                var clipped = false
+                while (g is org.w3c.dom.Element && !clipped) { clipped = g.getElementsByTagName("clip-path").length > 0 && g.tagName == "group"; g = g.parentNode }
+                assertTrue("${file.name}: night outline without clip", clipped)
+            }
+        }
+    }
+
+    /** QA F1: the night outline follows the mode even when Glose was drawn in the other mode first (drawable cache). */
+    @Test fun nightOutlineFollowsTheModeAfterASwitch() {
+        fun cream() = Glose.bitmap(Glose.mine(ctx, R.drawable.glose_assis_vd, accessory = false), 256, 256).let { b ->
+            (0 until b.width step 2).sumOf { x -> (0 until b.height step 2).count { y -> b.getPixel(x, y) == 0xFFF0E8D8.toInt() } } }
+        assertEquals(0, cream()) // by day: no outline
+        org.robolectric.RuntimeEnvironment.setQualifiers("+night")
+        assertTrue(cream() > 100) // then at night, same process: the outline shows
+        org.robolectric.RuntimeEnvironment.setQualifiers("+notnight")
+        assertEquals(0, cream()) // and goes again by day
     }
 }

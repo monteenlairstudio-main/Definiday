@@ -65,6 +65,7 @@ function draw(paper) {
   const jg = C.has('grelot') ? jingle(C, [H.chin[0] + 14, H.chin[1] - 6], { w: 50, s: 0.85 }) : {};
   const tree = C.has('sapin') ? paperTree(C, [868, 788], 0.8) : null;
   const gHead = G('dormeur', [paws, jg.band, H.group, bow, jg.bell]);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), scarfG); // nœud et grelot sont dans « dormeur »
   anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], values: [[1, 1], [1.008, 1.02], [1, 1]], dur: 4.2 });
 
   // ---------- bougie ----------
@@ -82,7 +83,7 @@ function draw(paper) {
     awake ? null : G('flamme', [fill(flameO.clone(NI), C.gold), fill(flameI, C.glow), outline(flameO, IN)])]);
   const gHalo = awake ? null : G('halo', [halo]);
   if (!awake) anims.push({ id: 'flamme', type: 'scale', pivot: [CX + 2, FY], values: [[1, 1], [0.9, 1.1], [1.06, 0.94], [0.94, 1.06], [1, 1]], dur: 1.7 },
-    { id: 'halo', attr: 'opacity', values: [0.8, 1, 0.85, 0.8], keyTimes: [0, 0.4, 0.7, 1], dur: 2.4 });
+    { id: 'halo', attr: 'opacity', values: [1, 0.85, 0.8, 1], keyTimes: [0, 0.3, 0.6, 1], dur: 2.4 }); // starts on the still (full glow)
 
   // ---------- vapeur, « z », sachet ----------
   const steam = (id, x, y, d) => {
@@ -104,7 +105,7 @@ function draw(paper) {
   const zG = awake ? null : G('zzz', [zz('z1', ear[0] - 34, ear[1] + 34, 13, 0), zz('z2', ear[0] - 62, ear[1] - 12, 18, -1.2), zz('z3', ear[0] - 84, ear[1] - 70, 24, -2.4)]);
   const tag = rpoly([[732, 622], [776, 622], [776, 674], [732, 674]], 6), leaf = blob([[754, 634], [766, 646], [754, 666], [742, 646]], 0.5);
   const gTea = G('sachet', [line(curve([[742, 554], [750, 572], [754, 594], [754, 622]]), 3.5), vol(null, tag, C.white, [shadowOf(tag, 8, 0, 0.12), fill(leaf, C.gold), line(curve([[754, 640], [754, 662]]), 2.5)], IN)]);
-  anims.push({ id: 'sachet', type: 'rotate', pivot: [744, 556], values: [-4, 4, -4], dur: 4.2 });
+  anims.push({ id: 'sachet', type: 'rotate', pivot: [744, 556], values: [0, 4, 0, -4, 0], dur: 4.2 }); // starts on the still (0°): no jump when the idle life starts
   const ground = fill(ell([540, 964], [440, 22]), INK, 0.14);
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);

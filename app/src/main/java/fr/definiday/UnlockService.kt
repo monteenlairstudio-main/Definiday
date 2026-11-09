@@ -32,9 +32,11 @@ class UnlockService : Service() {
         // posted at each start: sync() restarts it when the setting changes, so the text shows the current count
         val n = Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_stat)
-            .setContentText(getString(R.string.watch_text, Prefs(this).unlocks))
+            .setContentText(getString(R.string.watch_text, resources.getStringArray(R.array.unlocks_ordinals)[(Prefs(this).unlocks - 1).coerceIn(0, 2)]))
             .build()
         if (Build.VERSION.SDK_INT >= 34) startForeground(ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE) else startForeground(ID, n)
+        // restarted (START_STICKY) after the word was removed or the setting went back to the duration: nothing to watch
+        if (Prefs(this).let { it.wallpaperEndAt == 0L || it.unlocks == 0 }) stopSelf()
         return START_STICKY
     }
 

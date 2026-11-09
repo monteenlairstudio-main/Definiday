@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_ecrit_mot_vd">
+<target android:name="tete_halo" android:animation="@animator/glose_k_b3c06744"/>
+<target android:name="corps_halo" android:animation="@animator/glose_k_b44200ac"/>
+<target android:name="pelote_halo" android:animation="@animator/glose_k_f342840d"/>
+</animated-vector>

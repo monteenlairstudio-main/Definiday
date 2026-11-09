@@ -2,7 +2,7 @@
 // Tout est créé avec insert:false et rangé dans des groupes nommés : ordre des calques = ordre des listes.
 // Repère : canevas 1024, lumière en haut à gauche, trait extérieur OUT, intérieur IN, encre INK.
 const { Path, Point, Group, Color, Matrix } = paper;
-const INK = '#3B2A20', OUT = 9, IN = 5;
+const INK = '#3B2A20', [OUT, IN] = VARIANT.trait || [11, 6]; // variante {trait:[OUT, IN]} : essai d'épaisseur (décision du propriétaire)
 let SW = 1; // multiplicateur d'épaisseur (version « icône » : 1.7)
 const P = a => (a instanceof Point ? a : new Point(a));
 const NI = { insert: false };
@@ -49,6 +49,9 @@ function outline(p, w = OUT) { return line(p.clone(NI), w); }
 function grad(p, stops, o, d, radial) { p.fillColor = { gradient: { stops, radial: !!radial }, origin: o, destination: d }; p.strokeColor = null; return p; }
 function shadowOf(shape, dx = 22, dy = 26, o = 0.16, c = INK) { return fill(S(shape, moved(shape, -dx, -dy)), c, o); }
 function rimOf(shape, dx = 10, dy = 12, o = 0.26, c = '#FFF6E6') { return fill(S(shape, moved(shape, dx, dy)), c, o); }
+// accessoires du cou (écharpe, nœud, grelot) : ils respirent avec le corps qui les porte (même animation que lui), sinon le corps glisse
+// de 2 à 3 px sous un accessoire immobile. Les accessoires de tête sont déjà dans « tete ».
+function neckBreath(anims, breath, ...pieces) { for (const g of pieces) if (g && g.name && g.children.length) anims.push(Object.assign({}, breath, { id: g.name })); }
 function G(name, children) { const g = new Group({ children: children.filter(Boolean), insert: false }); if (name) g.name = name; return g; }
 function clipIn(shape, items) { const m = shape.clone(NI); m.clipMask = true; return new Group({ children: [m, ...items.filter(Boolean)], clipped: true, insert: false }); }
 function vol(name, shape, color, details = [], w = OUT) { return G(name, [fill(shape.clone(NI), color), ...details, outline(shape, w)]); }
@@ -136,23 +139,25 @@ function mouthW(c, s = 1) {
     line(arc(c.add([0, 9 * s]), c.add([-12 * s, 21 * s]), c.add([-25 * s, 9 * s]))),
     line(arc(c.add([0, 9 * s]), c.add([12 * s, 21 * s]), c.add([25 * s, 9 * s])))]);
 }
-// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare }
+// o : { at:[x,y] centre du crâne dans la scène, tilt (°, autour du cou), turn (rad), scale, sleep, prefix, glare, mood ('fier' | 'curieux'),
+//       whisk (longueur relative des moustaches), ear (hauteur relative des oreilles, pointe ramenée vers la base) }
 function gloseHead(C, o = {}) {
   const pre = o.prefix || '', turn = o.turn || 0, W = headWarp(turn), We = headWarp(turn * 0.6);
   const wx = x => W.x(x), anims = [];
   const sleep = !!o.sleep;
   // silhouette : crâne + oreilles (projetées plus doucement) + touffes de joues (la lointaine un peu réduite)
   const skull = ell([500, 352], [176, 146]);
-  const earL = warp(rpoly([[334, 304], [346, 128], [454, 226]], [40, 32, 40]), We);
-  const earR = warp(rpoly([[546, 226], [654, 128], [666, 304]], [40, 32, 40]), We);
+  const ek = o.ear || 1, eT = ([x, y]) => x < 500 ? [394 + (x - 394) * ek, 265 + (y - 265) * ek] : [606 + (x - 606) * ek, 265 + (y - 265) * ek]; // pointe -> milieu de la base
+  const earL = warp(rpoly([[334, 304], eT([346, 128]), [454, 226]], [40, 32, 40]), We);
+  const earR = warp(rpoly([[546, 226], eT([654, 128]), [666, 304]], [40, 32, 40]), We);
   const tL = blob([[346, 366], [304, 402], [330, 414], [312, 446], [356, 458], [370, 410]], 0.5);
   const tR = blob([[654, 366], [696, 402], [670, 414], [688, 446], [644, 458], [630, 410]], 0.5);
   const kT = 1 - Math.max(0, turn) * 0.9, kTl = 1 - Math.max(0, -turn) * 0.9;
   tR.scale(kT, [650, 410]); tL.scale(kTl, [350, 410]);
   const head = U(skull, earL, earR, tL, tR);
-  const innerL = warp(rpoly([[360, 278], [362, 166], [434, 236]], [26, 18, 26]), We), innerR = warp(rpoly([[566, 236], [638, 166], [640, 278]], [26, 18, 26]), We);
+  const innerL = warp(rpoly([[360, 278], eT([362, 166]), [434, 236]], [26, 18, 26]), We), innerR = warp(rpoly([[566, 236], eT([638, 166]), [640, 278]], [26, 18, 26]), We);
   const earHair = [[[376, 284], [372, 256], [380, 234]], [[390, 282], [390, 262]], [[624, 284], [628, 256], [620, 234]], [[610, 282], [610, 262]]]
-    .map(pts => line(warp(curve(pts), We), 4, C.cream, 0.9));
+    .map(pts => line(warp(curve(pts.map(eT)), We), 4, C.cream, 0.9));
   const muzzle = X(warp(U(circ([478, 452], 36), circ([522, 452], 36), ell([500, 480], [52, 30])), W), head);
   const mMark = U(warp(U(blob([[486, 210], [514, 210], [506, 272], [494, 272]], 0.4), blob([[442, 222], [464, 214], [468, 262], [460, 264]], 0.4),
     blob([[536, 214], [558, 222], [540, 264], [532, 262]], 0.4)), W), taper([[322, 340], [362, 350]], 18, 6), taper([[678, 340], [638, 350]], 18, 6),
@@ -160,6 +165,7 @@ function gloseHead(C, o = {}) {
   const eyeC = [[428, 384], [572, 384]].map(([x, y]) => ({ c: [wx(x), y], k: W.k(x) }));
   const shift = x => wx(x) - x;
   const whisk = [[[386, 442], [330, 430], [282, 434]], [[388, 456], [334, 460], [290, 476]], [[614, 442], [670, 430], [718, 434]], [[612, 456], [666, 460], [710, 476]]]
+    .map(w => w.map(([x, y]) => [w[0][0] + (x - w[0][0]) * (o.whisk || 1), w[0][1] + (y - w[0][1]) * (o.whisk || 1)]))
     .map(w => { const d = shift(w[0][0]); return line(curve(w.map(([x, y], i) => [x + d * (1 - i * 0.35), y])), 4.5, INK, 0.85); });
   // yeux
   let eyes = [], lids = null, eyeTops = [];
@@ -194,7 +200,14 @@ function gloseHead(C, o = {}) {
   // les cycles ne se recalent qu'après plusieurs minutes : le motif paraît irrégulier
   if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.8, 0.9, 1], dur: 11, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
   const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), 5, INK, 0.7), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), 5, INK, 0.7)]
+    : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), 5, INK, 0.8), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), 5, INK, 0.8)]
+    : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), 5, INK, 0.8), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), 5, INK, 0.8)]
     : [line(curve([[wx(396), 304], [wx(420), 294], [wx(446), 300]]), 5, INK, 0.8), line(curve([[wx(554), 300], [wx(580), 294], [wx(604), 304]]), 5, INK, 0.8)];
+  // humeur : bouche ouverte en « D » (fier), petit « o » (curieux), sinon le « w » de toujours
+  const mx = wx(500), mk = W.k(500);
+  const mouth = o.mood === 'fier' ? (() => { const m = blob([[mx - 26 * mk, 450], [mx + 26 * mk, 450], [mx + 18 * mk, 468], [mx, 476], [mx - 18 * mk, 468]], 0.45);
+      return vol(null, m, '#7A3A3E', [fill(X(ell([mx + 4, 476], [16 * mk, 10]), m), C.rose)], IN); })()
+    : o.mood === 'curieux' ? vol(null, ell([mx + 6, 464], [8 * mk, 10]), '#7A3A3E', [], IN) : mouthW([mx, 448]);
   const extra = skinExtra(C, head, 'head', [[wx(410), 250], [wx(600), 262], [wx(470), 300]]);
   // bâillement (une fois par cycle de 29 s) : bouche ouverte et paupières closes, cachées (échelle 0) le reste du temps
   const yawn = !sleep && o.yawn !== false, YK = [0, 0.5, 0.53, 0.6, 0.63, 1], YV = [[1, 0.001], [1, 0.001], [1, 1], [1, 1], [1, 0.001], [1, 0.001]];
@@ -203,7 +216,7 @@ function gloseHead(C, o = {}) {
     fill(X(mMark, head), C.stripe), shadowOf(head, 26, 30, 0.14), rimOf(head, 10, 12), fill(muzzle.clone(NI), C.cream), shadowOf(muzzle, 8, 12, 0.1),
     ...extra,
     fill(ell([wx(386), 452], [28 * W.k(386), 16]), C.rose, sleep ? 0.85 : 0.7), fill(ell([wx(614), 452], [28 * W.k(614), 16]), C.rose, sleep ? 0.85 : 0.7),
-    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouthW([wx(500), 448]), mouthO, lids,
+    ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouth, mouthO, lids,
     ...(yawn ? [0, 1].map(i => G(pre + 'baille_' + 'gd'[i], [lids.children[i].children[0].clone(NI)])) : []), glasses, ...brows];
   const parts = [o.behind || null, C.has('plume') ? quill(C, turn) : null, vol(null, head, C.fur, headIn), ...whisk,
     C.has('bonnet') ? nightcap(C, earL, earR, innerL, innerR, turn, pre) : null, C.has('beret') ? beret(C, W, pre) : null, C.has('couronne') ? crown(C, W, pre) : null, ...(o.front || [])];
@@ -402,17 +415,16 @@ function book(o) {
     fill(side.clone(NI), o.cover), fill(pages.clone(NI), o.pages)];
   for (let yy = y + ct + 7; yy < y + h - ct - 3; yy += 7) items.push(line(curve([[x + w + 3, yy], [x + w + dx - 8, yy + dy]]), 2, INK, 0.22));
   items.push(fill(X(poly([[x + w, y + h - ct - 12], [x + w + dx, y + h + dy - ct - 12], [x + w + dx, y + h + dy], [x + w, y + h]]), pages), INK, 0.1));
-  const sp = [fill(X(poly([[x, y + h * 0.1], [x + w, y + h * 0.1], [x + w, y + h * 0.26], [x, y + h * 0.26]]), front), '#FFFFFF', 0.13),
-    fill(X(poly([[x, y + h * 0.72], [x + w, y + h * 0.72], [x + w, y + h + 9], [x, y + h + 9]]), front), INK, 0.2)];
+  const sp = [fill(X(poly([[x, y + h * 0.1], [x + w, y + h * 0.1], [x + w, y + h * 0.26], [x, y + h * 0.26]]), front), '#FFFFFF', 0.18),
+    fill(X(poly([[x, y + h * 0.72], [x + w, y + h * 0.72], [x + w, y + h + 9], [x, y + h + 9]]), front), INK, 0.12)]; // ombre basse et reflet adoucis, bandes sans cerne : livre moins contrasté que le visage
   for (const f of o.bands || [0.14, 0.3, 0.7, 0.86]) {
     const bx = x + w * f, band = X(poly([[bx - 8, y], [bx + 8, y], [bx + 8, y + h], [bx - 8, y + h]]), front);
-    sp.push(fill(band.clone(NI), o.coverD), line(curve([[bx - 4, y + 7], [bx - 4, y + h - 7]]), 3, o.gold), line(band, 3));
+    sp.push(fill(band.clone(NI), o.coverD), line(curve([[bx - 4, y + 7], [bx - 4, y + h - 7]]), 3, o.gold, 0.6)); // filets d'or à 60 %
   }
-  for (const f of [0.045, 0.955]) { const bx = x + w * f; sp.push(line(curve([[bx, y + 9], [bx, y + h - 9]]), 3, o.gold)); }
   if (o.label) {
-    const lx = x + w * 0.5, lb = rpoly([[lx - w * 0.12, y + h * 0.28], [lx + w * 0.12, y + h * 0.28], [lx + w * 0.12, y + h * 0.72], [lx - w * 0.12, y + h * 0.72]], 5);
-    sp.push(fill(lb.clone(NI), o.labelC || o.gold), line(curve([[lx - w * 0.07, y + h * 0.45], [lx + w * 0.07, y + h * 0.45]]), 3, INK, 0.7),
-      line(curve([[lx - w * 0.045, y + h * 0.57], [lx + w * 0.045, y + h * 0.57]]), 3, INK, 0.5), line(lb, 3));
+    const lx = x + w * 0.5, lb = rpoly([[lx - w * 0.09, y + h * 0.33], [lx + w * 0.09, y + h * 0.33], [lx + w * 0.09, y + h * 0.67], [lx - w * 0.09, y + h * 0.67]], 5);
+    sp.push(fill(lb.clone(NI), o.labelC || o.gold), line(curve([[lx - w * 0.052, y + h * 0.46], [lx + w * 0.052, y + h * 0.46]]), 3, INK, 0.7),
+      line(curve([[lx - w * 0.034, y + h * 0.56], [lx + w * 0.034, y + h * 0.56]]), 3, INK, 0.5), line(lb, 3));
   }
   const corner = (a, b, c2) => { const t = X(poly([a, b, c2]), sil); return [fill(t.clone(NI), o.gold), line(t, 3)]; };
   const cs = 30, ux = dx / Math.hypot(dx, dy), uy = dy / Math.hypot(dx, dy);
@@ -514,6 +526,7 @@ function seatedGlose(C, o = {}) {
   if (C.has('noeud')) L.bow = bowTie(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
   if (C.has('grelot')) { const j = jingle(C, [H.chin[0] + 4, H.chin[1] - 4]); L.jingleBand = j.band; L.jingle = j.bell; }
   if (C.has('sapin')) L.tree = paperTree(C, o.tree || [744, 676], 1.25);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle);
   return { B, L, anims, H, body };
 }
 // bras : épaule -> coude -> poignet, patte ronde au bout, rayures qui suivent le membre, ombres et liseré
@@ -529,6 +542,79 @@ function arm(C, pts, w0, w1, paw, o = {}) {
   return { group: vol(o.name || null, a, C.fur, det), shape: a };
 }
 
+// ---------- liseré « autocollant » (mode sombre) ----------
+// Derrière tout le dessin, un liseré de couleur `color` qui déborde de `h` autour de chaque contour d'encre : l'union des contours
+// fermés (un seul chemin par groupe animé) + une copie élargie de chaque trait ouvert qui sort de la silhouette (moustaches, brins, mot).
+// Les parties animées (tête, queue, fil qui s'écrit…) ont leur liseré dans un groupe `<id>_halo` qui rejoue les mêmes animations.
+// Les pièces à porte (accessoires, ruban, détails rares) restent hors du liseré du corps : il dessinerait aussi les pièces non portées
+// (export Android {all:true}). Chaque accessoire et le ruban ont le leur, dans leur propre groupe (même porte, même calque Android),
+// découpé hors de la silhouette du corps ; les paillettes, étoiles et éclats n'en ont pas (clairs, ils se voient déjà la nuit).
+const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin)$|(bonnet|beret|couronne)$/;
+const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|eclats)$/;
+// groupes que les réactions au toucher animent (android/reactions.js, REACTIONS de make_android.js) sans animation au repos :
+// leur liseré doit être un groupe à part pour les suivre (svg2avd.animated() anime aussi « <nom>_halo »)
+const REACTED = ['tete', 'dormeur', 'pelote', 'patte', 'queue', 'zzz'];
+function halo(root, anims, color, h = 12) {
+  const moving = new Set(anims.filter(a => a.attr !== 'stroke-dashoffset').map(a => a.id).concat(REACTED)), dash = new Set(anims.filter(a => a.attr === 'stroke-dashoffset').map(a => a.id));
+  const ink = new Color(INK), buckets = new Map();
+  const walk = (it, chain) => {
+    if (!it.visible || it.clipMask || it.opacity < 0.5 || GATED.test(it.name || '')) return;
+    if (it.name && moving.has(it.name)) chain = chain.concat(it.name);
+    if (it.children && !(it instanceof paper.CompoundPath)) { if (!it.clipped) it.children.forEach(c => walk(c, chain)); return; }
+    if (!it.strokeColor || !it.strokeColor.equals(ink) || it.strokeWidth < 4) return;
+    const k = chain.join('/'); if (!buckets.has(k)) buckets.set(k, { chain, shut: [], open: [] });
+    const shut = it instanceof paper.CompoundPath || it.closed;
+    if (shut && it.strokeWidth < OUT * SW) return; // détail intérieur (nez, verres, filets du livre)
+    buckets.get(k)[shut ? 'shut' : 'open'].push(it);
+  };
+  walk(root, []);
+  const all = U(...[...buckets.values()].flatMap(b => b.shut.map(p => { const c = p.clone(NI); c.fillColor = 'black'; return c; })));
+  const groups = new Map(), extra = [];
+  // le liseré refait tous les mouvements de sa partie : sous le seuil d'avant (translation < 8, échelle < 5 %), la tête qui respire (−3)
+  // et bâille (−7) glissait jusqu'à 10 unités sur un liseré de 12 (il s'amincissait d'un côté)
+  const visible = () => true;
+  const groupOf = chain => { // groupes « <id>_halo » emboîtés comme les groupes animés d'origine, même pivot (data : réactions Android)
+    let parent = null, key = '';
+    for (const id of chain) {
+      key += '/' + id;
+      if (!groups.has(key)) { const g = G(id + '_halo', []); g.data = Object.assign({}, (root.getItem({ name: id }) || {}).data); groups.set(key, g); (parent || root).insertChild(parent ? parent.children.length : 0, g); extra.push(...anims.filter(a => a.id === id && a.attr !== 'stroke-dashoffset' && visible(a)).map(a => Object.assign({}, a, { id: id + '_halo' }))); }
+      parent = groups.get(key);
+    }
+    return parent;
+  };
+  const back = G('lisere', []); root.insertChild(0, back);
+  for (const b of buckets.values()) {
+    const out = [];
+    if (b.shut.length) { const s = U(...b.shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round'; s.opacity = 1; out.push(s); }
+    for (const p of b.open) {
+      const n = 12, pts = [...Array(n + 1).keys()].map(i => p.getPointAt(p.length * i / n));
+      if (all && pts.filter(q => !all.contains(q)).length < 2) continue; // trait intérieur : liseré caché, inutile
+      const c = p.clone(NI); c.strokeColor = color; c.strokeWidth = p.strokeWidth + 2 * h; c.opacity = 1;
+      // le fil qui écrit : liseré juste derrière lui, découpé hors de la silhouette ; il reste ainsi dans le calque Android du mot
+      // et la partie commune à tous les mots (glose_ecrit_mot_vd) ne change pas d'un mot à l'autre
+      if (p.name && dash.has(p.name)) {
+        c.name = p.name + '_halo'; extra.push(...anims.filter(a => a.id === p.name).map(a => Object.assign({}, a, { id: c.name })));
+        const e = c.strokeWidth / 2 + 2, box = rect(p.bounds.x - e, p.bounds.y - e, p.bounds.width + 2 * e, p.bounds.height + 2 * e);
+        clipIn(X(notIn(all), box), [c]).insertBelow(p); continue; // découpe réduite au cadre du fil : quelques segments seulement
+      }
+      out.push(c);
+    }
+    if (!out.length) continue;
+    const g = b.chain.length ? groupOf(b.chain) : back;
+    g.addChildren(out);
+  }
+  for (const g of root.getItems({ match: it => it.name && PIECE.test(it.name) && it.children })) {
+    const shut = g.getItems({ match: it => !(it.parent && it.parent.clipped) && it.strokeColor && it.strokeColor.equals(ink) && it.strokeWidth >= 4 && (it instanceof paper.CompoundPath || it.closed) });
+    if (!shut.length) continue;
+    const s = U(...shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round';
+    const e = OUT * SW / 2 + h + 2, box = rect(s.bounds.x - e, s.bounds.y - e, s.bounds.width + 2 * e, s.bounds.height + 2 * e);
+    const area = X(notIn(all), box);
+    if (area.isEmpty()) continue; // piece lying entirely on the body: no outline (unclipped, it would paint cream over the fur)
+    g.insertChild(0, clipIn(area, [s]));
+  }
+  anims.push(...extra);
+  return root;
+}
 // ---------- contours partiels ----------
 // edgeLine : ne trace que la partie du contour de `shape` située dans `area` (chemin ouvert + intersect sans trace)
 function openOf(p) { return (p.children ? p.children : [p]).map(c => { const o = new Path({ segments: c.segments.map(s => s.clone()), closed: false, insert: false }); o.add(c.firstSegment.clone()); return o; }); }

@@ -1,0 +1,57 @@
+# Journal de nuit
+
+- 00h10 : plan écrit (`plan.md`), validé par l'agent expert avec 11 changements, tous intégrés. Départ `08a954d`.
+- 00h25 : lot `sec:` test de profil doré 0.14.0 + test de couverture des clés de prefs (ProfileTest 8/8). Audits SEC/CRAP, UX/GRA, FON/SON lancés (3 agents).
+- 00h30 : ajout du propriétaire, équipe GLOSE (graphismes de Monsieur Glose, benchmark + itérations).
+- 00h30 : audits SEC/CRAP, FON/SON et UX/GRA rendus (scratchpad `night/audit_*_1.md`).
+  - Sécurité : aucun constat haut. Le seul risque réel est S1, les secrets de signature au niveau du dépôt : action du propriétaire.
+  - CRAP : 3 méthodes > 30, toutes sur le chemin d'installation de mise à jour (gelé), donc des tests seulement.
+  - FON : les 9 bugs de `bugs.md` sont corrigés, 4 nouveaux bugs sont prouvés.
+  - UX : Détail hors style, U+202F absent des polices, focus de l'étoile absent.
+- Lots du maître : `sec:` export `"wt"` et BOM (c8ab3ed), `fon:` durée hors liste (442c8d1), `fon:` citations à double guillemet et crédit Wikiquote (900742b), `sec:` import/export hors du thread UI (112326c).
+- Équipes lancées : crap-1 (tests de l'updater), fon-A (minuit, bandeau, extra `mot`), ux-A (Détail, focus, album), gla-1 (Glose).
+- 00h35 : crap-1 intégré (ca54ffd, 8 tests de l'updater, 4 mutations détectées). fon-A intégré (45927b7, minuit, bandeau, extra `mot` limité), suite complète 136/136.
+- GLOSE itération 1 : benchmark et audit (`night/glose_1.md`). Le plus gros défaut est la nuit : le contour brun disparaît sur #141829, d'où le prototype de liseré crème. Autre défaut : la même expression partout, d'où les humeurs « fier » et « curieux ». Itération 2 lancée : liseré de nuit dans Android et humeurs.
+- fon-B (rotation du score, sons préchauffés, N6, N10) et fon-C (renommage de Glose) lancés.
+- 00h45 : ux-A intégré (15183f7, 7640dd5).
+  - Détail au style de la carte d'accueil, focus de l'étoile, bandes de l'album, timbre de citation sans « 1 MOT ».
+  - Le maître a factorisé `fitWord` (2e55360).
+- fon-B intégré (9e70f64, a523b87, 77f9302) : rotation du score, sons du quiz préchauffés, chaîne d'alarmes robuste, service sans mot arrêté.
+- fon-C intégré (c1dbecf) : renommage de Glose dans Réglages › Apparence, signature des cartes, titre de la Collection. Suite complète 145/145.
+- Note : un `git stash` nommé `fonB-n2-src`, laissé par l'équipe fon-B, est encore dans le dépôt. Son contenu est déjà dans 9e70f64, je ne l'ai pas supprimé.
+- 00h50-01h00 :
+  - fon-D intégré (6985e65, cc1b11e) : ✓/✗ en icônes avec TalkBack, options désactivées lisibles de nuit, carte de notation seulement si l'appli vient du Play Store, avertissement quand le quiz passe avant le mot.
+  - GLOSE 2 intégré (c71720e, 9666fcd) : liseré crème de nuit, qui suit toutes les animations ; humeurs « fier » et « curieux » ; APK +56 Ko ; rendus de jour identiques au pixel.
+  - ux-B intégré (7a45d30, 1b81918, 49fe6be) : U+202F ajouté aux 4 polices OFL sans nom réservé, une seule règle pour les guillemets, en-tête compact en grande police.
+  - Deux interactions entre lots, corrigées dans les tests (c6caca6, 12bd955). Suite complète 149/149.
+- Libre Baskerville (toute l'interface) a un nom réservé, donc la ponctuation après U+202F retombe en police de repli. Voie retenue : une copie modifiée et renommée, conforme à l'OFL.
+- 01h05 : consigne du propriétaire, s'arrêter à 10 % de la limite hebdomadaire. Mesure à 01h03 : 4 % sur 7 jours.
+- 01h15 : police intégrée (aeadfd9). L'interface passe en « Definiday Serif » (Libre Baskerville renommée, avec U+202F) : plus de repli sur « ; : ! ? ». Suite complète 150/150. Conso hebdo 5 %.
+- 01h15 : relecture indépendante (`night/review_1.md`) : aucun constat bloquant, 1 important, 5 mineurs.
+  - I1 (mes citations corrigées changeaient de clé d'historique, ce qui cassait le délai de 270 jours) : corrigé par un champ `cle` stable (f3e19b5).
+  - M1 à M4 corrigés (ee51487) : test des sons plus strict, résultat d'import après rotation, texte `quiz_early`, réponse fausse annoncée par TalkBack.
+  - M5 : Zilla Slab rendue d'origine (marque Mozilla), mise dans NO_NNBSP.
+- GLOSE 3 intégré : livre allégé (d34715b), liseré de nuit des accessoires (7834355). L'icône générée est annulée (359279c, visage moins rond) et passe en proposition.
+- fon-E intégré (18a6904, 8d411a2, 897cb26) : filtre « À revoir » et rotation, plus de choix vide dans Couleurs et polices, menus des Réglages en ressources.
+- Suite complète 154/154. Conso hebdo 5 %.
+- 01h25 : lancés son (proposition de niveaux, sans remplacer les fichiers livrés), crap-2 (découpage de QuizActivity, tests de caractérisation d'abord), GLOSE 4 (anticipation et squash & stretch dans les réactions, pause de la vie au repos). Le maître corrige : la notification de suivi dit « au 2e déverrouillage », typo de `mots_none_favourites`, commentaire « fragile ».
+- 01h35 : son intégré (8fa55bb). C'est une proposition de niveaux à écouter, dans `docs/son/proposition_niveaux/` : après un passe-haut 300 Hz, l'écart entre les sons passe de 18,8 à 1,2 dB. Les fichiers livrés ne changent pas.
+- 01h40 : crap-2 intégré (4b25a40, 0048e13). QuizActivity est découpé : complexité max 26 → 11, avec 6 tests de caractérisation. Suite complète 161/161. Conso hebdo 6 %.
+- 01h45 : retouches du maître, widget en romain et lignes d'aide plus aérées (e4179a2). Relecture indépendante n° 2 lancée sur 6a3a199..e4179a2.
+- 01h42 : GLOSE 4 intégré (2640407, e968a4a).
+  - Réactions avec anticipation et squash & stretch, APK −32 Ko grâce aux animateurs partagés.
+  - Un appui long met en pause ou relance sa vie au repos, avec une action TalkBack.
+- **Incident** : e4179a2 avait cassé `widget.xml` (balise non fermée), et la CI de la branche était rouge sur 3 pushs. Mon décompte relisait les résultats de tests de l'exécution précédente sans vérifier le code de sortie de Gradle.
+  - Corrigé (widget.xml). Le script de suite complète supprime désormais les anciens résultats, vérifie le code de sortie et construit l'APK release.
+  - Suite complète 162/162, `assembleRelease` OK.
+- 01h48 : relecture n° 2 (`night/review_2.md`) : 1 bloquant (widget.xml, déjà corrigé), 1 important, 3 mineurs.
+  - I1 (liseré de nuit non découpé, qui peignait du crème sur le pelage autour du grelot et du nœud) : corrigé dans le générateur, 8 calques régénérés, avec un test (e67dd7b).
+  - M2 et M3 corrigés (a28a2b3). M1 (compteur « à revoir ») passe en décision du propriétaire.
+- Suite complète 164/164 et `assembleRelease` OK.
+- 02h05 : GLOSE 5 intégré (a548b1a), planche de choix `glose_decisions.md`. Recommandations : A3 (icône, visage actuel et liseré), B2 (trait 11/6), C3 (pelage gris chaud #AAA6AC), D2 (reliure ardoise #6A7EA6). Rien n'est appliqué. QA visuelle de toute l'appli lancée. Conso hebdo 7 %.
+- 02h20 : contrôle visuel de toute l'appli (`rapports/qa_visuelle.md`), 1 constat important et 8 mineurs.
+  - F1 corrigé (f17ff3e) : le liseré de nuit dépendait du cache, il manquait la nuit après un affichage de jour. Test ajouté.
+  - F2 à F7 corrigés (098c306).
+  - F8 (pointe des enveloppes, déjà là avant) laissé.
+- Suite complète 165/165 et `assembleRelease` OK.
+- 02h30 : fin du travail de nuit, avec 8 % de conso hebdo (seuil de 9 % proche, le reste relève de décisions du propriétaire). Rapport final dans `rapport_nuit.md`. Tâches planifiées supprimées.

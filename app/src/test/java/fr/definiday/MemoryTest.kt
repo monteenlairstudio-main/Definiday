@@ -133,6 +133,7 @@ class MemoryTest {
         Memory(ctx).favourite("abaque", true)
         assertEquals(setOf("abaque"), Memory(ctx).favourites)
         val w = all.first { it.mot != "abaque" }
+        History(ctx).mark(w.mot, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         val star = a.findViewById<CheckBox>(R.id.favori)
         assertTrue(!star.isChecked && star.visibility == View.VISIBLE)
@@ -143,6 +144,7 @@ class MemoryTest {
         val again = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.mot)).setup().get()
         assertTrue(again.findViewById<CheckBox>(R.id.favori).isChecked)
         val quote = Quotes.load(ctx).first().key
+        History(ctx).mark(quote, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         assertEquals(View.GONE, Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, quote))
             .setup().get().findViewById<View>(R.id.favori).visibility)
         // restored junk: wrong types, bad numbers
@@ -199,7 +201,7 @@ class MemoryTest {
         val d = Robolectric.buildActivity(DetailActivity::class.java, open).setup().get()
         val shown = views(d).filterIsInstance<TextView>().map { it.text.toString() }.toList()
         val w = word("abâtardir")
-        assertTrue(shown.toString(), listOf(ctx.getString(R.string.deja_vu), w.mot, w.nature, w.definition, "«\u00a0${w.exemple}\u00a0»", w.anecdote).all { it in shown })
+        assertTrue(shown.toString(), listOf(ctx.getString(R.string.deja_vu), w.mot, w.nature, w.definition, "«\u202F${w.exemple}\u202F»", w.anecdote).all { it in shown })
         assertEquals(today - 1, History(ctx).all()["abâtardir"])
         assertTrue(Words.seenToday(ctx).none { it.mot == "abâtardir" })
         val dStar = views(d).filterIsInstance<CheckBox>().single()
@@ -209,9 +211,16 @@ class MemoryTest {
         assertEquals(emptySet<String>(), Memory(ctx).favourites)
         val star = views(a).filterIsInstance<CheckBox>().last()
         assertEquals(ctx.getString(R.string.favori_add, "abâtardir"), star.contentDescription)
+        // keyboard focus is visible on the star (WCAG 2.4.7): its background shows an outline (a stroked shape) once focused, nothing at rest
+        fun outlined() = (star.background as android.graphics.drawable.LayerDrawable).let { bg -> (0 until bg.numberOfLayers).map(bg::getDrawable) }
+            .filterIsInstance<android.graphics.drawable.StateListDrawable>().single().current is android.graphics.drawable.GradientDrawable
+        assertTrue(!outlined())
+        star.isFocusableInTouchMode = true
+        assertTrue(star.requestFocus() && outlined())
+        star.clearFocus()
         star.performClick()
         assertEquals(setOf("abâtardir"), Memory(ctx).favourites)
-        views(a).filterIsInstance<Switch>().single().performClick() // « Favoris seulement »
+        views(a).filterIsInstance<Switch>().first { it.text == ctx.getString(R.string.mots_favourites) }.performClick()
         layout()
         assertEquals(listOf("abâtardir"), rows())
         views(a).filterIsInstance<EditText>().single().setText("jur")
@@ -219,5 +228,37 @@ class MemoryTest {
         assertTrue(rows().isEmpty())
         assertTrue(views(a).filterIsInstance<TextView>().any { it.text == ctx.getString(R.string.mots_none_found) && it.visibility == View.VISIBLE })
         assertTrue(views(a).any { it.contentDescription == "1 " + ctx.resources.getQuantityString(R.plurals.stat_favourites, 1) })
+    }
+
+    /** D2 (audit 011 n° 11): « À revoir seulement » lists the words due on the review ladder today, the ones the ledger counts;
+     *  N11: search and filters survive a rotation. */
+    @Test fun mesMotsFiltersWordsToReviewAndKeepsItsStateOnRotation() {
+        val today = LocalDate.now().toEpochDay()
+        History(ctx).run { mark("abjurer", today - 10); mark("abâtardir", today - 1); mark("ab irato", today - 3) }
+        Memory(ctx).answered("ab irato", true, today - 1, today - 3, review = true) // right when due: next at J+7, not due now
+        val c = Robolectric.buildActivity(MotsActivity::class.java).setup()
+        fun rows() = views(c.get()).filterIsInstance<TextView>().map { it.text.toString() }.filter { t -> all.any { it.mot == t } }.toList()
+        fun layout() = c.get().window.decorView.run { measure(View.MeasureSpec.makeMeasureSpec(1233, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(2600, View.MeasureSpec.EXACTLY)); layout(0, 0, 1233, 2600) }
+        fun switch(label: String) = views(c.get()).filterIsInstance<Switch>().single { it.text == label }
+        layout()
+        assertEquals(3, rows().size)
+        assertTrue(views(c.get()).any { it.contentDescription == "1 mot à revoir" }) // abjurer, never answered: due since J+2
+        switch("À revoir seulement").performClick()
+        layout()
+        assertEquals(listOf("abjurer"), rows())
+        switch("Favoris seulement").performClick() // both: favourites to review
+        layout()
+        assertTrue(rows().isEmpty())
+        switch("Favoris seulement").performClick()
+        views(c.get()).filterIsInstance<EditText>().single().setText("jur")
+        c.recreate() // rotation
+        layout()
+        assertEquals("jur", views(c.get()).filterIsInstance<EditText>().single().text.toString())
+        assertTrue(switch("À revoir seulement").isChecked && !switch("Favoris seulement").isChecked)
+        assertEquals(listOf("abjurer"), rows())
+        Memory(ctx).answered("abjurer", true, today, today - 10, review = true) // reviewed tonight: nothing left
+        c.recreate()
+        layout()
+        assertTrue(views(c.get()).filterIsInstance<TextView>().any { it.text == "Rien à revoir aujourd’hui\u202F: chaque mot revient de lui-même au quiz du soir." && it.visibility == View.VISIBLE })
     }
 }

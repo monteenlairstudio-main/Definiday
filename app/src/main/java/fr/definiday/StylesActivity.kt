@@ -24,11 +24,11 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
-import android.widget.Toast
 
 /**
  * Couleurs et polices: each palette is a small postcard in itself, each font a sheet with a sample in it; a tap keeps it in the pool
- * or removes it (Prefs, saved at once: rotation and Back keep it), under a live card of today's word. At least one of each stays kept.
+ * or removes it (Prefs, saved at once: rotation and Back keep it), under a live card of today's word. At least one of each stays kept:
+ * the last one is disabled and says why (never a refusal after the tap; « Celle du mot » instead of « Aucune », audit 011 n° 23).
  */
 class StylesActivity : Activity() {
     private lateinit var p: Prefs
@@ -44,8 +44,8 @@ class StylesActivity : Activity() {
         p = Prefs(this)
         cat = Styles.load(this)
         word = Words.today(this).filterIsInstance<Word>().firstOrNull() ?: Words.load(this).first() // today's slot may hold a quote
-        palettes = Pool(cat.palettes.associate { it.id to it.nom }, { p.palettes }, { p.palettes = it; Widget.update(this) }, R.id.palettes_count, word.palette)
-        polices = Pool(cat.polices.associate { it.id to it.nom }, { p.polices }, { p.polices = it }, R.id.polices_count, word.police)
+        palettes = Pool(cat.palettes.associate { it.id to it.nom }, { p.palettes }, { p.palettes = it; Widget.update(this) }, R.id.palettes_count, R.id.palettes_min, word.palette)
+        polices = Pool(cat.polices.associate { it.id to it.nom }, { p.polices }, { p.polices = it }, R.id.polices_count, R.id.polices_min, word.police)
         findViewById<Button>(R.id.palettes_all).setOnClickListener { palettes.all() }
         findViewById<Button>(R.id.palettes_none).setOnClickListener { palettes.none() }
         findViewById<Button>(R.id.polices_all).setOnClickListener { polices.all() }
@@ -67,25 +67,28 @@ class StylesActivity : Activity() {
         polices.refresh()
     }
 
-    /** Kept ids of one catalog ([names]: id -> nom, in catalog order); [fallback]: what « Aucune » keeps (the word's own). */
-    private inner class Pool(val names: Map<String, String>, val get: () -> Set<String>?, val set: (Set<String>?) -> Unit, val count: Int, fallback: String) {
+    /** Kept ids of one catalog ([names]: id -> nom, in catalog order); [fallback]: what « Celle du mot » keeps (the word's own);
+     *  [min]: the help line shown while one is left. */
+    private inner class Pool(val names: Map<String, String>, val get: () -> Set<String>?, val set: (Set<String>?) -> Unit, val count: Int, val min: Int, fallback: String) {
         val tiles = mutableMapOf<String, CheckBox>()
         val fallback = fallback.takeIf { it in names } ?: names.keys.first()
         fun kept() = Styles.kept(names.keys.toList(), get()) { it }.toSet()
         fun save(k: Set<String>) { set(if (k.size == names.size) null else k); refresh() }
         fun all() = save(names.keys)
-        fun none() { save(setOf(fallback)); min(fallback) }
+        fun none() = save(setOf(fallback))
         fun toggle(id: String) {
             val k = kept()
-            if (k == setOf(id)) { refresh(); min(id) } else save(if (id in k) k - id else k + id)
+            if (k == setOf(id)) refresh() else save(if (id in k) k - id else k + id) // the last one is disabled, but performClick toggles it: put back
         }
-        private fun min(id: String) = Toast.makeText(this@StylesActivity, getString(R.string.pool_min, names[id]), Toast.LENGTH_SHORT).show()
         fun refresh() {
             val k = kept()
+            val last = k.singleOrNull()
             tiles.forEach { (id, b) ->
                 b.isChecked = id in k // the tile's paper draws the outline and the check (tile)
-                if (Build.VERSION.SDK_INT >= 30) b.stateDescription = getString(if (id in k) R.string.kept_f else R.string.removed_f)
+                b.isEnabled = id != last
+                if (Build.VERSION.SDK_INT >= 30) b.stateDescription = getString(when (id) { last -> R.string.kept_last_f; in k -> R.string.kept_f; else -> R.string.removed_f })
             }
+            findViewById<TextView>(min).apply { visibility = if (last == null) View.GONE else View.VISIBLE; text = last?.let { getString(R.string.pool_min, names[it]) } }
             findViewById<TextView>(count).text = resources.getQuantityString(R.plurals.pool_count, k.size, k.size, names.size)
             preview()
         }

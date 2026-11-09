@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hand-written (not generated): Glose's night outline as literal colours, applied last by Glose.drawable.
+     A different style by day and by night changes the theme key, so a drawable cached in one mode is never reused in the other. -->
+<resources>
+    <style name="GloseHalo.Jour" parent=""><item name="gloseHalo">#00F0E8D8</item></style>
+    <style name="GloseHalo.Nuit" parent=""><item name="gloseHalo">#F0E8D8</item></style>
+</resources>

@@ -20,6 +20,13 @@ data class Style(val palette: Palette, val typeface: Typeface, val police: Polic
 object Styles {
     val DISPLAY_ONLY = setOf("unifraktur_maguntia", "uncial_antiqua", "dancing_script", "parisienne", "cinzel", "abril_fatface")
 
+    /** Faces without U+202F: their Reserved Font Name forbids adding it unrenamed (tools/fonts_nnbsp.py; FontsTest checks the list). */
+    val NO_NNBSP = setOf("abril_fatface", "dancing_script", "im_fell_english", "parisienne", "playfair_display",
+        "tenor_sans", "uncial_antiqua", "unifraktur_maguntia", "zilla_slab") // zilla_slab: trademarked name, not modified
+
+    /** [text] for [st]'s face: in a face without U+202F, « ; : ! ? » would follow the space into the system fallback font, so U+00A0. */
+    fun fine(text: String, st: Style) = if (st.police?.id in NO_NNBSP) text.replace(Regex("\u202F(?=[;:!?])"), "\u00A0") else text
+
     class Catalog(val palettes: List<Palette>, val polices: List<Police>)
 
     fun parse(json: String): Catalog {

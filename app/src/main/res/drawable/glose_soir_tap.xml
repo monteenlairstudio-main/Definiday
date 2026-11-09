@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_soir_vd">
-
+<target android:name="tete_halo" android:animation="@animator/glose_k_1187afb2"/>
+<target android:name="zzz_halo" android:animation="@animator/glose_k_5d08e8e2"/>
+<target android:name="dormeur_halo" android:animation="@animator/glose_k_e12412be"/>
+<target android:name="p1" android:animation="@animator/glose_k_dd99fbd8"/>
+<target android:name="a0" android:animation="@animator/glose_k_5ff8abfa"/>
+<target android:name="p3" android:animation="@animator/glose_k_89ff9e45"/>
+<target android:name="a2" android:animation="@animator/glose_k_e5ace916"/>
+<target android:name="p5" android:animation="@animator/glose_k_89ff9e45"/>
+<target android:name="a4" android:animation="@animator/glose_k_f13faa8c"/>
 </animated-vector>

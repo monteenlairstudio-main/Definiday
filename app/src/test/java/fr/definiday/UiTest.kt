@@ -57,16 +57,38 @@ class UiTest {
         assertEquals(View.GONE, banner().second.visibility)
     }
 
-    /** B3: right and wrong are written (✓ / ✗), and the tint keeps the button's rounded shape. */
+    /** N3: lock-only mode over the user's own lock wallpaper sends the word by notification (lockBlocked): refused, the banner says so. */
+    @Test fun bannerWhenTheLockScreenIsBlockedAndNotificationsAreOff() {
+        Prefs(ctx).apply { mode = Prefs.MODE_LOCK; lockBlocked = true }
+        shadowOf(nm).setNotificationsEnabled(false)
+        assertEquals(View.VISIBLE, Robolectric.buildActivity(MainActivity::class.java).setup().get().findViewById<View>(R.id.notif_banner).visibility)
+    }
+
+    /** B3: right and wrong are marked by a check / cross icon in the box's place (the word does not move) and said to TalkBack,
+     *  the other boxes go ink2 (no plume box on a disabled option), and the tint keeps the button's rounded shape. */
     @Test fun quizMarksAnswersInText() {
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
         val a = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
         val answer = quizAnswer(a)
+        val wordX = buttons(a).map { it.compoundPaddingStart }.distinct().single()
         val wrong = buttons(a).first { b -> b.text != answer }
         val wrongMot = wrong.text.toString()
         wrong.performClick()
-        assertEquals("✗ $wrongMot", wrong.text.toString())
-        assertTrue(buttons(a).any { it.text == "✓ $answer" })
+        val options = buttons(a).filter { it.text != ctx.getString(R.string.quiz_next) }
+        assertEquals(4, options.size)
+        assertEquals(listOf(wordX), options.map { it.compoundPaddingStart }.distinct()) // every word starts at the same x
+        assertEquals(wrongMot, wrong.text.toString())
+        assertEquals(ctx.getString(R.string.quiz_answer_picked, wrongMot), wrong.contentDescription)
+        val right = options.single { it.text == answer }
+        assertEquals(ctx.getString(R.string.quiz_answer_right, answer), right.contentDescription)
+        assertEquals(R.drawable.ic_check, shadowOf(right.compoundDrawablesRelative[0]).createdFromResId)
+        assertEquals(R.drawable.ic_cross, shadowOf(wrong.compoundDrawablesRelative[0]).createdFromResId)
+        (options - right - wrong).forEach { // their box stays, disabled: ink2 (quiz_box_edge, drawn in DefinidayTest)
+            assertEquals(null, it.contentDescription)
+            assertEquals(R.drawable.quiz_box, shadowOf(it.compoundDrawablesRelative[0]).createdFromResId)
+            assertTrue(!it.isEnabled)
+        }
+        assertTrue(java.io.File("src/main/java/fr/definiday/QuizActivity.kt").readText().none { it == '✓' || it == '✗' })
         assertTrue(views(a).filterIsInstance<TextView>().any { // visible, and read by TalkBack as a live region
             it.text == ctx.getString(R.string.quiz_wrong, answer) && it.accessibilityLiveRegion == View.ACCESSIBILITY_LIVE_REGION_POLITE })
         assertTrue(buttons(a).none { it.background is ColorDrawable })
@@ -102,6 +124,50 @@ class UiTest {
         assertEquals(UnlockService::class.java.name, shadowOf(ctx).nextStartedService.component!!.className)
     }
 
+    /** P19: the menus read their labels from string-array resources, unchanged; the unlocks help shows only when the word leaves at
+     *  an unlock, and says which one (« 2e »). */
+    @Test fun settingsMenusAndUnlocksHint() {
+        Prefs(ctx).apply { mode = Prefs.MODE_BOTH; unlocks = 0; durationMinutes = 90 }
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        fun labels(id: Int) = a.findViewById<Spinner>(id).adapter.let { ad -> (0 until ad.count).map { ad.getItem(it).toString() } }
+        assertEquals(listOf("1 mot", "2 mots", "3 mots"), labels(R.id.per_day))
+        assertEquals(listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), labels(R.id.mode))
+        assertEquals(listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), labels(R.id.unlocks))
+        assertEquals(listOf("En bas (laisse la place à l’horloge)", "Au milieu"), labels(R.id.text_pos))
+        assertEquals(listOf("15 min", "30 min", "1 h", "1 h 30", "2 h", "4 h", "8 h", "12 h", "24 h"), labels(R.id.duration))
+        val hint = a.findViewById<TextView>(R.id.unlocks_hint)
+        assertEquals(View.GONE, hint.visibility) // « Après la durée choisie »: no notification to explain
+        pick(a.findViewById(R.id.unlocks), 2)
+        assertEquals(View.VISIBLE, hint.visibility)
+        assertEquals("Pour guetter le 2e déverrouillage, une petite notification reste affichée. Le mot part quand même au bout de la durée choisie.", hint.text.toString())
+        pick(a.findViewById(R.id.unlocks), 1)
+        assertTrue(hint.text.startsWith("Pour guetter le 1er déverrouillage,"))
+        pick(a.findViewById(R.id.mode), Prefs.MODE_NOTIF)
+        assertEquals(View.GONE, hint.visibility)
+        pick(a.findViewById(R.id.mode), Prefs.MODE_LOCK)
+        assertEquals(View.VISIBLE, hint.visibility)
+        pick(a.findViewById(R.id.unlocks), 0)
+        assertEquals(View.GONE, hint.visibility)
+    }
+
+    /** P17: a quiz reminder set before the word's time never comes (no word seen yet): Settings says so under the quiz time. */
+    @Test fun quizBeforeTheWordIsExplained() {
+        Prefs(ctx).apply { enabled = true; hour = 8; minute = 0; quizEnabled = true; quizHour = 21; quizMinute = 0 }
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        val hint = a.findViewById<TextView>(R.id.quiz_early)
+        assertEquals(View.GONE, hint.visibility)
+        a.findViewById<Button>(R.id.quiz_time).performClick()
+        (org.robolectric.shadows.ShadowDialog.getLatestDialog() as android.app.TimePickerDialog).apply { updateTime(7, 0) }
+            .getButton(android.content.DialogInterface.BUTTON_POSITIVE).performClick()
+        assertEquals(7, Prefs(ctx).quizHour)
+        assertEquals(View.VISIBLE, hint.visibility)
+        assertEquals(ctx.getString(R.string.quiz_early), hint.text.toString())
+        a.findViewById<android.widget.Switch>(R.id.quiz_enabled).performClick() // no quiz reminder: nothing to warn about
+        assertEquals(View.GONE, hint.visibility)
+        Prefs(ctx).apply { quizEnabled = true; quizHour = 8 } // same minute as the word: the order of the two alarms is not guaranteed
+        assertEquals(View.VISIBLE, Robolectric.buildActivity(SettingsActivity::class.java).setup().get().findViewById<View>(R.id.quiz_early).visibility)
+    }
+
     /** More words a day once today's time has passed: the new ones are shown at once. */
     @Test fun raisingWordsPerDayAfterTheTimeShowsThem() {
         Prefs(ctx).apply { mode = Prefs.MODE_NOTIF; wordsPerDay = 1; hour = 0; minute = 0 }
@@ -125,11 +191,21 @@ class UiTest {
         assertEquals(View.VISIBLE, a.findViewById<View>(R.id.unlocks).visibility)
     }
 
+    /** N4: a duration outside the list (restored profile) is kept and shown, not replaced by the first choice. */
+    @Test fun settingsKeepADurationOutsideTheList() {
+        Prefs(ctx).durationMinutes = 90
+        val a = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
+        org.robolectric.shadows.ShadowLooper.idleMainLooper()
+        assertEquals(90, Prefs(ctx).durationMinutes)
+        assertEquals("1 h 30", a.findViewById<android.widget.Spinner>(R.id.duration).selectedItem)
+    }
+
     /** I8 / A14: the longest word, small screen, font x2: the headword shrinks down to 1.3 x the definition at most;
      *  if it still does not hold on one line, it breaks between syllables (never anywhere). */
     @Test @Config(qualifiers = "fr-w360dp-h740dp-xxhdpi") fun longWordFitsAtLargeFont() {
         RuntimeEnvironment.setFontScale(2f)
         val w = Words.load(ctx).maxBy { it.mot.length * (if (' ' in it.mot || '-' in it.mot) 0 else 1) }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
         val mot = a.findViewById<TextView>(R.id.mot)
         assertEquals(w.mot, mot.text.toString())
@@ -188,6 +264,7 @@ class UiTest {
      *  picture served read-only by our provider; a quote shares its author and work. */
     @Test fun shareSendsTextAndCardPicture() {
         val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val a = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup().get()
         a.findViewById<View>(R.id.share).performClick()
         val chooser = shadowOf(a).nextStartedActivity
@@ -219,14 +296,18 @@ class UiTest {
         assertTrue(Quiz.askRate(p, passed = true, counted = true))
         assertTrue(!Quiz.askRate(Prefs(ctx).apply { passedQuizzes = 9 }, passed = true, counted = true)) // only once
         // on the score screen: shown after the 5th passed quiz, « Plus tard » folds it
-        p.apply { rateAsked = false; passedQuizzes = 4; lastQuizDay = Long.MIN_VALUE }
         while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
-        val q = Robolectric.buildActivity(QuizActivity::class.java).setup().get()
-        repeat(Words.seenToday(ctx).size) { // a question may be the definition or a blanked example: quizAnswer() reads both
-            val answer = quizAnswer(q)
-            buttons(q).first { it.text == answer }.performClick()
-            buttons(q).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
-        }
+        fun fifth() = Robolectric.buildActivity(QuizActivity::class.java).also { p.apply { rateAsked = false; passedQuizzes = 4; lastQuizDay = Long.MIN_VALUE } }
+            .setup().get().also { q -> repeat(Words.seenToday(ctx).size) { // a question may be the definition or a blanked example: quizAnswer() reads both
+                val answer = quizAnswer(q)
+                buttons(q).first { it.text == answer }.performClick()
+                buttons(q).first { it.text == ctx.getString(R.string.quiz_next) }.performClick()
+            } }
+        // Q4: installed from the GitHub releases (no installer, or another one), « Noter » would open a missing listing: no card, not spent
+        assertTrue(views(fifth()).none { (it as? TextView)?.text == ctx.getString(R.string.rate_text) })
+        assertTrue(!p.rateAsked)
+        shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending")
+        val q = fifth()
         val rate = views(q).filterIsInstance<TextView>().single { it.text == ctx.getString(R.string.rate_text) }
         buttons(q).first { it.text == ctx.getString(R.string.rate_later) }.performClick()
         assertTrue(!rate.isShown)
@@ -239,6 +320,7 @@ class UiTest {
         s.findViewById<android.widget.Switch>(R.id.guess).performClick()
         assertTrue(Prefs(ctx).guessFirst)
         val w = Words.load(ctx).first { it.exemple.isNotEmpty() }
+        History(ctx).mark(w.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         val c = Robolectric.buildActivity(MainActivity::class.java, Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, w.key)).setup()
         val a = c.get()
         val reveal = a.findViewById<Button>(R.id.reveal)
@@ -262,7 +344,9 @@ class UiTest {
             listOf(12, 2, 4, 11, 7).map(MainActivity::season))
     }
 
-    /** Couleurs et polices: a tap removes or keeps a tile at once, the last one stays kept, Toutes = null, the pool survives recreation. */
+    /** Couleurs et polices: a tap removes or keeps a tile at once, Toutes = null, the pool survives recreation. The last one cannot be
+     *  removed and says why before any tap (audit 011 n° 23): disabled, its state read « gardée, la dernière : il en faut au moins une »,
+     *  a help line under the count; « Celle du mot » (not « Aucune », refused afterwards) keeps the word's own. */
     @Test fun stylesTilesToggleThePool() {
         val p = Prefs(ctx).apply { palettes = null; polices = null }
         val settings = Robolectric.buildActivity(SettingsActivity::class.java).setup().get()
@@ -278,21 +362,32 @@ class UiTest {
         assertTrue(!tile("Braise").isChecked)
         tile("Braise").performClick()
         assertEquals(null, p.palettes) // all kept again: stored as null
-        ctrl.get().findViewById<Button>(R.id.palettes_none).performClick()
+        val none = ctrl.get().findViewById<Button>(R.id.palettes_none)
+        assertEquals("Celle du mot", none.text.toString())
+        assertTrue(views(ctrl.get()).filterIsInstance<android.widget.CheckBox>().all { it.isEnabled })
+        none.performClick()
         val own = (Words.today(ctx).filterIsInstance<Word>().firstOrNull() ?: Words.load(ctx).first()).palette
             .takeIf { id -> cat.palettes.any { it.id == id } } ?: cat.palettes.first().id
         assertEquals(setOf(own), p.palettes) // « Aucune » keeps the word's own palette
         val last = cat.palettes.first { it.id == own }.nom
+        val why = "Il en faut au moins une\u202F: $last reste."
+        fun minShown() = views(ctrl.get()).filterIsInstance<TextView>().any { it.text.toString() == why && it.isShown }
+        assertTrue(!tile(last).isEnabled && tile(last).isChecked) // said before any tap
+        assertEquals("gardée, la dernière\u202F: il en faut au moins une", tile(last).stateDescription)
+        assertTrue(minShown())
+        assertTrue(views(ctrl.get()).filterIsInstance<android.widget.CheckBox>().count { !it.isEnabled } == 1) // only that one; the fonts all free
         tile(last).performClick()
         assertEquals(setOf(own), p.palettes) // the last one cannot be removed
         assertTrue(tile(last).isChecked)
-        assertEquals(ctx.getString(R.string.pool_min, last), org.robolectric.shadows.ShadowToast.getTextOfLatestToast())
+        assertEquals(null, org.robolectric.shadows.ShadowToast.getTextOfLatestToast()) // no refusal after the fact
         tile("Cinzel").performClick()
         ctrl.recreate() // rotation: read back from Prefs
-        assertTrue(!tile("Cinzel").isChecked && tile(last).isChecked && tile("Braise").isChecked == (own == "braise"))
+        assertTrue(!tile("Cinzel").isChecked && tile(last).isChecked && tile("Braise").isChecked == (own == "braise") && !tile(last).isEnabled && minShown())
         assertEquals(ctx.resources.getQuantityString(R.plurals.pool_count, 1, 1, cat.palettes.size), ctrl.get().findViewById<TextView>(R.id.palettes_count).text)
         ctrl.get().findViewById<Button>(R.id.polices_all).performClick()
         assertEquals(null, p.polices)
+        tile(cat.palettes.first { it.id != own }.nom).performClick() // a second palette kept: the first one is free again
+        assertTrue(tile(last).isEnabled && !minShown())
         p.palettes = null
     }
 }

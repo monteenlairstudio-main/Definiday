@@ -74,7 +74,7 @@ class Widget : AppWidgetProvider() {
                 }
                 is Quote -> {
                     text(R.id.widget_mot, "", pal.mot); text(R.id.widget_nature, ctx.getString(R.string.quote_label), pal.nature)
-                    text(R.id.widget_texte, "«\u00a0${item.texte}\u00a0»", pal.mot); text(R.id.widget_auteur, item.signature, pal.nature)
+                    text(R.id.widget_texte, "«\u202F${item.texte}\u202F»", pal.mot); text(R.id.widget_auteur, item.signature, pal.nature)
                 }
             }
             // ponytail: sizes estimated from widget.xml (padding 2 x 16 + 6 dp, Glose 40 + 8 dp, lines ~1.2 em); measure the layout if they drift

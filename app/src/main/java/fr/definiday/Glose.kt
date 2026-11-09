@@ -8,7 +8,11 @@ import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Build
+import android.provider.Settings
 import android.view.ContextThemeWrapper
+import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.ImageView
 import fr.definiday.Unlocks.Kind
 
@@ -24,6 +28,8 @@ object Glose {
     fun drawable(ctx: Context, res: Int, styles: List<Int> = emptyList()): Drawable {
         val t = ContextThemeWrapper(ctx, R.style.Glose)
         styles.forEach { t.theme.applyStyle(it, true) }
+        val night = ctx.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
+        t.theme.applyStyle(if (night) R.style.GloseHalo_Nuit else R.style.GloseHalo_Jour, true) // outline by mode, and a theme key per mode (cache)
         val layers = GloseLayers.layers[res] ?: return t.getDrawable(res)!!
         val open = GloseLayers.gates.filter { it.first in styles }.map { it.second }
         return LayerDrawable(layers.filter { it.first.isEmpty() || it.first in open }.map { t.getDrawable(it.second)!! }.toTypedArray())
@@ -75,10 +81,40 @@ object Glose {
      *  writes and the "le fil écrit…" poses would lose their word. The pending stop lives in the view's tag. */
     fun play(v: ImageView) {
         val d = avds(v.drawable).ifEmpty { return }
-        if (!ValueAnimator.areAnimatorsEnabled()) return
+        if (paused || !ValueAnimator.areAnimatorsEnabled()) return
         d.forEach { it.reset(); it.start() } // all layers in the same frame: they share their timeline
         v.removeCallbacks(v.tag as? Runnable)
-        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, IDLE_MS) }
+        // the generated loops end by themselves within IDLE_MS of animator time (make_android.js); this stop only catches the rest.
+        // Scaled like the animators (developer option « Animator duration scale »), or it would cut them mid-cycle.
+        v.tag = Runnable { d.forEach { it.stop() } }.also { v.postDelayed(it, (IDLE_MS * durationScale(v.context)).toLong()) }
+    }
+
+    /** The developer option « Animator duration scale », which the RenderThread applies to the AVDs.
+     *  ValueAnimator.getDurationScale() is public only from API 33: before, the same value read from the global setting. */
+    fun durationScale(ctx: Context) = if (Build.VERSION.SDK_INT >= 33) ValueAnimator.getDurationScale()
+        else Settings.Global.getFloat(ctx.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
+
+    /** The idle life paused by the user ([pausable]), for every Glose until resumed or the app restarts: [play] leaves the still.
+     *  Taps still make him react (the user asks for that motion), then he rests. WCAG 2.2.2. */
+    var paused = false
+
+    /** A long press on [v], or its TalkBack action « Mettre en pause » / « Reprendre » (the long-press action, relabelled),
+     *  pauses or resumes the idle life. No new visible control. When animations are off there is nothing to pause: no action. */
+    fun pausable(v: ImageView) {
+        v.setOnLongClickListener {
+            if (!ValueAnimator.areAnimatorsEnabled()) return@setOnLongClickListener false
+            paused = !paused
+            if (paused) stop(v) else play(v)
+            true
+        }
+        v.accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                val long = AccessibilityNodeInfo.AccessibilityAction.ACTION_LONG_CLICK
+                if (!ValueAnimator.areAnimatorsEnabled()) { info.removeAction(long); info.isLongClickable = false; return }
+                info.addAction(AccessibilityNodeInfo.AccessibilityAction(long.id, host.context.getString(if (paused) R.string.glose_resume else R.string.glose_pause)))
+            }
+        }
     }
 
     /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once]. */

@@ -273,8 +273,9 @@ class BugHuntTest {
     @Test fun notificationTappedWhileOpenShowsItsItem() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val q = Quotes.load(ctx).last()
+        History(ctx).mark(q.key, java.time.LocalDate.now().toEpochDay() - 1) // seen on an earlier day: the extra opens only such items or today's (S4)
         c.newIntent(Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, q.key))
-        assertEquals("«\u00a0${q.texte}\u00a0»", c.get().findViewById<TextView>(R.id.mot).text.toString())
+        assertEquals("«\u202F${Styles.fine(q.texte, Styles.of(ctx, q))}\u202F»", c.get().findViewById<TextView>(R.id.mot).text.toString())
     }
 
     /** MainActivity.show, quote branch: quote text and signature, Wikiquote link, no Académie button. */
@@ -282,7 +283,7 @@ class BugHuntTest {
         val q = Quotes.load(ctx).first()
         Prefs(ctx).apply { dailyDay = LocalDate.now().toEpochDay(); dailyMots = listOf(q.key) }
         val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
-        assertEquals("«\u00a0${q.texte}\u00a0»", a.findViewById<TextView>(R.id.mot).text.toString())
+        assertEquals("«\u202F${Styles.fine(q.texte, Styles.of(ctx, q))}\u202F»", a.findViewById<TextView>(R.id.mot).text.toString())
         assertEquals(q.signature, a.findViewById<TextView>(R.id.nature).text.toString())
         assertEquals(ctx.getString(R.string.quote_label), a.findViewById<TextView>(R.id.label).text.toString())
         assertEquals(View.GONE, a.findViewById<View>(R.id.academie).visibility)
@@ -302,5 +303,99 @@ class BugHuntTest {
         assertEquals(ctx.getString(R.string.slow_title), shadowOf(org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog()).title.toString())
         repeat(2) { random.performClick() }
         assertEquals(1, org.robolectric.shadows.ShadowDialog.getShownDialogs().size)
+    }
+
+    private fun card(a: android.app.Activity) = a.findViewById<TextView>(R.id.mot).text.toString() to a.findViewById<TextView>(R.id.label).text.toString()
+    private fun card(i: Item) = if (i is Word) i.mot to ctx.getString(R.string.today) else "«\u202F${Styles.fine((i as Quote).texte, Styles.of(ctx, i))}\u202F»" to ctx.getString(R.string.quote_label)
+
+    /** N1: the app left open (or restored) past midnight: yesterday's word of the day gives way to today's and is not marked seen again;
+     *  a random pick left on the card stays, not marked seen again either. */
+    @Test fun newDayWhileOpenShowsTodaysWordAndKeepsYesterdaysHistory() {
+        val tz = TimeZone.getDefault()
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT+12")) // UTC-12: day D
+            val d = LocalDate.now().toEpochDay()
+            val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+            val old = Words.today(ctx).first()
+            val saved = android.os.Bundle().also { c.saveInstanceState(it) }
+            val r = Robolectric.buildActivity(MainActivity::class.java).setup()
+            r.get().findViewById<Button>(R.id.new_word).performClick()
+            val random = card(r.get()).first
+            r.pause(); c.pause()
+            TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT-12")) // same instant seen 24 h later: D+1
+            c.resume(); r.resume()
+            val now = Words.today(ctx).first()
+            assertTrue(now.key != old.key)
+            assertEquals(card(now), card(c.get()))
+            assertEquals(card(now), card(Robolectric.buildActivity(MainActivity::class.java).setup(saved).get())) // process death, restored
+            assertEquals(d, History(ctx).all()[old.key]) // not back in tonight's quiz, cooldown not restarted
+            assertEquals(d + 1, History(ctx).all()[now.key])
+            assertEquals(random to ctx.getString(R.string.random), card(r.get()))
+            assertEquals(d, History(ctx).all()[random])
+        } finally { TimeZone.setDefault(tz) }
+    }
+
+    /** S4: MainActivity is exported: an extra naming a word neither of today's nor ever seen shows today's word, History untouched;
+     *  a word already seen (« Mes mots », an earlier notification) still opens, « Déjà vu ». */
+    @Test fun foreignExtraCannotMarkAWordSeen() {
+        fun open(key: String) = Intent(ctx, MainActivity::class.java).putExtra(MainActivity.EXTRA_MOT, key)
+        val today = Words.today(ctx).first()
+        val (stranger, seen) = Words.load(ctx).filter { it.key != today.key }.take(2)
+        History(ctx).mark(seen.key, LocalDate.now().toEpochDay() - 3)
+        val c = Robolectric.buildActivity(MainActivity::class.java, open(stranger.key)).setup()
+        assertEquals(card(today), card(c.get()))
+        c.newIntent(open(stranger.key))
+        assertEquals(card(today), card(c.get()))
+        assertEquals(null, History(ctx).all()[stranger.key])
+        val a = Robolectric.buildActivity(MainActivity::class.java, open(seen.key).putExtra(MainActivity.EXTRA_DEJA_VU, true)).setup().get()
+        assertEquals(seen.mot to ctx.getString(R.string.deja_vu), card(a))
+    }
+
+    /** N2 (audit FON 1): rotating the score screen lost the unlocks (« a gagné », stamps) and the rate card for good, and played the chime. */
+    @Test fun scoreScreenSurvivesRotation() {
+        val p = Prefs(ctx).apply { sounds = true; passedQuizzes = 4 } // this quiz is the 5th passed one: the rate card shows
+        org.robolectric.Shadows.shadowOf(ctx.packageManager).setInstallSourceInfo(ctx.packageName, "com.android.vending", "com.android.vending") // the card needs Play
+        ctx.getSystemService(android.media.AudioManager::class.java).ringerMode = android.media.AudioManager.RINGER_MODE_NORMAL
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx)
+        val c = Robolectric.buildActivity(QuizActivity::class.java).setup()
+        try {
+            repeat(Words.seenToday(ctx).size) { answerOne(c.get()) }
+            val end = listOf(ctx.getString(R.string.unlock_new, p.gloseName), Unlocks.items.last { it.id in p.announced }.nom, ctx.getString(R.string.rate_text))
+            assertTrue(texts(c.get()).containsAll(end))
+            Sounds.ALL.forEach { runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(it, true) } } // sounds asked before the rotation play now
+            shadowOf(Sounds.pool).clearPlayed()
+            c.recreate()
+            assertTrue("after rotation: ${texts(c.get())}", texts(c.get()).containsAll(end))
+            Sounds.ALL.forEach { runCatching { shadowOf(Sounds.pool).notifyResourceLoaded(it, true) } } // any sound asked again would play now (throws: never loaded)
+            assertEquals(emptyList<Int>(), Sounds.ALL.filter { shadowOf(Sounds.pool).wasResourcePlayed(it) }.map { ctx.resources.getResourceEntryName(it) })
+        } finally { Sounds.release() }
+    }
+
+    /** The watch notification names the unlock with an ordinal, as Réglages does (« au 2e déverrouillage »). */
+    @Test fun unlockWatchSaysWhichUnlock() {
+        Prefs(ctx).unlocks = 2
+        val c = Robolectric.buildService(UnlockService::class.java).create().startCommand(0, 1)
+        val text = shadowOf(c.get()).lastForegroundNotification.extras.getCharSequence(android.app.Notification.EXTRA_TEXT).toString()
+        assertTrue(text, "au 2e déverrouillage" in text)
+    }
+
+    /** N10 (audit FON 1): restarted by the system (START_STICKY) with no word on the lock screen, the watch kept its notification up. */
+    @Test fun unlockServiceRestartedWithoutAWordStops() {
+        Prefs(ctx).unlocks = 2 // wallpaperEndAt = 0: no word shown
+        val c = Robolectric.buildService(UnlockService::class.java).create().startCommand(0, 1)
+        assertTrue(shadowOf(c.get()).isStoppedBySelf)
+    }
+
+    /** N6 (audit FON 1): show() / the reminder ran before rescheduling, so one that threw ended the daily alarms for good. */
+    @Test fun throwingShowKeepsTheAlarmChain() {
+        while (Words.seenToday(ctx).isEmpty()) Words.random(ctx) // the quiz reminder has something to say
+        val broken = object : android.content.ContextWrapper(ctx) {
+            override fun getSystemService(name: String): Any? = if (name == android.content.Context.NOTIFICATION_SERVICE) error("boom") else super.getSystemService(name)
+        }
+        val am = shadowOf(ctx.getSystemService(android.app.AlarmManager::class.java))
+        for (action in listOf(DailyReceiver.ACTION_SHOW, DailyReceiver.ACTION_QUIZ)) {
+            assertTrue(runCatching { DailyReceiver().onReceive(broken, Intent(ctx, DailyReceiver::class.java).setAction(action)) }.isFailure)
+            assertTrue(action, am.scheduledAlarms.any { shadowOf(it.operation).savedIntent.action == action })
+        }
     }
 }

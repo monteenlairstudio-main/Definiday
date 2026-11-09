@@ -5,14 +5,18 @@ import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
@@ -24,6 +28,8 @@ import java.time.LocalTime
 class SettingsActivity : Activity() {
     private val durations = listOf(15, 30, 60, 120, 240, 480, 720, 1440)
     private lateinit var p: Prefs
+    private lateinit var name: EditText
+    private var shownName = "" // the saved name the field started from
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +38,7 @@ class SettingsActivity : Activity() {
 
         // Mot du jour
         val time = findViewById<Button>(R.id.time)
-        fun showTime() { time.text = getString(R.string.time, p.hour, p.minute); time.isEnabled = p.enabled }
+        fun showTime() { time.text = getString(R.string.time, p.hour, p.minute); time.isEnabled = p.enabled; quizEarly() }
         showTime()
         findViewById<Switch>(R.id.enabled).apply {
             isChecked = p.enabled
@@ -42,7 +48,7 @@ class SettingsActivity : Activity() {
             TimePickerDialog(this, { _, h, m -> p.hour = h; p.minute = m; showTime(); DailyReceiver.scheduleNext(this) }, p.hour, p.minute, true).show()
         }
         findViewById<Button>(R.id.exact_ask).setOnClickListener { Alarms.requestIntent(this)?.let { runCatching { startActivity(it) } } }
-        spinner(R.id.per_day, listOf("1 mot", "2 mots", "3 mots"), p.wordsPerDay - 1) {
+        spinner(R.id.per_day, choices(R.array.per_day_choices), p.wordsPerDay - 1) {
             val more = it + 1 > p.wordsPerDay
             if (p.wordsPerDay != it + 1) { p.wordsPerDay = it + 1; Words.today(this) }
             // today's time already passed: the new picks are shown now rather than only reachable from the home chips
@@ -63,28 +69,30 @@ class SettingsActivity : Activity() {
         findViewById<Button>(R.id.widget_add).setOnClickListener { Widget.pin(this) }
 
         // Écran de verrouillage
-        val lockOnly = listOf(R.id.unlocks_label, R.id.unlocks, R.id.unlocks_hint, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
+        val lockOnly = listOf(R.id.unlocks_label, R.id.unlocks, R.id.text_pos_label, R.id.text_pos).map { findViewById<View>(it) }
         fun showMode() {
             lockOnly.forEach { it.visibility = if (p.mode == Prefs.MODE_NOTIF) View.GONE else View.VISIBLE }
+            showUnlocks()
             explainLock()
             findViewById<TextView>(R.id.duration_hint).setText(when (p.mode) {
                 Prefs.MODE_NOTIF -> R.string.duration_notif; Prefs.MODE_LOCK -> R.string.duration_lock; else -> R.string.duration_both
             })
         }
         // order matches Prefs.MODE_BOTH, MODE_NOTIF, MODE_LOCK
-        spinner(R.id.mode, listOf("Notification et écran de verrouillage", "Notification seulement", "Écran de verrouillage seulement"), p.mode) {
+        spinner(R.id.mode, choices(R.array.mode_choices), p.mode) {
             p.mode = it; showMode()
         }
         showMode()
-        spinner(R.id.duration, durations.map(::label), durations.indexOf(p.durationMinutes)) { p.durationMinutes = durations[it] }
-        spinner(R.id.unlocks, listOf("Après la durée choisie", "Au 1er déverrouillage", "Au 2e déverrouillage", "Au 3e déverrouillage"), p.unlocks) {
-            p.unlocks = it; UnlockService.sync(this) // applies to the word already on the lock screen
+        val ds = (durations + p.durationMinutes).distinct().sorted() // a restored value outside the list stays as is
+        spinner(R.id.duration, ds.map(::label), ds.indexOf(p.durationMinutes)) { p.durationMinutes = ds[it] }
+        spinner(R.id.unlocks, choices(R.array.unlocks_choices), p.unlocks) {
+            p.unlocks = it; UnlockService.sync(this); showUnlocks() // applies to the word already on the lock screen
         }
-        spinner(R.id.text_pos, listOf("En bas (laisse la place à l’horloge)", "Au milieu"), if (p.textBottom) 0 else 1) { p.textBottom = it == 0 }
+        spinner(R.id.text_pos, choices(R.array.text_pos_choices), if (p.textBottom) 0 else 1) { p.textBottom = it == 0 }
 
         // Quiz du soir
         val quizTime = findViewById<Button>(R.id.quiz_time)
-        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute); quizTime.isEnabled = p.quizEnabled }
+        fun showQuizTime() { quizTime.text = getString(R.string.quiz_time, p.quizHour, p.quizMinute); quizTime.isEnabled = p.quizEnabled; quizEarly() }
         showQuizTime()
         findViewById<Switch>(R.id.quiz_enabled).apply {
             isChecked = p.quizEnabled
@@ -95,6 +103,22 @@ class SettingsActivity : Activity() {
         }
 
         // Apparence
+        shownName = p.gloseName
+        name = findViewById<EditText>(R.id.glose_name).apply {
+            setText(shownName)
+            addTextChangedListener(object : TextWatcher { // refusal shown as typed (the platform error popup, read by TalkBack)
+                override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+                override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+                override fun afterTextChanged(s: Editable?) { error = nameError(s.toString()).takeIf { it != 0 }?.let(::getString) }
+            })
+            setOnEditorActionListener { _, action, _ -> action == EditorInfo.IME_ACTION_DONE && !saveName() } // refused: the keyboard stays
+            setOnFocusChangeListener { _, has -> if (!has) saveName() }
+        }
+        findViewById<Button>(R.id.name_reset).apply {
+            text = getString(R.string.name_reset, getString(R.string.glose_name))
+            visibility = if (p.gloseName == getString(R.string.glose_name)) View.GONE else View.VISIBLE // nothing to reset
+            setOnClickListener { p.gloseName = ""; shownName = p.gloseName; name.setText(shownName); visibility = View.GONE }
+        }
         findViewById<Button>(R.id.styles_open).setOnClickListener { startActivity(Intent(this, StylesActivity::class.java)) }
         findViewById<Switch>(R.id.sounds).apply {
             isChecked = p.sounds
@@ -116,25 +140,60 @@ class SettingsActivity : Activity() {
         if (BuildConfig.SELF_UPDATE) updates() else listOf(R.id.update_rubric, R.id.update_sheet).forEach { findViewById<View>(it).visibility = View.GONE }
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (resumed === this) resumed = null
+        saveName() // leaving with Back while typing: no Done, no focus loss
+    }
+
+    /** Saves the typed name (trimmed), or shows why it is refused and keeps the saved one. A profile restored meanwhile wins. */
+    private fun saveName(): Boolean {
+        val err = nameError(name.text.toString())
+        name.error = if (err == 0) null else getString(err)
+        if (err != 0) return false
+        val typed = name.text.toString()
+        if (typed.trim() != shownName && p.gloseName == shownName) { p.gloseName = typed; shownName = p.gloseName } // untouched: no key written
+        findViewById<Button>(R.id.name_reset).visibility = if (shownName == getString(R.string.glose_name)) View.GONE else View.VISIBLE
+        if (typed != shownName) name.setText(shownName)
+        return true
+    }
+
     private fun pick(i: Intent, req: Int) = runCatching { startActivityForResult(i, req) } // no picker (rare): nothing happens
 
     override fun onActivityResult(req: Int, res: Int, data: Intent?) {
         val uri = data?.data?.takeIf { res == RESULT_OK } ?: return
+        busy++
+        profileButtons(false)
+        // Off the UI thread: the document may live on Drive or OneDrive (network), up to 4 MiB.
+        val app = applicationContext
+        Thread {
+            val saved = req == REQ_EXPORT && Profile.export(app, uri)
+            val profile = if (req == REQ_IMPORT) Profile.read(app, uri) else null
+            // to the screen showing now: rotated meanwhile, this instance is gone and the result would be lost
+            runOnUiThread { (resumed ?: this.takeUnless { isFinishing || isDestroyed })?.profileDone(req, saved, profile) }
+        }.start()
+    }
+
+    private fun profileButtons(on: Boolean) = listOf(R.id.profile_export, R.id.profile_import).forEach { findViewById<Button>(it).isEnabled = on }
+
+    private fun profileDone(req: Int, saved: Boolean, profile: Map<String, Map<String, Any>>?) {
         fun toast(s: Int) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
-        when (req) {
-            REQ_EXPORT -> toast(if (Profile.export(this, uri)) R.string.profile_saved else R.string.profile_save_failed)
-            REQ_IMPORT -> {
-                val profile = Profile.read(this, uri) ?: return toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
-                AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
-                    .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
-                    .setNegativeButton(R.string.cancel, null)
-                    .show()
-            }
+        busy--
+        profileButtons(busy == 0)
+        when {
+            req == REQ_EXPORT -> toast(if (saved) R.string.profile_saved else R.string.profile_save_failed)
+            profile == null -> toast(R.string.profile_bad) // checked before asking: junk never reaches the dialog
+            else -> AlertDialog.Builder(this).setTitle(R.string.profile_confirm_title).setMessage(R.string.profile_confirm)
+                .setPositiveButton(R.string.profile_replace) { _, _ -> Profile.apply(this, profile); toast(R.string.profile_restored); recreate() }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
         }
     }
 
     override fun onResume() {
         super.onResume()
+        resumed = this
+        profileButtons(busy == 0) // rotated during a profile read: still busy
         // back from the system "Alarms & reminders" page
         findViewById<View>(R.id.exact_box).visibility = if (Alarms.requestIntent(this) == null) View.GONE else View.VISIBLE
         explainLock() // back from changing the wallpaper
@@ -185,6 +244,20 @@ class SettingsActivity : Activity() {
         findViewById<Button>(R.id.update_releases).setOnClickListener { open(Update.REPO) }
     }
 
+    /** P17: the quiz reminder needs a word seen today, so set before the word's time it never comes (at the same minute, the two alarms
+     *  come in any order): said under the quiz time. */
+    private fun quizEarly() {
+        val early = p.enabled && p.quizEnabled && p.quizHour * 60 + p.quizMinute <= p.hour * 60 + p.minute
+        findViewById<View>(R.id.quiz_early).visibility = if (early) View.VISIBLE else View.GONE
+    }
+
+    /** The unlock-counting notification is explained only when the word leaves at an unlock, with which one (« le 2e »). */
+    private fun showUnlocks() = findViewById<TextView>(R.id.unlocks_hint).run {
+        val n = p.unlocks
+        visibility = if (p.mode != Prefs.MODE_NOTIF && n > 0) View.VISIBLE else View.GONE
+        resources.getStringArray(R.array.unlocks_ordinals).getOrNull(n - 1)?.let { text = getString(R.string.unlocks_hint, it) }
+    }
+
     private fun explainLock() = Wall.explain(findViewById(R.id.wallpaper_hint), findViewById(R.id.lock_own))
 
     private fun spinner(id: Int, labels: List<String>, selected: Int, onPick: (Int) -> Unit) =
@@ -197,7 +270,16 @@ class SettingsActivity : Activity() {
             }
         }
 
-    private fun label(min: Int) = if (min < 60) "$min min" else "${min / 60} h"
+    private fun choices(id: Int) = resources.getStringArray(id).toList()
 
-    private companion object { const val REQ_EXPORT = 1; const val REQ_IMPORT = 2 }
+    private fun label(min: Int) = when { min < 60 -> getString(R.string.duration_m, min); min % 60 == 0 -> getString(R.string.duration_h, min / 60)
+        else -> getString(R.string.duration_hm, min / 60, min % 60) }
+
+    internal companion object {
+        const val REQ_EXPORT = 1; const val REQ_IMPORT = 2
+        /** The Settings screen in the foreground, if any: a profile read finishing after a rotation lands there. */
+        @android.annotation.SuppressLint("StaticFieldLeak") var resumed: SettingsActivity? = null
+        /** Profile reads or writes running: the buttons stay off, on a recreated screen too (no second dialog stacked). */
+        var busy = 0
+    }
 }
