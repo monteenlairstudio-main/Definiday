@@ -51,6 +51,7 @@ async function buildOne(b, job) {
     }
     root.removeAttribute('width'); root.removeAttribute('height');
     root.setAttribute('viewBox', (res.viewBox || [0, 0, 1024, 1024]).join(' '));
+    if (res.yarn) root.setAttribute('data-yarn', res.yarn.join(' ')); // where the page's yarn leaves the drawing (Postal.Yarn, GloseLayers.yarn)
     root.setAttribute('role', 'img');
     if (res.title) { const t = mk('title'); t.textContent = res.title; root.insertBefore(t, root.firstChild); root.setAttribute('aria-label', res.title); }
     return new XMLSerializer().serializeToString(root);

@@ -251,15 +251,17 @@ function emit(e, alpha, gate, out, inh = {}) {
       const L = parseFloat((a['stroke-dasharray'] || '1').split(/[ ,]+/)[0]);
       target(tname, an.attrs, keyframesOf(an.attrs, 'trimPathEnd', vals.map(v => 1 - v / L)));
     } else if (an.attrs.attributeName === 'opacity') {
+      // SMIL: an opacity animation on the path itself replaces its opacity (the steam: 0.3 still, 0.5 while it rises), the groups' still
+      // multiplies; one moved down from a group (« z », halo) replaces the group's, the path's own still multiplies
       const prop = a.fill && a.fill !== 'none' ? 'fillAlpha' : 'strokeAlpha';
-      target(tname, an.attrs, keyframesOf(an.attrs, prop, vals.map(v => v * op)));
+      target(tname, an.attrs, keyframesOf(an.attrs, prop, vals.map(v => v * (an.down ? op : alpha))));
     }
   }
   out.push(inner ? `${s}>${inner}</path>` : `${s}/>`);
 }
 // les <animate> d'opacité posés sur un groupe (z, vapeur, halo) sont redescendus sur ses chemins
 (function push(e) { for (const k of e.kids) push(k);
-  if (e.tag === 'g') { const an = e.kids.filter(k => k.tag === 'animate'); if (an.length) { e.kids = e.kids.filter(k => k.tag !== 'animate'); (function down(x) { for (const k of x.kids) { if (k.tag === 'g') down(k); else if (shapeData(k)) k.kids.push(...an); } })(e); } } })(svg);
+  if (e.tag === 'g') { const an = e.kids.filter(k => k.tag === 'animate'); if (an.length) { e.kids = e.kids.filter(k => k.tag !== 'animate'); (function down(x) { for (const k of x.kids) { if (k.tag === 'g') down(k); else if (shapeData(k)) k.kids.push(...an.map(m => ({ ...m, down: true }))); } })(e); } } })(svg);
 
 // Layers, in drawing order: each accessory piece (LAYERED gate group) is its own layer, and the body is cut wherever a piece
 // is drawn between two body parts. opts.noSlots (head icons, which never wear them): pieces dropped.

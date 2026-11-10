@@ -5,4 +5,6 @@
 <target android:name="fil_a_halo" android:animation="@animator/glose_k_e9ca70cc"/>
 <target android:name="fil_b" android:animation="@animator/glose_k_e9ca70cc"/>
 <target android:name="fil_c" android:animation="@animator/glose_k_e9ca70cc"/>
+<target android:name="pince" android:animation="@animator/glose_k_711c59e0"/>
+<target android:name="fil" android:animation="@animator/glose_k_711c59e0"/>
 </animated-vector>

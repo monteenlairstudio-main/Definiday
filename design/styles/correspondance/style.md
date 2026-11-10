@@ -127,7 +127,7 @@ Toutes les animations sont courtes, une seule fois par événement, et désactiv
 
 ## 9. Monsieur Glose
 
-- **Le coin de Glose** : en haut à gauche de chaque écran, assis sur son livre, 132 à 142 dp. Le fil sort du dessin (la fin du fil peint dans `glose_assis`, point 312,806 de la viewBox) et devient la marge. C'est la règle qui rend le système cohérent : Glose est l'origine de la ligne.
+- **Le coin de Glose** : en haut à gauche de chaque écran, assis sur son livre, 132 à 142 dp. Le fil sort du dessin (la fin du fil peint dans `glose_assis`, point 323,858 de la viewBox, juste sous le bord du livre ; chaque pose donne le sien : `GloseLayers.yarn`) et devient la marge. C'est la règle qui rend le système cohérent : Glose est l'origine de la ligne.
 - Accueil : `glose_assis` et « Une lettre de Glose », annotation « rien que pour vous » ; le fil va jusqu'au sceau du quiz.
 - Quiz : même pose, « Prenez votre temps, la poste n'est pas pressée. », « Bonsoir, » en tête de lettre, et l'option « Je donne ma langue au chat » (si l'on garde un bouton pour passer). Le fil finit en boucle lâche.
 - Album : même pose ; le fil devient la cordelette de reliure qui passe dans les œillets de la page.

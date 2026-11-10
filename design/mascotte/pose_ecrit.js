@@ -37,7 +37,7 @@ function draw(paper) {
   for (const s of strokes) anims.push({ id: s.name, attr: 'stroke-dashoffset', values: [0, 0, LEN, LEN, 0], keyTimes: KT, dur: DUR });
   const fil = G('fil', strokes);
   // la patte se pose par-dessus le départ du fil : deux doigts le pincent
-  const pinch = G(null, [fill(X(circ(PAW.add([-4, -24]), 16), raised.shape), C.cream), line(arc(PAW.add([-20, -22]), PAW.add([-4, -12]), PAW.add([12, -24])), IN)]);
+  const pinch = G('pince', [fill(X(circ(PAW.add([-4, -24]), 16), raised.shape), C.cream), line(arc(PAW.add([-20, -22]), PAW.add([-4, -12]), PAW.add([12, -24])), IN)]);
   // la tête suit l'écriture (léger hochement vers le mot)
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, -3, -3, 0], keyTimes: KT, dur: DUR });
 
@@ -45,5 +45,6 @@ function draw(paper) {
   anims.push(...glint.anims);
   paper.project.activeLayer.addChildren([L.shadow, L.book, L.seat, L.ribbon, L.tree, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
     G('pattes', [near.group]), L.scarf, L.jingleBand, L.head, L.bow, L.jingle, fil, pinch, glint.group].filter(Boolean));
-  return { anims, viewBox: [170, 50, 900, 900], title: `Monsieur Glose écrit « ${word} » avec le fil de sa pelote` };
+  // yarn : pas de bout libre (le fil écrit) : le fil de la page sort de derrière le bas du livre
+  return { anims, yarn: [312, 846], viewBox: [170, 50, 900, 900], title: `Monsieur Glose écrit « ${word} » avec le fil de sa pelote` };
 }

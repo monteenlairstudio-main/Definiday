@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_reveil_vd_2">
-<target android:name="vap1_o" android:animation="@animator/glose_k_9911f3fc"/>
+<target android:name="vap1_o" android:animation="@animator/glose_k_ecb25952"/>
 <target android:name="a4" android:animation="@animator/glose_k_0997c9f3"/>
-<target android:name="vap2_o" android:animation="@animator/glose_k_cb04a118"/>
+<target android:name="vap2_o" android:animation="@animator/glose_k_148980a5"/>
 <target android:name="a5" android:animation="@animator/glose_k_9aaabae9"/>
 <target android:name="a6" android:animation="@animator/glose_k_e49df817"/>
 <target android:name="a7" android:animation="@animator/glose_k_cdb9cf84"/>

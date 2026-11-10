@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_echarpe">
-<target android:name="echarpe" android:animation="@animator/glose_k_d0ca07e3"/>
+<target android:name="echarpe" android:animation="@animator/glose_k_b437f825"/>
 </animated-vector>

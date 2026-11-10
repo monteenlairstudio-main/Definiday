@@ -275,6 +275,47 @@ class GloseTest {
         } finally { Glose.paused = false }
     }
 
+    /** A tap mid-cycle: the idle life, still playing, fades out over the reaction in a view of the parent's overlay (same place and size,
+     *  out of the accessibility tree), then is stopped and removed. Paused or animations off: nothing plays, nothing to fade. */
+    @Test fun tapFadesFromWhereGloseWas() {
+        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
+        val v = c.get().findViewById<ImageView>(R.id.glose)
+        val group = android.view.ViewOverlay::class.java.getDeclaredField("mOverlayViewGroup").apply { isAccessible = true }
+        fun overlay() = (group.get((v.parent as android.view.ViewGroup).overlay) as android.view.ViewGroup).let { g -> (0 until g.childCount).map { g.getChildAt(it) as ImageView } }
+        fun avds(d: android.graphics.drawable.Drawable) = (d as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>()
+        fun draw() = v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+        val idle = { ms: Long -> org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(ms)) }
+        draw()
+        val life = v.drawable
+        assertTrue(avds(life).all { it.isRunning })
+        v.performClick()
+        val o = overlay().single()
+        assertTrue(o.drawable === life && v.drawable !== life) // the life on top, the reaction under it
+        assertTrue(avds(life).all { it.isRunning }) // it goes on from where it was
+        assertEquals(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO, o.importantForAccessibility)
+        assertEquals(null, o.contentDescription)
+        assertEquals(listOf(v.left, v.top, v.width, v.height), listOf(o.left, o.top, o.width, o.height))
+        assertTrue(o.hasOverlappingRendering && v.hasOverlappingRendering) // one alpha for the whole picture
+        assertEquals(0f, v.alpha) // the reaction fades in under it
+        idle(Glose.FADE_MS + 50)
+        assertTrue(overlay().isEmpty())
+        assertEquals(1f, v.alpha)
+        assertTrue(o.drawable == null && avds(life).none { it.isRunning }) // no second animation left running
+        try { // paused: the life is stopped, the reaction starts from the still
+            idle(Glose.Taps.SPECIAL_QUIET_MS); draw()
+            assertTrue(v.performLongClick())
+            v.performClick()
+            assertTrue(overlay().isEmpty())
+        } finally { Glose.paused = false }
+        idle(Glose.Taps.SPECIAL_QUIET_MS); Glose.play(v); draw()
+        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
+        try {
+            scale.invoke(null, 0f)
+            v.performClick()
+            assertTrue(overlay().isEmpty())
+        } finally { scale.invoke(null, 1f) }
+    }
+
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
         val c = Robolectric.buildActivity(MainActivity::class.java).setup()
         val v = c.get().findViewById<ImageView>(R.id.glose)
@@ -343,5 +384,23 @@ class GloseTest {
         assertTrue(cream() > 100) // then at night, same process: the outline shows
         org.robolectric.RuntimeEnvironment.setQualifiers("+notnight")
         assertEquals(0, cream()) // and goes again by day
+    }
+
+    /** The home page's yarn takes the chosen yarn's colour, day and night: its solid strand is the ball, or its darker shade on paper
+     *  where the ball is too pale, and stays above 3:1 on the page (style.md § 7). Bordeaux keeps the style's fil / fil_clair. */
+    @Test fun pageYarnTakesTheChosenYarnColour() {
+        for (q in listOf("+notnight", "+night")) {
+            RuntimeEnvironment.setQualifiers(q)
+            val c = RuntimeEnvironment.getApplication()
+            val bg = c.getColor(R.color.bg)
+            assertEquals(c.getColor(R.color.yarn) to c.getColor(R.color.yarn_light), Postal.yarnColors(c, 0))
+            for (p in Unlocks.items.filter { it.kind == Unlocks.Kind.PELOTE && it.style != 0 }) {
+                val (solid, dashed) = Postal.yarnColors(c, p.style)
+                assertTrue("${p.id} $q", Styles.contrast(solid, bg) >= 3)
+                assertTrue("${p.id} $q", solid != dashed)
+            }
+        }
+        RuntimeEnvironment.setQualifiers("+notnight")
+        assertEquals(0xFF8A5F1E.toInt() to 0xFFD9A441.toInt(), Postal.yarnColors(ctx, R.style.Glose_Pelote_Moutarde)) // pale by day: its shade, and the ball
     }
 }

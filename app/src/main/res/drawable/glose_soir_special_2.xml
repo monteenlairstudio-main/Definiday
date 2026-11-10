@@ -3,6 +3,6 @@
     android:drawable="@drawable/glose_soir_vd_2">
 <target android:name="vap1_o" android:animation="@animator/glose_k_d904e9d2"/>
 <target android:name="a10" android:animation="@animator/glose_k_ea99c636"/>
-<target android:name="vap2_o" android:animation="@animator/glose_k_f04e36e6"/>
+<target android:name="vap2_o" android:animation="@animator/glose_k_aa8edaf6"/>
 <target android:name="a11" android:animation="@animator/glose_k_3d5d7f54"/>
 </animated-vector>

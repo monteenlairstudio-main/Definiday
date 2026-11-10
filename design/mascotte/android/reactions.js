@@ -21,12 +21,11 @@ const wink = (vd, a, b) => ({ [inner(vd, 'paupiere_d')]: lid(a, b) });
 // Squash & stretch du corps : l'échelle verticale sy (clés d'image) l'écrase ou l'étire autour de sa base, la largeur compense
 // (volume à peu près gardé) et chaque partie posée dessus suit : translateY = (sy - 1)·k, k = sa hauteur au-dessus de la base (< 0).
 // Les parties sans liseré à elles (pattes, bras, brin) bougent de moins de 8 : le liseré fixe derrière elles (12) les couvre encore.
-// Les accessoires du cou (écharpe, nœud, grelot) suivent la tête ; ceux de la tête sont déjà dans « tete ».
-const NECK = k => Object.fromEntries(['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'].map(g => [g, k]));
+// Les accessoires du cou suivent la tête (neck()) ; ceux de la tête sont déjà dans « tete ».
 const BODY = {
-  assis: { corps: [500, 700], tete: -182, ...NECK(-190), pattes: -120, pelote: -94, brin: -20 },
-  ecrit: { corps: [500, 700], tete: -180, ...NECK(-190), pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100 },
-  livres: { corps: [640, 655], tete: -160, ...NECK(-160), patte: -60 },
+  assis: { corps: [500, 700], tete: -182, pattes: -120, pelote: -94, brin: -20 },
+  ecrit: { corps: [500, 700], tete: -180, pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100, pince: -110, fil: -110 }, // the pinching fingers and the thread they hold go with the raised paw
+  livres: { corps: [640, 655], tete: -160, patte: -60 },
   soir: { dormeur: [490, 620] }, reveil: { dormeur: [490, 620] }, // tête et pattes sont dans « dormeur » : il s'écrase sur le bord de la tasse
 };
 const r3 = v => Math.round(v * 1000) / 1000;
@@ -158,12 +157,104 @@ function animators(vd, ms, targets, idle0) {
   return Object.fromEntries(Object.entries(targets).map(([t, props]) => [t, `<objectAnimator android:duration="${ms}" android:interpolator="@android:interpolator/linear">` +
     Object.entries(props).map(([p, k]) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">${kfs(k)}</propertyValuesHolder>`).join('') + '</objectAnimator>']));
 }
+// ---------- unwinding thread (glose_lib.js tether()) ----------
+// When the ball goes away from where its loose thread leaves it, a straight run of yarn joins the thread to the ball's outline and
+// lengthens by the way it went (the ball unwinds; coming back, it rewinds). Tether group (anchor, ball radius): its keys are
+// computed from the reaction's own keys (same easing as Android), so its end stays on the (squashed) ball at every frame.
+const TETHERS = { assis: [['brin_lien', 76]], livres: [['sol_lien', 64], ['patte_lien', 64]] }; // radii: pose_assis.js, pose_livres.js
+const ALPHA = { _a: 1, _b: 1, _c: 0.3, _h: 1 }; // its strokes once shown (ink, yarn, sheen, night outline): tether() draws them at 0
+const TETHER_LEN = 200; // glose_lib.js: the run is drawn this long, trimmed to its length
+const CAP = 9; // the fixed thread's round cap (ink 18 / 2): a run shorter than this is hidden under it, no tether animator then
+const bez = (x1, y1, x2, y2) => t => { let lo = 0, hi = 1, u; for (let i = 0; i < 40; i++) { u = (lo + hi) / 2;
+  if (3 * (1 - u) ** 2 * u * x1 + 3 * (1 - u) * u * u * x2 + u ** 3 < t) lo = u; else hi = u; }
+  return 3 * (1 - u) ** 2 * u * y1 + 3 * (1 - u) * u * u * y2 + u ** 3; };
+const EASES = { '@interpolator/glose_ease': bez(0.45, 0, 0.55, 1), '@android:interpolator/decelerate_quad': t => 1 - (1 - t) ** 2,
+  '@android:interpolator/accelerate_quad': t => t * t };
+const easeOf = i => !i ? (t => t) : EASES[i] || (([a, b]) => bez(1 / 3, a / 3000, 2 / 3, 1 - b / 3000))(i.split('_').slice(-2).map(Number));
+function valueAt(k, f) { // keys [fraction, value, force] eased as kfs() writes them
+  const e = hermite(k.map(q => q[1]), k.map(q => q[0]), false, k.map(q => q[2]));
+  if (f <= k[0][0]) return k[0][1];
+  for (let i = 1; i < k.length; i++) if (f <= k[i][0]) return k[i - 1][1] + (k[i][1] - k[i - 1][1]) * easeOf(e[i])((f - k[i - 1][0]) / (k[i][0] - k[i - 1][0]));
+  return k[k.length - 1][1];
+}
+// groups enclosing the group named nm in the VD (outermost first, that group last), as attribute maps
+function chainOf(vd, nm) {
+  const st = [], re = /<(\/?)(group|path|clip-path)\b([^>]*?)(\/?)>/g; let m;
+  while ((m = re.exec(vd))) {
+    if (m[1]) { if (m[2] === 'group') st.pop(); continue; }
+    const attrs = Object.fromEntries([...m[3].matchAll(/android:(\w+)="([^"]*)"/g)].map(x => [x[1], x[2]]));
+    if (m[2] === 'group') { st.push(attrs); if (attrs.name === nm) return st.slice(); if (m[4]) st.pop(); }
+  }
+  throw new Error(`tether: no group ${nm}`);
+}
+const mul = (A, B) => [A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3], A[2] * B[0] + A[3] * B[2], A[2] * B[1] + A[3] * B[3],
+  A[0] * B[4] + A[1] * B[5] + A[4], A[2] * B[4] + A[3] * B[5] + A[5]];
+const ap = (M, [x, y]) => [M[0] * x + M[1] * y + M[4], M[2] * x + M[3] * y + M[5]];
+const inv = ([a, b, c, d, e, f]) => { const k = a * d - b * c; return [d / k, -b / k, -c / k, a / k, (b * f - d * e) / k, (c * e - a * f) / k]; };
+function world(chain, targets, f) { // VGroup matrix: translate + pivot, rotate, scale, minus pivot; reaction keys over the VD's values
+  return chain.reduce((W, g) => {
+    const p = q => targets[g.name] && targets[g.name][q] ? valueAt(targets[g.name][q], f) : +(g[q] ?? (/^scale/.test(q) ? 1 : 0));
+    const r = p('rotation') * Math.PI / 180, c = Math.cos(r), s = Math.sin(r), sx = p('scaleX'), sy = p('scaleY'), px = p('pivotX'), py = p('pivotY');
+    const L = [sx * c, -sy * s, sx * s, sy * c];
+    return mul(W, [...L, p('translateX') + px - L[0] * px - L[1] * py, p('translateY') + py - L[2] * px - L[3] * py]);
+  }, [1, 0, 0, 1, 0, 0]);
+}
+// { tether target: objectAnimator xml } for one reaction of [ms] whose keys are [targets]; none for a run that stays under the cap
+function tethers(vd, family, ms, targets) {
+  const out = {}, n = Math.floor(ms / 17); // keys every frame (≥ 17 ms), linear in between as the RenderThread samples them
+  for (const [nm, r] of TETHERS[family] || []) {
+    const tc = chainOf(vd, nm), parent = tc.slice(0, -1), at = [+tc[tc.length - 1].translateX, +tc[tc.length - 1].translateY];
+    const inner = /android:name="pelote"><group android:name="(a\d+)" android:pivotX="([-\d.]+)" android:pivotY="([-\d.]+)"/.exec(vd);
+    const ball = chainOf(vd, 'pelote').concat([{ name: inner[1], pivotX: inner[2], pivotY: inner[3] }]), C = [+inner[2], +inner[3]];
+    const keys = [];
+    for (let i = 0; i <= n; i++) {
+      const f = i / n, P = world(parent, targets, f), B = world(ball, targets, f), A = ap(P, at), Al = ap(inv(B), A);
+      const d = Math.hypot(Al[0] - C[0], Al[1] - C[1]);
+      const T = d > r ? ap(B, [C[0] + r * (Al[0] - C[0]) / d, C[1] + r * (Al[1] - C[1]) / d]) : A; // the outline, toward the anchor
+      const v = ap(inv(P), T), len = Math.hypot(v[0] - at[0], v[1] - at[1]);
+      keys.push([+f.toFixed(4), Math.atan2(v[1] - at[1], v[0] - at[0]) * 180 / Math.PI, len]);
+    }
+    if (Math.max(...keys.map(k => k[2])) <= CAP) continue;
+    for (let i = 1; i < keys.length; i++) { // continuous angle, held where the run is too short to have one
+      if (keys[i][2] < 0.5) keys[i][1] = keys[i - 1][1];
+      while (keys[i][1] - keys[i - 1][1] > 180) keys[i][1] -= 360;
+      while (keys[i][1] - keys[i - 1][1] < -180) keys[i][1] += 360;
+    }
+    // every other key only where the line between its neighbours puts the end within 0.4 of it (0.2 px at 160 dp): fewer keys
+    const end = k => [k[2] * Math.cos(k[1] * Math.PI / 180), k[2] * Math.sin(k[1] * Math.PI / 180)];
+    for (let i = keys.length - 2; i > 0; i -= 2) {
+      const [a, b, c] = [keys[i - 1], keys[i], keys[i + 1]], mid = end([0, (a[1] + c[1]) / 2, (a[2] + c[2]) / 2]), e = end(b);
+      if (Math.hypot(mid[0] - e[0], mid[1] - e[1]) < 0.4 && i > 1 && i < keys.length - 2) keys.splice(i, 1);
+    }
+    const kf = (p, ks) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">` +
+      ks.map(([f, v]) => `<keyframe android:fraction="${f}" android:value="${+v.toFixed(4)}"/>`).join('') + '</propertyValuesHolder>';
+    const anim = h => `<objectAnimator android:duration="${ms}" android:interpolator="@android:interpolator/linear">${h}</objectAnimator>`;
+    // the group turns; each stroke is trimmed to the length (a scaled group would stretch the round caps: the VD strokes in its frame)
+    // and shown from the 2nd key to the one before last
+    if (Math.max(...keys.map(k => k[2])) > TETHER_LEN) throw new Error(`${nm}: run longer than ${TETHER_LEN}`);
+    out[nm] = out[nm + '_f'] = anim(kf('rotation', keys.map(k => [k[0], k[1]]))); // ink and core groups (glose_lib.js tether())
+    const trim = kf('trimPathEnd', keys.map(k => [k[0], k[2] / TETHER_LEN])), shown = a => [[0, 0], [keys[1][0], a], [keys[keys.length - 2][0], a], [1, 0]];
+    for (const [s, a] of Object.entries(ALPHA)) out[nm + s] = anim(trim + kf('strokeAlpha', shown(a)));
+  }
+  return out;
+}
+// Neck accessories ride with what carries the head in each reaction: « tete » awake (its keys and pivot: they turn and lift with it, squash
+// included), « dormeur » in the cup (the scarf; the bow and the bell are inside it). Their idle breathing is on an inner group, at rest here.
+const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'];
+function neck(vd, family, targets) {
+  const by = family === 'soir' || family === 'reveil' ? 'dormeur' : 'tete', k = targets[by];
+  if (!k) return targets;
+  for (const g of NECK) if (vd.includes(`android:name="${g}"`) && !chainOf(vd, g).some(a => a.name === by)) targets[g] = { ...(k.pivotX ? {} : at(pivot(vd, by))), ...k };
+  return targets;
+}
 const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['reveil', 'reveil'], ...WORDS.map(w => [`ecrit_${w}`, 'ecrit'])];
 module.exports = RES => {
   for (const [pose, family] of poses) {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
     const idle0 = IDLE0[`glose_${pose}`];
-    for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]])
-      animated(`glose_${pose}_${kind}`, name, animators(name, ms, settle(make(vd, family), idle0, ms), idle0), RES);
+    for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]]) {
+      const t = settle(neck(vd, family, make(vd, family)), idle0, ms);
+      animated(`glose_${pose}_${kind}`, name, Object.assign(animators(name, ms, t, idle0), tethers(vd, family, ms, t)), RES);
+    }
   }
 };
