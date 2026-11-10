@@ -33,7 +33,8 @@ function draw(paper) {
   const ringBack = line(arc(rr([278, 752]), rr([318, 737]), rr([358, 752])), 10, C.ballD);
   const ringFront = G(null, [line(arc(rr([278, 752]), rr([318, 768]), rr([358, 752])), 18), line(arc(rr([278, 752]), rr([318, 768]), rr([358, 752])), 10, C.ball)]);
   const thread = strand([[262, 812], [268, 800], rr([284, 766])], C, 10);
-  const legG = G('patte', [ringBack, leg.group, thread, ringFront]);
+  const lien = tether('patte_lien', [262, 812], C); // suit la pelote qui saute
+  const legG = G('patte', [ringBack, leg.group, lien[0], thread, lien[1], ringFront]);
   anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], values: [0, 4, -2, 0, 0], keyTimes: [0, 0.18, 0.36, 0.55, 1], dur: 2.6 });
 
   // tête : tournée vers la pelote (3/4 gauche), penchée
@@ -50,7 +51,8 @@ function draw(paper) {
 
   const ballG0 = yarn('pelote', [240, 864], 64, C, [line(curve([[198, 836], [228, 822], [264, 828]]), 6, C.ballD)]);
   const loose = strand([[194, 906], [164, 920], [136, 910], [118, 920]], C, 8);
-  const ballG = G('pelote_sol', [loose, ballG0]);
+  const sol = tether('sol_lien', [194, 906], C, 8);
+  const ballG = G('pelote_sol', [sol[0], loose, sol[1], ballG0]);
   anims.push({ id: 'pelote', type: 'rotate', pivot: [240, 864], values: [0, -7, 0, 0], keyTimes: [0, 0.3, 0.6, 1], dur: 2.6 });
   const shadow = G('ombre', [floorShadow([580, 916], [330, 24], 0.32), floorShadow([236, 920], [80, 13], 0.32)]);
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');

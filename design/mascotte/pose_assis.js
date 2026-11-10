@@ -8,6 +8,7 @@ function draw(paper) {
   anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, values: [0, 6, 0, -6, 0], dur: 3.8 });
   // brin libre : sort sous la pelote, file sur le livre et pend au coin avant gauche (épais : lisible à 128 px)
   const brin = strand([[496, 682], [476, 714], [430, 728], [370, 726], [318, 720], [296, 742], [298, 778], [312, 806]], C, 10, 'brin');
+  const lien = tether('brin_lien', [496, 682], C); brin.insertChild(0, lien[0]); brin.addChild(lien[1]); // se déroule quand la pelote roule
   const near = arm(C, [[430, 504], [404, 552], [414, 600], [444, 618]], 64, 54, { c: [456, 626], rx: 40, ry: 30, rot: -18 });
   const far = arm(C, [[606, 500], [636, 536], [636, 566], [612, 576]], 58, 50, { c: [604, 574], rx: 36, ry: 28, rot: -24 });
   const arms = G('pattes', [far.group, near.group]);

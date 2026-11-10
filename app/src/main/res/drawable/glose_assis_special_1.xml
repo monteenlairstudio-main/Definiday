@@ -5,4 +5,9 @@
 <target android:name="corps" android:animation="@animator/glose_k_09084dd8"/>
 <target android:name="pattes" android:animation="@animator/glose_k_62397000"/>
 <target android:name="brin" android:animation="@animator/glose_k_4b7efc0c"/>
+<target android:name="brin_lien_f" android:animation="@animator/glose_k_afcf6e34"/>
+<target android:name="brin_lien" android:animation="@animator/glose_k_afcf6e34"/>
+<target android:name="brin_lien_a" android:animation="@animator/glose_k_578f114a"/>
+<target android:name="brin_lien_b" android:animation="@animator/glose_k_578f114a"/>
+<target android:name="brin_lien_c" android:animation="@animator/glose_k_3e0b9959"/>
 </animated-vector>

@@ -5,4 +5,14 @@
 <target android:name="pelote" android:animation="@animator/glose_k_c351d9ab"/>
 <target android:name="a7" android:animation="@animator/glose_k_e6f9d4d9"/>
 <target android:name="corps" android:animation="@animator/glose_k_6ab99dfa"/>
+<target android:name="sol_lien_f" android:animation="@animator/glose_k_d81fe111"/>
+<target android:name="sol_lien" android:animation="@animator/glose_k_d81fe111"/>
+<target android:name="sol_lien_a" android:animation="@animator/glose_k_683798ea"/>
+<target android:name="sol_lien_b" android:animation="@animator/glose_k_683798ea"/>
+<target android:name="sol_lien_c" android:animation="@animator/glose_k_112adb15"/>
+<target android:name="patte_lien_f" android:animation="@animator/glose_k_f7e07d2a"/>
+<target android:name="patte_lien" android:animation="@animator/glose_k_f7e07d2a"/>
+<target android:name="patte_lien_a" android:animation="@animator/glose_k_239780fc"/>
+<target android:name="patte_lien_b" android:animation="@animator/glose_k_239780fc"/>
+<target android:name="patte_lien_c" android:animation="@animator/glose_k_521085e1"/>
 </animated-vector>

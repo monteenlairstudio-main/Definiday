@@ -4,4 +4,6 @@
 <target android:name="tete_halo" android:animation="@animator/glose_k_af06f7a6"/>
 <target android:name="corps_halo" android:animation="@animator/glose_k_b44200ac"/>
 <target android:name="pelote_halo" android:animation="@animator/glose_k_73ff251d"/>
+<target android:name="brin_lien_halo" android:animation="@animator/glose_k_62cf1c55"/>
+<target android:name="brin_lien_h" android:animation="@animator/glose_k_12c8af3d"/>
 </animated-vector>

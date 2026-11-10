@@ -402,6 +402,21 @@ function strand(pts, C, w = 10, name) {
   const c = curve(pts);
   return G(name, [line(c.clone(NI), w + 8), line(c.clone(NI), w, C.ball), line(moved(c, -1.5, -2), w * 0.28, '#FFFFFF', 0.3)]);
 }
+// brin qui se déroule : quand la pelote s'éloigne (réactions Android), un bout de brin droit va du point `at` (là où le fil posé quitte
+// la pelote) au bord de la pelote, et s'allonge du chemin parcouru. Trait de TETHER_LEN (0,0 -> TETHER_LEN,0) dans un groupe placé en
+// `at`, transparent au repos : android/reactions.js (TETHERS) le tourne (rotation du groupe), le coupe à la longueur voulue (trimPathEnd :
+// pas d'échelle non uniforme, qui étirerait les bouts ronds) et l'affiche le temps de la réaction. Deux groupes, tournés ensemble : l'encre
+// `name` à poser avant le brin, l'âme `name_f` après lui (sinon le bout rond d'encre de l'un barre l'autre à la jonction). Son liseré de nuit
+// est ajouté par halo() (data.tether), sous le groupe animé qui le porte.
+const TETHER_LEN = 200; // android/reactions.js TETHER_LEN
+function tether(name, at, C, w = 10) {
+  const seg = () => new Path({ segments: [[0, 0], [TETHER_LEN, 0]], insert: false });
+  const named = (p, k) => { p.name = `${name}_${k}`; return p; };
+  const back = G(name, [named(line(seg(), w + 8, INK, 0), 'a')]), front = G(name + '_f', [named(line(seg(), w, C.ball, 0), 'b'), named(line(moved(seg(), 0, -2), w * 0.28, '#FFFFFF', 0), 'c')]);
+  for (const g of [back, front]) { g.applyMatrix = false; g.translate(P(at)); }
+  back.data = { tether: w + 8 };
+  return [back, front];
+}
 // ---------- livre oblique (dos, couverture, tranche) ----------
 function book(o) {
   const { x, y, w, h } = o, [dx, dy] = o.d, ct = Math.max(9, h * 0.14);
@@ -557,7 +572,9 @@ const REACTED = ['tete', 'dormeur', 'pelote', 'patte', 'queue', 'zzz'];
 function halo(root, anims, color, h = 12) {
   const moving = new Set(anims.filter(a => a.attr !== 'stroke-dashoffset').map(a => a.id).concat(REACTED)), dash = new Set(anims.filter(a => a.attr === 'stroke-dashoffset').map(a => a.id));
   const ink = new Color(INK), buckets = new Map();
+  const tethers = []; // brins qui se déroulent (tether) : liseré ajouté plus bas, transparent comme eux au repos
   const walk = (it, chain) => {
+    if (it.data && it.data.tether) { tethers.push([it, chain]); return; }
     if (!it.visible || it.clipMask || it.opacity < 0.5 || GATED.test(it.name || '')) return;
     if (it.name && moving.has(it.name)) chain = chain.concat(it.name);
     if (it.children && !(it instanceof paper.CompoundPath)) { if (!it.clipped) it.children.forEach(c => walk(c, chain)); return; }
@@ -602,6 +619,11 @@ function halo(root, anims, color, h = 12) {
     if (!out.length) continue;
     const g = b.chain.length ? groupOf(b.chain) : back;
     g.addChildren(out);
+  }
+  for (const [t, chain] of tethers) {
+    const s = line(new Path({ segments: [[0, 0], [TETHER_LEN, 0]], insert: false }), t.data.tether + 2 * h / SW, color, 0); s.name = t.name + '_h';
+    const g = G(t.name + '_halo', [s]); g.applyMatrix = false; g.matrix = t.matrix.clone();
+    (chain.length ? groupOf(chain) : back).addChild(g);
   }
   for (const g of root.getItems({ match: it => it.name && PIECE.test(it.name) && it.children })) {
     const shut = g.getItems({ match: it => !(it.parent && it.parent.clipped) && it.strokeColor && it.strokeColor.equals(ink) && it.strokeWidth >= 4 && (it instanceof paper.CompoundPath || it.closed) });

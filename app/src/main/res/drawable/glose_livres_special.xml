@@ -6,4 +6,8 @@
 <target android:name="tete_halo" android:animation="@animator/glose_k_bc343ffa"/>
 <target android:name="a6" android:animation="@animator/glose_k_e6f9d4d9"/>
 <target android:name="corps_halo" android:animation="@animator/glose_k_6ab99dfa"/>
+<target android:name="sol_lien_halo" android:animation="@animator/glose_k_d81fe111"/>
+<target android:name="sol_lien_h" android:animation="@animator/glose_k_683798ea"/>
+<target android:name="patte_lien_halo" android:animation="@animator/glose_k_f7e07d2a"/>
+<target android:name="patte_lien_h" android:animation="@animator/glose_k_239780fc"/>
 </animated-vector>
