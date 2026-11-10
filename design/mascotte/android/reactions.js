@@ -21,12 +21,11 @@ const wink = (vd, a, b) => ({ [inner(vd, 'paupiere_d')]: lid(a, b) });
 // Squash & stretch du corps : l'échelle verticale sy (clés d'image) l'écrase ou l'étire autour de sa base, la largeur compense
 // (volume à peu près gardé) et chaque partie posée dessus suit : translateY = (sy - 1)·k, k = sa hauteur au-dessus de la base (< 0).
 // Les parties sans liseré à elles (pattes, bras, brin) bougent de moins de 8 : le liseré fixe derrière elles (12) les couvre encore.
-// Les accessoires du cou (écharpe, nœud, grelot) suivent la tête ; ceux de la tête sont déjà dans « tete ».
-const NECK = k => Object.fromEntries(['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'].map(g => [g, k]));
+// Les accessoires du cou suivent la tête (neck()) ; ceux de la tête sont déjà dans « tete ».
 const BODY = {
-  assis: { corps: [500, 700], tete: -182, ...NECK(-190), pattes: -120, pelote: -94, brin: -20 },
-  ecrit: { corps: [500, 700], tete: -180, ...NECK(-190), pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100, pince: -110, fil: -110 }, // the pinching fingers and the thread they hold go with the raised paw
-  livres: { corps: [640, 655], tete: -160, ...NECK(-160), patte: -60 },
+  assis: { corps: [500, 700], tete: -182, pattes: -120, pelote: -94, brin: -20 },
+  ecrit: { corps: [500, 700], tete: -180, pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100, pince: -110, fil: -110 }, // the pinching fingers and the thread they hold go with the raised paw
+  livres: { corps: [640, 655], tete: -160, patte: -60 },
   soir: { dormeur: [490, 620] }, reveil: { dormeur: [490, 620] }, // tête et pattes sont dans « dormeur » : il s'écrase sur le bord de la tasse
 };
 const r3 = v => Math.round(v * 1000) / 1000;
@@ -239,13 +238,22 @@ function tethers(vd, family, ms, targets) {
   }
   return out;
 }
+// Neck accessories ride with what carries the head in each reaction: « tete » awake (its keys and pivot: they turn and lift with it, squash
+// included), « dormeur » in the cup (the scarf; the bow and the bell are inside it). Their idle breathing is on an inner group, at rest here.
+const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'];
+function neck(vd, family, targets) {
+  const by = family === 'soir' || family === 'reveil' ? 'dormeur' : 'tete', k = targets[by];
+  if (!k) return targets;
+  for (const g of NECK) if (vd.includes(`android:name="${g}"`) && !chainOf(vd, g).some(a => a.name === by)) targets[g] = { ...(k.pivotX ? {} : at(pivot(vd, by))), ...k };
+  return targets;
+}
 const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['reveil', 'reveil'], ...WORDS.map(w => [`ecrit_${w}`, 'ecrit'])];
 module.exports = RES => {
   for (const [pose, family] of poses) {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
     const idle0 = IDLE0[`glose_${pose}`];
     for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]]) {
-      const t = settle(make(vd, family), idle0, ms);
+      const t = settle(neck(vd, family, make(vd, family)), idle0, ms);
       animated(`glose_${pose}_${kind}`, name, Object.assign(animators(name, ms, t, idle0), tethers(vd, family, ms, t)), RES);
     }
   }
