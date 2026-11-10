@@ -57,7 +57,7 @@ internal object GloseLayers {
     )
     /** Where the page's yarn (Postal.Yarn) leaves each pose: fraction of the drawable's width and height. */
     val yarn: Map<Int, Pair<Float, Float>> = mapOf(
-        R.drawable.glose_assis to (0.2463f to 0.8976f),
+        R.drawable.glose_assis to (0.2598f to 0.961f),
         R.drawable.glose_ecrit_bravo to (0.1578f to 0.8844f),
         R.drawable.glose_ecrit_coucou to (0.1578f to 0.8844f),
         R.drawable.glose_ecrit_dodo to (0.1578f to 0.8844f),
