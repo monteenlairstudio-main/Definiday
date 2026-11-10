@@ -25,7 +25,7 @@ const wink = (vd, a, b) => ({ [inner(vd, 'paupiere_d')]: lid(a, b) });
 const NECK = k => Object.fromEntries(['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'].map(g => [g, k]));
 const BODY = {
   assis: { corps: [500, 700], tete: -182, ...NECK(-190), pattes: -120, pelote: -94, brin: -20 },
-  ecrit: { corps: [500, 700], tete: -180, ...NECK(-190), pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100 },
+  ecrit: { corps: [500, 700], tete: -180, ...NECK(-190), pattes: -96, pelote: -84, bras_leve: -110, fil_bas: -100, pince: -110, fil: -110 }, // the pinching fingers and the thread they hold go with the raised paw
   livres: { corps: [640, 655], tete: -160, ...NECK(-160), patte: -60 },
   soir: { dormeur: [490, 620] }, reveil: { dormeur: [490, 620] }, // tête et pattes sont dans « dormeur » : il s'écrase sur le bord de la tasse
 };
