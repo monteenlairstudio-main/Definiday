@@ -56,5 +56,6 @@ function draw(paper) {
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');
   anims.push(...glint.anims);
   paper.project.activeLayer.addChildren([shadow, B1.group, rib, tree, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, ballG, scarfF, jg.band, H.group, bow, jg.bell, glint.group].filter(Boolean));
-  return { anims, viewBox: [90, 150, 860, 860], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
+  // yarn : bout du brin libre, d'où part le fil de la page (Postal.Yarn)
+  return { anims, yarn: [118, 920], viewBox: [90, 150, 860, 860], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
 }

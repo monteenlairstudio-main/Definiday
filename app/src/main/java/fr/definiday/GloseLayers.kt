@@ -55,6 +55,21 @@ internal object GloseLayers {
         R.drawable.glose_soir_tap to listOf("" to R.drawable.glose_soir_tap, "Marque" to R.drawable.glose_soir_vd_marque_page, "" to R.drawable.glose_soir_vd_1, "Sapin" to R.drawable.glose_soir_vd_sapin, "" to R.drawable.glose_soir_tap_2, "Echarpe" to R.drawable.glose_soir_vd_echarpe, "" to R.drawable.glose_soir_tap_3, "Grelot" to R.drawable.glose_soir_tap_grelot_ruban, "Plume" to R.drawable.glose_soir_tap_plume, "" to R.drawable.glose_soir_tap_4, "Bonnet" to R.drawable.glose_soir_tap_bonnet, "Beret" to R.drawable.glose_soir_tap_beret, "Couronne" to R.drawable.glose_soir_tap_couronne, "Noeud" to R.drawable.glose_soir_tap_noeud, "Grelot" to R.drawable.glose_soir_tap_grelot, "" to R.drawable.glose_soir_tap_5, "Glint" to R.drawable.glose_soir_vd_s_eclats),
         R.drawable.glose_soir_vd to listOf("" to R.drawable.glose_soir_vd, "Marque" to R.drawable.glose_soir_vd_marque_page, "" to R.drawable.glose_soir_vd_1, "Sapin" to R.drawable.glose_soir_vd_sapin, "" to R.drawable.glose_soir_vd_2, "Echarpe" to R.drawable.glose_soir_vd_echarpe, "" to R.drawable.glose_soir_vd_3, "Grelot" to R.drawable.glose_soir_vd_grelot_ruban, "Plume" to R.drawable.glose_soir_vd_plume, "" to R.drawable.glose_soir_vd_4, "Bonnet" to R.drawable.glose_soir_vd_bonnet, "Beret" to R.drawable.glose_soir_vd_beret, "Couronne" to R.drawable.glose_soir_vd_couronne, "Noeud" to R.drawable.glose_soir_vd_noeud, "Grelot" to R.drawable.glose_soir_vd_grelot, "" to R.drawable.glose_soir_vd_5, "Glint" to R.drawable.glose_soir_vd_s_eclats),
     )
+    /** Where the page's yarn (Postal.Yarn) leaves each pose: fraction of the drawable's width and height. */
+    val yarn: Map<Int, Pair<Float, Float>> = mapOf(
+        R.drawable.glose_assis to (0.2463f to 0.8976f),
+        R.drawable.glose_ecrit_bravo to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_coucou to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_dodo to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_encore to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_flocon to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_mot to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_rare to (0.1578f to 0.8844f),
+        R.drawable.glose_ecrit_ronron to (0.1578f to 0.8844f),
+        R.drawable.glose_livres to (0.0326f to 0.8953f),
+        R.drawable.glose_reveil to (0.2739f to 0.9217f),
+        R.drawable.glose_soir to (0.2739f to 0.9217f),
+    )
     /** Theme overlay -> gate it opens. */
     val gates: List<Pair<Int, String>> = listOf(R.style.Glose_Pelage_Enluminure to "Glint", R.style.Glose_Pelage_Nuit to "Glint", R.style.Glose_Acc_Noeud to "Noeud", R.style.Glose_Acc_Echarpe to "Echarpe", R.style.Glose_Acc_Bonnet to "Bonnet", R.style.Glose_Acc_Plume to "Plume", R.style.Glose_Acc_Marque to "Marque", R.style.Glose_Acc_Grelot to "Grelot", R.style.Glose_Acc_Beret to "Beret", R.style.Glose_Acc_Couronne to "Couronne", R.style.Glose_Acc_Sapin to "Sapin", R.style.Glose_Acc_EcharpeSucreOrge to "Echarpe", R.style.Glose_Acc_BonnetNeige to "Bonnet", R.style.Glose_Eclats to "Glint")
 }

@@ -191,7 +191,7 @@ object Postal {
         }
     }
 
-    /** Glose's yarn, the screen's one quiet line: from the end of the thread in his drawing ([from], at 38 % / 97 % of the view) down the margin
+    /** Glose's yarn, the screen's one quiet line: from the end of the thread in his drawing ([from]: GloseLayers.yarn of the pose shown, generated) down the margin
      *  at [x] to the middle of [to]. Set as the background of [host] (a common ancestor), so it passes behind the papers and shows in the gaps.
      *  Two strands: yarn and a dashed yarn_light, one of which stays above 3:1 on any background. */
     class Yarn(ctx: Context, private val host: ViewGroup, private val from: View, private val to: View, private val x: Float) : Paper() {
@@ -201,12 +201,22 @@ object Postal {
             style = Paint.Style.STROKE; strokeWidth = 1f * d; color = ctx.getColor(R.color.yarn_light); pathEffect = DashPathEffect(floatArrayOf(1.6f * d, 2.8f * d), 0f)
         }
         private val r = Rect()
+        private val pt = FloatArray(2)
+        private val prefs = Prefs(ctx)
 
         override fun draw(c: Canvas) {
             if (from.width == 0 || to.width == 0 || !from.isShown || !to.isShown) return
             r.set(0, 0, from.width, from.height); host.offsetDescendantRectToMyCoords(from, r)
-            val sx = r.left + r.width() * 0.38f
-            val sy = r.top + r.height() * 0.97f
+            // the end of the yarn painted in the pose shown (MainActivity: Glose.mainPose), through the view's scaling
+            val (fx, fy) = GloseLayers.yarn[Glose.mainPose(prefs)] ?: (0.38f to 0.97f)
+            val img = (from as? android.widget.ImageView)?.drawable
+            if (img != null && img.intrinsicWidth > 0) {
+                pt[0] = fx * img.intrinsicWidth; pt[1] = fy * img.intrinsicHeight
+                (from as android.widget.ImageView).imageMatrix.mapPoints(pt)
+                pt[0] += from.paddingLeft; pt[1] += from.paddingTop
+            } else { pt[0] = from.width * fx; pt[1] = from.height * fy }
+            val sx = r.left + pt[0]
+            val sy = r.top + pt[1]
             r.set(0, 0, to.width, to.height); host.offsetDescendantRectToMyCoords(to, r)
             val ey = r.exactCenterY()
             if (ey < sy) return
