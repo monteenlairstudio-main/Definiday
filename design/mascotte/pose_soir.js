@@ -88,7 +88,7 @@ function draw(paper) {
   // ---------- vapeur, « z », sachet ----------
   const steam = (id, x, y, d) => {
     anims.push({ id, type: 'translate', values: [[0, 20], [0, -50]], dur: 4.4, begin: d, linear: true });
-    anims.push({ id: id + '_o', attr: 'opacity', values: [0, 0.85, 0.85, 0], keyTimes: [0, 0.3, 0.6, 1], dur: 4.4, begin: d });
+    anims.push({ id: id + '_o', attr: 'opacity', values: [0, 0.5, 0.5, 0], keyTimes: [0, 0.3, 0.6, 1], dur: 4.4, begin: d }); // peak 0.5 while it rises (svg2avd: replaces the path's own 0.3, the still)
     const s = fill(taper([[x, y], [x - 18, y - 40], [x + 12, y - 80], [x - 8, y - 120], [x + 6, y - 160]], 16, 3), C.sepia, 0.32); s.name = id + '_o';
     return G(id, [s]);
   };
