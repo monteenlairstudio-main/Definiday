@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.DashPathEffect
 import android.graphics.Paint
@@ -191,21 +192,39 @@ object Postal {
         }
     }
 
+    /** The page yarn's two strands (solid, dashed) for the yarn of theme overlay [pelote] (Glose.Pelote.*, 0 = bordeaux), on the window bg of [ctx]'s
+     *  mode. Solid: the yarn's gloseBall, or its darker gloseBallD where the ball is under 3:1 (pale yarns by day), or else the ball lightened
+     *  to 3:1 (dark yarns at night); dashed: the ball when the solid strand is not it, else the ball lightened. Bordeaux keeps the style's
+     *  hand-tuned fil / fil_clair (style.md § 3). */
+    fun yarnColors(ctx: Context, pelote: Int): Pair<Int, Int> {
+        if (pelote == 0) return ctx.getColor(R.color.yarn) to ctx.getColor(R.color.yarn_light)
+        val t = android.view.ContextThemeWrapper(ctx, R.style.Glose).theme.apply { applyStyle(pelote, true) }
+        val (ball, shade) = listOf(R.attr.gloseBall, R.attr.gloseBallD).map { android.util.TypedValue().also { v -> t.resolveAttribute(it, v, true) }.data }
+        val bg = ctx.getColor(R.color.bg)
+        fun lighter(c: Int, k: Float) = Color.rgb(Color.red(c) + ((255 - Color.red(c)) * k).toInt(), Color.green(c) + ((255 - Color.green(c)) * k).toInt(), Color.blue(c) + ((255 - Color.blue(c)) * k).toInt())
+        var solid = listOf(ball, shade).firstOrNull { Styles.contrast(it, bg) >= 3 } ?: ball
+        while (Styles.contrast(solid, bg) < 3) solid = lighter(solid, 0.1f)
+        return solid to if (solid != ball) ball else lighter(ball, 0.45f)
+    }
+
     /** Glose's yarn, the screen's one quiet line: from the end of the thread in his drawing ([from]: GloseLayers.yarn of the pose shown, generated) down the margin
      *  at [x] to the middle of [to]. Set as the background of [host] (a common ancestor), so it passes behind the papers and shows in the gaps.
-     *  Two strands: yarn and a dashed yarn_light, one of which stays above 3:1 on any background. */
-    class Yarn(ctx: Context, private val host: ViewGroup, private val from: View, private val to: View, private val x: Float) : Paper() {
+     *  Two strands in the chosen yarn's colours ([yarnColors]), the solid one above 3:1 on the page. */
+    class Yarn(private val ctx: Context, private val host: ViewGroup, private val from: View, private val to: View, private val x: Float) : Paper() {
         private val d = dp(ctx)
-        private val dark = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeCap = Paint.Cap.ROUND; strokeWidth = 2.4f * d; color = ctx.getColor(R.color.yarn) }
+        private val dark = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeCap = Paint.Cap.ROUND; strokeWidth = 2.4f * d }
         private val light = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            style = Paint.Style.STROKE; strokeWidth = 1f * d; color = ctx.getColor(R.color.yarn_light); pathEffect = DashPathEffect(floatArrayOf(1.6f * d, 2.8f * d), 0f)
+            style = Paint.Style.STROKE; strokeWidth = 1f * d; pathEffect = DashPathEffect(floatArrayOf(1.6f * d, 2.8f * d), 0f)
         }
         private val r = Rect()
         private val pt = FloatArray(2)
         private val prefs = Prefs(ctx)
+        private var pelote = -1
 
         override fun draw(c: Canvas) {
             if (from.width == 0 || to.width == 0 || !from.isShown || !to.isShown) return
+            val pel = Unlocks.byId[Glose.choice(prefs).getValue(Unlocks.Kind.PELOTE)]?.style ?: 0 // changed in the collection: next draw
+            if (pel != pelote) { pelote = pel; yarnColors(ctx, pel).let { (a, b) -> dark.color = a; light.color = b } }
             r.set(0, 0, from.width, from.height); host.offsetDescendantRectToMyCoords(from, r)
             // the end of the yarn painted in the pose shown (MainActivity: Glose.mainPose), through the view's scaling
             val (fx, fy) = GloseLayers.yarn[Glose.mainPose(prefs)] ?: (0.38f to 0.97f)

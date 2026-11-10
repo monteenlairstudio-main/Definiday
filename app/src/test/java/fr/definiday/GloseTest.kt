@@ -385,4 +385,22 @@ class GloseTest {
         org.robolectric.RuntimeEnvironment.setQualifiers("+notnight")
         assertEquals(0, cream()) // and goes again by day
     }
+
+    /** The home page's yarn takes the chosen yarn's colour, day and night: its solid strand is the ball, or its darker shade on paper
+     *  where the ball is too pale, and stays above 3:1 on the page (style.md § 7). Bordeaux keeps the style's fil / fil_clair. */
+    @Test fun pageYarnTakesTheChosenYarnColour() {
+        for (q in listOf("+notnight", "+night")) {
+            RuntimeEnvironment.setQualifiers(q)
+            val c = RuntimeEnvironment.getApplication()
+            val bg = c.getColor(R.color.bg)
+            assertEquals(c.getColor(R.color.yarn) to c.getColor(R.color.yarn_light), Postal.yarnColors(c, 0))
+            for (p in Unlocks.items.filter { it.kind == Unlocks.Kind.PELOTE && it.style != 0 }) {
+                val (solid, dashed) = Postal.yarnColors(c, p.style)
+                assertTrue("${p.id} $q", Styles.contrast(solid, bg) >= 3)
+                assertTrue("${p.id} $q", solid != dashed)
+            }
+        }
+        RuntimeEnvironment.setQualifiers("+notnight")
+        assertEquals(0xFF8A5F1E.toInt() to 0xFFD9A441.toInt(), Postal.yarnColors(ctx, R.style.Glose_Pelote_Moutarde)) // pale by day: its shade, and the ball
+    }
 }
