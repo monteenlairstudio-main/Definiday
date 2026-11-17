@@ -2,7 +2,7 @@
 // Une patte la soutient par-dessous, l'autre est posée dessus ; queue enroulée devant les pieds ; tête 3/4 penchée.
 function draw(paper) {
   const C = makeC(VARIANT);
-  const { L, anims, H } = seatedGlose(C);
+  const { L, anims, H } = seatedGlose(C, { head: { quill: 8 } }); // plume penchée : sa pointe sortait par le haut au spécial (tête +11°)
   const ballC = [528, 606];
   const ballG = yarn('pelote', ballC, 76, C);
   anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, life: sway(25, { half: [1700, 2600], amp: [2.5, 6], hold: 0.2, at: 400 }) }); // il la berce, à son rythme

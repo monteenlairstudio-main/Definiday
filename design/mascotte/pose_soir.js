@@ -58,7 +58,8 @@ function draw(paper) {
   anims.push({ id: 'queue', type: 'rotate', pivot: [350, 586], life: sway(53, { half: [3400, 5200], amp: [1, 2.6], at: 1800 }).map(([t, v]) => [t, v > 0 ? v : +(-0.2 * v).toFixed(3)]) }); // posée sur le bord : d'un seul côté
   // tête endormie posée sur le bord, pattes croisées dessous
   const awake = !!C.v.awake; // « Réveil dans la tasse » : yeux ouverts, lunettes en place, bougie éteinte, sans « z »
-  const H = awake ? gloseHead(C, { at: [486, 432], tilt: -6, turn: -0.08 }) : gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
+  // plume penchée (22°) : sa pointe sortait par le haut quand il s’étire hors de la tasse (spécial)
+  const H = awake ? gloseHead(C, { at: [486, 432], tilt: -6, turn: -0.08, quill: 22 }) : gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, quill: 22, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
   anims.push(...H.anims);
   const pawL = pawShape([430, 610], 48, 28, -8), pawR = pawShape([548, 616], 46, 27, 6);
   const paws = G('pattes', [pawR, pawL].map(p => vol(null, p, C.cream, [shadowOf(p, 12, 10, 0.12), ...toes(p.position, 0, 2, 18, 24, p)])));
@@ -121,7 +122,8 @@ function draw(paper) {
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);
   paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, band, B2.group, bookSh, ...objs, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, gCandle, scarfG, gHead, zG, glint.group].filter(Boolean));
-  // yarn : pas de pelote : le fil de la page sort de derrière le bas du livre du dessous
-  return { anims, yarn: [312, 958], viewBox: [60, 110, 920, 920], title: awake ? 'Monsieur Glose réveillé dans sa tasse, le thé du matin' : 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
+  // yarn : pas de pelote : le fil de la page sort de derrière le bas du livre du dessous ; cadre ouvert en haut (même bas) : les bonnets
+  // restent dedans quand il s'étire hors de la tasse (spécial), Glose 2,6 % plus petit
+  return { anims, yarn: [312, 958], viewBox: [50, 85, 945, 945], title: awake ? 'Monsieur Glose réveillé dans sa tasse, le thé du matin' : 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
 }
 

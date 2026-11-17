@@ -71,6 +71,7 @@ function draw(paper) {
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');
   anims.push(...glint.anims);
   paper.project.activeLayer.addChildren([shadow, B1.group, rib, band, ...objs, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, ballG, scarfF, jg.band, H.group, bow, lav, jg.bell, glint.group].filter(Boolean));
-  // yarn : bout du brin libre, d'où part le fil de la page (Postal.Yarn)
-  return { anims, yarn: [118, 920], viewBox: [90, 150, 860, 860], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
+  // yarn : bout du brin libre, d'où part le fil de la page (Postal.Yarn) ; cadre ouvert en haut (même bas) : les bonnets restent dedans quand
+  // la tête se relève (double prise du toucher, spécial), Glose 4,4 % plus petit
+  return { anims, yarn: [118, 920], viewBox: [75, 110, 900, 900], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
 }
