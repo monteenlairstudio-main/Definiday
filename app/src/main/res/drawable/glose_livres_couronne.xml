@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd_couronne">
-<target android:name="a15" android:animation="@animator/glose_k_b42d945c"/>
-<target android:name="a14" android:animation="@animator/glose_k_4331099f"/>
-<target android:name="a13" android:animation="@animator/glose_k_cd5fdb68"/>
+<target android:name="a18" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a17" android:animation="@animator/glose_k_23e458da"/>
+<target android:name="a16" android:animation="@animator/glose_k_2409b16b"/>
 </animated-vector>

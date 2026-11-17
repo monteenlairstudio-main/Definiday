@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_reveil_vd_lisere">
+<target android:name="a2" android:animation="@animator/glose_k_4f10a7e9"/>
+<target android:name="a1" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a0" android:animation="@animator/glose_k_c12bd816"/>
+<target android:name="a3" android:animation="@animator/glose_k_13b7d48f"/>
+<target android:name="a4" android:animation="@animator/glose_k_6ba58107"/>
+</animated-vector>

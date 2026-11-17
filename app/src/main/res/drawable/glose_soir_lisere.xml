@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_soir_vd_lisere">
+<target android:name="p1" android:animation="@animator/glose_k_13a1e1b8"/>
+<target android:name="a0" android:animation="@animator/glose_k_a3b33530"/>
+<target android:name="p3" android:animation="@animator/glose_k_2659fd10"/>
+<target android:name="a2" android:animation="@animator/glose_k_bb3220c9"/>
+<target android:name="p5" android:animation="@animator/glose_k_66a2577c"/>
+<target android:name="a4" android:animation="@animator/glose_k_402cf593"/>
+<target android:name="a7" android:animation="@animator/glose_k_19cc1c09"/>
+<target android:name="a6" android:animation="@animator/glose_k_71a9113a"/>
+<target android:name="a8" android:animation="@animator/glose_k_13b7d48f"/>
+<target android:name="a9" android:animation="@animator/glose_k_854dbe21"/>
+</animated-vector>

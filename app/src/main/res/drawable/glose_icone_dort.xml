@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_icone_dort_vd">
-
+<target android:name="a0" android:animation="@animator/glose_k_19cc1c09"/>
+<target android:name="a1" android:animation="@animator/glose_k_8f1ae783"/>
+<target android:name="a2" android:animation="@animator/glose_k_19cc1c09"/>
+<target android:name="a3" android:animation="@animator/glose_k_8f1ae783"/>
 </animated-vector>

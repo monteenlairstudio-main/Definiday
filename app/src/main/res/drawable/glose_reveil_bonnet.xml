@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_reveil_vd_bonnet">
-<target android:name="a11" android:animation="@animator/glose_k_b42d945c"/>
-<target android:name="a10" android:animation="@animator/glose_k_59c0673c"/>
+<target android:name="a12" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a11" android:animation="@animator/glose_k_c12bd816"/>
 </animated-vector>

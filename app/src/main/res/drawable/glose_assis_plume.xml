@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_plume">
-<target android:name="a14" android:animation="@animator/glose_k_b42d945c"/>
-<target android:name="a13" android:animation="@animator/glose_k_c1a332c3"/>
-<target android:name="a12" android:animation="@animator/glose_k_22320380"/>
+<target android:name="a18" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a17" android:animation="@animator/glose_k_2229e057"/>
+<target android:name="a16" android:animation="@animator/glose_k_2409b16b"/>
 </animated-vector>

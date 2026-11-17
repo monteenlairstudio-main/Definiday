@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_2">
-<target android:name="a17" android:animation="@animator/glose_k_6ef3b70d"/>
-<target android:name="tete" android:animation="@animator/glose_k_af06f7a6"/>
+<target android:name="a21" android:animation="@animator/glose_k_12b55095"/>
+<target android:name="tete" android:animation="@animator/glose_k_d951e319"/>
+<target android:name="a25" android:animation="@animator/glose_k_64c3d23c"/>
+<target android:name="a26" android:animation="@animator/glose_k_4be115ce"/>
 </animated-vector>

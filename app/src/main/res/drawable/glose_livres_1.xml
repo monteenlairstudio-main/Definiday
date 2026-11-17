@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd_1">
-<target android:name="a7" android:animation="@animator/glose_k_e4ba4a88"/>
-<target android:name="a8" android:animation="@animator/glose_k_347d6d9b"/>
-<target android:name="a9" android:animation="@animator/glose_k_421abcf4"/>
-<target android:name="a10" android:animation="@animator/glose_k_cea7e1f1"/>
+<target android:name="a10" android:animation="@animator/glose_k_7eca0075"/>
+<target android:name="a9" android:animation="@animator/glose_k_144dcfa1"/>
+<target android:name="a11" android:animation="@animator/glose_k_81f29277"/>
+<target android:name="a12" android:animation="@animator/glose_k_6f5d24a8"/>
+<target android:name="a13" android:animation="@animator/glose_k_7820e42a"/>
 </animated-vector>

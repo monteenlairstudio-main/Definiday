@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_ecrit_mot_vd_2">
-<target android:name="a17" android:animation="@animator/glose_k_7eac8723"/>
-<target android:name="a18" android:animation="@animator/glose_k_e2721e84"/>
-<target android:name="a19" android:animation="@animator/glose_k_e2721e84"/>
-<target android:name="a20" android:animation="@animator/glose_k_7b3281d8"/>
-<target android:name="a21" android:animation="@animator/glose_k_7b3281d8"/>
-<target android:name="a22" android:animation="@animator/glose_k_e68f0af8"/>
-<target android:name="a16" android:animation="@animator/glose_k_b42d945c"/>
-<target android:name="a15" android:animation="@animator/glose_k_c1a332c3"/>
-<target android:name="a14" android:animation="@animator/glose_k_22320380"/>
-<target android:name="a13" android:animation="@animator/glose_k_7df15b50"/>
+<target android:name="a31" android:animation="@animator/glose_k_e3ed136f"/>
+<target android:name="a32" android:animation="@animator/glose_k_d367767b"/>
+<target android:name="a33" android:animation="@animator/glose_k_d367767b"/>
+<target android:name="a34" android:animation="@animator/glose_k_f90478fd"/>
+<target android:name="a35" android:animation="@animator/glose_k_f90478fd"/>
+<target android:name="a36" android:animation="@animator/glose_k_9b9ae106"/>
+<target android:name="a37" android:animation="@animator/glose_k_4f10a7e9"/>
+<target android:name="a38" android:animation="@animator/glose_k_25c8dec7"/>
+<target android:name="a30" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a29" android:animation="@animator/glose_k_2229e057"/>
+<target android:name="a28" android:animation="@animator/glose_k_2409b16b"/>
+<target android:name="a27" android:animation="@animator/glose_k_7df15b50"/>
 </animated-vector>

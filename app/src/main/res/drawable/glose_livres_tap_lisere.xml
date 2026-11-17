@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_livres_vd_lisere">
+<target android:name="tete_halo" android:animation="@animator/glose_k_1ec90fb6"/>
+<target android:name="a7" android:animation="@animator/glose_k_7ec856df"/>
+<target android:name="a3" android:animation="@animator/glose_k_ba0b5181"/>
+<target android:name="corps_halo" android:animation="@animator/glose_k_051b7e26"/>
+<target android:name="patte_halo" android:animation="@animator/glose_k_2db19a47"/>
+</animated-vector>
