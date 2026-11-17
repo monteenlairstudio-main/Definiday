@@ -14,7 +14,7 @@ function draw(paper) {
   const arms = G('pattes', [far.group, near.group]);
   const glint = rareGlints(C, [[300, 300, 16], [760, 470, 12], [690, 210, 10]], 'a_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([L.shadow, L.book, L.band, L.seat, L.ribbon, ...L.objs, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, brin, ballG, arms, L.scarf, L.jingleBand, L.col, L.boa, L.head, L.bow, L.lav, L.jingle, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([L.shadow, L.book, L.seat, L.ribbon, L.band, ...L.objs, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, brin, ballG, arms, L.scarf, L.jingleBand, L.head, L.bow, L.lav, L.jingle, glint.group].filter(Boolean));
   // yarn : bout du brin, juste sous le bord du bas du livre : le fil de la page (Postal.Yarn, style correspondance § 9) part du bout visible
   return { anims, yarn: [323, 858], viewBox: [110, 70, 820, 820], title: 'Monsieur Glose, chat bibliothécaire à lunettes dorées, assis sur un gros livre, serre sa pelote' };
 }

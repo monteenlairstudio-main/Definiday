@@ -106,6 +106,8 @@ const YARNS = {
   rose:     { label: 'Rose poudré', ball: '#E7A3A0', ballD: '#9C5050' },
   lavande:  { label: 'Lavande', ball: '#A99BC4', ballD: '#65587F' },
   bleu_prusse: { label: 'Bleu de Prusse', ball: '#2F5B8C', ballD: '#173252' },
+  prune:    { label: 'Prune', ball: '#7A4468', ballD: '#45223B' },
+  corail:   { label: 'Corail', ball: '#E8866E', ballD: '#A2493A' },
   vert_eau: { label: "Vert d'eau", ball: '#A9D6C4', ballD: '#5E8E7C' },
 };
 const SPECS = { ecaille: '#8A5530' }; // monture (lunettes) ; défaut : C.gold
@@ -357,40 +359,11 @@ function lavalliere(C, at, rot = 0, s = 1.15, tl = 1) {
   const knot = rpoly([[486, 488], [514, 488], [518, 518], [482, 518]], 9);
   const pleat = (pts, o = 0.4) => line(curve(pts), 3, INK, o);
   const g = G('lavalliere', [
-    vol(null, tailL, silk, [shadowOf(tailL, 6, 8, 0.25), pleat([[490, 520], [478, t(560)], [468, t(590)]], 0.3)], IN),
-    vol(null, tailR, silk, [shadowOf(tailR, 6, 8, 0.25), pleat([[512, 520], [526, t(562)], [534, t(594)]], 0.3)], IN),
-    vol(null, loopL, silk, [shadowOf(loopL, 8, 10, 0.25), fill(ell([446, 486], [22, 7]).rotate(-12), sheen, 0.22), pleat([[488, 502], [452, 496], [422, 502]]), pleat([[486, 510], [454, 516], [430, 520]], 0.3)]),
-    vol(null, loopR, silk, [shadowOf(loopR, 8, 10, 0.25), fill(ell([548, 484], [20, 6]).rotate(10), sheen, 0.18), pleat([[512, 502], [548, 496], [578, 502]]), pleat([[514, 510], [546, 516], [570, 520]], 0.3)]),
+    vol(null, tailL, silk, [pleat([[490, 520], [478, t(560)], [468, t(590)]], 0.3)], IN),
+    vol(null, tailR, silk, [pleat([[512, 520], [526, t(562)], [534, t(594)]], 0.3)], IN),
+    vol(null, loopL, silk, [shadowOf(loopL, 8, 10, 0.25), fill(ell([446, 486], [22, 7]).rotate(-12), sheen, 0.22), pleat([[488, 504], [452, 500], [422, 506]])]),
+    vol(null, loopR, silk, [shadowOf(loopR, 8, 10, 0.25), fill(ell([548, 484], [20, 6]).rotate(10), sheen, 0.18), pleat([[512, 504], [548, 500], [578, 506]])]),
     vol(null, knot, silk, [fill(circ([494, 498], 5), sheen, 0.35), pleat([[490, 492], [494, 516]], 0.35)], IN)]);
-  g.scale(s, [500, 500]); g.rotate(rot, [500, 500]); g.translate(P(at).subtract([500, 500]));
-  return g;
-}
-// col Claudine : petit col rond blanc d'écolière, deux pans arrondis qui se rejoignent sous le menton (sous la tête : le menton passe devant)
-function collar(C, at, rot = 0, s = 1) {
-  const lobe = k => blob([[500 + k * 2, 492], [500 - k * 30, 488], [500 - k * 72, 494], [500 - k * 88, 516], [500 - k * 80, 542], [500 - k * 48, 552], [500 - k * 14, 540], [500 + k * 2, 516]].map(([x, y]) => [x, y]), 0.45);
-  const g = G('col_claudine', [-1, 1].map(k => {
-    const l = lobe(-k), hem = l.clone(NI); hem.scale(0.8, [500 + k * 44, 512]);
-    return vol(null, l, C.white, [shadowOf(l, 8, 10, 0.16), line(X(hem, l), 2.5, INK, 0.22)], IN);
-  }));
-  g.scale(s, [500, 500]); g.rotate(rot, [500, 500]); g.translate(P(at).subtract([500, 500]));
-  return g;
-}
-// boa de plumes (réveillon) : bande duveteuse autour du cou, un bout qui tombe à droite ; festons = disques le long de la courbe
-function boa(C, at, rot = 0, s = 1, tl = 1) {
-  const pink = '#E9A3B6', pinkD = '#C27891';
-  const path = curve([[402, 494], [450, 528], [500, 542], [552, 528], [594, 498], [614, 540], [606, t2(590)], [614, t2(632)]], 0.5);
-  function t2(y) { return 540 + (y - 540) * tl; }
-  // plumes : touffes d'ellipses allongées, inclinées et décalées de façon fixe (pseudo-hasard), d'où un bord ébouriffé
-  const n = Math.round(path.length / 13), puffs = [], tufts = [], J = i => Math.sin(i * 12.9898) * 0.5 + Math.sin(i * 4.1414) * 0.5;
-  for (let i = 0; i <= n; i++) {
-    const s0 = path.length * i / n, q = path.getPointAt(s0), nr = path.getNormalAt(s0), k = i > n - 3 ? 0.7 : 1;
-    const c = q.add(nr.multiply(J(i) * 8)), e = ell(c, [34 * k, 17 * k]), f = ell(c.add(nr.multiply(-J(i + 3) * 12)), [22 * k, 12 * k]);
-    e.rotate(nr.angle + 90 + J(i + 7) * 45, c); f.rotate(nr.angle + 90 - J(i + 5) * 50, c); puffs.push(e, f);
-    if (i % 3 === 0) tufts.push(line(curve([xy(c.add(nr.multiply(-12))), xy(c), xy(c.add(nr.rotate(J(i) * 40).multiply(14)))]), 3.5, pinkD, 0.45));
-    if (i % 3 === 1) tufts.push(line(curve([xy(c.add(nr.multiply(4))), xy(c.add(nr.rotate(J(i) * 30 - 20).multiply(16)))]), 4, '#FFFFFF', 0.45));
-  }
-  const fluff = U(...puffs);
-  const g = G('boa', [vol(null, fluff, pink, [clipIn(fluff, tufts), shadowOf(fluff, 8, 10, 0.2), rimOf(fluff, 4, 5, 0.45)], IN)]);
   g.scale(s, [500, 500]); g.rotate(rot, [500, 500]); g.translate(P(at).subtract([500, 500]));
   return g;
 }
@@ -406,20 +379,6 @@ function croissant(C, at, s = 1) {
   return G('croissant', [fill(ell(q(4, 4), [72 * s, 13 * s]), INK, 0.18), vol(null, plate, C.white, [fill(well, '#E9DFCC', 0.8), shadowOf(plate, 0, -8, 0.12)], IN),
     vol(null, body, gold, [shadowOf(body, 10, 14, 0.25), rimOf(body, 5, 7, 0.35), ...seams, ...[[-6, -44], [-38, -36]].map(([x, y]) => fill(ell(q(x, y), [9 * s, 4 * s]), '#FFFFFF', 0.4))], IN)]);
 }
-// boussole d'aventurier ouverte : boîtier de laiton, couvercle relevé derrière, cadran crème et aiguille rouge et bleu nuit ; base au point `at`
-function compass(C, at, s = 1) {
-  const b = P(at), q = (x, y) => xy(b.add([x * s, y * s]));
-  const lid = ell(q(0, -50), [40 * s, 34 * s]), lidIn = ell(q(0, -50), [30 * s, 25 * s]), bail = S(circ(q(0, -90), 9 * s), circ(q(0, -90), 4 * s));
-  const box = U(ell(q(0, -14), [46 * s, 17 * s]), rect(q(-46, -14)[0], q(-46, -14)[1], 92 * s, 12 * s), ell(q(0, -2), [46 * s, 17 * s]));
-  const face = ell(q(0, -15), [36 * s, 12 * s]);
-  const north = poly([q(0, -15).map((v, i) => v + [-5, -3][i] * s), q(26, -22), q(0, -15).map((v, i) => v + [5, 3][i] * s)]);
-  const south = poly([q(0, -15).map((v, i) => v + [-5, -3][i] * s), q(-26, -8), q(0, -15).map((v, i) => v + [5, 3][i] * s)]);
-  const ticks = [[0, -26, 0, -23], [0, -4, 0, -7], [-34, -15, -30, -15], [34, -15, 30, -15]].map(([x0, y0, x1, y1]) => line(curve([q(x0, y0), q(x1, y1)]), 2.5, INK, 0.6));
-  return G('boussole', [fill(ell(q(4, 6), [50 * s, 10 * s]), INK, 0.18), vol(null, bail, C.gold, [], 4),
-    vol(null, lid, C.gold, [fill(lidIn.clone(NI), C.parch), fill(S(lidIn, moved(lidIn, 6, 6)), INK, 0.15), line(lidIn, 3), shadowOf(lid, 10, 0, 0.18)], IN),
-    vol(null, box, C.gold, [shadowOf(box, 14, 0, 0.22), rimOf(box, 4, 4, 0.4), fill(face.clone(NI), '#FFF8E8'), line(face, 3), ...ticks,
-      fill(north, '#C75B54'), fill(south, C.night), fill(circ(q(0, -15), 3.5 * s), C.goldD)], IN)]);
-}
 // bandeau de prix : bande rouge passée autour du volume (sur le dos et la couverture), deux lignes de titre crème ; o = paramètres de book()
 function prizeBand(B, o, f0, f1) {
   const { x, y, w, h } = o, [dx, dy] = o.d, a = x + w * f0, b = x + w * f1, red = '#B8423A';
@@ -429,9 +388,9 @@ function prizeBand(B, o, f0, f1) {
     line(curve([[a + 10, y + h * 0.4], [b - 10, y + h * 0.4]]), Math.max(4, h * 0.05), '#FFF6E6', 0.9), line(curve([[a + 16, y + h * 0.56], [b - 16, y + h * 0.56]]), 3, '#FFF6E6', 0.7),
     line(curve([[a, y + dy * 0], [a, y + h]]), IN), line(curve([[b, y], [b, y + h]]), IN), line(curve([[a, y], [a + dx, y + dy]]), 4, INK, 0.6), line(curve([[b, y], [b + dx, y + dy]]), 4, INK, 0.6)]);
 }
-// objet posé à côté de Glose (emplacement « objet ») : sapin, croissant ou boussole, au même point
+// objet posé à côté de Glose (emplacement « objet ») : sapin ou croissant, au même point
 function besides(C, at, s, treeAt = at, treeS = s) { // le sapin garde sa place quand l'objet en demande une autre
-  return [C.has('sapin') ? paperTree(C, treeAt, treeS) : null, C.has('croissant') ? croissant(C, at, s) : null, C.has('boussole') ? compass(C, at, s) : null];
+  return [C.has('sapin') ? paperTree(C, treeAt, treeS) : null, C.has('croissant') ? croissant(C, at, s) : null];
 }
 // grelot doré sur un ruban : ruban sous la tête (calque « grelot_ruban »), grelot devant (« grelot »)
 function jingle(C, chin, o = {}) {
@@ -673,10 +632,8 @@ function seatedGlose(C, o = {}) {
   if (C.has('noeud')) L.bow = bowTie(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
   if (C.has('grelot')) { const j = jingle(C, [H.chin[0] + 4, H.chin[1] - 4]); L.jingleBand = j.band; L.jingle = j.bell; }
   if (C.has('lavalliere')) L.lav = lavalliere(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
-  if (C.has('col_claudine')) L.col = collar(C, [H.chin[0] + 4, H.chin[1] - 2], -6);
-  if (C.has('boa')) L.boa = boa(C, [H.chin[0] + 4, H.chin[1] - 4], -6);
   L.objs = besides(C, o.tree || [744, 676], 1.25);
-  neckBreath(anims, anims.find(a => a.id === 'corps'), L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle, L.lav, L.col, L.boa);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle, L.lav);
   return { B, L, anims, H, body };
 }
 // bras : épaule -> coude -> poignet, patte ronde au bout, rayures qui suivent le membre, ombres et liseré
@@ -699,8 +656,8 @@ function arm(C, pts, w0, w1, paw, o = {}) {
 // Les pièces à porte (accessoires, ruban, détails rares) restent hors du liseré du corps : il dessinerait aussi les pièces non portées
 // (export Android {all:true}). Chaque accessoire et le ruban ont le leur, dans leur propre groupe (même porte, même calque Android),
 // découpé hors de la silhouette du corps ; les paillettes, étoiles et éclats n'en ont pas (clairs, ils se voient déjà la nuit).
-const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|col_claudine|boa|croissant|boussole|bandeau)$|(bonnet|beret|couronne|papier)$/;
-const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|col_claudine|boa|croissant|boussole|bandeau|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|papier|eclats)$/;
+const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|croissant|bandeau)$|(bonnet|beret|couronne|papier)$/;
+const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|croissant|bandeau|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|papier|eclats)$/;
 // groupes que les réactions au toucher animent (android/reactions.js, REACTIONS de make_android.js) sans animation au repos :
 // leur liseré doit être un groupe à part pour les suivre (svg2avd.animated() anime aussi « <nom>_halo »)
 const REACTED = ['tete', 'dormeur', 'pelote', 'patte', 'queue', 'zzz'];

@@ -43,8 +43,8 @@ function draw(paper) {
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([L.shadow, L.book, L.band, L.seat, L.ribbon, ...L.objs, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
-    G('pattes', [near.group]), L.scarf, L.jingleBand, L.col, L.boa, L.head, L.bow, L.lav, L.jingle, fil, pinch, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([L.shadow, L.book, L.seat, L.ribbon, L.band, ...L.objs, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
+    G('pattes', [near.group]), L.scarf, L.jingleBand, L.head, L.bow, L.lav, L.jingle, fil, pinch, glint.group].filter(Boolean));
   // yarn : pas de bout libre (le fil écrit) : le fil de la page sort de derrière le bas du livre
   return { anims, yarn: [312, 846], viewBox: [170, 50, 900, 900], title: `Monsieur Glose écrit « ${word} » avec le fil de sa pelote` };
 }

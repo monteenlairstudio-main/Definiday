@@ -65,10 +65,8 @@ function draw(paper) {
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 1);
   const jg = C.has('grelot') ? jingle(C, [H.chin[0] + 14, H.chin[1] - 6], { w: 50, s: 0.85 }) : {};
   const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 0.95, 0.55) : null;
-  const col = C.has('col_claudine') ? collar(C, [H.chin[0] + 16, H.chin[1] - 2], -9, 0.9) : null;
-  const fluff = C.has('boa') ? boa(C, [H.chin[0] + 16, H.chin[1] - 4], -9, 0.9, 0.5) : null;
   const objs = besides(C, [868, 788], 0.8);
-  const gHead = G('dormeur', [paws, jg.band, col, fluff, H.group, bow, lav, jg.bell]); // les pièces du cou dans « dormeur » : elles le suivent
+  const gHead = G('dormeur', [paws, jg.band, H.group, bow, lav, jg.bell]); // les pièces du cou dans « dormeur » : elles le suivent
   gCupFront.insertChild(gCupFront.children.length - 3, fill(X(moved(U(H.head, pawL, pawR), 8, 14), cupFront), INK, 0.22)); // ombre portée de la tête et des pattes sur la tasse
   neckBreath(anims, anims.find(a => a.id === 'corps'), scarfG); // nœud et grelot sont dans « dormeur »
   anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], values: [[1, 1], [1.008, 1.02], [1, 1]], dur: 4.2 });
@@ -114,7 +112,7 @@ function draw(paper) {
   const ground = fill(ell([540, 964], [440, 22]), INK, 0.14);
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, band, rib, B2.group, bookSh, ...objs, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, gCandle, scarfG, gHead, zG, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([ground, gHalo, B1.group, rib, band, B2.group, bookSh, ...objs, gSaucer, gCupBack, steamG, gBody, gCupFront, gTea, gTail, gCandle, scarfG, gHead, zG, glint.group].filter(Boolean));
   // yarn : pas de pelote : le fil de la page sort de derrière le bas du livre du dessous
   return { anims, yarn: [312, 958], viewBox: [60, 110, 920, 920], title: awake ? 'Monsieur Glose réveillé dans sa tasse, le thé du matin' : 'Monsieur Glose endormi dans sa tasse bleu nuit, à la lueur d’une bougie' };
 }
