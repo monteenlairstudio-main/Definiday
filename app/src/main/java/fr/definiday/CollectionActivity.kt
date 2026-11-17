@@ -119,6 +119,9 @@ class CollectionActivity : Activity() {
         })
         if (open) cell.foreground = Strip(this, stamp!!) // a locked slot stays one tone
         cell.addView(TextView(this, null, 0, R.style.Body).apply { text = item.nom; textSize = 14f; gravity = Gravity.CENTER; setLineSpacing(0f, 1f); setPadding((4 * dp).toInt(), (6 * dp).toInt(), (4 * dp).toInt(), 0) })
+        // its rarity as stars (TalkBack reads the edition's name, see refresh), its line on a long press
+        cell.addView(TextView(this, null, 0, R.style.Body).apply { text = item.rarete.etoiles; textSize = 11f; gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink2)); importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO })
+        cell.tooltipText = item.desc.ifEmpty { null }
         if (!open) cell.addView(TextView(this, null, 0, R.style.Body).apply { text = Unlocks.hint(item, p); textSize = 13f; setLineSpacing(0f, 1f); gravity = Gravity.CENTER; setTextColor(getColor(R.color.ink2)); setPadding((4 * dp).toInt(), 0, (4 * dp).toInt(), 0) })
         if (open) {
             cell.background = RippleDrawable(ColorStateList.valueOf(getColor(R.color.ripple)), StateListDrawable().apply {
@@ -154,7 +157,7 @@ class CollectionActivity : Activity() {
                 stamp == null -> ", " + getString(R.string.collection_locked) + ", " + Unlocks.hint(item, p)
                 worn -> ", " + getString(R.string.collection_worn)
                 else -> ""
-            }
+            } + ", " + item.rarete.nom + if (item.desc.isEmpty()) "" else ". " + item.desc
         }
     }
 

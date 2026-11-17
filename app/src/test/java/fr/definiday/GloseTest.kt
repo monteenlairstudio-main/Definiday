@@ -56,14 +56,18 @@ class GloseTest {
             "roux" to "q3", "smoking" to "q30", "lavande" to "q8", "bleu_prusse" to "c25", "vert_eau" to "r12", "reliure_bordeaux" to "q2",
             "reliure_verte" to "m40", "monture_ecaille" to "c20", "ecrit_coucou" to "q3", "ecrit_ronron" to "s10", "grelot" to "q12", "beret" to "k15",
             "reveil_tasse" to "q21", "echarpe_sucre_orge" to "d:12-01..12-31", "bonnet_neige" to "d:12-01..02-28", "ecrit_flocon" to "d:12-01..12-31",
-            "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20")
+            "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20",
+            // garde-robe wave (catalogue annex; cuir_fauve's h≥4 becomes q≥16, no new counter)
+            "bonnet_etoile" to "s21", "bonnet_imprimeur" to "c250", "monture_argent" to "q60", "monture_rose" to "k25", "col_claudine" to "k50",
+            "lavalliere" to "c160", "boa" to "d:12-28..01-05", "croissant" to "q30", "boussole" to "m150", "cuir_fauve" to "q16",
+            "bandeau_prix" to "d:11-01..11-20")
         assertEquals(table, Unlocks.items.associate { it.id to (it.window?.let { w -> "d:$w" } ?: "${it.on}${it.need}") })
         Unlocks.items.filter { it.need > 0 }.forEach {
             assertTrue(it.id, it.id in Unlocks.of(mapOf(it.on to it.need)))
             assertFalse(it.id, it.id in Unlocks.of(mapOf(it.on to it.need - 1)))
         }
         assertEquals(setOf("assis", "tigre", "bordeaux"), Unlocks.of(emptyMap()))
-        assertEquals(Unlocks.items.filter { it.window == null }.map { it.id }.toSet(), Unlocks.of("qprsckm".associateWith { 150 }))
+        assertEquals(Unlocks.items.filter { it.window == null }.map { it.id }.toSet(), Unlocks.of("qprsckm".associateWith { 300 }))
     }
 
     /** Every id is unique and resolves: poses to a drawable, other items (but the defaults) to an overlay that changes the picture; names never say "Glose". */
@@ -76,6 +80,22 @@ class GloseTest {
             else if (it.need > 0 || it.window != null) assertTrue(it.id, diff(base, Glose.bitmap(Glose.preview(ctx, it), 256, 256)) > 50)
             else assertEquals(it.id, 0, it.style)
             assertEquals(it.id, it.kind.slot == Unlocks.Kind.POSE, it.res != 0)
+        }
+    }
+
+    /** Every worn item shows in every pose and every tap reaction: its piece draws there (the layer is not empty) and stays inside the
+     *  drawing (no changed pixel on the edge). Bindings recolour the seated and pile poses' books, not the cup poses' fixed-colour ones. */
+    @Test fun everyItemShowsInEveryPose() {
+        val r = ctx.resources
+        val poses = Unlocks.items.filter { it.kind.slot == Unlocks.Kind.POSE }.map { it.res }
+        val all = poses + poses.flatMap { p -> listOf("_tap", "_special").map { r.getIdentifier(r.getResourceEntryName(p) + it, "drawable", ctx.packageName) } }.filter { it != 0 }
+        for (it in Unlocks.items.filter { it.kind in Unlocks.ACC }) for (res in all) {
+            val name = "${it.id} on ${r.getResourceEntryName(res)}"
+            if (it.kind == Unlocks.Kind.LIVRE && it.style != R.style.Glose_Livre_Bandeau && Regex("glose_(soir|reveil).*").matches(r.getResourceEntryName(res))) continue
+            val a = render(res, size = 192); val b = render(res, listOf(it.style), 192)
+            val px = (0 until a.width * a.height).filter { i -> a.getPixel(i % a.width, i / a.width) != b.getPixel(i % a.width, i / a.width) }
+            assertTrue(name, px.size > 40)
+            assertTrue("$name: cut by the edge", px.none { i -> i % a.width == 0 || i % a.width == a.width - 1 || i / a.width == 0 || i / a.width == a.height - 1 })
         }
     }
 
@@ -118,7 +138,7 @@ class GloseTest {
         assertEquals(setOf("ecrit_mot", "ecrit_encore", "soir", "ecrit_dodo"), Unlocks.update(p).map { it.id }.toSet())
         p.announced = p.announced + Unlocks.update(p).map { it.id }
         p.streak = 1; p.lastQuizDay = java.time.LocalDate.now().toEpochDay() // broken streak restarted today: nothing is lost, nothing new
-        assertTrue(Unlocks.update(p).isEmpty())
+        assertTrue(Unlocks.update(p).all { it.window != null }) // (but what today's quiz unlocks when today falls in a seasonal window)
         assertTrue("soir" in p.unlocked)
         assertEquals("Encore 2 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("soir"), p))
         // P8: broken since the last quiz (10 days ago), the hint counts from 0, not from the stale streak
