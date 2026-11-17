@@ -3,7 +3,8 @@
 function draw(paper) {
   const C = makeC(VARIANT), anims = [];
   const D = [44, -34];
-  const B1 = book({ name: 'livre_bas', x: 322, y: 818, w: 506, h: 96, d: D, cover: C.S ? C.S.low : C.bookCover ? C.night : C.sepia, coverD: C.S ? C.S.lowD : C.bookCover ? C.nightD : C.sepiaD, pages: C.parch, gold: C.gold, label: true, labelC: C.parch });
+  const b1 = { name: 'livre_bas', x: 322, y: 818, w: 506, h: 96, d: D, cover: C.S ? C.S.low : C.bookCover ? C.night : C.sepia, coverD: C.S ? C.S.lowD : C.bookCover ? C.nightD : C.sepiaD, pages: C.parch, gold: C.gold, label: true, labelC: C.parch }, B1 = book(b1);
+  const band = C.has('bandeau') ? prizeBand(B1, b1, 0.2, 0.34) : null;
   const B2 = book({ name: 'livre_milieu', x: 352, y: 724, w: 452, h: 84, d: D, cover: C.bord, coverD: C.bordD, pages: C.parch, gold: C.gold, bands: [0.12, 0.27, 0.73, 0.88] });
   const B3 = book({ name: 'livre_haut', x: 378, y: 636, w: 400, h: 78, d: D, cover: C.S ? C.S.top : C.bookCover ? C.sepia : C.night, coverD: C.S ? C.S.topD : C.bookCover ? C.sepiaD : C.nightD, pages: C.parch, gold: C.gold, label: true, labelC: C.gold, bands: [0.1, 0.24, 0.76, 0.9] });
   const rib = ribbonOrMark(C, [[836, 846], [840, 870], [842, 888]], [[854, 858], [866, 888], [884, 910], [916, 916]], 20);
@@ -38,7 +39,7 @@ function draw(paper) {
   anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], values: [0, 4, -2, 0, 0], keyTimes: [0, 0.18, 0.36, 0.55, 1], dur: 2.6 });
 
   // tête : tournée vers la pelote (3/4 gauche), penchée
-  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, mood: 'curieux' });
+  const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, mood: 'curieux', quill: 24 }); // plume penchée : sa pointe restait coupée par le haut du cadre
   anims.push(...H.anims);
   neckShadow(bodyG, H.head, body, 10, 14);
   anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.6 });
@@ -47,8 +48,11 @@ function draw(paper) {
   if (C.has('echarpe')) { const sc = scarf(C, { c: [520, 566], w: 96, h: 38, sag: 20, tail: [[642, 578], [664, 628], [674, 688]], tailFront: true }); scarfF = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0], H.chin[1] + 2], -10);
   const jg = C.has('grelot') ? jingle(C, [H.chin[0], H.chin[1] - 4], { w: 56 }) : {};
-  const tree = C.has('sapin') ? paperTree(C, [892, 904], 1.05) : null;
-  neckBreath(anims, anims.find(a => a.id === 'corps'), scarfF, jg.band, bow, jg.bell);
+  const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0], H.chin[1] + 4], -10) : null;
+  const col = C.has('col_claudine') ? collar(C, [H.chin[0], H.chin[1] - 2], -10) : null;
+  const fluff = C.has('boa') ? boa(C, [H.chin[0], H.chin[1] - 4], -10) : null;
+  const objs = besides(C, [852, 908], 1, [892, 904], 1.05);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), scarfF, jg.band, bow, jg.bell, lav, col, fluff);
 
   const ballG0 = yarn('pelote', [240, 864], 64, C, [line(curve([[198, 836], [228, 822], [264, 828]]), 6, C.ballD)]);
   const loose = strand([[194, 906], [164, 920], [136, 910], [118, 920]], C, 8);
@@ -58,7 +62,7 @@ function draw(paper) {
   const shadow = G('ombre', [floorShadow([580, 916], [330, 24], 0.32), floorShadow([236, 920], [80, 13], 0.32)]);
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([shadow, B1.group, rib, tree, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, ballG, scarfF, jg.band, H.group, bow, jg.bell, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([shadow, B1.group, band, rib, ...objs, B2.group, bookShadows, B3.group, seat, T.group, scarfB, bodyG, paw2G, legG, ballG, scarfF, jg.band, col, fluff, H.group, bow, lav, jg.bell, glint.group].filter(Boolean));
   // yarn : bout du brin libre, d'où part le fil de la page (Postal.Yarn)
   return { anims, yarn: [118, 920], viewBox: [90, 150, 860, 860], title: 'Monsieur Glose lové sur une pile de livres, la patte qui taquine sa pelote' };
 }

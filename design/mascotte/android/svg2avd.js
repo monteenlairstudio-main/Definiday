@@ -15,10 +15,11 @@ const TOKENS = { '#a4acbc': 'gloseFur', '#788196': 'gloseFurD', '#f8eedd': 'glos
   '#d9a401': 'gloseSpecs', '#788101': 'gloseStripe', '#f0e801': 'gloseHalo' }; // monture, rayures, liseré de nuit : sentinelles du mode {all:true}
 const GATES = [[/^noeud$/, 'Noeud'], [/^echarpe(_dos)?$/, 'Echarpe'], [/bonnet$/, 'Bonnet'], [/^plume$/, 'Plume'], [/^marque_page$/, 'Marque'],
   [/^ruban$/, 'Ruban'], [/^paillettes_/, 'Gilt'], [/^etoiles_/, 'Stars'], [/eclats$/, 'Glint'], [/^grelot(_ruban)?$/, 'Grelot'], [/beret$/, 'Beret'],
-  [/couronne$/, 'Couronne'], [/^sapin$/, 'Sapin']];
+  [/couronne$/, 'Couronne'], [/^sapin$/, 'Sapin'], [/papier$/, 'Papier'], [/^lavalliere$/, 'Lavalliere'], [/^col_claudine$/, 'Col'], [/^boa$/, 'Boa'],
+  [/^croissant$/, 'Croissant'], [/^boussole$/, 'Boussole'], [/^bandeau$/, 'Bandeau']];
 // Gates drawn as separate layers (one drawable per piece and pose), not hidden in every body drawable: the accessories,
 // and the glints of the rare pelages (drawn last, so they do not cut the body).
-const LAYERED = ['Noeud', 'Echarpe', 'Bonnet', 'Plume', 'Marque', 'Grelot', 'Beret', 'Couronne', 'Sapin', 'Glint'];
+const LAYERED = ['Noeud', 'Echarpe', 'Bonnet', 'Plume', 'Marque', 'Grelot', 'Beret', 'Couronne', 'Sapin', 'Papier', 'Lavalliere', 'Col', 'Boa', 'Croissant', 'Boussole', 'Bandeau', 'Glint'];
 const WRITTEN = new Map(), ALIASES = {}, LAYERS = {}, PARTS = {}; // content -> file; key -> file of same content; drawable -> [gate, layer]; VD -> layers
 const IDLE0 = {}; // drawable -> target -> property -> { start: value on the first frame of its life (reactions end there), still: in the VD, low: min }
 // Writes one file per content: a drawable identical to one already written (ecrit words, families) reuses it.

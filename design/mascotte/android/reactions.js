@@ -240,7 +240,7 @@ function tethers(vd, family, ms, targets) {
 }
 // Neck accessories ride with what carries the head in each reaction: « tete » awake (its keys and pivot: they turn and lift with it, squash
 // included), « dormeur » in the cup (the scarf; the bow and the bell are inside it). Their idle breathing is on an inner group, at rest here.
-const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'];
+const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban', 'lavalliere', 'col_claudine', 'boa'];
 function neck(vd, family, targets) {
   const by = family === 'soir' || family === 'reveil' ? 'dormeur' : 'tete', k = targets[by];
   if (!k) return targets;
