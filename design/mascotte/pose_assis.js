@@ -5,7 +5,7 @@ function draw(paper) {
   const { L, anims, H } = seatedGlose(C);
   const ballC = [528, 606];
   const ballG = yarn('pelote', ballC, 76, C);
-  anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, values: [0, 6, 0, -6, 0], dur: 3.8 });
+  anims.push({ id: 'pelote', type: 'rotate', pivot: ballC, life: sway(25, { half: [1700, 2600], amp: [2.5, 6], hold: 0.2, at: 400 }) }); // il la berce, à son rythme
   // brin libre : sort sous la pelote, file sur le livre et pend sur sa face et passe le bord du bas (le liseré de nuit compris), d’où part le fil de la page (épais : lisible à 128 px)
   const brin = strand([[496, 682], [476, 714], [430, 728], [370, 726], [318, 720], [296, 742], [298, 778], [312, 806], [320, 830], [323, 858]], C, 10, 'brin');
   const lien = tether('brin_lien', [496, 682], C); brin.insertChild(0, lien[0]); brin.addChild(lien[1]); // se déroule quand la pelote roule

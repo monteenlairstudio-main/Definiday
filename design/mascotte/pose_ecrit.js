@@ -40,6 +40,16 @@ function draw(paper) {
   const pinch = G('pince', [fill(X(circ(PAW.add([-4, -30]), 11), raised.shape), C.cream), line(arc(PAW.add([-14, -27]), PAW.add([-4, -21]), PAW.add([6, -27])), IN)]); // au-dessus des 4 doigts
   // la tête suit l'écriture (léger hochement vers le mot)
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, -3, -3, 0], keyTimes: KT, dur: DUR });
+  // fin de quiz (*_fin, make_android.js ONCE : le mot est écrit à 4 050 ms) : « bravo », il relève le menton, fier, tient, puis un petit
+  // hochement ; « encore », deux petits hochements qui encouragent. Le cou suit la tête (comme dans les réactions). Mêmes groupes pour tous
+  // les mots (le corps reste partagé), joués seulement par *_fin (svg2avd : data-fin).
+  const W = 4050, fin = word === 'encore'
+    ? { rotation: [[0, 0], [W + 60, 0], [W + 360, 3], [W + 660, -0.5], [W + 960, 2.5], [W + 1360, 0], [LIFE, 0]],
+      translate: [[0, [0, 0]], [W + 60, [0, 0]], [W + 360, [0, 2]], [W + 660, [0, 0]], [W + 960, [0, 1.5]], [W + 1360, [0, 0]], [LIFE, [0, 0]]] }
+    : { rotation: [[0, 0], [W + 50, 0], [W + 300, 1], [W + 600, -4, 'out'], [W + 1250, -3.5], [W + 1700, 1.5], [W + 1950, 0], [LIFE, 0]],
+      translate: [[0, [0, 0]], [W, [0, 0]], [W + 200, [0, 1]], [W + 500, [0, -9], 'out'], [W + 1250, [0, -8]], [W + 1650, [0, 1]], [W + 1900, [0, 0]], [LIFE, [0, 0]]] };
+  for (const id of ['tete', ...[L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle].filter(g => g && g.children.length).map(g => g.name)])
+    anims.push({ id, type: 'rotate', pivot: H.neck, life: fin.rotation, fin: true }, { id, type: 'translate', life: fin.translate, fin: true });
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');
   anims.push(...glint.anims);

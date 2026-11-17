@@ -16,13 +16,15 @@ function draw(paper) {
   const stripes = [560, 628, 694, 756].map((sx, i) => taper([[sx - 4, 440], [sx + 10, 492], [sx + 4 + i * 4, 540]], 30, 6));
   const bodyG = vol('corps', body, C.fur, [fill(X(U(...stripes), body), C.stripe), shadowOf(body, 30, 34, 0.17), rimOf(body, 12, 14),
     ...skinExtra(C, body, 'body', [[600, 500], [720, 520], [660, 600]]), line(curve([[694, 652], [702, 592], [748, 552], [806, 566]]), IN)]);
-  anims.push({ id: 'corps', type: 'scale', pivot: [640, 655], values: [[1, 1], [1.012, 1.03], [1, 1]], dur: 3.6 });
+  const breath = breaths(41, { period: [3200, 4300] });
+  anims.push({ id: 'corps', type: 'scale', pivot: [640, 655], life: along(breath, [1, 1], [1.012, 1.03]) });
   const seat = fill(X(moved(body, 8, 14), S(B3.top, body)), INK, 0.2);
 
   // queue en virgule
   const T = crossingTail(C, 'queue', [[770, 628], [812, 666], [826, 732], [818, 800], [786, 846], [736, 864], [692, 840], [682, 792], [706, 756], [752, 746], [800, 762], [846, 794]], 6, 50, 22,
     [[0.3, 0.46, 0.62, 0.8], [0.28, 0.55, 0.8]], [818, 774], 56);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [770, 636], values: [0, 4, 0, -3, 0], dur: 7.3 });
+  anims.push({ id: 'queue', type: 'rotate', pivot: [770, 636], life: sway(43, { half: [3000, 4400], amp: [2.2, 4.2], at: 1200 }) },
+    { id: 'queue', type: 'rotate', pivot: [770, 636], life: gestures(44, { gap: [3600, 8000], at: 4300 }, flick(3.5)) }); // balancement, et le bout qui fouette
 
   // patte rentrée posée au bord du livre
   const paw2 = ell([588, 652], [44, 27]);
@@ -36,14 +38,19 @@ function draw(paper) {
   const thread = strand([[262, 812], [268, 800], rr([284, 766])], C, 10);
   const lien = tether('patte_lien', [262, 812], C); // suit la pelote qui saute
   const legG = G('patte', [ringBack, leg.group, lien[0], thread, lien[1], ringFront]);
-  anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], values: [0, 4, -2, 0, 0], keyTimes: [0, 0.18, 0.36, 0.55, 1], dur: 2.6 });
+  // il tapote la pelote à intervalles irréguliers, parfois deux fois de suite : la patte se lève, frappe, revient ; la pelote part au contact
+  const pats = [], pat = gestures(45, { gap: [1300, 3900], at: 900 }, r => { const k = between(r, [0.7, 1]), two = r() < 0.25;
+    const one = () => [[between(r, [400, 520]), 4 * k], [between(r, [380, 460]), -2 * k, 'in'], [between(r, [460, 560]), 0]];
+    return two ? [...one(), [between(r, [120, 220]), 0], ...one()] : one(); });
+  pat.forEach(([t, v], i) => { if (v < 0) pats.push([t, -v / 2]); });
+  anims.push({ id: 'patte', type: 'rotate', pivot: [432, 596], life: pat });
 
   // tête : tournée vers la pelote (3/4 gauche), penchée
   const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, mood: 'curieux', quill: 24 }); // plume penchée : sa pointe restait coupée par le haut du cadre
   anims.push(...H.anims);
   neckShadow(bodyG, H.head, body, 10, 14);
-  anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.6 });
-  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 1.5, 0], dur: 6 });
+  anims.push({ id: 'tete', type: 'translate', life: along(breath, [0, 0], [0, -3], 120) });
+  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, life: headSway() });
   let scarfB = null, scarfF = null, bow = null;
   if (C.has('echarpe')) { const sc = scarf(C, { c: [520, 566], w: 96, h: 38, sag: 20, tail: [[642, 578], [664, 628], [674, 688]], tailFront: true }); scarfF = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0], H.chin[1] + 2], -10);
@@ -56,7 +63,10 @@ function draw(paper) {
   const loose = strand([[194, 906], [164, 920], [136, 910], [118, 920]], C, 8);
   const sol = tether('sol_lien', [194, 906], C, 8);
   const ballG = G('pelote_sol', [sol[0], loose, sol[1], ballG0]);
-  anims.push({ id: 'pelote', type: 'rotate', pivot: [240, 864], values: [0, -7, 0, 0], keyTimes: [0, 0.3, 0.6, 1], dur: 2.6 });
+  const roll = [[0, 0]]; // au contact de la patte : la pelote roule d'un coup (départ vif), revient en se berçant
+  pats.forEach(([t, k], i) => { const last = roll[roll.length - 1][0], t0 = Math.max(t, last + 60); if (t0 + 1100 > END) return;
+    roll.push([t0, 0], [t0 + 280, -7 * k, 'out'], [t0 + 620, 1.2 * k], [t0 + 1000, 0]); });
+  anims.push({ id: 'pelote', type: 'rotate', pivot: [240, 864], life: ms(roll.concat([[LIFE, 0]])) });
   const shadow = G('ombre', [floorShadow([580, 916], [330, 24], 0.32), floorShadow([236, 920], [80, 13], 0.32)]);
   const glint = rareGlints(C, [[250, 400, 16], [880, 470, 12], [620, 300, 10]], 'l_');
   anims.push(...glint.anims);

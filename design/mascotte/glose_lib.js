@@ -189,6 +189,7 @@ function gloseHead(C, o = {}) {
   const whisk = [[[386, 442], [330, 430], [282, 434]], [[388, 456], [334, 460], [290, 476]], [[614, 442], [670, 430], [718, 434]], [[612, 456], [666, 460], [710, 476]]]
     .map(w => w.map(([x, y]) => [w[0][0] + (x - w[0][0]) * (o.whisk || 1), w[0][1] + (y - w[0][1]) * (o.whisk || 1)]))
     .map(w => { const d = shift(w[0][0]); return line(curve(w.map(([x, y], i) => [x + d * (1 - i * 0.35), y])), 4.5, INK, 0.85); });
+  const whiskRoot = i => xy(whisk[2 * i].firstSegment.point.add(whisk[2 * i + 1].firstSegment.point).divide(2)); // pivot of each side's twitch
   // yeux
   let eyes = [], lids = null, eyeTops = [];
   if (!sleep) {
@@ -218,9 +219,8 @@ function gloseHead(C, o = {}) {
     ...gl.map(([x, y]) => fill(circ([wx(x - 30), y - 34], 5.5), '#FFF6E6', 0.9))];
   const glasses = G(pre + 'lunettes', glassItems);
   if (o.glassesTilt) glasses.rotate(o.glassesTilt, [wx(500), 400]);
-  // vie au repos : chaque partie a sa propre période (paupières 9,4 = 2 × 4,7 s, reflet 11 s, bâillement 29 s, queue 7,3 s dans les poses),
-  // les cycles ne se recalent qu'après plusieurs minutes : le motif paraît irrégulier
-  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.8, 0.9, 1], dur: 11, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
+  // vie au repos (vie.js) : reflet qui passe de temps en temps, clignements irréguliers (parfois doubles), un bâillement, moustaches qui frémissent
+  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', life: glints(13, { from: -110, gap: [5200, 9800], at: 3100 }).map(([t, x]) => [t, [x, 0]]), base: 'translate(-110 0)' });
   const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), IN, INK, 0.8), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), IN, INK, 0.8)]
     : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), IN, INK, 0.9), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), IN, INK, 0.9)]
     : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), IN, INK, 0.9), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), IN, INK, 0.9)]
@@ -232,7 +232,7 @@ function gloseHead(C, o = {}) {
     : o.mood === 'curieux' ? vol(null, ell([mx + 6, 464], [8 * mk, 10]), '#7A3A3E', [], IN) : mouthW([mx, 448]);
   const extra = skinExtra(C, head, 'head', [[wx(410), 250], [wx(600), 262], [wx(470), 300]]);
   // bâillement (une fois par cycle de 29 s) : bouche ouverte et paupières closes, cachées (échelle 0) le reste du temps
-  const yawn = !sleep && o.yawn !== false, YK = [0, 0.5, 0.53, 0.6, 0.63, 1], YV = [[1, 0.001], [1, 0.001], [1, 1], [1, 1], [1, 0.001], [1, 0.001]];
+  const yawn = !sleep && o.yawn !== false;
   const mouthO = yawn ? G(pre + 'baille', [vol(null, ell([wx(500), 466], [15 * W.k(500), 19]), '#7A3A3E', [fill(X(ell([wx(500), 482], [11 * W.k(500), 8]), ell([wx(500), 466], [15 * W.k(500), 19])), C.rose)], IN)]) : null;
   const headIn = [fill(X(U(innerL, innerR), head), C.rose), ...earHair,
     fill(X(mMark, head), C.stripe), shadowOf(head, 26, 30, 0.14), rimOf(head, 10, 12), fill(muzzle.clone(NI), C.cream), shadowOf(muzzle, 8, 12, 0.1),
@@ -240,7 +240,7 @@ function gloseHead(C, o = {}) {
     fill(ell([wx(386), 452], [28 * W.k(386), 16]), C.rose, sleep ? 0.85 : 0.7), fill(ell([wx(614), 452], [28 * W.k(614), 16]), C.rose, sleep ? 0.85 : 0.7),
     ...eyes, nose([wx(500), 438], 30, 20, C.noseC), mouth, mouthO, lids,
     ...(yawn ? [0, 1].map(i => G(pre + 'baille_' + 'gd'[i], [lids.children[i].children[0].clone(NI)])) : []), glasses, ...brows];
-  const parts = [o.behind || null, C.has('plume') ? quill(C, turn, o.quill) : null, vol(null, head, C.fur, headIn), ...whisk,
+  const parts = [o.behind || null, C.has('plume') ? quill(C, turn, o.quill) : null, vol(null, head, C.fur, headIn), G(pre + 'moustaches_g', whisk.slice(0, 2)), G(pre + 'moustaches_d', whisk.slice(2)),
     C.has('bonnet') ? nightcap(C, earL, earR, innerL, innerR, turn, pre) : null, C.has('beret') ? beret(C, W, pre) : null, C.has('couronne') ? crown(C, W, pre) : null,
     C.has('papier') ? paperHat(C, W, pre) : null, ...(o.front || [])];
   const g = G(pre + 'tete', parts);
@@ -250,15 +250,20 @@ function gloseHead(C, o = {}) {
   g.transform(M);
   const T = q => xy(P(q).transform(M));
   g.data = { pivot: T(neck) }; // pivot des réactions one-shot (svg2avd -> android:pivotX/Y du groupe « tete »)
-  if (!sleep) { // un clignement, puis un double clignement
-    const blink = { values: [[1, 0.001], [1, 0.001], [1, 1], [1, 0.001], [1, 0.001], [1, 1], [1, 0.001], [1, 1], [1, 0.001], [1, 0.001]], keyTimes: [0, 0.27, 0.3, 0.33, 0.86, 0.885, 0.91, 0.935, 0.96, 1], dur: 9.4, begin: o.blinkBegin || 0.7, base: 'scale(1 0.001)' };
+  const Y = YAWN, yk = [[0, 0], [Y, 0], [Y + 900, 1], [Y + 2700, 1], [Y + 3600, 0], [LIFE, 0]]; // bâillement : ouvre en 0,9 s, tient, referme
+  if (!sleep) { // clignements irréguliers (2,2 à 6,8 s), parfois doubles, jamais pendant le bâillement (yeux déjà clos)
+    const blink = { life: along(blinks(22, { avoid: yawn ? [[Y, Y + 3600]] : [], at: 1300 }), [1, 0.001], [1, 1]), base: 'scale(1 0.001)' };
     anims.push(Object.assign({ id: pre + 'paupiere_g', type: 'scale', pivot: T(eyeTops[0]) }, blink), Object.assign({ id: pre + 'paupiere_d', type: 'scale', pivot: T(eyeTops[1]) }, blink));
   }
   if (yawn) {
-    anims.push({ id: pre + 'baille', type: 'scale', pivot: T([wx(500), 448]), values: YV.map(([, y]) => [y, y]), keyTimes: YK, dur: 29, base: 'scale(0.001)' }); // caché en point, pas en trait
-    eyeTops.forEach((t, i) => anims.push({ id: pre + 'baille_' + 'gd'[i], type: 'scale', pivot: T(t), values: YV, keyTimes: YK, dur: 29, base: 'scale(1 0.001)' }));
-    anims.push({ id: pre + 'tete', type: 'translate', values: [[0, 0], [0, 0], [0, -7], [0, -7], [0, 0], [0, 0]], keyTimes: YK, dur: 29 });
+    anims.push({ id: pre + 'baille', type: 'scale', pivot: T([wx(500), 448]), life: along(yk, [0.001, 0.001], [1, 1]), base: 'scale(0.001)' }); // caché en point, pas en trait
+    eyeTops.forEach((t, i) => anims.push({ id: pre + 'baille_' + 'gd'[i], type: 'scale', pivot: T(t), life: along(yk, [1, 0.001], [1, 1]), base: 'scale(1 0.001)' }));
+    // la tête se lève en bâillant et retombe un peu plus tard que la bouche ne se ferme (traîne)
+    anims.push({ id: pre + 'tete', type: 'translate', life: [[0, [0, 0]], [Y + 150, [0, 0]], [Y + 1100, [0, -7]], [Y + 2700, [0, -7]], [Y + 3900, [0, 0]], [LIFE, [0, 0]]] });
   }
+  // moustaches : un frémissement de temps en temps, d'un côté puis parfois de l'autre (endormi : plus rare)
+  [0, 1].forEach(i => anims.push({ id: pre + 'moustaches_' + 'gd'[i], type: 'rotate', pivot: T(whiskRoot(i)),
+    life: gestures(31 + i, { gap: sleep ? [7000, 14000] : [3800, 9500], at: [2600, 5400][i] }, flick(i ? -3.5 : 3.5, 0.8)) }));
   return { group: g, anims, T, M, chin: T([wx(500), 500]), neck: T(neck), crown: T([wx(500), 206]), head: head.clone(NI).transform(M) }; // head : silhouette placée (ombre portée)
 }
 // ---------- variantes de pelage : détails rares ----------
@@ -609,7 +614,8 @@ function seatedGlose(C, o = {}) {
   L.body = vol('corps', body, C.fur, [fill(X(flank, body), C.stripe), shadowOf(body, 30, 30, 0.16), rimOf(body, 12, 12), ...skinExtra(C, body, 'body', [[404, 520], [612, 560], [380, 640]]),
     fill(bib.clone(NI), C.cream), shadowOf(bib, 10, 12, 0.1),
     line(curve([[370, 690], [382, 638], [420, 614]]), IN), line(curve([[632, 690], [622, 646], [594, 626]]), IN)]);
-  anims.push({ id: 'corps', type: 'scale', pivot: [500, 700], values: [[1, 1], [1.015, 1.025], [1, 1]], dur: 3.8 });
+  const breath = breaths(27, { period: [3000, 4600], pause: [0, 1000] }); // souffles de 3,5 à 4,3 s, parfois un soupir ; la tête et le cou suivent (seatedGlose)
+  anims.push({ id: 'corps', type: 'scale', pivot: [500, 700], life: along(breath, [1, 1], [1.015, 1.025]) });
   const footN = ell([424, 694], [52, 27]), footF = ell([592, 691], [44, 24]);
   L.feet = G(null, [footF, footN].map(f => { const c = f.position; return vol(null, f, C.cream, [shadowOf(f, 8, 10, 0.18), ...toes(c, 0, 2, 18, 24, f)]); }));
   // queue qui enveloppe les pieds : part de derrière la hanche droite, passe devant, le bout remonte contre le pied gauche
@@ -619,12 +625,14 @@ function seatedGlose(C, o = {}) {
   L.tail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.46, 0.62], 34, 8), tail), C.stripe), fill(X(circ([540, 688], 20), tail), C.furD),
     shadowOf(tail, 10, 12, 0.18), rimOf(tail, 6, 6)]);
   L.tailShadow = fill(X(S(moved(tailFull, 6, 10), tailFull), B.top), INK, 0.18);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [640, 680], values: [0, 1.6, 0, -1.2, 0], dur: 7.3 });
+  // queue : balancement lent (demi-périodes de 3 à 4,2 s) et, de temps en temps, un petit coup du bout (contre-temps, coup, dépassement)
+  anims.push({ id: 'queue', type: 'rotate', pivot: [640, 680], life: sway(23, { half: [2600, 4600], amp: [0.5, 2], hold: 0.25, at: 1500 }) },
+    { id: 'queue', type: 'rotate', pivot: [640, 680], life: gestures(24, { gap: [4200, 9000], at: 5200 }, flick(2.6)) });
   // tête : 3/4 vers la droite, penchée
   const H = gloseHead(C, Object.assign({ at: [514, 350], tilt: -6, turn: 0.17 }, o.head || {}));
   anims.push(...H.anims);
-  anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.8 });
-  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 2, 0], dur: 6.4 });
+  anims.push({ id: 'tete', type: 'translate', life: along(breath, [0, 0], [0, -3], 120) }); // la tête suit le souffle, un rien après la poitrine
+  anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, life: headSway() });
   L.head = H.group;
   neckShadow(L.body, H.head, body, 6, 16);
   // accessoires du cou

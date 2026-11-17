@@ -47,13 +47,15 @@ function draw(paper) {
   const bodyStripes = X(body, U(...[[590, 458], [632, 474], [672, 506]].map(([x, y], i) => taper([[x, y - 8], [x - 10 - i * 4, y + 66]], 30 - i * 3, 6))));
   const gBody = G('corps', [vol(null, body, C.fur, [fill(bodyStripes, C.stripe), shadowOf(body, 40, 14, 0.16), rimOf(body, 12, 10, 0.3, C.glow),
     ...skinExtra(C, body, 'body', [[620, 500], [700, 540]])])]);
-  anims.push({ id: 'corps', type: 'scale', pivot: [540, 600], values: [[1, 1], [1.012, 1.035], [1, 1]], dur: 4.2 });
+  // endormi : souffle lent (4,8 à 5,8 s, longue expiration, pause au creux) ; réveillé : souffle ordinaire. « dormeur » et l'écharpe suivent.
+  const breath = C.v.awake ? breaths(51, { period: [3600, 4400] }) : breaths(52, { period: [4800, 5800], inhale: 0.38, pause: [200, 900], sigh: 0.15 });
+  anims.push({ id: 'corps', type: 'scale', pivot: [540, 600], life: along(breath, [1, 1], [1.012, 1.035]) });
   // queue drapée par-dessus le bord, à gauche, bout relevé
   const tailPts = [[352, 584], [314, 600], [296, 642], [300, 694], [306, 732], [286, 760], [260, 752], [258, 730]];
   const tail = taper(tailPts, 46, 26);
   const gTail = vol('queue', tail, C.fur, [fill(X(ringsAlong(tailPts, [0.3, 0.5, 0.7], 40, 8), tail), C.stripe), fill(X(circ([258, 730], 22), tail), C.furD),
     shadowOf(tail, 12, 10, 0.16), rimOf(tail, 8, 6, 0.35, C.glow)]);
-  anims.push({ id: 'queue', type: 'rotate', pivot: [350, 586], values: [0, 2.5, 0], dur: 7.3 });
+  anims.push({ id: 'queue', type: 'rotate', pivot: [350, 586], life: sway(53, { half: [3400, 5200], amp: [1, 2.6], at: 1800 }).map(([t, v]) => [t, v > 0 ? v : +(-0.2 * v).toFixed(3)]) }); // posée sur le bord : d'un seul côté
   // tête endormie posée sur le bord, pattes croisées dessous
   const awake = !!C.v.awake; // « Réveil dans la tasse » : yeux ouverts, lunettes en place, bougie éteinte, sans « z »
   const H = awake ? gloseHead(C, { at: [486, 432], tilt: -6, turn: -0.08 }) : gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
@@ -69,7 +71,7 @@ function draw(paper) {
   const gHead = G('dormeur', [paws, jg.band, H.group, bow, lav, jg.bell]); // les pièces du cou dans « dormeur » : elles le suivent
   gCupFront.insertChild(gCupFront.children.length - 3, fill(X(moved(U(H.head, pawL, pawR), 8, 14), cupFront), INK, 0.22)); // ombre portée de la tête et des pattes sur la tasse
   neckBreath(anims, anims.find(a => a.id === 'corps'), scarfG); // nœud et grelot sont dans « dormeur »
-  anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], values: [[1, 1], [1.008, 1.02], [1, 1]], dur: 4.2 });
+  anims.push({ id: 'dormeur', type: 'scale', pivot: [490, 620], life: along(breath, [1, 1], [1.008, 1.02], 150) });
 
   // ---------- bougie ----------
   const CX = 178, CT = 640, base = 790;
@@ -85,21 +87,27 @@ function draw(paper) {
     line(curve([[CX, CT - 6], [CX + 2, FY - 4]]), 5),
     awake ? null : G('flamme', [fill(flameO.clone(NI), C.gold), fill(flameI, C.glow), outline(flameO, IN)])]);
   const gHalo = awake ? null : G('halo', [halo]);
-  if (!awake) anims.push({ id: 'flamme', type: 'scale', pivot: [CX + 2, FY], values: [[1, 1], [0.9, 1.1], [1.06, 0.94], [0.94, 1.06], [1, 1]], dur: 1.7 },
-    { id: 'halo', attr: 'opacity', values: [1, 0.85, 0.8, 1], keyTimes: [0, 0.3, 0.6, 1], dur: 2.4 }); // starts on the still (full glow)
+  // flamme qui vacille sans motif (extrêmes tous les 0,16 à 0,38 s), lueur qui respire plus lentement ; départ et fin sur le dessin fixe
+  if (!awake) anims.push({ id: 'flamme', type: 'scale', pivot: [CX + 2, FY], life: scaleOf(flicker(54, { step: [300, 650], amp: [0.04, 0.1] }), -1, 1) },
+    { id: 'halo', attr: 'opacity', life: flicker(55, { step: [900, 1600], amp: [0.04, 0.12], hold: 0.85 }).map(([t, v]) => [t, +(1 - Math.abs(v - 1) * (v < 1 ? 1.6 : 0.5)).toFixed(3)]) });
 
   // ---------- vapeur, « z », sachet ----------
+  // vapeur : deux volutes qui montent tour à tour, montées de 3,9 à 5 s, parfois un temps sans vapeur (vie.js particles)
+  const vap = particles(56, { from: [0, 20], to: [0, -50], rise: [3900, 5000], gap: [0, 900], peak: 0.5, still: 0.3, lanes: 2 });
   const steam = (id, x, y, d) => {
-    anims.push({ id, type: 'translate', values: [[0, 20], [0, -50]], dur: 4.4, begin: d, linear: true });
-    anims.push({ id: id + '_o', attr: 'opacity', values: [0, 0.5, 0.5, 0], keyTimes: [0, 0.3, 0.6, 1], dur: 4.4, begin: d }); // peak 0.5 while it rises (svg2avd: replaces the path's own 0.3, the still)
+    const v = vap[id === 'vap1' ? 0 : 1];
+    anims.push({ id, type: 'translate', life: v.pos }, { id: id + '_o', attr: 'opacity', life: v.alpha }); // peak 0.5 while it rises (svg2avd: replaces the path's own 0.3, the still)
     const s = fill(taper([[x, y], [x - 18, y - 40], [x + 12, y - 80], [x - 8, y - 120], [x + 6, y - 160]], 16, 3), C.sepia, 0.32); s.name = id + '_o';
     return G(id, [s]);
   };
   const steamG = G('vapeur', [steam('vap1', 720, 500, 0), steam('vap2', 758, 516, -2.2)]);
   // « z » : naissent contre l'oreille gauche et montent en s'éloignant, en crescendo
+  // « z » : à chaque expiration, les trois montent l'un après l'autre (0,9 s d'écart), petit, moyen, grand
+  const exhale = breath.filter(([, k]) => k > 0).map(([t]) => t);
+  const zs = [0, 1, 2].map(i => particles(57 + i, { from: [10, 16], to: [-14, -22], rise: [3400, 3800], peak: 1, still: 1, fade: [0.25, 0.7], at: exhale.map(t => t + 300 + 900 * i) })[0]);
   const zz = (id, x, y, s, d) => {
-    anims.push({ id, type: 'translate', values: [[10, 16], [-14, -22]], dur: 3.6, begin: d });
-    anims.push({ id: id + '_o', attr: 'opacity', values: [0, 1, 1, 0], keyTimes: [0, 0.25, 0.7, 1], dur: 3.6, begin: d });
+    const v = zs[+id[1] - 1];
+    anims.push({ id, type: 'translate', life: v.pos }, { id: id + '_o', attr: 'opacity', life: v.alpha });
     const z = G(id + '_o', [line(curve([[x - s, y - s], [x + s, y - s], [x - s, y + s], [x + s, y + s]].map(xy0 => xy0), 0), Math.max(7, s * 0.4) + 6), line(new Path({ segments: [[x - s, y - s], [x + s, y - s], [x - s, y + s], [x + s, y + s]], insert: false }), Math.max(7, s * 0.4) - 1, C.white)]);
     z.children[0].segments.forEach(sg => { sg.handleIn = null; sg.handleOut = null; });
     return G(id, [z]);
@@ -108,7 +116,7 @@ function draw(paper) {
   const zG = awake ? null : G('zzz', [zz('z1', ear[0] - 34, ear[1] + 34, 13, 0), zz('z2', ear[0] - 62, ear[1] - 12, 18, -1.2), zz('z3', ear[0] - 84, ear[1] - 70, 24, -2.4)]);
   const tag = rpoly([[732, 622], [776, 622], [776, 674], [732, 674]], 6), leaf = blob([[754, 634], [766, 646], [754, 666], [742, 646]], 0.5);
   const gTea = G('sachet', [line(curve([[742, 554], [750, 572], [754, 594], [754, 622]]), 3.5), vol(null, tag, C.white, [shadowOf(tag, 8, 0, 0.12), fill(leaf, C.gold), line(curve([[754, 640], [754, 662]]), 2.5)], IN)]);
-  anims.push({ id: 'sachet', type: 'rotate', pivot: [744, 556], values: [0, 4, 0, -4, 0], dur: 4.2 }); // starts on the still (0°): no jump when the idle life starts
+  anims.push({ id: 'sachet', type: 'rotate', pivot: [744, 556], life: sway(58, { half: [1900, 2700], amp: [2.4, 4.5], at: 600 }) }); // starts on the still (0°)
   const ground = fill(ell([540, 964], [440, 22]), INK, 0.14);
   const glint = rareGlints(C, [[880, 360, 14], [640, 300, 10], [940, 540, 10]], 's_');
   anims.push(...glint.anims);

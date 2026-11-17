@@ -65,11 +65,12 @@ function hermite(vals, kts, cyclic = false, force = []) {
     if (force[i] === 'in' && !m[i]) b = 2;
     return [q(Math.min(3, a)), q(Math.min(3, b))];
   });
+  const rest = m.map(x => !x); // keys where the motion rests (speed 0): a life track may be cut there (lifeXml)
   for (let i = 1; i < n - 1; i++) if (m[i] && ab[i] && ab[i + 1]) { // speed in / out at a pass-through key, after quantization
     const r = (ab[i + 1][0] * d[i]) / (ab[i][1] * d[i - 1]);
     if (!(r >= 0.5 && r <= 2)) throw new Error(`hermite: speed ratio ${r} at key ${i} of ${vals}`);
   }
-  return ab.map(x => {
+  return Object.defineProperty(ab.map(x => {
     if (!x) return null;
     const [a, b] = x;
     if (!a && !b) return EASE;
@@ -77,7 +78,37 @@ function hermite(vals, kts, cyclic = false, force = []) {
     if (!a && b === 2) return ACCEL;
     if (a === 1 && b === 1) return null;
     const nm = `glose_h_${a * 1000}_${b * 1000}`; HERMITE.add(nm); return `@interpolator/${nm}`;
-  });
+  }), 'rest', { value: rest });
+}
+// A life track (vie.js: one property over the whole idle life, from its still back to it) as short animators: cut only where every
+// property is on its still value, and left out where it rests there. Each animator starts at its first move (startOffset), lasts at most
+// MAXC where a cut is possible (one RenderThread sample per 16 ms frame, 300 at most per animator) and nothing is written in the rests.
+// Every animator thus starts and ends on the still: whatever order a runtime applies their start values in (RenderThread at play time 0,
+// reverse order of end; UI-thread AnimatorSet at start), it shows the still, and the cut changes nothing in the motion (the eases are the
+// whole track's Hermite segments, so the speed is the same on both sides of a cut). keys = [[property, values, fractions of the life]],
+// force = accents per key ('out' | 'in').
+const MAXC = 4800;
+function lifeXml(keys, force, at) {
+  keys = keys.filter(([, v]) => v.some(x => x !== v[0])); // a property that does not move is left out (its still value stays)
+  if (!keys.length) return null;
+  const k = keys[0][2], T = k.map(x => Math.round(x * IDLE_MS)), n = k.length, E = keys.map(([, v]) => hermite(v, k, false, force));
+  const still = i => keys.every(([, v]) => v[i] === v[0]), rests = i => still(i) && still(i + 1);
+  for (let i = 0; i < n - 1; i++) if (keys.some(([, v]) => v[i] !== v[i + 1]) && T[i + 1] - T[i] < 33) throw new Error(`${at}: life key ${T[i]} -> ${T[i + 1]} ms, under 2 frames`);
+  const chunks = []; let i0 = null;
+  for (let i = 0; i < n - 1; i++) {
+    if (rests(i)) { if (i0 !== null) chunks.push([i0, i]); i0 = null; continue; }
+    if (i0 === null) i0 = i;
+    if (i + 1 < n - 1 && still(i + 1) && !rests(i + 1)) { // a cut is possible after key i + 1: take it if the next one would be too far
+      let j = i + 2; while (j < n - 1 && !still(j)) j++;
+      if (T[j] - T[i0] > MAXC) { chunks.push([i0, i + 1]); i0 = null; }
+    }
+  }
+  if (i0 !== null) chunks.push([i0, n - 1]);
+  const xml = chunks.map(([a, b]) => { const d = T[b] - T[a];
+    return `<objectAnimator android:duration="${d}" android:interpolator="@android:interpolator/linear" android:startOffset="${T[a]}">` +
+      keys.map(([p, v], j) => `<propertyValuesHolder android:propertyName="${p}" android:valueType="floatType">` + v.slice(a, b + 1).map((x, i) =>
+        `<keyframe android:fraction="${+((T[a + i] - T[a]) / d).toFixed(4)}" android:value="${x}"${i && E[j][a + i] ? ` android:interpolator="${E[j][a + i]}"` : ''}/>`).join('') + '</propertyValuesHolder>').join('') + '</objectAnimator>'; });
+  return { xml: xml.length > 1 ? `<set>${xml.join('')}</set>` : xml[0], chunks: chunks.map(([a, b]) => [T[a], T[b]]) };
 }
 const hermiteXml = nm => { const [a, b] = nm.split('_').slice(2).map(x => x / 1000);
   return `<?xml version="1.0" encoding="utf-8"?>\n<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:controlX1="0.3333" android:controlY1="${+(a / 3).toFixed(4)}" android:controlX2="0.6667" android:controlY2="${+(1 - b / 3).toFixed(4)}"/>\n`; };
@@ -164,7 +195,10 @@ function animator(an, holders) {
   const n = ONCE(an) ? 1 : Math.max(1, Math.floor((IDLE_MS - offset) / dur));
   return [`<objectAnimator android:duration="${dur}" android:interpolator="@android:interpolator/linear" android:repeatCount="${n - 1}" android:startOffset="${offset}">${holders}</objectAnimator>`, { dur, offset, n }];
 }
-function target(nm, an, holders, keys = pend) { const [xml, t] = animator(an, holders); targets.push({ name: nm, xml, keys, ...t }); pend = []; }
+function target(nm, an, holders, keys = pend) {
+  if (an['data-life'] != null) { const L = lifeXml(keys, an['data-life'].split(';').map(x => x || undefined), `${name} ${nm}`);
+    if (L) targets.push({ name: nm, xml: L.xml, keys, life: L.chunks, dur: IDLE_MS, offset: 0, n: 1 }); pend = []; return; }
+  const [xml, t] = animator(an, holders); targets.push({ name: nm, xml, keys, ...t }); pend = []; }
 // SMIL starts a loop of negative begin mid-cycle. On Android it was a delayed start, and a delayed RenderThread animator writes nothing
 // before its delay: the still values showed, then jumped (a « z » at full opacity vanished at 1.2 s). The keys are rotated instead, the
 // loop starts at that phase p. A value that jumps at the seam (a rising « z ») keeps its jump, 0.001 long, hidden there as in the loop.
@@ -180,6 +214,7 @@ function phase(vals, k, p) {
 function kts(an, n) { return an.keyTimes ? an.keyTimes.split(';').map(Number) : Array.from({ length: n }, (_, i) => i / (n - 1)); }
 function keyframesOf(an, prop, vals) { // keyframes, réduits et étirés pour une animation « une fois »
   let k = kts(an, vals.length);
+  if (an['data-life'] != null) { pend.push([prop, vals.map(v => +(+v).toFixed(3)), k]); return ''; } // a life track: lifeXml() in target()
   if (ONCE(an)) { const [ix, t] = onceTimes(an); vals = ix.map(i => vals[i]); k = t; }
   const p = parseFloat(an.begin || '0') < 0 ? (-parseFloat(an.begin) / parseFloat(an.dur)) % 1 : 0;
   if (p) [vals, k] = phase(vals, k, p);
@@ -193,13 +228,15 @@ function emit(e, alpha, gate, out, inh = {}) {
   const inhKids = {}; INH.forEach(k => { if (a[k] != null) inhKids[k] = a[k]; });
   if (e.tag === 'g' || e.tag === 'svg') {
     const op = a.opacity != null ? +a.opacity : 1;
-    const anim = e.kids.find(k => k.tag === 'animateTransform');
+    const anim0 = e.kids.find(k => k.tag === 'animateTransform');
+    const anim = anim0 && anim0.attrs['data-fin'] && !opts.once ? null : anim0; // played by the quiz end only (*_fin): same drawing, no animator
     const nm = a.id || e.nm || null;
     let attrs = nm ? ` android:name="${esc(nm)}"` : '';
     let t = a.transform || '';
     const tr = /translate\(([-\d.e]+)[ ,]*([-\d.e]*)\)/.exec(t), sc = /scale\(([-\d.e]+)[ ,]*([-\d.e]*)\)/.exec(t);
     if (tr) attrs += ` android:translateX="${f(tr[1])}" android:translateY="${f(tr[2] || 0)}"`;
     if (sc) attrs += ` android:scaleX="${sc[1]}" android:scaleY="${sc[2] || sc[1]}"`;
+    if (anim0 && !anim && anim0.attrs.type === 'rotate') { const v = anim0.attrs.values.split(';')[0].trim().split(/[\s,]+/); attrs += ` android:pivotX="${v[1]}" android:pivotY="${v[2]}"`; }
     const pv = a['data-paper-data'] && JSON.parse(a['data-paper-data']).pivot; // pivot des réactions one-shot (groupe « tete »)
     if (pv) attrs += ` android:pivotX="${f(pv[0])}" android:pivotY="${f(pv[1])}"`;
     const g = a.id && GATES.find(([re]) => re.test(a.id));
@@ -268,13 +305,17 @@ function emit(e, alpha, gate, out, inh = {}) {
 // is drawn between two body parts. opts.noSlots (head icons, which never wear them): pieces dropped.
 // Anonymous animated nodes are named here, so that a group shared by several layers (the head) has the same name in each.
 const KID = k => !['animateTransform', 'animate', 'title', 'defs', 'clipPath'].includes(k.tag);
+// The night outline (glose_lib.js halo(): « lisere » and the « <part>_halo » groups, all at the back) is one layer of its own, drawn only at
+// night (gate Halo, Glose.drawable): by day the back layer (books, shadow) no longer redraws each frame because invisible outlines move.
 const order = []; let segs = 0, open = true;
 (function mark(e, piece) {
   if (e.tag === 'g' || e.tag === 'svg') {
     if (!e.attrs.id && e.kids.some(k => k.tag === 'animateTransform')) e.nm = `a${uid++}`;
-    const g = !piece && e.attrs.id && GATES.find(([re]) => re.test(e.attrs.id));
-    const p = piece || (g && LAYERED.includes(g[1]) ? e.attrs.id : null);
-    if (p && !piece && !opts.noSlots) { order.push([g[1], `_${p}`]); open = true; }
+    const halo = !piece && !opts.noSlots && e.tag === 'g' && /^(lisere|\w+_halo)$/.test(e.attrs.id || '');
+    const g = !piece && (halo ? [, 'Halo'] : e.attrs.id && GATES.find(([re]) => re.test(e.attrs.id)));
+    const p = piece || (halo ? 'lisere' : g && LAYERED.includes(g[1]) ? e.attrs.id : null);
+    if (p && !piece && !opts.noSlots && !(halo && order.length && order[order.length - 1][1] === '_lisere')) { order.push([g[1], `_${p}`]); open = true; }
+    if (halo && order.filter(o => o[1] === '_lisere').length > 1) throw new Error(`${name}: night outline groups not contiguous (${e.attrs.id})`);
     e.kids.filter(KID).forEach(k => mark(k, p)); return;
   }
   if (!shapeData(e)) return;
@@ -296,6 +337,8 @@ for (const [gate, key] of order) {
     const still = stillValue(vd, t.name, prop), at = `${name}${key} ${t.name}.${prop}`, last = vals[vals.length - 1];
     // a delayed animator writes nothing before its delay: its first key must be the still value, or the part jumps when it starts
     if (t.offset && vals[0] !== still) throw new Error(`${at}: starts at ${vals[0]} after ${t.offset} ms, still value ${still}`);
+    // a life track leaves its still and comes back to it within the life: frame 0 and the rest after IDLE_MS are the still drawing
+    if (t.life && (vals[0] !== still || last !== still)) throw new Error(`${at}: life track from ${vals[0]} to ${last}, still value ${still}`);
     // stop() (= end() on RenderThread) at IDLE_MS puts every animator on its last key: a loop must have played whole cycles by then,
     // or (a loop longer than the idle life) rest on its last value from that moment
     const cut = (IDLE_MS - t.offset) / t.dur - (t.n - 1);
@@ -333,5 +376,10 @@ if (require.main === module) { // node android/svg2avd.js : self-check of hermit
   eq(hermite([0, -2, 7, 5], [0, 0.1, 0.28, 0.4], false, [, , 'out']), [null, EASE, DECEL, EASE]); // snap out of the anticipation
   eq(hermite([2, -14, 10, 2], [0, 0.6667, 0.6677, 1], true)[1], H(1, 0)); // a « z » rotated by its phase passes its first key
   console.log('hermite ok');
+  // lifeXml: a breath, a hold, a blink: cut at the hold (nothing written during it), the blink accelerates shut and decelerates open
+  const k = [0, 1000, 2600, 4000, 4055, 4150, 26000].map(t => t / IDLE_MS), L = lifeXml([['scaleY', [1, 1.02, 1, 1, 0.001, 1, 1], k]], [, , , , 'in', 'out'], 'test');
+  eq(L.chunks, [[0, 2600], [4000, 4150]]);
+  if (!/startOffset="4000"><propertyValuesHolder[^>]*><keyframe android:fraction="0" android:value="1"\/><keyframe android:fraction="0.3667" android:value="0.001" android:interpolator="@android:interpolator\/accelerate_quad"\/><keyframe android:fraction="1" android:value="1" android:interpolator="@android:interpolator\/decelerate_quad"\/>/.test(L.xml)) throw new Error(L.xml);
+  console.log('life ok');
 }
 module.exports = { convert, animated, hermite, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };
