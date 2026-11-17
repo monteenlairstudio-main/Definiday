@@ -16,6 +16,24 @@ function ell(c, r) { return new Path.Ellipse({ center: c, radius: r, insert: fal
 function circ(c, r) { return new Path.Circle({ center: c, radius: r, insert: false }); }
 function arc(a, b, c) { return new Path.Arc({ from: a, through: b, to: c, insert: false }); }
 function rect(x, y, w, h) { return new Path.Rectangle({ point: [x, y], size: [w, h], insert: false }); }
+// arrondit les angles vifs (> minA degrés) d'une forme, d'un congé de rayon r : raccords d'une union (poignet, coude) sans pli
+function soften(p, r = 8, minA = 25) {
+  if (p.children) { p.children.forEach(c => soften(c, r, minA)); return p; }
+  const ang = s => Math.abs(p.getTangentAt(Math.max(0, s.location.offset - 0.5)).getDirectedAngle(p.getTangentAt(s.location.offset + 0.5)));
+  if (p.closed) { const segs = p.segments.slice(), i = segs.findIndex(s => s.index > 0 && ang(s) < 2); if (i > 0) p.segments = segs.slice(i).concat(segs.slice(0, i)); } // départ sur un point lisse
+  const L = p.length, offs = [];
+  for (const s of p.segments) {
+    const off = s.location.offset; if (off < 2 * r || off > L - 2 * r) continue;
+    if (Math.abs(p.getTangentAt(off - 0.5).getDirectedAngle(p.getTangentAt(off + 0.5))) > minA && (!offs.length || off - offs[offs.length - 1] > 2 * r)) offs.push(off);
+  }
+  for (const off of offs.reverse()) {
+    const corner = p.getPointAt(off), s2 = p.divideAt(off + r), s1 = p.divideAt(off - r);
+    if (!s1 || !s2) continue;
+    while (s1.next && s1.next !== s2) p.removeSegment(s1.next.index); // le coin (parfois doublé par l'union)
+    s1.handleOut = corner.subtract(s1.point).multiply(0.55); s2.handleIn = corner.subtract(s2.point).multiply(0.55);
+  }
+  return p;
+}
 function U(...ps) { ps = ps.filter(Boolean); let r = ps[0]; for (let i = 1; i < ps.length; i++) r = r.unite(ps[i], NI); return r; }
 function S(a, ...bs) { let r = a; for (const b of bs) if (b) r = r.subtract(b, NI); return r; }
 function X(a, b) { return a.intersect(b, NI); }
@@ -52,6 +70,8 @@ function rimOf(shape, dx = 10, dy = 12, o = 0.26, c = '#FFF6E6') { return fill(S
 // accessoires du cou (écharpe, nœud, grelot) : ils respirent avec le corps qui les porte (même animation que lui), sinon le corps glisse
 // de 2 à 3 px sous un accessoire immobile. Les accessoires de tête sont déjà dans « tete ».
 function neckBreath(anims, breath, ...pieces) { for (const g of pieces) if (g && g.name && g.children.length) anims.push(Object.assign({}, breath, { id: g.name })); }
+// ombre portée de la tête sur le corps (sous le menton) : la tête ne flotte plus devant le plastron ; posée dans le groupe du corps, sous son contour
+function neckShadow(vg, headSil, under, dx, dy, o = 0.16) { vg.insertChild(vg.children.length - 1, fill(X(moved(headSil, dx, dy), under), INK, o)); }
 function G(name, children) { const g = new Group({ children: children.filter(Boolean), insert: false }); if (name) g.name = name; return g; }
 function clipIn(shape, items) { const m = shape.clone(NI); m.clipMask = true; return new Group({ children: [m, ...items.filter(Boolean)], clipped: true, insert: false }); }
 function vol(name, shape, color, details = [], w = OUT) { return G(name, [fill(shape.clone(NI), color), ...details, outline(shape, w)]); }
@@ -155,13 +175,13 @@ function gloseHead(C, o = {}) {
   const kT = 1 - Math.max(0, turn) * 0.9, kTl = 1 - Math.max(0, -turn) * 0.9;
   tR.scale(kT, [650, 410]); tL.scale(kTl, [350, 410]);
   const head = U(skull, earL, earR, tL, tR);
-  const innerL = warp(rpoly([[360, 278], eT([362, 166]), [434, 236]], [26, 18, 26]), We), innerR = warp(rpoly([[566, 236], eT([638, 166]), [640, 278]], [26, 18, 26]), We);
-  const earHair = [[[376, 284], [372, 256], [380, 234]], [[390, 282], [390, 262]], [[624, 284], [628, 256], [620, 234]], [[610, 282], [610, 262]]]
-    .map(pts => line(warp(curve(pts.map(eT)), We), 4, C.cream, 0.9));
+  const innerL = warp(rpoly([[360, 278], eT([362, 166]), [434, 236]], [26, 18, 26]).scale(0.9, [386, 234]), We), innerR = warp(rpoly([[566, 236], eT([638, 166]), [640, 278]], [26, 18, 26]).scale(0.9, [614, 234]), We); // marge de poil autour du rose, même sur l'oreille lointaine
+  const earHair = [[[374, 262], [370, 238], [378, 214]], [[388, 254], [389, 236]], [[626, 262], [630, 238], [622, 214]], [[612, 254], [611, 236]]] // dans le rose : pas de traits sur le front
+    .map(pts => line(warp(curve(pts.map(eT)), We), 3, C.cream, 0.75)); // poils d'oreille fins : pas de points blancs en petit
   const muzzle = X(warp(U(circ([478, 452], 36), circ([522, 452], 36), ell([500, 480], [52, 30])), W), head);
   const mMark = U(warp(U(blob([[486, 210], [514, 210], [506, 272], [494, 272]], 0.4), blob([[442, 222], [464, 214], [468, 262], [460, 264]], 0.4),
-    blob([[536, 214], [558, 222], [540, 264], [532, 262]], 0.4)), W), taper([[322, 340], [362, 350]], 18, 6), taper([[678, 340], [638, 350]], 18, 6),
-    taper([[326, 372], [356, 376]], 14, 5), taper([[674, 372], [644, 376]], 14, 5));
+    blob([[536, 214], [558, 222], [540, 264], [532, 262]], 0.4)), W), taper([[318, 398], [358, 404]], 16, 5), taper([[682, 398], [642, 404]], 16, 5), // rayures de joue sous la branche des lunettes (pas collées à elle)
+    taper([[324, 424], [354, 426]], 12, 4), taper([[676, 424], [646, 426]], 12, 4));
   const eyeC = [[428, 384], [572, 384]].map(([x, y]) => ({ c: [wx(x), y], k: W.k(x) }));
   const shift = x => wx(x) - x;
   const whisk = [[[386, 442], [330, 430], [282, 434]], [[388, 456], [334, 460], [290, 476]], [[614, 442], [670, 430], [718, 434]], [[612, 456], [666, 460], [710, 476]]]
@@ -199,10 +219,10 @@ function gloseHead(C, o = {}) {
   // vie au repos : chaque partie a sa propre période (paupières 9,4 = 2 × 4,7 s, reflet 11 s, bâillement 29 s, queue 7,3 s dans les poses),
   // les cycles ne se recalent qu'après plusieurs minutes : le motif paraît irrégulier
   if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', values: [[-110, 0], [-110, 0], [110, 0], [110, 0]], keyTimes: [0, 0.8, 0.9, 1], dur: 11, begin: o.glareBegin || 0, base: 'translate(-110 0)' });
-  const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), 5, INK, 0.7), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), 5, INK, 0.7)]
-    : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), 5, INK, 0.8), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), 5, INK, 0.8)]
-    : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), 5, INK, 0.8), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), 5, INK, 0.8)]
-    : [line(curve([[wx(396), 304], [wx(420), 294], [wx(446), 300]]), 5, INK, 0.8), line(curve([[wx(554), 300], [wx(580), 294], [wx(604), 304]]), 5, INK, 0.8)];
+  const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), IN, INK, 0.8), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), IN, INK, 0.8)]
+    : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), IN, INK, 0.9), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), IN, INK, 0.9)]
+    : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), IN, INK, 0.9), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), IN, INK, 0.9)]
+    : [line(curve([[wx(396), 304], [wx(420), 294], [wx(446), 300]]), IN, INK, 0.9), line(curve([[wx(554), 300], [wx(580), 294], [wx(604), 304]]), IN, INK, 0.9)];
   // humeur : bouche ouverte en « D » (fier), petit « o » (curieux), sinon le « w » de toujours
   const mx = wx(500), mk = W.k(500);
   const mouth = o.mood === 'fier' ? (() => { const m = blob([[mx - 26 * mk, 450], [mx + 26 * mk, 450], [mx + 18 * mk, 468], [mx, 476], [mx - 18 * mk, 468]], 0.45);
@@ -236,7 +256,7 @@ function gloseHead(C, o = {}) {
     eyeTops.forEach((t, i) => anims.push({ id: pre + 'baille_' + 'gd'[i], type: 'scale', pivot: T(t), values: YV, keyTimes: YK, dur: 29, base: 'scale(1 0.001)' }));
     anims.push({ id: pre + 'tete', type: 'translate', values: [[0, 0], [0, 0], [0, -7], [0, -7], [0, 0], [0, 0]], keyTimes: YK, dur: 29 });
   }
-  return { group: g, anims, T, M, chin: T([wx(500), 500]), neck: T(neck), crown: T([wx(500), 206]), head };
+  return { group: g, anims, T, M, chin: T([wx(500), 500]), neck: T(neck), crown: T([wx(500), 206]), head: head.clone(NI).transform(M) }; // head : silhouette placée (ombre portée)
 }
 // ---------- variantes de pelage : détails rares ----------
 // gilt : paillettes d'or qui scintillent ; stars : petites étoiles pâles sur le pelage « Nuit d'encre »
@@ -452,9 +472,19 @@ function book(o) {
 }
 // pattes : patte avant ronde avec doigts, coussinets optionnels
 function pawShape(c, rx, ry, rot = 0) { const p = ell(c, [rx, ry]); p.rotate(rot, c); return p; }
-function toes(c, rot = 0, n = 2, len = 14, gap = 22) {
+// doigts : `shape` donné, chaque séparation est une encoche qui part du bord de la patte (rejoint le contour, posé par-dessus) et
+// rentre de `len` en s'effilant, les doigts extérieurs un peu écartés ; sans `shape`, l'ancien trait flottant au milieu de la patte
+function toes(c, rot = 0, n = 2, len = 14, gap = 22, shape = null) {
   c = P(c); const out = [];
-  for (let i = 0; i < n; i++) { const o = (i - (n - 1) / 2) * gap; const a = c.add(new Point(o, 4).rotate(rot)), b = c.add(new Point(o, 4 + len).rotate(rot)); out.push(line(curve([xy(a), xy(b)]), 4)); }
+  for (let i = 0; i < n; i++) {
+    const k = i - (n - 1) / 2, o = k * gap;
+    if (!shape) { const a = c.add(new Point(o, 4).rotate(rot)), b = c.add(new Point(o, 4 + len).rotate(rot)); out.push(line(curve([xy(a), xy(b)]), 4)); continue; }
+    const base = c.add(new Point(o, 0).rotate(rot)), dir = new Point(0, 1).rotate(rot + k * 10);
+    const hit = new Path({ segments: [base, base.add(dir.multiply(300))], insert: false }).getIntersections(shape).sort((p, q) => p.point.getDistance(base) - q.point.getDistance(base))[0];
+    if (!hit) continue;
+    const e = hit.point.add(dir.multiply(3)), n2 = dir.rotate(90).multiply(3.2);
+    out.push(fill(rpoly([hit.point.subtract(dir.multiply(len)), e.add(n2), e.subtract(n2)], [1.5, 1, 1]), INK)); // effilée : fine dedans, large au bord (caché sous le contour)
+  }
   return out;
 }
 
@@ -521,7 +551,7 @@ function seatedGlose(C, o = {}) {
     line(curve([[370, 690], [382, 638], [420, 614]]), IN), line(curve([[632, 690], [622, 646], [594, 626]]), IN)]);
   anims.push({ id: 'corps', type: 'scale', pivot: [500, 700], values: [[1, 1], [1.015, 1.025], [1, 1]], dur: 3.8 });
   const footN = ell([424, 694], [52, 27]), footF = ell([592, 691], [44, 24]);
-  L.feet = G(null, [footF, footN].map(f => { const c = f.position; return vol(null, f, C.cream, [shadowOf(f, 8, 10, 0.18), ...toes([c.x, c.y + 2], 0, 2, 13, 24)]); }));
+  L.feet = G(null, [footF, footN].map(f => { const c = f.position; return vol(null, f, C.cream, [shadowOf(f, 8, 10, 0.18), ...toes(c, 0, 2, 18, 24, f)]); }));
   // queue qui enveloppe les pieds : part de derrière la hanche droite, passe devant, le bout remonte contre le pied gauche
   const tailPts = [[614, 674], [670, 690], [688, 712], [664, 730], [604, 736], [546, 728], [520, 710], [526, 690], [544, 686]];
   const tailFull = taper(tailPts, 40, 22, t => 40 - 18 * Math.pow(t, 1.3) + 3 * Math.sin(Math.PI * t));
@@ -536,6 +566,7 @@ function seatedGlose(C, o = {}) {
   anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.8 });
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 2, 0], dur: 6.4 });
   L.head = H.group;
+  neckShadow(L.body, H.head, body, 6, 16);
   // accessoires du cou
   if (C.has('echarpe')) { const sc = scarf(C, { c: [512, 478], w: 132, h: 44, sag: 24, tail: [[430, 500], [418, 560], [424, 610]] }); L.scarfBack = sc.back; L.scarf = sc.band; }
   if (C.has('noeud')) L.bow = bowTie(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
@@ -547,12 +578,12 @@ function seatedGlose(C, o = {}) {
 // bras : épaule -> coude -> poignet, patte ronde au bout, rayures qui suivent le membre, ombres et liseré
 function arm(C, pts, w0, w1, paw, o = {}) {
   const pawS = pawShape(paw.c, paw.rx, paw.ry, paw.rot || 0);
-  const a = U(taper(pts, w0, w1), pawS);
+  const a = soften(U(taper(pts, w0, w1), pawS), 9, 15); // poignet sans pli
   const bands = ringsAlong(pts, o.bands || [0.38, 0.62], w0 * 0.75, 8);
   const tip = X(pawShape(paw.c, paw.rx + 6, paw.ry + 4, paw.rot || 0), a);
   const det = [fill(X(bands, S(a, pawS)), C.stripe), fill(tip.clone(NI), C.cream), shadowOf(a, 12, 12, 0.18), rimOf(a, 6, 7)];
-  if (o.pads) det.push(fill(U(ell(P(paw.c).add([2, 8]), [15, 11]), circ(P(paw.c).add([-17, -10]), 7), circ(P(paw.c).add([1, -18]), 7), circ(P(paw.c).add([19, -10]), 7)), C.rose));
-  else det.push(...toes(paw.c, paw.rot || 0, 3, 12, 15));
+  if (o.pads) det.push(fill(U(ell(P(paw.c).add([0, 13]), [15, 10]), ...[[-22, -4], [-9, -11], [5, -11], [19, -4]].map(d => circ(P(paw.c).add(d), 5.5))), C.rose)); // coussinet + 4 doigts en arc
+  else det.push(...toes(paw.c, paw.rot || 0, 3, 16, 16, pawS));
   if (o.elbow) det.push(line(curve(o.elbow), IN, INK, 0.8));
   return { group: vol(o.name || null, a, C.fur, det), shape: a };
 }

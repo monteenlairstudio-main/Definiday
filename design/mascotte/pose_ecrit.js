@@ -16,7 +16,7 @@ function draw(paper) {
   // bras lointain levé, coude marqué (touffe), patte ouverte (coussinets) qui pince le fil
   const PAW = P([770, 414]);
   const raised = arm(C, [[606, 512], [680, 524], [738, 486], [766, 440]], 60, 50, { c: xy(PAW), rx: 38, ry: 34, rot: 12 }, { pads: true, bands: [0.3, 0.52, 0.74] });
-  const elbowTuft = blob([[688, 548], [700, 558], [706, 544], [716, 540], [702, 528]], 0.45);
+  const elbowTuft = rpoly([[662, 540], [686, 570], [716, 538]], [14, 3, 14]); // mèche du coude : une pointe de poil
   const raisedG = G('bras_leve', [fill(X(moved(raised.shape, 10, 16), L.body.children[0]), INK, 0.14), vol(null, U(raised.shape, elbowTuft), C.fur, raised.group.children.slice(1, -1))]);
 
   // fil : de la pelote à la patte (derrière le bras), puis de la patte au mot (devant)
@@ -37,7 +37,7 @@ function draw(paper) {
   for (const s of strokes) anims.push({ id: s.name, attr: 'stroke-dashoffset', values: [0, 0, LEN, LEN, 0], keyTimes: KT, dur: DUR });
   const fil = G('fil', strokes);
   // la patte se pose par-dessus le départ du fil : deux doigts le pincent
-  const pinch = G('pince', [fill(X(circ(PAW.add([-4, -24]), 16), raised.shape), C.cream), line(arc(PAW.add([-20, -22]), PAW.add([-4, -12]), PAW.add([12, -24])), IN)]);
+  const pinch = G('pince', [fill(X(circ(PAW.add([-4, -30]), 11), raised.shape), C.cream), line(arc(PAW.add([-14, -27]), PAW.add([-4, -21]), PAW.add([6, -27])), IN)]); // au-dessus des 4 doigts
   // la tête suit l'écriture (léger hochement vers le mot)
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, -3, -3, 0], keyTimes: KT, dur: DUR });
 

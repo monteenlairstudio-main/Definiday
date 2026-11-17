@@ -25,7 +25,7 @@ function draw(paper) {
 
   // patte rentrée posée au bord du livre
   const paw2 = ell([588, 652], [44, 27]);
-  const paw2G = vol(null, paw2, C.cream, [shadowOf(paw2, 8, 10, 0.18), ...toes([588, 652], 0, 2, 13, 22)]);
+  const paw2G = vol(null, paw2, C.cream, [shadowOf(paw2, 8, 10, 0.18), ...toes([588, 652], 0, 2, 18, 22, paw2)]);
 
   // patte qui pend et taquine la pelote : brin enroulé au poignet
   const leg = arm(C, [[440, 588], [392, 640], [346, 708], [314, 768]], 66, 54, { c: [304, 786], rx: 38, ry: 31, rot: 14 }, { bands: [0.42, 0.66] });
@@ -40,6 +40,7 @@ function draw(paper) {
   // tête : tournée vers la pelote (3/4 gauche), penchée
   const H = gloseHead(C, { at: [450, 432], tilt: -7, turn: -0.16, mood: 'curieux' });
   anims.push(...H.anims);
+  neckShadow(bodyG, H.head, body, 10, 14);
   anims.push({ id: 'tete', type: 'translate', values: [[0, 0], [0, -3], [0, 0]], dur: 3.6 });
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, -2.5, 0, 1.5, 0], dur: 6 });
   let scarfB = null, scarfF = null, bow = null;

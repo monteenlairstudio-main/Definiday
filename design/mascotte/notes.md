@@ -221,3 +221,16 @@ Commit fec50e1 annulé : la tête générée tient dans le masque, mais elle se 
 Plus de filets d'or aux deux bords (restent les 4 bandes), filets des bandes à 60 %, bandes sans cerne d'encre, étiquette plus petite
 (0,18 × 0,34 de la face au lieu de 0,24 × 0,44), ombre basse 0,2 → 0,12, reflet 0,13 → 0,18. Contraste RMS de la zone du livre −3 %
 (assis, écrit) ; la masse bleu nuit reste la plus sombre : un fond plus clair serait une autre couleur de reliure par défaut (jeton gloseBook).
+
+## Finitions d'illustrateur (critique aux tailles réelles, 48 à 200 dp, jour et nuit)
+Identité, silhouettes et rig inchangés (noms, pivots, portes, `yarn`, `tether`, liserés ; `GloseLayers.kt` et animateurs identiques).
+1. Doigts : `toes(..., shape)` trace des encoches effilées qui partent du bord de la patte (avant : traits flottants au milieu ; dans la
+   tasse, deux pattes à deux traits se lisaient comme deux petits visages).
+2. Patte levée d'« écrit » : coussinet + 4 doigts en arc, pince plus petite au-dessus (avant : 2 coussinets + « U » = un visage).
+3. `soften()` : congé sur les angles vifs de l'union bras ∪ patte (pli d'encre au poignet).
+4. Rayures de joue sous la branche des lunettes (avant : collées à elle, deux bavures autour de la tempe).
+5. `neckShadow()` : ombre portée de la tête sur le corps (assis, écrit, pile) : la tête ne flotte plus devant le plastron.
+6. Poils d'oreille dans le rose, plus fins ; rose des oreilles à 90 % (marge de poil, oreille lointaine comprise) ; sourcils au trait IN.
+7. Mèche du coude : une pointe nette au lieu d'une verrue.
+Restent en proposition : contours intérieurs plus fins que la silhouette (touche au trait 11/6 choisi), moustaches effilées
+(le liseré de nuit ne suit que les traits), queue de la pile moins massive. APK release +0,7 Ko.

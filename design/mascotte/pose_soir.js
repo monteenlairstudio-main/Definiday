@@ -58,7 +58,7 @@ function draw(paper) {
   const H = awake ? gloseHead(C, { at: [486, 432], tilt: -6, turn: -0.08 }) : gloseHead(C, { at: [486, 440], tilt: -9, turn: -0.08, sleep: true, glassesDrop: 16, glassesTilt: 5, glare: false, prefix: '' });
   anims.push(...H.anims);
   const pawL = pawShape([430, 610], 48, 28, -8), pawR = pawShape([548, 616], 46, 27, 6);
-  const paws = G('pattes', [pawR, pawL].map(p => vol(null, p, C.cream, [shadowOf(p, 12, 10, 0.12), ...toes(p.position, 0, 2, 12, 24)])));
+  const paws = G('pattes', [pawR, pawL].map(p => vol(null, p, C.cream, [shadowOf(p, 12, 10, 0.12), ...toes(p.position, 0, 2, 18, 24, p)])));
   let scarfG = null, bow = null;
   if (C.has('echarpe')) { const sc = scarf(C, { c: [620, 600], w: 70, h: 34, sag: 10, tail: [[640, 600], [652, 650], [650, 700]], tailFront: true }); scarfG = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 1);
