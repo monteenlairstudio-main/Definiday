@@ -67,7 +67,7 @@ function draw(paper) {
   if (C.has('echarpe')) { const sc = scarf(C, { c: [620, 600], w: 70, h: 34, sag: 10, tail: [[640, 600], [652, 650], [650, 700]], tailFront: true }); scarfG = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 1);
   const jg = C.has('grelot') ? jingle(C, [H.chin[0] + 14, H.chin[1] - 6], { w: 50, s: 0.85 }) : {};
-  const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0] + 20, H.chin[1] + 4], -9, 0.95, 0.55) : null;
+  const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0] + 20, H.chin[1] + 14], -9, 0.85, 0.55) : null;
   const objs = besides(C, [868, 788], 0.8);
   const gHead = G('dormeur', [paws, jg.band, H.group, bow, lav, jg.bell]); // les pièces du cou dans « dormeur » : elles le suivent
   gCupFront.insertChild(gCupFront.children.length - 3, fill(X(moved(U(H.head, pawL, pawR), 8, 14), cupFront), INK, 0.22)); // ombre portée de la tête et des pattes sur la tasse

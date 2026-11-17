@@ -355,9 +355,11 @@ function paperHat(C, W, pre) {
   return G(pre + 'papier', [vol(null, peak, news, [clipIn(peak, print), crease, shadowOf(peak, 18, 14, 0.14), rimOf(peak, 6, 8, 0.4)], 6),
     vol(null, band, fold, [shadowOf(band, 12, 10, 0.16), rimOf(band, 5, 6, 0.4), line(warp(curve([[396, 232], [604, 232]]), W), 3, INK, 0.3)], 6)]);
 }
-// lavallière : grand nœud souple de poète, deux boucles et deux pans qui tombent sur le plastron (posée sous le menton, comme le nœud)
-function lavalliere(C, at, rot = 0, s = 1.15, tl = 1) {
-  const silk = '#3A3550', sheen = '#FFFFFF';
+// lavallière : grand nœud souple de poète, deux boucles et deux pans qui tombent sur le plastron. Posée 14 sous le menton (ses boucles ne
+// touchent jamais la bouche, bâillement et « D » fier compris) ; soie rose `fil_clair` (le brin clair du fil) : elle se lit sur chaque pelage,
+// Smoking et Nuit compris, et sur la tasse bleu nuit comme bordeaux, sans faire tache à 48 dp
+function lavalliere(C, at, rot = 0, s = 1, tl = 1) {
+  const silk = '#D88A97', sheen = '#FFFFFF';
   const t = y => 512 + (y - 512) * tl; // longueur des pans
   const tailL = blob([[484, 508], [500, 514], [492, t(556)], [486, t(602)], [472, t(592)], [456, t(600)], [464, t(552)]], 0.35);
   const tailR = blob([[500, 514], [516, 508], [534, t(552)], [548, t(606)], [532, t(596)], [518, t(604)], [510, t(556)]], 0.35);
@@ -641,7 +643,7 @@ function seatedGlose(C, o = {}) {
   if (C.has('echarpe')) { const sc = scarf(C, { c: [512, 478], w: 132, h: 44, sag: 24, tail: [[430, 500], [418, 560], [424, 610]] }); L.scarfBack = sc.back; L.scarf = sc.band; }
   if (C.has('noeud')) L.bow = bowTie(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
   if (C.has('grelot')) { const j = jingle(C, [H.chin[0] + 4, H.chin[1] - 4]); L.jingleBand = j.band; L.jingle = j.bell; }
-  if (C.has('lavalliere')) L.lav = lavalliere(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
+  if (C.has('lavalliere')) L.lav = lavalliere(C, [H.chin[0] + 4, H.chin[1] + 14], -6);
   L.objs = besides(C, o.tree || [744, 676], 1.25);
   neckBreath(anims, anims.find(a => a.id === 'corps'), ...neckPieces(L));
   return { B, L, anims, H, body };

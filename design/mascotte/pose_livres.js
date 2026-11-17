@@ -55,7 +55,7 @@ function draw(paper) {
   if (C.has('echarpe')) { const sc = scarf(C, { c: [520, 566], w: 96, h: 38, sag: 20, tail: [[642, 578], [664, 628], [674, 688]], tailFront: true }); scarfF = sc.band; }
   if (C.has('noeud')) bow = bowTie(C, [H.chin[0], H.chin[1] + 2], -10);
   const jg = C.has('grelot') ? jingle(C, [H.chin[0], H.chin[1] - 4], { w: 56 }) : {};
-  const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0], H.chin[1] + 4], -10) : null;
+  const lav = C.has('lavalliere') ? lavalliere(C, [H.chin[0], H.chin[1] + 14], -10) : null;
   const objs = besides(C, [852, 908], 1, [892, 904], 1.05);
   neckBreath(anims, anims.find(a => a.id === 'corps'), scarfF, jg.band, bow, jg.bell, lav);
 
