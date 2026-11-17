@@ -48,7 +48,7 @@ function draw(paper) {
       translate: [[0, [0, 0]], [W + 60, [0, 0]], [W + 360, [0, 2]], [W + 660, [0, 0]], [W + 960, [0, 1.5]], [W + 1360, [0, 0]], [LIFE, [0, 0]]] }
     : { rotation: [[0, 0], [W + 50, 0], [W + 300, 1], [W + 600, -4, 'out'], [W + 1250, -3.5], [W + 1700, 1.5], [W + 1950, 0], [LIFE, 0]],
       translate: [[0, [0, 0]], [W, [0, 0]], [W + 200, [0, 1]], [W + 500, [0, -9], 'out'], [W + 1250, [0, -8]], [W + 1650, [0, 1]], [W + 1900, [0, 0]], [LIFE, [0, 0]]] };
-  for (const id of ['tete', ...[L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle].filter(g => g && g.children.length).map(g => g.name)])
+  for (const id of ['tete', ...neckPieces(L).filter(g => g && g.children.length).map(g => g.name)])
     anims.push({ id, type: 'rotate', pivot: H.neck, life: fin.rotation, fin: true }, { id, type: 'translate', life: fin.translate, fin: true });
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');

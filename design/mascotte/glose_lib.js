@@ -69,6 +69,8 @@ function shadowOf(shape, dx = 22, dy = 26, o = 0.16, c = INK) { return fill(S(sh
 function rimOf(shape, dx = 10, dy = 12, o = 0.26, c = '#FFF6E6') { return fill(S(shape, moved(shape, dx, dy)), c, o); }
 // accessoires du cou (écharpe, nœud, grelot) : ils respirent avec le corps qui les porte (même animation que lui), sinon le corps glisse
 // de 2 à 3 px sous un accessoire immobile. Les accessoires de tête sont déjà dans « tete ».
+// les pièces du cou de seatedGlose, une seule liste : elles respirent avec le corps (neckBreath) et suivent la tête dans la fin de quiz (pose_ecrit.js)
+function neckPieces(L) { return [L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle, L.lav]; }
 function neckBreath(anims, breath, ...pieces) { for (const g of pieces) if (g && g.name && g.children.length) anims.push(Object.assign({}, breath, { id: g.name })); }
 // ombre portée de la tête sur le corps (sous le menton) : la tête ne flotte plus devant le plastron ; posée dans le groupe du corps, sous son contour
 function neckShadow(vg, headSil, under, dx, dy, o = 0.16) { vg.insertChild(vg.children.length - 1, fill(X(moved(headSil, dx, dy), under), INK, o)); }
@@ -641,7 +643,7 @@ function seatedGlose(C, o = {}) {
   if (C.has('grelot')) { const j = jingle(C, [H.chin[0] + 4, H.chin[1] - 4]); L.jingleBand = j.band; L.jingle = j.bell; }
   if (C.has('lavalliere')) L.lav = lavalliere(C, [H.chin[0] + 4, H.chin[1] + 4], -6);
   L.objs = besides(C, o.tree || [744, 676], 1.25);
-  neckBreath(anims, anims.find(a => a.id === 'corps'), L.scarfBack, L.scarf, L.jingleBand, L.bow, L.jingle, L.lav);
+  neckBreath(anims, anims.find(a => a.id === 'corps'), ...neckPieces(L));
   return { B, L, anims, H, body };
 }
 // bras : épaule -> coude -> poignet, patte ronde au bout, rayures qui suivent le membre, ombres et liseré
