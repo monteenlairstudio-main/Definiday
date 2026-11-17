@@ -58,9 +58,8 @@ class GloseTest {
             "reveil_tasse" to "q21", "echarpe_sucre_orge" to "d:12-01..12-31", "bonnet_neige" to "d:12-01..02-28", "ecrit_flocon" to "d:12-01..12-31",
             "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20",
             // garde-robe wave (catalogue annex; cuir_fauve's h≥4 becomes q≥16, no new counter)
-            "bonnet_etoile" to "s21", "bonnet_imprimeur" to "c250", "monture_argent" to "q60", "monture_rose" to "k25", "col_claudine" to "k50",
-            "lavalliere" to "c160", "boa" to "d:12-28..01-05", "croissant" to "q30", "boussole" to "m150", "cuir_fauve" to "q16",
-            "bandeau_prix" to "d:11-01..11-20")
+            "bonnet_etoile" to "s21", "bonnet_imprimeur" to "c250", "monture_argent" to "q60", "monture_rose" to "k25", "lavalliere" to "c160",
+            "croissant" to "q30", "cuir_fauve" to "q16", "bandeau_prix" to "d:11-01..11-20", "prune" to "q40", "corail" to "m60")
         assertEquals(table, Unlocks.items.associate { it.id to (it.window?.let { w -> "d:$w" } ?: "${it.on}${it.need}") })
         Unlocks.items.filter { it.need > 0 }.forEach {
             assertTrue(it.id, it.id in Unlocks.of(mapOf(it.on to it.need)))
