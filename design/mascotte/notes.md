@@ -229,7 +229,8 @@ Identité, silhouettes et rig inchangés (noms, pivots, portes, `yarn`, `tether`
 2. Patte levée d'« écrit » : coussinet + 4 doigts en arc, pince plus petite au-dessus (avant : 2 coussinets + « U » = un visage).
 3. `soften()` : congé sur les angles vifs de l'union bras ∪ patte (pli d'encre au poignet).
 4. Rayures de joue sous la branche des lunettes (avant : collées à elle, deux bavures autour de la tempe).
-5. `neckShadow()` : ombre portée de la tête sur le corps (assis, écrit, pile) : la tête ne flotte plus devant le plastron.
+5. `neckShadow()` : ombre portée de la tête sur le corps (assis, écrit, pile) : la tête ne flotte plus devant le plastron ;
+   dans la tasse, ombre de la tête et des pattes sur la tasse (fixe : quand il s’étire, elle reste sur la paroi).
 6. Poils d'oreille dans le rose, plus fins ; rose des oreilles à 90 % (marge de poil, oreille lointaine comprise) ; sourcils au trait IN.
 7. Mèche du coude : une pointe nette au lieu d'une verrue.
 Restent en proposition : contours intérieurs plus fins que la silhouette (touche au trait 11/6 choisi), moustaches effilées
