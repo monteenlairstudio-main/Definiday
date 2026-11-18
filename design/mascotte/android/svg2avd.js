@@ -113,6 +113,43 @@ function lifeXml(keys, force, at) {
 const hermiteXml = nm => { const [a, b] = nm.split('_').slice(2).map(x => x / 1000);
   return `<?xml version="1.0" encoding="utf-8"?>\n<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:controlX1="0.3333" android:controlY1="${+(a / 3).toFixed(4)}" android:controlX2="0.6667" android:controlY2="${+(1 - b / 3).toFixed(4)}"/>\n`; };
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+// Bounding box of pathData (control points included: a box that holds the shape), [x0, y0, x1, y1].
+function box(d) {
+  const b = [Infinity, Infinity, -Infinity, -Infinity], add = (x, y) => { b[0] = Math.min(b[0], x); b[1] = Math.min(b[1], y); b[2] = Math.max(b[2], x); b[3] = Math.max(b[3], y); };
+  let x = 0, y = 0, x0 = 0, y0 = 0;
+  for (const [, c, args] of d.matchAll(/([a-zA-Z])([^a-zA-Z]*)/g)) {
+    const n = (args.match(/-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi) || []).map(Number), C = c.toUpperCase(), rel = c !== C;
+    const k = { M: 2, L: 2, T: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, A: 7, Z: 0 }[C];
+    if (k === undefined) throw new Error(`box: ${c} in ${d.slice(0, 40)}`);
+    if (!k) { x = x0; y = y0; continue; }
+    for (let i = 0; i + k <= n.length; i += k) {
+      const a = n.slice(i, i + k), ox = rel ? x : 0, oy = rel ? y : 0;
+      if (C === 'H') x = a[0] + ox; else if (C === 'V') y = a[0] + oy;
+      else if (C === 'A') { add(x - a[0], y - a[1]); add(x + a[0], y + a[1]); x = a[5] + ox; y = a[6] + oy; add(x - a[0], y - a[1]); add(x + a[0], y + a[1]); }
+      else { for (let j = 0; j < k - 2; j += 2) add(a[j] + ox, a[j + 1] + oy); x = a[k - 2] + ox; y = a[k - 1] + oy; }
+      add(x, y);
+      if (C === 'M' && i === 0) { x0 = x; y0 = y; }
+    }
+  }
+  return b;
+}
+// Consecutive unnamed paths of one group with the same paint are written as one path (one subpath each): a VectorDrawable path costs
+// its element and attributes in the binary XML, whatever its size (ribs, creases, tufts). Only while their boxes do not meet: overlapping
+// subpaths would be painted once (alpha) or cancel out (opposite windings), so the drawing stays the same.
+function merge(kids) {
+  const re = /^<path android:pathData="(M[^"]*)"([^>]*)\/>$/; // starts with an absolute moveto: it stays in place after another subpath
+  for (let i = 0; i < kids.length; i++) {
+    const m = re.exec(kids[i]); if (!m) continue;
+    const ds = [m[1]], bs = [box(m[1])];
+    let j = i + 1;
+    for (; j < kids.length; j++) {
+      const n = re.exec(kids[j]); if (!n || n[2] !== m[2]) break;
+      const b = box(n[1]); if (bs.some(a => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3])) break;
+      ds.push(n[1]); bs.push(b);
+    }
+    if (ds.length > 1) kids.splice(i, j - i, `<path android:pathData="${ds.join('')}"${m[2]}/>`);
+  }
+}
 
 function convert(src, name, resDir, opts = {}) {
 const gates = {}; // attr -> valeur (hex ou ?attr/token) quand la porte est ouverte
@@ -256,6 +293,7 @@ function emit(e, alpha, gate, out, inh = {}) {
     const kids = [];
     for (const k of e.kids) if (k.tag !== 'animateTransform' && k.tag !== 'animate' && k.tag !== 'title' && k.tag !== 'defs' && k.tag !== 'clipPath') emit(k, alpha * op, g ? g[1] : gate, kids, inhKids);
     if (!kids.length) return; // nothing of this layer inside
+    merge(kids);
     if (anim) target(nm, anim.attrs, holders.join(''), keys);
     // un groupe sans nom, sans transformation ni découpe est inutile en VectorDrawable : on l'aplatit
     if (!nm && !tr && !sc && !clip) { out.push(...kids); return; }
@@ -381,5 +419,11 @@ if (require.main === module) { // node android/svg2avd.js : self-check of hermit
   eq(L.chunks, [[0, 2600], [4000, 4150]]);
   if (!/startOffset="4000"><propertyValuesHolder[^>]*><keyframe android:fraction="0" android:value="1"\/><keyframe android:fraction="0.3667" android:value="0.001" android:interpolator="@android:interpolator\/accelerate_quad"\/><keyframe android:fraction="1" android:value="1" android:interpolator="@android:interpolator\/decelerate_quad"\/>/.test(L.xml)) throw new Error(L.xml);
   console.log('life ok');
+  // merge(): two apart, same paint -> one path; a third that meets one of them, or another paint, stays apart
+  eq(box('M10,10c5,0 10,5 10,10l-20,0zM0,50a5,5 0 1,0 10,0z'), [-5, 10, 20, 55]);
+  const p = (d, a = ' android:fillColor="#3b2a20" android:fillAlpha="0.3"') => `<path android:pathData="${d}"${a}/>`, ks = [p('M0,0h10v10z'), p('M20,0h10v10z'), p('M25,5h10v10z'), p('M50,0h5v5z', ''), '<group/>'];
+  merge(ks);
+  eq(ks, [p('M0,0h10v10zM20,0h10v10z'), p('M25,5h10v10z'), p('M50,0h5v5z', ''), '<group/>']);
+  console.log('merge ok');
 }
 module.exports = { convert, animated, hermite, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };
