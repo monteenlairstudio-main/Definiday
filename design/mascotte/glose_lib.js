@@ -310,7 +310,7 @@ function quill(C, turn, rot = 0) { // rot : penchée vers l'arrière (°) quand 
 }
 // bonnet de nuit : dôme qui épouse le crâne, revers crème, pointe tombante + pompon ; les pointes d'oreilles passent par des fentes
 function nightcap(C, earL, earR, inL, inR, turn, pre) {
-  if (C.v.bonnet === 'long' || C.v.bonnet === 'rond') return softCap(C, earL, earR, inL, inR, turn, pre, C.v.bonnet);
+  if (C.v.bonnet === 'tombant' || C.v.bonnet === 'replie') return softCap(C, earL, earR, inL, inR, turn, pre, C.v.bonnet);
   const red = '#C75B54';
   const W = headWarp(turn);
   const dome = blob([[318, 300], [338, 236], [410, 196], [500, 186], [590, 196], [662, 236], [682, 300], [500, 276]], 0.5);
@@ -328,45 +328,45 @@ function nightcap(C, earL, earR, inL, inR, turn, pre) {
       shadowOf(pompon, 10, 10, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([pp, pp.add(new Point(18, 0).rotate(a))]), 3, INK, 0.2))]),
   ]);
 }
-// Essais du propriétaire (variante {bonnet: 'long' | 'rond'}, GLOSE_VARIANT) : bonnet de nuit en tissu mou, sans revers de fourrure.
-// 'long' : dôme qui épouse le crâne, ourlet roulé fin, long tuyau qui passe derrière l'oreille, se plie et retombe le long de la joue.
-// 'rond' : dôme rond et gonflé à pois, pointe courte rabattue vers l'avant entre les oreilles, pompon sur le front.
-// Mêmes couleurs que le bonnet actuel (#C75B54, pompon #F8EEDE : surcouches neige et bleu nuit) ; pois de la couleur du pompon.
-// La pointe et son pompon forment « bonnet_pointe » (pivot au pli, data.local) : les réactions au toucher la balancent (reactions.js).
+// Essais du propriétaire (variante {bonnet: 'tombant' | 'replie'}, GLOSE_VARIANT) : le corps du bonnet garde la largeur de la tête
+// jusqu'aux deux tiers de sa hauteur (volume mou, en sac), seul le dernier tiers s'affine et se plie ; revers crème comme l'actuel.
+// 'tombant' : la pointe passe par-dessus l'épaule droite du bonnet et pend le long de la tête, pompon à hauteur de joue.
+// 'replie' : corps un peu plus bas, la pointe se replie vers l'arrière, couchée sur le dessus, et retombe à gauche : pompon au bord du bonnet.
+// Oreilles : par des fentes (pointes dessinées devant le tissu, comme l'actuel). Mêmes couleurs que l'actuel (#C75B54, revers C.cream,
+// pompon #F8EEDE) : surcouches neige et bleu nuit inchangées. Pointe + pompon : « bonnet_pointe » (pivot au pli, data.local), que les
+// réactions au toucher balancent (reactions.js) ; son liseré de nuit est à elle (halo(), pièce emboîtée).
 function softCap(C, earL, earR, inL, inR, turn, pre, type) {
-  const red = '#C75B54', pom = '#F8EEDE', Wq = headWarp(turn * 0.6), wp = p => warp(p, Wq), long = type === 'long';
-  const dome = wp(long ? blob([[314, 308], [324, 246], [380, 200], [458, 180], [540, 176], [618, 190], [672, 238], [688, 308], [600, 288], [500, 282], [400, 288]], 0.5)
-    : blob([[316, 306], [322, 234], [366, 178], [436, 146], [512, 136], [590, 148], [650, 186], [682, 238], [686, 306], [600, 286], [500, 280], [400, 286]], 0.5));
-  const hem = S(dome, moved(dome, 0, -22)); // ourlet roulé : bande fine, un ton plus sombre (encre) : elle suit chaque couleur
-  const folds = (long ? [[[420, 266], [432, 232], [458, 210]], [[586, 262], [580, 230], [560, 208]]] : [[[404, 262], [414, 226], [440, 200]], [[604, 262], [600, 226], [580, 202]]])
-    .map(p => line(wp(curve(p)), 3, INK, 0.28));
+  const red = '#C75B54', pom = '#F8EEDE', A = type === 'tombant', Wq = headWarp(turn * 0.6), wp = p => warp(p, Wq);
+  const dx = Wq.x(600) - 600, sh = pts => pts.map(([x, y]) => [x + dx, y]);
+  const body = wp(A ? blob([[312, 304], [314, 226], [324, 174], [358, 140], [430, 122], [520, 117], [600, 121], [652, 138], [682, 170], [690, 226], [690, 304], [500, 288]], 0.5)
+    : blob([[312, 304], [314, 228], [326, 180], [364, 148], [436, 132], [520, 128], [598, 132], [652, 146], [682, 180], [690, 228], [690, 304], [500, 288]], 0.5));
+  const cuff = X(wp(blob([[306, 314], [322, 258], [500, 238], [678, 258], [694, 314], [500, 290]], 0.5)), body);
   const cut = rect(0, 0, 1024, 228), tips = U(X(earL, cut), X(earR, cut));
   const ears = vol(null, tips, C.fur, [fill(X(U(inL, inR), tips), C.rose)]);
   const pompon = (c, r) => { c = P(c); const b = circ(c, r);
     return vol(null, b, pom, [shadowOf(b, 8, 8, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([c, c.add(new Point(r * 0.62, 0).rotate(a))]), 3, INK, 0.2))]); };
-  let back = null, front = null, pivot, capShape = dome, capIn = [];
-  if (long) {
-    const dx = Wq.x(600) - 600, sh = pts => pts.map(([x, y]) => [x + dx, y]);
-    const Ct = sh([[556, 202], [616, 172], [684, 160], [728, 182]]), Cl = sh([[728, 182], [752, 236], [760, 306], [754, 380]]);
-    const upper = taper(Ct, 108, 64), lower = taper(Cl, 60, 28, t => 60 - 32 * Math.pow(t, 0.8));
-    capShape = U(dome, upper); pivot = Ct[3];
-    capIn = [line(curve(sh([[692, 184], [706, 202]])), 3, INK, 0.3), line(curve(sh([[658, 182], [680, 206]])), 3, INK, 0.22)]; // plis du coude
-    back = G(pre + 'bonnet_pointe', [vol(null, lower, red, [shadowOf(lower, 16, 0, 0.2), fill(X(circ(Cl[0], 36), lower), INK, 0.18)]), // l'intérieur du pli, dans l'ombre
-      pompon(P(Cl[3]).add([-2, 16]), 22)]);
+  const crease = (pts, o = 0.28) => line(curve(sh(pts)), 3, INK, o);
+  let back = null, front = null, pivot, cap = body, capIn = [];
+  if (A) {
+    const Ct = sh([[606, 168], [664, 161], [710, 170], [736, 196]]), Cl = sh([[736, 196], [750, 240], [752, 290], [748, 330]]);
+    const upper = taper(Ct, 96, 64), lower = taper(Cl, 60, 28, t => 60 - 32 * Math.pow(t, 0.8));
+    cap = U(body, upper); pivot = Ct[3];
+    capIn = [crease([[690, 182], [708, 204]], 0.3), crease([[656, 175], [676, 202]], 0.22), crease([[600, 150], [628, 178], [636, 214]], 0.2)]; // plis du coude
+    back = G(pre + 'bonnet_pointe', [vol(null, lower, red, [shadowOf(lower, 16, 0, 0.2), fill(X(circ(Cl[0], 36), lower), INK, 0.18)]), // l'intérieur du pli
+      pompon(P(Cl[3]).add([-2, 18]), 24)]);
   } else {
-    const fold = wp(new Path({ segments: [[504, 162]], insert: false })).firstSegment.point;
-    const tipC = [xy(fold), xy(fold.add([22, 26])), xy(fold.add([38, 66])), xy(fold.add([44, 92]))];
-    const flop = taper(tipC, 88, 34, t => 88 - 54 * Math.pow(t, 0.9));
-    const dots = [[392, 232], [452, 190], [596, 196], [638, 254], [366, 284], [560, 160]].map(([x, y], i) => wp(circ([x, y], i % 2 ? 12 : 15)));
-    capIn = [fill(X(U(...dots), X(dome, moved(dome, 0, -30))), pom)]; // pas sur l'ourlet
-    pivot = tipC[0];
-    front = G(pre + 'bonnet_pointe', [fill(S(X(moved(flop, 10, 14), dome), flop), INK, 0.16), // ombre portée sur le dôme
-      vol(null, flop, red, [shadowOf(flop, 14, 10, 0.16), rimOf(flop, 6, 6, 0.3)]), pompon(P(tipC[3]).add([4, 16]), 22)]);
+    const tc = sh([[642, 176], [592, 152], [512, 145], [424, 151], [356, 172], [312, 202]]);
+    const W = t => 80 - 54 * Math.pow(t, 1.2), flop = taper(tc.slice(0, 5), 80, W(0.8), t => W(t * 0.8)), end = taper(tc.slice(4), W(0.8), 26);
+    pivot = tc[4];
+    capIn = [crease([[654, 176], [668, 200]], 0.3), crease([[618, 184], [634, 210]], 0.22)]; // plis où le tissu se replie
+    front = G(null, [fill(S(X(moved(flop, 4, 14), body), flop), INK, 0.16), G(pre + 'bonnet_pointe', [vol(null, end, red, [shadowOf(end, 8, 10, 0.18)]), pompon(P(tc[5]).add([-14, 22]), 24)]), // le bout qui retombe
+      vol(null, flop, red, [shadowOf(flop, 10, 12, 0.18), rimOf(flop, 5, 6, 0.3), fill(X(circ(tc[0], 34), flop), INK, 0.18), line(curve(sh([[600, 166], [520, 161], [440, 167]])), 3, INK, 0.2)])]);
   }
-  for (const g of [back, front]) if (g) g.data = { local: xy(P(pivot)) };
+  for (const g of [back, front]) { const t = g && (g.name ? g : g.getItem({ name: pre + 'bonnet_pointe' })); if (t) t.data = { local: xy(P(pivot)) }; }
   return G(pre + 'bonnet', [back,
-    vol(null, capShape, red, [...capIn, shadowOf(capShape, 30, 18, 0.16), rimOf(capShape, 10, 10, 0.3), fill(hem.clone(NI), INK, 0.14), Object.assign(edgeLine(moved(dome, 0, -22), dome, 4), { opacity: 0.5 }), ...folds]),
-    ears, front]);
+    vol(null, cap, red, [...capIn, shadowOf(cap, 30, 18, 0.16), rimOf(cap, 10, 10, 0.3), fill(cuff.clone(NI), C.cream), shadowOf(cuff, 14, 10, 0.12),
+      line(S(cuff, moved(cuff, 0, 400)), IN), ...[360, 420, 480, 540, 600, 650].map(x => line(wp(curve([[x, 262], [x + 2, 298]])), 3, INK, 0.25))]),
+    front, ears]);
 }
 // béret de peintre penché sur l'oreille lointaine, queue de feutre au sommet (dans la tête : suit ses animations)
 function beret(C, W, pre) {
