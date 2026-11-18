@@ -543,7 +543,8 @@ function book(o) {
 // pattes : patte avant ronde avec doigts, coussinets optionnels
 function pawShape(c, rx, ry, rot = 0) { const p = ell(c, [rx, ry]); p.rotate(rot, c); return p; }
 // doigts : `shape` donné, chaque séparation est une encoche qui part du bord de la patte (rejoint le contour, posé par-dessus) et
-// rentre de `len` en s'effilant, les doigts extérieurs un peu écartés ; sans `shape`, l'ancien trait flottant au milieu de la patte
+// rentre de 0,65·`len` en s'effilant jusqu'à un bout rond (une pointe longue se lisait comme une épine dès 160 dp), les doigts extérieurs
+// un peu écartés ; sans `shape`, l'ancien trait flottant au milieu de la patte
 function toes(c, rot = 0, n = 2, len = 14, gap = 22, shape = null) {
   c = P(c); const out = [];
   for (let i = 0; i < n; i++) {
@@ -552,8 +553,8 @@ function toes(c, rot = 0, n = 2, len = 14, gap = 22, shape = null) {
     const base = c.add(new Point(o, 0).rotate(rot)), dir = new Point(0, 1).rotate(rot + k * 10);
     const hit = new Path({ segments: [base, base.add(dir.multiply(300))], insert: false }).getIntersections(shape).sort((p, q) => p.point.getDistance(base) - q.point.getDistance(base))[0];
     if (!hit) continue;
-    const e = hit.point.add(dir.multiply(3)), n2 = dir.rotate(90).multiply(3.2);
-    out.push(fill(rpoly([hit.point.subtract(dir.multiply(len)), e.add(n2), e.subtract(n2)], [1.5, 1, 1]), INK)); // effilée : fine dedans, large au bord (caché sous le contour)
+    const e = hit.point.add(dir.multiply(3));
+    out.push(fill(taper([xy(e), xy(hit.point.subtract(dir.multiply(len * 0.65)))], 6.4, 3.6), INK)); // effilée : large au bord (caché sous le contour), bout rond dedans
   }
   return out;
 }
