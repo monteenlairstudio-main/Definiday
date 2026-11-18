@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_ecrit_mot_vd_beret">
-<target android:name="a16" android:animation="@animator/glose_k_b42d945c"/>
-<target android:name="a15" android:animation="@animator/glose_k_c1a332c3"/>
-<target android:name="a14" android:animation="@animator/glose_k_22320380"/>
-<target android:name="a13" android:animation="@animator/glose_k_cad26f46"/>
+<target android:name="a30" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a29" android:animation="@animator/glose_k_2229e057"/>
+<target android:name="a28" android:animation="@animator/glose_k_2409b16b"/>
+<target android:name="a27" android:animation="@animator/glose_k_cad26f46"/>
+<target android:name="a26" android:animation="@animator/glose_k_0f4acbf9"/>
+<target android:name="a25" android:animation="@animator/glose_k_054ac853"/>
 </animated-vector>

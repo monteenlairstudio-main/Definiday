@@ -38,14 +38,18 @@ const STYLES = {
   'Pelote.Lavande': { gloseBall: '#A99BC4', gloseBallD: '#65587F' },
   'Pelote.BleuPrusse': { gloseBall: '#2F5B8C', gloseBallD: '#173252' },
   'Pelote.VertEau': { gloseBall: '#A9D6C4', gloseBallD: '#5E8E7C' },
+  'Pelote.Prune': { gloseBall: '#7A4468', gloseBallD: '#45223B' }, 'Pelote.Corail': { gloseBall: '#E8866E', gloseBallD: '#A2493A' },
   'Livre.Bordeaux': { gloseBook: '#8E3A44', gloseBookD: '#6E2A33', gloseBookTop: '#8E3A44', gloseBookTopD: '#6E2A33' },
   'Livre.Verte': { gloseBook: '#2F5A46', gloseBookD: '#1F3F31', gloseBookTop: '#2F5A46', gloseBookTopD: '#1F3F31' },
-  'Yeux.Ecaille': { gloseSpecs: '#8A5530' },
+  'Yeux.Ecaille': { gloseSpecs: '#8A5530' }, 'Yeux.Argent': { gloseSpecs: '#C9CDD4' }, 'Yeux.Rose': { gloseSpecs: '#E7A3A0' },
+  'Livre.Fauve': { gloseBook: '#B07A48', gloseBookD: '#8A5A32', gloseBookTop: '#B07A48', gloseBookTopD: '#8A5A32' }, 'Livre.Bandeau': { gates: ['Bandeau'] },
   'Acc.Noeud': { gates: ['Noeud'] }, 'Acc.Echarpe': { gates: ['Echarpe'] }, 'Acc.Bonnet': { gates: ['Bonnet'] },
   'Acc.Plume': { gates: ['Plume'] }, 'Acc.Marque': { gates: ['Marque'], off: ['Ruban'] },
   'Acc.Grelot': { gates: ['Grelot'] }, 'Acc.Beret': { gates: ['Beret'] }, 'Acc.Couronne': { gates: ['Couronne'] }, 'Acc.Sapin': { gates: ['Sapin'] },
   'Acc.EcharpeSucreOrge': { gates: ['Echarpe'], swap: { '#2c3a5e': '#C8453E', '#d9a441': '#FFF8EE' } },
-  'Acc.BonnetNeige': { gates: ['Bonnet'], swap: { '#c75b54': '#9CC4DD', '?attr/gloseCream': '#FFFFFF' } },
+  'Acc.BonnetNeige': { gates: ['Bonnet'], swap: { '#c75b54': '#9CC4DD', '?attr/gloseCream': '#FFFFFF', '#f8eede': '#FFFFFF' } },
+  'Acc.BonnetEtoile': { gates: ['Bonnet'], swap: { '#c75b54': '#34467A', '#f8eede': '#E9BE55' } }, // bleu nuit, pompon d'or
+  'Acc.Papier': { gates: ['Papier'] }, 'Acc.Lavalliere': { gates: ['Lavalliere'] }, 'Acc.Croissant': { gates: ['Croissant'] },
   Eclats: { gates: ['Glint'] }, // quiz sans faute : éclats autour de « bravo »
 };
 const jobs = [['assis', 'glose_assis'], ['livres', 'glose_livres'], ['soir', 'glose_soir'], ...WORDS.map(w => ['ecrit', `glose_ecrit_${w}`, { word: w }]),

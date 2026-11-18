@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_1">
-<target android:name="corps" android:animation="@animator/glose_k_b44200ac"/>
-<target android:name="pattes" android:animation="@animator/glose_k_f77d1c02"/>
-<target android:name="pelote" android:animation="@animator/glose_k_73ff251d"/>
-<target android:name="brin" android:animation="@animator/glose_k_3dc9d194"/>
-<target android:name="brin_lien_f" android:animation="@animator/glose_k_62cf1c55"/>
-<target android:name="brin_lien" android:animation="@animator/glose_k_62cf1c55"/>
-<target android:name="brin_lien_a" android:animation="@animator/glose_k_12c8af3d"/>
-<target android:name="brin_lien_b" android:animation="@animator/glose_k_12c8af3d"/>
-<target android:name="brin_lien_c" android:animation="@animator/glose_k_cc010fdf"/>
+<target android:name="a11" android:animation="@animator/glose_k_3f4c428c"/>
+<target android:name="corps" android:animation="@animator/glose_k_a14845c9"/>
+<target android:name="pattes" android:animation="@animator/glose_k_4f492c0e"/>
+<target android:name="pelote" android:animation="@animator/glose_k_950dfa7e"/>
+<target android:name="brin" android:animation="@animator/glose_k_e7bac617"/>
+<target android:name="brin_lien_f" android:animation="@animator/glose_k_8668dda4"/>
+<target android:name="brin_lien" android:animation="@animator/glose_k_8668dda4"/>
+<target android:name="brin_lien_a" android:animation="@animator/glose_k_a845823c"/>
+<target android:name="brin_lien_b" android:animation="@animator/glose_k_a845823c"/>
+<target android:name="brin_lien_c" android:animation="@animator/glose_k_7b356aa4"/>
 </animated-vector>

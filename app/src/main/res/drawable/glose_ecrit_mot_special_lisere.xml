@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_ecrit_mot_vd_lisere">
+<target android:name="pelote_halo" android:animation="@animator/glose_k_d044945a"/>
+<target android:name="tete_halo" android:animation="@animator/glose_k_ee45d6dd"/>
+<target android:name="a6" android:animation="@animator/glose_k_c6fc5fc9"/>
+<target android:name="a7" android:animation="@animator/glose_k_247a5b6e"/>
+<target android:name="a9" android:animation="@animator/glose_k_af30a275"/>
+<target android:name="corps_halo" android:animation="@animator/glose_k_0e315c45"/>
+</animated-vector>

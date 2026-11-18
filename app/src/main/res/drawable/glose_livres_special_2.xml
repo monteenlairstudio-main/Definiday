@@ -2,5 +2,7 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd_2">
 <target android:name="tete" android:animation="@animator/glose_k_bc343ffa"/>
-<target android:name="a18" android:animation="@animator/glose_k_d34421fd"/>
+<target android:name="a21" android:animation="@animator/glose_k_d34421fd"/>
+<target android:name="a25" android:animation="@animator/glose_k_755081b1"/>
+<target android:name="a26" android:animation="@animator/glose_k_aebe67c8"/>
 </animated-vector>

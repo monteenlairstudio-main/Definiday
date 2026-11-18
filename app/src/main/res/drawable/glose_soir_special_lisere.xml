@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_soir_vd_lisere">
+<target android:name="dormeur_halo" android:animation="@animator/glose_k_efb52b71"/>
+<target android:name="tete_halo" android:animation="@animator/glose_k_7a56ae98"/>
+<target android:name="zzz_halo" android:animation="@animator/glose_k_b50255c0"/>
+<target android:name="p1" android:animation="@animator/glose_k_7345272c"/>
+<target android:name="p3" android:animation="@animator/glose_k_7345272c"/>
+<target android:name="p5" android:animation="@animator/glose_k_7345272c"/>
+</animated-vector>

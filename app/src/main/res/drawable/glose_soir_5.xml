@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_soir_vd_5">
-<target android:name="p19" android:animation="@animator/glose_k_3ca609ee"/>
-<target android:name="p20" android:animation="@animator/glose_k_3ca609ee"/>
-<target android:name="a18" android:animation="@animator/glose_k_2e5119b4"/>
-<target android:name="p22" android:animation="@animator/glose_k_50370aa2"/>
-<target android:name="p23" android:animation="@animator/glose_k_50370aa2"/>
-<target android:name="a21" android:animation="@animator/glose_k_a47378d3"/>
-<target android:name="p25" android:animation="@animator/glose_k_994822e2"/>
-<target android:name="p26" android:animation="@animator/glose_k_994822e2"/>
-<target android:name="a24" android:animation="@animator/glose_k_486eae2d"/>
+<target android:name="p22" android:animation="@animator/glose_k_13a1e1b8"/>
+<target android:name="p23" android:animation="@animator/glose_k_13a1e1b8"/>
+<target android:name="a21" android:animation="@animator/glose_k_a3b33530"/>
+<target android:name="p25" android:animation="@animator/glose_k_2659fd10"/>
+<target android:name="p26" android:animation="@animator/glose_k_2659fd10"/>
+<target android:name="a24" android:animation="@animator/glose_k_bb3220c9"/>
+<target android:name="p28" android:animation="@animator/glose_k_66a2577c"/>
+<target android:name="p29" android:animation="@animator/glose_k_66a2577c"/>
+<target android:name="a27" android:animation="@animator/glose_k_402cf593"/>
 </animated-vector>

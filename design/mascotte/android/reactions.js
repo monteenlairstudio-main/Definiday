@@ -51,17 +51,48 @@ function merge(...all) {
   return out;
 }
 
-// un toucher : il se tasse, se redresse en s'étirant, penche la tête un peu au-delà puis s'y pose, clin d'œil, et revient en rebondissant ;
-// endormi : il se soulève à peine puis se blottit, écrasé sur le bord de la tasse ; les « z » se tassent puis sautent
+// the part's inner animated group (its idle life) and its night outline's: reactions key them alike
+const both = (vd, g, keys) => Object.fromEntries([g, g + '_halo'].filter(n => vd.includes(`android:name="${n}"`)).map(n => [inner(vd, n), keys]));
+const mirror = k => k.map(([t, v, f]) => [t, -v, f]);
+const whiskers = (vd, k) => ({ ...both(vd, 'moustaches_g', { rotation: k }), ...both(vd, 'moustaches_d', { rotation: mirror(k) }) });
+const eyes = (vd, a, b) => ({ [inner(vd, 'paupiere_g')]: lid(a, b), [inner(vd, 'paupiere_d')]: lid(a, b) });
+// A tap, awake: anticipation (he sinks, the head dips), action (stretch, the head rises then tilts: an arc, the tilt peaking ~50 ms after
+// the rise), follow-through (tail and whiskers start after the body and settle after it), landing (a small squash, the head overshoots
+// and settles). Keys on one grid (0.08 apart at least: merge() never makes a segment under 33 ms). One personality per pose:
+// assis content (wink), livres curious (double take, surprised blink, the paw twitches), écrit proud (chest out, chin up, smug slow blink),
+// réveil sleepy (slow blink). Body squash leads, head lags it by 1–2 frames, tail and whiskers by 4–8. The head holds ~120 ms at the
+// top of the gesture (an accent; the eyes and the tail keep moving): its layers (and the worn pieces) are not redrawn meanwhile; all is
+// settled ~50 ms before the end. RenderThread cost per frame then stays at or under the base's (glose_qa animation.md).
+const PERSONA = {
+  assis: { sy: [[0, 1], [0.08, 0.94], [0.2, 1.045, 'out'], [0.36, 0.99], [0.46, 1], [0.66, 1], [0.74, 0.97], [0.84, 1.01], [0.92, 1], [1, 1]],
+    rot: [[0, 0], [0.08, -2], [0.36, 7, 'out'], [0.46, 5], [0.66, 5], [0.8, -1.5], [0.92, 0], [1, 0]],
+    ty: [[0, 0], [0.08, 1.5], [0.28, -7, 'out'], [0.46, -5], [0.66, -5], [0.84, 1.2], [0.92, 0], [1, 0]],
+    tail: [[0, 0], [0.2, 0], [0.4, 4.5], [0.56, -2], [0.7, 0.6], [0.8, 0], [1, 0]],
+    whisk: [[0, 0], [0.08, 0], [0.2, -4, 'out'], [0.36, 1.5], [0.46, 0]], eyes: vd => wink(vd, 0.2, 0.46) },
+  livres: { sy: [[0, 1], [0.08, 0.97], [0.2, 1.03, 'out'], [0.36, 0.995], [0.46, 1], [1, 1]],
+    rot: [[0, 0], [0.08, 2], [0.28, -9, 'out'], [0.46, -7], [0.62, -7], [0.73, 3.5], [0.82, -0.8], [0.9, 0], [1, 0]],
+    ty: [[0, 0], [0.08, 1], [0.2, -5, 'out'], [0.36, -4], [0.62, -4], [0.76, 0.8], [0.86, 0], [1, 0]],
+    tail: [[0, 0], [0.14, 0], [0.28, -3], [0.42, 6, 'out'], [0.56, -2.5], [0.66, 0.8], [0.76, 0], [1, 0]],
+    whisk: [[0, 0], [0.08, 0], [0.2, -5, 'out'], [0.36, -4], [0.46, 0]], eyes: vd => eyes(vd, 0.36, 0.44),
+    extra: vd => ({ [inner(vd, 'patte')]: { rotation: [[0, 0], [0.2, 0], [0.36, -2.5], [0.46, 0.8], [0.56, 0], [1, 0]] } }) },
+  ecrit: { sy: [[0, 1], [0.08, 0.96], [0.28, 1.04, 'out'], [0.36, 1.03], [0.56, 1.03], [0.76, 0.985], [0.86, 1], [1, 1]],
+    rot: [[0, 0], [0.08, 1], [0.28, -5, 'out'], [0.36, -4.5], [0.56, -4.5], [0.7, 3], [0.8, -0.8], [0.9, 0], [1, 0]],
+    ty: [[0, 0], [0.08, 1], [0.28, -8, 'out'], [0.36, -7], [0.56, -7], [0.76, 1], [0.86, 0], [1, 0]],
+    tail: [[0, 0], [0.2, 0], [0.38, 3], [0.54, -1.5], [0.7, 0], [1, 0]],
+    whisk: [[0, 0], [0.2, 0], [0.3, -3], [0.4, 0]], eyes: vd => eyes(vd, 0.56, 0.7) },
+};
+PERSONA.reveil = Object.assign({}, PERSONA.assis, { tail: null, eyes: vd => eyes(vd, 0.36, 0.6) });
+const awake = (vd, family) => { const m = PERSONA[family];
+  return merge(m.eyes(vd), { tete: { rotation: m.rot, translateY: m.ty } }, m.tail ? both(vd, 'queue', { rotation: m.tail }) : {},
+    whiskers(vd, m.whisk), m.extra ? m.extra(vd) : {}, squash(family, m.sy)); };
+// un toucher éveillé : awake() ; endormi : il se soulève à peine puis se blottit, écrasé sur le bord de la tasse ; les « z » s'effacent avec
+// l'ancienne image (fondu du toucher) et ne reviennent qu'à la fin, en montant à leur place (settle, Z_BACK)
 const TAP = {
-  awake: (vd, family) => merge(wink(vd, 0.1, 0.55),
-    { tete: { rotation: [[0, 0], [0.1, -2], [0.28, 7, 'out'], [0.4, 5], [0.6, 5], [0.82, -1.5], [1, 0]],
-      translateY: [[0, 0], [0.1, 0], [0.28, -7, 'out'], [0.4, -5], [0.6, -5], [0.85, 0]] } },
-    squash(family, [[0, 1], [0.1, 0.93], [0.28, 1.05, 'out'], [0.4, 0.985], [0.48, 1], [0.66, 1], [0.78, 0.965], [0.85, 1.012], [1, 1]])), // keys on the head's
+  awake,
   soir: (vd, family) => merge(
     { tete: { rotation: [[0, 0], [0.12, 1.5], [0.35, -5], [0.65, 3], [0.85, -1], [1, 0]] },
-      zzz: { ...at([255, 305]), translateY: [[0, 0], [0.14, 4], [0.42, -16, 'out'], [0.72, 2], [0.86, -1], [1, 0]],
-        scaleY: [[0, 1], [0.14, 0.86], [0.3, 1.12], [0.48, 1], [1, 1]], scaleX: [[0, 1], [0.14, 1.1], [0.3, 0.92], [0.48, 1], [1, 1]] } },
+      zzz: { ...at([255, 305]), translateY: [[0, 0], [0.66, 14], [1, 0]], scaleY: [[0, 1], [0.66, 0.85], [1, 1]], scaleX: [[0, 1], [0.66, 0.85], [1, 1]] } },
+    whiskers(vd, [[0, 0], [0.2, 0], [0.4, 3], [0.6, -1], [0.8, 0]]), // a dreamer's twitch
     squash(family, [[0, 1], [0.12, 1.025], [0.38, 0.95], [0.58, 1.015], [0.76, 1], [1, 1]])),
 };
 // 4 touchers : une réaction propre à chaque pose
@@ -78,6 +109,8 @@ const SPECIAL = {
     tete: { rotation: [[0, 0], [0.1, 0], [0.32, 11, 'out'], [0.4, 9], [0.5, 9], [0.7, -3], [0.82, 1], [0.9, 0]],
       translateY: [[0, 0], [0.32, 6], [0.5, 6], [0.62, -6], [0.8, 0]] },
   }, wink(vd, 0.82, 0.9),
+  whiskers(vd, [[0, 0], [0.04, 0], [0.1, -6, 'out'], [0.2, 2], [0.3, 0], [0.74, 0], [0.8, -3], [0.86, 0]]), // startled, then pleased
+  both(vd, 'queue', { rotation: [[0, 0], [0.06, 0], [0.14, 7, 'out'], [0.26, -3], [0.38, 1.5], [0.5, 0], [0.74, 0], [0.8, 3], [0.88, 0], [1, 0]] }),
   squash('assis', [[0, 1], [0.04, 0.95], [0.1, 1.04, 'out'], [0.18, 1], [0.68, 1], [0.74, 0.95], [0.82, 1.02], [0.9, 1], [1, 1]])),
   // il recule la patte puis tape la pelote, qui s'étire en montant et s'écrase en retombant, deux fois ;
   // il relève la tête d'un coup (au-delà, puis s'y pose), la queue frétille
@@ -91,7 +124,7 @@ const SPECIAL = {
     tete: { rotation: [[0, 0], [0.08, 2], [0.24, -10, 'out'], [0.45, -8], [0.7, 1], [0.8, 0], [1, 0]],
       translateY: [[0, 0], [0.08, 4], [0.24, -13, 'out'], [0.34, -10], [0.6, -10], [0.85, 1], [0.92, 0]] },
     ...Object.fromEntries(['queue', 'queue_halo'].map(q => [inner(vd, q), { rotation: [[0, 0], [0.5, 0], [0.6, 8], [0.7, -6], [0.8, 4], [0.9, 0]] }])), // et son liseré de nuit
-  }, wink(vd, 0.84, 0.92), squash('livres', [[0, 1], [0.08, 0.96], [0.24, 1.03, 'out'], [0.36, 1], [0.8, 1], [0.85, 0.98], [0.94, 1], [1, 1]])),
+  }, wink(vd, 0.84, 0.92), whiskers(vd, [[0, 0], [0.12, 0], [0.2, -4, 'out'], [0.3, 1], [0.4, 0], [0.62, 0], [0.7, -3], [0.8, 0]]), squash('livres', [[0, 1], [0.08, 0.96], [0.24, 1.03, 'out'], [0.36, 1], [0.8, 1], [0.85, 0.98], [0.94, 1], [1, 1]])),
   // il se tasse au fond de la tasse, s'étire au-dehors (au-delà, puis tenu), soupire, retombe en s'écrasant et se rendort ;
   // un gros « z » se tasse, se gonfle et s'envole
   soir: () => ({
@@ -104,7 +137,7 @@ const SPECIAL = {
       translateY: [[0, 0], [0.6, 0], [0.66, 4], [0.92, -20], [1, 0]] },
   }),
   // il se soulève puis plonge le museau dans son thé en s'écrasant, ressort étiré et ravi (« ah »), la vapeur fait pouf
-  reveil: vd => ({
+  reveil: vd => ({ ...whiskers(vd, [[0, 0], [0.5, 0], [0.6, -4, 'out'], [0.7, 1.5], [0.8, 0]]), // « ah »
     dormeur: { ...at([490, 620]), translateY: [[0, 0], [0.08, -6], [0.2, 16, 'in'], [0.45, 16], [0.58, -8, 'out'], [0.66, 1], [0.72, 0]],
       scaleY: [[0, 1], [0.08, 1.03], [0.2, 0.94], [0.26, 0.97], [0.45, 0.97], [0.58, 1.05, 'out'], [0.66, 0.99], [0.72, 1]],
       scaleX: [[0, 1], [0.08, 0.98], [0.2, 1.035], [0.26, 1.02], [0.45, 1.02], [0.58, 0.97, 'out'], [0.66, 1], [0.72, 1]] },
@@ -124,7 +157,8 @@ const SPECIAL = {
     ...Object.fromEntries(['fil_a', 'fil_b', 'fil_c'].map(n => [n, { trimPathEnd: [[0, 1], [0.2, 0, 'in'], [0.75, 1, 'out'], [1, 1]] }])),
     pelote: { ...at(pivot(vd, 'pelote')), rotation: [[0, 0], [0.06, 12], [0.2, -150, 'in'], [0.75, 10, 'out'], [0.85, -3], [0.93, 0]] },
     tete: { rotation: [[0, 0], [0.06, 1.5], [0.2, -3], [0.75, 5, 'out'], [0.86, -1], [1, 0]] },
-  }, wink(vd, 0.8, 0.9), squash('ecrit', [[0, 1], [0.2, 0.96], [0.32, 1.03, 'out'], [0.44, 1], [0.76, 1], [0.82, 0.98], [0.9, 1], [1, 1]])),
+  }, wink(vd, 0.8, 0.9), whiskers(vd, [[0, 0], [0.7, 0], [0.78, -3.5, 'out'], [0.86, 1], [0.92, 0]]),
+  both(vd, 'queue', { rotation: [[0, 0], [0.06, 0], [0.18, -2.5], [0.4, 1], [0.7, 0], [0.78, 4], [0.86, -1], [0.92, 0], [1, 0]] }), squash('ecrit', [[0, 1], [0.2, 0.96], [0.32, 1.03, 'out'], [0.44, 1], [0.76, 1], [0.82, 0.98], [0.9, 1], [1, 1]])),
 };
 
 // speed continuous through the keys the motion passes, zero where it rests ('out' / 'in': snap out of a rest, impact on one; svg2avd.hermite)
@@ -133,17 +167,32 @@ const kfs = k => { const ease = hermite(k.map(q => q[1]), k.map(q => q[0]), fals
 // A reaction ends on the first frame of the idle life (once() then plays it afresh), not on the still: for the « z » and the steam of the
 // evening poses, which the idle starts mid-cycle; they reach it in the reaction's last 150 ms. What the idle shows and hides (« z »,
 // steam: alpha down to 0) may be hidden at the tap: the reaction fades it in from 0 (it vanishes then, a sleeper's start, never pops in).
+// The « z » (bold ink: their fade-in right after the tap's crossfade read as a flicker) come back at Z_BACK instead: 'end', over the
+// reaction's last 200 ms (as they rise into place, TAP.soir); a fraction, faded in from there (the special's big « z »).
 // A reaction that animates such a property itself keeps its keys but these ends.
-function settle(targets, idle0, ms) {
-  const fade = +(120 / ms).toFixed(3), fin = +(1 - 150 / ms).toFixed(3);
+const Z_BACK = { tap: 'end', special: 0.6 };
+function settle(targets, idle0, ms, isZ = () => false, back = 0) {
+  const fade = +(120 / ms).toFixed(3), fin = +(1 - 150 / ms).toFixed(3), late = +(1 - 200 / ms).toFixed(3);
   for (const [t, props] of Object.entries(idle0)) for (const [p, { start, still, low }] of Object.entries(props)) {
-    const hides = /Alpha$/.test(p) && low === 0;
+    const hides = /Alpha$/.test(p) && low === 0, b = isZ(t) ? back : 0;
     if (start === still && !hides) continue;
     const k = (targets[t] = targets[t] || {})[p];
     if (k) { k[k.length - 1][1] = start; if (hides) k[0][1] = 0; }
-    else targets[t][p] = hides ? [[0, 0], [fade, still], [fin, still], [1, start]] : [[0, still], [fin, still], [1, start]];
+    else targets[t][p] = !hides ? [[0, still], [fin, still], [1, start]] : b === 'end' ? [[0, 0], [late, 0], [1, start]]
+      : [[0, 0], ...(b ? [[b, 0]] : []), [+(b + fade).toFixed(3), still], [fin, still], [1, start]];
   }
   return targets;
+}
+// is the target named t (a group or a path) inside a group named g, in some layer of the VD
+function under(vd, t, g) {
+  const st = [], re = /<(\/?)(group|path|clip-path)\b([^>]*?)(\/?)>/g; let m;
+  while ((m = re.exec(vd))) {
+    if (m[1]) { if (m[2] === 'group') st.pop(); continue; }
+    const name = (/android:name="([^"]*)"/.exec(m[3]) || [])[1];
+    if (name === t && st.some(n => n === g || n === g + '_halo')) return true; // and its night outline's
+    if (m[2] === 'group' && !m[4]) st.push(name);
+  }
+  return false;
 }
 // { target: objectAnimator xml } for svg2avd.animated()
 function animators(vd, ms, targets, idle0) {
@@ -240,11 +289,29 @@ function tethers(vd, family, ms, targets) {
 }
 // Neck accessories ride with what carries the head in each reaction: « tete » awake (its keys and pivot: they turn and lift with it, squash
 // included), « dormeur » in the cup (the scarf; the bow and the bell are inside it). Their idle breathing is on an inner group, at rest here.
-const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban'];
+const NECK = ['echarpe', 'echarpe_dos', 'noeud', 'grelot', 'grelot_ruban', 'lavalliere'];
 function neck(vd, family, targets) {
   const by = family === 'soir' || family === 'reveil' ? 'dormeur' : 'tete', k = targets[by];
   if (!k) return targets;
   for (const g of NECK) if (vd.includes(`android:name="${g}"`) && !chainOf(vd, g).some(a => a.name === by)) targets[g] = { ...(k.pivotX ? {} : at(pivot(vd, by))), ...k };
+  return targets;
+}
+// Bonnet de nuit en tissu (glose_lib.js nightcap) : sa pointe traîne derrière la tête. Rotation propre = K × (rotation de
+// la tête LAG ms plus tôt − la sienne) : elle part en retard, rattrape, se pose avec elle. Clés aux seuls extremums (repos entre deux :
+// ni arrêt en route ni saut), les plus proches que 40 ms fondues ; quelques degrés au plus (elle reste sur la tête, test everyItemShowsInEveryPose).
+const LAG = 120, K = 0.6;
+function sway(vd, ms, targets) {
+  const r = targets.tete && targets.tete.rotation;
+  if (!r || !vd.includes('android:name="bonnet_pointe"')) return targets;
+  const n = Math.round(ms / 10), s = [];
+  for (let i = 0; i <= n; i++) { const f = i / n; s.push([f, K * (valueAt(r, Math.max(0, f - LAG / ms)) - valueAt(r, f))]); }
+  let keys = s.filter(([, v], i) => i > 0 && i < n && (v - s[i - 1][1]) * (s[i + 1][1] - v) < 0 && Math.abs(v) > 0.3).map(([f, v]) => [+f.toFixed(3), +v.toFixed(2)]);
+  keys = [[0, 0], ...keys, [1, 0]];
+  for (let i = 1; i < keys.length; i++) if ((keys[i][0] - keys[i - 1][0]) * ms < 40) { // too close: keep the larger swing (the ends stay)
+    const drop = i === keys.length - 1 || (i > 1 && Math.abs(keys[i - 1][1]) < Math.abs(keys[i][1])) ? i - 1 : i;
+    keys.splice(drop, 1); i = 0;
+  }
+  if (keys.length > 2) targets.bonnet_pointe = { rotation: keys };
   return targets;
 }
 const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['reveil', 'reveil'], ...WORDS.map(w => [`ecrit_${w}`, 'ecrit'])];
@@ -253,7 +320,7 @@ module.exports = RES => {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
     const idle0 = IDLE0[`glose_${pose}`];
     for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]]) {
-      const t = settle(neck(vd, family, make(vd, family)), idle0, ms);
+      const t = settle(sway(vd, ms, neck(vd, family, make(vd, family))), idle0, ms, n => under(vd, n, 'zzz'), Z_BACK[kind]);
       animated(`glose_${pose}_${kind}`, name, Object.assign(animators(name, ms, t, idle0), tethers(vd, family, ms, t)), RES);
     }
   }

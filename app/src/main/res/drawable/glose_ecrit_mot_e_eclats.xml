@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_ecrit_mot_vd_e_eclats">
-<target android:name="a25" android:animation="@animator/glose_k_990c9074"/>
-<target android:name="a26" android:animation="@animator/glose_k_7cf71493"/>
-<target android:name="a27" android:animation="@animator/glose_k_ac9a26c4"/>
+<target android:name="a48" android:animation="@animator/glose_k_990c9074"/>
+<target android:name="a49" android:animation="@animator/glose_k_7cf71493"/>
+<target android:name="a50" android:animation="@animator/glose_k_ac9a26c4"/>
 </animated-vector>

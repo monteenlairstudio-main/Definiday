@@ -56,14 +56,17 @@ class GloseTest {
             "roux" to "q3", "smoking" to "q30", "lavande" to "q8", "bleu_prusse" to "c25", "vert_eau" to "r12", "reliure_bordeaux" to "q2",
             "reliure_verte" to "m40", "monture_ecaille" to "c20", "ecrit_coucou" to "q3", "ecrit_ronron" to "s10", "grelot" to "q12", "beret" to "k15",
             "reveil_tasse" to "q21", "echarpe_sucre_orge" to "d:12-01..12-31", "bonnet_neige" to "d:12-01..02-28", "ecrit_flocon" to "d:12-01..12-31",
-            "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20")
+            "sapin_papier" to "d:12-01..12-31", "couronne_rois" to "d:01-02..01-20",
+            // garde-robe wave (catalogue annex; cuir_fauve's h≥4 becomes q≥16, no new counter)
+            "bonnet_etoile" to "s21", "bonnet_imprimeur" to "c250", "monture_argent" to "q60", "monture_rose" to "k25", "lavalliere" to "c160",
+            "croissant" to "q30", "cuir_fauve" to "q16", "bandeau_prix" to "d:11-01..11-20", "prune" to "q40", "corail" to "m60")
         assertEquals(table, Unlocks.items.associate { it.id to (it.window?.let { w -> "d:$w" } ?: "${it.on}${it.need}") })
         Unlocks.items.filter { it.need > 0 }.forEach {
             assertTrue(it.id, it.id in Unlocks.of(mapOf(it.on to it.need)))
             assertFalse(it.id, it.id in Unlocks.of(mapOf(it.on to it.need - 1)))
         }
         assertEquals(setOf("assis", "tigre", "bordeaux"), Unlocks.of(emptyMap()))
-        assertEquals(Unlocks.items.filter { it.window == null }.map { it.id }.toSet(), Unlocks.of("qprsckm".associateWith { 150 }))
+        assertEquals(Unlocks.items.filter { it.window == null }.map { it.id }.toSet(), Unlocks.of("qprsckm".associateWith { 300 }))
     }
 
     /** Every id is unique and resolves: poses to a drawable, other items (but the defaults) to an overlay that changes the picture; names never say "Glose". */
@@ -77,6 +80,91 @@ class GloseTest {
             else assertEquals(it.id, 0, it.style)
             assertEquals(it.id, it.kind.slot == Unlocks.Kind.POSE, it.res != 0)
         }
+    }
+
+    /** Seeks [d] (a layered reaction) as the RenderThread draws it: per animated property, the last animator started by then writes. */
+    private fun seeker(d: android.graphics.drawable.Drawable): (Long) -> Unit {
+        fun get(o: Any, f: String) = o.javaClass.getDeclaredField(f).apply { isAccessible = true }.get(o)
+        fun flat(a: android.animation.Animator, at: Long): List<Pair<android.animation.ObjectAnimator, Long>> = when (a) {
+            is android.animation.AnimatorSet -> a.childAnimations.flatMap { flat(it, at + a.startDelay) }
+            is android.animation.ObjectAnimator -> listOf(a to at + a.startDelay)
+            else -> emptyList()
+        }
+        val l = d as android.graphics.drawable.LayerDrawable
+        val tracks = (0 until l.numberOfLayers).map(l::getDrawable).filterIsInstance<AnimatedVectorDrawable>().flatMap { v ->
+            AnimatedVectorDrawable::class.java.getMethod("forceAnimationOnUI").invoke(v); v.start()
+            (get(get(v, "mAnimatorSet"), "mSet") as android.animation.AnimatorSet).let { it.pause(); flat(it, 0) }
+        }.groupBy { (a, _) -> System.identityHashCode(a.target) to a.values.joinToString { it.propertyName } }.values.map { g -> g.sortedBy { it.second } }
+        return { ms -> tracks.forEach { g -> g.lastOrNull { it.second <= ms }?.let { (a, t0) -> a.currentPlayTime = minOf(ms, t0 + a.totalDuration - a.startDelay) - t0 } } }
+    }
+
+    /** Every worn item shows in every pose, every tap reaction and the quiz end (*_fin), at frames 100 ms apart through each reaction: its
+     *  piece draws there (it changes the picture) and, drawn alone (the body layers hidden: nothing in front of it), never touches the edge
+     *  of the drawing. A head or neck piece rides with the head where the head moves rigidly (awake reactions, *_fin): the distance from
+     *  its centre (alpha-weighted) to the glasses' (which the head carries) stays within 1 px (at 192 px) of the first frame's. In the cup
+     *  the carrier squashes (no rigid reference): pieces are inside « dormeur » there. Objects and bindings are still layers, the same at every frame:
+     *  checked on the first. Bindings recolour the seated and pile poses' books, not the cup poses' fixed-colour ones. */
+    @Test fun everyItemShowsInEveryPose() {
+        val r = ctx.resources
+        val id = { n: String -> r.getIdentifier(n, "drawable", ctx.packageName) }
+        val poses = Unlocks.items.filter { it.kind.slot == Unlocks.Kind.POSE }.map { it.res }
+        val reactions = poses.flatMap { p -> listOf("_tap" to 600L, "_special" to 1800L).map { (s, ms) -> id(r.getResourceEntryName(p) + s) to (0..ms step 100).toList() } } +
+            listOf("bravo", "encore").map { id("glose_ecrit_${it}_fin") to (4000L..6100L step 100).toList() } // the word written (4 050 ms), the head moves
+        val moving = setOf(Unlocks.Kind.TETE, Unlocks.Kind.COU, Unlocks.Kind.YEUX)
+        val glasses = R.style.Glose_Yeux_Rose
+        val size = 192
+        fun pixels(b: Bitmap) = IntArray(size * size).also { b.getPixels(it, 0, size, 0, 0, size, size) }
+        fun changed(a: IntArray, b: IntArray) = a.indices.filter { a[it] != b[it] }
+        fun centre(px: List<Int>, w: (Int) -> Double = { 1.0 }) = px.sumOf(w).let { s -> px.sumOf { it % size * w(it) } / s to px.sumOf { it / size * w(it) } / s }
+        fun edge(i: Int) = i % size == 0 || i % size == size - 1 || i / size == 0 || i / size == size - 1
+        val bad = mutableListOf<String>()
+        var worst = 0.0
+        for ((res, frames) in poses.map { it to listOf(-1L) } + reactions.filter { it.first != 0 }) {
+            val name = r.getResourceEntryName(res)
+            val cup = Regex("glose_(soir|reveil).*").matches(name)
+            val items = Unlocks.items.filter { it.kind in Unlocks.ACC }.filterNot { it.kind == Unlocks.Kind.LIVRE && it.style != R.style.Glose_Livre_Bandeau && cup }
+            val ds = (listOf(0, glasses) + items.map { it.style }).associateWith { Glose.drawable(ctx, res, listOf(it).filter { s -> s != 0 }) }
+            // per item, the body layers of its drawable (in Glose.drawable's order), hidden to draw the piece alone; none for an item
+            // without layers of its own (a frame or a binding recolours the body)
+            val layers = GloseLayers.layers.getValue(res)
+            val body = items.associate { item ->
+                val kept = layers.filter { l -> l.first.isEmpty() || GloseLayers.gates.any { g -> g.first == item.style && g.second == l.first } }
+                item.style to if (kept.size == layers.count { it.first.isEmpty() }) emptyList() else kept.indices.filter { kept[it].first.isEmpty() }
+            }
+            val seek = if (frames.first() < 0) emptyMap() else ds.mapValues { (_, d) -> seeker(d) }
+            val first = mutableMapOf<String, Double>() // item: distance glasses -> piece at the first frame (the head at rest)
+            for (t in frames) {
+                val now = items.filter { t == frames.first() || it.kind in moving }
+                val px = (listOf(0, glasses) + now.map { it.style }).associateWith { st -> seek[st]?.invoke(t); pixels(Glose.bitmap(ds.getValue(st), size, size)) }
+                val a = px.getValue(0)
+                val eye = centre(changed(a, px.getValue(glasses)))
+                for (it in now) {
+                    val at = "${it.id} on $name${if (t >= 0) " at $t ms" else ""}"
+                    var p = changed(a, px.getValue(it.style))
+                    var weight: (Int) -> Double = { 1.0 }
+                    if (p.size <= 40) { bad += "$at: not drawn"; continue }
+                    val hide = body.getValue(it.style)
+                    if (hide.isNotEmpty()) { // the piece alone
+                        val d = ds.getValue(it.style) as android.graphics.drawable.LayerDrawable
+                        hide.forEach { i -> d.getDrawable(i).alpha = 0 }
+                        val q = pixels(Glose.bitmap(d, size, size))
+                        p = q.indices.filter { i -> Color.alpha(q[i]) > 0 }
+                        weight = { i -> Color.alpha(q[i]) / 255.0 } // its antialiased edge counts for what it covers
+                        hide.forEach { i -> d.getDrawable(i).alpha = 255 }
+                    }
+                    if (p.any(::edge)) bad += "$at: cut by the edge"
+                    if (it.kind != Unlocks.Kind.TETE && it.kind != Unlocks.Kind.COU || cup) continue
+                    val c = centre(p, weight)
+                    val dist = Math.hypot(c.first - eye.first, c.second - eye.second)
+                    val lag = dist - first.getOrPut(it.id) { dist }
+                    worst = maxOf(worst, Math.abs(lag))
+                    if (Math.abs(lag) > 1) bad += "$at: off the head by %.1f px".format(lag)
+                }
+            }
+        }
+        println("worst lag %.2f px".format(worst))
+        bad.forEach(::println)
+        assertEquals(emptyList<String>(), bad)
     }
 
     /** Windows any year, wrapping over the new year; seasonal hints say when they come back, never that they expired. */
@@ -118,7 +206,7 @@ class GloseTest {
         assertEquals(setOf("ecrit_mot", "ecrit_encore", "soir", "ecrit_dodo"), Unlocks.update(p).map { it.id }.toSet())
         p.announced = p.announced + Unlocks.update(p).map { it.id }
         p.streak = 1; p.lastQuizDay = java.time.LocalDate.now().toEpochDay() // broken streak restarted today: nothing is lost, nothing new
-        assertTrue(Unlocks.update(p).isEmpty())
+        assertTrue(Unlocks.update(p).all { it.window != null }) // (but what today's quiz unlocks when today falls in a seasonal window)
         assertTrue("soir" in p.unlocked)
         assertEquals("Encore 2 soirs de quiz d’affilée", Unlocks.hint(Unlocks.byId.getValue("soir"), p))
         // P8: broken since the last quiz (10 days ago), the hint counts from 0, not from the stale streak

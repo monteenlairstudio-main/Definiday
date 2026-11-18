@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_soir_vd_4">
-<target android:name="a17" android:animation="@animator/glose_k_59c0673c"/>
+<target android:name="a19" android:animation="@animator/glose_k_19cc1c09"/>
+<target android:name="a20" android:animation="@animator/glose_k_8f1ae783"/>
+<target android:name="a18" android:animation="@animator/glose_k_71a9113a"/>
 </animated-vector>

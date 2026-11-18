@@ -254,9 +254,9 @@ class UiTest {
         }
         val texts = views(a).filterIsInstance<TextView>().map { it.text.toString() }.toList()
         val fresh = Unlocks.items.filter { it.id in Prefs(ctx).announced }
-        assertEquals(4, fresh.size)
+        assertEquals(4, fresh.count { it.window == null }) // plus a seasonal item when today falls in its window (bandeau de prix in November)
         assertEquals(3, fresh.count { it.nom in texts })
-        assertTrue(ctx.getString(R.string.unlock_more, 1) in texts)
+        assertTrue(ctx.getString(R.string.unlock_more, fresh.size - 3) in texts)
         assertTrue(buttons(a).any { it.text == ctx.getString(R.string.collection_see) })
     }
 

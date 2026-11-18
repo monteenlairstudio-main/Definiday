@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_reveil_vd_4">
+<target android:name="a19" android:animation="@animator/glose_k_c872ae4e"/>
+<target android:name="a20" android:animation="@animator/glose_k_c26fe6ef"/>
 <target android:name="dormeur" android:animation="@animator/glose_k_b6f65fef"/>
 <target android:name="tete" android:animation="@animator/glose_k_50ed5bb7"/>
-<target android:name="a13" android:animation="@animator/glose_k_4dc6db31"/>
 <target android:name="a14" android:animation="@animator/glose_k_4dc6db31"/>
-<target android:name="a12" android:animation="@animator/glose_k_844ef662"/>
+<target android:name="a15" android:animation="@animator/glose_k_4dc6db31"/>
+<target android:name="a13" android:animation="@animator/glose_k_844ef662"/>
 </animated-vector>

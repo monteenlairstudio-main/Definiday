@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_1">
-<target android:name="a7" android:animation="@animator/glose_k_96207d83"/>
-<target android:name="a8" android:animation="@animator/glose_k_b34f7197"/>
-<target android:name="a9" android:animation="@animator/glose_k_f1bdf6c9"/>
+<target android:name="a10" android:animation="@animator/glose_k_59ca0ba6"/>
+<target android:name="a12" android:animation="@animator/glose_k_3dccc522"/>
+<target android:name="a11" android:animation="@animator/glose_k_34a2a5b7"/>
+<target android:name="a13" android:animation="@animator/glose_k_7aa1466b"/>
 </animated-vector>

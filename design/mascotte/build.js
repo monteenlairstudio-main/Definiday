@@ -11,8 +11,8 @@ const PAPER = require.resolve('paper/dist/paper-full.min.js'); // npm install pa
 
 async function buildOne(b, job) {
   const lib = fs.readFileSync(path.join(D, 'glose_lib.js'), 'utf8');
-  const pose = fs.readFileSync(path.join(D, `pose_${job.pose}.js`), 'utf8');
-  const code = `var VARIANT=${JSON.stringify(job.variant || {})};\n${lib}\n${pose}`;
+  const pose = fs.readFileSync(path.join(D, `pose_${job.pose}.js`), 'utf8'), vie = fs.readFileSync(path.join(D, 'vie.js'), 'utf8');
+  const code = `var VARIANT=${JSON.stringify(job.variant || {})};\n${lib}\n${vie}\n${pose}`;
   const p = await b.newPage();
   let err = null; p.on('pageerror', e => { err = e; });
   await p.setContent('<canvas id="c" width="1024" height="1024"></canvas>');
@@ -26,9 +26,12 @@ async function buildOne(b, job) {
     for (const a of res.anims || []) {
       const el = root.querySelector('#' + a.id);
       if (!el) throw new Error('groupe absent : ' + a.id);
+      if (a.life) Object.assign(a, { values: a.life.map(k => k[1]), keyTimes: a.life.map(k => +(k[0] / 26000).toFixed(6)), dur: 26 }); // vie.js (LIFE = Glose.IDLE_MS)
       const n = a.values.length;
       const kt = a.keyTimes || a.values.map((_, i) => +(i / (n - 1)).toFixed(4));
       const timing = { dur: a.dur + 's', begin: (a.begin || 0) + 's', repeatCount: 'indefinite', keyTimes: kt.join(';') };
+      if (a.life) timing['data-life'] = a.life.map(k => k[2] || '').join(';'); // svg2avd : piste de la vie, accents des clés
+      if (a.fin) timing['data-fin'] = '1'; // svg2avd : jouée seulement par la fin de quiz (*_fin)
       if (a.linear) timing.calcMode = 'linear'; else Object.assign(timing, { calcMode: 'spline', keySplines: Array(n - 1).fill(a.spline || ease).join(';') });
       if (a.attr) { // animation d'attribut (opacité, tracé du fil)
         const an = mk('animate');

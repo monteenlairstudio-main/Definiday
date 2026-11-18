@@ -35,7 +35,8 @@ object Glose {
         val night = ctx.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK == android.content.res.Configuration.UI_MODE_NIGHT_YES
         t.theme.applyStyle(if (night) R.style.GloseHalo_Nuit else R.style.GloseHalo_Jour, true) // outline by mode, and a theme key per mode (cache)
         val layers = GloseLayers.layers[res] ?: return t.getDrawable(res)!!
-        val open = GloseLayers.gates.filter { it.first in styles }.map { it.second }
+        // the night outline is a layer of its own (gate Halo): not drawn by day, where it is transparent and its moves would redraw a layer
+        val open = GloseLayers.gates.filter { it.first in styles }.map { it.second } + if (night) listOf("Halo") else emptyList()
         return LayerDrawable(layers.filter { it.first.isEmpty() || it.first in open }.map { t.getDrawable(it.second)!! }.toTypedArray())
     }
 

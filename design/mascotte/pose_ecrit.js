@@ -16,7 +16,7 @@ function draw(paper) {
   // bras lointain levé, coude marqué (touffe), patte ouverte (coussinets) qui pince le fil
   const PAW = P([770, 414]);
   const raised = arm(C, [[606, 512], [680, 524], [738, 486], [766, 440]], 60, 50, { c: xy(PAW), rx: 38, ry: 34, rot: 12 }, { pads: true, bands: [0.3, 0.52, 0.74] });
-  const elbowTuft = blob([[688, 548], [700, 558], [706, 544], [716, 540], [702, 528]], 0.45);
+  const elbowTuft = rpoly([[662, 540], [686, 570], [716, 538]], [14, 3, 14]); // mèche du coude : une pointe de poil
   const raisedG = G('bras_leve', [fill(X(moved(raised.shape, 10, 16), L.body.children[0]), INK, 0.14), vol(null, U(raised.shape, elbowTuft), C.fur, raised.group.children.slice(1, -1))]);
 
   // fil : de la pelote à la patte (derrière le bras), puis de la patte au mot (devant)
@@ -37,14 +37,24 @@ function draw(paper) {
   for (const s of strokes) anims.push({ id: s.name, attr: 'stroke-dashoffset', values: [0, 0, LEN, LEN, 0], keyTimes: KT, dur: DUR });
   const fil = G('fil', strokes);
   // la patte se pose par-dessus le départ du fil : deux doigts le pincent
-  const pinch = G('pince', [fill(X(circ(PAW.add([-4, -24]), 16), raised.shape), C.cream), line(arc(PAW.add([-20, -22]), PAW.add([-4, -12]), PAW.add([12, -24])), IN)]);
+  const pinch = G('pince', [fill(X(circ(PAW.add([-4, -30]), 11), raised.shape), C.cream), line(arc(PAW.add([-14, -27]), PAW.add([-4, -21]), PAW.add([6, -27])), IN)]); // au-dessus des 4 doigts
   // la tête suit l'écriture (léger hochement vers le mot)
   anims.push({ id: 'tete', type: 'rotate', pivot: H.neck, values: [0, 0, -3, -3, 0], keyTimes: KT, dur: DUR });
+  // fin de quiz (*_fin, make_android.js ONCE : le mot est écrit à 4 050 ms) : « bravo », il relève le menton, fier, tient, puis un petit
+  // hochement ; « encore », deux petits hochements qui encouragent. Le cou suit la tête (comme dans les réactions). Mêmes groupes pour tous
+  // les mots (le corps reste partagé), joués seulement par *_fin (svg2avd : data-fin).
+  const W = 4050, fin = word === 'encore'
+    ? { rotation: [[0, 0], [W + 60, 0], [W + 360, 3], [W + 660, -0.5], [W + 960, 2.5], [W + 1360, 0], [LIFE, 0]],
+      translate: [[0, [0, 0]], [W + 60, [0, 0]], [W + 360, [0, 2]], [W + 660, [0, 0]], [W + 960, [0, 1.5]], [W + 1360, [0, 0]], [LIFE, [0, 0]]] }
+    : { rotation: [[0, 0], [W + 50, 0], [W + 300, 1], [W + 600, -4, 'out'], [W + 1250, -3.5], [W + 1700, 1.5], [W + 1950, 0], [LIFE, 0]],
+      translate: [[0, [0, 0]], [W, [0, 0]], [W + 200, [0, 1]], [W + 500, [0, -9], 'out'], [W + 1250, [0, -8]], [W + 1650, [0, 1]], [W + 1900, [0, 0]], [LIFE, [0, 0]]] };
+  for (const id of ['tete', ...neckPieces(L).filter(g => g && g.children.length).map(g => g.name)])
+    anims.push({ id, type: 'rotate', pivot: H.neck, life: fin.rotation, fin: true }, { id, type: 'translate', life: fin.translate, fin: true });
 
   const glint = rareGlints(C, [[290, 300, 16], [930, 420, 12], [640, 120, 10]], 'e_');
   anims.push(...glint.anims);
-  paper.project.activeLayer.addChildren([L.shadow, L.book, L.seat, L.ribbon, L.tree, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
-    G('pattes', [near.group]), L.scarf, L.jingleBand, L.head, L.bow, L.jingle, fil, pinch, glint.group].filter(Boolean));
+  paper.project.activeLayer.addChildren([L.shadow, L.book, L.seat, L.ribbon, L.band, ...L.objs, L.scarfBack, L.body, L.feet, L.tailShadow, L.tail, low, raisedG, ballG,
+    G('pattes', [near.group]), L.scarf, L.jingleBand, L.head, L.bow, L.lav, L.jingle, fil, pinch, glint.group].filter(Boolean));
   // yarn : pas de bout libre (le fil écrit) : le fil de la page sort de derrière le bas du livre
   return { anims, yarn: [312, 846], viewBox: [170, 50, 900, 900], title: `Monsieur Glose écrit « ${word} » avec le fil de sa pelote` };
 }

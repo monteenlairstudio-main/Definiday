@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_assis_vd_lisere">
+<target android:name="a3" android:animation="@animator/glose_k_4f10a7e9"/>
+<target android:name="a4" android:animation="@animator/glose_k_25c8dec7"/>
+<target android:name="a2" android:animation="@animator/glose_k_e1f5ee46"/>
+<target android:name="a1" android:animation="@animator/glose_k_2229e057"/>
+<target android:name="a0" android:animation="@animator/glose_k_2409b16b"/>
+<target android:name="a5" android:animation="@animator/glose_k_7aa1466b"/>
+<target android:name="a7" android:animation="@animator/glose_k_3dccc522"/>
+<target android:name="a6" android:animation="@animator/glose_k_34a2a5b7"/>
+<target android:name="a8" android:animation="@animator/glose_k_59ca0ba6"/>
+</animated-vector>

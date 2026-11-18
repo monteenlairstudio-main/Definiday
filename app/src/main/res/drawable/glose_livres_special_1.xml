@@ -3,7 +3,7 @@
     android:drawable="@drawable/glose_livres_vd_1">
 <target android:name="patte" android:animation="@animator/glose_k_b137bcf4"/>
 <target android:name="pelote" android:animation="@animator/glose_k_c351d9ab"/>
-<target android:name="a7" android:animation="@animator/glose_k_e6f9d4d9"/>
+<target android:name="a9" android:animation="@animator/glose_k_e6f9d4d9"/>
 <target android:name="corps" android:animation="@animator/glose_k_6ab99dfa"/>
 <target android:name="sol_lien_f" android:animation="@animator/glose_k_d81fe111"/>
 <target android:name="sol_lien" android:animation="@animator/glose_k_d81fe111"/>
