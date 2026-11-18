@@ -850,15 +850,23 @@ function halo(root, anims, color, h = 12) {
   for (const g of root.getItems({ match: it => it.name && PIECE.test(it.name) && it.children })) {
     const shut = shutOf(g);
     if (!shut.length) continue;
-    const s = U(...shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round';
+    // un liseré par contour, sans les unir : même dessin (l'union élargie est l'union des contours élargis), mêmes tracés que les contours
+    // (le VectorDrawable ne les écrit qu'une fois) au lieu d'un tracé booléen de plus
+    const s = G(null, shut.map(p => { const c = p.clone(NI); c.fillColor = color; c.strokeColor = color; c.strokeWidth = OUT * SW + 2 * h; c.strokeJoin = 'round'; c.opacity = 1; return c; }));
     const e = OUT * SW / 2 + h + 2, box = rect(s.bounds.x - e, s.bounds.y - e, s.bounds.width + 2 * e, s.bounds.height + 2 * e);
     const host = hostOf(g), hs = host && U(...shutOf(host).map(p => p.clone(NI))), k = OUT * SW / 2;
     const area = S(X(notIn(all), box), hs && U(hs, ...[[k, 0], [-k, 0], [0, k], [0, -k]].map(([x, y]) => moved(hs, x, y)))); // emboîtée : hors de la pièce qui la porte, contour compris
     if (area.isEmpty()) continue; // piece lying entirely on the body: no outline (unclipped, it would paint cream over the fur)
+    (area.children || [area]).forEach(p => { p.simplify(1); grid(p); }); // bord du liseré sous le contour du corps : au plus 1 unité près, sur la grille entière
     g.insertChild(0, clipIn(area, [s]));
   }
   anims.push(...extra);
   return root;
+}
+// points et poignées d'un tracé sur la grille entière (le SVG puis le VectorDrawable les écrivent sans décimale)
+function grid(p) {
+  for (const sg of p.segments) { const pt = sg.point.round(), hi = sg.point.add(sg.handleIn).round(), ho = sg.point.add(sg.handleOut).round(); sg.point = pt; sg.handleIn = hi.subtract(pt); sg.handleOut = ho.subtract(pt); }
+  return p;
 }
 // ---------- contours partiels ----------
 // edgeLine : ne trace que la partie du contour de `shape` située dans `area` (chemin ouvert + intersect sans trace)
