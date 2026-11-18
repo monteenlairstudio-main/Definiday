@@ -296,7 +296,7 @@ function neck(vd, family, targets) {
   for (const g of NECK) if (vd.includes(`android:name="${g}"`) && !chainOf(vd, g).some(a => a.name === by)) targets[g] = { ...(k.pivotX ? {} : at(pivot(vd, by))), ...k };
   return targets;
 }
-// Bonnet de nuit en tissu (glose_lib.js softCap, essais 'tombant' / 'replie') : sa pointe traîne derrière la tête. Rotation propre = K × (rotation de
+// Bonnet de nuit en tissu (glose_lib.js nightcap) : sa pointe traîne derrière la tête. Rotation propre = K × (rotation de
 // la tête LAG ms plus tôt − la sienne) : elle part en retard, rattrape, se pose avec elle. Clés aux seuls extremums (repos entre deux :
 // ni arrêt en route ni saut), les plus proches que 40 ms fondues ; quelques degrés au plus (elle reste sur la tête, test everyItemShowsInEveryPose).
 const LAG = 120, K = 0.6;

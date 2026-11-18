@@ -8,7 +8,6 @@ const { convert, animated, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES
 // Essais pour les décisions du propriétaire (docs/autonomie/glose_decisions.md), sans effet quand ils sont absents :
 //   GLOSE_RES=<dossier>      écrit ailleurs que dans app/src/main/res (le Kotlin dans <dossier>/../java)
 //   GLOSE_VARIANT='{"trait":[11,6]}'   variante ajoutée à chaque pose (épaisseur du trait)
-//   GLOSE_VARIANT='{"bonnet":"tombant"}'  forme du bonnet de nuit à l'essai : "tombant" (A, pointe qui pend sur le côté), "replie" (B, pointe repliée sur le dessus) ou "moelleux" (v3, construit en volumes)
 //   GLOSE_TOKENS='{"gloseFur":"#A8A8B4"}'   couleurs par défaut remplacées (pelage, reliure...)
 //   GLOSE_ICON=a2|a3         écrit aussi drawable/ic_launcher_fg.xml depuis glose_icone (voir ICONS)
 const RES = process.env.GLOSE_RES ? path.resolve(process.env.GLOSE_RES) : path.join(__dirname, '../../../app/src/main/res'), TMP = 'rendus/android', KT = path.join(RES, '../java/fr/definiday/GloseLayers.kt');

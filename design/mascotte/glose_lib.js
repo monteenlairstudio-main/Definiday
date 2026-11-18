@@ -251,7 +251,8 @@ function gloseHead(C, o = {}) {
   g.transform(M);
   const T = q => xy(P(q).transform(M));
   g.data = { pivot: T(neck) }; // pivot des réactions one-shot (svg2avd -> android:pivotX/Y du groupe « tete »)
-  const tip = g.getItem({ name: pre + 'bonnet_pointe' }); if (tip) tip.data = { pivot: T(tip.data.local) }; // pli de la pointe (softCap)
+  const tip = g.getItem({ name: pre + 'bonnet_pointe' }); if (tip) tip.data = { pivot: T(tip.data.local) }; // coude de la pointe (nightcap)
+  lean(g.getItem({ name: pre + 'bonnet' }), M);
   const Y = YAWN, yk = [[0, 0], [Y, 0], [Y + 900, 1], [Y + 2700, 1], [Y + 3600, 0], [LIFE, 0]]; // bâillement : ouvre en 0,9 s, tient, referme
   const shut = yawn ? [[Y, Y + 3600]] : [], blinked = sleep ? [] : blinks(22, { avoid: shut, at: 1300 });
   // reflet qui passe de temps en temps, jamais pendant un clignement ni le bâillement
@@ -308,78 +309,25 @@ function quill(C, turn, rot = 0) { // rot : penchée vers l'arrière (°) quand 
     return line(curve([p, p.add(n.multiply(-side * 22)).add(tg.multiply(-12))]), 3, '#8C93A6', 0.55); });
   const g = G('plume', [vol(null, v2, '#FBF6EC', [clipIn(v2, barbs), shadowOf(v2, -8 * side, 10, 0.14)], 7), line(curve(rach), 4.5, C.goldD)]); g.rotate(rot * side, [bx, 300]); return g;
 }
-// bonnet de nuit : dôme qui épouse le crâne, revers crème, pointe tombante + pompon ; les pointes d'oreilles passent par des fentes
-function nightcap(C, earL, earR, inL, inR, turn, pre) {
-  if (C.v.bonnet === 'tombant' || C.v.bonnet === 'replie') return softCap(C, earL, earR, inL, inR, turn, pre, C.v.bonnet);
-  if (C.v.bonnet === 'moelleux') return plushCap(C, earL, earR, inL, inR, turn, pre);
-  const red = '#C75B54';
-  const W = headWarp(turn);
-  const dome = blob([[318, 300], [338, 236], [410, 196], [500, 186], [590, 196], [662, 236], [682, 300], [500, 276]], 0.5);
-  const tailC = [[560, 214], [652, 160], [742, 178], [790, 252], [796, 330]];
-  const cap = U(dome, taper(tailC, 120, 30));
-  const cuff = X(blob([[306, 314], [324, 258], [500, 236], [676, 258], [694, 314], [500, 290]], 0.5), dome);
-  const pp = P(tailC[tailC.length - 1]).add([0, 12]), pompon = circ(pp, 28);
-  const cut = rect(0, 0, 1024, 228);
-  const tips = U(X(earL, cut), X(earR, cut));
-  return G(pre + 'bonnet', [
-    vol(null, cap, red, [shadowOf(cap, 30, 18, 0.16), rimOf(cap, 10, 10, 0.3), fill(cuff.clone(NI), C.cream), shadowOf(cuff, 14, 10, 0.12),
-      line(S(cuff, moved(cuff, 0, 400)), IN), ...[360, 420, 480, 540, 600, 650].map(x => line(curve([[x, 258], [x + 2, 296]]), 3, INK, 0.25))]),
-    vol(null, tips, C.fur, [fill(X(U(inL, inR), tips), C.rose)]),
-    vol(null, pompon, '#F8EEDE', [ // pompon : sa couleur à lui (le bonnet bleu nuit l'a en or)
-      shadowOf(pompon, 10, 10, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([pp, pp.add(new Point(18, 0).rotate(a))]), 3, INK, 0.2))]),
-  ]);
-}
-// Essais du propriétaire (variante {bonnet: 'tombant' | 'replie'}, GLOSE_VARIANT) : le corps du bonnet garde la largeur de la tête
-// jusqu'aux deux tiers de sa hauteur (volume mou, en sac), seul le dernier tiers s'affine et se plie ; revers crème comme l'actuel.
-// 'tombant' : la pointe passe par-dessus l'épaule droite du bonnet et pend le long de la tête, pompon à hauteur de joue.
-// 'replie' : corps un peu plus bas, la pointe se replie vers l'arrière, couchée sur le dessus, et retombe à gauche : pompon au bord du bonnet.
-// Oreilles : par des fentes (pointes dessinées devant le tissu, comme l'actuel). Mêmes couleurs que l'actuel (#C75B54, revers C.cream,
-// pompon #F8EEDE) : surcouches neige et bleu nuit inchangées. Pointe + pompon : « bonnet_pointe » (pivot au pli, data.local), que les
-// réactions au toucher balancent (reactions.js) ; son liseré de nuit est à elle (halo(), pièce emboîtée).
-function softCap(C, earL, earR, inL, inR, turn, pre, type) {
-  const red = '#C75B54', pom = '#F8EEDE', A = type === 'tombant', Wq = headWarp(turn * 0.6), wp = p => warp(p, Wq);
-  const dx = Wq.x(600) - 600, sh = pts => pts.map(([x, y]) => [x + dx, y]);
-  const body = wp(A ? blob([[312, 304], [314, 226], [324, 174], [358, 140], [430, 122], [520, 117], [600, 121], [652, 138], [682, 170], [690, 226], [690, 304], [500, 288]], 0.5)
-    : blob([[312, 304], [314, 228], [326, 180], [364, 148], [436, 132], [520, 128], [598, 132], [652, 146], [682, 180], [690, 228], [690, 304], [500, 288]], 0.5));
-  const cuff = X(wp(blob([[306, 314], [322, 258], [500, 238], [678, 258], [694, 314], [500, 290]], 0.5)), body);
-  const cut = rect(0, 0, 1024, 228), tips = U(X(earL, cut), X(earR, cut));
-  const ears = vol(null, tips, C.fur, [fill(X(U(inL, inR), tips), C.rose)]);
-  const pompon = (c, r) => { c = P(c); const b = circ(c, r);
-    return vol(null, b, pom, [shadowOf(b, 8, 8, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([c, c.add(new Point(r * 0.62, 0).rotate(a))]), 3, INK, 0.2))]); };
-  const crease = (pts, o = 0.28) => line(curve(sh(pts)), 3, INK, o);
-  let back = null, front = null, pivot, cap = body, capIn = [];
-  if (A) {
-    const Ct = sh([[606, 168], [664, 161], [710, 170], [736, 196]]), Cl = sh([[736, 196], [750, 240], [752, 290], [748, 330]]);
-    const upper = taper(Ct, 96, 64), lower = taper(Cl, 60, 28, t => 60 - 32 * Math.pow(t, 0.8));
-    cap = U(body, upper); pivot = Ct[3];
-    capIn = [crease([[690, 182], [708, 204]], 0.3), crease([[656, 175], [676, 202]], 0.22), crease([[600, 150], [628, 178], [636, 214]], 0.2)]; // plis du coude
-    back = G(pre + 'bonnet_pointe', [vol(null, lower, red, [shadowOf(lower, 16, 0, 0.2), fill(X(circ(Cl[0], 36), lower), INK, 0.18)]), // l'intérieur du pli
-      pompon(P(Cl[3]).add([-2, 18]), 24)]);
-  } else {
-    const tc = sh([[642, 176], [592, 152], [512, 145], [424, 151], [356, 172], [312, 202]]);
-    const W = t => 80 - 54 * Math.pow(t, 1.2), flop = taper(tc.slice(0, 5), 80, W(0.8), t => W(t * 0.8)), end = taper(tc.slice(4), W(0.8), 26);
-    pivot = tc[4];
-    capIn = [crease([[654, 176], [668, 200]], 0.3), crease([[618, 184], [634, 210]], 0.22)]; // plis où le tissu se replie
-    front = G(null, [fill(S(X(moved(flop, 4, 14), body), flop), INK, 0.16), G(pre + 'bonnet_pointe', [vol(null, end, red, [shadowOf(end, 8, 10, 0.18)]), pompon(P(tc[5]).add([-14, 22]), 24)]), // le bout qui retombe
-      vol(null, flop, red, [shadowOf(flop, 10, 12, 0.18), rimOf(flop, 5, 6, 0.3), fill(X(circ(tc[0], 34), flop), INK, 0.18), line(curve(sh([[600, 166], [520, 161], [440, 167]])), 3, INK, 0.2)])]);
-  }
-  for (const g of [back, front]) { const t = g && (g.name ? g : g.getItem({ name: pre + 'bonnet_pointe' })); if (t) t.data = { local: xy(P(pivot)) }; }
-  return G(pre + 'bonnet', [back,
-    vol(null, cap, red, [...capIn, shadowOf(cap, 30, 18, 0.16), rimOf(cap, 10, 10, 0.3), fill(cuff.clone(NI), C.cream), shadowOf(cuff, 14, 10, 0.12),
-      line(S(cuff, moved(cuff, 0, 400)), IN), ...[360, 420, 480, 540, 600, 650].map(x => line(wp(curve([[x, 262], [x + 2, 298]])), 3, INK, 0.25))]),
-    front, ears]);
-}
-// Essai v3 (variante {bonnet: 'moelleux'}) : le bonnet construit en volumes (skill « volumes et plis »). Lumière en haut à gauche, ombres à
-// l'encre (elles suivent les surcouches neige et bleu nuit). Sac mou large comme la tête, ombre de forme au terminateur ; revers en boudin
-// sur un arc d'ellipse du crâne (côtes en contour transversal, serrées aux bords), ombre portée sur le front ; la pointe se plie à droite
+// bonnet de nuit (v3 « moelleux », validé par le propriétaire), construit en volumes (skill « volumes et plis »). Lumière en haut à gauche,
+// ombres à l'encre (elles suivent les surcouches neige et bleu nuit). Sac mou large comme la tête, ombre de forme au terminateur ; revers en
+// boudin sur un arc d'ellipse du crâne (côtes en contour transversal, serrées aux bords), ombre portée sur le front ; la pointe se plie à droite
 // (coude : encoche, plis de compression) et pend en chaînette, pompon festonné en volume ; les oreilles sortent par des fentes ourlées,
 // guirlande entre elles, ombre portée sur le tissu. Pointe + pompon : « bonnet_pointe » (pivot au coude), balancée par reactions.js.
-function plushCap(C, earL, earR, inL, inR, turn, pre) {
+// Allégé (même dessin) : ombres et reflets découpés dans des copies décalées des formes, tracés simplifiés puis sur la grille entière (lean()).
+function nightcap(C, earL, earR, inL, inR, turn, pre) {
   const red = '#C75B54', pom = '#F8EEDE', W = headWarp(turn * 0.6), wp = p => warp(p, W);
   const dx = W.x(620) - 620, sh = pts => pts.map(([x, y]) => [x + dx, y]);
   const crease = (pts, w = 6, o = 0.32, tail = 1.2) => fill(taper(pts, w, tail), INK, o); // pli effilé : épais au départ (support), fin au bout
   const creaseW = (pts, w, o) => fill(wp(taper(pts, w, 1.2)), INK, o);
-  const heavy = (s, x, y) => fill(S(s, moved(s, -x, -y)), INK); // contour plus lourd dessous / côté ombre
+  // ombres et reflets découpés dans des copies décalées des formes (dans keep, hors de hole) : une découpe par copie, au lieu d'un
+  // tracé booléen qui redit le bord ; lean() recale chaque copie sur sa forme (même tracé à une translation près : le VD le compresse)
+  const tag = (s, k, d = [0, 0]) => { if (s.children) s.children.forEach((c, i) => tag(c, k + i, d)); else s.data = { k, d }; return s; };
+  const copy = (s, d) => { const c = moved(s, d[0], d[1]); if (c.children) c.children.forEach((x, i) => tag(x, s.children[i].data.k, d)); else tag(c, s.data.k, d); return c; };
+  const cut = (c, o, keep, [hs, hd]) => keep.reduceRight((acc, [ks, kd]) => clipIn(copy(ks, kd), [acc]),
+    fill(new paper.CompoundPath({ children: [rect(-200, -200, 1500, 1500), copy(hs, hd)], fillRule: 'evenodd', insert: false }), c, o));
+  const rim = (s, dx, dy, c, o) => cut(c, o, [[s, [0, 0]]], [s, [dx, dy]]); // s moins s décalée : croissant d'ombre, de reflet, contour alourdi
+  const heavy = (s, x, y) => rim(s, -x, -y, INK, 1); // contour plus lourd dessous / côté ombre
   // sac : épaule gauche ronde, sommet qui descend vers la droite, coude replié à droite (dessous du coude : encoche, la pointe passe derrière)
   // (la torsion headWarp écrase tout x > 690 : le coude, hors de la tête, est décalé, pas tordu)
   const knob = taper(sh([[600, 172], [676, 170], [734, 186], [766, 222], [770, 238]]), 86, 60, t => 86 - 26 * t); // le tube se plie : dessous concave (compression), dessus convexe (tension)
@@ -392,7 +340,8 @@ function plushCap(C, earL, earR, inL, inR, turn, pre) {
   const ribs = [];
   for (let a = -70; a <= 70; a += 14) {
     const L = cuffAxis.length * (a + 80) / 160, p = cuffAxis.getPointAt(L), n = cuffAxis.getNormalAt(L), w = prof((a + 80) / 160) / 2, k = Math.cos(th(a));
-    ribs.push(fill(wp(taper([xy(p.add(n.multiply(w * 0.62))), xy(p.add(n.multiply(-w * 0.5)))], 3 + 2.5 * k, 1.5)), INK, 0.12 + 0.16 * k));
+    const seg = [xy(p.add(n.multiply(w * 0.62))), xy(p.add(n.multiply(-w * 0.5)))];
+    ribs.push(fill(wp(taper(seg, 3 + 2.5 * k, 1.5)), INK, 0.12 + 0.16 * k));
   }
   const gathers = [-50, -24, 22, 48].map(a => { const L = cuffAxis.length * (a + 80) / 160, p = cuffAxis.getPointAt(L), n = cuffAxis.getNormalAt(L), w = prof((a + 80) / 160) / 2;
     const top = p.add(n.multiply(n.y < 0 ? w - 6 : -w + 6)), up = top.subtract([500, 430]).normalize(36); // fronces : le sac entre dans le revers
@@ -403,7 +352,9 @@ function plushCap(C, earL, earR, inL, inR, turn, pre) {
   const tipsL = X(earL, cutOf(lipL)), tipsR = X(earR, cutOf(lipR)), tips = U(tipsL, tipsR);
   const strain = [[[462, 200], [474, 214], [480, 230]], [[330, 212], [328, 232], [334, 252]]].flatMap(p => [p, p.map(([x, y]) => [1000 - x, y])]).map(p => creaseW(p, 5, 0.26)); // l'oreille tend le tissu
   // ombre de forme du sac : tout ce qui est à droite du terminateur (courbe qui suit le volume), ombre de cœur le long de lui
-  const zone = S(body, moved(body, -95, -45)), core = S(zone, S(body, moved(body, -70, -32))); // croissant large (lumière) ; cœur = bande au terminateur
+  // (croissant large : le sac moins lui-même décalé vers la lumière ; cœur = bande au terminateur : la même découpe, dans le sac moins décalé)
+  tag(body, 'body'); tag(cuff, 'cuff'); tag(tips, 'tips');
+  const zone = cut(INK, 0.22, [[body, [0, 0]]], [body, [-95, -45]]), core = cut(INK, 0.1, [[body, [0, 0]], [body, [-70, -32]]], [body, [-95, -45]]);
   const shine = wp(taper([[352, 214], [360, 172], [392, 140], [446, 124], [500, 120]], 6, 6, t => 4 + 18 * Math.sin(Math.PI * Math.min(1, t * 1.1))));
   const sheen = taper(sh([[640, 132], [700, 136], [748, 154], [782, 196]]), 6, 6, t => 3 + 9 * Math.sin(Math.PI * t));
   // coude : plis de compression qui partent de l'encoche (704, 212) vers le haut du pli ; guirlande entre les oreilles (deux supports)
@@ -414,30 +365,43 @@ function plushCap(C, earL, earR, inL, inR, turn, pre) {
     fill(wp(taper(sag.map(([x, y]) => [x, y + 8]), 1, 1, t => 1 + 10 * Math.sin(Math.PI * t))), INK, 0.1)]; // dessous du pli dans l'ombre
   const squash = [[-74, 1], [-62, 1], [62, -1], [74, -1]].map(([a, d]) => { const L = cuffAxis.length * (a + 80) / 160, p = cuffAxis.getPointAt(L), n = cuffAxis.getNormalAt(L), w = prof((a + 80) / 160) / 2;
     return fill(wp(taper([xy(p.add(n.multiply(-w * 0.8))), xy(p.add(n.multiply(-w * 0.1)).add(new Point(5 * d, 0))), xy(p.add(n.multiply(w * 0.6)))], 1, 1, t => 1 + 3.5 * Math.sin(Math.PI * t))), INK, 0.2); }); // le boudin se tasse où il tourne
-  const earShadow = fill(S(X(moved(tips, 16, 12), body), tips, zone), INK, 0.18);
-  const skull = ell([500, 352], [176, 146]), cast = fill(X(S(moved(cuff, 6, 16), cuff), skull), INK, 0.18); // revers posé sur le front
+  const earShadow = cut(INK, 0.18, [[body, [0, 0]], [body, [-95, -45]], [tips, [16, 12]]], [tips, [0, 0]]); // hors de l'ombre de forme
+  const skull = ell([500, 352], [176, 146]), cast = clipIn(skull, [cut(INK, 0.18, [[cuff, [6, 16]]], [cuff, [0, 0]])]); // revers posé sur le front
   // la pointe : pend du coude en chaînette, s'amincit puis se tend au-dessus du pompon ; dessous du coude dans l'ombre (intérieur du pli)
   const Dp = sh([[766, 236], [780, 268], [782, 302], [774, 336]]), drop = taper(Dp, 60, 26, t => 60 - 34 * Math.pow(t, 0.8)); // chaînette : sort vers l'extérieur, revient à l'aplomb du pompon
   const pc = P(Dp[3]).add([0, 22]), pr = 27, puff = U(circ(pc, pr), ...[...Array(9).keys()].map(i => circ(pc.add(new Point(pr - 2, 0).rotate(i * 40 + 10)), 9.5)));
   const tufts = [[10, 0.5], [55, 0.62], [100, 0.5]].map(([a, f]) => { const c = pc.add(new Point(pr * f, 0).rotate(a)), t = new Point(7, 0).rotate(a + 90); // boucles de laine côté ombre (contour transversal)
     return fill(taper([xy(c.subtract(t)), xy(c.add(new Point(3, 0).rotate(a))), xy(c.add(t))], 2, 2, u => 1 + 3 * Math.sin(Math.PI * u)), INK, 0.3); });
-  const pompon = vol(null, puff, pom, [fill(X(circ(P(Dp[3]).add([0, -2]), 15), puff), INK, 0.2), shadowOf(puff, 12, 13, 0.2), heavy(puff, 3, 4), ...tufts,
+  tag(drop, 'drop'); tag(puff, 'puff');
+  const pompon = vol(null, puff, pom, [clipIn(puff, [fill(circ(P(Dp[3]).add([0, -2]), 15), INK, 0.2)]), rim(puff, -12, -13, INK, 0.2), heavy(puff, 3, 4), ...tufts,
     fill(circ(pc.add([-9, -10]), 7), '#FFFFFF', 0.75)]);
-  const tip = G(pre + 'bonnet_pointe', [vol(null, drop, red, [shadowOf(drop, 18, 4, 0.22), fill(X(circ(Dp[0], 44), drop), INK, 0.22), // ombre portée du coude
+  const tip = G(pre + 'bonnet_pointe', [vol(null, drop, red, [rim(drop, -18, -4, INK, 0.22), clipIn(drop, [fill(circ(Dp[0], 44), INK, 0.22)]), // ombre portée du coude
     crease([[Dp[1][0] - 4, Dp[1][1] + 4], [Dp[2][0] - 6, Dp[2][1]], [Dp[3][0] - 3, Dp[3][1] - 14]], 6, 0.32), // pli-tuyau de la chute
     ...[[[-24, 10], [-6, 4], [4, 12]], [[-22, 24], [-8, 20], [2, 28]]].map(z => crease(z.map(([x, y]) => [Dp[0][0] + x, Dp[0][1] + y]), 5, 0.34)), // zigzag : le tissu comprimé sous le coude
     heavy(drop, 4, 2)]), pompon]);
   tip.data = { local: xy(P(sh([[766, 232]])[0])) };
   const g = G(pre + 'bonnet', [tip, cast,
-    vol(null, body, red, [fill(zone, INK, 0.22), fill(core, INK, 0.1), fill(X(shine, body), '#FFF6E6', 0.4), fill(X(sheen, body), '#FFF6E6', 0.3),
-      clipIn(body, [...gathers, ...diaper, ...strain, pocket, ...elbow]), earShadow, heavy(body, 5, 6)]),
-    vol(null, cuff, C.cream, [shadowOf(cuff, -3, 22, 0.13), fill(X(S(cuff, moved(cuff, -16, -4)), cuff), INK, 0.08), rimOf(cuff, 3, 8, 0.8, '#FFFFFF'), ...ribs, ...squash, heavy(cuff, 2, 5)]),
+    vol(null, body, red, [zone, core, clipIn(body, [fill(shine, '#FFF6E6', 0.4), fill(sheen, '#FFF6E6', 0.3), ...gathers, ...diaper, ...strain, pocket, ...elbow]),
+      earShadow, heavy(body, 5, 6)]),
+    vol(null, cuff, C.cream, [rim(cuff, 3, -22, INK, 0.13), rim(cuff, -16, -4, INK, 0.08), rim(cuff, 3, 8, '#FFFFFF', 0.8), ...ribs, ...squash, heavy(cuff, 2, 5)]),
     vol(null, tips, C.fur, [fill(X(U(inL, inR), tips), C.rose)])]);
-  // taper() et les booléens laissent des centaines de nœuds par pli : simplifiés (écart < 1 unité sur 1024), l'APK s'allège d'autant
-  g.getItems({ match: it => it instanceof Path && it.segments.length > 12 }).forEach(p => p.simplify(LEAN));
   return g;
 }
-const LEAN = +(VARIANT.lean || 0.8);
+// taper() et les booléens laissent des centaines de nœuds par pli : simplifiés (écart < 1 unité sur 1024), puis points et poignées sur la
+// grille entière, une fois la tête placée (gloseHead : la rotation de la pose défait la grille) ; les copies décalées d'une forme (cut) sont
+// refaites sur la forme recalée, décalées d'un nombre entier d'unités : leur tracé ne diffère que par son point de départ (le VD compressé les écrit presque gratis).
+function lean(g, M) {
+  if (!g) return;
+  const paths = g.getItems({ match: it => it instanceof Path }), k = p => p.data && p.data.k, still = p => !(p.data.d[0] || p.data.d[1]);
+  const master = new Map(); for (const p of paths) if (k(p) && still(p) && !master.has(k(p))) master.set(k(p), p); // une forme, ses copies décalées
+  for (const p of paths) if (!k(p) || master.get(k(p)) === p) {
+    if (p.segments.length > 12) p.simplify(0.8);
+    grid(p);
+  }
+  for (const p of paths) { const m = k(p) && master.get(k(p)); if (!m || m === p) continue;
+    const d = P(p.data.d), off = (M ? M.transform(d).subtract(M.transform(P([0, 0]))) : d).round();
+    p.segments = m.segments.map(sg => sg.clone()); p.closed = m.closed; p.translate(off); }
+}
 // béret de peintre penché sur l'oreille lointaine, queue de feutre au sommet (dans la tête : suit ses animations)
 function beret(C, W, pre) {
   const col = '#4A5470', colD = '#343C55';
