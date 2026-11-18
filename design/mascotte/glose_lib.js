@@ -832,6 +832,8 @@ function grid(p) {
   for (const sg of p.segments) { const pt = sg.point.round(), hi = sg.point.add(sg.handleIn).round(), ho = sg.point.add(sg.handleOut).round(); sg.point = pt; sg.handleIn = hi.subtract(pt); sg.handleOut = ho.subtract(pt); }
   return p;
 }
+// tout Glose sur la grille entière (make_android.js : variante grid), une fois posé : placement, transformations et liseré faits, repère du VD
+function gridAll(root) { for (const p of root.getItems({ match: it => it instanceof Path })) grid(p); }
 // ---------- contours partiels ----------
 // edgeLine : ne trace que la partie du contour de `shape` située dans `area` (chemin ouvert + intersect sans trace)
 function openOf(p) { return (p.children ? p.children : [p]).map(c => { const o = new Path({ segments: c.segments.map(s => s.clone()), closed: false, insert: false }); o.add(c.firstSegment.clone()); return o; }); }

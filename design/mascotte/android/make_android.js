@@ -1,5 +1,5 @@
 // node android/make_android.js  -> régénère les dessins Android de Monsieur Glose dans app/src/main/res (XML versionnés : la CI ne lance pas Node).
-// Variante {all:true} de chaque pose (tous les accessoires et détails rares présents, masqués par attributs de thème), puis svg2avd.
+// Variante {all:true} de chaque pose (tous les accessoires et détails rares présents, masqués par attributs de thème) et {grid:true} (tracés sur la grille entière une fois posés : VD plus léger), puis svg2avd.
 // Écrit drawable/glose_*.xml, interpolator/glose_ease.xml, values/glose_attrs.xml, values/glose_styles.xml.
 const fs = require('fs'), path = require('path');
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
@@ -74,7 +74,7 @@ const REACTIONS = {
   try {
     for (const [pose, name, v] of jobs) {
       const out = `${TMP}/${name}.svg`;
-      await buildOne(b, { pose, out, variant: Object.assign({ all: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, OPT, v) }); // liseré de nuit (jeton gloseHalo)
+      await buildOne(b, { pose, out, variant: Object.assign({ all: true, grid: true, halo: '#F0E801', haloW: pose === 'icone' ? 8 : 12 }, OPT, v) }); // liseré de nuit (jeton gloseHalo)
       const svg = fs.readFileSync(path.join(__dirname, '..', out), 'utf8');
       const y = /data-yarn="([-\d.]+) ([-\d.]+)"/.exec(svg), vb = /viewBox="([^"]+)"/.exec(svg)[1].split(/[\s,]+/).map(Number);
       if (y) yarn[name] = [(y[1] - vb[0]) / vb[2], (y[2] - vb[1]) / vb[3]].map(v => +v.toFixed(4)); // fraction of the drawable
@@ -83,7 +83,7 @@ const REACTIONS = {
     }
     const icon = ICONS[process.env.GLOSE_ICON || 'a3']; // owner choice 2026-11-08: A3
     if (icon) {
-      const [v, k, tx, ty] = icon, svg = await buildOne(b, { pose: 'icone', out: `${TMP}/ic_launcher.svg`, variant: Object.assign({ halo: '#F0E8D8', haloW: 8 }, v) });
+      const [v, k, tx, ty] = icon, svg = await buildOne(b, { pose: 'icone', out: `${TMP}/ic_launcher.svg`, variant: Object.assign({ grid: true, halo: '#F0E8D8', haloW: 8 }, v) });
       const tmp = path.join(__dirname, '..', TMP, 'res'); convert(svg, 'ic_launcher_src', tmp, { noSlots: true });
       const vd = fs.readFileSync(path.join(tmp, 'drawable', 'ic_launcher_src_vd.xml'), 'utf8').replace(/\?attr\/(\w+)/g, (_, a) => DEFAULT[a]);
       const body = /<group android:name="cadre"[\s\S]*<\/group>/.exec(vd)[0];
