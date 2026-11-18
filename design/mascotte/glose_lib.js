@@ -251,6 +251,7 @@ function gloseHead(C, o = {}) {
   g.transform(M);
   const T = q => xy(P(q).transform(M));
   g.data = { pivot: T(neck) }; // pivot des réactions one-shot (svg2avd -> android:pivotX/Y du groupe « tete »)
+  const tip = g.getItem({ name: pre + 'bonnet_pointe' }); if (tip) tip.data = { pivot: T(tip.data.local) }; // pli de la pointe (softCap)
   const Y = YAWN, yk = [[0, 0], [Y, 0], [Y + 900, 1], [Y + 2700, 1], [Y + 3600, 0], [LIFE, 0]]; // bâillement : ouvre en 0,9 s, tient, referme
   const shut = yawn ? [[Y, Y + 3600]] : [], blinked = sleep ? [] : blinks(22, { avoid: shut, at: 1300 });
   // reflet qui passe de temps en temps, jamais pendant un clignement ni le bâillement
@@ -309,6 +310,7 @@ function quill(C, turn, rot = 0) { // rot : penchée vers l'arrière (°) quand 
 }
 // bonnet de nuit : dôme qui épouse le crâne, revers crème, pointe tombante + pompon ; les pointes d'oreilles passent par des fentes
 function nightcap(C, earL, earR, inL, inR, turn, pre) {
+  if (C.v.bonnet === 'long' || C.v.bonnet === 'rond') return softCap(C, earL, earR, inL, inR, turn, pre, C.v.bonnet);
   const red = '#C75B54';
   const W = headWarp(turn);
   const dome = blob([[318, 300], [338, 236], [410, 196], [500, 186], [590, 196], [662, 236], [682, 300], [500, 276]], 0.5);
@@ -325,6 +327,46 @@ function nightcap(C, earL, earR, inL, inR, turn, pre) {
     vol(null, pompon, '#F8EEDE', [ // pompon : sa couleur à lui (le bonnet bleu nuit l'a en or)
       shadowOf(pompon, 10, 10, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([pp, pp.add(new Point(18, 0).rotate(a))]), 3, INK, 0.2))]),
   ]);
+}
+// Essais du propriétaire (variante {bonnet: 'long' | 'rond'}, GLOSE_VARIANT) : bonnet de nuit en tissu mou, sans revers de fourrure.
+// 'long' : dôme qui épouse le crâne, ourlet roulé fin, long tuyau qui passe derrière l'oreille, se plie et retombe le long de la joue.
+// 'rond' : dôme rond et gonflé à pois, pointe courte rabattue vers l'avant entre les oreilles, pompon sur le front.
+// Mêmes couleurs que le bonnet actuel (#C75B54, pompon #F8EEDE : surcouches neige et bleu nuit) ; pois de la couleur du pompon.
+// La pointe et son pompon forment « bonnet_pointe » (pivot au pli, data.local) : les réactions au toucher la balancent (reactions.js).
+function softCap(C, earL, earR, inL, inR, turn, pre, type) {
+  const red = '#C75B54', pom = '#F8EEDE', Wq = headWarp(turn * 0.6), wp = p => warp(p, Wq), long = type === 'long';
+  const dome = wp(long ? blob([[314, 308], [324, 246], [380, 200], [458, 180], [540, 176], [618, 190], [672, 238], [688, 308], [600, 288], [500, 282], [400, 288]], 0.5)
+    : blob([[316, 306], [322, 234], [366, 178], [436, 146], [512, 136], [590, 148], [650, 186], [682, 238], [686, 306], [600, 286], [500, 280], [400, 286]], 0.5));
+  const hem = S(dome, moved(dome, 0, -22)); // ourlet roulé : bande fine, un ton plus sombre (encre) : elle suit chaque couleur
+  const folds = (long ? [[[420, 266], [432, 232], [458, 210]], [[586, 262], [580, 230], [560, 208]]] : [[[404, 262], [414, 226], [440, 200]], [[604, 262], [600, 226], [580, 202]]])
+    .map(p => line(wp(curve(p)), 3, INK, 0.28));
+  const cut = rect(0, 0, 1024, 228), tips = U(X(earL, cut), X(earR, cut));
+  const ears = vol(null, tips, C.fur, [fill(X(U(inL, inR), tips), C.rose)]);
+  const pompon = (c, r) => { c = P(c); const b = circ(c, r);
+    return vol(null, b, pom, [shadowOf(b, 8, 8, 0.15), ...[0, 60, 120, 180, 240, 300].map(a => line(curve([c, c.add(new Point(r * 0.62, 0).rotate(a))]), 3, INK, 0.2))]); };
+  let back = null, front = null, pivot, capShape = dome, capIn = [];
+  if (long) {
+    const dx = Wq.x(600) - 600, sh = pts => pts.map(([x, y]) => [x + dx, y]);
+    const Ct = sh([[556, 202], [616, 172], [684, 160], [728, 182]]), Cl = sh([[728, 182], [752, 236], [760, 306], [754, 380]]);
+    const upper = taper(Ct, 108, 64), lower = taper(Cl, 60, 28, t => 60 - 32 * Math.pow(t, 0.8));
+    capShape = U(dome, upper); pivot = Ct[3];
+    capIn = [line(curve(sh([[692, 184], [706, 202]])), 3, INK, 0.3), line(curve(sh([[658, 182], [680, 206]])), 3, INK, 0.22)]; // plis du coude
+    back = G(pre + 'bonnet_pointe', [vol(null, lower, red, [shadowOf(lower, 16, 0, 0.2), fill(X(circ(Cl[0], 36), lower), INK, 0.18)]), // l'intérieur du pli, dans l'ombre
+      pompon(P(Cl[3]).add([-2, 16]), 22)]);
+  } else {
+    const fold = wp(new Path({ segments: [[504, 162]], insert: false })).firstSegment.point;
+    const tipC = [xy(fold), xy(fold.add([22, 26])), xy(fold.add([38, 66])), xy(fold.add([44, 92]))];
+    const flop = taper(tipC, 88, 34, t => 88 - 54 * Math.pow(t, 0.9));
+    const dots = [[392, 232], [452, 190], [596, 196], [638, 254], [366, 284], [560, 160]].map(([x, y], i) => wp(circ([x, y], i % 2 ? 12 : 15)));
+    capIn = [fill(X(U(...dots), X(dome, moved(dome, 0, -30))), pom)]; // pas sur l'ourlet
+    pivot = tipC[0];
+    front = G(pre + 'bonnet_pointe', [fill(S(X(moved(flop, 10, 14), dome), flop), INK, 0.16), // ombre portée sur le dôme
+      vol(null, flop, red, [shadowOf(flop, 14, 10, 0.16), rimOf(flop, 6, 6, 0.3)]), pompon(P(tipC[3]).add([4, 16]), 22)]);
+  }
+  for (const g of [back, front]) if (g) g.data = { local: xy(P(pivot)) };
+  return G(pre + 'bonnet', [back,
+    vol(null, capShape, red, [...capIn, shadowOf(capShape, 30, 18, 0.16), rimOf(capShape, 10, 10, 0.3), fill(hem.clone(NI), INK, 0.14), Object.assign(edgeLine(moved(dome, 0, -22), dome, 4), { opacity: 0.5 }), ...folds]),
+    ears, front]);
 }
 // béret de peintre penché sur l'oreille lointaine, queue de feutre au sommet (dans la tête : suit ses animations)
 function beret(C, W, pre) {
@@ -671,7 +713,7 @@ function arm(C, pts, w0, w1, paw, o = {}) {
 // Les pièces à porte (accessoires, ruban, détails rares) restent hors du liseré du corps : il dessinerait aussi les pièces non portées
 // (export Android {all:true}). Chaque accessoire et le ruban ont le leur, dans leur propre groupe (même porte, même calque Android),
 // découpé hors de la silhouette du corps ; les paillettes, étoiles et éclats n'en ont pas (clairs, ils se voient déjà la nuit).
-const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|croissant|bandeau)$|(bonnet|beret|couronne|papier)$/;
+const PIECE = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|croissant|bandeau)$|(bonnet|beret|couronne|papier|bonnet_pointe)$/; // bonnet_pointe : pièce dans la pièce (elle se balance), son liseré à elle
 const GATED = /^(noeud|echarpe(_dos)?|plume|marque_page|ruban|grelot(_ruban)?|sapin|lavalliere|croissant|bandeau|paillettes_.*|etoiles_.*)$|(bonnet|beret|couronne|papier|eclats)$/;
 // groupes que les réactions au toucher animent (android/reactions.js, REACTIONS de make_android.js) sans animation au repos :
 // leur liseré doit être un groupe à part pour les suivre (svg2avd.animated() anime aussi « <nom>_halo »)
@@ -732,12 +774,16 @@ function halo(root, anims, color, h = 12) {
     const g = G(t.name + '_halo', [s]); g.applyMatrix = false; g.matrix = t.matrix.clone();
     (chain.length ? groupOf(chain) : back).addChild(g);
   }
+  const hostOf = it => { for (let q = it.parent; q; q = q.parent) if (q.name && PIECE.test(q.name)) return q; return null; };
+  const shutOf = g => g.getItems({ match: it => !(it.parent && it.parent.clipped) && it.strokeColor && it.strokeColor.equals(ink) && it.strokeWidth >= 4 &&
+    (it instanceof paper.CompoundPath || it.closed) && hostOf(it) === g }); // pas ceux d'une pièce emboîtée (bonnet_pointe) : elle a le sien
   for (const g of root.getItems({ match: it => it.name && PIECE.test(it.name) && it.children })) {
-    const shut = g.getItems({ match: it => !(it.parent && it.parent.clipped) && it.strokeColor && it.strokeColor.equals(ink) && it.strokeWidth >= 4 && (it instanceof paper.CompoundPath || it.closed) });
+    const shut = shutOf(g);
     if (!shut.length) continue;
     const s = U(...shut.map(p => p.clone(NI))); s.fillColor = color; s.strokeColor = color; s.strokeWidth = OUT * SW + 2 * h; s.strokeJoin = 'round';
     const e = OUT * SW / 2 + h + 2, box = rect(s.bounds.x - e, s.bounds.y - e, s.bounds.width + 2 * e, s.bounds.height + 2 * e);
-    const area = X(notIn(all), box);
+    const host = hostOf(g), hs = host && U(...shutOf(host).map(p => p.clone(NI))), k = OUT * SW / 2;
+    const area = S(X(notIn(all), box), hs && U(hs, ...[[k, 0], [-k, 0], [0, k], [0, -k]].map(([x, y]) => moved(hs, x, y)))); // emboîtée : hors de la pièce qui la porte, contour compris
     if (area.isEmpty()) continue; // piece lying entirely on the body: no outline (unclipped, it would paint cream over the fur)
     g.insertChild(0, clipIn(area, [s]));
   }

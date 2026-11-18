@@ -296,13 +296,31 @@ function neck(vd, family, targets) {
   for (const g of NECK) if (vd.includes(`android:name="${g}"`) && !chainOf(vd, g).some(a => a.name === by)) targets[g] = { ...(k.pivotX ? {} : at(pivot(vd, by))), ...k };
   return targets;
 }
+// Bonnet de nuit en tissu (glose_lib.js softCap, essais 'long' / 'rond') : sa pointe traîne derrière la tête. Rotation propre = K × (rotation de
+// la tête LAG ms plus tôt − la sienne) : elle part en retard, rattrape, se pose avec elle. Clés aux seuls extremums (repos entre deux :
+// ni arrêt en route ni saut), les plus proches que 40 ms fondues ; quelques degrés au plus (elle reste sur la tête, test everyItemShowsInEveryPose).
+const LAG = 120, K = 0.6;
+function sway(vd, ms, targets) {
+  const r = targets.tete && targets.tete.rotation;
+  if (!r || !vd.includes('android:name="bonnet_pointe"')) return targets;
+  const n = Math.round(ms / 10), s = [];
+  for (let i = 0; i <= n; i++) { const f = i / n; s.push([f, K * (valueAt(r, Math.max(0, f - LAG / ms)) - valueAt(r, f))]); }
+  let keys = s.filter(([, v], i) => i > 0 && i < n && (v - s[i - 1][1]) * (s[i + 1][1] - v) < 0 && Math.abs(v) > 0.3).map(([f, v]) => [+f.toFixed(3), +v.toFixed(2)]);
+  keys = [[0, 0], ...keys, [1, 0]];
+  for (let i = 1; i < keys.length; i++) if ((keys[i][0] - keys[i - 1][0]) * ms < 40) { // too close: keep the larger swing (the ends stay)
+    const drop = i === keys.length - 1 || (i > 1 && Math.abs(keys[i - 1][1]) < Math.abs(keys[i][1])) ? i - 1 : i;
+    keys.splice(drop, 1); i = 0;
+  }
+  if (keys.length > 2) targets.bonnet_pointe = { rotation: keys };
+  return targets;
+}
 const poses = [['assis', 'assis'], ['livres', 'livres'], ['soir', 'soir'], ['reveil', 'reveil'], ...WORDS.map(w => [`ecrit_${w}`, 'ecrit'])];
 module.exports = RES => {
   for (const [pose, family] of poses) {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
     const idle0 = IDLE0[`glose_${pose}`];
     for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]]) {
-      const t = settle(neck(vd, family, make(vd, family)), idle0, ms, n => under(vd, n, 'zzz'), Z_BACK[kind]);
+      const t = settle(sway(vd, ms, neck(vd, family, make(vd, family))), idle0, ms, n => under(vd, n, 'zzz'), Z_BACK[kind]);
       animated(`glose_${pose}_${kind}`, name, Object.assign(animators(name, ms, t, idle0), tethers(vd, family, ms, t)), RES);
     }
   }
