@@ -85,13 +85,13 @@ PERSONA.reveil = Object.assign({}, PERSONA.assis, { tail: null, eyes: vd => eyes
 const awake = (vd, family) => { const m = PERSONA[family];
   return merge(m.eyes(vd), { tete: { rotation: m.rot, translateY: m.ty } }, m.tail ? both(vd, 'queue', { rotation: m.tail }) : {},
     whiskers(vd, m.whisk), m.extra ? m.extra(vd) : {}, squash(family, m.sy)); };
-// un toucher éveillé : awake() ; endormi : il se soulève à peine puis se blottit, écrasé sur le bord de la tasse ; les « z » se tassent puis sautent
+// un toucher éveillé : awake() ; endormi : il se soulève à peine puis se blottit, écrasé sur le bord de la tasse ; les « z » s'effacent avec
+// l'ancienne image (fondu du toucher) et ne reviennent qu'à la fin, en montant à leur place (settle, Z_BACK)
 const TAP = {
   awake,
   soir: (vd, family) => merge(
     { tete: { rotation: [[0, 0], [0.12, 1.5], [0.35, -5], [0.65, 3], [0.85, -1], [1, 0]] },
-      zzz: { ...at([255, 305]), translateY: [[0, 0], [0.14, 4], [0.42, -16, 'out'], [0.72, 2], [0.86, -1], [1, 0]],
-        scaleY: [[0, 1], [0.14, 0.86], [0.3, 1.12], [0.48, 1], [1, 1]], scaleX: [[0, 1], [0.14, 1.1], [0.3, 0.92], [0.48, 1], [1, 1]] } },
+      zzz: { ...at([255, 305]), translateY: [[0, 0], [0.66, 14], [1, 0]], scaleY: [[0, 1], [0.66, 0.85], [1, 1]], scaleX: [[0, 1], [0.66, 0.85], [1, 1]] } },
     whiskers(vd, [[0, 0], [0.2, 0], [0.4, 3], [0.6, -1], [0.8, 0]]), // a dreamer's twitch
     squash(family, [[0, 1], [0.12, 1.025], [0.38, 0.95], [0.58, 1.015], [0.76, 1], [1, 1]])),
 };
@@ -167,17 +167,32 @@ const kfs = k => { const ease = hermite(k.map(q => q[1]), k.map(q => q[0]), fals
 // A reaction ends on the first frame of the idle life (once() then plays it afresh), not on the still: for the « z » and the steam of the
 // evening poses, which the idle starts mid-cycle; they reach it in the reaction's last 150 ms. What the idle shows and hides (« z »,
 // steam: alpha down to 0) may be hidden at the tap: the reaction fades it in from 0 (it vanishes then, a sleeper's start, never pops in).
+// The « z » (bold ink: their fade-in right after the tap's crossfade read as a flicker) come back at Z_BACK instead: 'end', over the
+// reaction's last 200 ms (as they rise into place, TAP.soir); a fraction, faded in from there (the special's big « z »).
 // A reaction that animates such a property itself keeps its keys but these ends.
-function settle(targets, idle0, ms) {
-  const fade = +(120 / ms).toFixed(3), fin = +(1 - 150 / ms).toFixed(3);
+const Z_BACK = { tap: 'end', special: 0.6 };
+function settle(targets, idle0, ms, isZ = () => false, back = 0) {
+  const fade = +(120 / ms).toFixed(3), fin = +(1 - 150 / ms).toFixed(3), late = +(1 - 200 / ms).toFixed(3);
   for (const [t, props] of Object.entries(idle0)) for (const [p, { start, still, low }] of Object.entries(props)) {
-    const hides = /Alpha$/.test(p) && low === 0;
+    const hides = /Alpha$/.test(p) && low === 0, b = isZ(t) ? back : 0;
     if (start === still && !hides) continue;
     const k = (targets[t] = targets[t] || {})[p];
     if (k) { k[k.length - 1][1] = start; if (hides) k[0][1] = 0; }
-    else targets[t][p] = hides ? [[0, 0], [fade, still], [fin, still], [1, start]] : [[0, still], [fin, still], [1, start]];
+    else targets[t][p] = !hides ? [[0, still], [fin, still], [1, start]] : b === 'end' ? [[0, 0], [late, 0], [1, start]]
+      : [[0, 0], ...(b ? [[b, 0]] : []), [+(b + fade).toFixed(3), still], [fin, still], [1, start]];
   }
   return targets;
+}
+// is the target named t (a group or a path) inside a group named g, in some layer of the VD
+function under(vd, t, g) {
+  const st = [], re = /<(\/?)(group|path|clip-path)\b([^>]*?)(\/?)>/g; let m;
+  while ((m = re.exec(vd))) {
+    if (m[1]) { if (m[2] === 'group') st.pop(); continue; }
+    const name = (/android:name="([^"]*)"/.exec(m[3]) || [])[1];
+    if (name === t && st.some(n => n === g || n === g + '_halo')) return true; // and its night outline's
+    if (m[2] === 'group' && !m[4]) st.push(name);
+  }
+  return false;
 }
 // { target: objectAnimator xml } for svg2avd.animated()
 function animators(vd, ms, targets, idle0) {
@@ -287,7 +302,7 @@ module.exports = RES => {
     const name = `glose_${pose}_vd`, vd = PARTS[name].map(l => l.xml).join('\n'); // every layer of the pose, in drawing order
     const idle0 = IDLE0[`glose_${pose}`];
     for (const [kind, ms, make] of [['tap', TAP_MS, TAP[family] || TAP.awake], ['special', SPECIAL_MS, SPECIAL[family]]]) {
-      const t = settle(neck(vd, family, make(vd, family)), idle0, ms);
+      const t = settle(neck(vd, family, make(vd, family)), idle0, ms, n => under(vd, n, 'zzz'), Z_BACK[kind]);
       animated(`glose_${pose}_${kind}`, name, Object.assign(animators(name, ms, t, idle0), tethers(vd, family, ms, t)), RES);
     }
   }
