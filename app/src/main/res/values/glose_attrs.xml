@@ -69,8 +69,8 @@
     <attr name="gloseGrelot_f0e801" format="color"/>
     <attr name="gloseGrelot_fff6e6" format="color"/>
     <attr name="gloseGrelot_ffffff" format="color"/>
-    <attr name="gloseLavalliere_3a3550" format="color"/>
     <attr name="gloseLavalliere_3b2a20" format="color"/>
+    <attr name="gloseLavalliere_d88a97" format="color"/>
     <attr name="gloseLavalliere_f0e801" format="color"/>
     <attr name="gloseLavalliere_ffffff" format="color"/>
     <attr name="gloseMarque_3b2a20" format="color"/>

@@ -6,7 +6,7 @@
 <target android:name="a15" android:animation="@animator/glose_k_d367767b"/>
 <target android:name="a16" android:animation="@animator/glose_k_f90478fd"/>
 <target android:name="a17" android:animation="@animator/glose_k_f90478fd"/>
-<target android:name="a18" android:animation="@animator/glose_k_9b9ae106"/>
+<target android:name="a18" android:animation="@animator/glose_k_4d772dbe"/>
 <target android:name="a19" android:animation="@animator/glose_k_4f10a7e9"/>
 <target android:name="a20" android:animation="@animator/glose_k_25c8dec7"/>
 <target android:name="a12" android:animation="@animator/glose_k_e1f5ee46"/>

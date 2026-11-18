@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_soir_vd_5">
-<target android:name="zzz" android:animation="@animator/glose_k_5d08e8e2"/>
-<target android:name="p22" android:animation="@animator/glose_k_89ff9e45"/>
-<target android:name="p23" android:animation="@animator/glose_k_89ff9e45"/>
-<target android:name="p25" android:animation="@animator/glose_k_89ff9e45"/>
-<target android:name="p26" android:animation="@animator/glose_k_89ff9e45"/>
-<target android:name="p28" android:animation="@animator/glose_k_89ff9e45"/>
-<target android:name="p29" android:animation="@animator/glose_k_89ff9e45"/>
+<target android:name="zzz" android:animation="@animator/glose_k_7e44f37f"/>
+<target android:name="p22" android:animation="@animator/glose_k_1ffc9f98"/>
+<target android:name="p23" android:animation="@animator/glose_k_1ffc9f98"/>
+<target android:name="p25" android:animation="@animator/glose_k_1ffc9f98"/>
+<target android:name="p26" android:animation="@animator/glose_k_1ffc9f98"/>
+<target android:name="p28" android:animation="@animator/glose_k_1ffc9f98"/>
+<target android:name="p29" android:animation="@animator/glose_k_1ffc9f98"/>
 </animated-vector>

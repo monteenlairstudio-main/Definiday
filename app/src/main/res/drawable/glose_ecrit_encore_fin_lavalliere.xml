@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/glose_ecrit_mot_vd_lavalliere">
+<target android:name="a44" android:animation="@animator/glose_k_59ca0ba6"/>
+<target android:name="a43" android:animation="@animator/glose_k_b0d0c8d3"/>
+<target android:name="a42" android:animation="@animator/glose_k_80a99f23"/>
+</animated-vector>

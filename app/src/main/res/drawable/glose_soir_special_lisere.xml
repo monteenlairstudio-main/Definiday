@@ -4,7 +4,7 @@
 <target android:name="dormeur_halo" android:animation="@animator/glose_k_efb52b71"/>
 <target android:name="tete_halo" android:animation="@animator/glose_k_7a56ae98"/>
 <target android:name="zzz_halo" android:animation="@animator/glose_k_b50255c0"/>
-<target android:name="p1" android:animation="@animator/glose_k_5d698a0f"/>
-<target android:name="p3" android:animation="@animator/glose_k_5d698a0f"/>
-<target android:name="p5" android:animation="@animator/glose_k_5d698a0f"/>
+<target android:name="p1" android:animation="@animator/glose_k_7345272c"/>
+<target android:name="p3" android:animation="@animator/glose_k_7345272c"/>
+<target android:name="p5" android:animation="@animator/glose_k_7345272c"/>
 </animated-vector>
