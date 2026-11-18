@@ -222,7 +222,6 @@ function gloseHead(C, o = {}) {
   const glasses = G(pre + 'lunettes', glassItems);
   if (o.glassesTilt) glasses.rotate(o.glassesTilt, [wx(500), 400]);
   // vie au repos (vie.js) : reflet qui passe de temps en temps, clignements irréguliers (parfois doubles), un bâillement, moustaches qui frémissent
-  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', life: glints(13, { from: -110, gap: [5200, 9800], at: 3100 }).map(([t, x]) => [t, [x, 0]]), base: 'translate(-110 0)' });
   const brows = sleep ? [line(curve([[wx(398), 318], [wx(420), 312], [wx(444), 316]]), IN, INK, 0.8), line(curve([[wx(556), 316], [wx(580), 312], [wx(602), 318]]), IN, INK, 0.8)]
     : o.mood === 'curieux' ? [line(curve([[wx(396), 304], [wx(420), 296], [wx(446), 302]]), IN, INK, 0.9), line(curve([[wx(552), 290], [wx(578), 270], [wx(606), 280]]), IN, INK, 0.9)]
     : o.mood === 'fier' ? [line(curve([[wx(394), 300], [wx(420), 284], [wx(446), 292]]), IN, INK, 0.9), line(curve([[wx(554), 292], [wx(580), 284], [wx(606), 300]]), IN, INK, 0.9)]
@@ -253,8 +252,11 @@ function gloseHead(C, o = {}) {
   const T = q => xy(P(q).transform(M));
   g.data = { pivot: T(neck) }; // pivot des réactions one-shot (svg2avd -> android:pivotX/Y du groupe « tete »)
   const Y = YAWN, yk = [[0, 0], [Y, 0], [Y + 900, 1], [Y + 2700, 1], [Y + 3600, 0], [LIFE, 0]]; // bâillement : ouvre en 0,9 s, tient, referme
+  const shut = yawn ? [[Y, Y + 3600]] : [], blinked = sleep ? [] : blinks(22, { avoid: shut, at: 1300 });
+  // reflet qui passe de temps en temps, jamais pendant un clignement ni le bâillement
+  if (o.glare !== false) anims.push({ id: pre + 'reflet', type: 'translate', life: glints(13, { from: -110, gap: [5200, 9800], at: 3100, avoid: [...spans(blinked), ...shut] }).map(([t, x]) => [t, [x, 0]]), base: 'translate(-110 0)' });
   if (!sleep) { // clignements irréguliers (2,2 à 6,8 s), parfois doubles, jamais pendant le bâillement (yeux déjà clos)
-    const blink = { life: along(blinks(22, { avoid: yawn ? [[Y, Y + 3600]] : [], at: 1300 }), [1, 0.001], [1, 1]), base: 'scale(1 0.001)' };
+    const blink = { life: along(blinked, [1, 0.001], [1, 1]), base: 'scale(1 0.001)' };
     anims.push(Object.assign({ id: pre + 'paupiere_g', type: 'scale', pivot: T(eyeTops[0]) }, blink), Object.assign({ id: pre + 'paupiere_d', type: 'scale', pivot: T(eyeTops[1]) }, blink));
   }
   if (yawn) {

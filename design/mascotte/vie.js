@@ -64,12 +64,25 @@ const blinks = (seed, o = {}) => gestures(seed, Object.assign({ gap: [2200, 6800
 // petit coup (queue, moustaches) : léger contre-temps, départ vif, dépassement amorti, repos
 const flick = (amp, speed = 1) => r => { const a = amp * between(r, [0.7, 1.1]) * (r() < 0.5 ? 1 : -1);
   return [[90 * speed, -0.25 * a], [110 * speed, a, 'out'], [170 * speed, -0.35 * a], [200 * speed, 0.1 * a], [220 * speed, 0]]; };
+// spans [début, fin] où une piste de gestes (gestures, blinks) quitte son repos 0
+function spans(keys) {
+  const out = [];
+  keys.forEach(([t, v], i) => { const n = keys[i + 1];
+    if (v === 0 && n && n[1] !== 0) out.push([t, t]); else if (out.length && v === 0 && out[out.length - 1][1] === out[out.length - 1][0]) out[out.length - 1][1] = t; });
+  return out;
+}
 // reflet des lunettes : passe d'un bord à l'autre (caché hors des verres aux deux bouts), puis repasse dans l'autre sens 1,2 à 3,2 s
-// plus tard (il finit où il commence)
+// plus tard (il finit où il commence). o.avoid : spans où il ne passe pas (clignements, bâillement : l'œil n'a qu'un événement à la
+// fois), 150 ms de marge ; un passage qui en croiserait un attend sa fin.
 function glints(seed, o) {
-  const r = seeded(seed), out = [[0, o.from]]; let t = o.at || between(r, o.gap);
-  const pass = (a, b) => { out.push([t, a]); t += between(r, [480, 640]); out.push([t, b]); };
-  while (t + 4500 < END) { pass(o.from, -o.from); t += between(r, [1200, 3200]); pass(-o.from, o.from); t += between(r, o.gap); }
+  const r = seeded(seed), out = [[0, o.from]], M = 150; let t = o.at || between(r, o.gap);
+  const free = (a, d) => { for (const [x, y] of o.avoid || []) if (a < y + M && a + d > x - M) return free(y + M, d); return a; };
+  while (t + 4500 < END) {
+    const d1 = between(r, [480, 640]), t1 = free(t, d1), back = between(r, [1200, 3200]), d2 = between(r, [480, 640]), t2 = free(t1 + d1 + back, d2);
+    if (t2 + d2 > END - 500) break; // both passes or none
+    out.push([t1, o.from], [t1 + d1, -o.from], [t2, -o.from], [t2 + d2, o.from]);
+    t = t2 + d2 + between(r, o.gap);
+  }
   return ms(out.concat([[LIFE, o.from]]));
 }
 // petites valeurs au hasard autour de 1 (flamme, lueur) : extrêmes alternés tous les step ms, parfois tenus (o.hold), départ et retour à 1
