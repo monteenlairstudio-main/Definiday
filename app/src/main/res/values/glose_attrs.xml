@@ -38,6 +38,7 @@
     <attr name="gloseBonnet_f8eedd" format="color"/>
     <attr name="gloseBonnet_f8eede" format="color"/>
     <attr name="gloseBonnet_fff6e6" format="color"/>
+    <attr name="gloseBonnet_ffffff" format="color"/>
     <attr name="gloseCouronne_3b2a20" format="color"/>
     <attr name="gloseCouronne_4a6fa5" format="color"/>
     <attr name="gloseCouronne_5e9a6e" format="color"/>

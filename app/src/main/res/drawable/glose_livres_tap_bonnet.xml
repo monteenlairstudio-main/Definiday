@@ -2,4 +2,5 @@
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd_bonnet">
 <target android:name="tete" android:animation="@animator/glose_k_1ec90fb6"/>
+<target android:name="bonnet_pointe" android:animation="@animator/glose_k_1ff8dd66"/>
 </animated-vector>

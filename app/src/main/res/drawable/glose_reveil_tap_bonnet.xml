@@ -3,4 +3,5 @@
     android:drawable="@drawable/glose_reveil_vd_bonnet">
 <target android:name="tete" android:animation="@animator/glose_k_10a8a2f3"/>
 <target android:name="dormeur" android:animation="@animator/glose_k_8fc09f9d"/>
+<target android:name="bonnet_pointe" android:animation="@animator/glose_k_c41d5d3e"/>
 </animated-vector>
