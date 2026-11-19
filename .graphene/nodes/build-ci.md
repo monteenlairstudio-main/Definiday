@@ -14,7 +14,7 @@ covers:
   - gradle/
   - .github/
   - app/src/test/
-last_commit: 20621e9
+last_commit: e1929f1
 edges:
   - to: release-signing type: depends_on reason: the release job (main/tags, environment release) decodes the keystore and passes DEFINIDAY_* to assembleRelease
   - to: mascot type: related_to reason: generated XML is versioned because CI does not run Node
@@ -28,3 +28,4 @@ edges:
 - 2f261b6: versionCode 15 / versionName 0.15.0; PR #18 opened (night improvements + owner choices). Release notes come from the merge commit message (first 12 lines without attribution): set a French user-facing title/body at merge time. <!-- id:2d47 -->
 - 2026-11-09: after a GitHub abuse-detection suspension (2026-11-08, flagged automated activity: ~100 commits overnight, ~240 CI runs in 48 h), build.yml triggers narrowed: push only on main and tags v*, pull_request, workflow_dispatch. Work branches are tested via their PR. Keep pushes batched (one per working session/lot), no unattended overnight pushing. <!-- id:ad7f -->
 - 2026-11-18: versionCode 17 / 0.17.0, PR #20 merged with a merge commit (20621e9, French title/body as release notes). The work branch was fast-forwarded to main afterwards, so it can keep going without a restart. <!-- id:48db -->
+- 2026-11-19: versionCode 18 / 0.17.1 (Glose 81 KB lighter: integer grid, thin tapers, compact pathData; tap crossfade replaced by queued reactions). <!-- id:1006 -->
