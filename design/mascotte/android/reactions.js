@@ -201,6 +201,10 @@ function animators(vd, ms, targets, idle0) {
     if (Math.abs((k[k.length - 1][1] - end) % (p === 'rotation' ? 360 : Infinity)) > 1e-6) throw new Error(`${vd} ${t}.${p} ne finit pas sur l'image 0 de la vie (${end})`);
     // a key segment shorter than 2 frames at 60 Hz is a jump, not a motion (merge() crossing nearby keys of two curves made 12 ms ones)
     k.slice(1).forEach(([t1, v1], i) => { if ((t1 - k[i][0]) * ms < 33 && v1 !== k[i][1]) throw new Error(`${vd} ${t}.${p}: ${k[i][0]} -> ${t1} lasts ${((t1 - k[i][0]) * ms).toFixed(0)} ms`); });
+    // keys from fraction 0 to 1 (held at both ends: same motion). AnimatorInflater pads a shorter track with a key without value, which the
+    // UI thread fills from the target but the RenderThread reads as 0: the ball (scale ending at 0.8) shrank to nothing (owner, 0.17.1).
+    if (k[0][0] > 0) k.unshift([0, k[0][1]]);
+    if (k[k.length - 1][0] < 1) k.push([1, k[k.length - 1][1]]);
   }
   // linear timeline: the fractions above are times (without it, AccelerateDecelerate moved the 0.1 key to 0.2)
   return Object.fromEntries(Object.entries(targets).map(([t, props]) => [t, `<objectAnimator android:duration="${ms}" android:interpolator="@android:interpolator/linear">` +

@@ -4,7 +4,7 @@
 <target android:name="a14" android:animation="@animator/glose_k_b301bb2d"/>
 <target android:name="a15" android:animation="@animator/glose_k_b301bb2d"/>
 <target android:name="tete" android:animation="@animator/glose_k_10a8a2f3"/>
-<target android:name="a19" android:animation="@animator/glose_k_64c3d23c"/>
-<target android:name="a20" android:animation="@animator/glose_k_4be115ce"/>
+<target android:name="a19" android:animation="@animator/glose_k_dd7d84fb"/>
+<target android:name="a20" android:animation="@animator/glose_k_27729bb8"/>
 <target android:name="dormeur" android:animation="@animator/glose_k_8fc09f9d"/>
 </animated-vector>

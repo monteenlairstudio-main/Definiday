@@ -3,8 +3,8 @@
     android:drawable="@drawable/glose_ecrit_mot_vd_lisere">
 <target android:name="tete_halo" android:animation="@animator/glose_k_0abe6da0"/>
 <target android:name="a9" android:animation="@animator/glose_k_2d95c241"/>
-<target android:name="a6" android:animation="@animator/glose_k_16cd4453"/>
-<target android:name="a7" android:animation="@animator/glose_k_cf416ccc"/>
+<target android:name="a6" android:animation="@animator/glose_k_165a7b1d"/>
+<target android:name="a7" android:animation="@animator/glose_k_671e0fce"/>
 <target android:name="corps_halo" android:animation="@animator/glose_k_d126b016"/>
 <target android:name="pelote_halo" android:animation="@animator/glose_k_739f928d"/>
 </animated-vector>

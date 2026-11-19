@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_livres_vd_lisere">
-<target android:name="patte_halo" android:animation="@animator/glose_k_b137bcf4"/>
-<target android:name="pelote_halo" android:animation="@animator/glose_k_c351d9ab"/>
+<target android:name="patte_halo" android:animation="@animator/glose_k_7d360f28"/>
+<target android:name="pelote_halo" android:animation="@animator/glose_k_f90bf391"/>
 <target android:name="tete_halo" android:animation="@animator/glose_k_bc343ffa"/>
-<target android:name="a7" android:animation="@animator/glose_k_e6f9d4d9"/>
-<target android:name="a3" android:animation="@animator/glose_k_755081b1"/>
+<target android:name="a7" android:animation="@animator/glose_k_3af4c075"/>
+<target android:name="a3" android:animation="@animator/glose_k_bbbb429c"/>
 <target android:name="corps_halo" android:animation="@animator/glose_k_6ab99dfa"/>
 <target android:name="sol_lien_halo" android:animation="@animator/glose_k_d81fe111"/>
 <target android:name="sol_lien_h" android:animation="@animator/glose_k_683798ea"/>

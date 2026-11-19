@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_1">
-<target android:name="pelote" android:animation="@animator/glose_k_f15397bf"/>
+<target android:name="pelote" android:animation="@animator/glose_k_8ce6f3b3"/>
 <target android:name="a11" android:animation="@animator/glose_k_c6b44eed"/>
 <target android:name="corps" android:animation="@animator/glose_k_09084dd8"/>
 <target android:name="pattes" android:animation="@animator/glose_k_62397000"/>

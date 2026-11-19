@@ -14,7 +14,7 @@ covers:
   - gradle/
   - .github/
   - app/src/test/
-last_commit: e1929f1
+last_commit: a1450a6
 edges:
   - to: release-signing type: depends_on reason: the release job (main/tags, environment release) decodes the keystore and passes DEFINIDAY_* to assembleRelease
   - to: mascot type: related_to reason: generated XML is versioned because CI does not run Node
@@ -29,3 +29,4 @@ edges:
 - 2026-11-09: after a GitHub abuse-detection suspension (2026-11-08, flagged automated activity: ~100 commits overnight, ~240 CI runs in 48 h), build.yml triggers narrowed: push only on main and tags v*, pull_request, workflow_dispatch. Work branches are tested via their PR. Keep pushes batched (one per working session/lot), no unattended overnight pushing. <!-- id:ad7f -->
 - 2026-11-18: versionCode 17 / 0.17.0, PR #20 merged with a merge commit (20621e9, French title/body as release notes). The work branch was fast-forwarded to main afterwards, so it can keep going without a restart. <!-- id:48db -->
 - 2026-11-19: versionCode 18 / 0.17.1 (Glose 81 KB lighter: integer grid, thin tapers, compact pathData; tap crossfade replaced by queued reactions). <!-- id:1006 -->
+- 2026-11-19: versionCode 19 / 0.17.2 (RenderThread keyframe fix: yarn ball, sleeper and steam no longer shrink to nothing in specials). v0.17.1 was published automatically ~7 min after merge (APK + update.json). <!-- id:1a2a -->
