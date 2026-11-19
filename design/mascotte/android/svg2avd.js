@@ -35,11 +35,20 @@ const avdXml = (vd, targets) => `<?xml version="1.0" encoding="utf-8"?>\n<animat
 // that plays it (a part and its night outline, the head copies under each hat, the ecrit words…): inline (aapt:attr), each copy was a
 // resource file of its own in the APK (279 for 41 distinct idle animators).
 function shared(resDir, xml) {
-  const n = 'glose_k_' + require('crypto').createHash('sha1').update(xml).digest('hex').slice(0, 8);
+  span(xml);
+  const n ='glose_k_' + require('crypto').createHash('sha1').update(xml).digest('hex').slice(0, 8);
   fs.mkdirSync(path.join(resDir, 'animator'), { recursive: true });
   fs.writeFileSync(path.join(resDir, 'animator', `${n}.xml`), '<?xml version="1.0" encoding="utf-8"?>\n' +
     xml.replace(/^<(\w+)/, '<$1 xmlns:android="http://schemas.android.com/apk/res/android"') + '\n');
   return n;
+}
+// Self-check of every animator written: each holder's keys go from fraction 0 to 1. AnimatorInflater pads a track that does not with a key
+// without value; the UI thread (and Robolectric) fills it from the target, the RenderThread reads 0 (a scale ending at 0.8 goes to 0 by 1).
+function span(xml) {
+  for (const [, p, body] of xml.matchAll(/propertyName="(\w+)"[^>]*>(.*?)<\/propertyValuesHolder>/g)) {
+    const f = [...body.matchAll(/android:fraction="([-\d.e]+)"/g)].map(m => +m[1]);
+    if (f[0] !== 0 || f[f.length - 1] !== 1) throw new Error(`${p}: keys from ${f[0]} to ${f[f.length - 1]}, not 0 to 1 (the RenderThread would read 0 outside): ${xml.slice(0, 200)}`);
+  }
 }
 const IDLE_MS = 26000; // Glose.IDLE_MS
 // Easing of each keyframe segment (index i = the segment ending at key i): monotone cubic Hermite (Fritsch–Carlson, as PCHIP). The speed
@@ -440,6 +449,10 @@ if (require.main === module) { // node android/svg2avd.js : self-check of hermit
   merge(ks);
   eq(ks, [p('M0,0h10v10zM20,0h10v10z'), p('M25,5h10v10z'), p('M50,0h5v5z', ''), '<group/>']);
   console.log('merge ok');
+  const pvh = fr => `<objectAnimator><propertyValuesHolder android:propertyName="scaleX" android:valueType="floatType">${fr.map(x => `<keyframe android:fraction="${x}" android:value="1"/>`).join('')}</propertyValuesHolder></objectAnimator>`;
+  span(pvh([0, 0.5, 1]));
+  require('assert').throws(() => span(pvh([0, 0.8])), /not 0 to 1/);
+  console.log('span ok');
   eq(tight('M180,852c0,-13 152,-24 340,-24c188,0 340,11 340,24c0,0.5 -0.25,1.5 0.5,.5z'), 'M180 852c0-13 152-24 340-24 188 0 340 11 340 24 0 .5-.25 1.5.5.5z');
   eq(tight('M0,0a5,5 0 1,0 10,0a5,5 0 1,0 -10,0zM1,1 2,2'), 'M0 0a5 5 0 1 0 10 0 5 5 0 1 0-10 0zM1 1 2 2');
   eq(tight('M1e-5,0h2'), 'M1e-5,0h2');
