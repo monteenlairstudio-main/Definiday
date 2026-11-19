@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_assis_vd_lisere">
-<target android:name="pelote_halo" android:animation="@animator/glose_k_f15397bf"/>
-<target android:name="tete_halo" android:animation="@animator/glose_k_f58c05d6"/>
-<target android:name="a3" android:animation="@animator/glose_k_f16a560f"/>
-<target android:name="a4" android:animation="@animator/glose_k_2c5cec57"/>
+<target android:name="pelote_halo" android:animation="@animator/glose_k_8ce6f3b3"/>
+<target android:name="tete_halo" android:animation="@animator/glose_k_60699957"/>
+<target android:name="a3" android:animation="@animator/glose_k_e478c044"/>
+<target android:name="a4" android:animation="@animator/glose_k_51fc6d68"/>
 <target android:name="a6" android:animation="@animator/glose_k_c6b44eed"/>
 <target android:name="corps_halo" android:animation="@animator/glose_k_09084dd8"/>
 <target android:name="brin_lien_halo" android:animation="@animator/glose_k_afcf6e34"/>

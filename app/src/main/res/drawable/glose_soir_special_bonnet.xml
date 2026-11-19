@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/glose_soir_vd_bonnet">
-<target android:name="dormeur" android:animation="@animator/glose_k_efb52b71"/>
-<target android:name="tete" android:animation="@animator/glose_k_7a56ae98"/>
+<target android:name="dormeur" android:animation="@animator/glose_k_d3b8d2d6"/>
+<target android:name="tete" android:animation="@animator/glose_k_a9cff457"/>
 <target android:name="bonnet_pointe" android:animation="@animator/glose_k_1d6c53c6"/>
 </animated-vector>

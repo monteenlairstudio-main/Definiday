@@ -3,7 +3,7 @@
     android:drawable="@drawable/glose_soir_vd_lisere">
 <target android:name="tete_halo" android:animation="@animator/glose_k_1187afb2"/>
 <target android:name="zzz_halo" android:animation="@animator/glose_k_7e44f37f"/>
-<target android:name="a7" android:animation="@animator/glose_k_04a68c8b"/>
+<target android:name="a7" android:animation="@animator/glose_k_ab9236fb"/>
 <target android:name="dormeur_halo" android:animation="@animator/glose_k_e12412be"/>
 <target android:name="p1" android:animation="@animator/glose_k_1ffc9f98"/>
 <target android:name="p3" android:animation="@animator/glose_k_1ffc9f98"/>

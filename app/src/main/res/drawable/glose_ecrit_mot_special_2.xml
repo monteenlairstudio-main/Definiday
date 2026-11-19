@@ -3,6 +3,6 @@
     android:drawable="@drawable/glose_ecrit_mot_vd_2">
 <target android:name="tete" android:animation="@animator/glose_k_ee45d6dd"/>
 <target android:name="a33" android:animation="@animator/glose_k_0734f4df"/>
-<target android:name="a37" android:animation="@animator/glose_k_c6fc5fc9"/>
-<target android:name="a38" android:animation="@animator/glose_k_247a5b6e"/>
+<target android:name="a37" android:animation="@animator/glose_k_26da054e"/>
+<target android:name="a38" android:animation="@animator/glose_k_c3e79f16"/>
 </animated-vector>

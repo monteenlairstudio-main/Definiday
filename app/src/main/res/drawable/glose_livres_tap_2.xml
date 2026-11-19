@@ -4,6 +4,6 @@
 <target android:name="a20" android:animation="@animator/glose_k_9ae4d35c"/>
 <target android:name="a21" android:animation="@animator/glose_k_9ae4d35c"/>
 <target android:name="tete" android:animation="@animator/glose_k_1ec90fb6"/>
-<target android:name="a25" android:animation="@animator/glose_k_ba0b5181"/>
-<target android:name="a26" android:animation="@animator/glose_k_3530e5a2"/>
+<target android:name="a25" android:animation="@animator/glose_k_e0359e08"/>
+<target android:name="a26" android:animation="@animator/glose_k_718431d4"/>
 </animated-vector>
