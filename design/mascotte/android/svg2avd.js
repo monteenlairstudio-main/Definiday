@@ -133,6 +133,21 @@ function box(d) {
   }
   return b;
 }
+// pathData au plus court, même tracé (PathParser d'Android, API 24+, et SVG) : rien avant « - », ni avant « . » après un nombre décimal,
+// pas de 0 avant le point, commande répétée implicite (sauf m, dont la répétition vaut l). Nombres recopiés tels quels, sinon d inchangé.
+function tight(d) {
+  if (/[^MmLlHhVvCcSsQqTtAaZz\d.,\s-]/.test(d)) return d; // exposant, signe + : tel quel
+  let o = '', prev = '';
+  for (const [, c, args] of d.matchAll(/([a-zA-Z])([^a-zA-Z]*)/g)) {
+    const ns = (args.match(/-?(?:\d+\.?\d*|\.\d+)/g) || []).map(t => t.replace(/^(-?)0\./, '$1.'));
+    if (args.replace(/-?(?:\d+\.?\d*|\.\d+)/g, '').replace(/[\s,]/g, '')) return d;
+    let num = c === prev && ns.length && !/[mz]/i.test(c) ? o.match(/[-\d.]*$/)[0] : ''; // répétée : le dernier nombre écrit
+    if (!num) o += c;
+    for (const n of ns) { o += num && !(n[0] === '-' || (n[0] === '.' && num.includes('.'))) ? ' ' + n : n; num = n; }
+    prev = c;
+  }
+  return o;
+}
 // Consecutive unnamed paths of one group with the same paint are written as one path (one subpath each): a VectorDrawable path costs
 // its element and attributes in the binary XML, whatever its size (ribs, creases, tufts). Only while their boxes do not meet: overlapping
 // subpaths would be painted once (alpha) or cancel out (opposite windings), so the drawing stays the same.
@@ -173,7 +188,7 @@ const defs = {}; (function walk(e) { if (e.attrs.id) defs[e.attrs.id] = e; e.kid
 const f = n => +(+n).toFixed(1);
 function shapeData(e) {
   const a = e.attrs;
-  if (e.tag === 'path') return a.d;
+  if (e.tag === 'path') return tight(a.d);
   if (e.tag === 'circle' || e.tag === 'ellipse') {
     const cx = +a.cx || 0, cy = +a.cy || 0, rx = +(a.rx || a.r), ry = +(a.ry || a.r);
     return `M${f(cx - rx)},${f(cy)}a${f(rx)},${f(ry)} 0 1,0 ${f(2 * rx)},0a${f(rx)},${f(ry)} 0 1,0 ${f(-2 * rx)},0z`;
@@ -425,5 +440,9 @@ if (require.main === module) { // node android/svg2avd.js : self-check of hermit
   merge(ks);
   eq(ks, [p('M0,0h10v10zM20,0h10v10z'), p('M25,5h10v10z'), p('M50,0h5v5z', ''), '<group/>']);
   console.log('merge ok');
+  eq(tight('M180,852c0,-13 152,-24 340,-24c188,0 340,11 340,24c0,0.5 -0.25,1.5 0.5,.5z'), 'M180 852c0-13 152-24 340-24 188 0 340 11 340 24 0 .5-.25 1.5.5.5z');
+  eq(tight('M0,0a5,5 0 1,0 10,0a5,5 0 1,0 -10,0zM1,1 2,2'), 'M0 0a5 5 0 1 0 10 0 5 5 0 1 0-10 0zM1 1 2 2');
+  eq(tight('M1e-5,0h2'), 'M1e-5,0h2');
+  console.log('tight ok');
 }
 module.exports = { convert, animated, hermite, hermiteXml, HERMITE, TOKENS, LAYERED, LAYERS, ALIASES, PARTS, IDLE0 };

@@ -832,6 +832,29 @@ function grid(p) {
   for (const sg of p.segments) { const pt = sg.point.round(), hi = sg.point.add(sg.handleIn).round(), ho = sg.point.add(sg.handleOut).round(); sg.point = pt; sg.handleIn = hi.subtract(pt); sg.handleOut = ho.subtract(pt); }
   return p;
 }
+// tout Glose sur la grille entière (make_android.js : variante grid), une fois posé : placement, transformations et liseré faits, repère du VD
+function gridAll(root) { for (const p of root.getItems({ match: it => it instanceof Path })) grid(thin(p)); }
+// suites de courbes courtes (< len u : doigts, membres, queue de taper() et des booléens) -> ligne brisée de Douglas-Peucker à tol près :
+// sur la grille, leurs centaines de nœuds serrés feraient des marches d'escalier
+function thin(p, tol = 0.25, len = 2) {
+  const S = p.segments, n = S.length, m = p.curves.length; if (m < 2) return p;
+  const short = p.curves.map(c => c.length < len), st = p.closed ? Math.max(0, short.findIndex((s, i) => !s && short[(i + 1) % m])) + 1 : 0;
+  const drop = new Set();
+  for (let k = 0; k < m;) {
+    if (!short[(st + k) % m]) { k++; continue; }
+    let e = k; while (e < m && short[(st + e) % m]) e++; // courbes k..e-1, nœuds k..e
+    const ix = []; for (let j = k; j <= e; j++) ix.push((st + j) % n);
+    S[ix[0]].handleOut = [0, 0]; S[ix[ix.length - 1]].handleIn = [0, 0]; ix.slice(1, -1).forEach(j => { S[j].handleIn = S[j].handleOut = [0, 0]; });
+    (function dp(a, b) { // garde le nœud le plus loin de la corde a-b s'il dépasse tol
+      const A = S[ix[a]].point, v = S[ix[b]].point.subtract(A), L = v.length; let w = -1, d = tol;
+      for (let j = a + 1; j < b; j++) { const q = S[ix[j]].point.subtract(A), h = L ? Math.abs(v.cross(q)) / L : q.length; if (h > d) { d = h; w = j; } }
+      if (w < 0) for (let j = a + 1; j < b; j++) drop.add(ix[j]); else { dp(a, w); dp(w, b); }
+    })(0, ix.length - 1);
+    k = e;
+  }
+  [...drop].sort((a, b) => b - a).forEach(j => p.removeSegment(j));
+  return p;
+}
 // ---------- contours partiels ----------
 // edgeLine : ne trace que la partie du contour de `shape` située dans `area` (chemin ouvert + intersect sans trace)
 function openOf(p) { return (p.children ? p.children : [p]).map(c => { const o = new Path({ segments: c.segments.map(s => s.clone()), closed: false, insert: false }); o.add(c.firstSegment.clone()); return o; }); }
