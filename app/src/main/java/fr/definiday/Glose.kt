@@ -12,9 +12,7 @@ import android.os.Build
 import android.provider.Settings
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
-import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import fr.definiday.Unlocks.Kind
 
@@ -22,8 +20,6 @@ import fr.definiday.Unlocks.Kind
 object Glose {
     /** The idle life plays this long, then rests on its still frame (WCAG 2.2.2, battery); a tap replays it. */
     const val IDLE_MS = 26_000L
-    /** A reaction starts from the still drawing: what was playing fades out over it this long ([fade]). */
-    const val FADE_MS = 120L
     /** Worn on the head or beside it: cropped from the head icons. */
     private val WORN = setOf(Kind.TETE, Kind.COU, Kind.OBJET)
 
@@ -122,58 +118,41 @@ object Glose {
         }
     }
 
-    /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once]. */
+    /** Stops the animation and cancels what was pending: the timed stop, the return to idle of [once], a reaction waiting. */
     fun stop(v: ImageView) {
         v.removeCallbacks(v.tag as? Runnable)
+        v.tag = null
         avds(v.drawable).forEach { it.clearAnimationCallbacks(); it.stop() }
     }
 
+    /** [ImageView.getTag] while a reaction of [once] plays: what it plays at its end instead of the idle. */
+    private class Next(var then: (() -> Unit)? = null)
+
     /** Plays the one-shot [res] (R.drawable.glose_icone_hoche: nods; glose_icone_penche: tilts the head, curious) on [v],
      *  then shows [idle] (e.g. R.drawable.glose_icone_vd) and [play]s it. Nothing when animations are off: the still stays.
-     *  [accessory] false for the head icons; [dress] builds both drawables. A second call replaces the first; [stop] (onPause) cancels the return.
-     *  Started while [v] is animating (idle mid-cycle, a reaction), that animation [fade]s out over the new one instead of snapping. */
+     *  [accessory] false for the head icons; [dress] builds both drawables. [stop] (onPause) cancels the return.
+     *  A reaction is never cut: called during one, it plays at its end (every reaction ends on the first frame of the idle life, so the
+     *  seam is clean; the last call wins). The idle life is cut: the reaction starts from the still drawing. No crossfade: the RenderThread
+     *  can neither pause nor seek an AVD, so the old animation would go on moving under the new one (owner, 0.17.0: a shrinking ghost). */
     fun once(v: ImageView, res: Int, idle: Int, accessory: Boolean = true, dress: (Int) -> Drawable = { mine(v.context, it, accessory) }) {
         if (!ValueAnimator.areAnimatorsEnabled()) return
-        val old = v.drawable
-        val moving = avds(old).any { it.isRunning } && v.isShown && v.isLaidOut && v.parent is ViewGroup
-        if (moving) { v.removeCallbacks(v.tag as? Runnable); avds(old).forEach { it.clearAnimationCallbacks() } } else stop(v)
+        (v.tag as? Next)?.let { it.then = { once(v, res, idle, accessory, dress) }; return }
+        stop(v)
         val d = dress(res)
         val layers = avds(d)
+        val next = Next()
         var left = layers.size // back to idle once every animated layer has ended
         layers.forEach { a -> a.registerAnimationCallback(object : Animatable2.AnimationCallback() {
             override fun onAnimationEnd(x: Drawable) {
                 a.clearAnimationCallbacks()
                 if (--left > 0) return
-                v.setImageDrawable(dress(idle))
-                play(v)
+                v.tag = null
+                next.then?.invoke() ?: run { v.setImageDrawable(dress(idle)); play(v) }
             }
         }) }
         v.setImageDrawable(d)
-        if (moving) fade(v, old)
+        if (layers.isNotEmpty()) v.tag = next
         layers.forEach { it.start() }
-    }
-
-    /** [old], still playing, over [v] in its parent's overlay (no layout change, out of the accessibility tree), faded out in [FADE_MS]
-     *  (scaled like every animator), then stopped and dropped. The RenderThread can neither pause nor seek an AVD: without it the pose snaps.
-     *  Under it, [v] fades in over 2 frames: what only the reaction shows (the written word, an edge) does not pop in, and the tap frame is
-     *  the idle's (where both are opaque the background shows through at most 7 %, one frame). */
-    private fun fade(v: ImageView, old: Drawable) {
-        v.forceHasOverlappingRendering(true)
-        v.alpha = 0f
-        v.animate().alpha(1f).setDuration(FADE_MS / 4).setInterpolator(LinearInterpolator())
-        val host = (v.parent as ViewGroup).overlay
-        val o = ImageView(v.context).apply {
-            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-            forceHasOverlappingRendering(true) // one alpha for the whole picture: else each path fades alone, the body would show through the scarf
-            scaleType = v.scaleType
-            setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, v.paddingBottom)
-            setImageDrawable(old)
-            measure(View.MeasureSpec.makeMeasureSpec(v.width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(v.height, View.MeasureSpec.EXACTLY))
-            layout(v.left, v.top, v.right, v.bottom)
-        }
-        host.add(o)
-        o.animate().alpha(0f).setDuration(FADE_MS).setInterpolator(LinearInterpolator()) // linear: the smallest step per frame
-            .withEndAction { host.remove(o); o.setImageDrawable(null); avds(old).forEach { it.stop() } }
     }
 
     /** Taps on Glose ([next], clock injected for tests): a tap within [QUIET_MS] of the last reaction, or [SPECIAL_QUIET_MS] of a special, is ignored

@@ -363,45 +363,40 @@ class GloseTest {
         } finally { Glose.paused = false }
     }
 
-    /** A tap mid-cycle: the idle life, still playing, fades out over the reaction in a view of the parent's overlay (same place and size,
-     *  out of the accessibility tree), then is stopped and removed. Paused or animations off: nothing plays, nothing to fade. */
-    @Test fun tapFadesFromWhereGloseWas() {
-        val c = Robolectric.buildActivity(MainActivity::class.java).setup()
-        val v = c.get().findViewById<ImageView>(R.id.glose)
-        val group = android.view.ViewOverlay::class.java.getDeclaredField("mOverlayViewGroup").apply { isAccessible = true }
-        fun overlay() = (group.get((v.parent as android.view.ViewGroup).overlay) as android.view.ViewGroup).let { g -> (0 until g.childCount).map { g.getChildAt(it) as ImageView } }
-        fun avds(d: android.graphics.drawable.Drawable) = (d as android.graphics.drawable.LayerDrawable).let { l -> (0 until l.numberOfLayers).map(l::getDrawable) }.filterIsInstance<AnimatedVectorDrawable>()
-        fun draw() = v.draw(Canvas(Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)))
+    /** Owner, 0.17.0: « l'animation disparaît en rétrécissant ». A tap mid-cycle faded the old animation, still playing (the RenderThread can
+     *  neither pause nor seek an AVD), over the new one: two Gloses in different poses for 120 ms, the old one squashing as it faded.
+     *  Every composed frame (the parent, its overlay included, every 16 ms) must be the view's one drawing: a tap during the idle life starts
+     *  the reaction at once; a reaction is never cut, what comes meanwhile (the 4th tap, two close taps) plays at its end, on its last frame. */
+    @Test fun aTapNeverShowsTwoGloses() {
+        org.robolectric.shadows.ShadowChoreographer.setPaused(true) // real 16 ms frames: else Robolectric runs an animation to its end at once
+        org.robolectric.shadows.ShadowChoreographer.setFrameDelay(java.time.Duration.ofMillis(16))
         val idle = { ms: Long -> org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(ms)) }
-        draw()
-        val life = v.drawable
-        assertTrue(avds(life).all { it.isRunning })
+        val a = Robolectric.buildActivity(MainActivity::class.java).setup().get()
+        a.findViewById<android.view.View>(R.id.season).visibility = android.view.View.GONE // the seasonal prop overlaps him: only Glose
+        idle(48)
+        val v = a.findViewById<ImageView>(R.id.glose)
+        val p = v.parent as android.view.ViewGroup
+        fun shot(draw: (Canvas) -> Unit) = Bitmap.createBitmap(p.width, p.height, Bitmap.Config.ARGB_8888).also { draw(Canvas(it)) }
+        val still = painted(shot { v.draw(it) }) // nothing yet: the first draw starts the idle life
+        fun frames(ms: Long) = repeat((ms / 16).toInt()) {
+            val seen = shot { p.draw(it) }
+            val alone = shot { it.translate(v.left.toFloat(), v.top.toFloat()); v.draw(it) }
+            assertEquals(0, diff(seen, alone)) // no second Glose, no alpha on him
+            assertTrue(painted(seen) > still * 0.9) // never vanishing
+            idle(16)
+        }
+        frames(2000) // the idle life
         v.performClick()
-        val o = overlay().single()
-        assertTrue(o.drawable === life && v.drawable !== life) // the life on top, the reaction under it
-        assertTrue(avds(life).all { it.isRunning }) // it goes on from where it was
-        assertEquals(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO, o.importantForAccessibility)
-        assertEquals(null, o.contentDescription)
-        assertEquals(listOf(v.left, v.top, v.width, v.height), listOf(o.left, o.top, o.width, o.height))
-        assertTrue(o.hasOverlappingRendering && v.hasOverlappingRendering) // one alpha for the whole picture
-        assertEquals(0f, v.alpha) // the reaction fades in under it
-        idle(Glose.FADE_MS + 50)
-        assertTrue(overlay().isEmpty())
-        assertEquals(1f, v.alpha)
-        assertTrue(o.drawable == null && avds(life).none { it.isRunning }) // no second animation left running
-        try { // paused: the life is stopped, the reaction starts from the still
-            idle(Glose.Taps.SPECIAL_QUIET_MS); draw()
-            assertTrue(v.performLongClick())
-            v.performClick()
-            assertTrue(overlay().isEmpty())
-        } finally { Glose.paused = false }
-        idle(Glose.Taps.SPECIAL_QUIET_MS); Glose.play(v); draw()
-        val scale = android.animation.ValueAnimator::class.java.getMethod("setDurationScale", Float::class.javaPrimitiveType)
-        try {
-            scale.invoke(null, 0f)
-            v.performClick()
-            assertTrue(overlay().isEmpty())
-        } finally { scale.invoke(null, 1f) }
+        frames(256) // the tap reaction, 256 ms in
+        val tap = v.drawable
+        val special = ctx.resources.getIdentifier(ctx.resources.getResourceEntryName(Glose.mainPose(Prefs(ctx))) + "_special", "drawable", ctx.packageName)
+        Glose.once(v, special, Glose.mainPose(Prefs(ctx))) // the 4th tap mid-reaction (a slow phone, durations x1.5)
+        assertTrue(v.drawable === tap) // not cut
+        frames(400)
+        assertFalse(v.drawable === tap) // the special, at the tap's end
+        val spec = v.drawable
+        frames(1900)
+        assertFalse(v.drawable === spec) // then the idle life
     }
 
     @Test fun mainScreenAnimatesGloseOnlyWhileVisible() {
